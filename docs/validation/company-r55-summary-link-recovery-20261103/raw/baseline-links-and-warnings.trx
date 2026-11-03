@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0a56d21e-c6e6-438e-80e7-dea5234027ec" name="Administrator@PC-20250309WEIZ 2026-11-03 10:51:22" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T10:51:23.0022844+08:00" queuing="2026-11-03T10:51:23.0022847+08:00" start="2026-11-03T10:51:19.4299513+08:00" finish="2026-11-03T10:51:23.0083433+08:00" />
+  <TestSettings name="default" id="cb02adbc-295d-4b05-b8f7-bc0c66010c90">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_10_51_22" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c4aea596-4af4-47ee-8195-e78ec2f35dff" testId="16455685-17aa-8e6d-9307-433fae3fd647" testName="MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages" computerName="PC-20250309WEIZ" duration="00:00:02.0081265" startTime="2026-11-03T10:51:20.3663780+08:00" endTime="2026-11-03T10:51:22.3916119+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4aea596-4af4-47ee-8195-e78ec2f35dff">
+      <Output>
+        <ErrorInfo>
+          <Message>StringAssert.Contains 失败。字符串“摄影策划 · 15区汇总项目 f1f3f96f-7f7e-48db-91ba-b9283b341a14 · 文档 a8752ffb-91a9-36ed-177a-b87aca175dbb只读阅读快照：按现有15区顺序。已保存的画布固定PNG按保存顺序呈现；经身份/Hash校验的项目自有PNG/JPEG参考副本可嵌入。外链和素材库原件仅列状态。不是可编辑画布或可搬迁项目包；普通附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。01 项目概览合成策划项目ID：f1f3f96f-7f7e-48db-91ba-b9283b341a14文档ID：a8752ffb-91a9-36ed-177a-b87aca175dbb标题：失效关联反馈副标题：未填写状态：草稿地点：未填写人员：未填写拍摄日期：未填写拍摄目标：未填写关键词：客户要求：未填写必拍内容：未填写注意事项：未填写交付用途：未填写扩展字段：未填写02 文字正文正文前段保留失效位置前文失效位置后文画布固定快照 · 版本 11111111-1111-4111-8111-111111111111 · 保存于 2026-11-02 10:00:00 +08:00正文末段保留正文格式：持久富文本；汇总保留支持的段落/图片/基础表格，缺图在原位置标记03 镜头清单与分镜本区未填写内容。04 参考图本区未填写内容。05 情绪板本区未填写内容。06 灯位图失效灯位位置横向位置：0.5纵向位置：0.5方向：0功率百分比：50修饰器：柔光箱画布修订ID：44444444-4444-4444-8444-444444444444参考原位置：未填写资源ID：b27ba99b-ea48-4c28-9d5c-c4ace90ac618名称：失效灯位位置关联镜头ID：[]已归档：否备注：未填写有效灯位保留横向位置：0.5纵向位置：0.5方向：0功率百分比：50修饰器：柔光箱画布修订ID：11111111-1111-4111-8111-111111111111参考原位置：未填写资源ID：8a5bf07f-6154-4c77-953f-7fe3332dab3a名称：有效灯位保留关联镜头ID：[]已归档：否备注：未填写固定快照已在正文或灯位的明确关联位置呈现。07 服化道与道具本区未填写内容。08 设备本区未填写内容。09 人员本区未填写内容。10 场地本区未填写内容。11 档期档期引用状态：未关联或当前快照未载入档期；不推断不存在12 当天时间表本区未填写内容。13 预算实际支出（只读）来源状态：收支只读来源未连接；未读取账本说明：预算与实际支出不混算、不跨币种换算；仅包含本次读取成功的项目支出14 文件本区未填写内容。15 文档内容文档内容本区共用的持久富文本已在02文字完整列出；以下为原补充文档内容，不重复创建另一份正文。内容：未填写已有画布快照 · 版本 01版本ID：11111111-1111-4111-8111-111111111111保存时间：2026-11-02 10:00:00 +08:00范围：已保存的固定PNG阅读快照；不读取当前画布或源照片，不还原可编辑自由画布固定快照已在正文或灯位的明确关联位置呈现。”不包含字符串“[画布固定快照未呈现：版本 33333333-3333-4333-8333-333333333333”。。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring, StringComparison comparisonType, String message) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 125&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 48&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests.&lt;&gt;c.&lt;&lt;MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages&gt;b__10_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b7772a43-fb7d-4ab9-a8f9-2e4b45a861ba" testId="1f4e7f68-6e9b-85e4-9daa-f3ce38c7b348" testName="DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary" computerName="PC-20250309WEIZ" duration="00:00:00.4492915" startTime="2026-11-03T10:51:22.3954600+08:00" endTime="2026-11-03T10:51:22.8460425+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7772a43-fb7d-4ab9-a8f9-2e4b45a861ba">
+      <Output>
+        <ErrorInfo>
+          <Message>StringAssert.Contains 失败。字符串“摄影策划 · 15区汇总项目 76170183-9187-435d-9278-bbd1725e1fc7 · 文档 d11e5524-ccbc-f83f-a58f-9451e4159989只读阅读快照：按现有15区顺序。已保存的画布固定PNG按保存顺序呈现；经身份/Hash校验的项目自有PNG/JPEG参考副本可嵌入。外链和素材库原件仅列状态。不是可编辑画布或可搬迁项目包；普通附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。01 项目概览合成策划项目ID：76170183-9187-435d-9278-bbd1725e1fc7文档ID：d11e5524-ccbc-f83f-a58f-9451e4159989标题：延迟警告一致性副标题：未填写状态：草稿地点：未填写人员：未填写拍摄日期：未填写拍摄目标：未填写关键词：客户要求：未填写必拍内容：未填写注意事项：未填写交付用途：未填写扩展字段：未填写02 文字正文内容：未填写正文格式：普通正文03 镜头清单与分镜本区未填写内容。04 参考图本区未填写内容。05 情绪板本区未填写内容。06 灯位图本区未填写内容。07 服化道与道具本区未填写内容。08 设备本区未填写内容。09 人员本区未填写内容。10 场地本区未填写内容。11 档期档期引用状态：未关联或当前快照未载入档期；不推断不存在12 当天时间表本区未填写内容。13 预算实际支出（只读）来源状态：收支只读来源未连接；未读取账本说明：预算与实际支出不混算、不跨币种换算；仅包含本次读取成功的项目支出14 文件本区未填写内容。15 文档内容文档内容内容：未填写已有画布快照 · 版本 01版本ID：11111111-1111-4111-8111-111111111111保存时间：2026-11-02 10:00:00 +08:00范围：已保存的固定PNG阅读快照；不读取当前画布或源照片，不还原可编辑自由画布[画布固定快照未呈现：版本 11111111-1111-4111-8111-111111111111；PNG编码已损坏，无法读取该固定版本。 未读取当前画布、源照片或其他版本替代。]”不包含字符串“导出警告（保留原资料，不替换源文件）”。。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring, StringComparison comparisonType, String message) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 125&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 48&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests.&lt;&gt;c.&lt;&lt;DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary&gt;b__11_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16455685-17aa-8e6d-9307-433fae3fd647">
+      <Execution id="c4aea596-4af4-47ee-8195-e78ec2f35dff" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages" />
+    </UnitTest>
+    <UnitTest name="DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f4e7f68-6e9b-85e4-9daa-f3ce38c7b348">
+      <Execution id="b7772a43-fb7d-4ab9-a8f9-2e4b45a861ba" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16455685-17aa-8e6d-9307-433fae3fd647" executionId="c4aea596-4af4-47ee-8195-e78ec2f35dff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f4e7f68-6e9b-85e4-9daa-f3ce38c7b348" executionId="b7772a43-fb7d-4ab9-a8f9-2e4b45a861ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,12 @@
+{
+  "status":"COMPANY_FIXES_DONE_OFFICE_NOT_RUN_HOME_STATUS_UNKNOWN",
+  "productSource":"3bf5d9a6a10124793434a43d782b22978d8707d0",
+  "testSupport":"73c3f33fe988697c1c0277e2cf02bdc490f7252e",
+  "items":[
+    {"id":"MISSING_CANVAS_REVISION_FEEDBACK","status":"REPRODUCED_FIXED_VERIFIED","baseline":"raw/baseline-links-and-warnings.trx","final":"raw/final-release-focused.trx"},
+    {"id":"DEFERRED_WARNING_AGGREGATE","status":"REPRODUCED_FIXED_VERIFIED","baseline":"baseline/DEFERRED_WARNING_REPRO.json","final":"release/DEFERRED_WARNING_REPRO.json"},
+    {"id":"ORIGINAL_FOUR_OFFICE_RENDER","status":"NOT_RUN_USER_SESSION_ACTIVE","evidence":"office/WPS_RENDER_RECEIPT.json","engineCreateAttempts":0,"automaticRetries":0},
+    {"id":"HOME_OVERNIGHT_WORK","status":"UNKNOWN_NOT_OBSERVABLE_FROM_COMPANY","evidence":"OVERNIGHT_STATUS.json","notExecutedClaimed":false,"familyNDriveAccessAttempts":0},
+    {"id":"PHYSICAL_MOUSE_DPI_ACM_HDR","status":"NOT_RUN","notReplacedByAutomatedTests":true}
+  ]
+}

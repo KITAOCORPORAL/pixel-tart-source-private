@@ -1,0 +1,19 @@
+{
+  "newSamples": [
+    {
+      "result": "Readable original-position feedback; stale snapshot images removed; valid PNG and surrounding body/table text retained; summary heading kept with warnings",
+      "pages": 4,
+      "file": "missing-revision-links.docx"
+    },
+    {
+      "result": "One broken preview: one source-position message plus the same one aggregate entry; returned/UI count remains1",
+      "pages": 3,
+      "file": "deferred-warning-summary.docx"
+    }
+  ],
+  "scope": "Only new feedback samples product readback; not independent Office acceptance of old four",
+  "recordedAtShanghai": "2026-11-03T11:20:46+08:00",
+  "oldFour": "Hashes exact and prior evidence reused; no repeat product renderer run",
+  "pagesReviewed": 7,
+  "independentOffice": "NOT_RUN_USER_WPS_SESSION_ACTIVE"
+}

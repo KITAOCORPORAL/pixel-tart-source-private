@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="efdfd5ba-0f42-48d0-9c55-be44297570fa" name="Administrator@PC-20250309WEIZ 2026-11-03 11:12:24" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T11:12:24.7395130+08:00" queuing="2026-11-03T11:12:24.7395132+08:00" start="2026-11-03T11:12:23.8883701+08:00" finish="2026-11-03T11:12:24.7441733+08:00" />
+  <TestSettings name="default" id="eb50b247-4148-4bf2-a427-978dbbad3032">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_11_12_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2a110e8a-9cfd-4142-96e1-295e25b5ae37" testId="19930dc0-30ad-8a96-91e5-f8f557148864" testName="ForeignProjectDocumentOrShotFailsClosed" computerName="PC-20250309WEIZ" duration="00:00:00.0179773" startTime="2026-11-03T11:12:24.4058134+08:00" endTime="2026-11-03T11:12:24.4392087+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a110e8a-9cfd-4142-96e1-295e25b5ae37" />
+    <UnitTestResult executionId="f33b7e20-eaa2-4083-b675-0eefb8572bde" testId="1a2de947-5d68-8641-9e86-226f8ccf3844" testName="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" computerName="PC-20250309WEIZ" duration="00:00:00.0061570" startTime="2026-11-03T11:12:24.4058270+08:00" endTime="2026-11-03T11:12:24.4299701+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f33b7e20-eaa2-4083-b675-0eefb8572bde" />
+    <UnitTestResult executionId="57b97c5c-3120-492a-9c5c-dc856807e636" testId="10a7a991-5c34-8b21-869c-712a3709a196" testName="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" computerName="PC-20250309WEIZ" duration="00:00:00.2232602" startTime="2026-11-03T11:12:24.4058058+08:00" endTime="2026-11-03T11:12:24.6454904+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57b97c5c-3120-492a-9c5c-dc856807e636" />
+    <UnitTestResult executionId="c3cf10f7-2034-460c-b6e6-bc6c6df889e6" testId="10ded0f0-3b4d-8495-aa48-4e22db73e757" testName="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" computerName="PC-20250309WEIZ" duration="00:00:00.0462471" startTime="2026-11-03T11:12:24.4058212+08:00" endTime="2026-11-03T11:12:24.4675171+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c3cf10f7-2034-460c-b6e6-bc6c6df889e6" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ForeignProjectDocumentOrShotFailsClosed" storage="e:/guangjing-summary-linkrecovery-20261103/final-core-testhost/rawselectionassistant.tests.dll" id="19930dc0-30ad-8a96-91e5-f8f557148864">
+      <Execution id="2a110e8a-9cfd-4142-96e1-295e25b5ae37" />
+      <TestMethod codeBase="E:/Guangjing-Summary-LinkRecovery-20261103/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="ForeignProjectDocumentOrShotFailsClosed" />
+    </UnitTest>
+    <UnitTest name="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" storage="e:/guangjing-summary-linkrecovery-20261103/final-core-testhost/rawselectionassistant.tests.dll" id="10a7a991-5c34-8b21-869c-712a3709a196">
+      <Execution id="57b97c5c-3120-492a-9c5c-dc856807e636" />
+      <TestMethod codeBase="E:/Guangjing-Summary-LinkRecovery-20261103/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" />
+    </UnitTest>
+    <UnitTest name="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" storage="e:/guangjing-summary-linkrecovery-20261103/final-core-testhost/rawselectionassistant.tests.dll" id="1a2de947-5d68-8641-9e86-226f8ccf3844">
+      <Execution id="f33b7e20-eaa2-4083-b675-0eefb8572bde" />
+      <TestMethod codeBase="E:/Guangjing-Summary-LinkRecovery-20261103/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" />
+    </UnitTest>
+    <UnitTest name="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" storage="e:/guangjing-summary-linkrecovery-20261103/final-core-testhost/rawselectionassistant.tests.dll" id="10ded0f0-3b4d-8495-aa48-4e22db73e757">
+      <Execution id="c3cf10f7-2034-460c-b6e6-bc6c6df889e6" />
+      <TestMethod codeBase="E:/Guangjing-Summary-LinkRecovery-20261103/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19930dc0-30ad-8a96-91e5-f8f557148864" executionId="2a110e8a-9cfd-4142-96e1-295e25b5ae37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a2de947-5d68-8641-9e86-226f8ccf3844" executionId="f33b7e20-eaa2-4083-b675-0eefb8572bde" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10a7a991-5c34-8b21-869c-712a3709a196" executionId="57b97c5c-3120-492a-9c5c-dc856807e636" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10ded0f0-3b4d-8495-aa48-4e22db73e757" executionId="c3cf10f7-2034-460c-b6e6-bc6c6df889e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 E:/Guangjing-Summary-LinkRecovery-20261103/final-core-testhost/RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

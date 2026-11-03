@@ -1,3 +1,11 @@
+## 2026-11-03 公司当前：DOCX失效关联反馈与警告一致性（Asia/Shanghai）
+- 两远端fetch后开工产品仍372a2e2334a6d06068df2221d4cb875959e651af/源码5116daa7，公司产品树clean/0未推；已查相关refs、工作树、reflog、交接记录及可见会话。家庭昨晚执行/未推成果仍缺实际HEAD/diff/测试或独立渲染回执，**状态未知，不以远端未更新判未执行**；未访问家庭N盘。后续家庭补丁须比较复用，不覆盖。
+- 原四份DOCX哈希不变，原已完成产品读回证据沿用。公司有WPS12.1.0.29161，但CLI帮助被签名门禁拒绝；受控COM前置检查遇到用户WPS PID11928，未创建COM/打开文档，未接管/关闭用户进程，未反复空跑。原四份独立Office仍NOT_RUN，不宣称排版FAIL或通过。
+- 公司当前可取得基线真实导出入口复现2项FAIL：失效正文继续导出旧RTF残图/灯位静默失链；延迟解码返回Warnings1但末尾汇总漏掉。最小修复保留请求ID、原位置明示不存在并加入Warnings、移除残图并保留正文/有效图片；末尾警告在全部图片处理后生成，补标题KeepNext。
+- 最终源码 **3bf5d9a6a10124793434a43d782b22978d8707d0**，测试 **73c3f33fe988697c1c0277e2cf02bdc490f7252e**。最终发布绑定25唯一/25执行PASS（WPF20/Core4/新增反馈页读回1），只相关集合；新增两份反馈7页查看通过，不等于原四份独立Office完成。初始失败/构建/预览保留，不重复快照嵌入、切库专项或JPEG/ICC研究。
+- 完整诊断ZIP E:/Guangjing-Summary-LinkRecovery-20261103/Guangjing-R55-SummaryLinkRecovery-Final-Diagnostic-win-x64.zip，294文件逐项SHA/ZIP读回，SHA256 B537F368065C016F975AB341F7F85DD9A19933EDCBFC4CAE46885442AED3CF56。同名目录Start-Guangjing-Diagnostic.cmd固定隔离根，OS启动身份/EXE和CMD退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false；全模块/策划15/教程退役，无Setup/单模块。
+- 公司旧灯台4独有提交和dirty资料原样保留，不合main/色彩研究、不强推。原画布数学/v1-v3/预算/default/PV/RAW/项目包协议不改；鼠标/DPI等未验。整体PARTIAL：公司反馈修复完成、独立Office未执行、家庭成果状态未知。当前报告docs/validation/company-r55-summary-link-recovery-20261103/FINAL_REPORT.md，所有新记录Asia/Shanghai，旧收据不改。
+
 ## 2026-11-02 公司当前：15区汇总DOCX固定快照（Asia/Shanghai）
 - 从6e01f26f/产品89b64fd2接续，fetch无产品线新增；旧灯台4独有未推提交、旧树/未提交资料/历史失败原样保留，不合main/研究、不强推。保存失败恢复专项冻结，只跑必要保全。
 - 产品源码 **5116daa77fdbf17f705497efc6df5b4cdcabd7a0**；测试支持 **c5222046aa7705ccf1adcd93b44e2fa37b91b518**。基线两版快照DOCX media0缺图已复现；现15区汇总仅从已保存PreviewPngBase64逐版嵌入，版本/时间图注，缺失损坏超预算原位占位+Warnings，不重渲染或访问源照片。

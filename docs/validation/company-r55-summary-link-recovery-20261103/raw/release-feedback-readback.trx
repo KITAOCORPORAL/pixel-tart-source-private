@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a2cfe29d-22e5-4d59-b76a-c255dd24dd93" name="Administrator@PC-20250309WEIZ 2026-11-03 11:07:51" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T11:07:51.9931910+08:00" queuing="2026-11-03T11:07:51.9931917+08:00" start="2026-11-03T11:07:50.4080983+08:00" finish="2026-11-03T11:07:51.9978513+08:00" />
+  <TestSettings name="default" id="7352d1f0-7e00-461c-8d63-170e36f8afd7">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_11_07_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4a529f7d-ed18-49d5-a182-2437aa885e35" testId="153492a5-1895-808a-8176-88a924c921a1" testName="RenderExportedDocxPagesForVisualInspection" computerName="PC-20250309WEIZ" duration="00:00:00.9373059" startTime="2026-11-03T11:07:50.9275448+08:00" endTime="2026-11-03T11:07:51.8844328+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a529f7d-ed18-49d5-a182-2437aa885e35" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RenderExportedDocxPagesForVisualInspection" storage="e:/guangjing-summary-linkrecovery-20261103/release-testhost/rawselectionassistant.wpftests.dll" id="153492a5-1895-808a-8176-88a924c921a1">
+      <Execution id="4a529f7d-ed18-49d5-a182-2437aa885e35" />
+      <TestMethod codeBase="E:/Guangjing-Summary-LinkRecovery-20261103/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="RenderExportedDocxPagesForVisualInspection" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="153492a5-1895-808a-8176-88a924c921a1" executionId="4a529f7d-ed18-49d5-a182-2437aa885e35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

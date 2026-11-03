@@ -1,0 +1,159 @@
+{
+  "executions": 25,
+  "failed": 0,
+  "scope": "Only selected DOCX feedback and basic full-scope preservation tests; no rerun of prior full workflow, color diagnosis or Office renderer acceptance",
+  "passed": 25,
+  "uniqueMethods": 25,
+  "rows": [
+    {
+      "duration": "00:00:00.0932449",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "TableImageKeepsAspectRatioAndFitsCellWithoutChangingSavedDimensions"
+    },
+    {
+      "duration": "00:00:00.0439611",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "ExclusiveReadDeniedCopyIsExplainedWithoutReadingAnotherFile"
+    },
+    {
+      "duration": "00:00:00.9215431",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand"
+    },
+    {
+      "duration": "00:00:00.0081503",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration"
+    },
+    {
+      "duration": "00:00:00.0448157",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "OwnedImageWithoutRichInsertionIsExplicitlyRetainedInDocumentContent"
+    },
+    {
+      "duration": "00:00:00.0787029",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "MissingOwnedImageIsDeclaredAtItsPositionAndFailedSaveCannotReplaceDestination"
+    },
+    {
+      "duration": "00:00:00.3955982",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences"
+    },
+    {
+      "duration": "00:00:00.4141106",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages"
+    },
+    {
+      "duration": "00:00:01.8455310",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop"
+    },
+    {
+      "duration": "00:00:01.6542293",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "MultipleOwnedImagesLongBodyRepeatedReferencesMissingCopyAndReopenRemainConsistent"
+    },
+    {
+      "duration": "00:00:00.7044985",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates"
+    },
+    {
+      "duration": "00:00:00.4869431",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages"
+    },
+    {
+      "duration": "00:00:00.0749349",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "EmptySectionsAndUiSavePathSuccessCancelAndFailureAreExplicit"
+    },
+    {
+      "duration": "00:00:00.0913384",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "ChangedUnsupportedOversizedAndForeignImagesAreExplainedNotSubstituted"
+    },
+    {
+      "duration": "00:00:00.1556541",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary"
+    },
+    {
+      "duration": "00:00:00.0067631",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions"
+    },
+    {
+      "duration": "00:00:00.0285841",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile"
+    },
+    {
+      "duration": "00:00:00.0493828",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "ExplicitRichBlockAndLightPlacementUseFrozenRevisionInsteadOfEmbeddedStaleImage"
+    },
+    {
+      "duration": "00:00:00.0483644",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport"
+    },
+    {
+      "duration": "00:00:00.0854550",
+      "receipt": "final-release-focused.trx",
+      "outcome": "Passed",
+      "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand"
+    },
+    {
+      "duration": "00:00:00.0179773",
+      "receipt": "final-release-core.trx",
+      "outcome": "Passed",
+      "testName": "ForeignProjectDocumentOrShotFailsClosed"
+    },
+    {
+      "duration": "00:00:00.0061570",
+      "receipt": "final-release-core.trx",
+      "outcome": "Passed",
+      "testName": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles"
+    },
+    {
+      "duration": "00:00:00.2232602",
+      "receipt": "final-release-core.trx",
+      "outcome": "Passed",
+      "testName": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput"
+    },
+    {
+      "duration": "00:00:00.0462471",
+      "receipt": "final-release-core.trx",
+      "outcome": "Passed",
+      "testName": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification"
+    },
+    {
+      "duration": "00:00:00.8980323",
+      "receipt": "final-feedback-readback.trx",
+      "outcome": "Passed",
+      "testName": "RenderExportedDocxPagesForVisualInspection"
+    }
+  ]
+}

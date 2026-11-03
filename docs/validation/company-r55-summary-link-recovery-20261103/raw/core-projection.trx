@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="999ccac6-e383-499b-8aca-ccf859106bf6" name="Administrator@PC-20250309WEIZ 2026-11-03 11:07:04" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T11:07:04.1335225+08:00" queuing="2026-11-03T11:07:04.1335227+08:00" start="2026-11-03T11:07:03.0502507+08:00" finish="2026-11-03T11:07:04.1380744+08:00" />
+  <TestSettings name="default" id="e515df6a-9ecb-4ecd-bdae-ba30eec7f08d">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_11_07_04" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="5729351d-ea4c-4d10-b5da-42fbc68354ec" testId="10ded0f0-3b4d-8495-aa48-4e22db73e757" testName="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" computerName="PC-20250309WEIZ" duration="00:00:00.0707491" startTime="2026-11-03T11:07:03.7832811+08:00" endTime="2026-11-03T11:07:03.8688375+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5729351d-ea4c-4d10-b5da-42fbc68354ec" />
+    <UnitTestResult executionId="1c47648b-fc13-4653-b78b-e04031481af2" testId="1a2de947-5d68-8641-9e86-226f8ccf3844" testName="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" computerName="PC-20250309WEIZ" duration="00:00:00.0218611" startTime="2026-11-03T11:07:03.7832729+08:00" endTime="2026-11-03T11:07:03.8223340+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c47648b-fc13-4653-b78b-e04031481af2" />
+    <UnitTestResult executionId="5cf68803-a5ea-4ce7-b2f5-67f8be7b27e2" testId="19930dc0-30ad-8a96-91e5-f8f557148864" testName="ForeignProjectDocumentOrShotFailsClosed" computerName="PC-20250309WEIZ" duration="00:00:00.0428654" startTime="2026-11-03T11:07:03.7832635+08:00" endTime="2026-11-03T11:07:03.8409804+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5cf68803-a5ea-4ce7-b2f5-67f8be7b27e2" />
+    <UnitTestResult executionId="b6db394a-47fa-4527-9ec2-0bdc02ac8d6c" testId="10a7a991-5c34-8b21-869c-712a3709a196" testName="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" computerName="PC-20250309WEIZ" duration="00:00:00.2459182" startTime="2026-11-03T11:07:03.7832866+08:00" endTime="2026-11-03T11:07:04.0450710+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6db394a-47fa-4527-9ec2-0bdc02ac8d6c" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ForeignProjectDocumentOrShotFailsClosed" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="19930dc0-30ad-8a96-91e5-f8f557148864">
+      <Execution id="5cf68803-a5ea-4ce7-b2f5-67f8be7b27e2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="ForeignProjectDocumentOrShotFailsClosed" />
+    </UnitTest>
+    <UnitTest name="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="10a7a991-5c34-8b21-869c-712a3709a196">
+      <Execution id="b6db394a-47fa-4527-9ec2-0bdc02ac8d6c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput" />
+    </UnitTest>
+    <UnitTest name="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1a2de947-5d68-8641-9e86-226f8ccf3844">
+      <Execution id="1c47648b-fc13-4653-b78b-e04031481af2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles" />
+    </UnitTest>
+    <UnitTest name="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="10ded0f0-3b4d-8495-aa48-4e22db73e757">
+      <Execution id="5729351d-ea4c-4d10-b5da-42fbc68354ec" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningReadableSummaryTests" name="SummaryUsesShotOrderAndCurrentSectionReferenceClassification" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="10ded0f0-3b4d-8495-aa48-4e22db73e757" executionId="5729351d-ea4c-4d10-b5da-42fbc68354ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a2de947-5d68-8641-9e86-226f8ccf3844" executionId="1c47648b-fc13-4653-b78b-e04031481af2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19930dc0-30ad-8a96-91e5-f8f557148864" executionId="5cf68803-a5ea-4ce7-b2f5-67f8be7b27e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10a7a991-5c34-8b21-869c-712a3709a196" executionId="b6db394a-47fa-4527-9ec2-0bdc02ac8d6c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
