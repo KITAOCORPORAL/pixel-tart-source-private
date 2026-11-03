@@ -15,8 +15,8 @@ public sealed partial class PlanningCenterViewModel
         IReadOnlyList<RAWSelectionAssistant.Core.Models.FinanceTransaction> expenses=[];var expenseState="收支只读来源未连接；未读取账本";
         if(!IsPackageImported && ReadPlanningExpenses is{} readExpenses)
         {
-            try{expenses=(await readExpenses(project)).Where(x=>x.ProjectId==project&&x.Kind==RAWSelectionAssistant.Core.Models.FinanceTransactionKind.Expense).DistinctBy(x=>x.Id).ToArray();expenseState="本次按项目只读读取成功；未修改账本";}
-            catch(Exception error)when(error is IOException or UnauthorizedAccessException or InvalidOperationException){expenseState="本次账本读取失败；未使用旧缓存："+error.GetType().Name;}
+            try{var values=await readExpenses(project)??throw new InvalidDataException("账本未返回读取结果。");expenses=values.Where(x=>x.ProjectId==project&&x.Kind==RAWSelectionAssistant.Core.Models.FinanceTransactionKind.Expense).DistinctBy(x=>x.Id).ToArray();expenseState=expenses.Count==0?"本次按项目只读读取成功；暂无实际支出；未修改账本":"本次按项目只读读取成功；未修改账本";}
+            catch(Exception error)when(IsRecoverableProjectError(error)||error is InvalidOperationException){expenseState="本次账本读取失败；未使用旧缓存："+error.GetType().Name;}
         }
         if(ProjectId!=project)throw new InvalidOperationException("策划已切换，未导出旧项目。");
         if(Baseline()!=baseline)throw new InvalidOperationException("读取期间策划内容已变化，请保存后重新汇总。");

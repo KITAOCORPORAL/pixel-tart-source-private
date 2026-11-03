@@ -55,19 +55,31 @@ public sealed partial class PlanningCenterViewModel
         if (!await FlushAsync()) return false;
         var next = ResourceCatalog.ImportGear(source); CapturePlanningUndo(); UpdateDocument(_document with { Resources = next }); return await FlushAsync();
     }
-    private Guid? _planningExpenseProject;
+    private long _planningExpenseReadRevision;
+    private void NotifyPlanningExpenses(){OnPropertyChanged(nameof(ResourceStatus));OnPropertyChanged(nameof(PlanningExpenses));}
+    private void ResetPlanningExpenses()
+    {
+        Interlocked.Increment(ref _planningExpenseReadRevision);PlanningExpenses=[];ResourceStatus="尚未读取本项目实际支出；请点击只读读取。";NotifyPlanningExpenses();
+    }
     public async Task RefreshPlanningExpensesAsync()
     {
-        if (ProjectId is not Guid id || ReadPlanningExpenses is null) { ResourceStatus = "收支只读来源未连接"; return; }
-        if(_planningExpenseProject!=id){PlanningExpenses=[];_planningExpenseProject=id;}
+        var revision=Interlocked.Increment(ref _planningExpenseReadRevision);var reader=ReadPlanningExpenses;PlanningExpenses=[];
+        if (ProjectId is not Guid id || reader is null) { ResourceStatus = "收支只读来源未连接；本次未读取账本。";NotifyPlanningExpenses();return; }
+        bool Current()=>revision==Interlocked.Read(ref _planningExpenseReadRevision)&&ProjectId==id&&ReferenceEquals(reader,ReadPlanningExpenses);
+        ResourceStatus="正在按项目只读读取支出；尚未获得本次结果。";NotifyPlanningExpenses();
         try
         {
-            var values = await ReadPlanningExpenses(id);
-            if (ProjectId != id) return;
+            var values = await reader(id)??throw new InvalidDataException("账本未返回读取结果。");
+            if (!Current()) return;
             PlanningExpenses = values.Where(v => v.ProjectId == id && v.Kind == FinanceTransactionKind.Expense).DistinctBy(v => v.Id).ToArray();
-            ResourceStatus = "按项目只读读取支出；币种分开，不修改账本。";
+            ResourceStatus = PlanningExpenses.Count==0?"按项目只读读取支出成功；本次暂无实际支出，币种分开，不修改账本。":$"按项目只读读取支出成功；本次{PlanningExpenses.Count}项，币种分开，不修改账本。";
         }
-        catch(Exception e) when(e is IOException or InvalidOperationException) { ResourceStatus = "账本读取失败，保留上次结果：" + e.Message; }
-        OnPropertyChanged(nameof(ResourceStatus)); OnPropertyChanged(nameof(PlanningExpenses));
+        catch(Exception error) when(IsRecoverableProjectError(error)||error is InvalidOperationException)
+        {
+            if(!Current())return;
+            new RAWSelectionAssistant.Core.Services.FileLogService().Error("策划支出只读查询失败，未使用旧结果。",error);
+            ResourceStatus="账本读取失败；本次未取得支出，未使用旧缓存，请重试。";
+        }
+        if(Current())NotifyPlanningExpenses();
     }
 }
