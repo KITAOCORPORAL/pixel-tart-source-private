@@ -1,0 +1,26 @@
+{
+  "recordedAtShanghai": "2026-11-03 16:07:39",
+  "branch": "home/r55-canvas-photo-preview-20261101",
+  "baseline": "3d7184102dda8d8c75f4eb8d052affb08d5510ca",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "testSupport": "d0c88e27291c432ace5dace5db8f1b3a6a8c5772",
+  "startingContinuationHead": "d0c88e27291c432ace5dace5db8f1b3a6a8c5772",
+  "startingRemoteHead": "3d7184102dda8d8c75f4eb8d052affb08d5510ca",
+  "sourceDiff": "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs\nM\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs\nM\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs\nA\ttests/RAWSelectionAssistant.WpfTests/PlanningExpenseScopeTests.cs\nA\ttests/RAWSelectionAssistant.WpfTests/ProjectBusinessFlowTests.cs\n",
+  "productChangedFiles": [
+    "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+    "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+    "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs"
+  ],
+  "testChangedFiles": [
+    "tests/RAWSelectionAssistant.WpfTests/PlanningExpenseScopeTests.cs",
+    "tests/RAWSelectionAssistant.WpfTests/ProjectBusinessFlowTests.cs"
+  ],
+  "worktreesEnumerated": 60,
+  "other59OriginalHeadAndStatusUnchanged": true,
+  "oldFilesVerified": 49,
+  "oldFileMismatches": 0,
+  "sourceChangedDuringContinuation": false,
+  "forbiddenWork": "No main merge, force push, resets, stash, clean, research integration, math changes, ComputerUse, Browser/WebView/CDP, WPS/Office control or daily-ledger access",
+  "ledgerDigestDefinition": "SHA256 of all FinanceTransaction rows serialized in Id order, not SQLite file-byte identity"
+}

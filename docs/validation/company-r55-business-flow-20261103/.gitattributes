@@ -1,0 +1,6 @@
+*.md text eol=lf
+*.json text eol=lf
+*.ps1 text eol=lf
+*.txt text eol=lf
+raw/* -text -diff
+WORKTREES_ORIGINAL_BEFORE.txt -text -diff

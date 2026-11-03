@@ -1,3 +1,12 @@
+## 2026-11-03 公司当前：项目—策划—日历—实际支出—15区汇总闭环（Asia/Shanghai）
+- 原会话中断时产品/测试已本地提交，本会话审核接续并完成发布绑定验证与封存；基线3d718410，产品源码 **38dd3f92bb2db7238f7f058008887929ec971c93**，测试 **d0c88e27291c432ace5dace5db8f1b3a6a8c5772**，未重写已有业务模型。
+- 基线主链末尾切B保留A支出状态1FAIL、ABA迟到成功/迟到失败/空结果3FAIL已留档；原持久化和独立重开本已正确。仅3个PlanningCenterViewModel产品文件：切项目清旧状态、revision/项目/reader校验迟到结果、明确读取中/未连接/空/失败，不用旧缓存冒充成功；汇总空/失败提示一致。
+- 最终20共享DLL绑定，**13唯一/13执行PASS**：完整App生产命令A/B创建/保存/关联档期/改期/日历回策划/支出/15区汇总；独立进程15040→30868重开后身份和逻辑账本行摘要一致。CNY/USD/EUR分开、收入排除、预算与实际分开；控件事件/命令/独立进程不称物理鼠标验收。
+- 完整自包含诊断ZIP E:/Guangjing-BusinessFlow-20261103/Guangjing-BusinessFlow-Diagnostic-win-x64.zip，293文件逐项ZIP/目录SHA读回，SHA256 **357D0E9D30BA30CC9C157FE40D66371F6DE7A978E81E8730497286CBA3AFA1A2**。同名目录Start-Guangjing-Diagnostic.cmd默认固定UserData-BusinessFlow；OS启动产品SHA正确、EXE/CMD退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全模块/策划15/教程退役，无Setup/单模块/合成DB或私照。
+- 60工作树重查；其他59树HEAD/dirty与原轮一致。旧灯台49文件逐个hash未变、远端保全分支仍27794d2f；不合main/研究、不强推、不reset/clean/stash。旧快照/DOCX警告/保存恢复/灯台修复保持，不改渲染数学/RAW/ICC/default/数据库schema，不重复旧专项。
+- 原失败、路径规范化夹具失败和重复夹具档期冲突均保留；最终采用新隔离根，不删原数据、不放宽断言。日常账本不访问；独立Office继续NOT_RUN，不接管/关闭WPS。鼠标/DPI/多屏仍NOT_RUN，下一项为公司原生鼠标/DPI下A/B业务链确认。总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。
+- 报告：docs/validation/company-r55-business-flow-20261103/FINAL_REPORT.md；测试TEST_SUMMARY.json、NONPASS.md及远端读回单列。新记录Asia/Shanghai，旧收据不改。
+
 ## 2026-11-03 公司当前：旧灯台四提交远端保全与最小交互收回（Asia/Shanghai）
 - 四个真实旧提交9299749c87833b4b637b83d0f086d06ac6e1025f、a1a2a8f751b83bfce23982784d2d7f3cae86fb2d、2ed1dc358cb6f7acaaaa670db25c8233f873f415、27794d2f86313d7231f235b4fd1104eb4e95c106已先普通push独立远端分支 **preserve/company-lighttable-four-20261103**，HEAD27794d2f；完整链接/父链/逐提交审查见docs/validation/company-r55-lighttable-reclaim-20261103/FINAL_REPORT.md，不再仅本地保留。
 - 旧树E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030不reset/clean/stash、HEAD/tracked源码不改；相对旧上游仍4ahead但现已可远端审查。49个未跟踪文件（30PNG/19文档收据）只列路径/hash，均未自动上传，旧私人图片/输出/受限资源不入Git。

@@ -1,0 +1,23 @@
+VSTest 版本 18.6.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 CompleteAppProjectPlanningCalendarExpensesAndSummaryChain [7 s]
+  错误消息:
+   Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException: Assert.IsNotNull 失败。‘value’表达式:‘saved’。 检测到时间冲突。请选择返回修改、仍然保存，或标记当前排期允许重叠后保存。
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.Booking(MainWindow window, MainViewModel main, String title, DateTime date, Nullable`1 edit)
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.Create(MainWindow window, MainViewModel main, String suffix, DateTime date)
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.<>c.<<CompleteAppProjectPlanningCalendarExpensesAndSummaryChain>b__19_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.<>c__DisplayClass18_1.<<RunHost>b__1>d.MoveNext()
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.RunHost(Func`3 action)
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.CompleteAppProjectPlanningCalendarExpensesAndSummaryChain()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+警告: 正在覆盖结果文件: E:\Guangjing-BusinessFlow-20261103/raw\release-final-business-host.trx
+结果文件: E:\Guangjing-BusinessFlow-20261103/raw\release-final-business-host.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 7 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

@@ -1,0 +1,118 @@
+{
+  "recordedAtShanghai": "2026-11-03 16:06:33",
+  "scope": "Targeted published-DLL-bound WPF commands/control handlers; not native mouse acceptance",
+  "publishedBindings": 20,
+  "total": 13,
+  "uniqueMethods": 13,
+  "passed": 13,
+  "failed": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "trx": "release-final2-business-host.trx",
+      "name": "CompleteAppProjectPlanningCalendarExpensesAndSummaryChain",
+      "className": "RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests",
+      "method": "CompleteAppProjectPlanningCalendarExpensesAndSummaryChain",
+      "outcome": "Passed",
+      "duration": "00:00:11.3164403"
+    },
+    {
+      "trx": "release-final2-independent-business.trx",
+      "name": "IndependentAppReopenPreservesProjectBookingAndLedgerIdentities",
+      "className": "RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests",
+      "method": "IndependentAppReopenPreservesProjectBookingAndLedgerIdentities",
+      "outcome": "Passed",
+      "duration": "00:00:07.1063210"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests",
+      "method": "AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences",
+      "outcome": "Passed",
+      "duration": "00:00:00.5564078"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "AToBToALateReadCannotReplaceTheNewerARead",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests",
+      "method": "AToBToALateReadCannotReplaceTheNewerARead",
+      "outcome": "Passed",
+      "duration": "00:00:00.2648692"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests",
+      "method": "ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile",
+      "outcome": "Passed",
+      "duration": "00:00:00.0278667"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "CancelLateGenerationAndProjectSwitchCannotPublish",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests",
+      "method": "CancelLateGenerationAndProjectSwitchCannotPublish",
+      "outcome": "Passed",
+      "duration": "00:00:00.8900936"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests",
+      "method": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "outcome": "Passed",
+      "duration": "00:00:01.3117800"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests",
+      "method": "LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport",
+      "outcome": "Passed",
+      "duration": "00:00:00.0638951"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests",
+      "method": "EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache",
+      "outcome": "Passed",
+      "duration": "00:00:00.4858766"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "LateFailureFromADoesNotReplaceBReadStatus",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests",
+      "method": "LateFailureFromADoesNotReplaceBReadStatus",
+      "outcome": "Passed",
+      "duration": "00:00:00.2421113"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "className": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests",
+      "method": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "outcome": "Passed",
+      "duration": "00:00:00.5976586"
+    },
+    {
+      "trx": "release-final2-regressions.trx",
+      "name": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "className": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests",
+      "method": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "outcome": "Passed",
+      "duration": "00:00:00.6913623"
+    },
+    {
+      "trx": "release-final2-existing-business.trx",
+      "name": "FifteenSectionsCreateEditLinkRecoverMoveAndReopenOneSyntheticPlan",
+      "className": "RAWSelectionAssistant.WpfTests.PlanningBatch3BusinessTests",
+      "method": "FifteenSectionsCreateEditLinkRecoverMoveAndReopenOneSyntheticPlan",
+      "outcome": "Passed",
+      "duration": "00:00:07.3121139"
+    }
+  ],
+  "physicalMouseDpi": "NOT_RUN",
+  "independentOffice": "NOT_RUN_UNCHANGED"
+}

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6bfa53b5-295d-4d23-9d8b-40f5df41581a" name="Administrator@PC-20250309WEIZ 2026-11-03 15:07:50" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T15:07:50.1262123+08:00" queuing="2026-11-03T15:07:50.1262125+08:00" start="2026-11-03T15:07:48.1459506+08:00" finish="2026-11-03T15:07:50.3484178+08:00" />
+  <TestSettings name="default" id="7716a3c3-9051-477c-9e05-522869de1d3c">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_15_07_50" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="68762940-9051-497d-b8cc-da439c2ecdcd" testId="13520e12-c8f6-8482-bf1a-190c39f68894" testName="LateFailureFromADoesNotReplaceBReadStatus" computerName="PC-20250309WEIZ" duration="00:00:00.2647053" startTime="2026-11-03T15:07:49.5646144+08:00" endTime="2026-11-03T15:07:49.8294764+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68762940-9051-497d-b8cc-da439c2ecdcd">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。字符串长度应为 21，但为 37。 ‘expected’表达式:‘expected’,‘actual’表达式:‘viewModel.ResourceStatus’。 A stale A error must not become B's current ledger-read state&#xD;
+应为:  "按项目只读读取支出；币种分开，不修改账本。"&#xD;
+但却是: "账本读取失败，保留上次结果：SYNTHETIC_OLD_A_FAILURE"&#xD;
+------^</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests.&lt;&gt;c.&lt;&lt;LateFailureFromADoesNotReplaceBReadStatus&gt;b__6_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4f4f2824-1c94-4c8a-b16e-a0544cc5c57e" testId="1b5f94fe-790b-82c3-b360-45a2d5fd7a74" testName="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" computerName="PC-20250309WEIZ" duration="00:00:00.3736905" startTime="2026-11-03T15:07:49.8298301+08:00" endTime="2026-11-03T15:07:50.2046630+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f4f2824-1c94-4c8a-b16e-a0544cc5c57e">
+      <Output>
+        <ErrorInfo>
+          <Message>StringAssert.Contains 失败。字符串“按项目只读读取支出；币种分开，不修改账本。”不包含字符串“暂无”。。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring, StringComparison comparisonType, String message) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 125&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 48&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests.&lt;&gt;c.&lt;&lt;EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="240656f0-dbfc-450f-ac43-df68898b688e" testId="1123843c-6f2c-81e0-b7ae-0dc9c20359d1" testName="AToBToALateReadCannotReplaceTheNewerARead" computerName="PC-20250309WEIZ" duration="00:00:00.7556092" startTime="2026-11-03T15:07:48.7865885+08:00" endTime="2026-11-03T15:07:49.5596829+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="240656f0-dbfc-450f-ac43-df68898b688e">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。字符串长度应为 9，但为 21。 ‘expected’表达式:‘"CURRENT_A"’,‘actual’表达式:‘viewModel.PlanningExpenses.Single().Note’。 An old A read must not publish merely because the UI returned to A&#xD;
+应为:  "CURRENT_A"&#xD;
+但却是: "STALE_A_BEFORE_SWITCH"&#xD;
+------^</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests.&lt;&gt;c.&lt;&lt;AToBToALateReadCannotReplaceTheNewerARead&gt;b__5_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LateFailureFromADoesNotReplaceBReadStatus" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13520e12-c8f6-8482-bf1a-190c39f68894">
+      <Execution id="68762940-9051-497d-b8cc-da439c2ecdcd" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="LateFailureFromADoesNotReplaceBReadStatus" />
+    </UnitTest>
+    <UnitTest name="AToBToALateReadCannotReplaceTheNewerARead" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1123843c-6f2c-81e0-b7ae-0dc9c20359d1">
+      <Execution id="240656f0-dbfc-450f-ac43-df68898b688e" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="AToBToALateReadCannotReplaceTheNewerARead" />
+    </UnitTest>
+    <UnitTest name="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b5f94fe-790b-82c3-b360-45a2d5fd7a74">
+      <Execution id="4f4f2824-1c94-4c8a-b16e-a0544cc5c57e" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="13520e12-c8f6-8482-bf1a-190c39f68894" executionId="68762940-9051-497d-b8cc-da439c2ecdcd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b5f94fe-790b-82c3-b360-45a2d5fd7a74" executionId="4f4f2824-1c94-4c8a-b16e-a0544cc5c57e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1123843c-6f2c-81e0-b7ae-0dc9c20359d1" executionId="240656f0-dbfc-450f-ac43-df68898b688e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

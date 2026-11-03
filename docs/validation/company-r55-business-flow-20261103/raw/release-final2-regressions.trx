@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b3f0303b-437a-4bc5-94c2-2c33784db93a" name="Administrator@PC-20250309WEIZ 2026-11-03 15:58:10" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T15:58:10.6469331+08:00" queuing="2026-11-03T15:58:10.6469333+08:00" start="2026-11-03T15:58:08.8002032+08:00" finish="2026-11-03T15:58:14.5909579+08:00" />
+  <TestSettings name="default" id="c6ce2174-9ea6-4220-b139-2d46e79a8eab">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_15_58_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c60a4078-3182-4ba4-9dcb-e0ec4b7136f9" testId="17836c9e-d489-8d60-ade6-83dcf46b06c8" testName="AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences" computerName="PC-20250309WEIZ" duration="00:00:00.5564078" startTime="2026-11-03T15:58:12.5133540+08:00" endTime="2026-11-03T15:58:13.0698852+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c60a4078-3182-4ba4-9dcb-e0ec4b7136f9" />
+    <UnitTestResult executionId="76477cf9-1f28-4c75-8805-c8d092facc99" testId="1123843c-6f2c-81e0-b7ae-0dc9c20359d1" testName="AToBToALateReadCannotReplaceTheNewerARead" computerName="PC-20250309WEIZ" duration="00:00:00.2648692" startTime="2026-11-03T15:58:10.2075476+08:00" endTime="2026-11-03T15:58:10.4725464+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76477cf9-1f28-4c75-8805-c8d092facc99" />
+    <UnitTestResult executionId="00e69c69-d1ff-4277-9292-19afebf92a80" testId="1433d390-f26e-81b3-82ea-abce8356b83c" testName="ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile" computerName="PC-20250309WEIZ" duration="00:00:00.0278667" startTime="2026-11-03T15:58:13.1339358+08:00" endTime="2026-11-03T15:58:13.1618667+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00e69c69-d1ff-4277-9292-19afebf92a80" />
+    <UnitTestResult executionId="b4d12d41-776c-46c0-9ca9-f5df39907df8" testId="11bf6de3-3ea2-8781-8180-1d91bf8114ac" testName="CancelLateGenerationAndProjectSwitchCannotPublish" computerName="PC-20250309WEIZ" duration="00:00:00.8900936" startTime="2026-11-03T15:58:09.2975738+08:00" endTime="2026-11-03T15:58:10.2040246+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b4d12d41-776c-46c0-9ca9-f5df39907df8" />
+    <UnitTestResult executionId="22b8b7f0-417f-43bb-8c78-5c6aaef42b69" testId="13728109-4d15-85f1-aef2-dfbf6b079204" testName="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" computerName="PC-20250309WEIZ" duration="00:00:01.3117800" startTime="2026-11-03T15:58:11.2012172+08:00" endTime="2026-11-03T15:58:12.5133007+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22b8b7f0-417f-43bb-8c78-5c6aaef42b69" />
+    <UnitTestResult executionId="ca70a2d6-f2db-402b-84af-664446a29fd9" testId="142298b4-9847-87fa-bf93-5d0528f4f440" testName="LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport" computerName="PC-20250309WEIZ" duration="00:00:00.0638951" startTime="2026-11-03T15:58:13.0699263+08:00" endTime="2026-11-03T15:58:13.1338958+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca70a2d6-f2db-402b-84af-664446a29fd9" />
+    <UnitTestResult executionId="ff9543ab-e0cd-40ec-8cdd-54c9c818a53c" testId="1b5f94fe-790b-82c3-b360-45a2d5fd7a74" testName="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" computerName="PC-20250309WEIZ" duration="00:00:00.4858766" startTime="2026-11-03T15:58:10.7152230+08:00" endTime="2026-11-03T15:58:11.2011712+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff9543ab-e0cd-40ec-8cdd-54c9c818a53c" />
+    <UnitTestResult executionId="0c3043e4-01cd-4088-8272-2a4965de683f" testId="13520e12-c8f6-8482-bf1a-190c39f68894" testName="LateFailureFromADoesNotReplaceBReadStatus" computerName="PC-20250309WEIZ" duration="00:00:00.2421113" startTime="2026-11-03T15:58:10.4728364+08:00" endTime="2026-11-03T15:58:10.7151911+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c3043e4-01cd-4088-8272-2a4965de683f" />
+    <UnitTestResult executionId="036f63f2-d172-492b-8597-dc005198af3f" testId="14bcd9a3-5e9a-813f-906b-1dae4ee5a500" testName="FullShellKeepsPrimaryNavigationAndContentTemplates" computerName="PC-20250309WEIZ" duration="00:00:00.5976586" startTime="2026-11-03T15:58:13.8534211+08:00" endTime="2026-11-03T15:58:14.4520497+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="036f63f2-d172-492b-8597-dc005198af3f" />
+    <UnitTestResult executionId="8ba13d0c-9003-4a38-8499-6fc932cabc2f" testId="1244cc47-3158-8407-af8d-c4af44419dce" testName="RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand" computerName="PC-20250309WEIZ" duration="00:00:00.6913623" startTime="2026-11-03T15:58:13.1619050+08:00" endTime="2026-11-03T15:58:13.8533832+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8ba13d0c-9003-4a38-8499-6fc932cabc2f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="17836c9e-d489-8d60-ade6-83dcf46b06c8">
+      <Execution id="c60a4078-3182-4ba4-9dcb-e0ec4b7136f9" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests" name="AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences" />
+    </UnitTest>
+    <UnitTest name="LateFailureFromADoesNotReplaceBReadStatus" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="13520e12-c8f6-8482-bf1a-190c39f68894">
+      <Execution id="0c3043e4-01cd-4088-8272-2a4965de683f" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="LateFailureFromADoesNotReplaceBReadStatus" />
+    </UnitTest>
+    <UnitTest name="CancelLateGenerationAndProjectSwitchCannotPublish" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="11bf6de3-3ea2-8781-8180-1d91bf8114ac">
+      <Execution id="b4d12d41-776c-46c0-9ca9-f5df39907df8" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests" name="CancelLateGenerationAndProjectSwitchCannotPublish" />
+    </UnitTest>
+    <UnitTest name="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="13728109-4d15-85f1-aef2-dfbf6b079204">
+      <Execution id="22b8b7f0-417f-43bb-8c78-5c6aaef42b69" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" />
+    </UnitTest>
+    <UnitTest name="AToBToALateReadCannotReplaceTheNewerARead" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="1123843c-6f2c-81e0-b7ae-0dc9c20359d1">
+      <Execution id="76477cf9-1f28-4c75-8805-c8d092facc99" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="AToBToALateReadCannotReplaceTheNewerARead" />
+    </UnitTest>
+    <UnitTest name="LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="142298b4-9847-87fa-bf93-5d0528f4f440">
+      <Execution id="ca70a2d6-f2db-402b-84af-664446a29fd9" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests" name="LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport" />
+    </UnitTest>
+    <UnitTest name="RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="1244cc47-3158-8407-af8d-c4af44419dce">
+      <Execution id="8ba13d0c-9003-4a38-8499-6fc932cabc2f" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests" name="RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand" />
+    </UnitTest>
+    <UnitTest name="ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="1433d390-f26e-81b3-82ea-abce8356b83c">
+      <Execution id="00e69c69-d1ff-4277-9292-19afebf92a80" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryExportTests" name="ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile" />
+    </UnitTest>
+    <UnitTest name="FullShellKeepsPrimaryNavigationAndContentTemplates" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="14bcd9a3-5e9a-813f-906b-1dae4ee5a500">
+      <Execution id="036f63f2-d172-492b-8597-dc005198af3f" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests" name="FullShellKeepsPrimaryNavigationAndContentTemplates" />
+    </UnitTest>
+    <UnitTest name="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="1b5f94fe-790b-82c3-b360-45a2d5fd7a74">
+      <Execution id="ff9543ab-e0cd-40ec-8cdd-54c9c818a53c" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningExpenseScopeTests" name="EmptyDisconnectedAndPermissionFailureRemainExplicitNotSuccessfulZeroOrCache" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="17836c9e-d489-8d60-ade6-83dcf46b06c8" executionId="c60a4078-3182-4ba4-9dcb-e0ec4b7136f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1123843c-6f2c-81e0-b7ae-0dc9c20359d1" executionId="76477cf9-1f28-4c75-8805-c8d092facc99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1433d390-f26e-81b3-82ea-abce8356b83c" executionId="00e69c69-d1ff-4277-9292-19afebf92a80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11bf6de3-3ea2-8781-8180-1d91bf8114ac" executionId="b4d12d41-776c-46c0-9ca9-f5df39907df8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13728109-4d15-85f1-aef2-dfbf6b079204" executionId="22b8b7f0-417f-43bb-8c78-5c6aaef42b69" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="142298b4-9847-87fa-bf93-5d0528f4f440" executionId="ca70a2d6-f2db-402b-84af-664446a29fd9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b5f94fe-790b-82c3-b360-45a2d5fd7a74" executionId="ff9543ab-e0cd-40ec-8cdd-54c9c818a53c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13520e12-c8f6-8482-bf1a-190c39f68894" executionId="0c3043e4-01cd-4088-8272-2a4965de683f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14bcd9a3-5e9a-813f-906b-1dae4ee5a500" executionId="036f63f2-d172-492b-8597-dc005198af3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1244cc47-3158-8407-af8d-c4af44419dce" executionId="8ba13d0c-9003-4a38-8499-6fc932cabc2f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.&#xD;
+   at MS.Internal.Data.DataBindEngine.Run(Object arg)&#xD;
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)&#xD;
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)&#xD;
+   at System.Windows.Threading.DispatcherOperation.InvokeImpl()&#xD;
+   at MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(Object obj)&#xD;
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+   at MS.Internal.CulturePreservingExecutionContext.Run(CulturePreservingExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+   at System.Windows.Threading.DispatcherOperation.Invoke()&#xD;
+   at System.Windows.Threading.Dispatcher.ProcessQueue()&#xD;
+   at System.Windows.Threading.Dispatcher.WndProcHook(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean&amp; handled)&#xD;
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean&amp; handled)&#xD;
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)&#xD;
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)&#xD;
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)&#xD;
+   at System.Windows.Threading.Dispatcher.LegacyInvokeImpl(DispatcherPriority priority, TimeSpan timeout, Delegate method, Object args, Int32 numArgs)&#xD;
+   at System.Windows.Threading.Dispatcher.Invoke(DispatcherPriority priority, Delegate method, Object arg)&#xD;
+   at MS.Win32.HwndSubclass.SubclassWndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam)&#xD;
+   at MS.Win32.UnsafeNativeMethods.DispatchMessage(MSG&amp; msg)&#xD;
+   at System.Windows.Threading.Dispatcher.PushFrameImpl(DispatcherFrame frame)&#xD;
+   at RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.&lt;&gt;c__DisplayClass17_0.&lt;.cctor&gt;b__1()&#xD;
+   at System.Threading.Thread.StartHelper.Callback(Object state)&#xD;
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

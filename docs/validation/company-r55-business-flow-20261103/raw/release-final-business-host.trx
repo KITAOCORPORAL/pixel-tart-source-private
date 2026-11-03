@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="5b0531a6-b280-4ad6-924f-17e7fa5033dc" name="Administrator@PC-20250309WEIZ 2026-11-03 15:56:05" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T15:56:05.8294979+08:00" queuing="2026-11-03T15:56:05.8294980+08:00" start="2026-11-03T15:55:57.2253440+08:00" finish="2026-11-03T15:56:05.8345550+08:00" />
+  <TestSettings name="default" id="e3960ad0-bbda-4a47-bc1d-2266a9ad2cc8">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_15_56_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e1f2650e-6ec8-4159-b578-ae3d1c6ea3af" testId="1f5d7bc5-acf1-8360-9b36-67f765875e9c" testName="CompleteAppProjectPlanningCalendarExpensesAndSummaryChain" computerName="PC-20250309WEIZ" duration="00:00:07.8907678" startTime="2026-11-03T15:55:57.7680501+08:00" endTime="2026-11-03T15:56:05.6740839+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e1f2650e-6ec8-4159-b578-ae3d1c6ea3af">
+      <Output>
+        <ErrorInfo>
+          <Message>Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException: Assert.IsNotNull 失败。‘value’表达式:‘saved’。 检测到时间冲突。请选择返回修改、仍然保存，或标记当前排期允许重叠后保存。&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194&#xD;
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.Booking(MainWindow window, MainViewModel main, String title, DateTime date, Nullable`1 edit)&#xD;
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.Create(MainWindow window, MainViewModel main, String suffix, DateTime date)&#xD;
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.&lt;&gt;c.&lt;&lt;CompleteAppProjectPlanningCalendarExpensesAndSummaryChain&gt;b__19_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.&lt;&gt;c__DisplayClass18_1.&lt;&lt;RunHost&gt;b__1&gt;d.MoveNext()</Message>
+          <StackTrace>   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.RunHost(Func`3 action)&#xD;
+   at RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests.CompleteAppProjectPlanningCalendarExpensesAndSummaryChain()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CompleteAppProjectPlanningCalendarExpensesAndSummaryChain" storage="e:\guangjing-businessflow-20261103\release-testhost\rawselectionassistant.wpftests.dll" id="1f5d7bc5-acf1-8360-9b36-67f765875e9c">
+      <Execution id="e1f2650e-6ec8-4159-b578-ae3d1c6ea3af" />
+      <TestMethod codeBase="E:\Guangjing-BusinessFlow-20261103\release-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ProjectBusinessFlowTests" name="CompleteAppProjectPlanningCalendarExpensesAndSummaryChain" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1f5d7bc5-acf1-8360-9b36-67f765875e9c" executionId="e1f2650e-6ec8-4159-b578-ae3d1c6ea3af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,56 @@
+{
+  "recordedAtShanghai": "2026-11-03 16:10:47",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "testSupport": "d0c88e27291c432ace5dace5db8f1b3a6a8c5772",
+  "sourceRevisionBound": true,
+  "build": {
+    "configuration": "Release",
+    "rid": "win-x64",
+    "selfContained": true,
+    "WholeAppDiagnosticBuild": true,
+    "PhotographerTrialBuild": false,
+    "installerCreated": false,
+    "allModules": true,
+    "planningSections": 15,
+    "tutorialsRetired": true
+  },
+  "sdk": "10.0.302",
+  "runtime": "10.0.10",
+  "publishedBindings": 20,
+  "publishedVersion": "2.3.0+38dd3f92bb2db7238f7f058008887929ec971c93",
+  "testAssemblySha256": "34BFB6C85E3D3AACC88E6953A9824157EAB51AD11544C92120441DFF7DB9E3C1",
+  "zip": {
+    "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64.zip",
+    "sha256": "357D0E9D30BA30CC9C157FE40D66371F6DE7A978E81E8730497286CBA3AFA1A2",
+    "files": 293,
+    "bytes": 79709421,
+    "directoryAndZipEveryFileReadback": "PASS"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+      "sha256": "76A9D5A7B187E4726197F5A766736C35725EF0A1EDAFC5955CB097C5D720CFFE"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+      "sha256": "1A1CB7A6BC5CD1C785F7A3D31031143A972AC8770454256B95BC5E312236BA77"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+      "sha256": "6EE01C266D752F8B5C327D85952C06C6D210653C8A8A14B3E2DB48D88ADFE81B"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/PlanningExpenseScopeTests.cs",
+      "sha256": "70DE5F727D3CB7BCAE5986687502B9FCEC125EBA545EFB075962F20B860D4558"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProjectBusinessFlowTests.cs",
+      "sha256": "860C82C1A4F2BE37705AA83C18DB9032AB2828DCC7F11BC71B0C08D5F685DF8F"
+    }
+  ],
+  "notes": [
+    "Package excludes testhost, fixture databases, generated DOCX and private images",
+    "All previous runtime/license paths remain present; prior package COMPANY-README.txt is not part of this publish",
+    "No additional product build on continuation; frozen prior publish reused and verified"
+  ]
+}
