@@ -13,6 +13,7 @@ public sealed record PlanningSummaryEntry(string Title,IReadOnlyList<KeyValuePai
     public IReadOnlyList<PlanningDocumentImage> OwnedImages {get;init;}=[];
     public IReadOnlyList<PlanningProjectCopy> ProjectCopies {get;init;}=[];
     public PlanningCanvasRevision? CanvasRevision {get;init;}
+    public Guid? CanvasRevisionId {get;init;}
 }
 public sealed record PlanningSummarySection(string Name,IReadOnlyList<PlanningSummaryEntry> Entries)
 {
@@ -69,7 +70,7 @@ public static class PlanningReadableSummaryBuilder
             if(resource is PlanningLight light&&!string.IsNullOrWhiteSpace(light.ReferencePath))fields.Add(("灯位原图状态",ReferenceState(light.ReferencePath)));
             Add(section,resource.Name,fields.ToArray());
             if(resource is PlanningLight {CanvasRevisionId:Guid revisionId})
-                sections[section][^1]=sections[section][^1] with{CanvasRevision=d.Package?.CanvasRevisions.FirstOrDefault(revision=>revision.RevisionId==revisionId)};
+                sections[section][^1]=sections[section][^1] with{CanvasRevisionId=revisionId,CanvasRevision=d.Package?.CanvasRevisions.FirstOrDefault(revision=>revision.RevisionId==revisionId)};
             if(resource is PlanningLight imageLight)Attach(section,owned.Where(i=>OwnPathMatches(i,imageLight.ReferencePath)));
         }
         if(input.Booking is{} booking)

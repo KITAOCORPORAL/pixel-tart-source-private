@@ -7,6 +7,7 @@ using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.Services;
 
 public sealed record PlanningSummaryExportResult(string Path,int Sections,IReadOnlyList<string> Warnings);
+internal sealed record PlanningSummaryWarningSummary(ICollection<string> Warnings);
 internal sealed record PlanningSummaryCanvasImage(PlanningCanvasRevision Revision,Guid ProjectId,double Width,double Height,ICollection<string> Warnings)
 {
     public Image Read()=>PlanningSummaryOwnedImage.ReadSnapshot(Revision,ProjectId,Width,Height);
@@ -41,7 +42,7 @@ public static class PlanningSummaryDocument
                     if(index==1&&field.Key=="内容"&&source.Package?.RichTextPackageBase64 is{} rich)
                     {AppendRich(rich,source.Package.RichLayout);continue;}
                     if(index==14&&field.Key=="内容"&&source.Package?.RichTextPackageBase64 is not null)Text("本区共用的持久富文本已在02文字完整列出；以下为原补充文档内容，不重复创建另一份正文。");
-                    Text(field.Key+"："+field.Value,entry.CanvasRevision is not null);
+                    Text(field.Key+"："+field.Value,entry.CanvasRevision is not null||entry.CanvasRevisionId is not null);
                 }
                 if(entry.CanvasRevision is{} revision)
                 {
@@ -52,6 +53,7 @@ public static class PlanningSummaryDocument
                     }
                     else Text("固定快照已在正文或灯位的明确关联位置呈现。");
                 }
+                else if(entry.CanvasRevisionId is Guid missingRevision)Text(MissingRevision(missingRevision));
             }
             foreach(var image in section.OwnedImages)AppendOwned(image);
             foreach(var copy in section.ProjectCopies)
@@ -63,10 +65,53 @@ public static class PlanningSummaryDocument
                 Text("项目内："+copy.RelativePath+"；SHA-256："+copy.Sha256+"；原来源仅作记录："+copy.OriginalPath);
             }
         }
-        if(warnings.Count>0){Text("导出警告（保留原资料，不替换源文件）");foreach(var warning in warnings)Text(warning);}
+        document.Blocks.Add(new Paragraph{Tag=new PlanningSummaryWarningSummary(warnings)});
         return document;
         void Text(string value,bool keepWithNext=false)=>document.Blocks.Add(new Paragraph(new Run(value)){Margin=new Thickness(0,2,0,6),KeepWithNext=keepWithNext});
         Image SnapshotImage(PlanningCanvasRevision revision)=>new(){Tag=new PlanningSummaryCanvasImage(revision,summary.ProjectId,contentWidth,contentHeight,warnings)};
+        string MissingRevision(Guid revisionId)
+        {
+            var message=$"[画布固定快照未呈现：版本 {revisionId:D}；关联的已保存版本不存在。未读取旧RTF嵌图、当前画布、源照片或其他版本替代。]";
+            warnings.Add(message);return message;
+        }
+        Block ReplaceCanvasContent(Block original,Func<Inline> content)
+        {
+            var inserted=false;
+            void Replace(InlineCollection inlines)
+            {
+                foreach(var inline in inlines.ToArray())
+                    if(inline is Span span)Replace(span.Inlines);
+                    else if(inline is InlineUIContainer{Child:Image image}&&image.Tag is not PlanningDocumentImage)
+                    {
+                        if(!inserted){inlines.InsertBefore(inline,content());inserted=true;}
+                        inlines.Remove(inline);
+                    }
+            }
+            void ReplaceBlocks(BlockCollection blocks)
+            {
+                foreach(var block in blocks.ToArray())
+                {
+                    var replacement=Rewrite(block);
+                    if(!ReferenceEquals(replacement,block)){blocks.InsertBefore(block,replacement);blocks.Remove(block);}
+                }
+            }
+            Block Rewrite(Block block)
+            {
+                if(block is Paragraph paragraph)Replace(paragraph.Inlines);
+                else if(block is BlockUIContainer{Child:Image image}&&image.Tag is not PlanningDocumentImage)
+                {
+                    var replacement=new Paragraph{Margin=block.Margin,BreakPageBefore=block.BreakPageBefore};
+                    if(!inserted){replacement.Inlines.Add(content());inserted=true;}return replacement;
+                }
+                else if(block is Table table)foreach(var group in table.RowGroups)foreach(var row in group.Rows)foreach(var cell in row.Cells)ReplaceBlocks(cell.Blocks);
+                else if(block is List list)foreach(var item in list.ListItems)ReplaceBlocks(item.Blocks);
+                else if(block is Section section)ReplaceBlocks(section.Blocks);
+                return block;
+            }
+            var output=Rewrite(original);
+            if(!inserted){if(output is Paragraph paragraph)paragraph.Inlines.Add(content());else document.Blocks.Add(new Paragraph(content()));}
+            return output;
+        }
         Image ReadImage(PlanningDocumentImage meta)=>PlanningSummaryOwnedImage.Read(meta,summary.DocumentId??Guid.Empty,contentWidth,contentHeight);
         string Failure(PlanningDocumentImage meta,Exception e){var message=$"[文档图片不可用：{meta.Title} / {meta.DocumentImageId:D}；{e.GetType().Name}：{e.Message}；保留原引用，未替换其他文件]";warnings.Add(message);return message;}
         void AppendOwned(PlanningDocumentImage meta)
@@ -97,20 +142,24 @@ public static class PlanningSummaryDocument
             foreach(var block in body.Blocks.ToArray())
             {
                 body.Blocks.Remove(block);
-                if(block.Tag is PlanningBlockSemantic{CanvasRevisionId:Guid revisionId}&&source.Package?.CanvasRevisions.FirstOrDefault(revision=>revision.RevisionId==revisionId) is{} revision)
+                Block output=block;
+                if(block.Tag is PlanningBlockSemantic{CanvasRevisionId:Guid revisionId})
                 {
-                    var image=SnapshotImage(revision);
-                    if(block is BlockUIContainer container)container.Child=image;
-                    else if(block is Paragraph paragraph)
+                    var revision=source.Package?.CanvasRevisions.FirstOrDefault(value=>value.RevisionId==revisionId);
+                    if(revision is null)
                     {
-                        foreach(var inline in paragraph.Inlines.OfType<InlineUIContainer>().ToArray())paragraph.Inlines.Remove(inline);
-                        paragraph.Inlines.Add(new InlineUIContainer(image));
+                        var message=MissingRevision(revisionId);
+                        output=ReplaceCanvasContent(block,()=>new Run(message));
                     }
-                    else document.Blocks.Add(new Paragraph(new InlineUIContainer(image)));
-                    renderedSnapshots.Add(revisionId);
-                    Text($"画布固定快照 · 版本 {revision.RevisionId:D} · 保存于 {revision.CapturedAt:yyyy-MM-dd HH:mm:ss zzz}",true);
+                    else
+                    {
+                        if(block is BlockUIContainer container)container.Child=SnapshotImage(revision);
+                        else output=ReplaceCanvasContent(block,()=>new InlineUIContainer(SnapshotImage(revision)));
+                        renderedSnapshots.Add(revisionId);
+                        Text($"画布固定快照 · 版本 {revision.RevisionId:D} · 保存于 {revision.CapturedAt:yyyy-MM-dd HH:mm:ss zzz}",true);
+                    }
                 }
-                document.Blocks.Add(block);
+                document.Blocks.Add(output);
             }
         }
     }

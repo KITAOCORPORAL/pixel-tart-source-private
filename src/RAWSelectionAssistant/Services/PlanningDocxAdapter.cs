@@ -85,7 +85,15 @@ public static partial class PlanningDocxAdapter
                         else throw new NotSupportedException("单元格内嵌套表格或未知块尚未支持；原件保留，未写入目标。");
                 }
                 foreach(var block in document.Blocks)
-                    if(block is Paragraph p)body.Append(Paragraph(p));
+                    if(block.Tag is PlanningSummaryWarningSummary summary)
+                    {
+                        if(summary.Warnings.Count>0)
+                        {
+                            body.Append(Paragraph(new Paragraph(new Run("导出警告（保留原资料，不替换源文件）"))));
+                            foreach(var warning in summary.Warnings)body.Append(Paragraph(new Paragraph(new Run(warning))));
+                        }
+                    }
+                    else if(block is Paragraph p)body.Append(Paragraph(p));
                     else if(block is BlockUIContainer image)body.Append(new W.Paragraph(ImageRun(image.Child as Image ?? throw new NotSupportedException("DOCX 暂不支持此嵌入对象。"))));
                     else if(block is List list)ExportList(list,body);
                     else if(block is Table table)
