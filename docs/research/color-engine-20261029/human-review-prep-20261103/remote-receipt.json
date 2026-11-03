@@ -1,0 +1,15 @@
+{
+  "version": "Round13HumanReviewRemotePayloadReceiptV1",
+  "observedAt": "2026-11-03T14:12:23.821498+08:00",
+  "timezone": "Asia/Shanghai",
+  "branch": "research/color-engine-round13-human-review-20261103",
+  "payloadLocalHead": "07f5cb9241ded64db6ef85262749541191ed7559",
+  "payloadRemoteHead": "07f5cb9241ded64db6ef85262749541191ed7559",
+  "payloadWorktree": "CLEAN",
+  "publicationManifest": "PASS_16_GIT_BLOB_HASHES",
+  "scope": "This receipt records the already-pushed payload commit. Receipt-only follow-up commit and final local/remote HEAD are independently read back after push; no circular final-commit self-hash claim.",
+  "humanPreference": "NOT_RUN_AWAITING_HUMAN",
+  "realPhotoViewerGeneration": "NOT_RUN_MISSING_PRIVATE_FILES",
+  "phaseDecision": "WAIT_FOR_ACTUAL_HUMAN_REVIEW",
+  "newResearchDeviceCalls": 0
+}
