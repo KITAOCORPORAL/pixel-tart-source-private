@@ -1,3 +1,12 @@
+## 2026-11-03 公司当前：旧灯台四提交远端保全与最小交互收回（Asia/Shanghai）
+- 四个真实旧提交9299749c87833b4b637b83d0f086d06ac6e1025f、a1a2a8f751b83bfce23982784d2d7f3cae86fb2d、2ed1dc358cb6f7acaaaa670db25c8233f873f415、27794d2f86313d7231f235b4fd1104eb4e95c106已先普通push独立远端分支 **preserve/company-lighttable-four-20261103**，HEAD27794d2f；完整链接/父链/逐提交审查见docs/validation/company-r55-lighttable-reclaim-20261103/FINAL_REPORT.md，不再仅本地保留。
+- 旧树E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030不reset/clean/stash、HEAD/tracked源码不改；相对旧上游仍4ahead但现已可远端审查。49个未跟踪文件（30PNG/19文档收据）只列路径/hash，均未自动上传，旧私人图片/输出/受限资源不入Git。
+- 当前8d3d8753基线实测保存清选择和旋转工具条重叠2项FAIL。仅一个产品文件最小收回a1a2/277的交互意图：同工作区保存保留有效选择，Targets真正Reset仍清空防同ID跨项目泄漏；工具条用实际变换照片+标签union和实际可用视口定位，不改当前独立Image/标签卡片结构。
+- 929大部分热点已有2174da07后续替代，不移植profiling/旧样式/任务状态/机械光影，不用旧成绩宣称新提速。2ed仅复用变换照片必须被明确选中的测试意图。未整树覆盖、未cherry-pick四提交，四旧SHA不作为当前产品祖先。
+- 产品源码 **26c034873a469d428b4e1975d1772a55f0128b66**；测试 **918d33025a45b528da417a4cd5f7638a6112e7db**。最终发布绑定15唯一PASS，含独立进程重开、同ID项目隔离/UndoRedo、渐进选择/任务取消/缓存句柄边界；800/1366/1920×3角度×3缩放27组通过，布局无新增解码。鼠标/DPI仍NOT_RUN，离屏不冒充实机。
+- 完整自包含诊断ZIP E:/Guangjing-Lighttable-Reclaim-20261103/Guangjing-R55-LighttableReclaim-Diagnostic-win-x64.zip，294文件逐项hash读回，SHA256 CAB9C4743D86472ED8BBE14C3C8FB9A082E7D9023B61CB87AB7386F9FC7D9F70；同名目录Start-Guangjing-Diagnostic.cmd隔离启动，产品SHA日志及EXE/CMD退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false；全模块/策划15/教程退役，无Setup/单模块。
+- DOCX失效关联/警告修复保持，本轮DOCX专项/Office探测/WPS操作0；独立Office继续NOT_RUN。色彩研究不整合，渲染数学/default/PV/RAW/任务桥/项目包范围不改，不合main、不强推。总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。新记录Asia/Shanghai，历史收据保持。
+
 ## 2026-11-03 公司当前：DOCX失效关联反馈与警告一致性（Asia/Shanghai）
 - 两远端fetch后开工产品仍372a2e2334a6d06068df2221d4cb875959e651af/源码5116daa7，公司产品树clean/0未推；已查相关refs、工作树、reflog、交接记录及可见会话。家庭昨晚执行/未推成果仍缺实际HEAD/diff/测试或独立渲染回执，**状态未知，不以远端未更新判未执行**；未访问家庭N盘。后续家庭补丁须比较复用，不覆盖。
 - 原四份DOCX哈希不变，原已完成产品读回证据沿用。公司有WPS12.1.0.29161，但CLI帮助被签名门禁拒绝；受控COM前置检查遇到用户WPS PID11928，未创建COM/打开文档，未接管/关闭用户进程，未反复空跑。原四份独立Office仍NOT_RUN，不宣称排版FAIL或通过。

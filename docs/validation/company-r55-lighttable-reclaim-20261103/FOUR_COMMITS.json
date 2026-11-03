@@ -1,0 +1,48 @@
+[
+  {
+    "sha": "9299749c87833b4b637b83d0f086d06ac6e1025f",
+    "subject": "perf(r55): freeze polished light table and remove measured refresh hotspots",
+    "link": "https://github.com/KITAOCORPORAL/pixel-tart-source-private/commit/9299749c87833b4b637b83d0f086d06ac6e1025f",
+    "parent": "b1443ed4263dee08e31f3602425833522c481d00",
+    "changedFiles": [
+      "A\tsrc/RAWSelectionAssistant/Services/ViewingTableDiagnostics.cs",
+      "M\tsrc/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingLayout.cs",
+      "M\tsrc/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingTable.cs",
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.Interaction.cs",
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs",
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/CompanyViewingMeasurementsTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/R53UiCorrectionTests.cs",
+      "A\ttests/RAWSelectionAssistant.WpfTests/R55PolishTests.cs"
+    ]
+  },
+  {
+    "sha": "a1a2a8f751b83bfce23982784d2d7f3cae86fb2d",
+    "subject": "fix(r55): retain same-project selection across autosave during visual review",
+    "link": "https://github.com/KITAOCORPORAL/pixel-tart-source-private/commit/a1a2a8f751b83bfce23982784d2d7f3cae86fb2d",
+    "parent": "9299749c87833b4b637b83d0f086d06ac6e1025f",
+    "changedFiles": [
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/R55PolishTests.cs"
+    ]
+  },
+  {
+    "sha": "2ed1dc358cb6f7acaaaa670db25c8233f873f415",
+    "subject": "test(r55): select transformed photo for full-host context-bar review",
+    "link": "https://github.com/KITAOCORPORAL/pixel-tart-source-private/commit/2ed1dc358cb6f7acaaaa670db25c8233f873f415",
+    "parent": "a1a2a8f751b83bfce23982784d2d7f3cae86fb2d",
+    "changedFiles": [
+      "M\ttests/RAWSelectionAssistant.WpfTests/R53UiCorrectionTests.cs"
+    ]
+  },
+  {
+    "sha": "27794d2f86313d7231f235b4fd1104eb4e95c106",
+    "subject": "style(r55): anchor transformed context to actual photo and label bounds",
+    "link": "https://github.com/KITAOCORPORAL/pixel-tart-source-private/commit/27794d2f86313d7231f235b4fd1104eb4e95c106",
+    "parent": "2ed1dc358cb6f7acaaaa670db25c8233f873f415",
+    "changedFiles": [
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.Interaction.cs",
+      "M\tsrc/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs"
+    ]
+  }
+]

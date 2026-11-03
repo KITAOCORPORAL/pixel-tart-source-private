@@ -1,0 +1,99 @@
+{
+  "rows": [
+    {
+      "testName": "WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0061199"
+    },
+    {
+      "testName": "ContextToolbarUsesTransformedPhotoAndLabelBoundsWithinViewport",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1667135"
+    },
+    {
+      "testName": "RealTaskExplicitCancelHasNoPartialVariant",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1636678"
+    },
+    {
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.8749018"
+    },
+    {
+      "testName": "GeometryFastPathKeepsFrozenReferencesUndoAndFullBoundaryRejection",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0435293"
+    },
+    {
+      "testName": "ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0078144"
+    },
+    {
+      "testName": "SelectingLoadedCardKeepsProgressiveWorkButDoesNotStealSelection",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0405166"
+    },
+    {
+      "testName": "LostCaptureFinalizesOnceStableOrderingAndCrossProjectHistoryReset",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2684619"
+    },
+    {
+      "testName": "RefreshRetainsFixedRowsAndInfoControlsAndOnlyNotifiesNewFailures",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.8092895"
+    },
+    {
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.7019856"
+    },
+    {
+      "testName": "SameProjectSaveRetainsSelectionButReloadWithSameIdsNeverLeaksSelection",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.0615608"
+    },
+    {
+      "testName": "CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0223449"
+    },
+    {
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.6536326"
+    },
+    {
+      "testName": "LayoutViewportOrderPreferencesAndProjectReopen",
+      "receipt": "release-reclaim.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2027662"
+    },
+    {
+      "testName": "IndependentR55LayoutReopen",
+      "receipt": "release-independent-reopen.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.5749631"
+    }
+  ],
+  "executions": 15,
+  "scope": "Only reclaimed light-table interactions, inherited replacement semantics and necessary preservation; no DOCX or broad color acceptance",
+  "passed": 15,
+  "failed": 0,
+  "uniqueMethods": 15
+}

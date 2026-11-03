@@ -1,0 +1,15 @@
+{
+  "status":"TARGETED_INTERACTIONS_RECOVERED_OVERALL_PARTIAL_DIAGNOSTIC",
+  "preservationBranch":"preserve/company-lighttable-four-20261103",
+  "preservationHead":"27794d2f86313d7231f235b4fd1104eb4e95c106",
+  "productSource":"26c034873a469d428b4e1975d1772a55f0128b66",
+  "testSupport":"918d33025a45b528da417a4cd5f7638a6112e7db",
+  "items":[
+    {"id":"SAVE_SELECTION_LOSS","status":"REPRODUCED_FIXED_VERIFIED","baseline":"raw/baseline-reclaim-v2.trx","after":"raw/release-reclaim.trx"},
+    {"id":"TRANSFORMED_CONTEXT_OVERLAP","status":"REPRODUCED_FIXED_VERIFIED","baseline":"baseline/CONTEXT_BOUNDS.json","after":"release/CONTEXT_BOUNDS.json"},
+    {"id":"OLD_PERFORMANCE_PORT","status":"NOT_PORTED_REPLACED_OR_OUT_OF_SCOPE","newPerformanceClaim":false,"oldScoresReused":false},
+    {"id":"PHYSICAL_MOUSE_DPI","status":"NOT_RUN","offscreenNotSubstitute":true},
+    {"id":"INDEPENDENT_OFFICE","status":"NOT_RUN_UNCHANGED","thisTurnOfficeProbes":0},
+    {"id":"OLD_UNTRACKED_DATA","status":"LOCAL_ONLY_NOT_AUTO_UPLOADED","files":49,"images":30,"otherReceipts":19}
+  ]
+}

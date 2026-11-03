@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="1046e7aa-c10c-4b93-ba75-fdee5c564096" name="Administrator@PC-20250309WEIZ 2026-11-03 13:36:10" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T13:36:10.7417981+08:00" queuing="2026-11-03T13:36:10.7417990+08:00" start="2026-11-03T13:36:08.6225175+08:00" finish="2026-11-03T13:36:10.7479406+08:00" />
+  <TestSettings name="default" id="6b10155f-f04f-48ef-90c7-f8698aea92cb">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_13_36_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8e5d1613-ca68-435e-89bd-fa1d81bce563" testId="10f28f22-28a0-8c19-abf2-5240c4f5fbd8" testName="SameProjectSaveRetainsSelectionButReloadWithSameIdsNeverLeaksSelection" computerName="PC-20250309WEIZ" duration="00:00:00.9504011" startTime="2026-11-03T13:36:09.5959056+08:00" endTime="2026-11-03T13:36:10.5628237+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e5d1613-ca68-435e-89bd-fa1d81bce563">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。应为: &lt;c1075516-bacf-48aa-8755-d9283913400e&gt;，实际为: &lt;&gt;。‘expected’表达式:‘selected’,‘actual’表达式:‘view.SelectedVariant’。 Saving the current project must not clear the selected fixed version</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405&#xD;
+   at RAWSelectionAssistant.WpfTests.LighttableReclaimTests.&lt;&gt;c.&lt;&lt;SameProjectSaveRetainsSelectionButReloadWithSameIdsNeverLeaksSelection&gt;b__6_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bbec3ac4-3494-4f4d-afef-5397d90eadfb" testId="1a9989c0-a9de-8019-88b9-2aa267000a28" testName="ContextToolbarUsesTransformedPhotoAndLabelBoundsWithinViewport" computerName="PC-20250309WEIZ" duration="00:00:00.0464676" startTime="2026-11-03T13:36:10.5664924+08:00" endTime="2026-11-03T13:36:10.6142215+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bbec3ac4-3494-4f4d-afef-5397d90eadfb">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsFalse 失败。‘condition’表达式:‘intersects’。 Context toolbar must not overlap the actual rotated photo or label when external space is available</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsFalseFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 200&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsFalse(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 191&#xD;
+   at RAWSelectionAssistant.WpfTests.LighttableReclaimTests.&lt;&gt;c.&lt;&lt;ContextToolbarUsesTransformedPhotoAndLabelBoundsWithinViewport&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ContextToolbarUsesTransformedPhotoAndLabelBoundsWithinViewport" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1a9989c0-a9de-8019-88b9-2aa267000a28">
+      <Execution id="bbec3ac4-3494-4f4d-afef-5397d90eadfb" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LighttableReclaimTests" name="ContextToolbarUsesTransformedPhotoAndLabelBoundsWithinViewport" />
+    </UnitTest>
+    <UnitTest name="SameProjectSaveRetainsSelectionButReloadWithSameIdsNeverLeaksSelection" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10f28f22-28a0-8c19-abf2-5240c4f5fbd8">
+      <Execution id="8e5d1613-ca68-435e-89bd-fa1d81bce563" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LighttableReclaimTests" name="SameProjectSaveRetainsSelectionButReloadWithSameIdsNeverLeaksSelection" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="10f28f22-28a0-8c19-abf2-5240c4f5fbd8" executionId="8e5d1613-ca68-435e-89bd-fa1d81bce563" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a9989c0-a9de-8019-88b9-2aa267000a28" executionId="bbec3ac4-3494-4f4d-afef-5397d90eadfb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
