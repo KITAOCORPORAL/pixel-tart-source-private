@@ -89,7 +89,7 @@ public static partial class PlanningDocxAdapter
                     {
                         if(summary.Warnings.Count>0)
                         {
-                            body.Append(Paragraph(new Paragraph(new Run("导出警告（保留原资料，不替换源文件）"))));
+                            body.Append(Paragraph(new Paragraph(new Run("导出警告（保留原资料，不替换源文件）")){KeepWithNext=true}));
                             foreach(var warning in summary.Warnings)body.Append(Paragraph(new Paragraph(new Run(warning))));
                         }
                     }
