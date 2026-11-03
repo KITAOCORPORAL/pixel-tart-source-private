@@ -1,3 +1,17 @@
+# 第十三批 V1 研究已结束并封存（2026-11-03，Asia/Shanghai）
+
+接续 research/color-engine-round13-human-review-20261103 @ 8b9dcfa0bf8bd07e983a63a0a79bfb84a7110ca9，fetch/本地/远端核对一致。复用本会话已核验真实人工评价；原 JSON SHA256 48bd60ff065eaadbb49576700fbf3c5f89ce85ea121d6b50747a9cb8a5dfd397，本次哈希确认未变，不重复评价、不补答案/文字原因。
+
+当前人工状态：**已收到并核验，未报告明确版本偏好**。30/30 项已填写；没有场景明确偏好 X 或 Y；总体4场景无明显偏好、2场景无法评估；无文字原因，观看条件记录不足。此前“尚未收到/NOT_RUN_AWAITING_HUMAN”仅为下方历史准备状态，不再是当前结论。
+
+SharedIncrementEnvelopeUnsharpV1：技术结果及取舍保留；人工评价已完成但未建立值得推荐的主观收益；默认关闭、NOT_ADMITTED，**结束V1研究、封存不接入**。独立验证保持 NOT_RUN_DEVELOPMENT_ONLY。无明确新问题，不自动调参/V2/新增样本，不继续追逐零值数量或跨GPU逐位一致。
+
+此次只汇总文档和 Git 交付：新增build/GPU/RAW/20MP/六图渲染/BT/算法调整/产品打包全部0。原JSON、评价页面、私照、匿名key/映射只本地保留，不揭盲、不上传。Git仅提交原文件hash、汇总/核验范围/局限。权威ROUND13_V1_CLOSURE_20261103.md及round13-v1-closure-20261103/SUMMARY.json；当前能力表已更正。最终Git提交/远端身份以实际push后的读回消息为准。完成后停止该候选任务。
+
+---
+
+## 以下为历史检查点（保留原字节；不代表当前人工评价状态）
+
 # 第十三批人工摄影评价准备已收口（2026-11-03，Asia/Shanghai）
 
 接续已审查 research/color-engine-company-scale-closure-20261103 @ 9b8c52715b45540ffaf1d1fc99e0a7bd832678fc，fetch 无增量，复用干净独立公司研究 checkout，新分支 research/color-engine-round13-human-review-20261103。CPU 数值定位停止；保留 double 身份差异与 tc_b / 相同输入子集 upsample 差异，无实现错误证据，不改像素数学。旧 validator/hash/localcopy 不重跑，缺家庭四完整数组不阻断此准备。

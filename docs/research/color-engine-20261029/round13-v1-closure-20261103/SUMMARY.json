@@ -1,0 +1,91 @@
+{
+  "version": "Round13V1HumanReviewClosureV1",
+  "date": "2026-11-03",
+  "timezone": "Asia/Shanghai",
+  "researchBaseline": "8b9dcfa0bf8bd07e983a63a0a79bfb84a7110ca9",
+  "candidate": "SharedIncrementEnvelopeUnsharpV1",
+  "sourceRecord": {
+    "originalJsonSha256": "48bd60ff065eaadbb49576700fbf3c5f89ce85ea121d6b50747a9cb8a5dfd397",
+    "originalJsonBytes": 2791,
+    "originalJsonModified": false,
+    "originalJsonPublished": false,
+    "reusedPreviouslyVerifiedResult": true,
+    "reviewVersion": "Round13AnonymousHumanReviewV1",
+    "pagePayloadSourceBase": "9b8c52715b45540ffaf1d1fc99e0a7bd832678fc"
+  },
+  "verificationScope": {
+    "pageVersionAndSourceMatched": true,
+    "uniqueScenes": 6,
+    "sceneIdsAndFixedRoisMatched": true,
+    "allowedChoicesChecked": true,
+    "declaredCountMatchedActualNonNullAnswers": true,
+    "answeredItems": 30,
+    "totalItems": 30,
+    "reasonFieldsNotFilledByAgent": true,
+    "anonymousMappingNotRevealed": true,
+    "scopeLimit": "Source/structure/option consistency verified, not authenticated viewing behavior or calibrated display conditions"
+  },
+  "aggregate": {
+    "detail": {
+      "noDifference": 4,
+      "cannotAssess": 2
+    },
+    "darkHalo": {
+      "noDifference": 5,
+      "cannotAssess": 1
+    },
+    "colorEdge": {
+      "noDifference": 6,
+      "cannotAssess": 0
+    },
+    "noise": {
+      "noDifference": 6,
+      "cannotAssess": 0
+    },
+    "overallPreference": {
+      "explicitX": 0,
+      "explicitY": 0,
+      "noPreference": 4,
+      "cannotAssess": 2
+    },
+    "writtenReasons": 0
+  },
+  "humanReview": {
+    "status": "RECEIVED_AND_VERIFIED_NO_EXPLICIT_VERSION_PREFERENCE",
+    "complete": true,
+    "recommendableSubjectiveBenefit": "NOT_ESTABLISHED",
+    "viewingConditions": "INSUFFICIENTLY_RECORDED",
+    "limitations": [
+      "one reviewer and six developmental scenes only",
+      "no written reasons",
+      "viewing zoom,display/browser and calibration conditions insufficiently recorded",
+      "no_difference does not assert both versions acceptable or all conditions indistinguishable"
+    ]
+  },
+  "decision": {
+    "state": "V1_RESEARCH_CLOSED_AND_FROZEN",
+    "technicalResults": "PRESERVED_WITH_KNOWN_TRADEOFFS",
+    "defaultEnabled": false,
+    "product": "NOT_ADMITTED",
+    "integration": "NONE",
+    "independentValidation": "NOT_RUN_DEVELOPMENT_ONLY",
+    "v2Created": false,
+    "retuning": false,
+    "newSamples": false,
+    "furtherExperiments": "STOP_UNLESS_EXPLICIT_NEW_QUESTION"
+  },
+  "newExecutionCounts": {
+    "build": 0,
+    "productPackage": 0,
+    "gpu": 0,
+    "rawDecode": 0,
+    "full20MP": 0,
+    "sixSceneRender": 0,
+    "BT": 0,
+    "algorithmAdjustment": 0
+  },
+  "privacy": {
+    "gitContent": "aggregate conclusions and raw answer hash only; no per-scene answers, photographs,HTML,anonymous key/mapping or rawJSON",
+    "privateMaterial": "retained locally unchanged"
+  }
+}

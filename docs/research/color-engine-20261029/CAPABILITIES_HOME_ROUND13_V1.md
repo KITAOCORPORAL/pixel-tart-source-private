@@ -1,3 +1,13 @@
+# 第十三批 V1 当前最终状态（2026-11-03，Asia/Shanghai）
+
+**V1_RESEARCH_CLOSED_AND_FROZEN / DEFAULT_OFF / NOT_ADMITTED。** 技术结果保留；真实人工评价已收到并核验，30/30项完整，没有明确X/Y偏好，总体4无明显偏好/2无法评估，无文字原因、观看条件不足，未建立值得推荐的主观收益。独立验证仍NOT_RUN_DEVELOPMENT_ONLY。封存不接入，不自动调参、V2、新样本或重跑计算。
+
+权威ROUND13_V1_CLOSURE_20261103.md、当前CAPABILITIES_ROUND13_HUMAN_REVIEW_20261103.md及round13-v1-closure-20261103/SUMMARY.json。下方为原技术批次历史能力，含当时的NOT_RUN/等待评价，不代表今天仍未收到答案。
+
+---
+
+## 历史技术能力（原文保留）
+
 # 第十三批能力状态：唯一受约束锐化候选
 
 2026-11-01（Europe/Helsinki），独立研究，不注册产品，不替代第十批冻结合同。

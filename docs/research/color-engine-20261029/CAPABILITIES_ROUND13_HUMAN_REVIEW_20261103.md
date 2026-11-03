@@ -1,3 +1,26 @@
+# 第十三批人工评价当前能力与V1封存状态
+
+日期：2026-11-03，Asia/Shanghai。权威 ROUND13_V1_CLOSURE_20261103.md 与 round13-v1-closure-20261103/SUMMARY.json。此前准备阶段能力表原样保留在下方历史区。
+
+|事项|当前状态|证据边界|
+|---|---|---|
+|真实评价材料|RECEIVED_HASH_UNCHANGED|复用已核验原JSON，SHA256 48bd60ff065eaadbb49576700fbf3c5f89ce85ea121d6b50747a9cb8a5dfd397，2791bytes；未修改/上传|
+|页面及原材料校验|EXISTING_HOME_PREPARATION_VERIFIED|此前家庭61文件完整校验通过且已生成私有页面，本次不重生成/重新验六图；版本/来源/固定ROI与答案已核验|
+|真人评价完整性|COMPLETED_30_OF_30|六场景各五项非空；未补答、未代填|
+|明确版本偏好|NONE_REPORTED|没有场景明确偏好X/Y；总体4无明显偏好、2无法评估|
+|文字原因/观看条件|LIMITED|无文字原因；具体观看倍率/显示设备/校准条件记录不足，不补造|
+|值得推荐的主观收益|NOT_ESTABLISHED|不推断两版均可接受、完全不可区分或候选更好|
+|技术结果|PRESERVED_WITH_TRADEOFFS|第十三批冻结技术结果和细节/噪声等代价原样保留，不重算|
+|独立评价|NOT_RUN_DEVELOPMENT_ONLY|一名评价者、六开发样本；不改称独立验证|
+|匿名/私有数据|LOCAL_ONLY_NO_UNBLIND|页面、照片、key、原JSON留本地，不上传/不揭示映射|
+|候选决策|V1_RESEARCH_CLOSED_AND_FROZEN|SharedIncrementEnvelopeUnsharpV1默认关闭、NOT_ADMITTED；封存不接入|
+|本次执行|DOCUMENTATION_ONLY_ZERO_COMPUTE|build/GPU/RAW/20MP/六图渲染/BT/算法调整/产品打包0|
+|停止条件|REACHED|不自动调参/建V2/增样本，未有明确新问题不追逐零值或跨GPU位一致；完成交付后停止|
+
+---
+
+## 历史：入口准备阶段能力（当时未收到评价，不是当前状态）
+
 # 第十三批人工评价准备能力表
 
 日期：2026-11-03，Asia/Shanghai。权威 ROUND13_HUMAN_REVIEW_PREPARATION_20261103.md。
