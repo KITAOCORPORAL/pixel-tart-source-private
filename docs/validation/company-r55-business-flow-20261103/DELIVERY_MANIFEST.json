@@ -1,9 +1,9 @@
 {
-  "recordedAtShanghai": "2026-11-03 16:13:51",
+  "recordedAtShanghai": "2026-11-03 16:15:03",
   "scope": "Report files only, excluding this self manifest; raw TRX/log bytes preserved",
   "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
   "testSupport": "d0c88e27291c432ace5dace5db8f1b3a6a8c5772",
-  "fileCount": 52,
+  "fileCount": 53,
   "files": [
     {
       "path": ".gitattributes",
@@ -214,6 +214,11 @@
       "path": "raw/release-final2-regressions.trx",
       "bytes": 17042,
       "sha256": "6510C87624146E117E48E66E104FF2BB811D10BF9B327008B7C4300877F19812"
+    },
+    {
+      "path": "REMOTE_READBACK.json",
+      "bytes": 981,
+      "sha256": "D71717A8D855D61B3FF7BD8DF0CAE09FD822C38AF20C9C91877B838C873BB0D9"
     },
     {
       "path": "RESUME_PREFLIGHT.json",
