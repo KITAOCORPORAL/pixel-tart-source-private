@@ -1,5 +1,7 @@
 # RAW-REOPEN-001：DcrawProcess内部交接（2026-11-04，Asia/Shanghai）
 
+本轮源码交接本地提交3d06c14004c8047a88ab5362b14039fff0bbf7ac。两次正常push连接重置，ls-remote端口443超时；远端接收未确认，最后成功fetch研究0e0723df/产品c7df75d4。PUSH_RECEIPT记录实际失败，网络恢复后只补推送读回，不重做审查或解码。
+
 研究基线0e0723df0c8eaf665d2bccdfe150c45621534d3b，产品新观测diagnostic/raw-reopen001-20261104@c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39已fetch并读取实际report/source/receipt。有效Unpack同、Process首次已不同（5316通道/3042像素/max146U16）；实际unpacker=unpacked_load_raw()/flags4096、filters9/colors3。OMP启动前null→原binding初始化后6，nativeactualworker仍未知，停止称必然外部继承。
 
 只审固定LibRaw0.21.1@cccb97647fcee56801fa68231fa8a38aa8b52ef7和RT5.11@db575c6690d30ce6428c0e1383bec8b8f1fb8d21；复用本地RT归档，补固定LibRaw源，35file/35anchors。raw2image/黑位、scale/pre_interpolate、实际选择、插值/convert路径精确位置/域/布局/初始化状态在docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md和CHECKPOINT_SPEC.json。

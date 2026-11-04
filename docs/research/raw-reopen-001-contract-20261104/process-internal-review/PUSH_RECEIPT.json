@@ -1,0 +1,31 @@
+{
+  "version": "RawReopen001InternalReviewPushReceiptV1",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "branch": "research/raw-reopen-001-contract-20261104",
+  "researchImplementationCommit": "3d06c14004c8047a88ab5362b14039fff0bbf7ac",
+  "pushStatus": "FAILED_NETWORK",
+  "remoteHeadAfterAttempt": null,
+  "lastSuccessfulFetchedResearchRemote": "0e0723df0c8eaf665d2bccdfe150c45621534d3b",
+  "lastSuccessfulFetchedProductRemote": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "Recv failure: Connection was reset"
+    },
+    {
+      "attempt": 2,
+      "result": "Recv failure: Connection was reset"
+    }
+  ],
+  "remoteReadback": "Failed to connect to github.com port443 after21075ms",
+  "localWorktreeCleanBeforeReceipt": true,
+  "nextAction": "Network restored: normal push this research branch and verify ls-remote; no new source review/RAW execution required.",
+  "forbiddenActionsNotPerformed": [
+    "forcepush",
+    "networkconfigchange",
+    "productmodification",
+    "decoder/buildexperiment"
+  ],
+  "note": "This receipt is a later documentation commit; final localHEAD reported separately. No remote success asserted."
+}
