@@ -1,0 +1,8 @@
+param([Parameter(Mandatory)][string]$Binding,[Parameter(Mandatory)][string]$Output)
+$ErrorActionPreference='Stop'
+if(Test-Path -LiteralPath $Output){throw 'Preserve IL evidence'}
+$a=[Reflection.Assembly]::LoadFile([IO.Path]::GetFullPath($Binding));$t=$a.GetType('Sdcb.LibRaw.Natives.LibRawNative',$true)
+$op=@{};[Reflection.Emit.OpCodes].GetFields([Reflection.BindingFlags]'Public,Static')|ForEach-Object {$o=$_.GetValue($null);$op[[int]$o.Value -band 65535]=$o}
+$methods=@($t.TypeInitializer,$t.GetMethod('get_OpenMPThreadCount'),$t.GetMethod('set_OpenMPThreadCount'))
+$results=foreach($method in $methods){$b=$method.GetMethodBody().GetILAsByteArray();$items=@();$p=0;while($p -lt $b.Length){$start=$p;$v=[int]$b[$p++];if($v -eq 254){$v=65280+[int]$b[$p++]};$o=$op[$v];if(!$o){throw 'Unknown IL'};$n=switch($o.OperandType.ToString()){'InlineNone'{0};'ShortInlineBrTarget'{1};'ShortInlineI'{1};'ShortInlineVar'{1};'InlineVar'{2};'InlineI8'{8};'InlineR'{8};'InlineSwitch'{throw 'Unexpected switch'};default{4}};$operand='';if($n -eq 4){$token=[BitConverter]::ToInt32($b,$p);$operand=switch($o.OperandType.ToString()){'InlineMethod'{$method.Module.ResolveMethod($token).ToString()};'InlineString'{$method.Module.ResolveString($token)};default{$token.ToString()}}};$p+=$n;$items+=@{offset=$start;opcode=$o.Name;operand=$operand}};@{method=$method.ToString();ilHex=[Convert]::ToHexString($b);instructions=$items}}
+@{binding=[IO.Path]::GetFullPath($Binding);sha256=(Get-FileHash -LiteralPath $Binding).Hash;methods=$results;nativeInvocations=0;mode='Metadata IL only; no type initialization'}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $Output
