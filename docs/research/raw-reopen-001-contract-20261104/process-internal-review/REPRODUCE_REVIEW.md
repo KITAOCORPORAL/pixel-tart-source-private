@@ -1,0 +1,14 @@
+# 重现本轮源码审查（不是执行实验）
+
+研究基线0e0723df0c8eaf665d2bccdfe150c45621534d3b；产品c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39。所有函数/行与SHA由INTERNAL_SOURCE_LOCK.json固定，产品报告与参数由PRODUCT_EVIDENCE_BINDINGS.json固定。
+
+1. 对照固定commit读取文件，按sourceRecords的SHA核验；17项已存在基线锁文件完全匹配。第三方源码只在授权本地根，不复制产品。
+2. 按anchors的start/end与rangeSha逐段审查；REPORT与CHECKPOINTS解释domain/布局/阶段选择。
+3. HYPOTHESIS_H1的地址实例只由T512、stride496和公开尺寸/CFA做整数下标校验，不能冒称解码、线程trace或像素实验。
+4. METADATA_CHECKS记录93项源字节/行范围/Git证据/静态索引/范围检查，不是93个LibRaw数值测试。
+
+源码来源：现有家庭RT固定tar归档明确路径解出8文件；LibRaw公司源不可在家假定存在，官方固定commit文本补充到INTERNAL_SOURCE_LOCK的externalRoot；一个猜测文件路径404后从同commit树定位到正确文件，失败保留。未安装依赖、configure/build、加载native或执行reference程序。
+
+没有新的解码入口、harness或像素run命令。任何真正内部观测由产品线根据CHECKPOINTS统一安排；不能运行旧外层检查计划、换图、设置OMP1、清零或锁住算法来替代事实。原始RAF/私有buffer/变更坐标CSV仍产品授权本地，本研究只读取Git汇总；未访问公司E盘。
+
+本轮文档交付后停止，ROOT_CAUSE_OPEN；不授权另启候选或修复。

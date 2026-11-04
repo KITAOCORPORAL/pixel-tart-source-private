@@ -1,0 +1,263 @@
+{
+  "version": "RawReopen001InternalReviewProductBindingsV1",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "researchBase": "0e0723df0c8eaf665d2bccdfe150c45621534d3b",
+  "productObservationCommit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+  "productPixelSourceCommit": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "diagnosticSourceCommit": "14e62f56b9a24131ed071f5d01e5547391c0882a",
+  "nativeArtifactSha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+  "bindingArtifactSha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+  "inputSha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+  "observed": {
+    "unpacker": "unpacked_load_raw()",
+    "decoderFlags": 4096,
+    "filters": 9,
+    "colors": 3,
+    "unpackActiveShape": [
+      5184,
+      7752
+    ],
+    "unpackEqual": true,
+    "processRgbChangedChannels": 5316,
+    "processChangedPixels": 3042,
+    "processMaxAbsU16": 146,
+    "memoryRgbChangedChannels": 5311,
+    "memoryChangedPixels": 3042,
+    "memoryMaxAbsU16": 4628,
+    "outer16BorderChangedChannels": 0,
+    "ompBeforeBinding": null,
+    "ompAfterBinding": "6",
+    "logicalProcessors": 12,
+    "actualNativeWorkers": "NOT_OBSERVED",
+    "actualInternalQualityPassesFujiWidth": "NOT_CAPTURED"
+  },
+  "configured": {
+    "Aber": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "AdjustMaximumThr": 0.75,
+    "AutoBrightThr": 0.01,
+    "AutoScale": true,
+    "BadPixels": null,
+    "Brightness": 1,
+    "CameraProfile": null,
+    "Cropbox": {
+      "Bottom": -1,
+      "Height": -1,
+      "IsEmpty": false,
+      "Left": 0,
+      "Location": {
+        "IsEmpty": true,
+        "X": 0,
+        "Y": 0
+      },
+      "Right": -1,
+      "Size": {
+        "Height": -1,
+        "IsEmpty": false,
+        "Width": -1
+      },
+      "Top": 0,
+      "Width": -1,
+      "X": 0,
+      "Y": 0
+    },
+    "DarkFrame": null,
+    "DcbEnhanceFl": 0,
+    "DcbIterations": 0,
+    "ExpCorrec": false,
+    "ExpPreser": 0,
+    "ExpShift": 1,
+    "FbddNoiserd": 0,
+    "FourColorRgb": false,
+    "Gamma": [
+      0.45,
+      4.5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "GreenMatching": 0,
+    "Greybox": {
+      "Bottom": -1,
+      "Height": -1,
+      "IsEmpty": false,
+      "Left": 0,
+      "Location": {
+        "IsEmpty": true,
+        "X": 0,
+        "Y": 0
+      },
+      "Right": -1,
+      "Size": {
+        "Height": -1,
+        "IsEmpty": false,
+        "Width": -1
+      },
+      "Top": 0,
+      "Width": -1,
+      "X": 0,
+      "Y": 0
+    },
+    "HalfSize": false,
+    "HighlightMode": 0,
+    "Interpolation": true,
+    "MedianPasses": 0,
+    "NoAutoBright": false,
+    "OutputBps": 16,
+    "OutputColor": 1,
+    "OutputFlags": 0,
+    "OutputProfile": null,
+    "OutputTiff": false,
+    "Threshold": 0,
+    "UseAutoWb": false,
+    "UseCameraMatrix": true,
+    "UseCameraWb": true,
+    "UseFujiRotate": true,
+    "UserBlack": -1,
+    "UserCBlack": [
+      -1000001,
+      -1000001,
+      -1000001,
+      -1000001
+    ],
+    "UserFlip": 0,
+    "UserMultipliers": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "UserQual": -1,
+    "UserSaturation": -1
+  },
+  "preProcessColorSummary": {
+    "black": 0,
+    "maximum": 16383,
+    "dataMaximum": 0,
+    "cblackGrid": [
+      6,
+      6
+    ],
+    "cblackGridAll1020": true,
+    "camMul": [
+      525,
+      302,
+      585,
+      0
+    ],
+    "preMul": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "white8x8AllZero": true
+  },
+  "postProcessColorSummary": {
+    "black": 0,
+    "maximum": 15363,
+    "dataMaximum": 3724,
+    "preMul": [
+      1.7384106,
+      1,
+      1.9370861,
+      1
+    ],
+    "cblackAllZero": true
+  },
+  "files": [
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/FINAL_REPORT.md",
+      "gitBlobSha256": "daf1b55314ee26dd72cab724518dd5fc7985bb1523e2be7d8286eabfe877a580",
+      "bytes": 9579
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/LAYOUT_REVIEW.md",
+      "gitBlobSha256": "3dd403fd055747c5db170225faf3684ac46ac9b645a3d97fe9a492361237bf7f",
+      "bytes": 6026
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/REMAINING_AND_NEXT_PROPOSAL.md",
+      "gitBlobSha256": "b248dfc59a0245230d52b2c79f428532aff97995549093327573765d3f410dbf",
+      "bytes": 2755
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/SOURCE_IDENTITIES.json",
+      "gitBlobSha256": "9e1d12a84892df247a3be6e3be6c5db3fdcf3f11fbca22e3f15c4a75cd356806",
+      "bytes": 3245
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/STAGE_COMPARISON.json",
+      "gitBlobSha256": "1deb034eac62f5e753b3a38f7be2d3578735382e3a57f5b9ebcb31e3ba2f70ec",
+      "bytes": 4004
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/PARAMETER_COMPARISON.json",
+      "gitBlobSha256": "20c65dbddfa94fc171c7692fe3e93d72a788368ca143b9f8f720617339470bc8",
+      "bytes": 658
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/BINDING_THREAD_INITIALIZER_IL.json",
+      "gitBlobSha256": "01bb36cc7ec67792efdee2b63f21ba5f2baba743218ca3e9ae1c4dfadd1d0db3",
+      "bytes": 3692
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/PARENT_ENVIRONMENT_READBACK.json",
+      "gitBlobSha256": "c537b584adf23b093515f7ee68edf4aa384ef18fa2be937f02b331d4ea710a37",
+      "bytes": 1245
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/pair-v2_1/first/unpacked-parameters.json",
+      "gitBlobSha256": "7e6332ce3b74e60dc0b3a05b1973c05acccab4958b1577014c9e4672ea3ac71c",
+      "bytes": 1070311
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/pair-v2_1/first/configured-output.json",
+      "gitBlobSha256": "884fc0d5d33f7e71a801efba19cfc2bdd908639c278bd1506fe4a743acd6fba2",
+      "bytes": 1732
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/pair-v2_1/first/processed-parameters.json",
+      "gitBlobSha256": "25fdaf7e7d3eb4ac8503887a75b4d15d2ee9c83f31b7a797be47dbeca59fee92",
+      "bytes": 1070364
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/pair-v2_1/first/runtime.json",
+      "gitBlobSha256": "40ff196b3829b799e72e80519545caf6ad003c13bbc24019bf4d7754648cc861",
+      "bytes": 832
+    },
+    {
+      "commit": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+      "path": "docs/validation/company-r55-raw-reopen001-native-20261104/receipts/pair-v2_1/second/runtime.json",
+      "gitBlobSha256": "0c0b1526edc8fa328241e0e27d4554f6004652a051a79e2cb4eff58b84fdc4d9",
+      "bytes": 831
+    }
+  ],
+  "newRuns": {
+    "raw": 0,
+    "unpack": 0,
+    "process": 0,
+    "memoryImage": 0,
+    "build": 0,
+    "gpu": 0
+  },
+  "limitations": "Product-native artifact uses version0.21.1 and ABI-checked outer fields; exact toolchain/patch/private fields and actual internal execution branch not established by upstream source alone."
+}

@@ -1,0 +1,289 @@
+{
+  "version": "RawReopen001InternalCheckpointSpecV1",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "proposalOnly": true,
+  "observationsExecuted": 0,
+  "baseContract": "No product parameter change. All source lineanchors bound by INTERNAL_SOURCE_LOCK. Product alone controls newinstrumentedbinary and executionauthorization.",
+  "stageHeader": [
+    "checkpoint ID/order",
+    "entry/exit/callback phase",
+    "actualvalidwidth/height/sourcepitch/slotcount/selectedchannelmap",
+    "pointergeneration/allocationextent/notaddressascontent",
+    "domain andCFAphase/whitepointNOTMEASURED",
+    "raw littleendian samplehash",
+    "parameters rawbit hash andbranch events"
+  ],
+  "checkpoints": [
+    {
+      "id": "P0",
+      "function": "LibRaw::raw2image_start",
+      "file": "src/preprocessing/raw2image.cpp",
+      "afterLine": 50,
+      "callsite": "raw2image_ex:306",
+      "payload": "metadata only; saved/rawdata versus restored color/sizes/iparams/ioparams",
+      "domain": "raw mosaic stage identity; no new pixels yet",
+      "layout": "raw_image singleU16 pitch raw_pitch; image dimensions not yet allocated",
+      "state": [
+        "saved/current sizes",
+        "black/maximum/data_maximum/cblack validrepeatgrid",
+        "pre_mul/cam_mul/rgb_cam/white",
+        "filters/colors/xtrans6x6",
+        "IO.shrink/fuji_width/mix_green/raw_color/zero_is_bad",
+        "O.half_size/threshold/aber/cropbox"
+      ],
+      "initialization": "memmove saved structures; shrink derived from half/noise/aber, not just half_size",
+      "priority": "record with P1 if metadata bandwidth permits"
+    },
+    {
+      "id": "P1",
+      "function": "LibRaw::raw2image_ex",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "afterLine": 45,
+      "callsite": "after raw2image_ex success; before remove_zeroes/bad_pixels/darkframe/callback",
+      "payload": "active-CFA sample stream plus separate initialized4-slot image audit; stage-local dims",
+      "domain": "camera-code U16 sparseCFA; black subtracted only if actual subtract_inline",
+      "layout": "ushort image[iheight*iwidth][4]; offset8*(y*iwidth+x)+2*fcol(y,x); record actualalloc_width/height and rawpitch; no margin/padding",
+      "state": [
+        "subtract_inline",
+        "is_bayer helper means anyfilter not onlyBayer",
+        "IO.zero_is_bad",
+        "do_crop/fuji_width/fuji_layout/shrink",
+        "alloc_width/height",
+        "copywidth/height",
+        "C.black/cblack/max/data_max"
+      ],
+      "initialization": "raw2image_ex395-402 zeroes entire allocation; copy_bayerwritesonlyfcol; inlineblack538-544 clearsblack+first4cblack, notnecessarilyrepeatgrid",
+      "priority": "earliest missing internal payload; do not repeat unpack"
+    },
+    {
+      "id": "P2",
+      "function": "LibRaw::dcraw_process",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "afterLine": 112,
+      "callsite": "immediately before no_auto_scale branch; after black/max/optionalgreen/pre_scalecallback",
+      "payload": "sparse4slot validimage andactiveCFA hashes; conditionevents",
+      "domain": "black-adjusted camera-codeU16, beforeWB scale",
+      "layout": "current compact iwidth/iheight image, include fourthslot asstate notfinalRGB",
+      "state": [
+        "quality and user_qual",
+        "fuji_width",
+        "subtract_inline",
+        "subtract_black_internal executedbool",
+        "adjust_maximum executedbool",
+        "decoderFixedmaxflag",
+        "user_sat",
+        "pre_scalecallback invokedbool"
+      ],
+      "initialization": "explicitblackloop reads allzero-initialized slots; dmax reduction; sample0meaning differsfromnonCFA0",
+      "priority": "only distinguishes P1->scale entrance; hashreuse/reference ifunchanged"
+    },
+    {
+      "id": "P3a",
+      "function": "LibRaw::scale_colors",
+      "file": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "beforeLine": 221,
+      "callsite": "afterWB selection, optionalwavelet andscale_mul calculation, before scale_colors_loop",
+      "payload": "metadata scale_mul4float rawbits andpre_mul4float; selectedWB branch",
+      "domain": "unscaled integer cameraimage plusfloatperchannel multipliers",
+      "layout": "loopcount iwidth*iheight and4slots",
+      "state": [
+        "user_mul",
+        "use_camera_wb/use_auto_wb",
+        "cam_mul validity/white8x8sum",
+        "as_shot_wb_applied",
+        "rawparams fallback option",
+        "pre_mul before/after",
+        "maximum/black/cblack",
+        "highlight",
+        "scale_mul bytes",
+        "waveletcalled"
+      ],
+      "initialization": "sums reset, scale_mul all4 set via normal orfallback; notuninitialized bydefault",
+      "priority": "smallstate always record if scale_colorscalled"
+    },
+    {
+      "id": "P3b",
+      "function": "LibRaw::scale_colors",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "afterLine": 118,
+      "callsite": "after scale_colors returns or explicitly record skipped",
+      "payload": "WBscaled sparseimage4slot andCFA hashes",
+      "domain": "scaledcameraU16 0..65535, clipped/truncated; not normalizedfloat, notsRGB, notdisplayencoded",
+      "layout": "compact iwidth*iheight; sourcecamera channels, observeactual shrink",
+      "state": [
+        "scale executed",
+        "postblack/max/pre_mul",
+        "aber/wavelet branch",
+        "warnings"
+      ],
+      "initialization": "scale_colors_loop reads/updates initialized image; zeros may skip whenblacknonzero",
+      "priority": "first coarse split beforepreinterpolate"
+    },
+    {
+      "id": "P4",
+      "function": "LibRaw::pre_interpolate",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "afterLine": 123,
+      "callsite": "beforeflags/exp correction/pre_interpolate_cb",
+      "payload": "activeCFA andvalid4slot storage if newlyallocated; stageheader",
+      "domain": "stillcameraCFA unlesshalf_sizeforcesfilters0/mixedchannels",
+      "layout": "ifshrink0 iwidth=width; ifunshrink branch newwidth*height4slots, do notuse stale iwidthwithoutverification",
+      "state": [
+        "pre/postpointergeneration",
+        "width/height/iwidth/iheight",
+        "shrink/filters/colors/mix_green",
+        "half_size/four_color"
+      ],
+      "initialization": "unshrink alloccalloc, copiesonlyCFA, freesold; previouspointer mustnotbeused",
+      "priority": "distinguish layout/state remap beforedemosaic"
+    },
+    {
+      "id": "P5",
+      "function": "LibRaw::dcraw_process interpolation dispatch",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "beforeLine": 147,
+      "callsite": "afterexp_bef/pre_interpolatecallback; emitactualbranch event atselectedcall",
+      "payload": "pre-demosaic validimage+actualentryname/passes counter",
+      "domain": "camera-domain sparseimage orcallbackmodified state",
+      "layout": "recordactualwidthstride andCFA; privatecallback maymutate so captureafterit",
+      "state": [
+        "quality/user_qual/fuji_width",
+        "filters/colors/no_interpolation",
+        "all interpolation callbackpresence/invocation",
+        "actualalgorithm_name",
+        "passes",
+        "noiserd/fbdd",
+        "exp_correc/exp_shift",
+        "LIBRAW_USE_OPENMP andLIBRAW_NOTHREADS compiletruth"
+      ],
+      "initialization": "do not inferentryfrom model; filters9/quality2or3 conditionalpredictsXTrans not proof",
+      "priority": "required factual branch beforeH1 applicability"
+    },
+    {
+      "id": "P6",
+      "function": "selected demosaic return",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "beforeLine": 183,
+      "callsite": "immediately afteractualchoseninterpolator/callback; beforemixgreen/postcallback/median",
+      "payload": "validcameraRGB slots0..2 plusseparatestate slot3ifused; recordcompletion/join",
+      "domain": "demosaicedcameraRGBU16, notoutputprimariesorMemoryImagegamma",
+      "layout": "image[(y*width+x)][4], hash3channels exceptactualcolors4requires4; border8included",
+      "state": [
+        "algorithm/passes/team size/tileT",
+        "returnstatus",
+        "actualimagepointer/dims",
+        "progressflags",
+        "borderinterpolatecalled"
+      ],
+      "initialization": "XTrans finalslot3stillgreenupperboundatsomesites; do notlabel fourthRGB",
+      "priority": "minimal before/after to confirm orfalsify interpolation firstdivergence"
+    },
+    {
+      "id": "P7",
+      "function": "pre convert_to_rgb",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "beforeLine": 235,
+      "callsite": "aftermixgreen/postinterp ormedian/highlight/fujirotate/ICC/preconvertcallback",
+      "payload": "currentvalidcamera/ICCprocessedimage plusactualoperationflags",
+      "domain": "cameraRGB unlessapply_profile/callbackconverted; declareobserved branch",
+      "layout": "recomputeextent/strideafterfuji_rotate andpossiblepointerreplacement",
+      "state": [
+        "mix_green",
+        "post_interpolatecallback",
+        "medianpasses",
+        "highlight",
+        "use_fuji_rotate/fuji_width beforeafter",
+        "camera_profile/output_profile",
+        "NO_LCMS",
+        "pre_converttorgb callback",
+        "raw_color"
+      ],
+      "initialization": "histogram allocation precedesconvert butnotvaliduntilzeroed; nothashuninitializedhistogram",
+      "priority": "split optionalpostprocess fromconvert"
+    },
+    {
+      "id": "P8",
+      "function": "LibRaw::convert_to_rgb_loop",
+      "file": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "beforeLine": 103,
+      "callsite": "effective out_cam ready; loop entry",
+      "payload": "out_cam3xcolorsfloat validcells rawbits, rgb_cam3x4state, raw_color/colors/output_color",
+      "domain": "camera->declaredoutput primariesmatrix, bypassexplicit; gamma_curve mode0notpixelOETF",
+      "layout": "matrix4stride butonlycolors initialized/consumed; nohash unusedstackpadding",
+      "state": [
+        "out_cam validcolumns",
+        "raw_color",
+        "colors",
+        "output_color",
+        "gamm",
+        "rgb_cam",
+        "camera_profileeffect"
+      ],
+      "initialization": "memcpyout_cam first thenselectedmatrixsum; allRGBdotresultscomputedbeforepixelstores",
+      "priority": "distinguish identicalinputdifferentmatrix vsconversionoutput"
+    },
+    {
+      "id": "P9",
+      "function": "LibRaw::convert_to_rgb",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "afterLine": 235,
+      "callsite": "beforepost_converttorgbcb/stretch",
+      "payload": "validU16outputRGB andhistogram4*8192int ifinitialized",
+      "domain": "outputlinear/code RGB clippedU16, notfinalgamma/autoBrightnessencodedmemoryRGB16",
+      "layout": "widthheight4slotimage, colors maychange4->3; histogramloopusedcolors",
+      "state": [
+        "raw_color/outputcolors",
+        "out_cam binding",
+        "histogramshape",
+        "gamma curve mode0",
+        "callback/geometrypending"
+      ],
+      "initialization": "histogrammemsetinloop79..85 beforeincrements; serial inreviewedsource",
+      "priority": "pinactualconversion boundary"
+    },
+    {
+      "id": "P10",
+      "function": "LibRaw::dcraw_process return",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "beforeLine": 248,
+      "callsite": "afterpostconvert/stretch/fourcolorrestore",
+      "payload": "reuseproductalreadycapturedProcess image/signature, notnewoutertest",
+      "domain": "sameasproductProcess boundary includinganypostconvertgeometry",
+      "layout": "actualwidthheight/flip/stride typed header",
+      "state": [
+        "post_converttorgbcallback",
+        "stretch actualexecutedpixel_aspect",
+        "restoredfour_color",
+        "returncode"
+      ],
+      "initialization": "successful owners alive; do not reuse stale pointers across realloc",
+      "priority": "existing endpoint, no proposal torepeat old outerobservationalone"
+    }
+  ],
+  "minimumCoarseCapture": [
+    "P1",
+    "P3b",
+    "P5",
+    "P6",
+    "P7",
+    "P9"
+  ],
+  "smallState": [
+    "P0",
+    "P2",
+    "P3a",
+    "P4",
+    "P8",
+    "P10"
+  ],
+  "forbidden": [
+    "repeatOpenUnpackMemoryImagealone",
+    "registerinterpolationcallbackthatreplacesalgorithm",
+    "readunknownprivateABIoffset",
+    "wholeuninitializedscratchhash",
+    "changeOMP/FMA/zero/mutex/decoder",
+    "runresearchRAWorreference"
+  ]
+}

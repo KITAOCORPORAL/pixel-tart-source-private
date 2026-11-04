@@ -1,0 +1,48 @@
+{
+  "version": "RawReopen001ProcessStaticReviewExecutionV1",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "branch": "research/raw-reopen-001-contract-20261104",
+  "researchBase": "0e0723df0c8eaf665d2bccdfe150c45621534d3b",
+  "productEvidence": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+  "activities": [
+    "git fetchandshow exactrefs",
+    "readfixedthirdpartysources",
+    "reusepinnedRTlocalarchive",
+    "fetchmissingofficialfixedLibRawsourcefiles",
+    "metadata/hash/line-anchor and staticindexchecking",
+    "writecontract/checkpoint/proposalonly"
+  ],
+  "counts": {
+    "rawDecode": 0,
+    "LibRawInit": 0,
+    "Unpack": 0,
+    "DcrawProcess": 0,
+    "MemoryImage": 0,
+    "nativeLibraryLoad": 0,
+    "build": 0,
+    "gpu": 0,
+    "referenceProgramRun": 0,
+    "pixelCandidate": 0,
+    "rawPrivateRead": 0,
+    "productPatch": 0
+  },
+  "decision": "INTERNAL_OBSERVATION_HANDOFF_ONLY_ROOT_CAUSE_OPEN",
+  "oldUnsharpV1": "CLOSED_DEFAULT_OFF_NOT_ADMITTED_NO_V2",
+  "exclusions": [
+    "crossGPU追差",
+    "BT",
+    "20MP",
+    "sixphoto sharpening",
+    "filmstock",
+    "Sony",
+    "newcamera"
+  ],
+  "sourceAcquisitionFailures": [
+    {
+      "file": "src/preprocessing/preprocessing_utils.cpp",
+      "result": "404; exactcommit tree located correct src/postprocessing/postprocessing_utils_dcrdefs.cpp; originalfailurekept"
+    }
+  ],
+  "permissionBoundary": "NoEdriveprobe;fixedcompanyreceiptsfromGitonly. Allthirdpartysourcesexternalhomeauthorizedroot, no source/binaryinproductGit."
+}

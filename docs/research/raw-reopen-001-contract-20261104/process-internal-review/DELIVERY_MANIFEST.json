@@ -1,0 +1,78 @@
+{
+  "version": "RawReopen001InternalReviewDeliveryManifestV1",
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "baseResearch": "0e0723df0c8eaf665d2bccdfe150c45621534d3b",
+  "productObservation": "c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "sha256": "aa0843de521b01de7ad39cd284f4684de3f10aed629200d7603fe94149285060",
+      "bytes": 35107
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/CAPABILITIES.md",
+      "sha256": "446bcb30b72b0153eefd7fb96bfe77bd4030e094e032d4c35a1e618ffdc8680d",
+      "bytes": 1882
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md",
+      "sha256": "5e13952aa5d6eba44aa7284b37a58bc82338efa4a7302ab2f658321b985c335a",
+      "bytes": 8013
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINT_SPEC.json",
+      "sha256": "83e318955c31ad030c70fdc75afcd214e851a8d92f460595a340f34180d68aee",
+      "bytes": 12346
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/EXECUTION_RECEIPT.json",
+      "sha256": "f2301f7e26f144c832f11f8c9f6197fd5464a1f0c7929545a163f9112b6daaa1",
+      "bytes": 1513
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/HYPOTHESIS_H1.json",
+      "sha256": "902c2d87d79c04b6baab162f60d931c74a9df7a71d0e3f3074fb622d5466a81a",
+      "bytes": 5418
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/INITIALIZATION_AND_PARALLEL_AUDIT.md",
+      "sha256": "72833cdf9fb5797a2c5a97d73e25ae873cc83db34766a7dd7e831b4cc2f82f4f",
+      "bytes": 3470
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/INTERNAL_SOURCE_LOCK.json",
+      "sha256": "45601177677bf46ad05c4398c18c75d376d7782f28d1a32b8e55ab75a60a6734",
+      "bytes": 27263
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/METADATA_CHECKS.json",
+      "sha256": "42abc6822b7f64007d8fd64b421f97a75668a2f85d172e6386a3eec4cb5d63f5",
+      "bytes": 4885
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/PRODUCT_EVIDENCE_BINDINGS.json",
+      "sha256": "9609501612daadf671b9cb1bb13c81deb77da734a95547a28dbb8802a7de0226",
+      "bytes": 7859
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/REPORT.md",
+      "sha256": "3393121de76367e0ee250ca4bbb9be7eb41677b8fed68382d383cefaa4e03ac9",
+      "bytes": 14935
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/REPRODUCE_REVIEW.md",
+      "sha256": "dba82708d3fbed3221f28a4d8392049808afa5a6bc96b444ed22c74c3659860d",
+      "bytes": 1588
+    }
+  ],
+  "allowedChanges": [
+    "current research CHECKPOINT prepend",
+    "new process-internal-review docs metadata"
+  ],
+  "externalSourcePublished": false,
+  "privateRawOrPixelsPublished": false,
+  "sourceOrProductCodeChanges": false,
+  "rootCause": "OPEN",
+  "hypotheses": 1
+}

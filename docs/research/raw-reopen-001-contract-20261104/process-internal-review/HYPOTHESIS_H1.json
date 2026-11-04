@@ -1,0 +1,138 @@
+{
+  "version": "RawReopen001FalsifiableHypothesisV1",
+  "id": "H1_XTRANS_SHARED_IMAGE_GREEN_BOUND",
+  "status": "SOURCE_READ_WRITE_OVERLAP_IDENTIFIED_PRODUCTION_CAUSALITY_NOT_ESTABLISHED",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "claim": "If actual XTrans stage uses the reviewed parallel top-tile loop, one tile may read a non-green image slot1 as original green lower bound after another tile has written reconstructed green into that same shared slot. This could introduce schedule-dependent interpolation differences.",
+  "conditions": [
+    "actualentryxtrans_interpolate confirmed",
+    "actual omp team>1 and LIBRAW_USE_OPENMP path confirmed",
+    "pre-interpolation effective image/stateequal across processes",
+    "post-interpolation firstdifference observed",
+    "actualnativecode retains reviewed image read/write loop"
+  ],
+  "notAssumed": [
+    "native DLL build matches upstream unmodified",
+    "fuji_width0",
+    "passes3",
+    "actualworker6",
+    "preinterpolationimageequal",
+    "racealreadycaused5316changes"
+  ],
+  "locations": {
+    "readTileRGB": "xtrans_demosaic.cpp205-209 memcpy sharedimage RGB3 into scratch",
+    "readLowerBound": "xtrans_demosaic.cpp220-232 pix[0][1] consumed by LIM; sameimage again249-257",
+    "writeLowerBoundInitially": "xtrans_demosaic.cpp103-147 serial greenbound construction slot1min/slot3max onnon-green",
+    "writeFinal": "xtrans_demosaic.cpp388-417 image RGB3 writeback",
+    "parallel": "xtrans_demosaic.cpp168-180 dynamic top loop; nointertile sync untilend",
+    "macro": "internal/defines.h107-111 MIN/MAX/LIM can evaluate pointer arguments morethanonce"
+  },
+  "staticExample": {
+    "onlySourceIndexArithmetic": true,
+    "decodedPixelsRead": 0,
+    "sourceT": 512,
+    "stride": 496,
+    "width": 7752,
+    "height": 5184,
+    "tileA": {
+      "top": 3,
+      "left": 3,
+      "reads": {
+        "rowsInclusive": [
+          3,
+          514
+        ],
+        "colsInclusive": [
+          3,
+          514
+        ]
+      },
+      "writes": {
+        "rowsInclusive": [
+          6,
+          506
+        ],
+        "colsInclusive": [
+          6,
+          506
+        ]
+      }
+    },
+    "tileB": {
+      "top": 499,
+      "left": 3,
+      "reads": {
+        "rowsInclusive": [
+          499,
+          1010
+        ],
+        "colsInclusive": [
+          3,
+          514
+        ]
+      },
+      "writes": {
+        "rowsInclusive": [
+          507,
+          1002
+        ],
+        "colsInclusive": [
+          6,
+          506
+        ]
+      }
+    },
+    "readAWriteBRows": [
+      507,
+      514
+    ],
+    "readBWriteARows": [
+      499,
+      506
+    ],
+    "example": {
+      "x": 500,
+      "y": 507,
+      "cfaFromObservedPublic6x6": 2,
+      "slot": 1,
+      "byteOffset": 31446114,
+      "meaningBefore": "minimum green bound",
+      "meaningAfterOtherTileWrite": "reconstructed green",
+      "notAPhotoMeasuredValue": true
+    },
+    "separateFinalWriteRegionsDisjoint": true,
+    "sharedReadWriteRegionsOverlap": true
+  },
+  "rtContrast": {
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "source": "rawData singlefloatplane remains input; privategreenminmaxtile bounds; finalwrites red/green/blue separately",
+    "refs": [
+      "rtengine/xtrans_demosaic.cc317-404",
+      "rtengine/xtrans_demosaic.cc408-416",
+      "rtengine/xtrans_demosaic.cc944-966"
+    ],
+    "notAnOracle": "SameMarkesteijn/dcrawlineage; float/tile114/schedule/border/ClippingandWB differ; not proof RT correctorproductionbug"
+  },
+  "minimalProductCheck": {
+    "firstGate": "P5actualentry+validimage/state thenP6actualreturn. If firstdifferencebeforeP5, do not attribute primaryfirstdifference toH1.",
+    "conditionalLocalObservation": "OnlyifgatehitsXTrans: afterglobalgreenboundsetup record boundedimmutablewitnessvalues atoverlappoints andcasepublishedneighborhoods; recordactualconsumerreadsandmatchingfinalwrites withtiletop/left,workerid,pass/phase,generation in preallocatedthreadprivate logs; dump afterjoin. Do notread arraysduringunsynchronizedwrites as fullframehash.",
+    "support": "Observed consumerlowerbound differsfromstage-start witness andmatchesothertilefinalwrite, withinidentifiedoverlap; divergenceafterprestageequal. Still needscontrolledcausalconfirmation, notjustaddressoverlap.",
+    "falsify": "NoXTrans/noactualparallelteam orsameprestagealreadydifferent falsifiesH1 as firstdifference here. If affected readsretainoriginalbounds incapturedexecution, H1mechanismnotdemonstrated forthatrun; absenceone schedule notproofallschedules.",
+    "observerEffect": "Logging and read instrumentation may alter heap/scheduling/optimizer. LIMmacro mayloadsameexpressionmultiple times: before/afterextra peek alone is notactualconsumedvalue; caching args intoone local changesrace behavior andcannotbeclaimedpassiveequivalent. Record instrumentation exactloads/source/DLL,notclaimoriginalDLLexecution.",
+    "forbiddenFixes": [
+      "addlock",
+      "clearallbuffers",
+      "singlethreadOMP",
+      "switchdecoder",
+      "alterquality/passes",
+      "runsecondresearchdecode"
+    ]
+  },
+  "requiredNextFact": "Earliest missing checkpoint is raw2image_ex return; to pursueH1 specifically need equal actual demosaicentry image/state with firstdifference atactualinterpolatorreturn.",
+  "newExecutionCounts": {
+    "decoder": 0,
+    "gpu": 0,
+    "build": 0,
+    "numericalReferenceRun": 0
+  }
+}

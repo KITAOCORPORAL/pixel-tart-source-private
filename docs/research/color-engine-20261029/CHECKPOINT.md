@@ -1,3 +1,19 @@
+# RAW-REOPEN-001：DcrawProcess内部交接（2026-11-04，Asia/Shanghai）
+
+研究基线0e0723df0c8eaf665d2bccdfe150c45621534d3b，产品新观测diagnostic/raw-reopen001-20261104@c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39已fetch并读取实际report/source/receipt。有效Unpack同、Process首次已不同（5316通道/3042像素/max146U16）；实际unpacker=unpacked_load_raw()/flags4096、filters9/colors3。OMP启动前null→原binding初始化后6，nativeactualworker仍未知，停止称必然外部继承。
+
+只审固定LibRaw0.21.1@cccb97647fcee56801fa68231fa8a38aa8b52ef7和RT5.11@db575c6690d30ce6428c0e1383bec8b8f1fb8d21；复用本地RT归档，补固定LibRaw源，35file/35anchors。raw2image/黑位、scale/pre_interpolate、实际选择、插值/convert路径精确位置/域/布局/初始化状态在docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md和CHECKPOINT_SPEC.json。
+
+找到唯一条件性H1：XTranstop并行tile共享image读取（含非绿slot1=minGreen）与邻tileRGB回写交叠；有明确源码读写/静态索引实例，不是单凭malloc/OMP或RT清0。实际算法/passes/team、P5输入同且P6输出先差以及真实消费值尚未捕获，ROOT_CAUSE_OPEN/NOT_FIXED；不加锁/清零/换decoder。最早缺的内部事实仍是raw2image_ex返回有效域是否同；产品统一安排隔离观测，研究不再跑旧外层计划。
+
+新增RAW/nativeinit/unpack/process/memory/build/GPU/参考运行/像素候选全0。产品src/UI/default/旧结果不变；RT为共同Markesteijn/dcraw血缘+LibRaw输入复用，不是生产同域独立数值真值。旧锐化V1封存/defaultoff/NOT_ADMITTED，不开V2、不扩跨GPU/BT/20MP/胶片/Sony/新相机。
+
+权威process-internal-review/REPORT.md、INITIALIZATION_AND_PARALLEL_AUDIT.md、HYPOTHESIS_H1.json和PRODUCT_EVIDENCE_BINDINGS/INTERNAL_SOURCE_LOCK。旧REPORT/PRODUCT_DIAGNOSTIC_PLAN仅保留历史，不能将已完成外层观察再列下一步。完成本次源码交接后等待产品内部阶段事实，不启动研究线运行实验。最终Git身份以实际push/readback为准。
+
+---
+
+## 以下是历史检查点，未回写当时未知项
+
 # RAW-REOPEN-001 单一源码/契约对照（2026-11-04，Asia/Shanghai）
 
 研究从封存6f1ae27aff72a7439c661e605a38c1702feea4ce接续，产品审查e2437d2300b37872d5b66482a721e3b6463f1ce4仅只读，未合入产品分支。新研究分支research/raw-reopen-001-contract-20261104，权威docs/research/raw-reopen-001-contract-20261104/REPORT.md、SOURCE_LOCK.json、PRODUCTION_DEPENDENCIES.json和PRODUCT_DIAGNOSTIC_PLAN.md。
