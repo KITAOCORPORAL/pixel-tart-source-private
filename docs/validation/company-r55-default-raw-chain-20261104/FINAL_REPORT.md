@@ -87,6 +87,6 @@
 | 包验证 | 293 个 ZIP 条目/目录文件逐个读回；WholeAppDiagnosticBuild=true、PhotographerTrialBuild=false；全模块、策划15项、教程退役随原包保留 |
 | 公司启动 | E:/Guangjing-BusinessFlow-20261103/Guangjing-BusinessFlow-Diagnostic-win-x64/Start-Guangjing-Diagnostic.cmd；仍指向 UserData-BusinessFlow 隔离根，本轮未执行该 CMD 或重跑业务链 |
 
-独立分支 docs/raw-default-chain-closure-20261104；LOCAL_HEAD / REMOTE_HEAD 的最终读回见 PUSH_READBACK.json（独立后置收据不递归写入自身 commit）。产品分支未合并本审查提交。提交只包括测试、报告、数值/身份收据和交接指针，不含 RAW/PNG/TIFF、数据库、已发布 DLL、ZIP 或研究资源。
+独立分支 docs/raw-default-chain-closure-20261104；审查内容提交的远端读回见 PUSH_READBACK.json；包含该收据后的最终 LOCAL_HEAD / REMOTE_HEAD 另写 E:/Guangjing-RawColorChain-20261104-closure/PUSH_READBACK.json，不递归写入自身 commit。产品分支未合并本审查提交。提交只包括测试、报告、数值/身份收据和交接指针，不含 RAW/PNG/TIFF、数据库、已发布 DLL、ZIP 或研究资源。
 
 本轮额外未验：物理鼠标、显示器 ICC/DPI/多屏、其他相机与家庭素材、实际 C1/LR 同源对照、全部局部工具、全软件再验收。审查交付完成不消除 Sony 拒绝和 Fuji FAIL。

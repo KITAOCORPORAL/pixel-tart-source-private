@@ -1,0 +1,15 @@
+{
+  "recordedAtUtc": "2026-11-04T03:39:47.368Z",
+  "timeZone": "Europe/Berlin",
+  "stage": "AUDIT_AND_TEST_DELIVERY_VERIFIED_BEFORE_THIS_RECEIPT_COMMIT",
+  "branch": "docs/raw-default-chain-closure-20261104",
+  "verifiedDeliveryLocalHead": "dde29aefba76d3e6a095f88a73a829d2eb728df8",
+  "verifiedDeliveryRemoteHead": "dde29aefba76d3e6a095f88a73a829d2eb728df8",
+  "equal": true,
+  "testCommit": "41743c9b00cc28b1f2c463063697528dff4b9efb",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "productBranchRemoteHead": "f27f440909fe19ddd5665b167b912c9db9d897d4",
+  "workingTreeAtVerifiedDelivery": "CLEAN",
+  "finalHeadReceipt": "E:/Guangjing-RawColorChain-20261104-closure/PUSH_READBACK.json",
+  "note": "This tracked receipt verifies its parent delivery commit, not its own future commit. Final HEAD readback is recorded outside Git to avoid self-referential hashes."
+}
