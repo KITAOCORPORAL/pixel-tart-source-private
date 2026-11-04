@@ -1,0 +1,56 @@
+{
+  "version": "RAW-REOPEN-001-StageProbeV1.3",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "source": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+  "sourceSha256": "BFB25AF74D54F49E18F12668BCCA895035A7D04A8AB6C7B5343996FA75FEE587",
+  "lineEndings": "CRLF to LF only",
+  "preamble": "// Generated diagnostic-only v1. Product source SHA256: BFB25AF74D54F49E18F12668BCCA895035A7D04A8AB6C7B5343996FA75FEE587\n#nullable enable\n",
+  "replacements": [
+    [
+      "namespace RAWSelectionAssistant.Core.Services.RawToJpeg;",
+      "using RAWSelectionAssistant.Core.Services.RawToJpeg;\nusing RAWSelectionAssistant.Core.Services;\nnamespace RawReopenStageProbe;"
+    ],
+    [
+      "public sealed class RawDecodeException(string errorCode, string message, Exception? innerException = null)\n    : IOException(message, innerException)\n{\n    public string ErrorCode { get; } = errorCode;\n    public string Stage {get;init;}=\"Unknown\";\n    public int? NativeCode {get;init;}\n    public string? NativeName {get;init;}\n}\n",
+      ""
+    ],
+    [
+      "public sealed class LibRawDecoder : IRawDecoder",
+      "public sealed class ObservedLibRawDecoder : IRawDecoder"
+    ],
+    [
+      "using var context = RawContext.OpenFile(sourcePath);\n            using var viewingWork",
+      "Probe.Count(\"OpenFile\");\n            using var context = RawContext.OpenFile(sourcePath);\n            Probe.Parameters(\"opened\", context);\n            using var viewingWork"
+    ],
+    [
+      "stage=\"Metadata\";var sourceOrientation = viewingEdge>0?ReadViewingOrientation(sourcePath):ReadOrientation(sourcePath);",
+      "stage=\"Metadata\";var sourceOrientation = viewingEdge>0?ReadViewingOrientation(sourcePath):ReadOrientation(sourcePath);\n            Probe.Orientation(sourceOrientation);"
+    ],
+    [
+      "stage=\"Unpack\";context.Unpack();",
+      "stage=\"Unpack\";Probe.Count(\"Unpack\");context.Unpack();\n            Probe.Parameters(\"unpacked\",context);"
+    ],
+    [
+      "stage=\"DcrawProcess\";context.DcrawProcess(output =>",
+      "stage=\"DcrawProcess\";Probe.Count(\"DcrawProcess\");context.DcrawProcess(output =>"
+    ],
+    [
+      "if (!options.AutoRotate) output.UserFlip = 0;",
+      "if (!options.AutoRotate) output.UserFlip = 0;\n                Probe.Configured(output);"
+    ],
+    [
+      "using var processed = context.MakeDcrawMemoryImage();",
+      "Probe.Parameters(\"processed\",context);\n            Probe.Count(\"MakeDcrawMemoryImage\");\n            using var processed = context.MakeDcrawMemoryImage();"
+    ],
+    [
+      "int resultWidth=processed.Width,resultHeight=processed.Height;",
+      "Probe.Native(processed);\n            int resultWidth=processed.Width,resultHeight=processed.Height;"
+    ],
+    [
+      "DateTimeOffset? capturedAt = otherParams.Timestamp > 0",
+      "Probe.Managed(processed,pixels48);\n            DateTimeOffset? capturedAt = otherParams.Timestamp > 0"
+    ]
+  ],
+  "generatedSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+  "policy": "Observation additions only; no changed algorithm or parameter assignments; namespace/class adjusted for standalone compilation"
+}

@@ -1,0 +1,12 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {createReadStream} from 'node:fs';
+const pair=process.argv[2],out=process.argv[3];
+if(!pair||!out)throw Error('Usage: node Compare-Stages.mjs <pair-directory> <new-output.json>');
+async function compare(a,b,kind,width){const ha=await fs.open(a,'r'),hb=await fs.open(b,'r');let bytes=(await ha.stat()).size;if(bytes!==(await hb.stat()).size)throw Error('size mismatch');const size=1024*1024,ba=Buffer.alloc(size),bb=Buffer.alloc(size),unit=kind==='u16'?2:4;let changed=0,sum=0,max=0,at=null,first=null,left=width,top=1e9,right=-1,bottom=-1,border=0;try{for(let off=0;off<bytes;off+=size){let n=Math.min(size,bytes-off);if((await ha.read(ba,0,n,off)).bytesRead!==n||(await hb.read(bb,0,n,off)).bytesRead!==n)throw Error('short read');for(let j=0;j<n;j+=unit){const va=kind==='u16'?ba.readUInt16LE(j):ba.readFloatLE(j),vb=kind==='u16'?bb.readUInt16LE(j):bb.readFloatLE(j);if(va===vb)continue;let d=Math.abs(va-vb),i=(off+j)/unit,p=Math.floor(i/3),x=p%width,y=Math.floor(p/width),v={x,y,channel:i%3,first:va,second:vb};changed++;sum+=d;if(!first)first=v;if(d>max){max=d;at=v;}left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x);bottom=Math.max(bottom,y);if(x<16||y<16||x>=width-16||y>=5184-16)border++;}}}finally{await ha.close();await hb.close();}return{kind,channels:bytes/unit,changedChannels:changed,maxAbsoluteDifference:max,meanAbsoluteDifference:sum/(bytes/unit),maximumLocation:at,firstDifference:first,bounds:changed?{left,top,right,bottom}:null,borderChangedChannels:border};}
+const read=async(slot,n)=>JSON.parse(await fs.readFile(path.join(pair,slot,n+'.json'),'utf8'));
+const first=await read('first','stages'),second=await read('second','stages'),results=[];
+for(const a of first){const b=second.find(s=>s.name===a.name);for(const s of [a,b]){const h=crypto.createHash('sha256');for await(const bytes of createReadStream(s.path))h.update(bytes);if(h.digest('hex').toUpperCase()!==s.sha256)throw Error('stage identity changed '+s.path);}results.push({name:a.name,firstSha256:a.sha256,secondSha256:b.sha256,equal:a.sha256===b.sha256,...await compare(a.path,b.path,a.name.includes('rgb16')?'u16':'f32',7752)});}
+await fs.writeFile(out,JSON.stringify({version:'RAW-REOPEN-001-StageCompareV1',newRawDecodes:0,sourcePair:pair,results},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify(results,null,2));
