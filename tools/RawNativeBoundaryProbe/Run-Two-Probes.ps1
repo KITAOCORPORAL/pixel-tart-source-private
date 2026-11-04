@@ -16,4 +16,3 @@ if($changes.Count -or $badFiles.Count){Write-Output 'BLOCKED before any decode p
 # The original audited runner enforces two serial independent processes, once per slot,
 # 50ms memory sampling, 2GiB/600s limits, CreateNoWindow, and immediate stop on failure.
 & (Join-Path $PSScriptRoot '../RawReopenStageProbe/Run-Two-Probes.ps1') -Sdk $Sdk -Manifest $Manifest -ProbeDll $ProbeDll -ResultRoot $ResultRoot
-
