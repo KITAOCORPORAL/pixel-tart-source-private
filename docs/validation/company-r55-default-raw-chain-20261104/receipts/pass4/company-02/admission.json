@@ -1,0 +1,34 @@
+{
+  "id": "company-02",
+  "name": "DSCF0347.RAF",
+  "model": "X-T5",
+  "status": "DEFAULT_RAW16_ADMITTED",
+  "processId": 23936,
+  "fullApp": true,
+  "UsePhotoGradePage": true,
+  "IsProfessionalRaw": false,
+  "engine": "Stable",
+  "state": "{\u0022Nodes\u0022:[],\u0022Version\u0022:2,\u0022WorkingSpace\u0022:\u0022OKLabD65\u0022,\u0022ProcessingVersion\u0022:1}",
+  "source": {
+    "Width": 7752,
+    "Height": 5184,
+    "SourceBitDepth": "16",
+    "WorkingColorSpace": "sRGB",
+    "Orientation": 1,
+    "min": 0,
+    "max": 1,
+    "zeroChannelSamples": 8009942,
+    "oneChannelSamples": 514205,
+    "negative": 0,
+    "above": 0,
+    "nonfinite": 0,
+    "note": "Already after LibRaw development; not a sensor clipping or scene-linear claim"
+  },
+  "budgets": {
+    "MasterBudgetBytes": 536870912,
+    "PreviewBudgetBytes": 67108864,
+    "MasterLimit": 1073741824,
+    "TotalLimit": 2147483648
+  },
+  "scope": "Production entry after file choice, no mouse/file-dialog acceptance"
+}

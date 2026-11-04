@@ -1,0 +1,3 @@
+# Preserve original receipt bytes while accepting their explicit Windows CRLF endings.
+receipts/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+scripts/Run-RawReview.historical.ps1 -text whitespace=trailing-space,space-before-tab,cr-at-eol

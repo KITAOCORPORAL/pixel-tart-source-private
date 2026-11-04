@@ -1,0 +1,233 @@
+{
+  "scope": "Exact copies of bounded receipts only; no private images, RAW, sessions, databases or binaries committed",
+  "files": [
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/RUN_IDENTITY.json",
+      "receipt": "receipts/pass4/RUN_IDENTITY.json",
+      "sha256": "810F464D44917749D2C47CA3F54D5594FE85BA4DA6F6FC3EDC52E29AC0897B61",
+      "bytes": 280
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/RUN_RESULTS.json",
+      "receipt": "receipts/pass4/RUN_RESULTS.json",
+      "sha256": "A3C29A0F5107AE78F5B166ADC2C9D9A75BF0098B7F95E1F2560C63048663E52F",
+      "bytes": 251
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/PUBLISHED_BINDING.json",
+      "receipt": "receipts/pass4/PUBLISHED_BINDING.json",
+      "sha256": "AD3D86840554AFF875C8147A28EA94730492C822AEDB1FDA17B607F10E2E2F92",
+      "bytes": 4605
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/AUTHORIZED_SELECTED.json",
+      "receipt": "receipts/pass4/AUTHORIZED_SELECTED.json",
+      "sha256": "0BB8F826C019061AB1B8E8AE9A465A1B47054906BFE3ED410385877B15FAE4B5",
+      "bytes": 1067
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-01/admission.json",
+      "receipt": "receipts/pass4/company-01/admission.json",
+      "sha256": "0610DDFF806B9B6AD43A80EBDF3D16AF59CC39443A038FAC0354A6790BE5E326",
+      "bytes": 605
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-01/native-open-failure.json",
+      "receipt": "receipts/pass4/company-01/native-open-failure.json",
+      "sha256": "4CC468159B81B4F51C4A133C3BD1CAA5DA3B7628C2E5175B394A9DCF5316E618",
+      "bytes": 160
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/admission.json",
+      "receipt": "receipts/pass4/company-02/admission.json",
+      "sha256": "E5A53FA996F671EB937A3D27312066541754A05F94F96E1321424647557D0B43",
+      "bytes": 1017
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-output.json",
+      "receipt": "receipts/pass4/company-02/default-output.json",
+      "sha256": "D4A75C407CE130D769710D29ECAC035B369520145284A391DD9342E07E2BE96F",
+      "bytes": 1052
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/display-exposure-plus05-output.json",
+      "receipt": "receipts/pass4/company-02/display-exposure-plus05-output.json",
+      "sha256": "043424F873B9F7D306CAC20300D5E2E721D665E23AD7905670B1BDC0FD212FF5",
+      "bytes": 1538
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/independent-reopen-output.json",
+      "receipt": "receipts/pass4/company-02/independent-reopen-output.json",
+      "sha256": "307AC17DCEF83E9C8DE32CF74ECC80B60D77C3C7801CEE12150EEF7D347BEFDA",
+      "bytes": 1528
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/native-initial-parameters.json",
+      "receipt": "receipts/pass4/company-02/native-initial-parameters.json",
+      "sha256": "146633CBF4FFB6A5EBEEF54CDDD7B6A486686D15A9273C28A166C0148F7E64D7",
+      "bytes": 2143
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/reopen-decoded-master-comparison.json",
+      "receipt": "receipts/pass4/company-02/reopen-decoded-master-comparison.json",
+      "sha256": "681715790D639D55CCD9D6BCEEA47EFD4AB5B783F289293A6CDC5B98013F6871",
+      "bytes": 522
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/reopen-observation.json",
+      "receipt": "receipts/pass4/company-02/reopen-observation.json",
+      "sha256": "BD65FF5889FA46B169FE55FA8CFDF37E1378766665110ED7BC068A39D0C66547",
+      "bytes": 303
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/reopen-receipt.json",
+      "receipt": "receipts/pass4/company-02/reopen-receipt.json",
+      "sha256": "6012BEEFAE186CF46EB03E4DDFD1DAE42624D857522D5DF6F266517AC3EDF091",
+      "bytes": 990
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/admission.json",
+      "receipt": "receipts/pass4/company-05/admission.json",
+      "sha256": "E04273CC91433FFE013897F646F316C5BF06AF2FDD628DC98FDF6816E51E263B",
+      "bytes": 1025
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/default-output.json",
+      "receipt": "receipts/pass4/company-05/default-output.json",
+      "sha256": "FDEA1EA39AA21A3CDB67EF979878C570BF9830A70CDCF29B70E95522E0AD5271",
+      "bytes": 1052
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/display-exposure-plus05-output.json",
+      "receipt": "receipts/pass4/company-05/display-exposure-plus05-output.json",
+      "sha256": "405483F17A927829D9F446F5BC02496CB4F94A06EAA7D431F44CE8C144B0EBFF",
+      "bytes": 1538
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/independent-reopen-output.json",
+      "receipt": "receipts/pass4/company-05/independent-reopen-output.json",
+      "sha256": "BD29DD90F3CE9AB0BBE109BC41EA6C284C07E8D651A1F141B3966E2B68F52482",
+      "bytes": 1528
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/independent-reopen.json",
+      "receipt": "receipts/pass4/company-05/independent-reopen.json",
+      "sha256": "3AE5A6F55DAA5E905DB67AC2E01107F27A505570E6FC9B0599676BFC8348B846",
+      "bytes": 181
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/native-initial-parameters.json",
+      "receipt": "receipts/pass4/company-05/native-initial-parameters.json",
+      "sha256": "146633CBF4FFB6A5EBEEF54CDDD7B6A486686D15A9273C28A166C0148F7E64D7",
+      "bytes": 2143
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/reopen-decoded-master-comparison.json",
+      "receipt": "receipts/pass4/company-05/reopen-decoded-master-comparison.json",
+      "sha256": "09F45363E8FA4F67CE446F11B1A3CB4D1900D4BCEB261607A0457C4EEADA9575",
+      "bytes": 482
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/reopen-observation.json",
+      "receipt": "receipts/pass4/company-05/reopen-observation.json",
+      "sha256": "57028543DA7068529839B11B1D864EC5EE50BB3325699660875907DE88431F2B",
+      "bytes": 303
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/company-05/reopen-receipt.json",
+      "receipt": "receipts/pass4/company-05/reopen-receipt.json",
+      "sha256": "DA386DC9B42BCF9C7F44A4611239D26F49BDD8C8B66890FCB565046F10D520D1",
+      "bytes": 990
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-01-producer.log",
+      "receipt": "receipts/pass4/raw/company-01-producer.log",
+      "sha256": "AF5B52B5D4187224A826EB60A8727D2C9EDD52C7D8FE364666CA938BEE97FA94",
+      "bytes": 357
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-01-producer.trx",
+      "receipt": "receipts/pass4/raw/company-01-producer.trx",
+      "sha256": "312837C30B7CC7B4F697670A36DB11F6A4EA4AFF891DC2BA38F4F20E62595ADE",
+      "bytes": 2516
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-02-producer.log",
+      "receipt": "receipts/pass4/raw/company-02-producer.log",
+      "sha256": "4DF7FFB5A03497E55EF945634312ABFD0B354FB1500460DACBA30CF0BCFFA25D",
+      "bytes": 358
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-02-producer.trx",
+      "receipt": "receipts/pass4/raw/company-02-producer.trx",
+      "sha256": "21483957A2454F016F5BE9B229AB6570AAB61EB6457EA85CEFEC83EF693EB41E",
+      "bytes": 2516
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-02-reopen.log",
+      "receipt": "receipts/pass4/raw/company-02-reopen.log",
+      "sha256": "FE4309DB75DB205013B4B8C88DCA1E6CB14833F8C38F177939C8BD6EB62F25EF",
+      "bytes": 2262
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-02-reopen.trx",
+      "receipt": "receipts/pass4/raw/company-02-reopen.trx",
+      "sha256": "3A51603E1CF82DCA23A5B1944B9F55CFF9B5F8D8D9F38AA2A26D295D0215BF62",
+      "bytes": 4587
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-05-producer.log",
+      "receipt": "receipts/pass4/raw/company-05-producer.log",
+      "sha256": "E3EECBF50422A8164009E6CD039CA8E995391B77E15C951F780D28C1131550FD",
+      "bytes": 358
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-05-producer.trx",
+      "receipt": "receipts/pass4/raw/company-05-producer.trx",
+      "sha256": "0F85572096E2DE8A81C1B8D1AFEE870F97218D968212B30F24CF5E532774DDA3",
+      "bytes": 2516
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-05-reopen.log",
+      "receipt": "receipts/pass4/raw/company-05-reopen.log",
+      "sha256": "2BD804B0CC571D03AB9D082F2637919A61EB1A5148D422DF519344B6E6ECC082",
+      "bytes": 356
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/pass4/raw/company-05-reopen.trx",
+      "receipt": "receipts/pass4/raw/company-05-reopen.trx",
+      "sha256": "DA6F843450C68138A2E4B3B963D36931F7670E11A8D0DE511F80BE7A3F1FD959",
+      "bytes": 2546
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261104-closure/REUSE_VERIFICATION.json",
+      "receipt": "receipts/closure/REUSE_VERIFICATION.json",
+      "sha256": "B1B67C571F6DE63F3298CF345E0410887BEB3AFD91053335220E1B3E0C17CA66",
+      "bytes": 6345
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261104-closure/NATIVE_AND_TIFF_IDENTITIES.json",
+      "receipt": "receipts/closure/NATIVE_AND_TIFF_IDENTITIES.json",
+      "sha256": "31F605247AC2C0EC5945EF52D5475F8EE5BC19B90A31A8D327158B604A32F41F",
+      "bytes": 6527
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261104-closure/REOPEN_TIFF_PIXEL_COMPARISON.json",
+      "receipt": "receipts/closure/REOPEN_TIFF_PIXEL_COMPARISON.json",
+      "sha256": "63686D7B60CCBA5448C424C81F80819F8BD00F31077AA9E38909E5722CE1CAF3",
+      "bytes": 1402
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/closure-audit/VERIFIER_FAILURE.txt",
+      "receipt": "receipts/prior-closure/VERIFIER_FAILURE.txt",
+      "sha256": "A489EC06FABDC56BDC14883405345E8F233D540E0C68FFA4CD190CACEB94044D",
+      "bytes": 284
+    },
+    {
+      "source": "E:/Guangjing-RawColorChain-20261103/closure-audit/VISUAL_IDENTITIES.json",
+      "receipt": "receipts/prior-closure/VISUAL_IDENTITIES.json",
+      "sha256": "20FDEECC7942CDB5C4C131E55F9102E004079AB921790E86196F7F37FB9F839A",
+      "bytes": 16271
+    }
+  ]
+}

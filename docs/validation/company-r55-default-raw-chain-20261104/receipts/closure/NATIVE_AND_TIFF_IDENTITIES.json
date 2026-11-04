@@ -1,0 +1,301 @@
+{
+  "nativeChecks": [
+    {
+      "file": "raw_r.dll",
+      "publishedSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+      "testhostSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+      "matched": true
+    },
+    {
+      "file": "lcms2.dll",
+      "publishedSha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB",
+      "testhostSha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB",
+      "matched": true
+    }
+  ],
+  "outputs": [
+    {
+      "id": "company-02",
+      "phase": "default",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "sha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+      "tiff": {
+        "256": [
+          7752
+        ],
+        "257": [
+          5184
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          5184
+        ],
+        "279": [
+          241118208
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    },
+    {
+      "id": "company-02",
+      "phase": "display-exposure-plus05",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\display-exposure-plus05-export\\DSCF0347_仿色.tif",
+      "sha256": "484790E87709BA7F923432C9A1167AD1507CAC74CFEFA5474EF979C0F24052EE",
+      "tiff": {
+        "256": [
+          7752
+        ],
+        "257": [
+          5184
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          5184
+        ],
+        "279": [
+          241118208
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    },
+    {
+      "id": "company-02",
+      "phase": "independent-reopen",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\independent-reopen-export\\DSCF0347_仿色.tif",
+      "sha256": "7EB6AED9D547E631E3559F428F420EDECC54FD605F1E114C455D11CAB1994438",
+      "tiff": {
+        "256": [
+          7752
+        ],
+        "257": [
+          5184
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          5184
+        ],
+        "279": [
+          241118208
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    },
+    {
+      "id": "company-05",
+      "phase": "default",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\default-export\\TNAN8886_仿色.tif",
+      "sha256": "30D6E7828FCC8431057465226167D001A6FB1A5D19B972864185C4ED813D8FE8",
+      "tiff": {
+        "256": [
+          5496
+        ],
+        "257": [
+          3670
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          3670
+        ],
+        "279": [
+          121021920
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    },
+    {
+      "id": "company-05",
+      "phase": "display-exposure-plus05",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\display-exposure-plus05-export\\TNAN8886_仿色.tif",
+      "sha256": "29CF1F8790E8012FDB410AD333FF783A5AD36B83B4EC315F330FB5270B84F3A4",
+      "tiff": {
+        "256": [
+          5496
+        ],
+        "257": [
+          3670
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          3670
+        ],
+        "279": [
+          121021920
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    },
+    {
+      "id": "company-05",
+      "phase": "independent-reopen",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\independent-reopen-export\\TNAN8886_仿色.tif",
+      "sha256": "29CF1F8790E8012FDB410AD333FF783A5AD36B83B4EC315F330FB5270B84F3A4",
+      "tiff": {
+        "256": [
+          5496
+        ],
+        "257": [
+          3670
+        ],
+        "258": [
+          16,
+          16,
+          16
+        ],
+        "259": [
+          1
+        ],
+        "262": [
+          2
+        ],
+        "273": [
+          3351
+        ],
+        "274": [
+          1
+        ],
+        "277": [
+          3
+        ],
+        "278": [
+          3670
+        ],
+        "279": [
+          121021920
+        ],
+        "34675": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+          "signature": "acsp",
+          "colorSpace": "RGB ",
+          "pcs": "XYZ "
+        }
+      }
+    }
+  ],
+  "scope": "Native DLL bytes compared; TIFF IFD and embedded ICC bytes only; no RAW decode or color conversion"
+}

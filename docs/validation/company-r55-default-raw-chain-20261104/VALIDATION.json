@@ -1,0 +1,49 @@
+{
+  "recordedAtUtc": "2026-11-04T03:29:53.426Z",
+  "timeZone": "Europe/Berlin",
+  "receiptHashesVerified": 38,
+  "derivedViewsHashesVerified": 27,
+  "existingTiffComparisonScriptRepeated": true,
+  "existingTiffComparisonResultExact": true,
+  "newRawDecodes": 0,
+  "sourceAndPrototypesDiffEmpty": true,
+  "trx": [
+    {
+      "file": "company-01-producer.trx",
+      "outcomes": [
+        "Passed"
+      ]
+    },
+    {
+      "file": "company-02-producer.trx",
+      "outcomes": [
+        "Passed"
+      ]
+    },
+    {
+      "file": "company-02-reopen.trx",
+      "outcomes": [
+        "Failed"
+      ]
+    },
+    {
+      "file": "company-05-producer.trx",
+      "outcomes": [
+        "Passed"
+      ]
+    },
+    {
+      "file": "company-05-reopen.trx",
+      "outcomes": [
+        "Passed"
+      ]
+    }
+  ],
+  "trxExecutions": 5,
+  "trxPassed": 4,
+  "trxFailed": 1,
+  "productBuild": "NOT_RUN_NO_PRODUCT_CHANGE",
+  "freshRuntimeTests": "NOT_RUN_REUSE_ONLY",
+  "finalGitDiffCheck": "PASS",
+  "committedTestBlobSha256": "42F0ABE5E09405F812D9B9C54B6B83680B85A9F89F8A15DC0E68DB7BFBCA31EF"
+}

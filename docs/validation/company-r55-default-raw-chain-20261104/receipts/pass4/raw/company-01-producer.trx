@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="471e76e8-cf17-4dd5-b6d2-29ab12f2c688" name="Administrator@PC-20250309WEIZ 2026-11-03 18:38:02" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-03T18:38:02.6071478+08:00" queuing="2026-11-03T18:38:02.6071481+08:00" start="2026-11-03T18:37:54.8226425+08:00" finish="2026-11-03T18:38:02.6121770+08:00" />
+  <TestSettings name="default" id="503c7acf-d980-48b5-8267-4d28532bdeba">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-03_18_38_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="feee9d3d-caeb-4175-9986-add90c196fdf" testId="1f217de2-5018-8710-b0b2-246fadb235ea" testName="FullAppDefaultNamedRawPreviewExportAndSave" computerName="PC-20250309WEIZ" duration="00:00:06.9890916" startTime="2026-11-03T18:37:55.4466681+08:00" endTime="2026-11-03T18:38:02.4534030+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="feee9d3d-caeb-4175-9986-add90c196fdf" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FullAppDefaultNamedRawPreviewExportAndSave" storage="e:\guangjing-rawcolorchain-20261103\pass4\published-testhost\rawselectionassistant.wpftests.dll" id="1f217de2-5018-8710-b0b2-246fadb235ea">
+      <Execution id="feee9d3d-caeb-4175-9986-add90c196fdf" />
+      <TestMethod codeBase="E:\Guangjing-RawColorChain-20261103\pass4\published-testhost\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawColorChainReviewTests" name="FullAppDefaultNamedRawPreviewExportAndSave" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1f217de2-5018-8710-b0b2-246fadb235ea" executionId="feee9d3d-caeb-4175-9986-add90c196fdf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

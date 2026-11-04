@@ -1,0 +1,24 @@
+VSTest 版本 18.6.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 IndependentAppReopenNamedRawPreservesStateAndPreview [27 s]
+  错误消息:
+   Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException: Assert.AreEqual 失败。字符串长度均为 64，但在索引 0 处有所不同。 ‘expected’表达式:‘receipt.PreviewSha256’,‘actual’表达式:‘Digest(Display(vm))’。
+应为:  "E2282B5E75882E9A7C08C6938142A8142A8572..."
+但却是: "F6C374AA8FC1138A9B201877D3A6BBB64EA0D4..."
+------^
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405
+   at RAWSelectionAssistant.WpfTests.RawColorChainReviewTests.<>c.<<IndependentAppReopenNamedRawPreservesStateAndPreview>b__19_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at RAWSelectionAssistant.WpfTests.RawColorChainReviewTests.<>c__DisplayClass17_1.<<RunHost>b__1>d.MoveNext()
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.RawColorChainReviewTests.RunHost(Func`3 action)
+   at RAWSelectionAssistant.WpfTests.RawColorChainReviewTests.IndependentAppReopenNamedRawPreservesStateAndPreview()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+结果文件: E:\Guangjing-RawColorChain-20261103\pass4/raw\company-02-reopen.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 27 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

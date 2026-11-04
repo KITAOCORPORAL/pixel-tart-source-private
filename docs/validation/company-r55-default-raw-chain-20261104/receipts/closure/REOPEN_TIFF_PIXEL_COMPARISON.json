@@ -1,0 +1,37 @@
+[
+  {
+    "id": "company-05",
+    "first": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\display-exposure-plus05-export\\TNAN8886_仿色.tif",
+    "second": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\independent-reopen-export\\TNAN8886_仿色.tif",
+    "changedChannels": 0,
+    "maximumU16Difference": 0,
+    "meanAbsoluteU16": 0,
+    "maximumLocation": null,
+    "bounds": null,
+    "sameState": "from preserved reopen-observation; state not regenerated",
+    "scope": "Streaming existing uncompressed TIFF pixel payload comparison, 2 MiB buffers, zero RAW decode"
+  },
+  {
+    "id": "company-02",
+    "first": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\display-exposure-plus05-export\\DSCF0347_仿色.tif",
+    "second": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\independent-reopen-export\\DSCF0347_仿色.tif",
+    "changedChannels": 20521,
+    "maximumU16Difference": 6844,
+    "meanAbsoluteU16": 0.07203520689735717,
+    "maximumLocation": {
+      "x": 7581,
+      "y": 3980,
+      "channel": 2,
+      "before": 834,
+      "after": 7678
+    },
+    "bounds": {
+      "left": 507,
+      "top": 497,
+      "right": 7691,
+      "bottom": 4481
+    },
+    "sameState": "from preserved reopen-observation; state not regenerated",
+    "scope": "Streaming existing uncompressed TIFF pixel payload comparison, 2 MiB buffers, zero RAW decode"
+  }
+]

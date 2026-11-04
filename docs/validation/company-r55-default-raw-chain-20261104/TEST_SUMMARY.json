@@ -1,0 +1,65 @@
+{
+  "dateLocal": "2026-11-04",
+  "timeZone": "Europe/Berlin",
+  "reviewStatus": "COMPLETED_BOUNDED_AUDIT",
+  "productStatus": "PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "baseHead": "f27f440909fe19ddd5665b167b912c9db9d897d4",
+  "testCommit": "41743c9b00cc28b1f2c463063697528dff4b9efb",
+  "testSourceSha256": "42F0ABE5E09405F812D9B9C54B6B83680B85A9F89F8A15DC0E68DB7BFBCA31EF",
+  "testAssemblySha256": "EE2F9D2B5BCBDE825CD8CC1988F125A8AF96E08D95FA90B1FFCA62EA1B9E77AE",
+  "executionMode": "REUSE_IDENTITY_VERIFIED_PASS4_NO_NEW_RAW_DECODE",
+  "uniqueTestMethods": 2,
+  "executions": 5,
+  "trxPassed": 4,
+  "trxFailed": 1,
+  "admission": {
+    "selected": 3,
+    "decoded": 2,
+    "notAdmitted": 1
+  },
+  "meaning": "Sony producer TRX PASS means rejection observed, not decode PASS. Canon 2 PASS; Fuji producer PASS and reopen FAIL.",
+  "samples": [
+    {
+      "id": "company-01",
+      "model": "Sony ILCE-7M4",
+      "status": "NOT_ADMITTED",
+      "stage": "RawContext.OpenFile",
+      "nativeError": "FileUnsupported",
+      "preview": "NOT_RUN",
+      "export": "NOT_RUN",
+      "reopen": "NOT_RUN"
+    },
+    {
+      "id": "company-05",
+      "model": "Canon EOS R6",
+      "status": "ADMITTED",
+      "producer": "PASS",
+      "independentReopen": "PASS",
+      "reopenTiffChangedChannels": 0
+    },
+    {
+      "id": "company-02",
+      "model": "Fujifilm X-T5",
+      "status": "ADMITTED",
+      "producer": "PASS",
+      "independentReopen": "FAIL",
+      "reopenMasterChangedChannels": 16344,
+      "reopenMasterMaxU16": 5600,
+      "reopenTiffChangedChannels": 20521,
+      "reopenTiffMaxU16": 6844
+    }
+  ],
+  "previewExportChecks": {
+    "count": 6,
+    "maximum8BitDifference": 0,
+    "scope": "matching nearest-sample display adapters for default and +0.5 and reopen; not calibrated physical display or all tools"
+  },
+  "newProductBuild": false,
+  "newRawDecodes": 0,
+  "productFilesChanged": 0,
+  "physicalPointerAcceptance": "NOT_RUN",
+  "referenceApplications": "NOT_RUN",
+  "cameraColorCalibration": "NOT_RUN",
+  "excludedTasksRun": []
+}

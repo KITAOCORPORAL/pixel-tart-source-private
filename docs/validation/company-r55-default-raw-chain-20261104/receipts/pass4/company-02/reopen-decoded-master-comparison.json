@@ -1,0 +1,22 @@
+{
+  "changedChannels": 16344,
+  "maximumU16Difference": 5600,
+  "maximumLocation": {
+    "x": 7581,
+    "y": 3980,
+    "channel": 2,
+    "before": 593,
+    "after": 6193
+  },
+  "meanAbsoluteU16": 0.060309978747021875,
+  "changedBounds": {
+    "left": 507,
+    "top": 497,
+    "right": 7691,
+    "bottom": 4481
+  },
+  "borderChannels": 0,
+  "interiorChannels": 16344,
+  "sameDimensions": true,
+  "scope": "Reopened post-LibRaw master vs original identity TIFF16; no second demosaic in the comparison"
+}

@@ -1,3 +1,11 @@
+## 2026-11-04 暗室默认 RAW 链审查收口（Europe/Berlin）
+- 接续已落盘 pass4 与中断聊天的 closure-audit，不重复 RAW 开发；产品源码仍 38dd3f92bb2db7238f7f058008887929ec971c93，审查独立分支 docs/raw-default-chain-closure-20261104，测试提交 41743c9b00cc28b1f2c463063697528dff4b9efb。原公司树与未跟踪测试保留，不合研究/旧树，不改默认。
+- 默认新导入为 LibRaw0.21.1 RGB16 已显影 sRGB 标记链，不是 PV4 线性 ProPhoto 或全程宽域编辑；显式专业/诊断/默认关闭/未接线路径分开记录。
+- 授权3样本：Sony OpenFile不接纳，Canon保存独立重开一致，Fuji源/栈/版本不变但master重建已有差异，精确预览FAIL保留。2方法5执行TRX4PASS/1FAIL，其中Sony仅拒绝观察PASS，不算支持。
+- 优先问题 RAW-REOPEN-001：Fuji重开master 16,344通道差，max5600 U16；既有+0.5 TIFF只读比较20,521通道差，max6844。边界已定位，native具体根因未证，不放宽断言、不擅改解码/曲线/profile；后续依POLICY成熟实现对照。
+- 新增RAW解码0/产品修改0/重建0；20共享DLL+2 native绑定与293个包文件读回，沿用原完整诊断包，WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全模块/策划15/教程退役保持。未启动日历/DOCX/灯台/锐化/20MP/六图专项。
+- 报告 docs/validation/company-r55-default-raw-chain-20261104/FINAL_REPORT.md，TEST_SUMMARY/SOURCE_IDENTITY/NONPASS及后置PUSH_READBACK分列；审查完成但产品PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。原收据/照片只读，图片不进Git；家庭未推成果未知，未探测N盘。
+
 ## 2026-11-03 公司当前：项目—策划—日历—实际支出—15区汇总闭环（Asia/Shanghai）
 - 原会话中断时产品/测试已本地提交，本会话审核接续并完成发布绑定验证与封存；基线3d718410，产品源码 **38dd3f92bb2db7238f7f058008887929ec971c93**，测试 **d0c88e27291c432ace5dace5db8f1b3a6a8c5772**，未重写已有业务模型。
 - 基线主链末尾切B保留A支出状态1FAIL、ABA迟到成功/迟到失败/空结果3FAIL已留档；原持久化和独立重开本已正确。仅3个PlanningCenterViewModel产品文件：切项目清旧状态、revision/项目/reader校验迟到结果、明确读取中/未连接/空/失败，不用旧缓存冒充成功；汇总空/失败提示一致。
