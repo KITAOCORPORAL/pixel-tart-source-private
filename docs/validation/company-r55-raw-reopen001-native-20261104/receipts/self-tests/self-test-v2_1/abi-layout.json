@@ -1,0 +1,236 @@
+{
+  "nativeVersion": "0.21.1-Release",
+  "structs": [
+    {
+      "name": "Sdcb.LibRaw.Natives.LibRawData",
+      "size": 381256,
+      "fields": [
+        {
+          "Name": "Image",
+          "offset": 0
+        },
+        {
+          "Name": "ImageSizes",
+          "offset": 8
+        },
+        {
+          "Name": "ImageParams",
+          "offset": 192
+        },
+        {
+          "Name": "LensInfo",
+          "offset": 632
+        },
+        {
+          "Name": "MakerNotes",
+          "offset": 1928
+        },
+        {
+          "Name": "ShootingInfo",
+          "offset": 4880
+        },
+        {
+          "Name": "OutputParams",
+          "offset": 5024
+        },
+        {
+          "Name": "RawUnpackParams",
+          "offset": 5328
+        },
+        {
+          "Name": "ProgressFlags",
+          "offset": 5376
+        },
+        {
+          "Name": "ProcessWarnings",
+          "offset": 5380
+        },
+        {
+          "Name": "Color",
+          "offset": 5384
+        },
+        {
+          "Name": "OtherParams",
+          "offset": 192416
+        },
+        {
+          "Name": "Thumbnail",
+          "offset": 193216
+        },
+        {
+          "Name": "ThumbnailList",
+          "offset": 193240
+        },
+        {
+          "Name": "RawData",
+          "offset": 193504
+        },
+        {
+          "Name": "ParentClass",
+          "offset": 381248
+        }
+      ]
+    },
+    {
+      "name": "Sdcb.LibRaw.Natives.LibRawRawData",
+      "size": 187744,
+      "fields": [
+        {
+          "Name": "RawAlloc",
+          "offset": 0
+        },
+        {
+          "Name": "RawImage",
+          "offset": 8
+        },
+        {
+          "Name": "Color4Image",
+          "offset": 16
+        },
+        {
+          "Name": "Color3Image",
+          "offset": 24
+        },
+        {
+          "Name": "FloatImage",
+          "offset": 32
+        },
+        {
+          "Name": "Float3Image",
+          "offset": 40
+        },
+        {
+          "Name": "Float4Image",
+          "offset": 48
+        },
+        {
+          "Name": "Ph1Cblack",
+          "offset": 56
+        },
+        {
+          "Name": "Ph1Rblack",
+          "offset": 64
+        },
+        {
+          "Name": "IParams",
+          "offset": 72
+        },
+        {
+          "Name": "Sizes",
+          "offset": 512
+        },
+        {
+          "Name": "IOParams",
+          "offset": 696
+        },
+        {
+          "Name": "Color",
+          "offset": 712
+        }
+      ]
+    },
+    {
+      "name": "Sdcb.LibRaw.Natives.LibRawImageSizes",
+      "size": 184,
+      "fields": [
+        {
+          "Name": "RawHeight",
+          "offset": 0
+        },
+        {
+          "Name": "RawWidth",
+          "offset": 2
+        },
+        {
+          "Name": "Height",
+          "offset": 4
+        },
+        {
+          "Name": "Width",
+          "offset": 6
+        },
+        {
+          "Name": "TopMargin",
+          "offset": 8
+        },
+        {
+          "Name": "LeftMargin",
+          "offset": 10
+        },
+        {
+          "Name": "IHeight",
+          "offset": 12
+        },
+        {
+          "Name": "IWidth",
+          "offset": 14
+        },
+        {
+          "Name": "RawPitch",
+          "offset": 16
+        },
+        {
+          "Name": "PixelAspect",
+          "offset": 24
+        },
+        {
+          "Name": "Flip",
+          "offset": 32
+        },
+        {
+          "Name": "Mask",
+          "offset": 36
+        },
+        {
+          "Name": "RawAspect",
+          "offset": 164
+        },
+        {
+          "Name": "RawInsetCrops",
+          "offset": 166
+        }
+      ]
+    },
+    {
+      "name": "Sdcb.LibRaw.Natives.LibRawProcessedImage",
+      "size": 20,
+      "fields": [
+        {
+          "Name": "Type",
+          "offset": 0
+        },
+        {
+          "Name": "Height",
+          "offset": 4
+        },
+        {
+          "Name": "Width",
+          "offset": 6
+        },
+        {
+          "Name": "Colors",
+          "offset": 8
+        },
+        {
+          "Name": "Bits",
+          "offset": 10
+        },
+        {
+          "Name": "DataSize",
+          "offset": 12
+        },
+        {
+          "Name": "FirstData",
+          "offset": 16
+        }
+      ]
+    }
+  ],
+  "init": 1,
+  "recycle": 1,
+  "close": 1,
+  "open": 0,
+  "unpack": 0,
+  "process": 0,
+  "memoryImage": 0
+}

@@ -1,3 +1,12 @@
+## 2026-11-04 RAW-REOPEN-001：Unpack有效域相同，首差已收窄至DcrawProcess（Asia/Shanghai）
+- 接续diagnostic/raw-reopen001-20261104@b14f8381…；产品源码仍38dd3f92bb2db7238f7f058008887929ec971c93，src/prototypes零修改。观测源码冻结14e62f56b9a24131ed071f5d01e5547391c0882a，V2.1观测DLL SHA1CBD7FD8…；实际native仍F500C073…，不是新decoder。
+- 先读并复用研究线0e0723df…的LibRaw/binding/RawTherapee固定源码与许可/契约对照，未再搭第二套成熟实现。实际DLL指令+native getter地址/尺寸+固定源码确认所用ABI；LibRawData.Image的四ushort占的是指针槽，不当像素。无RAW自检与身份冻结后才运行。
+- 仅DSCF0347.RAF授权SHA；串行两个独立进程15284→4908，各Open/Unpack/Process/MemoryImage1次，共完整解码2，无第三次或重试。Unpack active7752×5184单平面（raw7872×5196、pitch15744、left60/top6）hash相同；Process有效RGB首差5316通道/3042像素、max146；返回RGB16差5311/max4628。排除第四槽/padding/无效RAW域，未跨布局逐字节比较。
+- OMP措辞纠正：旧收据6是binding初始化后值，不足以声称由父进程继承。固定binding源码及实际IL确认空值时既有initializer会设ProcessorCount/2；本次启动前null→原绑定初始化后6，父进程/user/machine仍null。观测器未设/清OMP、不强制单线程。早期比较错时点的零解码预检保留并标注，不当真实环境漂移或产品修复。
+- 两次完整参数相同，与旧共有output/nativeOutput/unpack/color字段也相同，仅XmpDataPtr地址不同。实测unpacker=unpacked_load_raw()/4096、filters9/colors3；实际插值入口/passes/fuji_width/worker/scratch仍未测，不直接断言X-Trans竞态。四次无RAW自检、两次工具编译失败、旧两进程/原FAIL及旧目录均保留。
+- OS峰值工作集724279296/724688896，私有内存峰值50ms采样均699195392；一行46512bytes compaction、无全图托管复制/float/App；六stage.bin共1125218304bytes仅本地。旧两次native不同14275，本次5311；观测改变堆/时序，数量变化不是改进或fix，旧新hash/参数已离线对照。
+- 状态REPRODUCED_DCRAW_PROCESS_BOUNDARY / ROOT_CAUSE_OPEN / NOT_FIXED。具体首差仍在raw2image/scale/pre-interpolate/插值/convert_to_rgb范围未分；下一版本检查点只作提案，不再解码、不改算法/线程/参数/decoder。无产品修复不重建包，修复后App预览/保存重开/TIFF均NOT_RUN。
+- 原完整诊断ZIP/入口SHA本轮重核未变，WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false、全模块/策划15/教程退役保持。报告docs/validation/company-r55-raw-reopen001-native-20261104/FINAL_REPORT.md；本地E:/Guangjing-RawReopen001-20261104/native-boundaries-v2。
 ## 2026-11-04 RAW-REOPEN-001：native RGB16 边界已复现，根因仍待研究（Asia/Shanghai）
 - 唯一问题RAW-REOPEN-001；从审查e2437d2300b37872d5b66482a721e3b6463f1ce4建独立diagnostic/raw-reopen001-20261104。产品基线仍f27f440909fe19ddd5665b167b912c9db9d897d4，产品源码仍38dd3f92bb2db7238f7f058008887929ec971c93；产品src/prototypes零改动，审查/诊断HEAD不当产品源码。
 - 仅授权company-02固定SHA；两独立进程35784→32688串行、各一次默认完整解码。首个已观测差异在MakeDcrawMemoryImage返回nativeRGB16：14,275通道不同、max5600 U16，最大点(7581,3980,B)为6193/593。native复制前后/托管复制/释放后hash各自一致，float与16位roundtrip零错、orientation1不变；无App也复现。

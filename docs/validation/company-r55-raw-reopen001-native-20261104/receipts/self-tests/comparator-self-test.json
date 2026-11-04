@@ -1,0 +1,49 @@
+{
+  "rawDecodeCalls": 0,
+  "status": "OFFLINE_COMPARATOR_SELF_TEST_COMPLETED",
+  "result": {
+    "name": "synthetic",
+    "layout": {
+      "Width": 2,
+      "Height": 1,
+      "ValidChannels": 3
+    },
+    "firstSha256": "4FFE3951C053F577C2E6E77C8007A599303910623FAAEF55AD9835CF0001EDF5",
+    "secondSha256": "355CD455BE6E88D036B835DE3F689C436062BD3384AA4AD35EF8C2B3C7D749E3",
+    "equal": false,
+    "validSamples": 6,
+    "changedChannels": 1,
+    "changedPixels": 1,
+    "perChannel": [
+      0,
+      1,
+      0
+    ],
+    "maxAbsoluteDifference": 7,
+    "meanAbsoluteDifference": 1.1666666666666667,
+    "meanChangedAbsoluteDifference": 7,
+    "firstDifference": {
+      "x": 0,
+      "y": 0,
+      "channel": 1,
+      "first": 1,
+      "second": 8
+    },
+    "maximumLocation": {
+      "x": 0,
+      "y": 0,
+      "channel": 1,
+      "first": 1,
+      "second": 8
+    },
+    "bounds": {
+      "left": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "borderChangedChannels": 1,
+    "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+    "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\comparator-self-test\\changes.csv"
+  }
+}

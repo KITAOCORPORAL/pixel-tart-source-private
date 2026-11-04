@@ -1,0 +1,151 @@
+{
+  "mode": "Metadata IL only; no type initialization",
+  "sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+  "methods": [
+    {
+      "method": "Void .cctor()",
+      "instructions": [
+        {
+          "operand": "Void Init()",
+          "offset": 0,
+          "opcode": "call"
+        },
+        {
+          "operand": "System.String get_OpenMPThreadCount()",
+          "offset": 5,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 10,
+          "opcode": "brtrue.s"
+        },
+        {
+          "operand": "Int32 get_ProcessorCount()",
+          "offset": 12,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 17,
+          "opcode": "ldc.i4.2"
+        },
+        {
+          "operand": "",
+          "offset": 18,
+          "opcode": "div"
+        },
+        {
+          "operand": "",
+          "offset": 19,
+          "opcode": "ldc.i4.1"
+        },
+        {
+          "operand": "Int32 get_ProcessorCount()",
+          "offset": 20,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 25,
+          "opcode": "ldc.i4.2"
+        },
+        {
+          "operand": "",
+          "offset": 26,
+          "opcode": "div"
+        },
+        {
+          "operand": "Int32 Clamp(Int32, Int32, Int32)",
+          "offset": 27,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 32,
+          "opcode": "stloc.0"
+        },
+        {
+          "operand": "",
+          "offset": 33,
+          "opcode": "ldloca.s"
+        },
+        {
+          "operand": "System.String ToString()",
+          "offset": 35,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 40,
+          "opcode": "dup"
+        },
+        {
+          "operand": "Void set_OpenMPThreadCount(System.String)",
+          "offset": 41,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 46,
+          "opcode": "pop"
+        },
+        {
+          "operand": "",
+          "offset": 47,
+          "opcode": "ret"
+        }
+      ],
+      "ilHex": "282401000628E70000062D23288A00000A185B17288A00000A185B288B00000A0A1200288C00000A2528E8000006262A"
+    },
+    {
+      "method": "System.String get_OpenMPThreadCount()",
+      "instructions": [
+        {
+          "operand": "OMP_NUM_THREADS",
+          "offset": 0,
+          "opcode": "ldstr"
+        },
+        {
+          "operand": "System.String GetEnvironmentVariable(System.String)",
+          "offset": 5,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 10,
+          "opcode": "ret"
+        }
+      ],
+      "ilHex": "72740C0070288D00000A2A"
+    },
+    {
+      "method": "Void set_OpenMPThreadCount(System.String)",
+      "instructions": [
+        {
+          "operand": "OMP_NUM_THREADS",
+          "offset": 0,
+          "opcode": "ldstr"
+        },
+        {
+          "operand": "",
+          "offset": 5,
+          "opcode": "ldarg.0"
+        },
+        {
+          "operand": "Void SetEnvironmentVariable(System.String, System.String)",
+          "offset": 6,
+          "opcode": "call"
+        },
+        {
+          "operand": "",
+          "offset": 11,
+          "opcode": "ret"
+        }
+      ],
+      "ilHex": "72740C007002288E00000A2A"
+    }
+  ],
+  "binding": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\build-v2_1\\Sdcb.LibRaw.dll",
+  "nativeInvocations": 0
+}

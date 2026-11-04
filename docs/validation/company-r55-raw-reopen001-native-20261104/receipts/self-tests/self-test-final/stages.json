@@ -1,0 +1,80 @@
+[
+  {
+    "name": "synthetic-a",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\self-test-final\\synthetic-a.bin",
+    "sha256": "C13BD5F18C464223369F79BF3DDB37AF27A27A180E9F415594BEE2E99A9CF43B",
+    "bytes": 36,
+    "layout": {
+      "Width": 3,
+      "Height": 2,
+      "SourcePixelChannels": 4,
+      "ValidChannels": 3,
+      "SourcePitch": 48,
+      "Left": 1,
+      "Top": 0
+    },
+    "packedPitch": 18,
+    "domain": "Synthetic only",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 2,
+        "sha256": "C13BD5F18C464223369F79BF3DDB37AF27A27A180E9F415594BEE2E99A9CF43B"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 18
+  },
+  {
+    "name": "synthetic-padding-unused-mutated",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\self-test-final\\synthetic-padding-unused-mutated.bin",
+    "sha256": "C13BD5F18C464223369F79BF3DDB37AF27A27A180E9F415594BEE2E99A9CF43B",
+    "bytes": 36,
+    "layout": {
+      "Width": 3,
+      "Height": 2,
+      "SourcePixelChannels": 4,
+      "ValidChannels": 3,
+      "SourcePitch": 48,
+      "Left": 1,
+      "Top": 0
+    },
+    "packedPitch": 18,
+    "domain": "Synthetic only",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 2,
+        "sha256": "C13BD5F18C464223369F79BF3DDB37AF27A27A180E9F415594BEE2E99A9CF43B"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 18
+  },
+  {
+    "name": "synthetic-valid-mutated",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\self-test-final\\synthetic-valid-mutated.bin",
+    "sha256": "10DFB7ED6A0B7A2D0BFEDE04DC80CDD5AECC1E2ABE17D2E238365EA4568D651D",
+    "bytes": 36,
+    "layout": {
+      "Width": 3,
+      "Height": 2,
+      "SourcePixelChannels": 4,
+      "ValidChannels": 3,
+      "SourcePitch": 48,
+      "Left": 1,
+      "Top": 0
+    },
+    "packedPitch": 18,
+    "domain": "Synthetic only",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 2,
+        "sha256": "10DFB7ED6A0B7A2D0BFEDE04DC80CDD5AECC1E2ABE17D2E238365EA4568D651D"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 18
+  }
+]

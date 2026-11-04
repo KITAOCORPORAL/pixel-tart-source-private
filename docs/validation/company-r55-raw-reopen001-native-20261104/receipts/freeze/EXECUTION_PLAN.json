@@ -1,0 +1,27 @@
+{
+  "version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+  "frozenManifestSha256": "26C4C71CA9BF575E520FB2A419CBD1D3130DA9936C2F78EE36175E5D1E5A301D",
+  "sourceCommit": "14e62f56b9a24131ed071f5d01e5547391c0882a",
+  "processes": 2,
+  "rawFiles": 1,
+  "maxCallsPerProcess": {
+    "MakeDcrawMemoryImage": 1,
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 1
+  },
+  "serial": true,
+  "automaticRetry": false,
+  "additionalThirdDecode": false,
+  "threadOverridesByObserver": false,
+  "startupAndEffectiveSnapshotsSeparated": true,
+  "oldOmpInheritanceWordingCorrected": true,
+  "inputId": "company-02",
+  "inputSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "observerDllSha256": "1CBD7FD8A1DA6878F2C5C3D1B1910BA272F78E98BA7C187CAFEB78BB50DFE4AA",
+  "nativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+  "noRawSelfTest": "frozen-self-test/self-test.json",
+  "offlineComparatorSelfTest": "comparator-self-test/self-test.json",
+  "peakLimitBytes": 2147483648,
+  "timeoutSecondsPerProcess": 600
+}

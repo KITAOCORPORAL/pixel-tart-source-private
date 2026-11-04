@@ -1,0 +1,21 @@
+{
+  "dirtyStateLimitation": "Other-tree HEADs compared to initial inventory; no claim of bytewise proof or original dirty-porcelain equality for every foreign checkout",
+  "localBefore": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/WORKTREES_BEFORE.txt",
+  "oldTrackedEvidenceDiff": [],
+  "localAfter": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/WORKTREES_AFTER.txt",
+  "targetOnlyChanges": "tools/RawNativeBoundaryProbe, new native diagnostic docs, HANDOFF and R55 outline",
+  "worktreesBefore": 62,
+  "targetInitiallyClean": true,
+  "headChanges": [
+    {
+      "target": true,
+      "path": "E:/Kitao-Worktrees/raw-reopen001-diagnosis-20261104",
+      "after": "14e62f56b9a24131ed071f5d01e5547391c0882a",
+      "before": "b14f8381f29d30928a29103abe334ae0000cb301"
+    }
+  ],
+  "baseline": "b14f8381f29d30928a29103abe334ae0000cb301",
+  "worktreesAfter": 62,
+  "nonTargetExistingUserFileChanges": 0,
+  "incidentalOwnNewFile": "A relative .NET path initially created workspace-root HANDOFF.MD instead of rewriting the target copy. Initial root inventory showed absent; exact generated content verified, then only that new file was removed with LiteralPath. No existing user file was changed."
+}

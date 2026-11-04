@@ -1,0 +1,73 @@
+{
+  "imagePointer": "0x25D8000A040",
+  "sizes": {
+    "Flip": 0,
+    "Height": 5184,
+    "IHeight": 5184,
+    "IWidth": 7752,
+    "LeftMargin": 60,
+    "Mask": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "PixelAspect": 1,
+    "RawAspect": 1333,
+    "RawHeight": 5196,
+    "RawInsetCrops": [
+      {
+        "CHeight": 5149,
+        "CLeft": 12,
+        "CTop": 24,
+        "CWidth": 7728
+      },
+      {
+        "CHeight": 5149,
+        "CLeft": 444,
+        "CTop": 24,
+        "CWidth": 6865
+      }
+    ],
+    "RawPitch": 15744,
+    "RawWidth": 7872,
+    "TopMargin": 6,
+    "Width": 7752
+  },
+  "colors": 3,
+  "filters": 9,
+  "sourcePixelBytes": 8,
+  "validChannels": 3,
+  "unusedChannel": 3,
+  "lifetime": "Borrowed image after successful DcrawProcess, before MakeDcrawMemoryImage; context still alive",
+  "domain": "LibRaw processed RGB U16 before memory-image gamma/auto-bright curve lookup; not sensor values, not final RGB16",
+  "validity": "raw2image initializes image; process completes interpolation including border_interpolate; convert_to_rgb writes output RGB. Include output rectangle only, never unused fourth slot"
+}

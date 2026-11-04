@@ -1,0 +1,98 @@
+[
+  {
+    "name": "OpenFile_enter",
+    "elapsedMs": 418.5452,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 9273344,
+    "workingBytes": 32014336
+  },
+  {
+    "name": "OpenFile_return",
+    "elapsedMs": 430.3076,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 10539008,
+    "workingBytes": 33570816
+  },
+  {
+    "name": "Unpack_enter",
+    "elapsedMs": 482.6673,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 27471872,
+    "workingBytes": 50810880
+  },
+  {
+    "name": "Unpack_return",
+    "elapsedMs": 542.0783,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 109572096,
+    "workingBytes": 132636672
+  },
+  {
+    "name": "unpack-active-mosaic_captured",
+    "elapsedMs": 688.3121,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 121864192,
+    "workingBytes": 145047552
+  },
+  {
+    "name": "DcrawProcess_enter",
+    "elapsedMs": 691.5024,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 121864192,
+    "workingBytes": 145047552
+  },
+  {
+    "name": "DcrawProcess_return",
+    "elapsedMs": 4903.1529,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 593899520,
+    "workingBytes": 617091072
+  },
+  {
+    "name": "process-image-rgb_captured",
+    "elapsedMs": 5440.604,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 593899520,
+    "workingBytes": 617091072
+  },
+  {
+    "name": "MakeDcrawMemoryImage_enter",
+    "elapsedMs": 5443.6873,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 593899520,
+    "workingBytes": 617091072
+  },
+  {
+    "name": "MakeDcrawMemoryImage_return",
+    "elapsedMs": 5540.4746,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 699195392,
+    "workingBytes": 715595776
+  },
+  {
+    "name": "memory-rgb16_captured",
+    "elapsedMs": 5873.6273,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 699195392,
+    "workingBytes": 716017664
+  },
+  {
+    "name": "AllNativeOwnersDisposed",
+    "elapsedMs": 5916.0053,
+    "managedThreadId": 5,
+    "osThreadId": 19232,
+    "privateBytes": 699195392,
+    "workingBytes": 716017664
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "environment": {
+    "OMP_NUM_THREADS": "6",
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  },
+  "status": "SELF_TEST_COMPLETED_NOT_A_PRODUCT_FIX",
+  "validSampleMutationDetected": true,
+  "paddingUnusedAndOutsideRectangleExcluded": true,
+  "invalidLayoutsRejected": 5,
+  "open": 0,
+  "unpack": 0,
+  "process": 0,
+  "memoryImage": 0,
+  "smallSyntheticBufferBytes": 96
+}

@@ -1,0 +1,1280 @@
+[
+  {
+    "name": "unpack-active-mosaic",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\unpack-active-mosaic.bin",
+    "sha256": "E6B2E63F50C2786F90068806426DD865BB12278C794BC469A84E7D325B71B9F0",
+    "bytes": 80372736,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "SourcePixelChannels": 1,
+      "ValidChannels": 1,
+      "SourcePitch": 15744,
+      "Left": 60,
+      "Top": 6
+    },
+    "packedPitch": 15504,
+    "domain": "Unpack active sensor mosaic; no WB/gamma/demosaic",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 64,
+        "sha256": "8C8723B61D352B4063F4D55A83ED2BC14FC889CC1A5558CD4F4DF872089C720A"
+      },
+      {
+        "firstRow": 64,
+        "rows": 64,
+        "sha256": "51B61C5E4193554F1E8220B097B99830539225A3489160B4BF23F4528DC124A3"
+      },
+      {
+        "firstRow": 128,
+        "rows": 64,
+        "sha256": "4C28F068917E14B245F9A9959BB873A331AFA196C93189F1FC8E65717753D6EE"
+      },
+      {
+        "firstRow": 192,
+        "rows": 64,
+        "sha256": "CABC10381C8EC9B4A29A895B24D80C9F050D984331B4FD8C7E9EBA4790A50529"
+      },
+      {
+        "firstRow": 256,
+        "rows": 64,
+        "sha256": "C29F6DFBB787FB0E4DB9CE078410331B23EACAA248D2737F8EEE4CE65860E78E"
+      },
+      {
+        "firstRow": 320,
+        "rows": 64,
+        "sha256": "361B5DAFC0624878327468A4EC7B668345A7C93D5879F57C2D34F66435AC5F04"
+      },
+      {
+        "firstRow": 384,
+        "rows": 64,
+        "sha256": "C5C6F46658B9173CAA17565DDE82FB5BF2E9573B631EA88690B5D43DC90C2218"
+      },
+      {
+        "firstRow": 448,
+        "rows": 64,
+        "sha256": "B5617D2BC3CF1029AAF497F9CF444AA9A5390BD8BD01CD26D423FFED5F460FE7"
+      },
+      {
+        "firstRow": 512,
+        "rows": 64,
+        "sha256": "FE72E4710AA4F9C3B3A7EDBE8E6C72FECF368EA3F3F285099D52A7EFF9E17007"
+      },
+      {
+        "firstRow": 576,
+        "rows": 64,
+        "sha256": "E6FCB77FD0B9058E046F68C058EE7533B534700DFD5F69253EDDD61217279FF5"
+      },
+      {
+        "firstRow": 640,
+        "rows": 64,
+        "sha256": "3AA84C5385722FCD07D5AA4C759D8E5066F653E565A7885643B5964445EB23FE"
+      },
+      {
+        "firstRow": 704,
+        "rows": 64,
+        "sha256": "1938E1E4B65A5FAC5F3FB4471F9EF4DBA3F1F83530CCBCB08A189DBF81E6EC29"
+      },
+      {
+        "firstRow": 768,
+        "rows": 64,
+        "sha256": "BE94426AF108CE11F5E32AF6332FFE4F58FB5695ABC975A0518554390C61D9A9"
+      },
+      {
+        "firstRow": 832,
+        "rows": 64,
+        "sha256": "FB0D16AEF0CEDEDA52F39885994F70BA7F5E0B22CF9F29F76CD0C9663BF59385"
+      },
+      {
+        "firstRow": 896,
+        "rows": 64,
+        "sha256": "0E994EAC10580A7966729E313FC66CC8AD1B7D8FE0B8B4E8CDB79A5BCBA08FB3"
+      },
+      {
+        "firstRow": 960,
+        "rows": 64,
+        "sha256": "E7EDDFF80B2C23606FF1C887BA9AC03C182F6F19075886D4AE24374B3222CFF4"
+      },
+      {
+        "firstRow": 1024,
+        "rows": 64,
+        "sha256": "EB9682A86F0E04B865A717C8702190A06B9377B90CBDCE9C1DE3A05B957532AC"
+      },
+      {
+        "firstRow": 1088,
+        "rows": 64,
+        "sha256": "740EDA12B4D59E2DB8CFB3EEA649946FA2CC566FC479C092416C1DD777AF8EB6"
+      },
+      {
+        "firstRow": 1152,
+        "rows": 64,
+        "sha256": "65D425D946904152972F6BB4D2B1CA668AB5DCE019B6F790A4F7376A544435BC"
+      },
+      {
+        "firstRow": 1216,
+        "rows": 64,
+        "sha256": "A9420658DDFC50043EAB58724534E2E8DB3E25C222689A07B23F1C5CD911F97C"
+      },
+      {
+        "firstRow": 1280,
+        "rows": 64,
+        "sha256": "9503C3A46FC3C172A88AC042182001DD7632FBFCCBEF1D4A2E7B9373C0972C8B"
+      },
+      {
+        "firstRow": 1344,
+        "rows": 64,
+        "sha256": "5697FBE17762EF01130FD5DE059C1B0340CF13ADF4B4034EFDF5FE12ADC8F7EA"
+      },
+      {
+        "firstRow": 1408,
+        "rows": 64,
+        "sha256": "A7EBDB92187A636EC0046D245899EE808BA57FF2513CDECCBA2CEE0E4D51CE5C"
+      },
+      {
+        "firstRow": 1472,
+        "rows": 64,
+        "sha256": "AB6BADAD0714D66219EA5F4969B1E36DE886086201CFFFBC5C68ACC64D8D52F0"
+      },
+      {
+        "firstRow": 1536,
+        "rows": 64,
+        "sha256": "39D11DA8919A1C42BA0156AA7536F155EF1AB6FF03A82885B1BF218206A745F4"
+      },
+      {
+        "firstRow": 1600,
+        "rows": 64,
+        "sha256": "92FC7E358F7F1266652774D92BE72507EC2DF2E6919CF7E417E15786FE307EAD"
+      },
+      {
+        "firstRow": 1664,
+        "rows": 64,
+        "sha256": "56B1A37F9CCC7950A0E1E837B7D3032877CD4FF352E4245A7F29850C371B34B1"
+      },
+      {
+        "firstRow": 1728,
+        "rows": 64,
+        "sha256": "7E10E7FBC38BBC253EA3256DF3E071940F8F653BDE707DBB9FD1C536BC72282A"
+      },
+      {
+        "firstRow": 1792,
+        "rows": 64,
+        "sha256": "15CBF34852738D108D150BB378709C6492DCBBAEA97DF6DEBBD465801BDF28FB"
+      },
+      {
+        "firstRow": 1856,
+        "rows": 64,
+        "sha256": "EBB30CDB841AB57B1C6AA1351CE72463E0692B8BD6335DAF60C2F2CCC9DD6668"
+      },
+      {
+        "firstRow": 1920,
+        "rows": 64,
+        "sha256": "B77841B62920419E705428EFAACA58BC28AA901F740DBBE8390240DBB8FAD292"
+      },
+      {
+        "firstRow": 1984,
+        "rows": 64,
+        "sha256": "223720387BB18E708E527DC633782D817B8A7E8D1D3B44B3B519A191292C7AB6"
+      },
+      {
+        "firstRow": 2048,
+        "rows": 64,
+        "sha256": "7852184DAE441031AFF797CE4DA8D9FCB147BA218D19EBB697601006B66A242C"
+      },
+      {
+        "firstRow": 2112,
+        "rows": 64,
+        "sha256": "A222443D8D3F6C039D5750F217CEE91C776271608ABA68F29082A8C701EF28AD"
+      },
+      {
+        "firstRow": 2176,
+        "rows": 64,
+        "sha256": "7912A958A60C811595D986C7C6867DBA39AD682B3BEDD1001C815E4053BDC9A5"
+      },
+      {
+        "firstRow": 2240,
+        "rows": 64,
+        "sha256": "F5E971839DFCF108BBDD3D2ED4A83D22FE106E2D4B25BA674883E1298368FCF2"
+      },
+      {
+        "firstRow": 2304,
+        "rows": 64,
+        "sha256": "A3CE221E20FB11F33A4959E3BE61F6E217DB3DEE1173561DD674E79A663C7717"
+      },
+      {
+        "firstRow": 2368,
+        "rows": 64,
+        "sha256": "460A6E46FB33AA0FE8E611C94957117F9137B0E3C57155271DA7207AC451F9BD"
+      },
+      {
+        "firstRow": 2432,
+        "rows": 64,
+        "sha256": "8724E59596D82D692EB6B26672A23BF5BB7313D015831769B24E211D06936878"
+      },
+      {
+        "firstRow": 2496,
+        "rows": 64,
+        "sha256": "BC402423CE0128611FF9B2B710904D82BDC018F7FC8A09E70C1A9C72CC3C0482"
+      },
+      {
+        "firstRow": 2560,
+        "rows": 64,
+        "sha256": "B91D5954209CB5F36FE8AA617C71138CEF47E8F1254DEBA1AAC2691A258CFC1F"
+      },
+      {
+        "firstRow": 2624,
+        "rows": 64,
+        "sha256": "9E7FC5AB3CDBCC299746BDC851F7AD80A0B5115C4ADB36A8545E5E897614DC95"
+      },
+      {
+        "firstRow": 2688,
+        "rows": 64,
+        "sha256": "FD649E4BDC2D2BD8D8B15703AD0BBC08B19DAA5D9F5BC30596A1848BBA419389"
+      },
+      {
+        "firstRow": 2752,
+        "rows": 64,
+        "sha256": "6E31419DCCAD99D5AF91E8CF2B5F931E3DE348BF238E631EDC5EBEDAEB7E846A"
+      },
+      {
+        "firstRow": 2816,
+        "rows": 64,
+        "sha256": "BE0D574B2F0FB6329EED6B65F86DF0E931646A64E562CD39B14821F9BCC233A2"
+      },
+      {
+        "firstRow": 2880,
+        "rows": 64,
+        "sha256": "1CF03ACAB10EF5A22247AB6A4E8AD5187AAA17477F39812F7C301B17B2F1A965"
+      },
+      {
+        "firstRow": 2944,
+        "rows": 64,
+        "sha256": "B1743D7430D56AF1DD660752DDBBA1834CB4ADB94095FCB7FFAB5CA27B8F05E0"
+      },
+      {
+        "firstRow": 3008,
+        "rows": 64,
+        "sha256": "CD0FFE679C0BDFA4FEF2F1C8D3720FBB2CF979BE5F9208891EF55AE70AE3EB79"
+      },
+      {
+        "firstRow": 3072,
+        "rows": 64,
+        "sha256": "01D6D7EAB7FB0C8F490969C0BAC0FBB6AA89DC1DFA5D0BEAA825D7F2932027B8"
+      },
+      {
+        "firstRow": 3136,
+        "rows": 64,
+        "sha256": "35737AB856CA41F712A51E9A395147A9C26450A68B11BCD80E9241B10F98EF9B"
+      },
+      {
+        "firstRow": 3200,
+        "rows": 64,
+        "sha256": "2903B39FA6FB450305D0C1EE8BB6984F86898A2BFED9D4ADEC4B4C2C02AF3A69"
+      },
+      {
+        "firstRow": 3264,
+        "rows": 64,
+        "sha256": "A23C31D4D90BBA5C0F3ABD82E3C28723F1B96F9F157FBDA5BD17A993B85C956E"
+      },
+      {
+        "firstRow": 3328,
+        "rows": 64,
+        "sha256": "DF280299E53014BFA9AEBB7C20867A60A3F6D7E7D14F1CB84F3DCD068ED1A9E7"
+      },
+      {
+        "firstRow": 3392,
+        "rows": 64,
+        "sha256": "3B0A72CB425E207596B96C5DE82FA460EF3B4DEA6F9A476F261040EA7653AFC3"
+      },
+      {
+        "firstRow": 3456,
+        "rows": 64,
+        "sha256": "7BF0CA1B4F05F1839AAF8814426BEF511B26B755B3789EB3E078F4866F58CB52"
+      },
+      {
+        "firstRow": 3520,
+        "rows": 64,
+        "sha256": "8E6E2DE62A15A3ED54D3CFAF99B6A402A2E4138455283F315A705EA04DAAE648"
+      },
+      {
+        "firstRow": 3584,
+        "rows": 64,
+        "sha256": "FAFDE65D9B43B40DDDE79506E132BDECA7E991C856C110986ADAF422ADDA0A44"
+      },
+      {
+        "firstRow": 3648,
+        "rows": 64,
+        "sha256": "C7A540E02CEA288829399F884A21104E8E93EA8BD8D7B6D04D4470994ED29C88"
+      },
+      {
+        "firstRow": 3712,
+        "rows": 64,
+        "sha256": "1E73DD380DF80E6AE17F7569811D53CFD22A1D9242A38CF59BBB9B73FA425CB9"
+      },
+      {
+        "firstRow": 3776,
+        "rows": 64,
+        "sha256": "7A881937B4410246F83B4195EF699DD0B6DE54CFF3B405040D61DB2D1CA4F159"
+      },
+      {
+        "firstRow": 3840,
+        "rows": 64,
+        "sha256": "5B485A70145021A61247E6B8012325FA54C51E7566AD58F98612565405C039BB"
+      },
+      {
+        "firstRow": 3904,
+        "rows": 64,
+        "sha256": "9FE31818D7E7EF5A9D08A432572C305AAE6DC92C20C7ED3F4B26DAAB4D442E9D"
+      },
+      {
+        "firstRow": 3968,
+        "rows": 64,
+        "sha256": "ABEDF1FBBD5B8F0D68820772B20EF072008B0EB6751D53AD9FDCC4181D4BB86A"
+      },
+      {
+        "firstRow": 4032,
+        "rows": 64,
+        "sha256": "6C0FB47F2EFF64B0297D1A0D3C426C232B7FA0E6A74DA98FBE39D6FA1FE325BE"
+      },
+      {
+        "firstRow": 4096,
+        "rows": 64,
+        "sha256": "315CF13C8E5ACED3F5ADFAFF09EE16C0BE87335EF5E3E31A20FD482506469EED"
+      },
+      {
+        "firstRow": 4160,
+        "rows": 64,
+        "sha256": "DF909B37B6EF03705F03E238FB3AE8B9335058254B4071820E45E1A453EC255D"
+      },
+      {
+        "firstRow": 4224,
+        "rows": 64,
+        "sha256": "DACEE6D0B0490FE5933A6C7D641B07D271D246530D7D857E0D0C2DC669D520BF"
+      },
+      {
+        "firstRow": 4288,
+        "rows": 64,
+        "sha256": "11B32E03C4C9EF97F1EE239A6813F7C75B5517A0D0A50E63BD121EB84B1D2589"
+      },
+      {
+        "firstRow": 4352,
+        "rows": 64,
+        "sha256": "31DB98E8E57372FB885BFFCBF5B169A2F89065F72B72D1E51283576722C8BA77"
+      },
+      {
+        "firstRow": 4416,
+        "rows": 64,
+        "sha256": "B58EB1067A8F662DE32D15D1A1508025A80FF715D99129082E202A25612AD2CB"
+      },
+      {
+        "firstRow": 4480,
+        "rows": 64,
+        "sha256": "B84D2DE9FC1BA0B226A1C0B6BB4919B2515D59860896EFEDEFEB5FB61C04E007"
+      },
+      {
+        "firstRow": 4544,
+        "rows": 64,
+        "sha256": "AC9121AF50289122CBD8897E3FCF34CF422ED133CF20D7B3CA4CD9701EE2C8E1"
+      },
+      {
+        "firstRow": 4608,
+        "rows": 64,
+        "sha256": "6985D17ED77325D9238D10EA06C6D29BD2831CA319C88A3AF820E80DD57021AA"
+      },
+      {
+        "firstRow": 4672,
+        "rows": 64,
+        "sha256": "9EBC8D2ED10974A4850A4CB51E9F30475E5F5915067046EF4408E3E05E88F52D"
+      },
+      {
+        "firstRow": 4736,
+        "rows": 64,
+        "sha256": "0968F15AC5162A30D88D35B0B13920F825A2A0FD4390B245A7E5F8B643DC6FA0"
+      },
+      {
+        "firstRow": 4800,
+        "rows": 64,
+        "sha256": "2AA61112986F9DE5087E29DA63AB80E737512B34BCD753724453E557E64C2CCB"
+      },
+      {
+        "firstRow": 4864,
+        "rows": 64,
+        "sha256": "B96BCBEDCAC328852C566835475A34915202EE4FF2DCE21FB9A08C908C1C8E87"
+      },
+      {
+        "firstRow": 4928,
+        "rows": 64,
+        "sha256": "C50E80B0D3CF838A698577ADE9DD3E1FA04D6830758AD1C2C7FC2C678A3C982E"
+      },
+      {
+        "firstRow": 4992,
+        "rows": 64,
+        "sha256": "87DF2B9F8A20AFA67EE0341CDB712D5B736BB1327BD5FC5BC11DB25A447D8755"
+      },
+      {
+        "firstRow": 5056,
+        "rows": 64,
+        "sha256": "278AD4C04684E5F03F2F4708F9F56CAAB7C77D9735DB00698B82EBBD63805449"
+      },
+      {
+        "firstRow": 5120,
+        "rows": 64,
+        "sha256": "653601690C5B2EAABC7B3031F86E7EC66D3672123812C2BFCD031E029607DFA6"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 0
+  },
+  {
+    "name": "process-image-rgb",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\process-image-rgb.bin",
+    "sha256": "9460FDC33E873AA7B7CDF7B6A54D9444F91E8AEDA91AACA7CBF8AA36590F35A1",
+    "bytes": 241118208,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "SourcePixelChannels": 4,
+      "ValidChannels": 3,
+      "SourcePitch": 62016,
+      "Left": 0,
+      "Top": 0
+    },
+    "packedPitch": 46512,
+    "domain": "DcrawProcess image RGB before output curve; no bytewise cross-stage comparison",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 64,
+        "sha256": "42D6B939EDB027A2B5B59AA74D0C9D95D6D9FF60CFB83D85B48E1A6F5F84A4F8"
+      },
+      {
+        "firstRow": 64,
+        "rows": 64,
+        "sha256": "10AA79A6B1B64E8B1E026728762B287606CF864A14840544E421F541544B45A3"
+      },
+      {
+        "firstRow": 128,
+        "rows": 64,
+        "sha256": "590305B5D03A2B9559B29471A5058024EAD98FE4374FE78661DABE179F21180C"
+      },
+      {
+        "firstRow": 192,
+        "rows": 64,
+        "sha256": "A3799F67145BD08F37929889C4AB0B04E7F2D677A2BD5657CE7C058844B6CFD3"
+      },
+      {
+        "firstRow": 256,
+        "rows": 64,
+        "sha256": "B5670CCBF0A4DAF05C32A00000AACA69F8884470FD5C8CE1BB7E3E4F55E3DD3B"
+      },
+      {
+        "firstRow": 320,
+        "rows": 64,
+        "sha256": "592C9F677FF1154CE13EB8B6627F3E30FAF0F7E25D1CEDE2A758C2B8072D4C7F"
+      },
+      {
+        "firstRow": 384,
+        "rows": 64,
+        "sha256": "EC7F383A081BAC65820EFA8422F97FB85DF0134F9C09B3661461BD449956C38F"
+      },
+      {
+        "firstRow": 448,
+        "rows": 64,
+        "sha256": "20EC467AA6C6F680CFBFED9381964E12B8DFC1E7EB9FDA5BAB72F99876DABD28"
+      },
+      {
+        "firstRow": 512,
+        "rows": 64,
+        "sha256": "22E331A7B883AF6C90BEFD7B7669E6D94742F2D69DA3729D068D14435DE62A25"
+      },
+      {
+        "firstRow": 576,
+        "rows": 64,
+        "sha256": "F197B77AB5EE6D1DDA02E4A9739FDDE7DB769B7EB10CF24C0FBFAC23DDED8E39"
+      },
+      {
+        "firstRow": 640,
+        "rows": 64,
+        "sha256": "702B1B14EAF0918979DE3C2FB177F332AD57BE49350AA09B3EBE79D17171D1D6"
+      },
+      {
+        "firstRow": 704,
+        "rows": 64,
+        "sha256": "E13F7A3F47DC6665B022AE6B04A80E7052C727F0121DE780B368532F97FE7030"
+      },
+      {
+        "firstRow": 768,
+        "rows": 64,
+        "sha256": "C2A931D9FDEBEAD485200B27FC0668DF455E2B3E4DA14EE7F4C79FFFBDBF83DC"
+      },
+      {
+        "firstRow": 832,
+        "rows": 64,
+        "sha256": "96CB1DDD310F1DA9302C49641A2BFD616702608E53F98AA4C5F767CE985EF3D1"
+      },
+      {
+        "firstRow": 896,
+        "rows": 64,
+        "sha256": "7D8C2249AC8C9B61B28094CD45D89F79BEF59502153E07F618642B98997D7036"
+      },
+      {
+        "firstRow": 960,
+        "rows": 64,
+        "sha256": "846C552C33B84B03936657DEE62FE33DC1679168F3E7303D18C8716404B29925"
+      },
+      {
+        "firstRow": 1024,
+        "rows": 64,
+        "sha256": "988D771F44EB256C93A3A05F80428363334AAB2DFC0234E70658CF1FA153E4B4"
+      },
+      {
+        "firstRow": 1088,
+        "rows": 64,
+        "sha256": "BACE3AE1AD218EE1E45E4601AF10DD48F6413AD32D1FA0023E2790A2F7E9941F"
+      },
+      {
+        "firstRow": 1152,
+        "rows": 64,
+        "sha256": "3DD651AFF3CA1335864EFB32E13AD175C898CF32733B9DCDB2786C2C54E55475"
+      },
+      {
+        "firstRow": 1216,
+        "rows": 64,
+        "sha256": "51AAB35D8EC44CAAC3EADBDDD95672CAE849F6928CBC28FBB3F415B3D868DEFD"
+      },
+      {
+        "firstRow": 1280,
+        "rows": 64,
+        "sha256": "30130772AD17009191952566F0771293C93942A69975724493B34CEA0C3B63AF"
+      },
+      {
+        "firstRow": 1344,
+        "rows": 64,
+        "sha256": "5ADA5468277D1FFE62287860C03B378F8EDF421E71CAD3054497CD974DBD7133"
+      },
+      {
+        "firstRow": 1408,
+        "rows": 64,
+        "sha256": "502C8F42E2D40E0961CA397772115909CB4A274EC6EEE08569CACFCAAE9ECD19"
+      },
+      {
+        "firstRow": 1472,
+        "rows": 64,
+        "sha256": "12F432207C0920CDE6E128CC202824CEB7CC271962B24F826EE9D1A201DBE59F"
+      },
+      {
+        "firstRow": 1536,
+        "rows": 64,
+        "sha256": "96A666221632EF8E09C4BC4B96A7C1578258E093614838FF046E6AB9C4482D39"
+      },
+      {
+        "firstRow": 1600,
+        "rows": 64,
+        "sha256": "7331304850A413D30E3D52643FB02AFAFD82C8A8D0AC66A3CCE4A515DD2376B8"
+      },
+      {
+        "firstRow": 1664,
+        "rows": 64,
+        "sha256": "EF37EBE8E202FA0B48AA47783D862CBA105D3CD58D588F88545880D8CD68D132"
+      },
+      {
+        "firstRow": 1728,
+        "rows": 64,
+        "sha256": "16464048DCCB08685BBB1A7FDE57D50BEB37E8A5DB50F157E80989B2F2EF9360"
+      },
+      {
+        "firstRow": 1792,
+        "rows": 64,
+        "sha256": "620124B282B61EBFF284162DB086A49EB4E138DAC79BF21E9549F5948478B9BD"
+      },
+      {
+        "firstRow": 1856,
+        "rows": 64,
+        "sha256": "37AC5ED5538768467598C2DC4A5B826C7A2AD473CE2328405C5D1C2D9D815564"
+      },
+      {
+        "firstRow": 1920,
+        "rows": 64,
+        "sha256": "4B0A439C4C63AF4C35B0BBFB0EFC2B695E92FB5D61F9AD2FD926F23E8454C817"
+      },
+      {
+        "firstRow": 1984,
+        "rows": 64,
+        "sha256": "E4D2797BFBDBF7098061E3EA3DF9941DD81386D92DEFE1D4488F40C95F6E7B6C"
+      },
+      {
+        "firstRow": 2048,
+        "rows": 64,
+        "sha256": "61D124CC11F1DDBEC9F4F56A97BCFA081EFAD149E2F8024666DB71A64F60A35D"
+      },
+      {
+        "firstRow": 2112,
+        "rows": 64,
+        "sha256": "A524785DB5D25B6AD7C2CFBC757ABCD23CD4CFBE8B63F59E6E2BCFBF46E9A9D1"
+      },
+      {
+        "firstRow": 2176,
+        "rows": 64,
+        "sha256": "2EFD2E7045C0D5D423632A1DD432D132CFA638A1F7C697C46DDEFC95BB08DB68"
+      },
+      {
+        "firstRow": 2240,
+        "rows": 64,
+        "sha256": "4F254727BE5E47C3620F18CBA0FF179E9E4CB1E073714EFC90023F19FAF791B9"
+      },
+      {
+        "firstRow": 2304,
+        "rows": 64,
+        "sha256": "825FEC877FBF0AE220B3D84D4D0F9678527251412DCC5CF75990C38A9DEEA408"
+      },
+      {
+        "firstRow": 2368,
+        "rows": 64,
+        "sha256": "67B4DA78D2802000CA229D37887C2583219E51C87497E0623191F3D3ADD3F033"
+      },
+      {
+        "firstRow": 2432,
+        "rows": 64,
+        "sha256": "F6280DBA06671D744DCE7012234D5548C50ACF822FDD0AAC888D46EE98B8D1F3"
+      },
+      {
+        "firstRow": 2496,
+        "rows": 64,
+        "sha256": "57C60BF9F79FD35313ED0351C55819B78F4DF171C9CB8BEA5E9CE6DDDDC242A7"
+      },
+      {
+        "firstRow": 2560,
+        "rows": 64,
+        "sha256": "6AB736532D71042FFE5DB0C592CB68B5ED616AA237DBF13494B3AD270F0CA4FC"
+      },
+      {
+        "firstRow": 2624,
+        "rows": 64,
+        "sha256": "41A1AE9FB7D7FC96FA446A2AF4C7C02B9E86C17231BFE12C1B0DB7E235E0FE35"
+      },
+      {
+        "firstRow": 2688,
+        "rows": 64,
+        "sha256": "61A9A5053F2A54A0029071E69C44FEC766A7C409356120B9089104115ED509FC"
+      },
+      {
+        "firstRow": 2752,
+        "rows": 64,
+        "sha256": "F71DB3DE1A3B590BC1AA37CD37D57FB6A49E61633DFFB0F602CDB6C5337C9DB0"
+      },
+      {
+        "firstRow": 2816,
+        "rows": 64,
+        "sha256": "C8A408207EC7D935CFB6DE4DD9D219581D1A8739425365AA7C1AF084F3615FB3"
+      },
+      {
+        "firstRow": 2880,
+        "rows": 64,
+        "sha256": "AD8396E98A266E31A74B9BF0D8D18E28C639B7E57F1377E8829A91E27F59EEC1"
+      },
+      {
+        "firstRow": 2944,
+        "rows": 64,
+        "sha256": "8D3AE086FDB2D0F4F51C405A24E1FC20B3B2C3B224D51000E746BDF7FA23B9CF"
+      },
+      {
+        "firstRow": 3008,
+        "rows": 64,
+        "sha256": "BA97DEE1D631666965D422F7D832A0022EFEB55ABC51BAA67EFC84C1DF7FDEF3"
+      },
+      {
+        "firstRow": 3072,
+        "rows": 64,
+        "sha256": "8773AF1598D12803C1E90DF539A6F0F5AC3438250823757E35C18F4464B46DF3"
+      },
+      {
+        "firstRow": 3136,
+        "rows": 64,
+        "sha256": "BBBDBF4B845CFCB9F482D4F52146E037D6B4DE3C00393BB78E130C2C8E383B36"
+      },
+      {
+        "firstRow": 3200,
+        "rows": 64,
+        "sha256": "40EFF544F0DAF3F19BD068E2F445EEECCCC24B46F0161F401A67D82231124160"
+      },
+      {
+        "firstRow": 3264,
+        "rows": 64,
+        "sha256": "7C1FC58B8E2FBE21E8050216386A656A5DFA9C05A362EAE5B42765F898308C2B"
+      },
+      {
+        "firstRow": 3328,
+        "rows": 64,
+        "sha256": "30718C14FCD558E1AFCE48E8EFFBCF146A479CCD1EAFC9D1D8A1571430B1A434"
+      },
+      {
+        "firstRow": 3392,
+        "rows": 64,
+        "sha256": "0A6DC20DA6C69A94584328D73ABF4BD457A9D18BC3BDA6652925630877E1AFF3"
+      },
+      {
+        "firstRow": 3456,
+        "rows": 64,
+        "sha256": "09F8E55E28B80580C12869CEFF2386B60AA9647A1969634624690FE3DBF49718"
+      },
+      {
+        "firstRow": 3520,
+        "rows": 64,
+        "sha256": "4CB7E8B6747588BF508BF880ECDB26B26E310D099B7FD1DF3430BDCDE36B5939"
+      },
+      {
+        "firstRow": 3584,
+        "rows": 64,
+        "sha256": "7FBC58A9161B507333F3E869786AAAB436CD00150391A5E27153CF7DFE277D55"
+      },
+      {
+        "firstRow": 3648,
+        "rows": 64,
+        "sha256": "F8795CED7873A1CE75FD2D52C6CDB28D10D54EB54CEBDE64B767D8C53602F572"
+      },
+      {
+        "firstRow": 3712,
+        "rows": 64,
+        "sha256": "49380D5CB9E2893B85D74D168A848CECEDA03BDFFAAAA95419992DFAD0F5FBCF"
+      },
+      {
+        "firstRow": 3776,
+        "rows": 64,
+        "sha256": "44C597D7D42DA70C8896014AE17774D5A3940FDB88D493E4567FD925FAEE0D6A"
+      },
+      {
+        "firstRow": 3840,
+        "rows": 64,
+        "sha256": "E969EF911C9B65D7AC4181E3C3D8D8957925EE4BA6E4354D852EE62EF020BEDE"
+      },
+      {
+        "firstRow": 3904,
+        "rows": 64,
+        "sha256": "93EBEFF3104EBF48AFE6B0BBE36D1C50A061DBC48C6B2F1B887146F925E6A5D0"
+      },
+      {
+        "firstRow": 3968,
+        "rows": 64,
+        "sha256": "8B41B6A651ACFAE59AE8F40CC5A2767487B6C415258D109E359DC751648261D4"
+      },
+      {
+        "firstRow": 4032,
+        "rows": 64,
+        "sha256": "6B33C1430AE5228402167D622D29B9C13FDDE976129FF2C1BA1414F3D33E6FA8"
+      },
+      {
+        "firstRow": 4096,
+        "rows": 64,
+        "sha256": "21F4E0A7928B74E564C3256BEDF2221FB870BBB2183753D2E63F65BF1395BECC"
+      },
+      {
+        "firstRow": 4160,
+        "rows": 64,
+        "sha256": "E25EC40A5677B8E0DE8F5A2A0EBF291CF0A02B8A3229F4D0492ABC655A514309"
+      },
+      {
+        "firstRow": 4224,
+        "rows": 64,
+        "sha256": "315940777DA0440F024157693643A3EB73F77EFA4714D1CE8CF97A6963F53D67"
+      },
+      {
+        "firstRow": 4288,
+        "rows": 64,
+        "sha256": "7D69260EE6DFE54E9FB48F7CFCA5C4F2B1D7017BB07F5AE84AD4309A048AAB57"
+      },
+      {
+        "firstRow": 4352,
+        "rows": 64,
+        "sha256": "023B323DFABAC9DD0ACEBE1F848DE4B2B12ADFEAC51FE504C4FBC172EA70539D"
+      },
+      {
+        "firstRow": 4416,
+        "rows": 64,
+        "sha256": "B8EB8CB536B12319626B7A0728E5101B007F579DD5DAC956C26819173E470E60"
+      },
+      {
+        "firstRow": 4480,
+        "rows": 64,
+        "sha256": "085F224F1C4468B09B0387DB2A4371F453024379A8D4C2274BFB0EBF0304D34E"
+      },
+      {
+        "firstRow": 4544,
+        "rows": 64,
+        "sha256": "1C3CE0D62A86D12084A777DA667DF0787A86359696E893579D63C11090FFB62F"
+      },
+      {
+        "firstRow": 4608,
+        "rows": 64,
+        "sha256": "9FCE6B32AD348B6C480BBC82F72BFDCE2E77ABF1D2023EE8CC2DD7C08874ED2E"
+      },
+      {
+        "firstRow": 4672,
+        "rows": 64,
+        "sha256": "2341384BC17816944969368E0A21B9F9B8C5976871F70BC84C748192E06AA8E2"
+      },
+      {
+        "firstRow": 4736,
+        "rows": 64,
+        "sha256": "1BC42A86DF2C3DEBEDF95BEEB07AE2864F7D1EB9A1458333DC2A39BC11CE7D4A"
+      },
+      {
+        "firstRow": 4800,
+        "rows": 64,
+        "sha256": "0D744E5A26247D9E88C54890D735054E870AE7DD64D10941E4555C962C09678C"
+      },
+      {
+        "firstRow": 4864,
+        "rows": 64,
+        "sha256": "EECE20CDA3D69A44E517C99F445F747217E21025AC0761646546E56534D65AF8"
+      },
+      {
+        "firstRow": 4928,
+        "rows": 64,
+        "sha256": "B191B617C14BAC4412348ED7478AB48F32B42D29A83360B614725E9928075F0C"
+      },
+      {
+        "firstRow": 4992,
+        "rows": 64,
+        "sha256": "00069493399B92D660456A2FFF835361945D6156600D034DCEE3EB62AE2E3B83"
+      },
+      {
+        "firstRow": 5056,
+        "rows": 64,
+        "sha256": "A75F073D353D41CF66D2799D0D249C7F82E80E68CFD3C9D9EFFEDBCBF5FAA4E9"
+      },
+      {
+        "firstRow": 5120,
+        "rows": 64,
+        "sha256": "7348ECCE67BB33E385D7B8B12503F146FB6A0A56B003330779A3B53C8240838A"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 46512
+  },
+  {
+    "name": "memory-rgb16",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\memory-rgb16.bin",
+    "sha256": "32D58075EBEA3DBDB547E9262ECB2FEA6F9579C518D7D8BA21F273CFF520E995",
+    "bytes": 241118208,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "SourcePixelChannels": 3,
+      "ValidChannels": 3,
+      "SourcePitch": 46512,
+      "Left": 0,
+      "Top": 0
+    },
+    "packedPitch": 46512,
+    "domain": "MakeDcrawMemoryImage returned RGB16 (gamma/auto-bright output curve applied)",
+    "encoding": "uint16 little-endian row-major; only declared valid channels",
+    "chunks": [
+      {
+        "firstRow": 0,
+        "rows": 64,
+        "sha256": "C0E345308795EB90972B7654EC59F718245783B5637D757037CC3CB7110C3C21"
+      },
+      {
+        "firstRow": 64,
+        "rows": 64,
+        "sha256": "A76270A75060DC9188D57D41BBFAD60DFD09E4C0F5A8B819BD33656A2C838402"
+      },
+      {
+        "firstRow": 128,
+        "rows": 64,
+        "sha256": "D959C6010E6A0A51D3D50719B823B3B9CEAE136B885188042D3FBB2C5CDC1298"
+      },
+      {
+        "firstRow": 192,
+        "rows": 64,
+        "sha256": "CA4346278514C93C74D754C07F341F4DF9510C97EC332FBEF5B907205317C572"
+      },
+      {
+        "firstRow": 256,
+        "rows": 64,
+        "sha256": "6BE3379FBF3431A26C0B85C24A46A5906B0D7CEA3B1809A0AB000AF73BFB0223"
+      },
+      {
+        "firstRow": 320,
+        "rows": 64,
+        "sha256": "4804814BC1A2FA09E357E5AB67FAB782A1ACD90D1D71DD5089313EA784A8C76D"
+      },
+      {
+        "firstRow": 384,
+        "rows": 64,
+        "sha256": "68C8CA0F30C40E70F3AB9BEED0BBE4FD46AF1BC32FFBB4F6E450E2F35BE83DD2"
+      },
+      {
+        "firstRow": 448,
+        "rows": 64,
+        "sha256": "B966B9F300B3559D01F9CF6EE2F77E7DEFF1874641C68A483D1DEA772B6BAB0C"
+      },
+      {
+        "firstRow": 512,
+        "rows": 64,
+        "sha256": "11D494460DA98EFEC19D94AA72E35504CCEEB53057F3B0F54B1682A3DC0679E5"
+      },
+      {
+        "firstRow": 576,
+        "rows": 64,
+        "sha256": "5E7268D6913CE1FC8F210B613017915F00345EDE1883934CA3717E09A56FF966"
+      },
+      {
+        "firstRow": 640,
+        "rows": 64,
+        "sha256": "B251F5608E14D134978D10850BAE1D53F4D94C366FFEADAA583F090E207D3333"
+      },
+      {
+        "firstRow": 704,
+        "rows": 64,
+        "sha256": "15E807A56CD3016B3746F1ACCA7D54D078BA8EDA9077FB97E496171957135452"
+      },
+      {
+        "firstRow": 768,
+        "rows": 64,
+        "sha256": "835FE6EB66342C5276601F1C4FB1E2BD73673A74C52633EADDC623BDEE38B02A"
+      },
+      {
+        "firstRow": 832,
+        "rows": 64,
+        "sha256": "FEA76FCC645085B65EE8AAB0D77D71F08E946A190D849FF121F47C6C307AB489"
+      },
+      {
+        "firstRow": 896,
+        "rows": 64,
+        "sha256": "F1E86AEFC7CE8ED5E317D6B5C03BCBCC1971698D99000E7147E434A08C3C6E0B"
+      },
+      {
+        "firstRow": 960,
+        "rows": 64,
+        "sha256": "394C7DE3D2571C3712AB869103D04347C90994EB71DF570A9C6ED27C7830F530"
+      },
+      {
+        "firstRow": 1024,
+        "rows": 64,
+        "sha256": "422AC98F5AF540B4B22EB7FAF9D8D8B1B895935DB938E852B8DC8CCAC086A5BE"
+      },
+      {
+        "firstRow": 1088,
+        "rows": 64,
+        "sha256": "8E0B4FC10EC7970369089F462F9678AD3C3204E7CA933CF78AFE00C034DA2B2F"
+      },
+      {
+        "firstRow": 1152,
+        "rows": 64,
+        "sha256": "F6E37080B747E2B9C9B2F3F529E4B9126EB1D89F00B6D7B8A7AECA6E3F1830AC"
+      },
+      {
+        "firstRow": 1216,
+        "rows": 64,
+        "sha256": "1560207E08CCC7FE8B0F51952F90877D83E84D5079288E749944A67BA4FCAAC3"
+      },
+      {
+        "firstRow": 1280,
+        "rows": 64,
+        "sha256": "A9B5D1496C7E4676F15181C67C155394149616CD6673A829CDA6542878A6CB40"
+      },
+      {
+        "firstRow": 1344,
+        "rows": 64,
+        "sha256": "C8C5593B97F8B5FB05941994DF3687C2B90AE96B6296DE110CFD9B585AB4F2CA"
+      },
+      {
+        "firstRow": 1408,
+        "rows": 64,
+        "sha256": "633AD35259ADEC58296104E20B9465CB863B7D72152B8E12E8C3EDAB98DEBECA"
+      },
+      {
+        "firstRow": 1472,
+        "rows": 64,
+        "sha256": "F293565E2E5B60AD7AFBF075F236D2029B1EC4F716663259FDF2BFC5CCAA45F3"
+      },
+      {
+        "firstRow": 1536,
+        "rows": 64,
+        "sha256": "8FE92D0BADB76AFECC48914147B4B151686D8C6006CDB45FAA0B198CD620AFCF"
+      },
+      {
+        "firstRow": 1600,
+        "rows": 64,
+        "sha256": "0F9260BCEDA3A890361581380D66B1A255097CCC25FA35A2E122D14A98BC064F"
+      },
+      {
+        "firstRow": 1664,
+        "rows": 64,
+        "sha256": "D4B9C80B756559B815CFA7F216C1E244ADE1A9B3BBA5EC28478B70355D00F1BC"
+      },
+      {
+        "firstRow": 1728,
+        "rows": 64,
+        "sha256": "AA289E4BD82DF62BE8DBB132347A38C30BA20C7D5662DEAB0949B297224AA59C"
+      },
+      {
+        "firstRow": 1792,
+        "rows": 64,
+        "sha256": "C1418475581D17008B6868185D0B87922E367282CA1A1C21C68B9D03BFD74064"
+      },
+      {
+        "firstRow": 1856,
+        "rows": 64,
+        "sha256": "3EA2AFF84026B050E42E93552323FB5C11ABBD124FBA2FFE0275AB7157C5F22E"
+      },
+      {
+        "firstRow": 1920,
+        "rows": 64,
+        "sha256": "8F7F638AF17792B36D4CB8F43817DAE91845962A954C91199DB2D707C1210A3E"
+      },
+      {
+        "firstRow": 1984,
+        "rows": 64,
+        "sha256": "F6933355A2CD07F5924B2BD0B7747E400D4A6E166B2A0594D875A9610E9F6B35"
+      },
+      {
+        "firstRow": 2048,
+        "rows": 64,
+        "sha256": "C19BCA4C10918C4BBE3DD245E85AD1003B92F283E7EE83FA8AC6BB0862A48B14"
+      },
+      {
+        "firstRow": 2112,
+        "rows": 64,
+        "sha256": "07F009B554EF687DA74BA2288C7B12A5B3C5D1FA60AC8046A93A799874EB58F7"
+      },
+      {
+        "firstRow": 2176,
+        "rows": 64,
+        "sha256": "D9604625F636DFF2678F4B064C08537DBB4A432DEB38C89096910EF5AD009D87"
+      },
+      {
+        "firstRow": 2240,
+        "rows": 64,
+        "sha256": "FF0B5161A581A22E0E44D93DD5E3FF38AD78666A5183FFC5760F16FA412BD6B5"
+      },
+      {
+        "firstRow": 2304,
+        "rows": 64,
+        "sha256": "ACAF1DD4AB841F78B0D73176737DFAC9FB2224DCDC1807CB044784CDA397262B"
+      },
+      {
+        "firstRow": 2368,
+        "rows": 64,
+        "sha256": "658AE64FFF085A90C8FF566C6191F403CFBD292F23571F1FB8BF2BDF6595173A"
+      },
+      {
+        "firstRow": 2432,
+        "rows": 64,
+        "sha256": "EAE203CBC90A762971D1EA4A80AF642D4994E41E95D1071B6D7B82D6194DFCA8"
+      },
+      {
+        "firstRow": 2496,
+        "rows": 64,
+        "sha256": "CC90CEF731FD4732ECDC48530CE7FC554EF7E9352BEEDA39F1AFB36A6205462D"
+      },
+      {
+        "firstRow": 2560,
+        "rows": 64,
+        "sha256": "6177544E557CE66CBF65B6A287550CBDF2EE7E2DA15B7AD1256428D0F696C565"
+      },
+      {
+        "firstRow": 2624,
+        "rows": 64,
+        "sha256": "48C620161006C26210CC894F5E87D665248DB7C39D859272249ED8872AC9931E"
+      },
+      {
+        "firstRow": 2688,
+        "rows": 64,
+        "sha256": "01E2149347C308C61C88292625CA0019CC1E1464C8125E133CCAD2842D0347FB"
+      },
+      {
+        "firstRow": 2752,
+        "rows": 64,
+        "sha256": "302CB1F3330DB2C9282FA4E72ACF5568B7BE80621F7FFCA43F00938CBC06E783"
+      },
+      {
+        "firstRow": 2816,
+        "rows": 64,
+        "sha256": "67B231566F3ED523A29C708C95CF224DB702D0541FD95BA6636E0968C646C22B"
+      },
+      {
+        "firstRow": 2880,
+        "rows": 64,
+        "sha256": "683A34303720D4D4E0F21E30ACA941BED5CBA4DF834DFC271DE9F54A000F8EF6"
+      },
+      {
+        "firstRow": 2944,
+        "rows": 64,
+        "sha256": "1B54A91D8FD2B2AB3FAC96667869DE4DBD34DD7F57818D6F3FC8C45DD2271E0B"
+      },
+      {
+        "firstRow": 3008,
+        "rows": 64,
+        "sha256": "9768489D53519AB70957C020C1127594B0B85C6743489FB7924358A72AD6AADC"
+      },
+      {
+        "firstRow": 3072,
+        "rows": 64,
+        "sha256": "5332444796BE2575D5D65A9B68C437E7E7EAFF4E9305AF65CA34E4DEFE56F355"
+      },
+      {
+        "firstRow": 3136,
+        "rows": 64,
+        "sha256": "E1C1499B308BF3F0BB44458BE0F1C8FD2842E2596B4E5EE475DCA30B25A5A643"
+      },
+      {
+        "firstRow": 3200,
+        "rows": 64,
+        "sha256": "FED0F1A4B9A33551ABD9806665AF9F2412DDEA172F039E09870B5A19C7CCC6E0"
+      },
+      {
+        "firstRow": 3264,
+        "rows": 64,
+        "sha256": "75DA2B627A64466F1E5FACD28A989CC8B56B09F64811224E12C13A413E4E5DE0"
+      },
+      {
+        "firstRow": 3328,
+        "rows": 64,
+        "sha256": "A43F6B755FA0F9AA6F1A7612957D4617F46BF735D8A093BC6BB0A05E39BCDC2A"
+      },
+      {
+        "firstRow": 3392,
+        "rows": 64,
+        "sha256": "4F13B6EA3C624A5E158AE803BDC1D0F8FD2BF4144B7B2431803ADA2419219F87"
+      },
+      {
+        "firstRow": 3456,
+        "rows": 64,
+        "sha256": "507D9CDA27B978FFEF3E14D3A506C65B7E8D7BA9D00FBC2A990A383B3CAEB0D3"
+      },
+      {
+        "firstRow": 3520,
+        "rows": 64,
+        "sha256": "A6E5BDF9772C1608CF26A681A9BE74193DC72CEB4F0C8C909F706B2EE6413008"
+      },
+      {
+        "firstRow": 3584,
+        "rows": 64,
+        "sha256": "DDC8A74725B3B55DF67AF658C872A2B336D280F9AB7A49167EF5A565A8B19B10"
+      },
+      {
+        "firstRow": 3648,
+        "rows": 64,
+        "sha256": "4A6B52926939E15217506A98DE16DEE70553B544E0917F7C31860480703D93D2"
+      },
+      {
+        "firstRow": 3712,
+        "rows": 64,
+        "sha256": "96BB51A5D0F492B35D1C0AFA7ADE9C7CD0ED2FE27C06EC4E4AA185F64D56093A"
+      },
+      {
+        "firstRow": 3776,
+        "rows": 64,
+        "sha256": "DB98BAC882B08B4CD2D2F5DD9B4057F8DD3C2DA831F6F1686A274967B76C1412"
+      },
+      {
+        "firstRow": 3840,
+        "rows": 64,
+        "sha256": "16859547ACA2D94351B49CB68270209378400AA2086E844F5C9DA3A1A8147C0D"
+      },
+      {
+        "firstRow": 3904,
+        "rows": 64,
+        "sha256": "D9F4F15EBF0EA23B367F29710B61674BFA6FFA37EC6820234B02951E8CAFEEE8"
+      },
+      {
+        "firstRow": 3968,
+        "rows": 64,
+        "sha256": "BAE8070BA9CE61F3A60CCFEF33A1438419C15EF4A50E365B539D198B3BA820D6"
+      },
+      {
+        "firstRow": 4032,
+        "rows": 64,
+        "sha256": "5F98214560F18D7FF232233AC9CC5C3BBD4DAB280DC40A4DFA42CA0C17CE7D5D"
+      },
+      {
+        "firstRow": 4096,
+        "rows": 64,
+        "sha256": "D3FA4DBF4A4A867FF7B9F87303ED0A1A601EEF2CEA6EB61E229A7A21B93CEE2D"
+      },
+      {
+        "firstRow": 4160,
+        "rows": 64,
+        "sha256": "35C3578B744B31BE33B31D59532110F46A08D2A5CE9270CDB14055F4871B6CA4"
+      },
+      {
+        "firstRow": 4224,
+        "rows": 64,
+        "sha256": "79451EB325B397FD2A251C58602D949945254E1995D2688B5CA403FCF627844F"
+      },
+      {
+        "firstRow": 4288,
+        "rows": 64,
+        "sha256": "B5F05B79957518319E39EB519EA7A12EA3B3B4961A171B3202D81C201333C174"
+      },
+      {
+        "firstRow": 4352,
+        "rows": 64,
+        "sha256": "CE8265F2C0B16BC78FCE2B5C280A8F71D94FA4FB2F4C20E581B9C4225D7C81A4"
+      },
+      {
+        "firstRow": 4416,
+        "rows": 64,
+        "sha256": "4C32CD72E3778A56DC9CE949D78148E83B29DC43B35CEA4CFBF08335F4CD3DB8"
+      },
+      {
+        "firstRow": 4480,
+        "rows": 64,
+        "sha256": "CEED5EAEFB95A0D85DE8BE77DA912C8E0ADDD4237E974BA924092C6219B75564"
+      },
+      {
+        "firstRow": 4544,
+        "rows": 64,
+        "sha256": "54A2E191EDBAE8675241F488FA1B1AF25D06D411DD795CA4C87FC6063F1AD3B6"
+      },
+      {
+        "firstRow": 4608,
+        "rows": 64,
+        "sha256": "EF96820A9F957DA74FB44EA0CD280B1AB9F2427F35FC326DDC72ABBDB52B8B80"
+      },
+      {
+        "firstRow": 4672,
+        "rows": 64,
+        "sha256": "53A61F34F0B4D59032D9AFEE067D4588ABE85D9C62EF55CE8D2DC6BD4F8A5A54"
+      },
+      {
+        "firstRow": 4736,
+        "rows": 64,
+        "sha256": "BB25F1AD440E9981687BC39B03B2418548436555F654110CC83A3822CC9ABECA"
+      },
+      {
+        "firstRow": 4800,
+        "rows": 64,
+        "sha256": "4A7BB9E3052E507C260FB86BE999436537287B42DE6D6FC93F4A2EE1795E2A2A"
+      },
+      {
+        "firstRow": 4864,
+        "rows": 64,
+        "sha256": "C438111F8BDC711A70EBEEB70C0669E46732CBB7753DCB778DDE7914B8AE6EF9"
+      },
+      {
+        "firstRow": 4928,
+        "rows": 64,
+        "sha256": "D1E995CF89C9EA1F90C56F7E6EAB0736107A406CA10F4ABCCC7FF311914FE5CE"
+      },
+      {
+        "firstRow": 4992,
+        "rows": 64,
+        "sha256": "3768570A3FF80F5FA5833EAD2799C88EFE8F51A452BB886AEBEBDF6CBC583838"
+      },
+      {
+        "firstRow": 5056,
+        "rows": 64,
+        "sha256": "B734C34FAB8391A4B280444CB91FA57A9ACA8CD245CB6A23778CECED67EDA999"
+      },
+      {
+        "firstRow": 5120,
+        "rows": 64,
+        "sha256": "F1664A43C1952FDE94C9960FB691C4D6A3EA3C7E101B28EBE6BA560A531CC9A5"
+      }
+    ],
+    "observerManagedPixelBufferBytes": 0
+  }
+]

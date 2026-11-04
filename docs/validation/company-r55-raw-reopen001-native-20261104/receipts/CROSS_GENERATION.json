@@ -1,0 +1,334 @@
+{
+  "rawDecodeCalls": 0,
+  "comparisons": [
+    {
+      "oldslot": "first",
+      "newslot": "first",
+      "result": {
+        "name": "native-rgb16",
+        "layout": {
+          "Width": 7752,
+          "Height": 5184,
+          "SourcePixelChannels": 3,
+          "ValidChannels": 3,
+          "SourcePitch": 46512,
+          "Left": 0,
+          "Top": 0
+        },
+        "firstSha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+        "secondSha256": "32D58075EBEA3DBDB547E9262ECB2FEA6F9579C518D7D8BA21F273CFF520E995",
+        "equal": false,
+        "validSamples": 120559104,
+        "changedChannels": 16594,
+        "changedPixels": 9778,
+        "perChannel": [
+          6801,
+          3233,
+          6560
+        ],
+        "maxAbsoluteDifference": 5600,
+        "meanAbsoluteDifference": 0.059665158095401905,
+        "meanChangedAbsoluteDifference": 433.4806556586718,
+        "firstDifference": {
+          "x": 4475,
+          "y": 499,
+          "channel": 1,
+          "first": 6980,
+          "second": 7426
+        },
+        "maximumLocation": {
+          "x": 7581,
+          "y": 3980,
+          "channel": 2,
+          "first": 6193,
+          "second": 593
+        },
+        "bounds": {
+          "left": 507,
+          "top": 499,
+          "right": 7691,
+          "bottom": 4480
+        },
+        "borderChangedChannels": 0,
+        "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+        "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\cross-generation-offline\\first-vs-first.csv"
+      }
+    },
+    {
+      "oldslot": "first",
+      "newslot": "second",
+      "result": {
+        "name": "native-rgb16",
+        "layout": {
+          "Width": 7752,
+          "Height": 5184,
+          "SourcePixelChannels": 3,
+          "ValidChannels": 3,
+          "SourcePitch": 46512,
+          "Left": 0,
+          "Top": 0
+        },
+        "firstSha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+        "secondSha256": "3169F3FD17F057B5B9827D43AA4419EC5E21946760F66AB59FE0840C261CC355",
+        "equal": false,
+        "validSamples": 120559104,
+        "changedChannels": 18119,
+        "changedPixels": 10624,
+        "perChannel": [
+          7339,
+          3591,
+          7189
+        ],
+        "maxAbsoluteDifference": 5600,
+        "meanAbsoluteDifference": 0.06460346619696178,
+        "meanChangedAbsoluteDifference": 429.8546277388377,
+        "firstDifference": {
+          "x": 6464,
+          "y": 502,
+          "channel": 1,
+          "first": 3086,
+          "second": 3264
+        },
+        "maximumLocation": {
+          "x": 7581,
+          "y": 3980,
+          "channel": 2,
+          "first": 6193,
+          "second": 593
+        },
+        "bounds": {
+          "left": 507,
+          "top": 502,
+          "right": 7691,
+          "bottom": 4969
+        },
+        "borderChangedChannels": 0,
+        "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+        "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\cross-generation-offline\\first-vs-second.csv"
+      }
+    },
+    {
+      "oldslot": "second",
+      "newslot": "first",
+      "result": {
+        "name": "native-rgb16",
+        "layout": {
+          "Width": 7752,
+          "Height": 5184,
+          "SourcePixelChannels": 3,
+          "ValidChannels": 3,
+          "SourcePitch": 46512,
+          "Left": 0,
+          "Top": 0
+        },
+        "firstSha256": "9729A70A4CB29D9CB16A7AEABD630D37A2BEAED63F914C8FF6B13B6DA9F422E4",
+        "secondSha256": "32D58075EBEA3DBDB547E9262ECB2FEA6F9579C518D7D8BA21F273CFF520E995",
+        "equal": false,
+        "validSamples": 120559104,
+        "changedChannels": 4030,
+        "changedPixels": 2323,
+        "perChannel": [
+          1671,
+          753,
+          1606
+        ],
+        "maxAbsoluteDifference": 4628,
+        "meanAbsoluteDifference": 0.014222260643211151,
+        "meanChangedAbsoluteDifference": 425.46476426799006,
+        "firstDifference": {
+          "x": 4475,
+          "y": 499,
+          "channel": 1,
+          "first": 6980,
+          "second": 7426
+        },
+        "maximumLocation": {
+          "x": 7482,
+          "y": 3485,
+          "channel": 2,
+          "first": 7180,
+          "second": 2552
+        },
+        "bounds": {
+          "left": 507,
+          "top": 499,
+          "right": 7691,
+          "bottom": 4481
+        },
+        "borderChangedChannels": 0,
+        "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+        "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\cross-generation-offline\\second-vs-first.csv"
+      }
+    },
+    {
+      "oldslot": "second",
+      "newslot": "second",
+      "result": {
+        "name": "native-rgb16",
+        "layout": {
+          "Width": 7752,
+          "Height": 5184,
+          "SourcePixelChannels": 3,
+          "ValidChannels": 3,
+          "SourcePitch": 46512,
+          "Left": 0,
+          "Top": 0
+        },
+        "firstSha256": "9729A70A4CB29D9CB16A7AEABD630D37A2BEAED63F914C8FF6B13B6DA9F422E4",
+        "secondSha256": "3169F3FD17F057B5B9827D43AA4419EC5E21946760F66AB59FE0840C261CC355",
+        "equal": false,
+        "validSamples": 120559104,
+        "changedChannels": 5392,
+        "changedPixels": 3079,
+        "perChannel": [
+          2155,
+          1081,
+          2156
+        ],
+        "maxAbsoluteDifference": 3589,
+        "meanAbsoluteDifference": 0.018641653143009425,
+        "meanChangedAbsoluteDifference": 416.8065652818991,
+        "firstDifference": {
+          "x": 7525,
+          "y": 499,
+          "channel": 0,
+          "first": 4214,
+          "second": 4570
+        },
+        "maximumLocation": {
+          "x": 7521,
+          "y": 2489,
+          "channel": 0,
+          "first": 6568,
+          "second": 10157
+        },
+        "bounds": {
+          "left": 507,
+          "top": 499,
+          "right": 7689,
+          "bottom": 4969
+        },
+        "borderChangedChannels": 0,
+        "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+        "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\cross-generation-offline\\second-vs-second.csv"
+      }
+    }
+  ],
+  "parameterComparisons": [
+    {
+      "slot": "first",
+      "phase": "opened",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x196001D4A20",
+          "second": "0x26DF0292160"
+        }
+      ]
+    },
+    {
+      "slot": "first",
+      "phase": "unpacked",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x196001D4A20",
+          "second": "0x26DF0292160"
+        }
+      ]
+    },
+    {
+      "slot": "first",
+      "phase": "processed",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x196001D4A20",
+          "second": "0x26DF0292160"
+        }
+      ]
+    },
+    {
+      "slot": "second",
+      "phase": "opened",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x285001B4640",
+          "second": "0x2097E1A3690"
+        }
+      ]
+    },
+    {
+      "slot": "second",
+      "phase": "unpacked",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x285001B4640",
+          "second": "0x2097E1A3690"
+        }
+      ]
+    },
+    {
+      "slot": "second",
+      "phase": "processed",
+      "scope": "Original common output/nativeOutput/unpack/color/image fields only; new sizes/decoder are additional observations",
+      "differences": [
+        {
+          "path": "image.XmpDataPtr",
+          "first": "0x285001B4640",
+          "second": "0x2097E1A3690"
+        }
+      ]
+    }
+  ],
+  "relation": {
+    "processChangedChannels": 5316,
+    "memoryChangedChannels": 5311,
+    "memoryOnlyChangedCoordinates": 0,
+    "processDifferencesCollapsedAtOutput": [
+      {
+        "x": 2494,
+        "y": 1990,
+        "channel": 0,
+        "first": 6490,
+        "second": 6500
+      },
+      {
+        "x": 2492,
+        "y": 1993,
+        "channel": 0,
+        "first": 6465,
+        "second": 6545
+      },
+      {
+        "x": 2492,
+        "y": 1994,
+        "channel": 0,
+        "first": 6733,
+        "second": 6687
+      },
+      {
+        "x": 2494,
+        "y": 1994,
+        "channel": 0,
+        "first": 7525,
+        "second": 7464
+      },
+      {
+        "x": 2495,
+        "y": 1994,
+        "channel": 0,
+        "first": 7668,
+        "second": 7650
+      }
+    ],
+    "scope": "Coordinate-set relationship only, after per-stage pair comparisons; not cross-layout byte comparison or proof of curve internals"
+  }
+}

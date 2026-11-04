@@ -1,0 +1,81 @@
+{
+  "baseline": "b14f8381f29d30928a29103abe334ae0000cb301",
+  "researchBranch": "research/raw-reopen-001-contract-20261104",
+  "observerDllSha256": "1CBD7FD8A1DA6878F2C5C3D1B1910BA272F78E98BA7C187CAFEB78BB50DFE4AA",
+  "researchHead": "0e0723df0c8eaf665d2bccdfe150c45621534d3b",
+  "sourceIdentityNote": "Observer commit and actual on-disk source SHA both recorded; existing repository EOL policy applies. Manifest verifies those exact local build inputs before decode.",
+  "referenceSources": [
+    {
+      "commit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+      "status": [],
+      "name": "LibRaw",
+      "files": [
+        {
+          "sha256": "B5BB4182D1DCC6F9C125C402F8B183E87DB5E316C168F7F8B72862B678037D8F",
+          "path": "libraw/libraw_types.h"
+        },
+        {
+          "sha256": "E1112C5A98D1FE55DAB229A72C884FEF8F755D6D3E4A68B49168FB45BF78641B",
+          "path": "src/preprocessing/raw2image.cpp"
+        },
+        {
+          "sha256": "67522A791C13A8D00CF2203AFE5C6F57460F12112228C9A43136F41A36784FDB",
+          "path": "src/decoders/generic.cpp"
+        },
+        {
+          "sha256": "F70F6ED43E7D42C19DF8E1F6C23140E9C9A68282AE359BA474F4DE670AAAF227",
+          "path": "src/postprocessing/dcraw_process.cpp"
+        },
+        {
+          "sha256": "CB75F800482EB9DC6C4DA338FA95FB4E0E2B40174E20933C85796F54EC506C2D",
+          "path": "src/postprocessing/mem_image.cpp"
+        },
+        {
+          "sha256": "DF3DAF229CC0601C452E6270785893545CD969E90E33C512850200C2E9FD7C85",
+          "path": "src/postprocessing/postprocessing_utils.cpp"
+        },
+        {
+          "sha256": "208BD3F9BE33407299C365410AD5786ABAC6C63D20C5878BD79E07F2CC8377A7",
+          "path": "src/demosaic/xtrans_demosaic.cpp"
+        }
+      ]
+    },
+    {
+      "commit": "43e9c1771c2b1387c2170e084e433d8bcef51cab",
+      "status": [],
+      "name": "Sdcb.LibRaw",
+      "files": [
+        {
+          "sha256": "E54328BD241FD2EFBC3F3C7F5DBA7BCCD9A248F85E0B91F7D9DD429012F3B52B",
+          "path": "Sdcb.LibRaw/RawContext.cs"
+        },
+        {
+          "sha256": "6F9E6D4CAE0C82517138AB87F9E1797712EF75EA64ED0E0270B95FF8F31A3613",
+          "path": "Sdcb.LibRaw/Natives/LibRawNative.cs"
+        },
+        {
+          "sha256": "2257755A363B91D838E824C9B15FD255BD4FA77AA45CDC2B781A7506880C8EDE",
+          "path": "Sdcb.LibRaw/Natives/LibRawStructures.cs"
+        }
+      ]
+    },
+    {
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "status": [],
+      "name": "RawTherapee",
+      "files": [
+        {
+          "sha256": "297854786CEEBDBB0C68E08F798FF1970F954B14D1CF2CF7097C7DBD50F56B74",
+          "path": "rtengine/xtrans_demosaic.cc"
+        }
+      ]
+    }
+  ],
+  "referenceExecution": "NOT_RUN",
+  "dateAsiaShanghai": "2026-11-04T17:22:44.0291685+08:00",
+  "observerSource": "14e62f56b9a24131ed071f5d01e5547391c0882a",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "researchMode": "Read-only reuse; no new reference build/run or third-party source copied",
+  "localInputHashesFrozenIn": "receipts/freeze/FROZEN_MANIFEST.json",
+  "observerImplementation": "5ac7a0625f7a9b58635e03767d9f0c4cfc0cd3e7"
+}

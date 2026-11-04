@@ -1,0 +1,84 @@
+{
+  "version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+  "status": "REPRODUCED_DCRAW_PROCESS_BOUNDARY_ROOT_CAUSE_OPEN_NOT_FIXED",
+  "timeZone": "Asia/Shanghai",
+  "newCompletedRawDecodes": 2,
+  "newCallCounts": {
+    "OpenFile": 2,
+    "Unpack": 2,
+    "DcrawProcess": 2,
+    "MakeDcrawMemoryImage": 2
+  },
+  "processIds": [
+    15284,
+    4908
+  ],
+  "sequential": true,
+  "automaticRetry": false,
+  "thirdDecode": false,
+  "productChanges": 0,
+  "productBuilds": 0,
+  "observerBuildAttempts": 6,
+  "observerBuildSuccess": 4,
+  "observerBuildFailures": 2,
+  "noRawSelfTestExecutions": 4,
+  "noRawSelfTestCountsPerExecution": {
+    "Close": 1,
+    "Recycle": 1,
+    "Unpack": 0,
+    "OpenFile": 0,
+    "Initialize": 1,
+    "DcrawProcess": 0,
+    "MakeDcrawMemoryImage": 0
+  },
+  "noRawComparatorSelfTests": 1,
+  "obsoletePhaseMismatchPreflight": {
+    "rawCalls": 0,
+    "preserved": true,
+    "cause": "Compared pre-binding startup to post-binding old receipt; corrected without thread override",
+    "createdDecoderProcesses": 0
+  },
+  "stages": {
+    "memory": {
+      "changedPixels": 3042,
+      "equal": false,
+      "changedChannels": 5311,
+      "maxU16": 4628
+    },
+    "process": {
+      "changedPixels": 3042,
+      "equal": false,
+      "changedChannels": 5316,
+      "maxU16": 146
+    },
+    "unpack": {
+      "equal": true,
+      "validSamples": 40186368,
+      "changed": 0
+    }
+  },
+  "configuredParametersSame": true,
+  "commonRecordedParametersSameAsV13ExceptXmpPointer": true,
+  "startupOmp": null,
+  "effectiveOmpAfterOriginalBinding": "6",
+  "observerThreadEnvironmentWrites": 0,
+  "nativeWorkerCount": "NOT_MEASURED",
+  "fullManagedPixelCopies": 0,
+  "maxManagedPixelCompactionRowBytes": 46512,
+  "localStageBinBytes": 1125218304,
+  "peakWorkingSetBytes": [
+    724279296,
+    724688896
+  ],
+  "peakPrivateBytesSampled": [
+    699195392,
+    699195392
+  ],
+  "memorySampleMs": 50,
+  "originalBudgetBytes": 2147483648,
+  "referenceNumericComparisons": "NOT_RUN_EXISTING_RESEARCH_CONTRACT_REUSED",
+  "postFixPreviewSaveReopenTiff": "NOT_RUN_NO_FIX",
+  "overallProduct": "PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE",
+  "localRoot": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2",
+  "selfTestStatus": "OBSERVATION_VALIDATION_ONLY_NOT_A_PRODUCT_FIX"
+}

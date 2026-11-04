@@ -1,0 +1,45 @@
+{
+  "version": "Observer setup history",
+  "rawCountsBeforeAuthorizedPair": {
+    "MemoryImage": 0,
+    "OpenFile": 0,
+    "Process": 0,
+    "Unpack": 0
+  },
+  "compilerFailures": [
+    {
+      "log": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/build.log",
+      "rawCalls": 0,
+      "reason": "Observer initializer syntax error"
+    },
+    {
+      "log": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/build-02.log",
+      "rawCalls": 0,
+      "reason": "Wrong wrapper accessor name corrected to GetLensInformation"
+    }
+  ],
+  "obsoletePreflight": {
+    "nativeProcessesCreated": 0,
+    "oldReceiptEdited": false,
+    "status": "OBSOLETE_COMPARISON_OF_DIFFERENT_INITIALIZATION_PHASES",
+    "receipt": "receipts/OBSOLETE_PHASE_MISMATCH_PREFLIGHT.json"
+  },
+  "deepAnalysisProviderUnavailable": {
+    "additionalInstallOrDllExecution": false,
+    "reason": "Configured Windows Ghidra role excludes DLL; no Hopper on Windows, IDA not configured",
+    "fallback": "Read-only installed Capstone on exact PE bytes",
+    "provider": "rea auto"
+  },
+  "successfulNoRawSelfTests": [
+    "self-test",
+    "self-test-final",
+    "self-test-v2_1",
+    "frozen-self-test"
+  ],
+  "allLocalDirectoriesPreserved": true,
+  "documentationGateCorrections": [
+    "An initial .NET relative path resolved against host CWD rather than PowerShell location; absolute target paths now used. Verified own newly created duplicate removed, no existing file overwritten.",
+    "Byte-preserved JSON receipts retain CRLF. Added path-specific cr-at-eol whitespace attribute, without EOL conversion or persistent Git config. Final staged diff check exit0.",
+    "Receipt manifest regenerated relative to resolved absolute delivery root; previous draft used cross-drive paths."
+  ]
+}

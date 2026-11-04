@@ -1,0 +1,137 @@
+{
+  "Version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+  "Input": {
+    "Id": "company-02",
+    "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+    "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+  },
+  "NativePath": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/frozen-build/raw_r.dll",
+  "Files": [
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\jpeg8.dll",
+      "Sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\lcms2.dll",
+      "Sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\raw_r.dll",
+      "Sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\RawNativeBoundaryProbe.deps.json",
+      "Sha256": "B8FDA87C5DB295F700DBDBECC7CCDA27B366D2F6C70AE20DD30C1CD47D733E82"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\RawNativeBoundaryProbe.dll",
+      "Sha256": "1CBD7FD8A1DA6878F2C5C3D1B1910BA272F78E98BA7C187CAFEB78BB50DFE4AA"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\RawNativeBoundaryProbe.exe",
+      "Sha256": "E88B2DC66BDBC4F0FACACB90E56B92227DF40AF1AE2F3C40EA8172F76E9BA31B"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\RawNativeBoundaryProbe.runtimeconfig.json",
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\Sdcb.LibRaw.dll",
+      "Sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\frozen-build\\zlib1.dll",
+      "Sha256": "4A0BD02C2985974F90DA4A7065ACAC1B72F21A4FE58C5391E14B3E6FE566BC12"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\dotnet.exe",
+      "Sha256": "4377F10C78400F0370B88156773DE9843C07F14E65B3232005EC3179EF38D463"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App\\10.0.10\\coreclr.dll",
+      "Sha256": "58859F85A30CC71313B281898E7CFBDBB9ECCB95AE2A3F865329EFD47EBF31BB"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App\\10.0.10\\System.Private.CoreLib.dll",
+      "Sha256": "76A49F17E83F613BC8A5B55FC98830B764E7838265AACBDBCC8F46707F80A3C9"
+    },
+    {
+      "Path": "C:/Windows/System32/MSVCP140.dll",
+      "Sha256": "7C26614E1D733892C2DEAC7E245CE115504B1D80592DD0A01B08E3E5A55F89CA"
+    },
+    {
+      "Path": "C:/Windows/System32/VCOMP140.DLL",
+      "Sha256": "95D4CE4A6802D1E18B5E0E1722CC30EA72CA7E033F83828F05C0B7B993FE7CBF"
+    },
+    {
+      "Path": "C:/Windows/System32/VCRUNTIME140.dll",
+      "Sha256": "D1F4225DF2CD877DBF130D5668A021DCE3F94118455FF5EC952061C30AFC9CE7"
+    },
+    {
+      "Path": "C:/Windows/System32/VCRUNTIME140_1.dll",
+      "Sha256": "A7146C08F89FE5B04541AB507CDB59FF7B44534D4BA3C668A426C6450A03434E"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Build-Probe.ps1",
+      "Sha256": "8A9AA906A9F805BC1CA77202498CEFC628D83360A96750B7FB898EDD1E68CFB3"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Compare-NativeStages.mjs",
+      "Sha256": "24759A931B10E5793A16585A6419D25709AAEC48E6D1D7E8A46044D4FFD1E8A8"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Inspect-BindingIl.ps1",
+      "Sha256": "6910015C462BCBCCB884E01A376C1185BDAC124B176645399BB9B004B8D0D23F"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Inspect-NativeAbi.py",
+      "Sha256": "37CC00FB3FD17A54E22E86228FB69CC91F3ABE1F5E358A321B3EAF92C433C871"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Program.cs",
+      "Sha256": "676AE4DEB5599158CED4E5A9FDEDDC85024EC5E6B13CB7D3910E576E7DA8726B"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\RawNativeBoundaryProbe.csproj",
+      "Sha256": "E736286D43C10F2C426ACBF792BC001F41EF8D359A6EAFCB4CA5458829E11954"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\README.md",
+      "Sha256": "D2FC92E8062A4616A32B53EE622D6BED7114A18BD7A77DB1DB78BC326FF75D78"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawNativeBoundaryProbe\\Run-Two-Probes.ps1",
+      "Sha256": "4B0EEFCEFA1D13198A27ADDEF6263AB571DA35BD217B23102362660028846EC7"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-reopen001-diagnosis-20261104\\tools\\RawReopenStageProbe\\Run-Two-Probes.ps1",
+      "Sha256": "64809EFF55FADE8613ED92FAC272B69B9F7D3D3F322EF1916BFFA47FEC160697"
+    }
+  ],
+  "Environment": {
+    "OMP_NUM_THREADS": "6",
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  },
+  "StartupEnvironment": {
+    "OMP_NUM_THREADS": null,
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "nativeContextStartsEightBytesAfterCppThis": true,
+  "fullDisassemblyFiles": [
+    {
+      "sha256": "90C82E3CE83C5D62F34A3D21D0E80B8E7F940C1B9DB1DF73E9EBAA512A215F26",
+      "path": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/NATIVE_ABI_EXPORTS.json"
+    },
+    {
+      "sha256": "24895A9BD455E902E9F18CAFC35A5FB8EA6F8C441804836A242386698E918E25",
+      "path": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/NATIVE_ABI_INNER.json"
+    },
+    {
+      "sha256": "A2A0C7CBFD4B8F05594061ADFF2EB765CAFE4E852106907C5A107A3F4CD044D2",
+      "path": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/NATIVE_ABI_RESTORE.json"
+    }
+  ],
+  "version": "Selective ABI proof V2",
+  "limitations": [
+    "Selective fields verified, not a bit-reproducible build or all private internal ABI",
+    "No replacement native binary",
+    "LibRawData.Image binding array is a pointer-sized representation, never image samples",
+    "Actual pre/post demosaic and internal fuji_width not safely exposed/observed"
+  ],
+  "sourceBasedOffsets": {
+    "rawDataSavedSizes": 194016,
+    "parentClass": 381248,
+    "imagePointerSlot": 0,
+    "sizes": 8,
+    "rawImagePointerSlot": 193512,
+    "imageParams": 192,
+    "rawData": 193504
+  },
+  "architecture": "x64",
+  "runtimeCrossChecks": "Native getter addresses, raw/processed dimensions, color getters, parent delta, saved/current sizes, readable pages",
+  "imageBase": "0x180000000",
+  "nativeSha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+  "selectedInstructions": [
+    {
+      "address": "0x18003e2ca",
+      "bytes": "0fb74114",
+      "mnemonic": "movzx",
+      "operands": "eax, word ptr [rcx + 0x14]"
+    },
+    {
+      "address": "0x18003e2d2",
+      "bytes": "488d81a0ef0200",
+      "mnemonic": "lea",
+      "operands": "rax, [rcx + 0x2efa0]"
+    },
+    {
+      "address": "0x18003e2f2",
+      "bytes": "488d81c0000000",
+      "mnemonic": "lea",
+      "operands": "rax, [rcx + 0xc0]"
+    },
+    {
+      "address": "0x18003e31a",
+      "bytes": "0fb74116",
+      "mnemonic": "movzx",
+      "operands": "eax, word ptr [rcx + 0x16]"
+    },
+    {
+      "address": "0x18003e37a",
+      "bytes": "0fb74108",
+      "mnemonic": "movzx",
+      "operands": "eax, word ptr [rcx + 8]"
+    },
+    {
+      "address": "0x18003e38a",
+      "bytes": "0fb7410a",
+      "mnemonic": "movzx",
+      "operands": "eax, word ptr [rcx + 0xa]"
+    },
+    {
+      "address": "0x18003e4e9",
+      "bytes": "488b8940d10500",
+      "mnemonic": "mov",
+      "operands": "rcx, qword ptr [rcx + 0x5d140]"
+    },
+    {
+      "address": "0x18003e4f0",
+      "bytes": "e97b480400",
+      "mnemonic": "jmp",
+      "operands": "0x180082d70"
+    },
+    {
+      "address": "0x180083085",
+      "bytes": "0faf5320",
+      "mnemonic": "imul",
+      "operands": "edx, dword ptr [rbx + 0x20]"
+    },
+    {
+      "address": "0x180083095",
+      "bytes": "4c8b83f0f30200",
+      "mnemonic": "mov",
+      "operands": "r8, qword ptr [rbx + 0x2f3f0]"
+    },
+    {
+      "address": "0x1800830b4",
+      "bytes": "488b4b08",
+      "mnemonic": "mov",
+      "operands": "rcx, qword ptr [rbx + 8]"
+    },
+    {
+      "address": "0x1800830b8",
+      "bytes": "430fb70448",
+      "mnemonic": "movzx",
+      "operands": "eax, word ptr [r8 + r9*2]"
+    },
+    {
+      "address": "0x180083c12",
+      "bytes": "488d93e8f50200",
+      "mnemonic": "lea",
+      "operands": "rdx, [rbx + 0x2f5e8]"
+    },
+    {
+      "address": "0x180083c19",
+      "bytes": "41b8b8000000",
+      "mnemonic": "mov",
+      "operands": "r8d, 0xb8"
+    },
+    {
+      "address": "0x180083c1f",
+      "bytes": "488d4b10",
+      "mnemonic": "lea",
+      "operands": "rcx, [rbx + 0x10]"
+    },
+    {
+      "address": "0x180083c28",
+      "bytes": "488d9330f40200",
+      "mnemonic": "lea",
+      "operands": "rdx, [rbx + 0x2f430]"
+    },
+    {
+      "address": "0x180083c35",
+      "bytes": "488d8bc8000000",
+      "mnemonic": "lea",
+      "operands": "rcx, [rbx + 0xc8]"
+    },
+    {
+      "address": "0x18008d02a",
+      "bytes": "488b5908",
+      "mnemonic": "mov",
+      "operands": "rbx, qword ptr [rcx + 8]"
+    }
+  ]
+}
