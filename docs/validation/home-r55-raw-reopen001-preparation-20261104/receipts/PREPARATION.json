@@ -1,0 +1,34 @@
+{
+  "status": "SOURCE_PREPARATION_ONLY_NATIVE_NOT_COMPILED",
+  "mode": "--prepare",
+  "commit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "target": "src/postprocessing/dcraw_process.cpp",
+  "originalSha256": "81efb3bab8631285123414f5e6dc2de62069e2340bf54e7dae41a55d7540c540",
+  "instrumentedSha256": "86baab732536d7eadecbe048d75d0e2ae43d5b6390b7ea914b5705f2f6b2661e",
+  "headerSha256": "3cea8d29ca663d61a4b5ae01ed3b7536ed44ac6196399391b9ed3ba792d896a7",
+  "generatorSha256": "1c28098d80c1737b22d306efdd6e11735611ce4e42747cf857d5cbbe1d978c1c",
+  "originalByteRestoration": true,
+  "anchorRejection": true,
+  "insertionCount": 30,
+  "branches": [
+    "custom-bayer",
+    "custom-xtrans",
+    "linear",
+    "vng",
+    "ppg",
+    "xtrans",
+    "ahd",
+    "dcb",
+    "dht",
+    "aahd",
+    "ahd-fallback"
+  ],
+  "domainSelfTest": {
+    "denseSha": "7f2c54e8999d66b3aa92515015a40df6f6a34f525e632340beeb5693d958d08d",
+    "sparseSha": "33a89994bef0b5928314a152c7b42a3fed6413a8cf66e3a75017a97f1a0a47f6",
+    "syntheticOnly": true,
+    "excludedBorder": 16,
+    "rawCalls": 0
+  },
+  "fullRawDevelopments": 0
+}

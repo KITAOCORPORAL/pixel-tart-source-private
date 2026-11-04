@@ -1,3 +1,10 @@
+## 2026-11-05 RAW-REOPEN-001 家庭：静态准备，原生工具链门禁未过（Asia/Shanghai）
+- 接续诊断c7df75d4…，新分支diagnostic/raw-reopen001-home-20261104；产品源码仍38dd3f92…，src/prototypes零差异，不重跑Unpack/托管复制/float/方向/App。旧树/原DLL/失败/两轮输出不覆盖。
+- 复用研究线0e0723df…及唯一家庭共用固定LibRaw cccb9764…；18个锁定blob哈希通过。原NuGet native F500C073…及binding/依赖等于旧收据，native编译flags/补丁仍未知；新构建不冒称等价。
+- 已知授权DSCF0347.RAF SHA52D054ED…E865匹配。家庭Windows10.0.26200/28逻辑CPU/.NET10.0.12，不是公司同环境。启动OMP/KMP清单null，未初始化绑定、不猜后置有效值、不设置/清除环境。
+- 原创阶段header/可逆生成器/隔离构建脚本/无RAW ABI宿主已准备。生成器合成检查通过；宿主最终编译0警告0错误，一次早期编译失败保留。cl/nmake/dumpbin缺失，原生编译0、ABI/native自检NOT_RUN；**完整显影0，Open/Unpack/Process/MemoryImage均0**，两次额度未消耗，无旧DLL对照/自动重试。
+- 已有结论仍有效Unpack相同、Process image已不同，内部首差未知；PREPARATION_PARTIAL / NATIVE_TOOLCHAIN_UNAVAILABLE / NOT_FIXED。C++补丁未编译，新bounded RAW runner尚未实现；先工具链/原生自检/阶段复核，不宣称准备即修复。
+- 报告docs/validation/home-r55-raw-reopen001-preparation-20261104/FINAL_REPORT.md，工具tools/RawNativeStagePreparation。本地仓库外raw-reopen001-shared-research保留全部源码/生成树/构建日志。无产品修复不重建包，默认/线程/算法不变；最终HEAD另行推送读回。
 ## 2026-11-04 RAW-REOPEN-001：Unpack有效域相同，首差已收窄至DcrawProcess（Asia/Shanghai）
 - 接续diagnostic/raw-reopen001-20261104@b14f8381…；产品源码仍38dd3f92bb2db7238f7f058008887929ec971c93，src/prototypes零修改。观测源码冻结14e62f56b9a24131ed071f5d01e5547391c0882a，V2.1观测DLL SHA1CBD7FD8…；实际native仍F500C073…，不是新decoder。
 - 先读并复用研究线0e0723df…的LibRaw/binding/RawTherapee固定源码与许可/契约对照，未再搭第二套成熟实现。实际DLL指令+native getter地址/尺寸+固定源码确认所用ABI；LibRawData.Image的四ushort占的是指针槽，不当像素。无RAW自检与身份冻结后才运行。

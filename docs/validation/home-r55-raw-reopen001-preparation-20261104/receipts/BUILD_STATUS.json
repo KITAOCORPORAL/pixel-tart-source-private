@@ -1,0 +1,19 @@
+{
+  "status": "NOT_BUILT_TOOLCHAIN_UNAVAILABLE",
+  "utc": "2026-11-04T16:16:03.996678+00:00",
+  "fullRawDevelopments": 0,
+  "tools": {
+    "dotnet.exe": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "dumpbin.exe": null,
+    "cl.exe": null,
+    "nmake.exe": null
+  },
+  "failures": [
+    "Missing tool: cl.exe",
+    "Missing tool: nmake.exe",
+    "Missing tool: dumpbin.exe"
+  ],
+  "productionEquivalent": false,
+  "optionalComponents": "Upstream Makefile.msvc defaults: no extra RawSpeed/DNGSDK/LCMS/JPEG opt-in; NOT production-equivalent",
+  "flags": "Upstream COPT plus COPT_OPT=/openmp; no thread env changes"
+}
