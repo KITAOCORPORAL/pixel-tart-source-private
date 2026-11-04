@@ -1,0 +1,13 @@
+{
+  "status": "FAILED_NO_AUTOMATIC_RETRY",
+  "error": "System.TypeInitializationException: The type initializer for \u0027Sdcb.LibRaw.Natives.LibRawNative\u0027 threw an exception.\r\n ---\u003E System.TypeInitializationException: The type initializer for \u0027Sdcb.LibRaw.Natives.LibRawNativeLoader\u0027 threw an exception.\r\n ---\u003E System.InvalidOperationException: A resolver is already set for the assembly.\r\n   at System.Runtime.InteropServices.NativeLibrary.SetDllImportResolver(Assembly assembly, DllImportResolver resolver)\r\n   at Sdcb.LibRaw.Natives.LibRawNativeLoader..cctor()\r\n   --- End of inner exception stack trace ---\r\n   at Sdcb.LibRaw.Natives.LibRawNativeLoader.Init()\r\n   at Sdcb.LibRaw.Natives.LibRawNative..cctor()\r\n   --- End of inner exception stack trace ---\r\n   at Sdcb.LibRaw.Natives.LibRawNative.GetVersion()\r\n   at Sdcb.LibRaw.RawContext.get_Version()\r\n   at RawReopenStageProbe.Program.Main(String[] args)",
+  "version": "RAW-REOPEN-001-StageProbeV1",
+  "pid": 18196,
+  "elapsedMs": 261.0703,
+  "counts": {},
+  "peakWorkingSetOs": 34553856,
+  "peakWorkingSetSampled": 34545664,
+  "peakPrivateBytesSampled": 9887744,
+  "privateSamplePeriodMs": 50,
+  "scope": "Exactly one default native development in an isolated process; no App preview/export/reopen rerun; full stage binaries retained locally"
+}

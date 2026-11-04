@@ -1,0 +1,37 @@
+{
+  "processId": 32688,
+  "architecture": "X64",
+  "os": "Microsoft Windows 10.0.19045",
+  "runtime": ".NET 10.0.10",
+  "ProcessorCount": 12,
+  "CurrentDirectory": "E:\\Guangjing-RawReopen001-20261104\\probe-build-v1_3",
+  "culture": "zh-CN",
+  "utcNow": "2026-11-04T05:54:31.0404405+00:00",
+  "libRaw": "0.21.1-Release",
+  "wrapper": "Sdcb.LibRaw, Version=0.21.1.7, Culture=neutral, PublicKeyToken=null",
+  "rawOptions": {
+    "JpegQuality": 90,
+    "LongestEdge": null,
+    "UseCameraWhiteBalance": true,
+    "VerifySha256": true,
+    "PreserveExif": true,
+    "AutoRotate": false,
+    "DecodeMode": 1
+  },
+  "masterBudgetBytes": 536870912,
+  "totalBudgetBytes": 2147483648,
+  "environment": {
+    "OMP_NUM_THREADS": "6",
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  },
+  "note": "No thread, algorithm, decoder or output-parameter overrides; unmodified wrapper loader uses the identical shipped native binary; actual loaded path/hash checked"
+}

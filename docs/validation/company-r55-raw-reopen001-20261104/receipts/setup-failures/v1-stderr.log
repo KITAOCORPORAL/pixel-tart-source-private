@@ -1,0 +1,13 @@
+System.TypeInitializationException: The type initializer for 'Sdcb.LibRaw.Natives.LibRawNative' threw an exception.
+ ---> System.TypeInitializationException: The type initializer for 'Sdcb.LibRaw.Natives.LibRawNativeLoader' threw an exception.
+ ---> System.InvalidOperationException: A resolver is already set for the assembly.
+   at System.Runtime.InteropServices.NativeLibrary.SetDllImportResolver(Assembly assembly, DllImportResolver resolver)
+   at Sdcb.LibRaw.Natives.LibRawNativeLoader..cctor()
+   --- End of inner exception stack trace ---
+   at Sdcb.LibRaw.Natives.LibRawNativeLoader.Init()
+   at Sdcb.LibRaw.Natives.LibRawNative..cctor()
+   --- End of inner exception stack trace ---
+   at Sdcb.LibRaw.Natives.LibRawNative.GetVersion()
+   at Sdcb.LibRaw.RawContext.get_Version()
+   at RawReopenStageProbe.Program.Main(String[] args)
+

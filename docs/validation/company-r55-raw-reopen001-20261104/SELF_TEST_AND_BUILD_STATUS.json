@@ -1,0 +1,17 @@
+{
+  "build": "PASS 0 warnings 0 errors for frozen V1.3 observer only",
+  "serializationSelfTest": {
+    "failedVersion": "V1.2",
+    "error": "Serialization and deserialization of System.IntPtr instances is not supported. Path: $.unpack",
+    "failedTestUsedRaw": false,
+    "passedVersion": "V1.3",
+    "passedTestUsedRaw": false,
+    "failureEvidence": "Tool execution output plus retained Program.StageProbeV1_2.cs.txt and empty new self-test directory; not a missing successful receipt"
+  },
+  "generatedSourceCheck": "PASS exact frozen-source and generated SHA",
+  "parameterComparisonScript": "PASS reproduced existing parameter comparison exactly",
+  "pixelConsistency": "FAIL reproduced, not relaxed",
+  "earlierBuildEvidenceRoot": "E:/Guangjing-RawReopen001-20261104",
+  "productBuild": "NOT_RUN_NO_PRODUCT_CHANGE",
+  "noRuntimeClaimsFromBuild": true
+}

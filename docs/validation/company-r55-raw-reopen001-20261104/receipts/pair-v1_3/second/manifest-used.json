@@ -1,0 +1,99 @@
+{
+  "Version": "RAW-REOPEN-001-StageProbeV1.3",
+  "Input": {
+    "Id": "company-02",
+    "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+    "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+  },
+  "NativePath": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/raw_r.dll",
+  "Files": [
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/jpeg8.dll",
+      "Sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/lcms2.dll",
+      "Sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/MetadataExtractor.dll",
+      "Sha256": "2D4D43F4F10B0655FAFC3A145DBD4DCC79D81459335BB4D8A324CE2AED2F9EC8"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/Microsoft.Data.Sqlite.dll",
+      "Sha256": "1078D41C6C0F2CEE48A8B706E3A54CE145705993F19F703D2B3BDF2ABCC59088"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/PixelTart.Kernel.dll",
+      "Sha256": "0B4584DA2D6AB6BCF32BB4AC3FE2359212395F91FD7D4255332711D1B6C5297E"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/RawReopenStageProbe.deps.json",
+      "Sha256": "677B3669A9B3632D31ECA68B43F09BDEB7DC480851D75E45E571FD67C50F4989"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/RawReopenStageProbe.dll",
+      "Sha256": "D0DE344357BCCA06006287B430C8926A2D40319BB2BF9E8334DFA32F65A0B822"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/RawReopenStageProbe.exe",
+      "Sha256": "895874AB4D00E7B09CA6F77D849C385C7A6C8BF22E9C7B359E251FA2B2C54F40"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/RawReopenStageProbe.runtimeconfig.json",
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/RAWSelectionAssistant.Core.dll",
+      "Sha256": "206A1098C78CE54FD40C7517C7DA24FB474680ABCA44CC9E10B92C0D7FC12744"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/raw_r.dll",
+      "Sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/Sdcb.LibRaw.dll",
+      "Sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/System.Security.Cryptography.ProtectedData.dll",
+      "Sha256": "EB535B4EAAED42BD93E1CEA9E03E25480D7371F6B1F2452216E9A8AFF262AE5F"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/XmpCore.dll",
+      "Sha256": "E88FEB22528A78B294B6CFD9390B8CE8A5B27DB025FF976799DF2322BDE51B58"
+    },
+    {
+      "Path": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3/zlib1.dll",
+      "Sha256": "4A0BD02C2985974F90DA4A7065ACAC1B72F21A4FE58C5391E14B3E6FE566BC12"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\dotnet.exe",
+      "Sha256": "4377F10C78400F0370B88156773DE9843C07F14E65B3232005EC3179EF38D463"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App\\10.0.10\\coreclr.dll",
+      "Sha256": "58859F85A30CC71313B281898E7CFBDBB9ECCB95AE2A3F865329EFD47EBF31BB"
+    },
+    {
+      "Path": "D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App\\10.0.10\\System.Private.CoreLib.dll",
+      "Sha256": "76A49F17E83F613BC8A5B55FC98830B764E7838265AACBDBCC8F46707F80A3C9"
+    },
+    {
+      "Path": "C:/Windows/System32/MSVCP140.dll",
+      "Sha256": "7C26614E1D733892C2DEAC7E245CE115504B1D80592DD0A01B08E3E5A55F89CA"
+    },
+    {
+      "Path": "C:/Windows/System32/VCOMP140.DLL",
+      "Sha256": "95D4CE4A6802D1E18B5E0E1722CC30EA72CA7E033F83828F05C0B7B993FE7CBF"
+    },
+    {
+      "Path": "C:/Windows/System32/VCRUNTIME140.dll",
+      "Sha256": "D1F4225DF2CD877DBF130D5668A021DCE3F94118455FF5EC952061C30AFC9CE7"
+    },
+    {
+      "Path": "C:/Windows/System32/VCRUNTIME140_1.dll",
+      "Sha256": "A7146C08F89FE5B04541AB507CDB59FF7B44534D4BA3C668A426C6450A03434E"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "name": "native-rgb16",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\native-rgb16.bin",
+    "sha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+    "bytes": 241118208,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "Channels": 3,
+      "Bits": 16,
+      "DataSize": 241118208,
+      "validBytes": 241118208,
+      "stride": 46512,
+      "littleEndian": true
+    }
+  },
+  {
+    "name": "managed-rgb16",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\managed-rgb16.bin",
+    "sha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+    "bytes": 241118208,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "samples": 120559104
+    }
+  },
+  {
+    "name": "float-master",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\float-master.bin",
+    "sha256": "50968DA7BAC68AC895B74970D2890282F8F79D9A040D6560F0311E2A628A75F2",
+    "bytes": 482236416,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "Orientation": 1,
+      "WorkingColorSpace": "sRGB",
+      "SourceBitDepth": "16",
+      "encoding": "IEEE754 little-endian float32 RGB"
+    }
+  },
+  {
+    "name": "upright-master",
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\upright-master.bin",
+    "sha256": "50968DA7BAC68AC895B74970D2890282F8F79D9A040D6560F0311E2A628A75F2",
+    "bytes": 482236416,
+    "layout": {
+      "Width": 7752,
+      "Height": 5184,
+      "Orientation": 1,
+      "WorkingColorSpace": "sRGB",
+      "SourceBitDepth": "16",
+      "encoding": "IEEE754 little-endian float32 RGB"
+    }
+  }
+]

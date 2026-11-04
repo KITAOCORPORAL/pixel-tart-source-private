@@ -1,0 +1,123 @@
+{
+  "timeZone": "Asia/Shanghai",
+  "date": "2026-11-04",
+  "status": "REPRODUCED_NATIVE_RGB16_BOUNDARY_FAIL_ROOT_CAUSE_NOT_YET_PROVEN",
+  "productStatus": "PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE",
+  "observationVersion": "RAW-REOPEN-001-StageProbeV1.3",
+  "newFullRawDevelopments": 2,
+  "decodedInputs": [
+    "company-02"
+  ],
+  "successfulProbeProcesses": [
+    35784,
+    32688
+  ],
+  "sequential": true,
+  "perSuccessfulProcess": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 1,
+    "MakeDcrawMemoryImage": 1
+  },
+  "additionalSetupFailures": [
+    {
+      "pid": 18196,
+      "OpenFile": 0,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    },
+    {
+      "pid": 30252,
+      "OpenFile": 0,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    },
+    {
+      "pid": 23144,
+      "OpenFile": 1,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    }
+  ],
+  "totalRawContextOpenCalls": 3,
+  "totalUnpackCalls": 2,
+  "totalDcrawProcessCalls": 2,
+  "totalMakeDcrawMemoryImageCalls": 2,
+  "consistencyTest": "FAIL",
+  "firstObservedDifferentStage": "MakeDcrawMemoryImage returned RGB16 before managed copy",
+  "nativeDifference": {
+    "name": "native-rgb16",
+    "firstSha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+    "secondSha256": "9729A70A4CB29D9CB16A7AEABD630D37A2BEAED63F914C8FF6B13B6DA9F422E4",
+    "equal": false,
+    "kind": "u16",
+    "channels": 120559104,
+    "changedChannels": 14275,
+    "maxAbsoluteDifference": 5600,
+    "meanAbsoluteDifference": 0.05121050833290865,
+    "maximumLocation": {
+      "x": 7581,
+      "y": 3980,
+      "channel": 2,
+      "first": 6193,
+      "second": 593
+    },
+    "firstDifference": {
+      "x": 7525,
+      "y": 499,
+      "channel": 0,
+      "first": 4570,
+      "second": 4214
+    },
+    "bounds": {
+      "left": 507,
+      "top": 499,
+      "right": 7691,
+      "bottom": 4481
+    },
+    "borderChangedChannels": 0
+  },
+  "managedCopyExactBoth": true,
+  "copyAfterDisposeExactBoth": true,
+  "floatConversionErrors": [
+    0,
+    0
+  ],
+  "u16RoundTripErrors": [
+    0,
+    0
+  ],
+  "orientation": [
+    1,
+    1
+  ],
+  "configuredOutputParameterDifferences": 0,
+  "unpackParameterDifferences": 0,
+  "colorFieldDifferences": 0,
+  "otherSnapshotDifferences": "Only XmpDataPtr address; XMP bytes not copied or hashed",
+  "runtimeEnvironmentDifference": "PID and start timestamp only among recorded fields",
+  "inheritedOmpNumThreads": "6",
+  "ompPolicyModified": false,
+  "actualNativeWorkerCount": "NOT_MEASURED",
+  "peakWorkingSetOs": [
+    949080064,
+    948678656
+  ],
+  "peakPrivateBytesSampled": [
+    921321472,
+    921042944
+  ],
+  "privateMemorySamplePeriodMs": 50,
+  "budgetBytes": 2147483648,
+  "masterBytes": 482236416,
+  "masterBudgetBytes": 536870912,
+  "productFilesChanged": 0,
+  "productRebuild": false,
+  "appPreviewSaveReopenExportRerun": "NOT_RUN_NO_FIX",
+  "oldPass4Failure": "PRESERVED",
+  "canon": "HISTORICAL_ONLY_NO_NEW_DECODE",
+  "sony": "OUT_OF_SCOPE",
+  "serialProbeDoesNotProve": "Native worker threads single-threaded; original App parameter snapshots equal; native internal stage root cause",
+  "comparisonReferencesExecuted": 0,
+  "probeSourceCommit": "aa7cc94b8559ea7d2fa6e9c782b31b0ab16b7966"
+}

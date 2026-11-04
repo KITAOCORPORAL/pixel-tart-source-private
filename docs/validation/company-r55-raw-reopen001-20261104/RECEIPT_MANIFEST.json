@@ -1,0 +1,501 @@
+{
+  "version": 1,
+  "mediaPolicy": "No RAW, TIFF, preview image, full binary pixel stage, database, native executable or third-party source uploaded. Full stage binaries remain local.",
+  "files": [
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/FROZEN_MANIFEST.json",
+      "receipt": "receipts/pair-v1_3/FROZEN_MANIFEST.json",
+      "sourceSha256": "19B60270F7CFCE05D5F6081DB72627362D612FFA54D1D0E9597AF967FF729F4C",
+      "receiptSha256": "19B60270F7CFCE05D5F6081DB72627362D612FFA54D1D0E9597AF967FF729F4C",
+      "sourceBytes": 4281,
+      "receiptBytes": 4281,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/EXECUTION_PLAN.json",
+      "receipt": "receipts/pair-v1_3/EXECUTION_PLAN.json",
+      "sourceSha256": "204E99F39B7305695A92B46118586E6A722F989B07FA0B8C8FE10EEFE16ECAA6",
+      "receiptSha256": "204E99F39B7305695A92B46118586E6A722F989B07FA0B8C8FE10EEFE16ECAA6",
+      "sourceBytes": 1234,
+      "receiptBytes": 1234,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/PROCESS_RECEIPTS.json",
+      "receipt": "receipts/pair-v1_3/PROCESS_RECEIPTS.json",
+      "sourceSha256": "A31D6F01141F9CC42AEBBEBC088B6AB4346BDAE330178E6F81FA5D6E9879078D",
+      "receiptSha256": "A31D6F01141F9CC42AEBBEBC088B6AB4346BDAE330178E6F81FA5D6E9879078D",
+      "sourceBytes": 1020,
+      "receiptBytes": 1020,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/STAGE_COMPARISON.json",
+      "receipt": "receipts/pair-v1_3/STAGE_COMPARISON.json",
+      "sourceSha256": "755B80971CAD8B4DFB8B0408A9A67245476A7A03502B25EDEA572DDE75FABDA9",
+      "receiptSha256": "755B80971CAD8B4DFB8B0408A9A67245476A7A03502B25EDEA572DDE75FABDA9",
+      "sourceBytes": 3689,
+      "receiptBytes": 3689,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/PARAMETER_COMPARISON.json",
+      "receipt": "receipts/pair-v1_3/PARAMETER_COMPARISON.json",
+      "sourceSha256": "8EDB316F6B5D767E915B77CD71FA9AEC7A7A74982BF027454D2444E36C02C9D4",
+      "receiptSha256": "8EDB316F6B5D767E915B77CD71FA9AEC7A7A74982BF027454D2444E36C02C9D4",
+      "sourceBytes": 659,
+      "receiptBytes": 659,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/actual-native-loaded.json",
+      "receipt": "receipts/pair-v1_3/first/actual-native-loaded.json",
+      "sourceSha256": "B457D4FC930DC228AF7CD49226D766973D6BCA30F4D8D30FE62ADDD69D21F2BA",
+      "receiptSha256": "B457D4FC930DC228AF7CD49226D766973D6BCA30F4D8D30FE62ADDD69D21F2BA",
+      "sourceBytes": 252,
+      "receiptBytes": 252,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/calls.json",
+      "receipt": "receipts/pair-v1_3/first/calls.json",
+      "sourceSha256": "82280A3E03883454926CE5036BC2CC495FBEE03C63947FD998A1E723CE92F895",
+      "receiptSha256": "82280A3E03883454926CE5036BC2CC495FBEE03C63947FD998A1E723CE92F895",
+      "sourceBytes": 90,
+      "receiptBytes": 90,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/configured-output.json",
+      "receipt": "receipts/pair-v1_3/first/configured-output.json",
+      "sourceSha256": "884FC0D5D33F7E71A801EFBA19CFC2BDD908639C278BD1506FE4A743ACD6FBA2",
+      "receiptSha256": "884FC0D5D33F7E71A801EFBA19CFC2BDD908639C278BD1506FE4A743ACD6FBA2",
+      "sourceBytes": 1732,
+      "receiptBytes": 1732,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/conversion-check.json",
+      "receipt": "receipts/pair-v1_3/first/conversion-check.json",
+      "sourceSha256": "F978B3C849D536B4CFC6BA5F5C405B5C53BEE5C50C0F0A85AFA24CE4D32464E7",
+      "receiptSha256": "F978B3C849D536B4CFC6BA5F5C405B5C53BEE5C50C0F0A85AFA24CE4D32464E7",
+      "sourceBytes": 303,
+      "receiptBytes": 303,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/copy-check.json",
+      "receipt": "receipts/pair-v1_3/first/copy-check.json",
+      "sourceSha256": "D3E3F413B45BDB760A19CCF4E4AC701BF9BB9C697DA9AA645B5E342D2705CEDF",
+      "receiptSha256": "D3E3F413B45BDB760A19CCF4E4AC701BF9BB9C697DA9AA645B5E342D2705CEDF",
+      "sourceBytes": 279,
+      "receiptBytes": 279,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/events.json",
+      "receipt": "receipts/pair-v1_3/first/events.json",
+      "sourceSha256": "E69E8A6C93A3ABED3B6884724FA5311A95A3E604041BE40A91063E492F4D95F1",
+      "receiptSha256": "E69E8A6C93A3ABED3B6884724FA5311A95A3E604041BE40A91063E492F4D95F1",
+      "sourceBytes": 2189,
+      "receiptBytes": 2189,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/loaded-modules.json",
+      "receipt": "receipts/pair-v1_3/first/loaded-modules.json",
+      "sourceSha256": "00CDD2B07FCADD3031C53CFB1E2C0368910B6C71F81022264924BCB8BC492E00",
+      "receiptSha256": "00CDD2B07FCADD3031C53CFB1E2C0368910B6C71F81022264924BCB8BC492E00",
+      "sourceBytes": 2188,
+      "receiptBytes": 2188,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/manifest-used.json",
+      "receipt": "receipts/pair-v1_3/first/manifest-used.json",
+      "sourceSha256": "E55040410624278D87E0ADC8275ED8A0B35EB646FE14A1C21B353C06B75B8CB3",
+      "receiptSha256": "E55040410624278D87E0ADC8275ED8A0B35EB646FE14A1C21B353C06B75B8CB3",
+      "sourceBytes": 4379,
+      "receiptBytes": 4379,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/opened-parameters.json",
+      "receipt": "receipts/pair-v1_3/first/opened-parameters.json",
+      "sourceSha256": "BF2397C4C51880B562BEDB266CCBBF302081E138AE58AB25070B011C80960504",
+      "receiptSha256": "65FFB102228A7CCA11971BB52FC67FD8F3BEFA86B69481364F26F0D444D526E1",
+      "sourceBytes": 1069497,
+      "receiptBytes": 414000,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/processed-parameters.json",
+      "receipt": "receipts/pair-v1_3/first/processed-parameters.json",
+      "sourceSha256": "AA3DBC22B1F836EF3CA6C08AA2F03450DA924B2CBDF9A34040680D2CE52F7F0D",
+      "receiptSha256": "E0EBFE6B29BE8B21525FB2D31F3C67E9F4E7C1A6F56AE0C38BB38F5CA7D37732",
+      "sourceBytes": 1069550,
+      "receiptBytes": 414053,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/result.json",
+      "receipt": "receipts/pair-v1_3/first/result.json",
+      "sourceSha256": "9DE613A2B1520C87AF8AC00CB2D78C3A1692CCE5A743A2B82671F7FE34874309",
+      "receiptSha256": "9DE613A2B1520C87AF8AC00CB2D78C3A1692CCE5A743A2B82671F7FE34874309",
+      "sourceBytes": 587,
+      "receiptBytes": 587,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/returned-copy-check.json",
+      "receipt": "receipts/pair-v1_3/first/returned-copy-check.json",
+      "sourceSha256": "190383DDBD80B4786A304C91D6E94020241A5391C2FCD82A6A18084EAE1C2C2E",
+      "receiptSha256": "190383DDBD80B4786A304C91D6E94020241A5391C2FCD82A6A18084EAE1C2C2E",
+      "sourceBytes": 191,
+      "receiptBytes": 191,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/run-slot.json",
+      "receipt": "receipts/pair-v1_3/first/run-slot.json",
+      "sourceSha256": "7C1B2C7C7192D577E264E07F0F1A83247DD7AD4568D9DBBBDB2F4A0D0D100898",
+      "receiptSha256": "7C1B2C7C7192D577E264E07F0F1A83247DD7AD4568D9DBBBDB2F4A0D0D100898",
+      "sourceBytes": 88,
+      "receiptBytes": 88,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/runtime.json",
+      "receipt": "receipts/pair-v1_3/first/runtime.json",
+      "sourceSha256": "6C46B49992E8E812B69D3CA2742432319065E23CA52473F50CAF33D2B9C5123D",
+      "receiptSha256": "6C46B49992E8E812B69D3CA2742432319065E23CA52473F50CAF33D2B9C5123D",
+      "sourceBytes": 1248,
+      "receiptBytes": 1248,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/source-orientation.json",
+      "receipt": "receipts/pair-v1_3/first/source-orientation.json",
+      "sourceSha256": "0B0EBE73A6F3721CBFCE853288EC878D606F17806DCE71B39142B5D45BCEA4BD",
+      "receiptSha256": "0B0EBE73A6F3721CBFCE853288EC878D606F17806DCE71B39142B5D45BCEA4BD",
+      "sourceBytes": 19,
+      "receiptBytes": 19,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/stages.json",
+      "receipt": "receipts/pair-v1_3/first/stages.json",
+      "sourceSha256": "C52C844AF3C2778AE60C59F8B7E8F2BD91724FFE1A78F0F76D4420062044642B",
+      "receiptSha256": "C52C844AF3C2778AE60C59F8B7E8F2BD91724FFE1A78F0F76D4420062044642B",
+      "sourceBytes": 1707,
+      "receiptBytes": 1707,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/first/unpacked-parameters.json",
+      "receipt": "receipts/pair-v1_3/first/unpacked-parameters.json",
+      "sourceSha256": "BF2397C4C51880B562BEDB266CCBBF302081E138AE58AB25070B011C80960504",
+      "receiptSha256": "65FFB102228A7CCA11971BB52FC67FD8F3BEFA86B69481364F26F0D444D526E1",
+      "sourceBytes": 1069497,
+      "receiptBytes": 414000,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/actual-native-loaded.json",
+      "receipt": "receipts/pair-v1_3/second/actual-native-loaded.json",
+      "sourceSha256": "B457D4FC930DC228AF7CD49226D766973D6BCA30F4D8D30FE62ADDD69D21F2BA",
+      "receiptSha256": "B457D4FC930DC228AF7CD49226D766973D6BCA30F4D8D30FE62ADDD69D21F2BA",
+      "sourceBytes": 252,
+      "receiptBytes": 252,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/calls.json",
+      "receipt": "receipts/pair-v1_3/second/calls.json",
+      "sourceSha256": "82280A3E03883454926CE5036BC2CC495FBEE03C63947FD998A1E723CE92F895",
+      "receiptSha256": "82280A3E03883454926CE5036BC2CC495FBEE03C63947FD998A1E723CE92F895",
+      "sourceBytes": 90,
+      "receiptBytes": 90,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/configured-output.json",
+      "receipt": "receipts/pair-v1_3/second/configured-output.json",
+      "sourceSha256": "884FC0D5D33F7E71A801EFBA19CFC2BDD908639C278BD1506FE4A743ACD6FBA2",
+      "receiptSha256": "884FC0D5D33F7E71A801EFBA19CFC2BDD908639C278BD1506FE4A743ACD6FBA2",
+      "sourceBytes": 1732,
+      "receiptBytes": 1732,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/conversion-check.json",
+      "receipt": "receipts/pair-v1_3/second/conversion-check.json",
+      "sourceSha256": "F978B3C849D536B4CFC6BA5F5C405B5C53BEE5C50C0F0A85AFA24CE4D32464E7",
+      "receiptSha256": "F978B3C849D536B4CFC6BA5F5C405B5C53BEE5C50C0F0A85AFA24CE4D32464E7",
+      "sourceBytes": 303,
+      "receiptBytes": 303,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/copy-check.json",
+      "receipt": "receipts/pair-v1_3/second/copy-check.json",
+      "sourceSha256": "F484ED51541DD702FC0F74542786BDB2FCEACD707C746FC2E51B98B26E10DD90",
+      "receiptSha256": "F484ED51541DD702FC0F74542786BDB2FCEACD707C746FC2E51B98B26E10DD90",
+      "sourceBytes": 279,
+      "receiptBytes": 279,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/events.json",
+      "receipt": "receipts/pair-v1_3/second/events.json",
+      "sourceSha256": "C1BC245BEE49C51053C7D5D63E9236F55AFB54FCA63A677B66058A64AD573EBC",
+      "receiptSha256": "C1BC245BEE49C51053C7D5D63E9236F55AFB54FCA63A677B66058A64AD573EBC",
+      "sourceBytes": 2186,
+      "receiptBytes": 2186,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/loaded-modules.json",
+      "receipt": "receipts/pair-v1_3/second/loaded-modules.json",
+      "sourceSha256": "55F1575539AF2CE2016411F7C58FA39ED3A4AB7DC72B89B01AB5DF142E61F703",
+      "receiptSha256": "55F1575539AF2CE2016411F7C58FA39ED3A4AB7DC72B89B01AB5DF142E61F703",
+      "sourceBytes": 2188,
+      "receiptBytes": 2188,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/manifest-used.json",
+      "receipt": "receipts/pair-v1_3/second/manifest-used.json",
+      "sourceSha256": "E55040410624278D87E0ADC8275ED8A0B35EB646FE14A1C21B353C06B75B8CB3",
+      "receiptSha256": "E55040410624278D87E0ADC8275ED8A0B35EB646FE14A1C21B353C06B75B8CB3",
+      "sourceBytes": 4379,
+      "receiptBytes": 4379,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/opened-parameters.json",
+      "receipt": "receipts/pair-v1_3/second/opened-parameters.json",
+      "sourceSha256": "3EA16E4D38B2403EB722227780E75F5BEDD40B11AE7A0F3FA90ABE4AD2F1751E",
+      "receiptSha256": "36ABC7A6B0029583046153DDFB7A07A65E353BE2D39E006A86D7EA69E9E484FD",
+      "sourceBytes": 1069497,
+      "receiptBytes": 414000,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/processed-parameters.json",
+      "receipt": "receipts/pair-v1_3/second/processed-parameters.json",
+      "sourceSha256": "92B00A5B7AB61F4A4DA4C318B09A95A45692759B1CB21B21007C295963128988",
+      "receiptSha256": "2D40BB66B96A78BE40A7EAAE6E336CAFD9AB7FC345A95FFBEEF683CAE29CD154",
+      "sourceBytes": 1069550,
+      "receiptBytes": 414053,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/result.json",
+      "receipt": "receipts/pair-v1_3/second/result.json",
+      "sourceSha256": "D42A988EEF1B0C0D35678F4933068E940F06C1B2E6F1EBD4AC007ED511B5B408",
+      "receiptSha256": "D42A988EEF1B0C0D35678F4933068E940F06C1B2E6F1EBD4AC007ED511B5B408",
+      "sourceBytes": 587,
+      "receiptBytes": 587,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/returned-copy-check.json",
+      "receipt": "receipts/pair-v1_3/second/returned-copy-check.json",
+      "sourceSha256": "8FD8AB0F89037F0435684DA865887DC95633DC199561BF457AB29D48D755D874",
+      "receiptSha256": "8FD8AB0F89037F0435684DA865887DC95633DC199561BF457AB29D48D755D874",
+      "sourceBytes": 191,
+      "receiptBytes": 191,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/run-slot.json",
+      "receipt": "receipts/pair-v1_3/second/run-slot.json",
+      "sourceSha256": "27659E9AFDF41683AB9C72663CA00553A40AC41BFBC1F9E7F67B0E05C14E5BD5",
+      "receiptSha256": "27659E9AFDF41683AB9C72663CA00553A40AC41BFBC1F9E7F67B0E05C14E5BD5",
+      "sourceBytes": 89,
+      "receiptBytes": 89,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/runtime.json",
+      "receipt": "receipts/pair-v1_3/second/runtime.json",
+      "sourceSha256": "5B162E74F66DDAFF72E511EC1BC16E587A275C1900DCD035DE2A8108871C0585",
+      "receiptSha256": "5B162E74F66DDAFF72E511EC1BC16E587A275C1900DCD035DE2A8108871C0585",
+      "sourceBytes": 1248,
+      "receiptBytes": 1248,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/source-orientation.json",
+      "receipt": "receipts/pair-v1_3/second/source-orientation.json",
+      "sourceSha256": "0B0EBE73A6F3721CBFCE853288EC878D606F17806DCE71B39142B5D45BCEA4BD",
+      "receiptSha256": "0B0EBE73A6F3721CBFCE853288EC878D606F17806DCE71B39142B5D45BCEA4BD",
+      "sourceBytes": 19,
+      "receiptBytes": 19,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/stages.json",
+      "receipt": "receipts/pair-v1_3/second/stages.json",
+      "sourceSha256": "8C1FDB72BD9706F250B70F35379996F197ACB3DB64ACEB407F30AD3F44CD66C0",
+      "receiptSha256": "8C1FDB72BD9706F250B70F35379996F197ACB3DB64ACEB407F30AD3F44CD66C0",
+      "sourceBytes": 1711,
+      "receiptBytes": 1711,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_3/second/unpacked-parameters.json",
+      "receipt": "receipts/pair-v1_3/second/unpacked-parameters.json",
+      "sourceSha256": "3EA16E4D38B2403EB722227780E75F5BEDD40B11AE7A0F3FA90ABE4AD2F1751E",
+      "receiptSha256": "36ABC7A6B0029583046153DDFB7A07A65E353BE2D39E006A86D7EA69E9E484FD",
+      "sourceBytes": 1069497,
+      "receiptBytes": 414000,
+      "transformation": "JSON compact only, full semantic content retained"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/INPUT.json",
+      "receipt": "receipts/preflight/INPUT.json",
+      "sourceSha256": "DACEBB8A5692237EADFAB257BA4C93740FD8FEB5530DA69934A183E00200E11D",
+      "receiptSha256": "DACEBB8A5692237EADFAB257BA4C93740FD8FEB5530DA69934A183E00200E11D",
+      "sourceBytes": 420,
+      "receiptBytes": 420,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/OLD_EVIDENCE_VERIFICATION.json",
+      "receipt": "receipts/preflight/OLD_EVIDENCE_VERIFICATION.json",
+      "sourceSha256": "1F6099951A454ACE3DB2BF0A4716A4B8C1A9166819270BFA8AF96A065CA334CA",
+      "receiptSha256": "1F6099951A454ACE3DB2BF0A4716A4B8C1A9166819270BFA8AF96A065CA334CA",
+      "sourceBytes": 1278,
+      "receiptBytes": 1278,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/NATIVE_DEPENDENCY_PREFLIGHT.json",
+      "receipt": "receipts/preflight/NATIVE_DEPENDENCY_PREFLIGHT.json",
+      "sourceSha256": "BE71355FC4A14A84D89EAD843DC098970F2BAA06ABF394707DCF15F752108B11",
+      "receiptSha256": "BE71355FC4A14A84D89EAD843DC098970F2BAA06ABF394707DCF15F752108B11",
+      "sourceBytes": 2782,
+      "receiptBytes": 2782,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/OBSERVER_FAILURES.json",
+      "receipt": "receipts/preflight/OBSERVER_FAILURES.json",
+      "sourceSha256": "0B41F7CB12B7E1B494DEC4A5F5D028D48902E804D271A5D73AD7EEEE47D97344",
+      "receiptSha256": "0B41F7CB12B7E1B494DEC4A5F5D028D48902E804D271A5D73AD7EEEE47D97344",
+      "sourceBytes": 789,
+      "receiptBytes": 789,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/PUBLISHED_BINDINGS.json",
+      "receipt": "receipts/preflight/PUBLISHED_BINDINGS.json",
+      "sourceSha256": "BDB456A5912D183D3A6F8BACBCD96290CF60C58386BFA03EE403880392A269E1",
+      "receiptSha256": "BDB456A5912D183D3A6F8BACBCD96290CF60C58386BFA03EE403880392A269E1",
+      "sourceBytes": 1753,
+      "receiptBytes": 1753,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/serialization-self-test-v1_3/serialization-self-test.json",
+      "receipt": "receipts/self-test/serialization-self-test.json",
+      "sourceSha256": "7BCA48F81C667CE7F23D89704F8966A2E942D4DB98A6DD3D740D8AC457233A22",
+      "receiptSha256": "7BCA48F81C667CE7F23D89704F8966A2E942D4DB98A6DD3D740D8AC457233A22",
+      "sourceBytes": 4886,
+      "receiptBytes": 4886,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/probe-build-v1_3.log",
+      "receipt": "receipts/self-test/probe-build-v1_3.log",
+      "sourceSha256": "BBAC3FC3E69AE1FF20DDFDE9DA76C261EE7C3A6F7F189F04ECA4F0E94324650E",
+      "receiptSha256": "BBAC3FC3E69AE1FF20DDFDE9DA76C261EE7C3A6F7F189F04ECA4F0E94324650E",
+      "sourceBytes": 272,
+      "receiptBytes": 272,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/first/result.json",
+      "receipt": "receipts/setup-failures/v1-result.json",
+      "sourceSha256": "399D4BABAE7DE4E5526534EEAA271AE6BEA497AE032634C542CEE45C6F1A7029",
+      "receiptSha256": "399D4BABAE7DE4E5526534EEAA271AE6BEA497AE032634C542CEE45C6F1A7029",
+      "sourceBytes": 1364,
+      "receiptBytes": 1364,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/PROCESS_RECEIPTS.json",
+      "receipt": "receipts/setup-failures/v1-process.json",
+      "sourceSha256": "16E7FF591231025A9DAD9ECDBD28A693484C3A355421B0E39C73F81527A780DD",
+      "receiptSha256": "16E7FF591231025A9DAD9ECDBD28A693484C3A355421B0E39C73F81527A780DD",
+      "sourceBytes": 470,
+      "receiptBytes": 470,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/first.stderr.log",
+      "receipt": "receipts/setup-failures/v1-stderr.log",
+      "sourceSha256": "EED30B8D81BCD47ABF0EA25B6586345A3124F9BDBC17C648EDA3012D4DB65A44",
+      "receiptSha256": "EED30B8D81BCD47ABF0EA25B6586345A3124F9BDBC17C648EDA3012D4DB65A44",
+      "sourceBytes": 856,
+      "receiptBytes": 856,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_1/first/result.json",
+      "receipt": "receipts/setup-failures/v1_1-loader-result.json",
+      "sourceSha256": "DBB23111C5513F2384EDFF913DC91D88507589C29AAE5BCD74055C87948D7D8A",
+      "receiptSha256": "DBB23111C5513F2384EDFF913DC91D88507589C29AAE5BCD74055C87948D7D8A",
+      "sourceBytes": 1305,
+      "receiptBytes": 1305,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_1/PROCESS_RECEIPTS.json",
+      "receipt": "receipts/setup-failures/v1_1-loader-process.json",
+      "sourceSha256": "7DA3898D33E3804683FB120BFCF1305A4A348D9FB368AA5DE8095B4DF7CBD892",
+      "receiptSha256": "7DA3898D33E3804683FB120BFCF1305A4A348D9FB368AA5DE8095B4DF7CBD892",
+      "sourceBytes": 470,
+      "receiptBytes": 470,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-v1_1/first.stderr.log",
+      "receipt": "receipts/setup-failures/v1_1-loader-stderr.log",
+      "sourceSha256": "66AA93A384C221ED42CDB12CCF814A1B7B7183D43B85B890C33DB82108A6C8B6",
+      "receiptSha256": "66AA93A384C221ED42CDB12CCF814A1B7B7183D43B85B890C33DB82108A6C8B6",
+      "sourceBytes": 762,
+      "receiptBytes": 762,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-final-v1_1/first/result.json",
+      "receipt": "receipts/setup-failures/v1_1-serializer-result.json",
+      "sourceSha256": "4A020FA11AB4C371E229A39589377C08F75F87D330FEF75C11D27A5AF45823A0",
+      "receiptSha256": "4A020FA11AB4C371E229A39589377C08F75F87D330FEF75C11D27A5AF45823A0",
+      "sourceBytes": 1978,
+      "receiptBytes": 1978,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-final-v1_1/PROCESS_RECEIPTS.json",
+      "receipt": "receipts/setup-failures/v1_1-serializer-process.json",
+      "sourceSha256": "C5FA6EB5AC46FE6979A25B0AC479BA0577798C48C8CDEE77C966F2CCED2B2FBA",
+      "receiptSha256": "C5FA6EB5AC46FE6979A25B0AC479BA0577798C48C8CDEE77C966F2CCED2B2FBA",
+      "sourceBytes": 471,
+      "receiptBytes": 471,
+      "transformation": "exact bytes"
+    },
+    {
+      "source": "E:/Guangjing-RawReopen001-20261104/pair-final-v1_1/first.stderr.log",
+      "receipt": "receipts/setup-failures/v1_1-serializer-stderr.log",
+      "sourceSha256": "8A228FBE8AD823AF4972806C11195E2B2C1BB51374A2D7B9AB7E862D5D526501",
+      "receiptSha256": "8A228FBE8AD823AF4972806C11195E2B2C1BB51374A2D7B9AB7E862D5D526501",
+      "sourceBytes": 1403,
+      "receiptBytes": 1403,
+      "transformation": "exact bytes"
+    }
+  ]
+}

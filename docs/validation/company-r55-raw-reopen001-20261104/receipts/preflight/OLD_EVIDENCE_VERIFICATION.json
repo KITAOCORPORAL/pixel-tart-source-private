@@ -1,0 +1,27 @@
+{
+  "dateUtc": "2026-11-04T06:04:28.814Z",
+  "inputSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "originalOutputs": [
+    {
+      "phase": "default",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "sha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+      "unchanged": true
+    },
+    {
+      "phase": "display-exposure-plus05",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\display-exposure-plus05-export\\DSCF0347_仿色.tif",
+      "sha256": "484790E87709BA7F923432C9A1167AD1507CAC74CFEFA5474EF979C0F24052EE",
+      "unchanged": true
+    },
+    {
+      "phase": "independent-reopen",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\independent-reopen-export\\DSCF0347_仿色.tif",
+      "sha256": "7EB6AED9D547E631E3559F428F420EDECC54FD605F1E114C455D11CAB1994438",
+      "unchanged": true
+    }
+  ],
+  "testSourceSha256": "42F0ABE5E09405F812D9B9C54B6B83680B85A9F89F8A15DC0E68DB7BFBCA31EF",
+  "originalPass4TestDllSha256": "EE2F9D2B5BCBDE825CD8CC1988F125A8AF96E08D95FA90B1FFCA62EA1B9E77AE",
+  "scope": "company-02 only; Canon historical result referenced without reading or decoding its original"
+}

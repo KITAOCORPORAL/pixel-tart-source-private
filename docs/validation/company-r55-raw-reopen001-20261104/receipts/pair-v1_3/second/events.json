@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Initialized",
+    "elapsedMs": 200.3938,
+    "threadId": 5,
+    "privateBytes": 8740864,
+    "workingBytes": 30511104
+  },
+  {
+    "name": "OpenFile",
+    "elapsedMs": 246.5552,
+    "threadId": 7,
+    "privateBytes": 10072064,
+    "workingBytes": 34480128
+  },
+  {
+    "name": "opened-parameters",
+    "elapsedMs": 305.2092,
+    "threadId": 7,
+    "privateBytes": 27357184,
+    "workingBytes": 52547584
+  },
+  {
+    "name": "Unpack",
+    "elapsedMs": 360.666,
+    "threadId": 7,
+    "privateBytes": 29163520,
+    "workingBytes": 57593856
+  },
+  {
+    "name": "unpacked-parameters",
+    "elapsedMs": 449.9325,
+    "threadId": 7,
+    "privateBytes": 121012224,
+    "workingBytes": 149671936
+  },
+  {
+    "name": "DcrawProcess",
+    "elapsedMs": 453.6242,
+    "threadId": 7,
+    "privateBytes": 121012224,
+    "workingBytes": 149671936
+  },
+  {
+    "name": "ConfiguredOutputBeforeWrapperCommit",
+    "elapsedMs": 460.6169,
+    "threadId": 7,
+    "privateBytes": 121012224,
+    "workingBytes": 149671936
+  },
+  {
+    "name": "processed-parameters",
+    "elapsedMs": 4876.6633,
+    "threadId": 7,
+    "privateBytes": 592752640,
+    "workingBytes": 621228032
+  },
+  {
+    "name": "MakeDcrawMemoryImage",
+    "elapsedMs": 4880.1542,
+    "threadId": 7,
+    "privateBytes": 592752640,
+    "workingBytes": 621228032
+  },
+  {
+    "name": "native-rgb16",
+    "elapsedMs": 6317.928,
+    "threadId": 7,
+    "privateBytes": 691130368,
+    "workingBytes": 707207168
+  },
+  {
+    "name": "managed-rgb16",
+    "elapsedMs": 7761.4633,
+    "threadId": 7,
+    "privateBytes": 921042944,
+    "workingBytes": 948633600
+  },
+  {
+    "name": "DecodeAsyncReturned_AllUsingScopesExited",
+    "elapsedMs": 7931.9366,
+    "threadId": 7,
+    "privateBytes": 921042944,
+    "workingBytes": 948637696
+  },
+  {
+    "name": "float-master",
+    "elapsedMs": 11046.659,
+    "threadId": 7,
+    "privateBytes": 921042944,
+    "workingBytes": 948637696
+  },
+  {
+    "name": "upright-master",
+    "elapsedMs": 13962.8731,
+    "threadId": 7,
+    "privateBytes": 921042944,
+    "workingBytes": 948637696
+  }
+]

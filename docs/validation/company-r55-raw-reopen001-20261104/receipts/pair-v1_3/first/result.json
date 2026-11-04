@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETED",
+  "error": null,
+  "version": "RAW-REOPEN-001-StageProbeV1.3",
+  "pid": 35784,
+  "elapsedMs": 14672.3305,
+  "counts": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 1,
+    "MakeDcrawMemoryImage": 1
+  },
+  "peakWorkingSetOs": 949080064,
+  "peakWorkingSetSampled": 949075968,
+  "peakPrivateBytesSampled": 921321472,
+  "privateSamplePeriodMs": 50,
+  "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+}

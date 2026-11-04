@@ -1,0 +1,135 @@
+{
+  "version": "RAW-REOPEN-001-StageCompareV1",
+  "newRawDecodes": 0,
+  "sourcePair": "E:/Guangjing-RawReopen001-20261104/pair-v1_3",
+  "results": [
+    {
+      "name": "native-rgb16",
+      "firstSha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+      "secondSha256": "9729A70A4CB29D9CB16A7AEABD630D37A2BEAED63F914C8FF6B13B6DA9F422E4",
+      "equal": false,
+      "kind": "u16",
+      "channels": 120559104,
+      "changedChannels": 14275,
+      "maxAbsoluteDifference": 5600,
+      "meanAbsoluteDifference": 0.05121050833290865,
+      "maximumLocation": {
+        "x": 7581,
+        "y": 3980,
+        "channel": 2,
+        "first": 6193,
+        "second": 593
+      },
+      "firstDifference": {
+        "x": 7525,
+        "y": 499,
+        "channel": 0,
+        "first": 4570,
+        "second": 4214
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4481
+      },
+      "borderChangedChannels": 0
+    },
+    {
+      "name": "managed-rgb16",
+      "firstSha256": "72879A9A8DBB2F914AC3CBA8B7B379CB31AA39554DCE12298462791EFC34C4BD",
+      "secondSha256": "9729A70A4CB29D9CB16A7AEABD630D37A2BEAED63F914C8FF6B13B6DA9F422E4",
+      "equal": false,
+      "kind": "u16",
+      "channels": 120559104,
+      "changedChannels": 14275,
+      "maxAbsoluteDifference": 5600,
+      "meanAbsoluteDifference": 0.05121050833290865,
+      "maximumLocation": {
+        "x": 7581,
+        "y": 3980,
+        "channel": 2,
+        "first": 6193,
+        "second": 593
+      },
+      "firstDifference": {
+        "x": 7525,
+        "y": 499,
+        "channel": 0,
+        "first": 4570,
+        "second": 4214
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4481
+      },
+      "borderChangedChannels": 0
+    },
+    {
+      "name": "float-master",
+      "firstSha256": "50968DA7BAC68AC895B74970D2890282F8F79D9A040D6560F0311E2A628A75F2",
+      "secondSha256": "80CCC46D9035B7F3D52608E09DC7349A31F013DDE61AFA77664BD89F22D2B31A",
+      "equal": false,
+      "kind": "f32",
+      "channels": 120559104,
+      "changedChannels": 14275,
+      "maxAbsoluteDifference": 0.08545052632689476,
+      "meanAbsoluteDifference": 7.814222746146878e-7,
+      "maximumLocation": {
+        "x": 7581,
+        "y": 3980,
+        "channel": 2,
+        "first": 0.0944991260766983,
+        "second": 0.009048599749803543
+      },
+      "firstDifference": {
+        "x": 7525,
+        "y": 499,
+        "channel": 0,
+        "first": 0.06973373144865036,
+        "second": 0.0643015205860138
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4481
+      },
+      "borderChangedChannels": 0
+    },
+    {
+      "name": "upright-master",
+      "firstSha256": "50968DA7BAC68AC895B74970D2890282F8F79D9A040D6560F0311E2A628A75F2",
+      "secondSha256": "80CCC46D9035B7F3D52608E09DC7349A31F013DDE61AFA77664BD89F22D2B31A",
+      "equal": false,
+      "kind": "f32",
+      "channels": 120559104,
+      "changedChannels": 14275,
+      "maxAbsoluteDifference": 0.08545052632689476,
+      "meanAbsoluteDifference": 7.814222746146878e-7,
+      "maximumLocation": {
+        "x": 7581,
+        "y": 3980,
+        "channel": 2,
+        "first": 0.0944991260766983,
+        "second": 0.009048599749803543
+      },
+      "firstDifference": {
+        "x": 7525,
+        "y": 499,
+        "channel": 0,
+        "first": 0.06973373144865036,
+        "second": 0.0643015205860138
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4481
+      },
+      "borderChangedChannels": 0
+    }
+  ]
+}

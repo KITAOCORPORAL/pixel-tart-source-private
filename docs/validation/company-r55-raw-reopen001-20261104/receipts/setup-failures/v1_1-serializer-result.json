@@ -1,0 +1,15 @@
+{
+  "status": "FAILED_NO_AUTOMATIC_RETRY",
+  "error": "System.NotSupportedException: Specified method is not supported.\r\n   at System.Reflection.RuntimeMethodInfo.ThrowNoInvokeException()\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.PropertyInfo.GetValue(Object obj)\r\n   at RawReopenStageProbe.Probe.Snapshot(Object v, Int32 depth)\r\n   at RawReopenStageProbe.Probe.Parameters(String stage, RawContext ctx)\r\n   at RawReopenStageProbe.ObservedLibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken, Int32 viewingEdge)\r\n   at RawReopenStageProbe.ObservedLibRawDecoder.\u003C\u003Ec__DisplayClass4_0.\u003CDecodeAsync\u003Eb__0()\r\n   at System.Threading.Tasks.Task\u00601.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task\u0026 currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RawReopenStageProbe.Program.Main(String[] args)",
+  "version": "RAW-REOPEN-001-StageProbeV1.1",
+  "pid": 23144,
+  "elapsedMs": 291.754,
+  "counts": {
+    "OpenFile": 1
+  },
+  "peakWorkingSetOs": 43438080,
+  "peakWorkingSetSampled": 43433984,
+  "peakPrivateBytesSampled": 16060416,
+  "privateSamplePeriodMs": 50,
+  "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+}

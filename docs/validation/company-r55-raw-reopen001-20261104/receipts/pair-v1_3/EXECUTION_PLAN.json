@@ -1,0 +1,32 @@
+{
+  "version": "RAW-REOPEN-001-StageProbeV1.3",
+  "createdAtUtc": "2026-11-04T05:53:29.189Z",
+  "timeZone": "Asia/Shanghai",
+  "softwareManifestSha256": "19B60270F7CFCE05D5F6081DB72627362D612FFA54D1D0E9597AF967FF729F4C",
+  "observerSourceSha256": "AC9D3F8A70E68EE7A4DCDBF4C5FEBD93A4D7E44610FE6A25C9874412D22034C2",
+  "generatedSourceSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+  "noRawSerializationSelfTest": "PASS; all types, no native initialization",
+  "input": {
+    "Id": "company-02",
+    "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+    "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+  },
+  "decodeProcesses": 2,
+  "defaultDevelopmentsPerProcess": 1,
+  "serial": true,
+  "automaticRetries": false,
+  "hardLimitBytes": 2147483648,
+  "masterBudgetBytes": 536870912,
+  "threadPolicy": "UNCHANGED",
+  "parameterAssignments": "UNCHANGED",
+  "failedSetupPids": [
+    18196,
+    30252,
+    23144
+  ],
+  "priorOpenFileCalls": 1,
+  "priorUnpackCalls": 0,
+  "priorDcrawProcessCalls": 0,
+  "fullRawDevelopmentsBeforePair": 0,
+  "note": "Preserve every setup failure; only first and second can develop; no third decoded input or extra retry allowed."
+}

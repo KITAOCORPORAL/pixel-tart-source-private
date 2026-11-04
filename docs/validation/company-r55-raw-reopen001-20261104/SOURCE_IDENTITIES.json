@@ -1,0 +1,102 @@
+{
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "productBaseline": "f27f440909fe19ddd5665b167b912c9db9d897d4",
+  "auditBaseline": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+  "branch": "diagnostic/raw-reopen001-20261104",
+  "productChanged": false,
+  "sourceHashes": [
+    {
+      "name": "LibRawDecoder",
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+      "sha256": "BFB25AF74D54F49E18F12668BCCA895035A7D04A8AB6C7B5343996FA75FEE587"
+    },
+    {
+      "name": "RawImageOrientation",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "sha256": "886EA2AEEABBF0AF3E7A4A6D00EB8F53EF70B87C616815582315136BF8F25E16"
+    },
+    {
+      "name": "HighBitDepthImageBuffer",
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "sha256": "34E8893800D9C3B6D384296F23D2F4A6919981BA0077910DC75D0B1735BE08B7"
+    },
+    {
+      "name": "FrozenRawMaster",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/FrozenRawMaster.cs",
+      "sha256": "AC3D980CB28DE3617BE965F6D0022B64EF9CC1DC095E7FDF86253E0FB16D0583"
+    },
+    {
+      "name": "RawPipeline",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "sha256": "520865F35D93E2A05B6295AE2D18DA0314D2B01162FD5670199F29AE04C80D94"
+    },
+    {
+      "name": "Workspace",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "sha256": "FF595B39353D13D1987026B96CD313DA86F8FAB9C7338411E49D464690C0CF24"
+    },
+    {
+      "name": "Session",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+      "sha256": "EDF912E2B091CF6F1E0D81FC5B6322CAB4B03D81227FDD983DAE7C8AA6475A82"
+    },
+    {
+      "name": "Thumbnails",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "sha256": "9B7D43906FD2621D8C01FA1EF532B84FAE1851B80ECCE930C1769CB10595119E"
+    },
+    {
+      "name": "ReviewTest",
+      "path": "tests/RAWSelectionAssistant.WpfTests/RawColorChainReviewTests.cs",
+      "sha256": "21839346C0B08A9C5AE9CD43AFB80145CF2D567295218A5C2C2C585DEA2B04A9"
+    }
+  ],
+  "wrapperReference": {
+    "repository": "https://github.com/sdcb/Sdcb.LibRaw",
+    "commit": "43e9c1771c2b1387c2170e084e433d8bcef51cab",
+    "license": "MIT per local pinned NuGet nuspec; no new dependency or vendor code copied into product",
+    "referenceHashes": [
+      {
+        "file": "RawContext.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/RawContext.cs",
+        "sha256": "241F033A6AD8170A79D42B457761C46A723605FFF6FAA612C9E0E1BE377A9E92",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      },
+      {
+        "file": "ProcessedImage.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/ProcessedImage.cs",
+        "sha256": "9C325313F27E14CA3FBA357534351DDE0692C7DF740955DE0BC9DFA4827E5C6A",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      },
+      {
+        "file": "OutputParams.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/OutputParams.cs",
+        "sha256": "D3715EF83CBF8E4D630E41C4904F27BE09DDEB8477949C7AD58161A7795DAB89",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      },
+      {
+        "file": "NativeLibRawData.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/NativeLibRawData.cs",
+        "sha256": "654D3C24CE7571BA4BB5DB02E00AE8A840DBFCA164E53736BA6BE0682287AE4B",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      },
+      {
+        "file": "NativeOutputParams.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/NativeOutputParams.cs",
+        "sha256": "DFB470139998CB29510F32491858DE15945F905A30D5641DF00434C8027AF0E3",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      },
+      {
+        "file": "LibRawNativeLoader.cs",
+        "path": "E:/Guangjing-RawReopen001-20261104/reference/LibRawNativeLoader.cs",
+        "sha256": "3167359FF4379BEBCF541B365B1F2F871A7AAE0D645B5FFA60C32B7AA698A062",
+        "authority": "NuGet repository commit 43e9c1771c2b1387c2170e084e433d8bcef51cab; reference-only, not a native algorithm comparison"
+      }
+    ]
+  },
+  "observationVersion": "RAW-REOPEN-001-StageProbeV1.3",
+  "probeAssemblySha256": "D0DE344357BCCA06006287B430C8926A2D40319BB2BF9E8334DFA32F65A0B822",
+  "nativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+  "noThirdNativeDecode": true,
+  "probeSourceCommit": "aa7cc94b8559ea7d2fa6e9c782b31b0ab16b7966"
+}

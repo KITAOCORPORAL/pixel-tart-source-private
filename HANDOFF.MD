@@ -1,3 +1,11 @@
+## 2026-11-04 RAW-REOPEN-001：native RGB16 边界已复现，根因仍待研究（Asia/Shanghai）
+- 唯一问题RAW-REOPEN-001；从审查e2437d2300b37872d5b66482a721e3b6463f1ce4建独立diagnostic/raw-reopen001-20261104。产品基线仍f27f440909fe19ddd5665b167b912c9db9d897d4，产品源码仍38dd3f92bb2db7238f7f058008887929ec971c93；产品src/prototypes零改动，审查/诊断HEAD不当产品源码。
+- 仅授权company-02固定SHA；两独立进程35784→32688串行、各一次默认完整解码。首个已观测差异在MakeDcrawMemoryImage返回nativeRGB16：14,275通道不同、max5600 U16，最大点(7581,3980,B)为6193/593。native复制前后/托管复制/释放后hash各自一致，float与16位roundtrip零错、orientation1不变；无App也复现。
+- 已记录configured-output/unpack/color字段相同，XmpDataPtr只有地址不同；继承OMP_NUM_THREADS=6且未改，实际native worker数未测。峰值工作集949080064/948678656 bytes，master482236416小于512MiB，未提高2GiB预算。
+- 3个观测器启动失败保留，其中1次仅OpenFile、未Unpack/Process；本轮完整解码严格2次，总OpenFile3/Unpack2/Process2/MemoryImage2。早期resolver/依赖/序列化错误不是产品根因。Canon历史0差不重解码，原pass4 FAIL不覆盖、不放宽断言。
+- 状态REPRODUCED_NATIVE_BOUNDARY / ROOT_CAUSE_OPEN / NOT_FIXED。native内部Unpack/Process/MemoryImage子阶段未分离，不能直接断言X-Trans竞态。后续研究需固定阶段有效布局/hash与LibRaw+RawTherapee成熟对照；未改单线程、参数、decoder、gamma/肤色/高光，未加持久缓存。
+- 报告docs/validation/company-r55-raw-reopen001-20261104/FINAL_REPORT.md；工具RawReopenStageProbeV1.3及完整参数/数值收据提交，原像素stage.bin仅留本地。无产品改变，不重建包，沿用原完整诊断ZIP，WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false、全模块/策划15/教程退役保持。修复后App预览/保存重开/导出NOT_RUN；未重跑三图、20MP/六图、日历/DOCX/灯台/锐化。
+
 ## 2026-11-04 暗室默认 RAW 链审查收口（Europe/Berlin）
 - 接续已落盘 pass4 与中断聊天的 closure-audit，不重复 RAW 开发；产品源码仍 38dd3f92bb2db7238f7f058008887929ec971c93，审查独立分支 docs/raw-default-chain-closure-20261104，测试提交 41743c9b00cc28b1f2c463063697528dff4b9efb。原公司树与未跟踪测试保留，不合研究/旧树，不改默认。
 - 默认新导入为 LibRaw0.21.1 RGB16 已显影 sRGB 标记链，不是 PV4 线性 ProPhoto 或全程宽域编辑；显式专业/诊断/默认关闭/未接线路径分开记录。

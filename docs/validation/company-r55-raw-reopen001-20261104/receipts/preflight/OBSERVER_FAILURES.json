@@ -1,0 +1,29 @@
+{
+  "failures": [
+    {
+      "pid": 18196,
+      "stage": "DLL resolver",
+      "OpenFile": 0,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    },
+    {
+      "pid": 30252,
+      "stage": "Missing packaged native dependencies",
+      "OpenFile": 0,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    },
+    {
+      "pid": 23144,
+      "stage": "Read-only parameter serializer tried invoking a byref-like Span property",
+      "OpenFile": 1,
+      "Unpack": 0,
+      "DcrawProcess": 0
+    }
+  ],
+  "fullRawDevelopments": 0,
+  "automaticDecodeRetries": 0,
+  "fix": "V1.2 filters reflection-invocation-ineligible computed properties; all stored fields and configured OutputParams remain captured. New no-RAW serialization self-test before input processing.",
+  "originalFailuresPreserved": true
+}
