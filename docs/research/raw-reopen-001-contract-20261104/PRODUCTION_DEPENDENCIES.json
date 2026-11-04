@@ -1,0 +1,215 @@
+{
+  "version": "RawReopen001ProductionDependencyBindingV1",
+  "observedAt": "2026-11-04T07:15:24.715890+00:00",
+  "scope": "Static byte hashing, PE import names, previously observed native version and managed assembly file metadata only. No native library loaded or initialized here; no RAW touched.",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "productAudit": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+  "nativeVersion": "0.21.1-Release",
+  "nativeVersionAuthority": "Product preserved native-initial-parameters.json, not a new runtime call",
+  "managedAssemblyVersion": "0.21.1.7",
+  "managedFileVersion": "0.21.1.7",
+  "managedInformationalVersion": "0.21.1.7+43e9c1771c2b1387c2170e084e433d8bcef51cab",
+  "managedAsset": "net6.0 byte-exact; netstandard2.0 is different and not the shipped asset",
+  "files": [
+    {
+      "role": "published-native",
+      "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64\\raw_r.dll",
+      "exists": true,
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "PE": {
+        "machine": "0x8664",
+        "optionalHeaderMagic": "0x20b",
+        "imports": [
+          "WS2_32.dll",
+          "lcms2.dll",
+          "zlib1.dll",
+          "jpeg8.dll",
+          "KERNEL32.dll",
+          "MSVCP140.dll",
+          "VCOMP140.DLL",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll"
+        ]
+      }
+    },
+    {
+      "role": "cache-native",
+      "path": "C:\\Users\\Administrator\\.nuget\\packages\\sdcb.libraw.runtime.win64\\0.21.1\\runtimes\\win-x64\\native\\raw_r.dll",
+      "exists": true,
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "PE": {
+        "machine": "0x8664",
+        "optionalHeaderMagic": "0x20b",
+        "imports": [
+          "WS2_32.dll",
+          "lcms2.dll",
+          "zlib1.dll",
+          "jpeg8.dll",
+          "KERNEL32.dll",
+          "MSVCP140.dll",
+          "VCOMP140.DLL",
+          "VCRUNTIME140.dll",
+          "VCRUNTIME140_1.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll"
+        ]
+      }
+    },
+    {
+      "role": "published-binding",
+      "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64\\Sdcb.LibRaw.dll",
+      "exists": true,
+      "bytes": 75776,
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+      "PE": {
+        "machine": "0x14c",
+        "optionalHeaderMagic": "0x10b",
+        "imports": [
+          "mscoree.dll"
+        ]
+      }
+    },
+    {
+      "role": "cache-net6-binding",
+      "path": "C:\\Users\\Administrator\\.nuget\\packages\\sdcb.libraw\\0.21.1.7\\lib\\net6.0\\Sdcb.LibRaw.dll",
+      "exists": true,
+      "bytes": 75776,
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+      "PE": {
+        "machine": "0x14c",
+        "optionalHeaderMagic": "0x10b",
+        "imports": [
+          "mscoree.dll"
+        ]
+      }
+    },
+    {
+      "role": "cache-netstandard-binding",
+      "path": "C:\\Users\\Administrator\\.nuget\\packages\\sdcb.libraw\\0.21.1.7\\lib\\netstandard2.0\\Sdcb.LibRaw.dll",
+      "exists": true,
+      "bytes": 82432,
+      "sha256": "5260d0410a5df5d2af852e5d78ac261b625b95953313b5e4f3ae5572daadd934",
+      "PE": {
+        "machine": "0x14c",
+        "optionalHeaderMagic": "0x10b",
+        "imports": [
+          "mscoree.dll"
+        ]
+      }
+    },
+    {
+      "role": "preserved-pass4-testhost-Sdcb.LibRaw.dll",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\published-testhost\\Sdcb.LibRaw.dll",
+      "exists": true,
+      "bytes": 75776,
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "role": "preserved-pass4-runtime-native",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\published-testhost\\runtimes\\win-x64\\native\\raw_r.dll",
+      "exists": true,
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+    },
+    {
+      "role": "published-native-dependency",
+      "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64\\lcms2.dll",
+      "exists": true,
+      "bytes": 346112,
+      "sha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb",
+      "loadedModuleAtOriginalRun": "NOT_OBSERVED"
+    },
+    {
+      "role": "published-native-dependency",
+      "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64\\zlib1.dll",
+      "exists": true,
+      "bytes": 87040,
+      "sha256": "4a0bd02c2985974f90da4a7065acac1b72f21a4fe58c5391e14b3e6fe566bc12",
+      "loadedModuleAtOriginalRun": "NOT_OBSERVED"
+    },
+    {
+      "role": "published-native-dependency",
+      "path": "E:\\Guangjing-BusinessFlow-20261103\\Guangjing-BusinessFlow-Diagnostic-win-x64\\jpeg8.dll",
+      "exists": true,
+      "bytes": 621056,
+      "sha256": "3854cebc61fd5892cb60491719834922030097f7848d29cccbfca3e88d7ed1e5",
+      "loadedModuleAtOriginalRun": "NOT_OBSERVED"
+    }
+  ],
+  "packages": [
+    {
+      "path": "C:\\Users\\Administrator\\.nuget\\packages\\sdcb.libraw\\0.21.1.7\\sdcb.libraw.nuspec",
+      "sha256": "168a2bcedaaf788de0ba00856d4dc1a791f788d46085d451ffbb19f910db6dab",
+      "id": "Sdcb.LibRaw",
+      "version": "0.21.1.7",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/sdcb/Sdcb.LibRaw",
+        "commit": "43e9c1771c2b1387c2170e084e433d8bcef51cab"
+      },
+      "dependencies": [
+        {
+          "id": "System.Memory",
+          "version": "4.6.0",
+          "exclude": "Build,Analyzers"
+        },
+        {
+          "id": "System.Runtime",
+          "version": "4.3.1",
+          "exclude": "Build,Analyzers"
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\Administrator\\.nuget\\packages\\sdcb.libraw.runtime.win64\\0.21.1\\sdcb.libraw.runtime.win64.nuspec",
+      "sha256": "e88c26a73194da3eb8dacac1f5a2be64fb38b7becd71f7c23e33cd3fc21c555e",
+      "id": "Sdcb.LibRaw.runtime.win64",
+      "version": "0.21.1",
+      "license": "(LGPL-2.1-only OR CDDL-1.0)",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/sdcb/Sdcb.LibRaw.git"
+      },
+      "dependencies": []
+    }
+  ],
+  "nativeReleaseSourceCandidate": {
+    "repository": "LibRaw/LibRaw",
+    "ref": "0.21.1",
+    "commit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+    "binarySourceEquivalence": "NOT_PROVEN",
+    "reason": "Runtime nuspec has no repository commit, compiler/flags/vcpkg patches or reproducible-build attestation. Tag/version and cached/package/published/testhost byte equality identify artifact, not exact native source/build."
+  },
+  "openMP": {
+    "importObserved": "VCOMP140.DLL",
+    "meaning": "Evidence of binary OpenMP runtime dependency only",
+    "notProven": [
+      "thread count for original run",
+      "actual X-Trans dispatch",
+      "data race",
+      "required global serialization"
+    ]
+  },
+  "nativeResolver": "Sdcb tries raw_r.dll then libraw.dll on Windows (S07)",
+  "originalLoadedModulePath": "NOT_CAPTURED; requires product runtime receipt, not inferred from presence of file",
+  "licenseAdmission": "NOT_APPROVED_BY_THIS_RESEARCH"
+}

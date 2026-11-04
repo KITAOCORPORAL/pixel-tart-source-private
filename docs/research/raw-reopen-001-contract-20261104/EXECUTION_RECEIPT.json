@@ -1,0 +1,64 @@
+{
+  "version": "RawReopen001ContractReviewExecutionV1",
+  "recordedAt": "2026-11-04T15:23:00.871979+08:00",
+  "timezone": "Asia/Shanghai",
+  "researchBase": "6f1ae27aff72a7439c661e605a38c1702feea4ce",
+  "researchBranch": "research/raw-reopen-001-contract-20261104",
+  "productReadOnlyRef": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "worktree": "E:/Kitao-Worktrees/color-engine-company-scale-closure-20261103",
+  "thirdPartyLocalRoot": "E:\\Kitao-Research\\raw-reopen-001-contract-20261104",
+  "scope": "One issue, static official-source and contract review; actual artifact byte hashes and inherited report identities; no duplicated product reproduction",
+  "executed": [
+    "Git fetch / ls-remote / branch ancestry and dirty-state audit",
+    "Read product report/source Git blobs without merging its branch",
+    "Static byte hashing and PE import-table read of explicit production/cache/preserved-testhost DLLs; managed assembly file metadata read",
+    "Clone official LibRaw0.21.1, RawTherapee5.11 and exact Sdcb source commit; read pinned functions and license files",
+    "Prepare self-authored contract comparison, source lock and product-only follow-up plan",
+    "New documentation/anchor/hash/scope checks only"
+  ],
+  "counts": {
+    "rawFileOpen": 0,
+    "rawDecode": 0,
+    "nativeLibraryLoad": 0,
+    "nativeInit": 0,
+    "nativeProcess": 0,
+    "gpuExperiment": 0,
+    "build": 0,
+    "referenceProgramExecution": 0,
+    "newPixelComparison": 0,
+    "newPhotographRender": 0,
+    "oldSharpeningEvaluation": 0,
+    "oldSharpeningSealing": 0,
+    "newCandidate": 0,
+    "productSourceModification": 0
+  },
+  "inheritedPixelEvidence": "Product existing report only; no new RAW/TIFF/PNG or full image buffers read",
+  "selectedUnpacker": "NOT_CAPTURED_IN_PRODUCT_EVIDENCE",
+  "selectedInterpolation": "NOT_CAPTURED_IN_PRODUCT_EVIDENCE",
+  "binarySourceProvenance": "NATIVE_EXACT_COMPILER_FLAGS_PATCHES_UNKNOWN",
+  "contractViolation": "NOT_ESTABLISHED_FOR_EXISTING_DEFAULT_SUCCESS_PATH",
+  "rootCause": "OPEN",
+  "fixRecommendation": "NO_BEHAVIOR_PATCH; product-owned passive boundary diagnostics only",
+  "independentSameDomainNumericalComparison": "NOT_RUN",
+  "licenseAdmission": "REFERENCE_ONLY_NOT_PRODUCT_DISTRIBUTION_APPROVAL",
+  "frozenSharpeningV1": "UNCHANGED_DEFAULT_OFF_NOT_ADMITTED",
+  "limitations": [
+    "Primary web fetch returned no usable text; official Git pinned sources used instead.",
+    "Native runtime nuspec has no source commit/build recipe attestation; upstream release fixed as corresponding reference, not proven binary-reproducible source.",
+    "Some initially assumed filesystem layouts were absent; only explicit paths checked, corrected from product historical runner and runtime layout. No drive/RAW scan.",
+    "Actual historical loaded-module path/effective parameters/CFA branch are not captured; do not infer from camera model, dll presence, UserQual or VCOMP import."
+  ],
+  "newReviewCheckAttempts": [
+    {
+      "attempt": 1,
+      "result": "FAILED_CHECKPOINT_WORKTREE_VS_GIT_BLOB_CRLF_LF",
+      "meaning": "Review checker mixed worktree and canonical Git line endings; source/dependency checks preceding it passed. Original worktree suffix was prepended without modification."
+    },
+    {
+      "attempt": 2,
+      "result": "PASS",
+      "correction": "Compare canonical staged checkpoint blob with base blob; no modification of old checkpoint body. Only new-review metadata checks rerun."
+    }
+  ]
+}

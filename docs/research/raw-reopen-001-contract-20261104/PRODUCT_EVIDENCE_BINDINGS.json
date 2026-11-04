@@ -1,0 +1,140 @@
+{
+  "version": "RawReopen001InheritedEvidenceBindingsV1",
+  "readOnlyProductAudit": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+  "researchBase": "6f1ae27aff72a7439c661e605a38c1702feea4ce",
+  "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+  "method": "Read exact Git blobs from product audit; do not merge, copy full product branch, rerun tests, decode RAW, compare TIFF again, or infer root cause",
+  "files": [
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/FINAL_REPORT.md",
+      "gitBlobSha256": "e9878618a94a2e6b9e512b0a1ea8d9f03843506719d76cb9eaeed6c5605f05cd",
+      "bytes": 13524
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/NONPASS.md",
+      "gitBlobSha256": "a6ea10621f9e395f25e797efd121acf5e927ecb70d0e640e332626bb6fb61a37",
+      "bytes": 1150
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/SOURCE_IDENTITY.json",
+      "gitBlobSha256": "d2f2cd9a97d6ac0fb23ee08f3ad855c456fe06fed5c5a72927179aa9393f8929",
+      "bytes": 1809
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/closure/NATIVE_AND_TIFF_IDENTITIES.json",
+      "gitBlobSha256": "31f605247ac2c0ec5945ef52d5475f8ee5bc19b90a31a8d327158b604a32f41f",
+      "bytes": 6527
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/closure/REOPEN_TIFF_PIXEL_COMPARISON.json",
+      "gitBlobSha256": "63686d7b60ccba5448c424c81f80819f8bd00f31077aa9e38909e5722ce1caf3",
+      "bytes": 1402
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/PUBLISHED_BINDING.json",
+      "gitBlobSha256": "ad3d86840554aff875c8147a28ea94730492c822aedb1fda17b607f10e2e2f92",
+      "bytes": 4605
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-02/native-initial-parameters.json",
+      "gitBlobSha256": "146633cbf4ffb6a5ebeef54cddd7b6a486686d15a9273c28a166c0148f7e64d7",
+      "bytes": 2143
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-02/reopen-observation.json",
+      "gitBlobSha256": "bd65ff5889fa46b169fe55fa8cfdf37e1378766665110ed7bc068a39d0c66547",
+      "bytes": 303
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-02/reopen-decoded-master-comparison.json",
+      "gitBlobSha256": "681715790d639d55ccd9d6bceea47efd4ab5b783f289293a6cdc5b98013f6871",
+      "bytes": 522
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-02/reopen-receipt.json",
+      "gitBlobSha256": "6012beefae186cf46eb03e4ddfd1dae42624d857522d5df6f266517ac3edf091",
+      "bytes": 990
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-05/reopen-observation.json",
+      "gitBlobSha256": "57028543da7068529839b11b1d864ec5ee50bb3325699660875907de88431f2b",
+      "bytes": 303
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/company-05/reopen-decoded-master-comparison.json",
+      "gitBlobSha256": "09f45363e8fa4f67ce446f11b1a3cb4d1900d4bceb261607a0457c4eeada9575",
+      "bytes": 482
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/receipts/pass4/RUN_IDENTITY.json",
+      "gitBlobSha256": "810f464d44917749d2c47ca3f54d5594fe85ba4da6f6fc3edc52e29ac0897b61",
+      "bytes": 280
+    },
+    {
+      "path": "docs/validation/company-r55-default-raw-chain-20261104/scripts/Run-RawReview.historical.ps1",
+      "gitBlobSha256": "3760a150b4a80c95058b0114cebcbd955da0a59623dc297ecff3288a525808c5",
+      "bytes": 3327
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/RAWSelectionAssistant.Core.csproj",
+      "gitBlobSha256": "adecb10b3e2d0522701df0fdb244cf94e408ba25791f5eb3651d66b6fb59543e",
+      "bytes": 1311
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+      "gitBlobSha256": "79dbf871f746cd3cca4152013576371fbdbe6684100e85674cf6b31d8fb454df",
+      "bytes": 14030
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "gitBlobSha256": "e8245df6278cd5ce27927ac48149e12cb5ebead3031d2fce67bd95790394d207",
+      "bytes": 8462
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "gitBlobSha256": "a9ed2f10b8b78e769f49487e32d50584224d006ce78566cf6cc4ba522c1cbc9c",
+      "bytes": 5027
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "gitBlobSha256": "b25e963f73c1ddc17789b923ad26f160773b129e845bf8ee40c702328236efaa",
+      "bytes": 1522
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/RawColorChainReviewTests.cs",
+      "gitBlobSha256": "42f0abe5e09405f812d9b9c54b6b83680b85a9f89f8a15dc0e68db7bfbca31ef",
+      "bytes": 15769
+    }
+  ],
+  "productCodeAnchors": {
+    "P01": "LibRawDecoder.cs:78-163 synchronous DecodeCore in Task.Run, fresh context, params, MakeMemoryImage, copy before Dispose",
+    "P02": "RawMatchTiff16ProductPipeline.cs:15-29 legacy full RGB16 master route",
+    "P03": "HighBitDepthImageBuffer.cs:51-65 conversion from managed RGB48 into float representation",
+    "P04": "RawImageOrientation.cs:8-27 permutation/normalization after decode"
+  },
+  "existingFactsNotNewExecutions": {
+    "issue": "RAW-REOPEN-001 / P1 / OPEN",
+    "sample": "company-02 / Fujifilm X-T5",
+    "sameSourceStackVersion": true,
+    "masterComparison": {
+      "changedChannels": 16344,
+      "maximumU16Difference": 5600,
+      "maximumLocation": {
+        "x": 7581,
+        "y": 3980,
+        "channel": "B"
+      },
+      "note": "Published comparison against reopened master; not a pair of passive native-stage captures"
+    },
+    "editedTiffComparison": {
+      "changedChannels": 20521,
+      "maximumU16Difference": 6844,
+      "note": "Inherited existing TIFF pixel-stream comparison, not rerun"
+    },
+    "canonControl": "company-05 exact in preserved comparison",
+    "rawStageBeforeDemosaic": "NOT_CAPTURED",
+    "selectedUnpacker": "NOT_CAPTURED",
+    "selectedInterpolation": "NOT_CAPTURED"
+  },
+  "newPixelEvidenceGenerated": false
+}

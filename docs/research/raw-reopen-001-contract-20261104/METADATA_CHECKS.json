@@ -1,0 +1,20 @@
+{
+  "version": "RawReopen001SourceContractMetadataChecksV1",
+  "passed": true,
+  "checked": {
+    "sourceLicenseFiles": 39,
+    "functionLineAnchors": 41,
+    "productGitBlobs": 20,
+    "explicitDependencyFiles": 10
+  },
+  "method": "Static source/metadata/artifact identity checks, no decoder test or numerical validation",
+  "checkpointHashBasis": "Canonical Git index/blob bytes, not platform worktree line endings",
+  "researchBaseAncestor": true,
+  "productAuditMerged": false,
+  "oldCheckpointGitBlobSuffixPreserved": true,
+  "productSourceTestsToolsUnchanged": true,
+  "newRawDecode": 0,
+  "newPixelComparisons": 0,
+  "nativeCodeExecuted": false,
+  "scope": "Validates review traceability, not root cause, real image reproducibility, pixel quality, product acceptance or license approval"
+}

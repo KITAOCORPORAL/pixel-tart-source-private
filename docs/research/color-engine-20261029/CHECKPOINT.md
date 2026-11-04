@@ -1,3 +1,15 @@
+# RAW-REOPEN-001 单一源码/契约对照（2026-11-04，Asia/Shanghai）
+
+研究从封存6f1ae27aff72a7439c661e605a38c1702feea4ce接续，产品审查e2437d2300b37872d5b66482a721e3b6463f1ce4仅只读，未合入产品分支。新研究分支research/raw-reopen-001-contract-20261104，权威docs/research/raw-reopen-001-contract-20261104/REPORT.md、SOURCE_LOCK.json、PRODUCTION_DEPENDENCIES.json和PRODUCT_DIAGNOSTIC_PLAN.md。
+
+确认发布/缓存/既有pass4 testhost原生raw_r.dll及Sdcb.LibRaw net6.0资产字节匹配；native版本复用0.21.1-Release收据，绑定0.21.1.7/43e9c177。固定LibRaw0.21.1@cccb97647fcee56801fa68231fa8a38aa8b52ef7与RawTherapee5.11@db575c6690d30ce6428c0e1383bec8b8f1fb8d21相关函数/许可；native包源码/编译溯源仍不完整，不能声称上游tag与DLL可复现同源。
+
+现有默认成功路径未发现明确生命周期/输出buffer契约违约；实际unpacker/CFA/fuji_width/插值分支旧收据未捕获，不凭型号/UserQual猜算法。RT默认输入端共用LibRaw、后续为自有float demosaic，非完全独立同域数值oracle。mutex/scratch差异不足以证明竞态或未初始化读取，不建议直接关线程、换decoder或calloc。仅给产品线最小被动诊断计划，研究线本轮RAW/GPU/build/参考运行/像素比较均0，产品src/默认参数无改动。
+
+本轮CODE_CONTRACT_REVIEW_COMPLETE、ROOT_CAUSE_OPEN；独立同域数值对照NOT_RUN，非像素变更准入。V1锐化继续封存/default-off/NOT_ADMITTED；无V2或胶片候选。下方原检查点字节保留，不重复评价或封存V1。
+
+---
+
 # 第十三批 V1 研究已结束并封存（2026-11-03，Asia/Shanghai）
 
 接续 research/color-engine-round13-human-review-20261103 @ 8b9dcfa0bf8bd07e983a63a0a79bfb84a7110ca9，fetch/本地/远端核对一致。复用本会话已核验真实人工评价；原 JSON SHA256 48bd60ff065eaadbb49576700fbf3c5f89ce85ea121d6b50747a9cb8a5dfd397，本次哈希确认未变，不重复评价、不补答案/文字原因。

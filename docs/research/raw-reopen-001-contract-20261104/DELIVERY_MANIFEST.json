@@ -1,0 +1,72 @@
+{
+  "version": "RawReopen001ContractReviewDeliveryManifestV1",
+  "researchBase": "6f1ae27aff72a7439c661e605a38c1702feea4ce",
+  "productReadOnlyInput": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+  "fileCount": 12,
+  "hashBasis": "Canonical Git index/blob bytes",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 32692,
+      "gitBlobSha256": "4f3823d5235f781a1bef8dfa66576138896963348d220048eb7539246d932206"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/.gitattributes",
+      "bytes": 30,
+      "gitBlobSha256": "93aacecaa993509cce94958a3a85bfc06b3cb21a747bab51b8021652a3acb878"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/CONTRACT_COMPARISON.md",
+      "bytes": 7564,
+      "gitBlobSha256": "499b6a6a799a2b9e41b3923a5a3343220a274a9f9002951e36ccc1c4e5ccaa23"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/EXECUTION_RECEIPT.json",
+      "bytes": 3532,
+      "gitBlobSha256": "b75aaea04571cb0314ac75eddd143635382c459d5f7d83cf39474d24388f8adf"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/LICENSE_BOUNDARIES.md",
+      "bytes": 2914,
+      "gitBlobSha256": "e52cced18aca5ac40b21e27042e66385dc5cff6d30c9e3ea7f56b68362d528d1"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/METADATA_CHECKS.json",
+      "bytes": 798,
+      "gitBlobSha256": "fcb9fb020660024101d45088eab36e6ff8fbb7138f1dfe712667e18d57804265"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/PRODUCTION_DEPENDENCIES.json",
+      "bytes": 8110,
+      "gitBlobSha256": "c4002eddf0cfcdb638aebdd16a85f83e7b2df8bba56b762da34a445ffe14558f"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/PRODUCT_DIAGNOSTIC_PLAN.md",
+      "bytes": 7284,
+      "gitBlobSha256": "73ac9198cf48cdc8cbbc58d6a4333cdb76f9d509637c8e4a1bc90fcd22f9fcdd"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/PRODUCT_EVIDENCE_BINDINGS.json",
+      "bytes": 6343,
+      "gitBlobSha256": "a31889eed879b2b3ddc82b3035c2a482ca4b9e1566b41737aa0faa163d06fc9e"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/REPORT.md",
+      "bytes": 12696,
+      "gitBlobSha256": "653977c735c3188fa4d7f8dc148e9b6f749e8da5f2a329408249b6952bbd95b2"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/REPRODUCE_SOURCE_REVIEW.md",
+      "bytes": 1820,
+      "gitBlobSha256": "12d7068d7abd2f5b65b1d275bea8a2d7cebf7941501a7247d7ba6adc47ba63ac"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/SOURCE_LOCK.json",
+      "bytes": 25864,
+      "gitBlobSha256": "b69da851f84a133df1c73076d498ce7198959a169b3e26f7e08161646fdeba96"
+    }
+  ],
+  "selfExcluded": true,
+  "remoteIdentityReceipt": "Saved locally after actual push; no self-referential commit claim",
+  "scope": "Self-authored research docs, function/license/source metadata and artifact identities only; no product src/tests/tools changes; no third-party implementation code, binary, RAW, TIFF, PNG or private buffers"
+}
