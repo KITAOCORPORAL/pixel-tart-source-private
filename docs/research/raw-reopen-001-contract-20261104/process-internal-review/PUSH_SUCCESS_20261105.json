@@ -1,0 +1,67 @@
+{
+  "version": "RawReopen001InternalReviewPushSuccessV1",
+  "date": "2026-11-05",
+  "timezone": "Asia/Shanghai",
+  "branch": "research/raw-reopen-001-contract-20261104",
+  "researchContentCommit": "3d06c14004c8047a88ab5362b14039fff0bbf7ac",
+  "verifiedLocalHead": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+  "verifiedRemoteHead": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+  "pushStatus": "SUCCESS",
+  "remoteReadback": "EXACT_MATCH",
+  "worktreeAfterVerifiedPush": "CLEAN",
+  "reusedCompletedInternalReview": true,
+  "requiredHandoffFiles": [
+    {
+      "file": "REPORT.md",
+      "bytes": 14935,
+      "sha256": "3393121de76367e0ee250ca4bbb9be7eb41677b8fed68382d383cefaa4e03ac9"
+    },
+    {
+      "file": "CHECKPOINTS.md",
+      "bytes": 8013,
+      "sha256": "5e13952aa5d6eba44aa7284b37a58bc82338efa4a7302ab2f658321b985c335a"
+    },
+    {
+      "file": "CHECKPOINT_SPEC.json",
+      "bytes": 12346,
+      "sha256": "83e318955c31ad030c70fdc75afcd214e851a8d92f460595a340f34180d68aee"
+    },
+    {
+      "file": "HYPOTHESIS_H1.json",
+      "bytes": 5418,
+      "sha256": "902c2d87d79c04b6baab162f60d931c74a9df7a71d0e3f3074fb622d5466a81a"
+    },
+    {
+      "file": "INITIALIZATION_AND_PARALLEL_AUDIT.md",
+      "bytes": 3470,
+      "sha256": "72833cdf9fb5797a2c5a97d73e25ae873cc83db34766a7dd7e831b4cc2f82f4f"
+    },
+    {
+      "file": "INTERNAL_SOURCE_LOCK.json",
+      "bytes": 27263,
+      "sha256": "45601177677bf46ad05c4398c18c75d376d7782f28d1a32b8e55ab75a60a6734"
+    },
+    {
+      "file": "PRODUCT_EVIDENCE_BINDINGS.json",
+      "bytes": 7859,
+      "sha256": "9609501612daadf671b9cb1bb13c81deb77da734a95547a28dbb8802a7de0226"
+    },
+    {
+      "file": "METADATA_CHECKS.json",
+      "bytes": 4885,
+      "sha256": "42abc6822b7f64007d8fd64b421f97a75668a2f85d172e6386a3eec4cb5d63f5"
+    }
+  ],
+  "rootCause": "OPEN_NOT_FIXED",
+  "remainingFact": "Whether raw2image_ex return already differs. H1 additionally requires actual X-Trans branch/team and same interpolation-entry image/state followed by changed interpolation output.",
+  "newExecution": {
+    "rawDecode": 0,
+    "nativeLibraryLoad": 0,
+    "build": 0,
+    "gpu": 0,
+    "referenceProgramRun": 0,
+    "productSourceChange": 0
+  },
+  "oldFailureReceipt": "PUSH_RECEIPT.json retained unchanged as historical",
+  "note": "This success receipt is a subsequent documentation commit; its final HEAD will be separately read back and reported."
+}

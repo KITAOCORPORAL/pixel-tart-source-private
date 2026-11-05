@@ -1,3 +1,15 @@
+# RAW-REOPEN-001 内部交接已推送（2026-11-05，Asia/Shanghai）
+
+复用已完成内部审查，未重复生命周期报告、解码或运行实验。研究内容提交3d06c14004c8047a88ab5362b14039fff0bbf7ac及历史失败收据ef95df88e5ca7b44a6adbcd0f7278941c46db58f已正常推送，远端实际读回ef95df88e5ca7b44a6adbcd0f7278941c46db58f一致。原PUSH_RECEIPT.json仍保留当时网络失败；当前成功记录为process-internal-review/PUSH_SUCCESS_20261105.json，后续文档提交HEAD另读回。
+
+产品线交接入口：docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md、CHECKPOINT_SPEC.json、HYPOTHESIS_H1.json、INITIALIZATION_AND_PARALLEL_AUDIT.md；文件/函数行范围锁在INTERNAL_SOURCE_LOCK.json，产品输入绑定c7df75d4ec8dde31cb1bd6d33ce3726eb2db7c39。材料覆盖内部函数落点、有效域/布局/初始化、实际quality/passes/分支与worker字段、唯一H1的读写关系和证伪条件。
+
+ROOT_CAUSE_OPEN/NOT_FIXED不变：最早缺raw2image_ex返回有效image/state是否已差；H1还缺实际XTrans分支/team与插值前同/后差及消费值证据。产品统一安排隔离观测，研究等待内部事实。此次新增RAW/native加载/build/GPU/参考运行均0，src/tools/tests零变更；旧锐化V1保持封存default-off/NOT_ADMITTED。
+
+---
+
+## 以下保留原检查点与历史网络失败，不代表当前交付状态
+
 # RAW-REOPEN-001：DcrawProcess内部交接（2026-11-04，Asia/Shanghai）
 
 本轮源码交接本地提交3d06c14004c8047a88ab5362b14039fff0bbf7ac。两次正常push连接重置，ls-remote端口443超时；远端接收未确认，最后成功fetch研究0e0723df/产品c7df75d4。PUSH_RECEIPT记录实际失败，网络恢复后只补推送读回，不重做审查或解码。
