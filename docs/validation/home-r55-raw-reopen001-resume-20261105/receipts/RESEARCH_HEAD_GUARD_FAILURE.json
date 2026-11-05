@@ -1,0 +1,8 @@
+{
+  "remediation": "Bind immutable reviewed Git object, do not depend on live research worktree HEAD; new commit only added push receipt",
+  "status": "EXPECTED_GUARD_FAILURE_RESEARCH_HEAD_MOVED",
+  "actualHead": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+  "nativeCalls": 0,
+  "rawCalls": 0,
+  "expectedHead": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f"
+}

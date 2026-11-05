@@ -1,0 +1,53 @@
+{
+  "version": "RAW-REOPEN-001-ContinuationPlan-20261105",
+  "status": "BLOCKED_PREREQUISITES_NO_LAUNCH",
+  "authorization": "Existing task authorization, not a new per-machine allowance",
+  "taskTotalMaximumFullDecodes": 2,
+  "localEvidenceOfConsumedNewObservationSlots": 0,
+  "companyLiveExecutionState": "UNKNOWN",
+  "doNotInferCompanyExecutionCount": true,
+  "rawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "rawFoundAtExistingAuthorizedPath": true,
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "researchPinnedReview": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+  "primaryPayloads": [
+    "P1",
+    "P3b",
+    "P5",
+    "P6",
+    "P7",
+    "P9"
+  ],
+  "plannedMode": "Two independent serial processes, once per slot, default decode, no automatic retry",
+  "nativeThreadPolicy": "Normal existing binding initialization; never manually set/clear OMP/KMP",
+  "missingTools": [
+    "cl.exe",
+    "nmake.exe",
+    "dumpbin.exe"
+  ],
+  "sdkDiscovery": "No installed-root registry entry found; no scan of other disks",
+  "nativeDll": "NOT_BUILT",
+  "abiSelfTest": "NOT_RUN",
+  "checkpointContract": "PARTIAL_DETAILS_IN_RESEARCH_CHECKPOINT_BINDING",
+  "boundedDecodeRunner": "NOT_IMPLEMENTED_EXISTING_HOST_IS_NO_RAW_ONLY",
+  "nextNativeCommand": "Build-Isolated.ps1 -PreparedRoot <shared>/isolated-source-03 -BindingRoot <fixed-Sdcb-lib/net6.0> -OutputRoot <NEW-output> (requires genuine x64 MSVC Developer shell and Windows SDK first)",
+  "afterBuild": [
+    "Record real compiler/flags/macros/optional components/imports/DLL hash as NEW build identity",
+    "Pass exported offsetof/sizeof, binding/accessor, synthetic native hash and no-RAW lifecycle test",
+    "Complete checkpoint/state fields and review gaps; sparse P5 alone cannot prove all interpolation inputs equal",
+    "Implement and freeze bounded task-wide slot runner with original default assignments and identities; do not bypass old V2.1 fixed-native guards",
+    "Only then consult original task-wide consumption evidence and execute within remaining allowance, no replenishment on machine change"
+  ],
+  "newCallsThisResume": {
+    "fullDecodes": 0,
+    "memoryImage": 0,
+    "nativeInit": 0,
+    "process": 0,
+    "open": 0,
+    "unpack": 0
+  },
+  "productionEquivalent": false,
+  "firstNewDifference": "NOT_OBSERVED_NO_EXECUTION",
+  "originalKnownBoundary": "Valid Unpack equal; Process image already differs",
+  "noApplicationPackageBuild": true
+}

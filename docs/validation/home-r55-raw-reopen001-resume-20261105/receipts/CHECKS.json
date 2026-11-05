@@ -1,0 +1,30 @@
+{
+  "status": "LOCAL_AUDIT_AND_RESEARCH_BINDING_VERIFIED_NATIVE_BLOCKED",
+  "dateShanghai": "2026-11-05T20:29:48.4551624+08:00",
+  "tools": [
+    {
+      "file": "Audit-LocalState.ps1",
+      "sha256": "369741C2224D9F92C0CBB7A922F7C4BEFAD006605DCAF213834D3F24F4F80E18"
+    },
+    {
+      "file": "Bind-ResearchContract.mjs",
+      "sha256": "D370DC398D2A3771DF28DBDE118AB54E39F93EDC1DA247D12DE6623CB13391DC"
+    },
+    {
+      "file": "Bind-ResearchContract.Tests.mjs",
+      "sha256": "9E7DEF4881B4102E75CD23B0ADACC50CA4FEEF8AF296B12B3F343E32D2BFBF09"
+    }
+  ],
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "researchPinnedHead": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+  "lockedLibRawFilesVerified": 27,
+  "primaryPayloadCallsites": 6,
+  "syntheticChecksPassed": 10,
+  "nativeBuildsThisResume": 0,
+  "nativeSelfTestsThisResume": 0,
+  "fullDecodesThisResume": 0,
+  "localConsumedSlotsFound": 0,
+  "companyLiveState": "UNKNOWN",
+  "executionReady": false,
+  "productSourceChanged": false
+}

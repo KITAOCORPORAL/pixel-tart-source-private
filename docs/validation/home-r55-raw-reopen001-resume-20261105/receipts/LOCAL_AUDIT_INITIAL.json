@@ -1,0 +1,98 @@
+{
+  "timestampShanghai": "2026-11-05T20:19:01.0425417+08:00",
+  "trees": [
+    {
+      "path": "N:\\pixart\\pixel-tart-source-private\\raw-reopen001-home-native",
+      "head": "bb19e8e1326c108f538e60b33501ee229ba133f7",
+      "status": [],
+      "branch": "diagnostic/raw-reopen001-home-20261104"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-raw-reopen-001-contract-20261104",
+      "head": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+      "status": [],
+      "branch": "research/raw-reopen-001-contract-20261104"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-r55-default-raw-chain-20261103",
+      "head": "f27f440909fe19ddd5665b167b912c9db9d897d4",
+      "status": [
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "?? tests/RAWSelectionAssistant.WpfTests/DefaultRawChainObservationTests.cs",
+        "?? tests/RAWSelectionAssistant.WpfTests/DefaultRawStatusTests.cs"
+      ],
+      "branch": "home/r55-default-raw-chain-20261103"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\PUSH_READBACK.json",
+      "bytes": 605,
+      "sha256": "31C21351EA45E84200AEE599A8B88CE8EAE7C7B1B01516EBCE70E5634BFC2517"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\isolated-source-01\\PREPARATION.json",
+      "bytes": 1105,
+      "sha256": "1F77EC09508AD8EEFD19D8300B7A0A0B77688A9A35DFFCB17907281FFB0FE708"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\isolated-source-02\\PREPARATION.json",
+      "bytes": 1105,
+      "sha256": "80B9D0D11929E5D7D4981565113A164688C26E827FF9F2ADABDB64CB3225BAD0"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\isolated-source-03\\PREPARATION.json",
+      "bytes": 1105,
+      "sha256": "3D27AFACA67AC7ADCE70844C9E78EA4F3B16F46FD07ADB83333AA4457940CAA5"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\native-build-preflight-01\\BUILD_STATUS.json",
+      "bytes": 633,
+      "sha256": "5C682F76CCB7F89A6B625103D65462088D5A1B92A6143AB34D4FC9491D2797B4"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\preparation-selftest-01\\PREPARATION.json",
+      "bytes": 1107,
+      "sha256": "E3CB9385C1DFD294125E29AB4FBA41BEA512793F4ADCC2B33D7CD91B7559AF35"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\preparation-selftest-02\\PREPARATION.json",
+      "bytes": 1107,
+      "sha256": "83CBD46525715E840E22943C65D37A130CE988084A4ACFEECD809F5F50FC8807"
+    },
+    {
+      "path": "N:\\pixart\\raw-reopen001-shared-research\\preparation-selftest-03\\PREPARATION.json",
+      "bytes": 1107,
+      "sha256": "AF2888AA4781A3E38FBB24CE30472F0C023355D79ACAA82A311B9D3A29D3FC65"
+    }
+  ],
+  "toolchainRegistry": [
+    {
+      "key": "HKLM:/SOFTWARE/Microsoft/VisualStudio/SxS/VS7",
+      "exists": false,
+      "values": null
+    },
+    {
+      "key": "HKLM:/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7",
+      "exists": false,
+      "values": null
+    },
+    {
+      "key": "HKLM:/SOFTWARE/Microsoft/Windows Kits/Installed Roots",
+      "exists": false,
+      "values": null
+    },
+    {
+      "key": "HKLM:/SOFTWARE/WOW6432Node/Microsoft/Windows Kits/Installed Roots",
+      "exists": false,
+      "values": null
+    }
+  ],
+  "rawPresent": true,
+  "rawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "companyLiveState": "UNKNOWN_NOT_ACCESSIBLE",
+  "newObservationLocalConsumedSlots": 0,
+  "newObservationLocalRunReceipts": 0,
+  "newObservationNativeDlls": 0
+}

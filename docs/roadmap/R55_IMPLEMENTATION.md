@@ -1,3 +1,10 @@
+## 2026-11-05 RAW-REOPEN-001 家庭续查：本地WIP真实存在，研究检查点绑定补齐（Asia/Shanghai）
+- fetch后原远端诊断仍c7df75d4，家庭独立树实际bb19e8e1且起始干净，未推送源码/四次宿主构建和失败日志全在。研究固定ef95df88精确检查点本地可读；其后5a4f233d只增加推送收据，不改合同。
+- 新Audit-LocalState检查指定工作树/诊断根：同SHA授权RAW存在，consumed/calls/result/新nativeDLL均0；公司当前本地UNKNOWN，不猜路径/次数，不因换机器重新分配两次。上轮HOME_EXECUTION与本次核验一致：本计划尚未构建新库/运行RAW。
+- 新Bind-ResearchContract以固定Git对象核对27份LibRaw内部锁文件与现有生成身份，六个主payload静态点存在，十项合成防误判检查PASS，native/RAW0。研究HEAD移动引发的首次guard失败保留，改用不可变Git对象绑定，不动研究树。
+- 精确缺口：cl/nmake/dumpbin和已登记SDK未发现；原生编译/ABI/无RAW自检未完成；旧patch的black-after不是P2，P5稀疏CFA hash不足证明整个插值输入相同，scale_mul/out_cam/布局代数/事件尚缺；bounded RAW runner尚未实现/冻结。executionReady=false，不冒称仅缺一次运行。
+- 本轮Open/Unpack/Process/MemoryImage/nativeInit/原生编译全0。新两库/两进程未执行，内部首差仍未测；已有边界Unpack有效域相同、Process image已不同；ROOT_CAUSE_OPEN/NOT_FIXED。
+- 产品38dd3f92不变、src/prototypes零差异，不改默认/线程/算法、不重建包。交接docs/validation/home-r55-raw-reopen001-resume-20261105/FINAL_REPORT.md与EXECUTION_PLAN.json；先前WIP及本轮增量在diagnostic/raw-reopen001-home-20261104提交推送，最终HEAD另存读回。
 ## 2026-11-05 RAW-REOPEN-001 家庭：静态准备，原生工具链门禁未过（Asia/Shanghai）
 - 接续诊断c7df75d4…，新分支diagnostic/raw-reopen001-home-20261104；产品源码仍38dd3f92…，src/prototypes零差异，不重跑Unpack/托管复制/float/方向/App。旧树/原DLL/失败/两轮输出不覆盖。
 - 复用研究线0e0723df…及唯一家庭共用固定LibRaw cccb9764…；18个锁定blob哈希通过。原NuGet native F500C073…及binding/依赖等于旧收据，native编译flags/补丁仍未知；新构建不冒称等价。

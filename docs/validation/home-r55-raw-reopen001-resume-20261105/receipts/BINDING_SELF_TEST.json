@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "passed": 10,
+  "cases": [
+    "accept exact pinned synthetic source record",
+    "reject source content mutation even when length is unchanged",
+    "reject source version drift",
+    "reject duplicate ownership of locked source",
+    "restore original algorithm exactly",
+    "reject edited original algorithm even with updated prepared hash",
+    "reject stale observer header identity",
+    "reject altered generated file without re-freezing",
+    "static callsites never imply runtime capture or complete compliance",
+    "missing convert-rgb stage remains missing"
+  ],
+  "syntheticOnly": true,
+  "rawCalls": 0,
+  "nativeCalls": 0
+}

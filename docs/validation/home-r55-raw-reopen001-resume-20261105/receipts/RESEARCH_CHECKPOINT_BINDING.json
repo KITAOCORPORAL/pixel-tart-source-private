@@ -1,0 +1,354 @@
+{
+  "status": "SOURCE_BINDING_VERIFIED_CHECKPOINT_COVERAGE_PARTIAL",
+  "researchHead": "ef95df88e5ca7b44a6adbcd0f7278941c46db58f",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "documents": [
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/INTERNAL_SOURCE_LOCK.json",
+      "sha256": "45601177677bf46ad05c4398c18c75d376d7782f28d1a32b8e55ab75a60a6734"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINT_SPEC.json",
+      "sha256": "83e318955c31ad030c70fdc75afcd214e851a8d92f460595a340f34180d68aee"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md",
+      "sha256": "5e13952aa5d6eba44aa7284b37a58bc82338efa4a7302ab2f658321b985c335a"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/REPORT.md",
+      "sha256": "3393121de76367e0ee250ca4bbb9be7eb41677b8fed68382d383cefaa4e03ac9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/process-internal-review/HYPOTHESIS_H1.json",
+      "sha256": "902c2d87d79c04b6baab162f60d931c74a9df7a71d0e3f3074fb622d5466a81a"
+    }
+  ],
+  "sourceRecords": [
+    {
+      "path": "COPYRIGHT",
+      "bytes": 1153,
+      "sha256": "d6ed03c89e25fcda5db454c1badc2c321f241799aab2062418a7fb3742c935ce",
+      "verified": true
+    },
+    {
+      "path": "internal/dcraw_defs.h",
+      "bytes": 2108,
+      "sha256": "4d1cbcc107267b814b2b4aed85056d45eb6020fbf751589c4cf37f6a16214eff",
+      "verified": true
+    },
+    {
+      "path": "internal/defines.h",
+      "bytes": 6160,
+      "sha256": "7f5d88b42b2005c5319f544cc98c1a52261c63b2b1bc02e6e6fae66e974168d6",
+      "verified": true
+    },
+    {
+      "path": "internal/libraw_cxx_defs.h",
+      "bytes": 5377,
+      "sha256": "a8406ee044f6c04c9beafdc684e2351fbad695be12a39a4ff67b5a664eaca445",
+      "verified": true
+    },
+    {
+      "path": "internal/libraw_internal_funcs.h",
+      "bytes": 17528,
+      "sha256": "4adc7dcc998f99f1498704c59a357e3ff4a1dac8cfda68bc5df63c66c42c8a23",
+      "verified": true
+    },
+    {
+      "path": "internal/var_defines.h",
+      "bytes": 10295,
+      "sha256": "724ce47af48d728cbc81d51cbb6b7184bb8368816ce8d37c4658d15dbcbac952",
+      "verified": true
+    },
+    {
+      "path": "libraw/libraw.h",
+      "bytes": 18208,
+      "sha256": "3e1c191f1b2feeb58c50de668c2a10fa62631ac49db3fafc3501e5c9aff7ceab",
+      "verified": true
+    },
+    {
+      "path": "libraw/libraw_const.h",
+      "bytes": 24831,
+      "sha256": "dbee02d1453e39c1b391d9ad7fa7dfecd21bf82a1a4d785c452de7a720223ece",
+      "verified": true
+    },
+    {
+      "path": "libraw/libraw_internal.h",
+      "bytes": 10718,
+      "sha256": "7c7d8a6abd51642868903f4567475ca97d5bb876259a2e1643ff9f0bcc706b11",
+      "verified": true
+    },
+    {
+      "path": "libraw/libraw_types.h",
+      "bytes": 33142,
+      "sha256": "d83c7b9c7a8ea035b12f1d7b70f8ed686bae360da5b56c3fdf48dac397b6402d",
+      "verified": true
+    },
+    {
+      "path": "LICENSE.CDDL",
+      "bytes": 16906,
+      "sha256": "0e3098d2d54a12434715f6679ea408d57da5e8d613c385c58ecc6fe5d30cc81f",
+      "verified": true
+    },
+    {
+      "path": "LICENSE.LGPL",
+      "bytes": 24389,
+      "sha256": "eea173a556abac0370461e57e12aab266894ea6be3874c2be05fd87871f75449",
+      "verified": true
+    },
+    {
+      "path": "src/decoders/generic.cpp",
+      "bytes": 2958,
+      "sha256": "2c826d57ef765db71bffe1f14e83d1336c85434e9b71bad6553293f29e45350c",
+      "verified": true
+    },
+    {
+      "path": "src/demosaic/ahd_demosaic.cpp",
+      "bytes": 10564,
+      "sha256": "05db2e09c7963fc25f691eb36c84cf4593c05642282e5b3dcd19b4946600c4dc",
+      "verified": true
+    },
+    {
+      "path": "src/demosaic/misc_demosaic.cpp",
+      "bytes": 14041,
+      "sha256": "d9ee430943c20a348dd73aae597526baa8a70a769b4ad3abf16462658c70bb7b",
+      "verified": true
+    },
+    {
+      "path": "src/demosaic/xtrans_demosaic.cpp",
+      "bytes": 17849,
+      "sha256": "1c4aa7362d4059ea3952dbc9a09de73f13721aa18f65d2445d027e68352045af",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/aspect_ratio.cpp",
+      "bytes": 3342,
+      "sha256": "d125607d068000695db99e1d67e8c2cfafcaa731f6460ddbfc80b7dcedd54162",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/dcraw_process.cpp",
+      "bytes": 6464,
+      "sha256": "81efb3bab8631285123414f5e6dc2de62069e2340bf54e7dae41a55d7540c540",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/mem_image.cpp",
+      "bytes": 7324,
+      "sha256": "b722aa2cdcbf446e5bf3cf774b1108376e1fdec965d50bd7740a9532b0c135f1",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/postprocessing_aux.cpp",
+      "bytes": 13446,
+      "sha256": "d846d8c869e3d7666b0b93e4b713b40476d5cfc12fd7a3ceb79fe72e2b984110",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/postprocessing_utils.cpp",
+      "bytes": 5705,
+      "sha256": "554d6a358915866b5fbc5bdda8682f81b01f9619f522aea7473ebdbbb5b32701",
+      "verified": true
+    },
+    {
+      "path": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "bytes": 10783,
+      "sha256": "531b7f9176006933a58d638f8e2f96cf9bfa300375ddab5b4034708fe1045ea2",
+      "verified": true
+    },
+    {
+      "path": "src/preprocessing/preprocessing_ph.cpp",
+      "bytes": 827,
+      "sha256": "9f8016c7553ae4e16b5d796777230f57282841f26b53b46a30129ea17dd5fe1b",
+      "verified": true
+    },
+    {
+      "path": "src/preprocessing/raw2image.cpp",
+      "bytes": 16893,
+      "sha256": "c7086786e96c03601de4bee5215532fa14d7a83da6fcbe8af912cf209d1e5d8f",
+      "verified": true
+    },
+    {
+      "path": "src/preprocessing/subtract_black.cpp",
+      "bytes": 2424,
+      "sha256": "87a09f0428e675f40381029c3600411ed9097a7bf58a47bb204e2e3c826296eb",
+      "verified": true
+    },
+    {
+      "path": "src/utils/init_close_utils.cpp",
+      "bytes": 11227,
+      "sha256": "fd9c618f46a7db1aa6274e0a5f05d18be359ba6a51202826620f8953921c8b44",
+      "verified": true
+    },
+    {
+      "path": "src/utils/utils_libraw.cpp",
+      "bytes": 17367,
+      "sha256": "a5dda3c94664b54b73a798b87379862a806d66ad4730a7ea5934a7122a8b24a8",
+      "verified": true
+    }
+  ],
+  "preparedIdentity": {
+    "source": "86baab732536d7eadecbe048d75d0e2ae43d5b6390b7ea914b5705f2f6b2661e",
+    "observer": "3cea8d29ca663d61a4b5ae01ed3b7536ed44ac6196399391b9ed3ba792d896a7"
+  },
+  "checkpoints": [
+    {
+      "id": "P0",
+      "file": "src/preprocessing/raw2image.cpp",
+      "sourceAnchor": 50,
+      "primaryPayload": false,
+      "observerStage": null,
+      "staticCallsitePresent": false,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "saved/restored small-state snapshot"
+      ]
+    },
+    {
+      "id": "P1",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 45,
+      "primaryPayload": true,
+      "observerStage": "raw2image-after",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "allocation extent/generation",
+        "full CFA origin/grid and raw sizes/margins"
+      ]
+    },
+    {
+      "id": "P2",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 112,
+      "primaryPayload": false,
+      "observerStage": null,
+      "staticCallsitePresent": false,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "after pre_scalecolors callback point (existing black-after is earlier)",
+        "callback execution events"
+      ]
+    },
+    {
+      "id": "P3a",
+      "file": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sourceAnchor": 221,
+      "primaryPayload": false,
+      "observerStage": null,
+      "staticCallsitePresent": false,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "actual scale_mul float bits and WB branch"
+      ]
+    },
+    {
+      "id": "P3b",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 118,
+      "primaryPayload": true,
+      "observerStage": "scale-after",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "full layout/state header"
+      ]
+    },
+    {
+      "id": "P4",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 123,
+      "primaryPayload": false,
+      "observerStage": "pre-interpolate-after",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "image generation and mix_green state"
+      ]
+    },
+    {
+      "id": "P5",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 147,
+      "primaryPayload": true,
+      "observerStage": "interpolation-enter",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "complete initialized input-state contract beyond sparse CFA hash",
+        "callback execution/state snapshots"
+      ]
+    },
+    {
+      "id": "P6",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 183,
+      "primaryPayload": true,
+      "observerStage": "interpolation-return",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "complete layout/state header"
+      ]
+    },
+    {
+      "id": "P7",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 235,
+      "primaryPayload": true,
+      "observerStage": "convert-rgb-before",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "post-demosaic branch events"
+      ]
+    },
+    {
+      "id": "P8",
+      "file": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sourceAnchor": 103,
+      "primaryPayload": false,
+      "observerStage": null,
+      "staticCallsitePresent": false,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "actual effective out_cam valid columns and raw_color"
+      ]
+    },
+    {
+      "id": "P9",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 235,
+      "primaryPayload": true,
+      "observerStage": "convert-rgb-after",
+      "staticCallsitePresent": true,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "complete layout/state header and histogram validity"
+      ]
+    },
+    {
+      "id": "P10",
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "sourceAnchor": 248,
+      "primaryPayload": false,
+      "observerStage": null,
+      "staticCallsitePresent": false,
+      "runtimeCaptured": false,
+      "missingOrUnverified": [
+        "postconvert callback/stretch event summary"
+      ]
+    }
+  ],
+  "rawCalls": 0,
+  "nativeBuild": "NOT_EXECUTED_BY_BINDER",
+  "nativeAbi": "NOT_EXECUTED_BY_BINDER",
+  "executionReady": false,
+  "limitations": [
+    "Static callsite presence is not full contract conformance",
+    "No new native build or runtime branch proof",
+    "Sparse input hash equality alone cannot establish all interpolator input-state equality for H1",
+    "H1 remains conditional; no actual consumer-load or parallel-region trace"
+  ]
+}

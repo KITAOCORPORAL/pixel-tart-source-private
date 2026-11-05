@@ -1,0 +1,36 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {SOURCE,sha,verifySourceRecords,verifyPrepared,coverage} from './Bind-ResearchContract.mjs';
+const out=process.argv[2];assert(out&&!fs.existsSync(out),'NEW self-test receipt path required');
+const passed=[];const test=(name,fn)=>{fn();passed.push(name);};
+const original=Buffer.from('original_algorithm();\n');
+const modified=Buffer.from('/*RR001_BEGIN*/observe();/*RR001_END*/original_algorithm();\n');
+const header=Buffer.from('synthetic observer, no native execution');
+const prep={commit:SOURCE,originalSha256:sha(original),instrumentedSha256:sha(modified),headerSha256:sha(header)};
+const load=p=>p.endsWith('rr001_observer.h')?header:modified;
+const record={project:'libraw',commit:SOURCE,path:'synthetic.cpp',bytes:original.length,sha256:sha(original)};
+const lock={librawCommit:SOURCE,sourceRecords:[record]};
+test('accept exact pinned synthetic source record',()=>assert.equal(verifySourceRecords(lock,()=>original).length,1));
+test('reject source content mutation even when length is unchanged',()=>assert.throws(()=>verifySourceRecords(lock,()=>Buffer.from(original.toString().replace('algorithm','algorithN')))));
+test('reject source version drift',()=>assert.throws(()=>verifySourceRecords({...lock,librawCommit:'wrong'},()=>original)));
+test('reject duplicate ownership of locked source',()=>assert.throws(()=>verifySourceRecords({...lock,sourceRecords:[record,record]},()=>original)));
+test('restore original algorithm exactly',()=>assert.equal(verifyPrepared(prep,load,original),modified.toString()));
+test('reject edited original algorithm even with updated prepared hash',()=>{
+ const altered=Buffer.from(modified.toString().replace('original_algorithm','altered_algorithm'));
+ assert.throws(()=>verifyPrepared({...prep,instrumentedSha256:sha(altered)},p=>p.endsWith('rr001_observer.h')?header:altered,original));
+});
+test('reject stale observer header identity',()=>assert.throws(()=>verifyPrepared(prep,p=>p.endsWith('rr001_observer.h')?Buffer.from('changed'):modified,original)));
+test('reject altered generated file without re-freezing',()=>assert.throws(()=>verifyPrepared(prep,p=>p.endsWith('rr001_observer.h')?header:Buffer.from('changed'),original)));
+const ids=['P0','P1','P2','P3a','P3b','P4','P5','P6','P7','P8','P9','P10'];
+const spec={sourceCommit:SOURCE,checkpoints:ids.map(id=>({id,file:'synthetic.cpp'}))};
+const stages=['raw2image-after','scale-after','interpolation-enter','interpolation-return','convert-rgb-before','convert-rgb-after','pre-interpolate-after'];
+const cpp=stages.map(x=>'"'+x+'"').join('\n');
+test('static callsites never imply runtime capture or complete compliance',()=>{
+ const c=coverage(spec,cpp);assert.equal(c.filter(x=>x.primaryPayload&&x.staticCallsitePresent).length,6);
+ assert(c.every(x=>!x.runtimeCaptured&&x.missingOrUnverified.length>0));
+ assert(c.find(x=>x.id==='P5').missingOrUnverified.some(x=>x.includes('beyond sparse')));
+ assert.equal(c.find(x=>x.id==='P2').staticCallsitePresent,false);
+});
+test('missing convert-rgb stage remains missing',()=>assert.equal(coverage(spec,cpp.replace('"convert-rgb-after"','"wrong-stage"')).find(x=>x.id==='P9').staticCallsitePresent,false));
+const receipt={status:'PASS',passed:passed.length,cases:passed,syntheticOnly:true,rawCalls:0,nativeCalls:0};
+fs.writeFileSync(out,JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));

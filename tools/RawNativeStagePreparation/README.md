@@ -22,3 +22,11 @@ node <tool>/Prepare.mjs --prepare <shared-fixed-source> <NEW-isolated-source>
 全部满足后按当时用户授权最多两独立进程各一次，持久consumed slot、失败不补跑、不另跑原DLL。相同只能写新构建本次未复现。后续会话权限/次数依据当时指令，不自动把本轮额度延期。
 
 不修改生产native/默认/算法初始化/线程/quality，不用calloc、单线程或缓存掩盖。不自动启动浏览器/产品/后台任务。当前只记录hash和状态，无私有像素写盘，不为选择分歧阶段追加显影。
+
+## 2026-11-05 续查工具
+
+- Audit-LocalState.ps1：仅指定工作树/诊断根/授权文件的实际状态核验，不扫描其他盘、不初始化native；输出消费痕迹/构建/自检收据清单、工具链与明确UNKNOWN边界，不生成新额度。
+- Bind-ResearchContract.mjs：固定研究ef95df88 Git对象读取INTERNAL_SOURCE_LOCK/CHECKPOINT_SPEC/CHECKPOINTS/REPORT/H1，核对共用LibRaw27份内部锁文件与旧生成树/header，产出逐检查点缺口。研究工作树HEAD可前进，固定合同不随其漂移。
+- Bind-ResearchContract.Tests.mjs：十项合成误判防护，无RAW/native。静态callsite存在不意味着完整合同或runtime已捕获。
+
+旧生成树六个主payload调用点存在，但完整P2位置/scale_mul/out_cam/布局代数/回调事件尚未实现；稀疏P5相等不能推出整个插值输入状态相同。绑定工具明确executionReady=false，不能用旧patch直接宣称可运行/H1被证实。最新准确阻塞与native首条构建命令见home-r55-raw-reopen001-resume-20261105报告，旧报告/失败原样保留。
