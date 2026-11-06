@@ -1,6 +1,6 @@
 # RAW-REOPEN-001 InternalV3 tool
 
-Original diagnostic code only. Isolated worktree/source generation, no production edit, native replacement or application package. Vendor source and generated trees remain local. Fixed research: `5a4f233dea5ba11622b18380fea137c8f3944e53`; LibRaw: `cccb97647fcee56801fa68231fa8a38aa8b52ef7`.
+Original diagnostic code only. Isolated worktree/source generation, no production edit, native replacement or application package. Vendor source and generated trees remain local. Research addendum `71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f` F1/F2/F3 incorporated: P1 never reads uninitialized quality; missing typed state or run identity is rejected; serial-ready and initialized allhex/CIELab are mandatory comparisons before P6. Fixed research: `5a4f233dea5ba11622b18380fea137c8f3944e53`; LibRaw: `cccb97647fcee56801fa68231fa8a38aa8b52ef7`.
 
 **Current delivery is not RAW-ready.** Managed host builds and static/synthetic checks are separate from MSVC native compilation, exact native ABI/lifecycle tests and original task allowance. None of the latter can be inferred from a managed build or static callsite. The old `RawNativeBoundaryProbe` V2.1 DLL hash/ABI checks are untouched.
 
@@ -40,7 +40,7 @@ Supported safe image layout is shrink0/fuji_width0, width=iwidth/height=iheight,
 
 ## Offline comparison and limitations
 
-`Compare-Checkpoints.mjs <first> <second> <NEW-output>` checks completed status, complete six-stage payloads, exact file length/hash and same-stage layout; writes local coordinate/count/amplitude CSVs and earliest different payload/state boundary. Typed state is compared cumulatively between checkpoints; pointer numbers/event sequence and tile ownership are recorded separately rather than mistaken for pixel input. P5 sparse/border-truncated state is rejected. Never byte-compare different stages/layouts. All equal -> `NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED`; no third decode.
+`Compare-Checkpoints.mjs <first> <second> <NEW-output>` checks completed status, complete six-stage payloads, exact file length/hash and same-stage layout; writes local coordinate/count/amplitude CSVs and earliest different payload/state boundary, including XTRANS-serial-ready between P5/P6. Typed state is compared cumulatively between checkpoints; pointer numbers/event sequence and tile ownership are recorded separately rather than mistaken for pixel input. P5 sparse/border-truncated state is rejected. Never byte-compare different stages/layouts. All equal -> `NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED`; no third decode.
 
 `Tests.mjs <pinned-source> <NEW-root>` exercises source preservation, wrong anchors, P2 ordering, P5 full-state non-CFA/border detection, out_cam placement, exhausted/unknown quota, deduplication, persistent failed reservation, missing roots, tampered receipts and comparison failures. These are synthetic/static checks, **not native ABI/self-test or original defect reproduction**.
 

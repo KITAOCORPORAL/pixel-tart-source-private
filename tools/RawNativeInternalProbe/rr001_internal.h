@@ -4,6 +4,7 @@
 #ifndef LIBRAW_LIBRARY_BUILD
 #define LIBRAW_LIBRARY_BUILD
 #endif
+#include <winsock2.h>
 #include "libraw/libraw.h"
 #include <windows.h>
 #include <bcrypt.h>
