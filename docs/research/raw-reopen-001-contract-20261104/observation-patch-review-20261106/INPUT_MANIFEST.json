@@ -1,0 +1,292 @@
+{
+  "version": "RAW-REOPEN-001-ActualObservationPatchReviewV1",
+  "observedAt": "2026-11-06T08:54:17.002116+02:00",
+  "timezone": "Europe/Helsinki",
+  "researchBaseline": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+  "reviewBranch": "research/raw-observation-review-20261106",
+  "productHead": "1cabb0cfcbe2184fb55c066326cbd3c1d1bd23eb",
+  "productStatus": "?? tools/RawNativeInternalProbe/",
+  "productMergeBase": "f8beaa37977e2b76b2096fa51f3a716a45f33274",
+  "patchIdentity": "FIXED_GENERATED_SOURCE_PLUS_HASHED_PRODUCT_SNAPSHOT",
+  "snapshotRoot": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2",
+  "librawSourceRoot": "E:/Kitao-Research/raw-reopen-001-contract-20261104/libraw-0.21.1",
+  "librawCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "preparedRoot": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3",
+  "files": [
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/.gitattributes",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/.gitattributes",
+      "bytes": 29,
+      "sha256": "730a35ae3d558080083c3103d9ac8100c3f6561678092abe341701dfa331eb1d"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Budget.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Budget.mjs",
+      "bytes": 4762,
+      "sha256": "bc6c5c996ef1e14464500f6b873b7631fd633a5831685ea85eb09138c34fa618"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Build-Isolated.ps1",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Build-Isolated.ps1",
+      "bytes": 3720,
+      "sha256": "7294c746d8546d92fa0c56577bd1d36616b0a94fa061785046a9b69d8c8d42f6"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Compare-Checkpoints.mjs",
+      "bytes": 4407,
+      "sha256": "1ee52b02a5effbffae64dcb2f1c4f9582767f20d5e8d7771f8c334202d4de33f"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Discover-Toolchain.ps1",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Discover-Toolchain.ps1",
+      "bytes": 2355,
+      "sha256": "dcfc127fb5c118b7561203b4ed646624bc9cf9bde53c220215ad1687fcbb1af1"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Freeze.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Freeze.mjs",
+      "bytes": 2548,
+      "sha256": "ac53d07e5497f831f559367ca4c1a2afaac1f8316be5da0555ed173f16e50c4a"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Prepare-Internal.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Prepare-Internal.mjs",
+      "bytes": 12457,
+      "sha256": "971987d23a53638f3d463580cf3b87b8b36b3cf3dc97b227e56b73e9de14a939"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Program.cs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Program.cs",
+      "bytes": 11631,
+      "sha256": "481060de3a7368d25b7aa952d44b9b54d352f6b050ce1ab7cbd14cb17fc47793"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/RawNativeInternalHost.csproj",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/RawNativeInternalHost.csproj",
+      "bytes": 564,
+      "sha256": "ecdd2fe3364eb407be3f74a86c223b1b3049ae6a9f84f9ce25a2e63481580a32"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/README.md",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/README.md",
+      "bytes": 8433,
+      "sha256": "c4cd36055e1603f482dd339f499daeec59df9ba0b160d8f50514183a00969f02"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Run-Bounded.ps1",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Run-Bounded.ps1",
+      "bytes": 3968,
+      "sha256": "3cff492b5f3cf779757815f930580c40a4a20691cb092453608b6ec12c711dd7"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Seal-Execution.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Seal-Execution.mjs",
+      "bytes": 1670,
+      "sha256": "19edf109771278598730745a075e8370f46409a47e039302cb47c9052e81c044"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Tests.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Tests.mjs",
+      "bytes": 6116,
+      "sha256": "78dc6ab09b6c152c0b3d453b4d9e157b86d1095d0494589b97ff7b3ddc8264f7"
+    },
+    {
+      "kind": "product-patch-snapshot",
+      "path": "E:/Kitao-Worktrees/raw-reopen001-native-20261106/tools/RawNativeInternalProbe/Verify-Contract.mjs",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/patch/Verify-Contract.mjs",
+      "bytes": 5039,
+      "sha256": "d9d538be8030905a4364e3d27b2ac06c58f159c1e1d4586132ff8bc11e669481"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/postprocessing/dcraw_process.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/postprocessing/dcraw_process.cpp",
+      "bytes": 16453,
+      "sha256": "1d6a26ecb332a8c30e3bf1215e8f5bdb5863af8f9ccc439d7944bf039fd99be8"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/postprocessing/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/postprocessing/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "bytes": 12293,
+      "sha256": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/postprocessing/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/postprocessing/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/preprocessing/raw2image.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/preprocessing/raw2image.cpp",
+      "bytes": 17582,
+      "sha256": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/preprocessing/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/preprocessing/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/demosaic/xtrans_demosaic.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/demosaic/xtrans_demosaic.cpp",
+      "bytes": 18470,
+      "sha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/demosaic/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/demosaic/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/preprocessing/subtract_black.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/preprocessing/subtract_black.cpp",
+      "bytes": 2703,
+      "sha256": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/preprocessing/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/preprocessing/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/utils/utils_libraw.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/utils/utils_libraw.cpp",
+      "bytes": 17591,
+      "sha256": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/utils/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/utils/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "generated-libraw",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/demosaic/ahd_demosaic.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/demosaic/ahd_demosaic.cpp",
+      "bytes": 10804,
+      "sha256": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232"
+    },
+    {
+      "kind": "generated-observer-header",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/src/demosaic/rr001_internal.h",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/generated/src/demosaic/rr001_internal.h",
+      "bytes": 13267,
+      "sha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/PREPARATION.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/frozen-source-v3/PREPARATION.json",
+      "bytes": 2981,
+      "sha256": "3fa9219fdd28fd79876d5a1d0ab24f91f8fb50eb909d4acb2c94ba6c1bfe10a6"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3/FILES.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/frozen-source-v3/FILES.json",
+      "bytes": 28702,
+      "sha256": "c71ecd06621fd9bd77c763dd91d77a0b986c1ce204dd33d0c56f7149e233c1df"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/FROZEN_CONTRACT.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/FROZEN_CONTRACT.json",
+      "bytes": 3030,
+      "sha256": "2fe2304359c16a6f8857792608a46b46b3e1f713c0d9a83e2e307be135c121cf"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/native-build-preflight/BUILD_STATUS.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/native-build-preflight/BUILD_STATUS.json",
+      "bytes": 616,
+      "sha256": "d283d01890457a1d4039e6b62038717ec44ba5cd16b66f17114c48d01a51c593"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/bounded-runner-denied/EXECUTION_RECEIPT.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/bounded-runner-denied/EXECUTION_RECEIPT.json",
+      "bytes": 174,
+      "sha256": "07074a004a7d764aa1d049d3d416396a90bd1b261f1d3bb97d255d2444d73a8b"
+    },
+    {
+      "kind": "existing-product-receipt",
+      "path": "E:/Guangjing-RawReopen001-20261106/TASK_BUDGET_AUDIT.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/receipts/TASK_BUDGET_AUDIT.json",
+      "bytes": 6194,
+      "sha256": "1ec9b1558ab22353c1173badd389b689f37bea3a541ade64e26b5c02e977b887"
+    },
+    {
+      "kind": "fixed-research-contract",
+      "path": "5a4f233dea5ba11622b18380fea137c8f3944e53:docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINTS.md",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/research-baseline/CHECKPOINTS.md",
+      "bytes": 8013,
+      "sha256": "5e13952aa5d6eba44aa7284b37a58bc82338efa4a7302ab2f658321b985c335a"
+    },
+    {
+      "kind": "fixed-research-contract",
+      "path": "5a4f233dea5ba11622b18380fea137c8f3944e53:docs/research/raw-reopen-001-contract-20261104/process-internal-review/CHECKPOINT_SPEC.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/research-baseline/CHECKPOINT_SPEC.json",
+      "bytes": 12346,
+      "sha256": "83e318955c31ad030c70fdc75afcd214e851a8d92f460595a340f34180d68aee"
+    },
+    {
+      "kind": "fixed-research-contract",
+      "path": "5a4f233dea5ba11622b18380fea137c8f3944e53:docs/research/raw-reopen-001-contract-20261104/process-internal-review/HYPOTHESIS_H1.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/research-baseline/HYPOTHESIS_H1.json",
+      "bytes": 5418,
+      "sha256": "902c2d87d79c04b6baab162f60d931c74a9df7a71d0e3f3074fb622d5466a81a"
+    },
+    {
+      "kind": "fixed-research-contract",
+      "path": "5a4f233dea5ba11622b18380fea137c8f3944e53:docs/research/raw-reopen-001-contract-20261104/process-internal-review/INTERNAL_SOURCE_LOCK.json",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2/research-baseline/INTERNAL_SOURCE_LOCK.json",
+      "bytes": 27263,
+      "sha256": "45601177677bf46ad05c4398c18c75d376d7782f28d1a32b8e55ab75a60a6734"
+    }
+  ],
+  "sourceCodeCommitted": false,
+  "newRawCalls": 0
+}

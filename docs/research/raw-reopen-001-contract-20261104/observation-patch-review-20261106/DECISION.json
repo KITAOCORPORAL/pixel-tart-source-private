@@ -1,0 +1,124 @@
+{
+  "version": "RAW-REOPEN-001-PatchReviewDecisionV1",
+  "status": "REVIEW_COMPLETE_PATCH_REQUIRES_CHANGE_NOT_FIXED",
+  "baseline": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+  "productHead": "1cabb0cfcbe2184fb55c066326cbd3c1d1bd23eb",
+  "snapshotManifestSha256": "d94ebc28b7af1708069753a6b7bea6ae4c80c758e8a0ed9971061e0287b7dd4b",
+  "generatedPreparationSha256": "3fa9219fdd28fd79876d5a1d0ab24f91f8fb50eb909d4acb2c94ba6c1bfe10a6",
+  "observerHeaderSha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539",
+  "staticContractComplete": false,
+  "executionReady": false,
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P1",
+      "verdict": "NOT_SATISFIED",
+      "title": "Observer reads quality before original assignment",
+      "patch": "Prepare-Internal.mjs",
+      "lines": [
+        7,
+        9
+      ],
+      "generated": "src/postprocessing/dcraw_process.cpp",
+      "generatedLines": [
+        74,
+        102
+      ],
+      "minimumChange": "At P1 leave observer quality unavailable; remove the early local-variable read. Record it only after the original assignment. Do not move or change vendor initialization."
+    },
+    {
+      "id": "F2",
+      "priority": "P2",
+      "verdict": "NOT_SATISFIED",
+      "title": "Missing mandatory typed state can compare equal",
+      "patch": "Compare-Checkpoints.mjs",
+      "lines": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "minimumChange": "Require checkpoint-specific typed records, exact branch/colors/CFA/layout/valid table records and source/run identities. Missing data is UNKNOWN or rejected, never stateEqual=true. Preserve existing successful observed-state mismatch comparison."
+    },
+    {
+      "id": "F3",
+      "priority": "P2",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "title": "Serial-ready image is emitted but absent from primary comparison order",
+      "patch": "Compare-Checkpoints.mjs",
+      "lines": [
+        2,
+        4
+      ],
+      "minimumChange": "Before localizing H1 to parallel shared loads, compare XTRANS-serial-ready image4 plus defined allhex/CIELab tables. If the first difference precedes the parallel region, report that earlier boundary. No new run is authorized."
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "P2-location",
+      "verdict": "SATISFIED",
+      "scope": "STATIC_ONLY",
+      "evidence": "Generated dcraw_process.cpp:142, after original pre_scalecolors callback and before no_auto_scale; small-state-only matches baseline minimum."
+    },
+    {
+      "id": "P5-image-coverage",
+      "verdict": "SATISFIED",
+      "scope": "STATIC_SUPPORTED_LAYOUT_ONLY",
+      "evidence": "Actual xtrans leaf generated lines206-207; full image4, all rows and borders, source iwidth*8 with width==iwidth guard."
+    },
+    {
+      "id": "P5-effective-input-equivalence",
+      "verdict": "NOT_SATISFIED",
+      "scope": "COMPARISON_GATE",
+      "evidence": "F1 invalid early observation; F2 missing typed state accepted. No runtime equality is established."
+    },
+    {
+      "id": "P6-rgb-coverage",
+      "verdict": "SATISFIED",
+      "scope": "STATIC_COLORS3_XTRANS_ONLY",
+      "evidence": "Generated line208 after xtrans return; includes native join and border_interpolate(8); slots0..2 valid RGB, audit4 separate."
+    },
+    {
+      "id": "layout-and-pointer-switch",
+      "verdict": "SATISFIED",
+      "scope": "FAIL_CLOSED_SUPPORTED_LAYOUT_ONLY",
+      "evidence": "Header63-70 rejects changed pointer, shrink/fuji and unequal width/iwidth or height/iheight; no generic pointer-switch support claimed."
+    },
+    {
+      "id": "initialization",
+      "verdict": "SATISFIED",
+      "scope": "STATIC_PROVENANCE_ONLY",
+      "evidence": "Original raw2image.cpp395-402 zeroes full allocation; allhex explicitly initialized; no scratch bytes hashed."
+    },
+    {
+      "id": "runtime-P2-P5-P6",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "runtime": "UNKNOWN",
+      "evidence": "Build receipt NOT_BUILT; no new native internal capture and no new binary equivalence."
+    },
+    {
+      "id": "H1",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "runtime": "UNKNOWN_CONDITIONAL",
+      "evidence": "Actual parallel branch/team, complete matching inputs and divergent P6 all unobserved for new binary; per-load consumption unobserved."
+    }
+  ],
+  "earliestInternalDifference": "UNKNOWN",
+  "H1": "UNKNOWN_CONDITIONAL",
+  "existingTaskBudget": {
+    "consumed": 2,
+    "remaining": 0,
+    "newAllowance": 0
+  },
+  "newCalls": {
+    "RAW": 0,
+    "nativeInit": 0,
+    "nativeCompiler": 0,
+    "managedBuild": 0,
+    "GPU": 0,
+    "numericalReference": 0
+  },
+  "productEdits": 0,
+  "confirmedProductCommit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+  "confirmedProductBinding": "PRODUCT_COMMIT_BINDING.json"
+}

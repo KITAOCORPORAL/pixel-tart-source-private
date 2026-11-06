@@ -1,3 +1,9 @@
+# 当前检查点：RAW-REOPEN-001 实际观测补丁审查（2026-11-06，Europe/Helsinki）
+
+从5a4f233d接续。实际产品未跟踪补丁与frozen-source-v3已按独立快照绑定，未合入产品分支。P2落点和小状态满足基线；P5全四槽/P6含边界RGB在支持布局上静态覆盖满足，运行均UNKNOWN。发现P1读取未初始化quality；新版比较器能检测已记录状态不同，但缺必需状态仍可相等；serial-ready额外payload未进入主比较，H1维持UNKNOWN_CONDITIONAL。94项源码/文件/合成核验；27份源锁/7份字节恢复通过。新RAW/native init/构建/GPU/参考数值运行均0；已有预算consumed2/remaining0，未新增额度。交付observation-patch-review-20261106/REPORT.md、DECISION.json及CONTRACT_AMENDMENT.json。状态REVIEW_COMPLETE / PATCH_REQUIRES_CHANGE / NOT_FIXED；不重跑，不改产品像素，V1锐化继续封存。
+
+---
+
 # RAW-REOPEN-001 内部交接已推送（2026-11-05，Asia/Shanghai）
 
 复用已完成内部审查，未重复生命周期报告、解码或运行实验。研究内容提交3d06c14004c8047a88ab5362b14039fff0bbf7ac及历史失败收据ef95df88e5ca7b44a6adbcd0f7278941c46db58f已正常推送，远端实际读回ef95df88e5ca7b44a6adbcd0f7278941c46db58f一致。原PUSH_RECEIPT.json仍保留当时网络失败；当前成功记录为process-internal-review/PUSH_SUCCESS_20261105.json，后续文档提交HEAD另读回。

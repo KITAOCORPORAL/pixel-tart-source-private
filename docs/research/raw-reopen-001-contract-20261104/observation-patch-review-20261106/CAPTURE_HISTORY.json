@@ -1,0 +1,8 @@
+{
+  "firstSnapshot": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot",
+  "supersededReason": "Product patch evolved during review; first snapshot header was newer than original sealed generated source. No verdict issued for that mixed identity.",
+  "retainedOutsideGit": true,
+  "currentSnapshot": "E:/Kitao-Research/raw-observation-review-20261106/input-snapshot-v2",
+  "currentGenerated": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3",
+  "priorRunNote": "First verifier attempts rejected mixed/live input identity and contained a JavaScript string formatting error. Both were corrected before final source/synthetic verification; no product/native/RAW execution occurred."
+}

@@ -1,0 +1,40 @@
+{
+  "version": "RAW-REOPEN-001-ReviewedProductCommitBindingV1",
+  "productCommit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+  "scope": "Critical generator, header and comparison/contract logic; does not adopt unrelated budget changes or mutate product",
+  "files": [
+    {
+      "path": "tools/RawNativeInternalProbe/Prepare-Internal.mjs",
+      "commit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+      "gitBlobSha256": "971987d23a53638f3d463580cf3b87b8b36b3cf3dc97b227e56b73e9de14a939",
+      "reviewedSha256": "971987d23a53638f3d463580cf3b87b8b36b3cf3dc97b227e56b73e9de14a939",
+      "exactBytesEqual": true,
+      "onlyLineEndingsOrTrailingEmptyLinesDiffer": true
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/rr001_internal.h",
+      "commit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+      "gitBlobSha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539",
+      "reviewedSha256": "41321ac0e0fb40b8117542dfcc1d4622179129127376a6d8fbb8bc4fdf6a1539",
+      "exactBytesEqual": true,
+      "onlyLineEndingsOrTrailingEmptyLinesDiffer": true
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "commit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+      "gitBlobSha256": "f7692f91ad523173621c46457f003259af9d0108663cbe5d6ccbe0c2001cd6b1",
+      "reviewedSha256": "1ee52b02a5effbffae64dcb2f1c4f9582767f20d5e8d7771f8c334202d4de33f",
+      "exactBytesEqual": false,
+      "onlyLineEndingsOrTrailingEmptyLinesDiffer": true
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Verify-Contract.mjs",
+      "commit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+      "gitBlobSha256": "943dd50dc8ef32272872f2bacacf013a201c979baa621ad0975e334267c4188f",
+      "reviewedSha256": "d9d538be8030905a4364e3d27b2ac06c58f159c1e1d4586132ff8bc11e669481",
+      "exactBytesEqual": false,
+      "onlyLineEndingsOrTrailingEmptyLinesDiffer": true
+    }
+  ],
+  "sourceLogicChanged": false
+}

@@ -1,0 +1,56 @@
+{
+  "version": "RAW-REOPEN-001-ActualPatchContractAddendumV1",
+  "baseline": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+  "appliesToManifest": "INPUT_MANIFEST.json",
+  "baselineDocumentsUnchanged": true,
+  "staticContractComplete": false,
+  "executionReady": false,
+  "requiredChanges": [
+    "F1",
+    "F2"
+  ],
+  "rules": {
+    "P1": {
+      "quality": "UNAVAILABLE until original assignment; observer must not read early"
+    },
+    "P2": {
+      "location": "after pre_scalecolors callback, before no_auto_scale",
+      "payload": "small state permitted; pixel equality UNKNOWN without pixel evidence"
+    },
+    "P5": {
+      "image": "all initialized four slots, full declared active domain including border",
+      "state": "complete mandatory typed schema; exact branch/passes/CFA/layout/effective matrix and identity",
+      "missing": "UNKNOWN_OR_REJECT",
+      "equality": "imageEqual AND requiredStateComplete AND validStateEqual AND identitiesVerified"
+    },
+    "P6": {
+      "channels": "RGB0..2 only for supported colors3 branch; slot3 independent audit",
+      "location": "actual selected interpolator return including border, before mix/post callback"
+    },
+    "pointer": {
+      "supported": "unchanged allocated pointer and width==iwidth / height==iheight / shrink=0 / fuji=0",
+      "unsupported": "invalid capture, do not infer equivalent input"
+    },
+    "serialReady": {
+      "requiredForParallelAttribution": true,
+      "payload": "compare already-emitted XTRANS-serial-ready image4 and initialized allhex/CIELab tables",
+      "ifDifferent": "report earlier serial boundary; no new experiment"
+    },
+    "H1": {
+      "status": "UNKNOWN_CONDITIONAL",
+      "prerequisites": [
+        "actual X-Trans",
+        "actual parallel team>1",
+        "complete equal P5 input",
+        "different P6"
+      ],
+      "furtherRequired": "actual consumer load evidence; no extra peek equivalence; no cached LIM, lock or single-thread pseudo-passive change"
+    }
+  },
+  "execution": {
+    "researchRawCalls": 0,
+    "newAllowance": 0,
+    "observedRemaining": 0,
+    "next": "No automatic execution; report UNKNOWN until actual separately authorized evidence exists"
+  }
+}
