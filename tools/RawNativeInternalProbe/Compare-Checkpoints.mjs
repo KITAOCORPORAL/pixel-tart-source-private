@@ -30,7 +30,8 @@ export function validateTyped(rows,states){
   for(const [name,n]of [['xtrans-six-by-six',36],['xtrans-absolute-six-by-six',36],['white-defined-8x8',128]]){const v=named(segment,'defined-byte-span-hash',name);assert(v.bytes===n&&isHash(v.sha256),where+' invalid '+name);}
   states[id]=semantic(rows.slice(a,b));
  }
- const p3a=one(rows,r=>r.kind==='state'&&r.where==='P3a-after-WB-wavelet-before-scale-loop','P3a');assert(rows.indexOf(p3a)<rows.indexOf(scale)&&rows.indexOf(scale)<rows.indexOf(one(rows,r=>r.kind==='state'&&r.where==='P3b','P3b')),'Actual scale position');
+ const wb=one(rows,r=>r.kind==='state'&&r.where==='WB-entry-before-selection','WB selection entry');
+ const p3a=one(rows,r=>r.kind==='state'&&r.where==='P3a-after-WB-wavelet-before-scale-loop','P3a');assert(rows.indexOf(p3a)<rows.indexOf(scale)&&rows.indexOf(scale)<rows.indexOf(one(rows,r=>r.kind==='state'&&r.where==='P3b','P3b')),'Actual scale position');assert(rows.indexOf(wb)<rows.indexOf(p3a),'WB selection phase missing');const wbRows=rows.slice(rows.indexOf(wb),rows.indexOf(p3a));for(const name of ['pre_mul','cam_mul','user_mul'])assert(hasNumbers(named(wbRows,'float32-bits',name).bits,4),'WB effective input missing');states.P3b.push(...wbRows.map(semantic),semantic(scale));
  const lab=named(rows,'defined-byte-span-hash','cielab-initialized-cbrt');assert(lab.bytes===65536*4&&isHash(lab.sha256),'CIELab table missing');
  const matrix=rows.filter(r=>r.kind==='float32-bits'&&r.name==='cielab-effective-xyz-cam');assert(matrix.length===3&&matrix.every(r=>hasNumbers(r.bits,3)),'CIELab valid matrix rows missing');
  const hex=named(rows,'defined-byte-span-hash','xtrans-fully-defined-allhex');assert(hex.bytes===3*3*2*8*2&&isHash(hex.sha256),'allhex missing');
