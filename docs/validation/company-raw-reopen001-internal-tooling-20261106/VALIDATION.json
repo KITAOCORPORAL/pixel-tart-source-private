@@ -1,0 +1,30 @@
+{
+  "timeAsiaShanghai": "2026-11-06T15:15:42.6040985+08:00",
+  "observerSource": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "status": "STATIC_MANAGED_AND_IDENTITY_CHECKS_COMPLETE_NATIVE_NOT_VALIDATED_NOT_FIXED",
+  "syntheticChecks": 38,
+  "managedHostBuild": "PASS_0_WARNINGS_0_ERRORS",
+  "managedNoNativeDefaults": "PASS",
+  "nativeDll": "NOT_BUILT",
+  "nativeAbiHashLayoutLifecycle": "NOT_RUN",
+  "newRawCounts": {
+    "MakeDcrawMemoryImage": 0,
+    "nativeInit": 0,
+    "Unpack": 0,
+    "OpenFile": 0,
+    "DcrawProcess": 0
+  },
+  "originalTaskBudget": {
+    "remaining": 0,
+    "launchAllowed": false,
+    "consumed": 2
+  },
+  "productDiff": [],
+  "oldV21GuardsDiff": [],
+  "oldHomePreparationDiff": [],
+  "oldTrackedEvidenceDiff": [],
+  "researchFindings": "F1/F2/F3 addressed in tool code, no external rereview of corrected commit",
+  "existingWorktreesUnchanged": "62 prior HEAD/porcelain/unpushed lists identical; 64 total now including this worktree and independent research review",
+  "originalProductBuilds": 0,
+  "noThirdProcessOrAutomaticRetry": true
+}

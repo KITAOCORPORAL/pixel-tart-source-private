@@ -1,0 +1,75 @@
+{
+  "observerSourceCommit": "973856b017555d96764d99db60ffb463be8eebd5",
+  "files": [
+    {
+      "sha256": "730A35AE3D558080083C3103D9AC8100C3F6561678092ABE341701DFA331EB1D",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\.gitattributes"
+    },
+    {
+      "sha256": "BC6C5C996EF1E14464500F6B873B7631FD633A5831685EA85EB09138C34FA618",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Budget.mjs"
+    },
+    {
+      "sha256": "7294C746D8546D92FA0C56577BD1D36616B0A94FA061785046A9B69D8C8D42F6",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Build-Isolated.ps1"
+    },
+    {
+      "sha256": "F7692F91AD523173621C46457F003259AF9D0108663CBE5D6CCBE0C2001CD6B1",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Compare-Checkpoints.mjs"
+    },
+    {
+      "sha256": "DCFC127FB5C118B7561203B4ED646624BC9CF9BDE53C220215AD1687FCBB1AF1",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Discover-Toolchain.ps1"
+    },
+    {
+      "sha256": "AC53D07E5497F831F559367CA4C1A2AFAAC1F8316BE5DA0555ED173F16E50C4A",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Freeze.mjs"
+    },
+    {
+      "sha256": "971987D23A53638F3D463580CF3B87B8B36B3CF3DC97B227E56B73E9DE14A939",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Prepare-Internal.mjs"
+    },
+    {
+      "sha256": "481060DE3A7368D25B7AA952D44B9B54D352F6B050CE1AB7CBD14CB17FC47793",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Program.cs"
+    },
+    {
+      "sha256": "ECDD2FE3364EB407BE3F74A86C223B1B3049AE6A9F84F9CE25A2E63481580A32",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\RawNativeInternalHost.csproj"
+    },
+    {
+      "sha256": "AD799A786947532B18190DEF30D9EF2EE5CF54B462700B613F0CCAB68B4A8D55",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\README.md"
+    },
+    {
+      "sha256": "41321AC0E0FB40B8117542DFCC1D4622179129127376A6D8FBB8BC4FDF6A1539",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\rr001_internal.h"
+    },
+    {
+      "sha256": "3CFF492B5F3CF779757815F930580C40A4A20691CB092453608B6EC12C711DD7",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Run-Bounded.ps1"
+    },
+    {
+      "sha256": "19EDF109771278598730745A075E8370F46409A47E039302CB47C9052E81C044",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Seal-Execution.mjs"
+    },
+    {
+      "sha256": "6F73F624351F7DB96E23ED3834278023B65F926E0F46E7DC0DD3FEEF9908B02B",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Tests.mjs"
+    },
+    {
+      "sha256": "943DD50DC8EF32272872F2BACACF013A201C979BAA621AD0975E334267C4188F",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Verify-Contract.mjs"
+    }
+  ],
+  "nativeAbiSelfTest": "NOT_RUN",
+  "preparedFileInventorySha256": "C71ECD06621FD9BD77C763DD91D77A0B986C1CE204DD33D0C56F7149E233C1DF",
+  "rawCalls": 0,
+  "host": {
+    "sha256": "25B1A52ADEE3668022D19F19FE1115C06F2C3E0DEBD6C6057338BBBC48F4A34E",
+    "path": "E:/Guangjing-RawReopen001-20261106/host-sealed/RawNativeInternalHost.dll"
+  },
+  "preparedSourceManifestSha256": "3FA9219FDD28FD79876D5A1D0AB24F91F8FB50EB909D4ACB2C94BA6C1BFE10A6",
+  "staticContractSha256": "9AB6147B7048A73707F1582879FD1B1755847146910C93D5CC4139046DE2B166",
+  "nativeLibrary": "NOT_BUILT"
+}

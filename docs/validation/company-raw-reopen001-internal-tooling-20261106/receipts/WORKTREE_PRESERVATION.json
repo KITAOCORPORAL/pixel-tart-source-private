@@ -1,0 +1,66 @@
+{
+  "beforeCount": 62,
+  "afterCount": 64,
+  "existingTreeHeadPorcelainUnpushedChanges": [],
+  "newTree": "E:/Kitao-Worktrees/raw-reopen001-native-20261106",
+  "byteHashLimitation": "Compares HEAD/porcelain/unpushed list; not a full bytewise snapshot of foreign dirty files",
+  "noResetStashMergeClean": true,
+  "newTreesObserved": [
+    {
+      "worktree": "E:/Kitao-Worktrees/raw-observation-review-20261106",
+      "HEAD": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+      "branch": "refs/heads/research/raw-observation-review-20261106",
+      "porcelain": [
+        "M  docs/research/color-engine-20261029/CHECKPOINT.md",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/.gitattributes",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/CAPTURE_HISTORY.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/CONTRACT_AMENDMENT.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/DECISION.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/DELIVERY_MANIFEST.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/INPUT_MANIFEST.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/LIVE_READBACK.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/PRODUCT_COMMIT_BINDING.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/REPORT.md",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/REVIEW_CHECKS.json",
+        "A  docs/research/raw-reopen-001-contract-20261104/observation-patch-review-20261106/verify_review.py"
+      ]
+    },
+    {
+      "worktree": "E:/Kitao-Worktrees/raw-reopen001-native-20261106",
+      "HEAD": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+      "branch": "refs/heads/diagnostic/raw-reopen001-native-20261106",
+      "porcelain": [
+        " M HANDOFF.MD",
+        " M docs/roadmap/R55_IMPLEMENTATION.md",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/.gitattributes",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/.gitignore",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/EXECUTION_RECEIPT.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/FINAL_REPORT.md",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/NONPASS.md",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/SOURCE_IDENTITY.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/BUDGET_CONFIG.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/BUDGET_CONFIG_FINAL.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/COMPANY_EXECUTION_RECEIPTS.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/FINAL_STATIC_CONTRACT.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/FINAL_TASK_BUDGET_AUDIT.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/GENERATED_INPUT_FILES.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/JS_PARSE_FINAL.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/MANAGED_CONFIGURED_DEFAULTS.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/MANAGED_SELF_TEST.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/NATIVE_BUILD_STATUS.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/OBSERVER_FREEZE.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/OBSERVER_FREEZE_FINAL.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/POWERSHELL_PARSE.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/PREPARATION.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/PRIOR_V21_STAGE_COMPARISON.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/RUNNER_BUDGET_READBACK.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/RUNNER_DENIAL.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/STATIC_SYNTHETIC_TESTS.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/STATIC_SYNTHETIC_TESTS_FINAL.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/TASK_BUDGET_AUDIT.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/TOOLCHAIN.json",
+        "?? docs/validation/company-raw-reopen001-internal-tooling-20261106/receipts/WORKTREE_AUDIT_BEFORE.json"
+      ]
+    }
+  ]
+}

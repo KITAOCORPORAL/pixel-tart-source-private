@@ -1,3 +1,11 @@
+## 2026-11-06 RAW-REOPEN-001：内部阶段工具已实现，原生验证与执行仍受阻（Asia/Shanghai）
+- fetch确认家庭1cabb0cfcbe2184fb55c066326cbd3c1d1bd23eb、研究5a4f233dea5ba11622b18380fea137c8f3944e53；公司62工作树/10脏树及asset-library-v1的8个未推提交只读保留。从家庭HEAD建独立diagnostic/raw-reopen001-native-20261106，不合研究/不重置旧树。
+- 新tools/RawNativeInternalProbe实际实现7CPP可逆插入、27份源码锁、修正P2、实际WB/scale_mul/out_cam、全初始化P5四槽（含边缘/非CFA）、P6 RGB+第四槽、实际分支/回调/后处理、worker/tile/join记录、独立bounded host/runner和全任务账本。旧V2.1 DLL hash/ABI检查未删未改；新库不能靠放宽旧guard运行。
+- 公司V1.3/V2.1历史各有两次解码；新内部库根无运行证据，但本轮没有新发两次额度。保守绑定原V2.1 PID15284/4908核销原两槽，剩余0；家庭0/换机不补额，失败不退款，未知公司收据拒绝。runner实测未创建解码进程。
+- 收尾纳入研究审查71ba977a的F1/F2/F3：消除P1提前读quality、缺失typed state/身份拒绝、serial-ready+allhex/CIELab纳入首差。最终38项静态/合成通过；修正版研究复审NOT_RUN，native仍未执行。最终工具源码08bfae4a6e311609c95784e8373bead711d9997c，host SHA68E5E49D1217715D9A8A706A9218B03EA09F210640AC1969A2685FDFDDB2D389。
+- 未找到cl/nmake/dumpbin、Windows SDK include/lib及x64 Developer shell；仅一次native预检即停止，MSVC调用0。既有Zig一次语法探针FileNotFound失败保留，无DLL、不替代MSVC；没有反复构建或更改机器配置。新nativeDLL/ABI/布局/hash/生命周期均NOT_BUILT/NOT_RUN。
+- 本轮完整RAW/Open/Unpack/Process/MemoryImage/nativeInit全部0，P1/P3b/P5/P6/P7/P9均NOT_OBSERVED。最早已证仍为有效Unpack同、Process先差；根因OPEN/NOT_FIXED，不凭源码点/合成通过宣布修复或H1成立。
+- 产品源码仍38dd3f92bb2db7238f7f058008887929ec971c93，功能源码零变，不打包应用；全模块/策划15/教程退役保持，Sony/gamma/肤色/高光不扩。报告docs/validation/company-raw-reopen001-internal-tooling-20261106/FINAL_REPORT.md；本地E:/Guangjing-RawReopen001-20261106。
 ## 2026-11-05 RAW-REOPEN-001 家庭续查：本地WIP真实存在，研究检查点绑定补齐（Asia/Shanghai）
 - fetch后原远端诊断仍c7df75d4，家庭独立树实际bb19e8e1且起始干净，未推送源码/四次宿主构建和失败日志全在。研究固定ef95df88精确检查点本地可读；其后5a4f233d只增加推送收据，不改合同。
 - 新Audit-LocalState检查指定工作树/诊断根：同SHA授权RAW存在，consumed/calls/result/新nativeDLL均0；公司当前本地UNKNOWN，不猜路径/次数，不因换机器重新分配两次。上轮HOME_EXECUTION与本次核验一致：本计划尚未构建新库/运行RAW。

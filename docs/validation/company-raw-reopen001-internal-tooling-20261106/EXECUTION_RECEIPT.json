@@ -1,0 +1,180 @@
+{
+  "nativeBuild": "NOT_BUILT",
+  "alternateSyntaxProbe": {
+    "mode": "-fsyntax-only only, no DLL",
+    "tool": "existing Zig 0.15.2",
+    "attempts": 1,
+    "result": "FAILED_FileNotFound_NOT_A_NATIVE_BUILD_OR_ABI_CHECK",
+    "automaticRepeat": false
+  },
+  "nativeLibraryBuildAttempts": 0,
+  "managedHostBuilds": 4,
+  "nativeInitialization": 0,
+  "rawCalls": {
+    "MakeDcrawMemoryImage": 0,
+    "fullDecode": 0,
+    "DcrawProcess": 0,
+    "Unpack": 0,
+    "OpenFile": 0
+  },
+  "finalStatus": "PARTIAL_TOOL_IMPLEMENTATION_NATIVE_VALIDATION_BLOCKED_NOT_FIXED",
+  "dateAsiaShanghai": "2026-11-06T14:55:49.8595105+08:00",
+  "managedDefaultNoNativeSelfTests": 4,
+  "sourceGeneratorFailures": {
+    "nativeCalls": 0,
+    "count": 2,
+    "reason": "Ambiguous anchors rejected before generating tree; narrowed scopes, failures preserved"
+  },
+  "logs": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\CONTRACT_SEALED.json",
+      "bytes": 3030,
+      "sha256": "0E94E2AEC12F6BD49BCE66D3CA0364EAE06FCF34C55E5716F02F3A040614AA8B"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\CONTRACT_SEALED.log",
+      "bytes": 99,
+      "sha256": "5531690494C2ACBB8F989F26E64D2A41EF14AE553D8B4FDD234C1D37D08CEB9A"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\CONTRACT_VERIFY.log",
+      "bytes": 99,
+      "sha256": "5531690494C2ACBB8F989F26E64D2A41EF14AE553D8B4FDD234C1D37D08CEB9A"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\CONTRACT.json",
+      "bytes": 3030,
+      "sha256": "5D4F283C105D5503D5EE010A4A54DA3E76EB81417B89A65016D3D62F596F7F09"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\FINAL_STATIC_CONTRACT.json",
+      "bytes": 3046,
+      "sha256": "9AB6147B7048A73707F1582879FD1B1755847146910C93D5CC4139046DE2B166"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\FROZEN_CONTRACT.json",
+      "bytes": 3030,
+      "sha256": "2FE2304359C16A6F8857792608A46B46B3E1F713C0D9A83E2E307BE135C121CF"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\GENERATOR_01.log",
+      "bytes": 1299,
+      "sha256": "018846DB7A42F7F3BA01654AED9FD3045AA2858D63D784C9CB3797C8F74FBA47"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\GENERATOR_02.log",
+      "bytes": 1301,
+      "sha256": "C74B488DC92E070427586C47F37978DEF66B90ECC49E2287C500B6E7FB588959"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\GENERATOR_03.log",
+      "bytes": 2777,
+      "sha256": "B6FFC0D38EFB254E71417DAE7BA0C4829AA17694CB5AF752E163750DFAD3C3B3"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\GENERATOR_FINAL.log",
+      "bytes": 3050,
+      "sha256": "96D4C312486645F1BAE2DBEB45EF1436EBC2EE746E01A2A5F45DE079E2CBFD4B"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\GENERATOR_SEALED.log",
+      "bytes": 3050,
+      "sha256": "1C8ED3F6DBD90C8A62E9CEAD016F700163DBF353A4B174996CBDB90D370C47A7"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\HOST_BUILD_01.log",
+      "bytes": 367,
+      "sha256": "ED43EE10A06D3995A29B32017B93E01642DE46AB354776F3FA9B9874BD270BB9"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\HOST_BUILD_FINAL.log",
+      "bytes": 276,
+      "sha256": "D4BD66D5D32F7E8E03BC79E9631D7AB66A5D2641E6CB45531E78F34C084287D9"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\HOST_BUILD_SEALED.log",
+      "bytes": 271,
+      "sha256": "F3AB33FBE98BE35B700E724F9FEA47E477AF632396FDE9F376C856CF55F59FDA"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\MANAGED_SELF_TEST_FINAL.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\MANAGED_SELF_TEST_SEALED.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\MANAGED_SELF_TEST.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\PREPARATION_FROZEN.log",
+      "bytes": 3050,
+      "sha256": "E05340F9968DC82EC424C172EAD18F84D4032302D6DC057EECCADC270CD8FE43"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Budget.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Compare-Checkpoints.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Freeze.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Prepare-Internal.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Seal-Execution.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Tests.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\SYNTAX_Verify-Contract.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\TESTS_SEALED.log",
+      "bytes": 43,
+      "sha256": "88E444BDE1633DFD99271A1F1729893FE28D2532BFCD492C8877CF4E16BD78C6"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\TESTS_V3.log",
+      "bytes": 43,
+      "sha256": "88E444BDE1633DFD99271A1F1729893FE28D2532BFCD492C8877CF4E16BD78C6"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\ZIG_SYNTAX_01.log",
+      "bytes": 1106,
+      "sha256": "A9010E9D116071587284E4079008FBF5C08C99ECC8D94E86D88F3FEFBA825924"
+    }
+  ],
+  "msvcCompilerInvocations": 0,
+  "nativeBuildPreflights": 1,
+  "nativeAbiAndNoRawSelfTest": "NOT_RUN",
+  "staticSyntheticTestsFinal": 38,
+  "researchFindingsCorrected": [
+    "F1",
+    "F2",
+    "F3"
+  ],
+  "authoritativeFreeze": "receipts/OBSERVER_FREEZE_DELIVERY.json"
+}

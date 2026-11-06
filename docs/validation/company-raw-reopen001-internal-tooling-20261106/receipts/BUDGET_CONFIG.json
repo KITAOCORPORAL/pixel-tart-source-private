@@ -1,0 +1,24 @@
+{
+  "maximum": 2,
+  "internalRoot": "E:/Guangjing-RawReopen001-NativeStages-20261104",
+  "ledgerRoot": "E:/Guangjing-RawReopen001-20261106/task-wide-ledger",
+  "task": "RAW-REOPEN-001-ORIGINAL-TWO-PROCESS-ALLOWANCE",
+  "originalConsumed": [
+    {
+      "result": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/first/result.json",
+      "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+      "slot": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/first/run-slot.json"
+    },
+    {
+      "result": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/second/result.json",
+      "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+      "slot": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/second/run-slot.json"
+    }
+  ],
+  "scopeDecision": "No new allowance granted by this continuation; conservatively bind original V2.1 two completed processes. Internal-new-binary-only local execution=0 does not by itself grant 2 further processes.",
+  "companyRoots": [
+    "E:/Guangjing-RawReopen001-20261104",
+    "E:/Guangjing-RawReopen001-NativeStages-20261104",
+    "E:/Guangjing-RawReopen001-20261106"
+  ]
+}

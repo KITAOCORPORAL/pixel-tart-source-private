@@ -1,0 +1,94 @@
+{
+  "missing": [
+    "cl.exe",
+    "nmake.exe",
+    "dumpbin.exe",
+    "Windows SDK include/lib registered and active",
+    "x64 MSVC Developer shell"
+  ],
+  "rawCalls": 0,
+  "alternateExistingCompiler": "D:/Tools/REA/zig-x86_64-windows-0.15.2/zig.exe exists; not MSVC/Windows SDK, not used as substitute DLL toolchain",
+  "status": "REQUIRED_MSVC_TOOLCHAIN_UNAVAILABLE",
+  "timeAsiaShanghai": "2026-11-06T14:39:15.0003813+08:00",
+  "commands": {
+    "cmake.exe": null,
+    "MSBuild.exe": null,
+    "dumpbin.exe": null,
+    "ninja.exe": null,
+    "cl.exe": null,
+    "dotnet.exe": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "nmake.exe": null
+  },
+  "registry": [
+    {
+      "properties": null,
+      "path": "HKLM:/SOFTWARE/Microsoft/VisualStudio/SxS/VS7",
+      "exists": false
+    },
+    {
+      "properties": null,
+      "path": "HKLM:/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7",
+      "exists": false
+    },
+    {
+      "properties": null,
+      "path": "HKLM:/SOFTWARE/Microsoft/Windows Kits/Installed Roots",
+      "exists": false
+    },
+    {
+      "properties": null,
+      "path": "HKLM:/SOFTWARE/WOW6432Node/Microsoft/Windows Kits/Installed Roots",
+      "exists": false
+    }
+  ],
+  "currentDeveloperShell": {
+    "sdk": null,
+    "vcTools": null,
+    "target": null
+  },
+  "candidatePaths": [
+    {
+      "path": "C:/Program Files/Microsoft Visual Studio",
+      "exists": false
+    },
+    {
+      "path": "C:/Program Files (x86)/Microsoft Visual Studio",
+      "exists": false
+    },
+    {
+      "path": "C:/BuildTools",
+      "exists": false
+    },
+    {
+      "path": "D:/BuildTools",
+      "exists": false
+    },
+    {
+      "path": "E:/BuildTools",
+      "exists": false
+    },
+    {
+      "path": "D:/VisualStudio",
+      "exists": false
+    },
+    {
+      "path": "D:/Microsoft Visual Studio",
+      "exists": false
+    },
+    {
+      "path": "E:/Microsoft Visual Studio",
+      "exists": false
+    },
+    {
+      "path": "C:/Program Files (x86)/Windows Kits/10/Include",
+      "exists": false
+    },
+    {
+      "path": "C:/Program Files (x86)/Windows Kits/10/Lib",
+      "exists": false
+    }
+  ],
+  "visualStudioInstances": [],
+  "nativeBuildAttempts": 0,
+  "vswhereExists": false
+}

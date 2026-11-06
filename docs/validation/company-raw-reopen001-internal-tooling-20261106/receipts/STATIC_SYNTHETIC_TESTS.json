@@ -1,0 +1,29 @@
+{
+  "status": "STATIC_AND_SYNTHETIC_CHECKS_PASS_NOT_NATIVE_ABI",
+  "cases": [
+    "all seven vendor files restore byte-for-byte after removing only inserted observer spans",
+    "missing mandatory anchor rejected",
+    "duplicate mandatory anchor rejected",
+    "P2 is after pre-scale callback and before no_auto_scale branch",
+    "P5 capture wraps actual selected xtrans call with all four initialized slots",
+    "P8 valid out_cam columns captured immediately before original loop",
+    "budget cap cannot be increased on another machine",
+    "completed plus failed reservations exhaust the two-process cap",
+    "duplicate receipts of the same reservation count once",
+    "unknown execution evidence blocks allowance",
+    "no-RAW self-test evidence never consumes a RAW slot",
+    "real audit counts known receipt and verifies identity",
+    "reservation persists before spawn and failure cannot refund it",
+    "missing company root is uncertainty, not zero",
+    "tampered original receipt blocks launch",
+    "pointer numbers and event sequence are diagnostic identities, not pixel inputs",
+    "typed multiplier difference remains part of state comparison",
+    "P5 input comparison detects non-CFA fourth-slot and border mutation",
+    "same-stage layout mismatch rejected",
+    "truncated payload rejected by complete-run loader"
+  ],
+  "passed": 20,
+  "rawCalls": 0,
+  "nativeInit": 0,
+  "nativeCompilerInvocations": 0
+}

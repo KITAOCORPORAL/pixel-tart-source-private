@@ -1,0 +1,27 @@
+{
+  "rawCalls": 0,
+  "researchReviewCommit": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "correctedProductCommit": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "nativeSelfTest": "NOT_RUN",
+  "externalResearchRereview": "NOT_RUN_ON_CORRECTED_COMMIT",
+  "supersededReceipts": "Prior OBSERVER_FREEZE/STATIC_CONTRACT/PREPARATION retained as pre-F1-F3 snapshots; R2 is authoritative current source/host identity",
+  "nativeBuild": "NOT_BUILT",
+  "fixes": [
+    {
+      "id": "F1",
+      "change": "P1 observer quality=-1 unavailable; does not evaluate local quality before vendor assignment",
+      "verification": "38-case suite includes pre-assignment no-read assertion and exact vendor byte restoration"
+    },
+    {
+      "id": "F2",
+      "change": "Mandatory checkpoint schemas, cardinality/order/typed state/CFA/matrices/branch/control/run identities; empty/missing data rejects; separate imageEqual/stateEqual/effectiveInputEqual",
+      "verification": "Missing/duplicate/wrong branch/CFA/matrix/scale/identity rejection and preserved mismatch checks"
+    },
+    {
+      "id": "F3",
+      "change": "XTRANS-serial-ready image4 plus initialized allhex/CIELab added between P5/P6 before any parallel attribution",
+      "verification": "Mandatory order/table presence checked; H1 remains UNKNOWN without actual consumer loads"
+    }
+  ],
+  "reviewedProductCommit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2"
+}

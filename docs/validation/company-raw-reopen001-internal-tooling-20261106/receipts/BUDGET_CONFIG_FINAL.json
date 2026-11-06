@@ -1,0 +1,146 @@
+{
+  "maximum": 2,
+  "internalRoot": "E:/Guangjing-RawReopen001-NativeStages-20261104",
+  "ledgerRoot": "E:/Guangjing-RawReopen001-20261106/task-wide-ledger",
+  "task": "RAW-REOPEN-001-ORIGINAL-TWO-PROCESS-ALLOWANCE",
+  "originalConsumed": [
+    {
+      "result": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/first/result.json",
+      "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+      "slot": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/first/run-slot.json"
+    },
+    {
+      "result": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/second/result.json",
+      "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+      "slot": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/second/run-slot.json"
+    }
+  ],
+  "scopeDecision": "No new allowance granted by this continuation; conservatively bind original V2.1 two completed processes. Internal-new-binary-only local execution=0 does not by itself grant 2 further processes.",
+  "companyRoots": [
+    "E:/Guangjing-RawReopen001-20261104",
+    "E:/Guangjing-RawReopen001-NativeStages-20261104",
+    "E:/Guangjing-RawReopen001-20261106"
+  ],
+  "observationRoots": [
+    "E:/Guangjing-RawReopen001-NativeStages-20261104",
+    "E:/Guangjing-RawReopen001-20261106"
+  ],
+  "legacyEvidence": [
+    {
+      "sha256": "3577c105aa1416dce4a24e2d53587d4e947c29458b76675567f17d315538ab37",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\EXECUTION_PLAN.json"
+    },
+    {
+      "sha256": "f2cca2219b88e29ff20b734fef9c626adf3e1ff7eefe64284ff1a97f29cf70ce",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\first.consumed"
+    },
+    {
+      "sha256": "16e7ff591231025a9dad9ecdbd28a693484c3a355421b0e39c73f81527a780dd",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\PROCESS_RECEIPTS.json"
+    },
+    {
+      "sha256": "399d4babae7de4e5526534eeaa271ae6bea497ae032634c542cee45c6f1a7029",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\first\\result.json"
+    },
+    {
+      "sha256": "532ee1d96310138977ebb97766a259a139ca75c518b69d827cbe9d46f5a4fc20",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\EXECUTION_PLAN.json"
+    },
+    {
+      "sha256": "9fa29effff88e4a91119675d916c3a2aced5c6e60b0f3c969bc9d8ae3bcddfcb",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first.consumed"
+    },
+    {
+      "sha256": "c5fa6eb5ac46fe6979a25b0ac479ba0577798c48c8cdee77c966f2cced2b2fba",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\PROCESS_RECEIPTS.json"
+    },
+    {
+      "sha256": "e2dc66e93f73fd3f209c9122091d9c876a63f4fb66207befb4f03a7ac271f81a",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\EXECUTION_PLAN.json"
+    },
+    {
+      "sha256": "281d362c97c7f0ea889c36ae20693fab0bf906a64e2cd34bbf88ae150859d6cf",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first.consumed"
+    },
+    {
+      "sha256": "7da3898d33e3804683fb120bfcf1305a4a348d9fb368aa5de8095b4df7cbd892",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\PROCESS_RECEIPTS.json"
+    },
+    {
+      "sha256": "204e99f39b7305695a92b46118586e6a722f989b07fa0b8c8fe10eefe16ecaa6",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\EXECUTION_PLAN.json"
+    },
+    {
+      "sha256": "b14086a4282b405e7a94de9a5c5c5fd5f06e62b3e5e092f31e5284feb672b43e",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first.consumed"
+    },
+    {
+      "sha256": "a31d6f01141f9cc42aebbebc088b6ab4346bdae330178e6f81fa5d6e9879078d",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\PROCESS_RECEIPTS.json"
+    },
+    {
+      "sha256": "4d80c9394508a212c067ee9c5624b7776c4eec16da39fac152cb4b91e7a3ec2e",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second.consumed"
+    },
+    {
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\calls.json"
+    },
+    {
+      "sha256": "9de613a2b1520c87af8ac00cb2d78c3a1692cce5a743a2b82671f7fe34874309",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\result.json"
+    },
+    {
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\calls.json"
+    },
+    {
+      "sha256": "d42a988eef1b0c0d35678f4933068e940f06c1b2e6f1ebd4ac007ed511b5b408",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\result.json"
+    },
+    {
+      "sha256": "dbb23111c5513f2384edff913dc91d88507589c29aae5bcd74055c87948d7d8a",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first\\result.json"
+    },
+    {
+      "sha256": "2202ee9e69ddc0f461415196041d3142487582d3d370696a7b1282e63bfdf6a4",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\calls.json"
+    },
+    {
+      "sha256": "4a020fa11ab4c371e229a39589377c08f75f87d330fef75c11d27a5af45823a0",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\result.json"
+    },
+    {
+      "sha256": "1e29a24ab353a2ff39a242d84c65b51130cecc52653af3b08e089d0b302c8602",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\EXECUTION_PLAN.json"
+    },
+    {
+      "sha256": "25bf0c5d6d9a9c8d3a72f86f95edd24cd615449589bd71ad978c9e1a2fe46f01",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\first.consumed"
+    },
+    {
+      "sha256": "6f56be29dcf17696fdf3da85dffaf1ab37a49b217f130c2fc4e9d647bae53b6c",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\second.consumed"
+    },
+    {
+      "sha256": "8a43791afd532dd3f1d748bebda153a1df77d62e11d76028a4bcd649163b98a8",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\PROCESS_RECEIPTS.json"
+    },
+    {
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\calls.json"
+    },
+    {
+      "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\result.json"
+    },
+    {
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\calls.json"
+    },
+    {
+      "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\result.json"
+    }
+  ]
+}

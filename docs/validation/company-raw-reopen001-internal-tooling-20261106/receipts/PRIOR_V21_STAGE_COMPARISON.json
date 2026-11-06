@@ -1,0 +1,134 @@
+{
+  "version": "RAW-REOPEN-001-NativeCompareV2",
+  "rawDecodeCalls": 0,
+  "results": [
+    {
+      "name": "unpack-active-mosaic",
+      "layout": {
+        "Width": 7752,
+        "Height": 5184,
+        "SourcePixelChannels": 1,
+        "ValidChannels": 1,
+        "SourcePitch": 15744,
+        "Left": 60,
+        "Top": 6
+      },
+      "firstSha256": "E6B2E63F50C2786F90068806426DD865BB12278C794BC469A84E7D325B71B9F0",
+      "secondSha256": "E6B2E63F50C2786F90068806426DD865BB12278C794BC469A84E7D325B71B9F0",
+      "equal": true,
+      "validSamples": 40186368,
+      "changedChannels": 0,
+      "changedPixels": 0,
+      "perChannel": [
+        0
+      ],
+      "maxAbsoluteDifference": 0,
+      "meanAbsoluteDifference": 0,
+      "meanChangedAbsoluteDifference": 0,
+      "firstDifference": null,
+      "maximumLocation": null,
+      "bounds": null,
+      "borderChangedChannels": 0,
+      "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+      "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\comparison-v2_1\\unpack-active-mosaic.changes.csv"
+    },
+    {
+      "name": "process-image-rgb",
+      "layout": {
+        "Width": 7752,
+        "Height": 5184,
+        "SourcePixelChannels": 4,
+        "ValidChannels": 3,
+        "SourcePitch": 62016,
+        "Left": 0,
+        "Top": 0
+      },
+      "firstSha256": "9460FDC33E873AA7B7CDF7B6A54D9444F91E8AEDA91AACA7CBF8AA36590F35A1",
+      "secondSha256": "9C34D452FA62827F034217D6C753286852159DDA210C7E14C0D422BA7C0194E1",
+      "equal": false,
+      "validSamples": 120559104,
+      "changedChannels": 5316,
+      "changedPixels": 3042,
+      "perChannel": [
+        2152,
+        1015,
+        2149
+      ],
+      "maxAbsoluteDifference": 146,
+      "meanAbsoluteDifference": 0.0003952169385731334,
+      "meanChangedAbsoluteDifference": 8.962942061700527,
+      "firstDifference": {
+        "x": 4475,
+        "y": 499,
+        "channel": 1,
+        "first": 129,
+        "second": 120
+      },
+      "maximumLocation": {
+        "x": 2492,
+        "y": 1990,
+        "channel": 2,
+        "first": 1600,
+        "second": 1454
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4969
+      },
+      "borderChangedChannels": 0,
+      "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+      "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\comparison-v2_1\\process-image-rgb.changes.csv"
+    },
+    {
+      "name": "memory-rgb16",
+      "layout": {
+        "Width": 7752,
+        "Height": 5184,
+        "SourcePixelChannels": 3,
+        "ValidChannels": 3,
+        "SourcePitch": 46512,
+        "Left": 0,
+        "Top": 0
+      },
+      "firstSha256": "32D58075EBEA3DBDB547E9262ECB2FEA6F9579C518D7D8BA21F273CFF520E995",
+      "secondSha256": "3169F3FD17F057B5B9827D43AA4419EC5E21946760F66AB59FE0840C261CC355",
+      "equal": false,
+      "validSamples": 120559104,
+      "changedChannels": 5311,
+      "changedPixels": 3042,
+      "perChannel": [
+        2147,
+        1015,
+        2149
+      ],
+      "maxAbsoluteDifference": 4628,
+      "meanAbsoluteDifference": 0.019303394955556406,
+      "meanChangedAbsoluteDifference": 438.184899265675,
+      "firstDifference": {
+        "x": 4475,
+        "y": 499,
+        "channel": 1,
+        "first": 7426,
+        "second": 6980
+      },
+      "maximumLocation": {
+        "x": 7482,
+        "y": 3485,
+        "channel": 2,
+        "first": 2552,
+        "second": 7180
+      },
+      "bounds": {
+        "left": 507,
+        "top": 499,
+        "right": 7691,
+        "bottom": 4969
+      },
+      "borderChangedChannels": 0,
+      "coordinates": "Within packed valid stage rectangle; add source Left/Top for original raw sites",
+      "localDifferenceCsv": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\comparison-v2_1\\memory-rgb16.changes.csv"
+    }
+  ]
+}

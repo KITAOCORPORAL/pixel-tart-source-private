@@ -1,0 +1,197 @@
+{
+  "version": "RR001-TaskWideBudgetV1",
+  "task": "RAW-REOPEN-001-ORIGINAL-TWO-PROCESS-ALLOWANCE",
+  "dateUtc": "2026-11-06T07:14:51.895Z",
+  "maximum": 2,
+  "consumed": 2,
+  "remaining": 0,
+  "unknownEvidence": 0,
+  "launchAllowed": false,
+  "failures": [],
+  "records": [
+    {
+      "identity": "original-pid-15284",
+      "status": "completed",
+      "pid": 15284
+    },
+    {
+      "identity": "original-pid-4908",
+      "status": "completed",
+      "pid": 4908
+    }
+  ],
+  "sources": [
+    {
+      "path": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/first/result.json",
+      "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "pid": 15284
+    },
+    {
+      "path": "E:/Guangjing-RawReopen001-20261104/native-boundaries-v2/pair-v2_1/second/result.json",
+      "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "pid": 4908
+    }
+  ],
+  "findings": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\first\\result.json",
+      "sha256": "399d4babae7de4e5526534eeaa271ae6bea497ae032634c542cee45c6f1a7029",
+      "bytes": 1364
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\first.consumed",
+      "sha256": "f2cca2219b88e29ff20b734fef9c626adf3e1ff7eefe64284ff1a97f29cf70ce",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\first.consumed",
+      "sha256": "25bf0c5d6d9a9c8d3a72f86f95edd24cd615449589bd71ad978c9e1a2fe46f01",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\second.consumed",
+      "sha256": "6f56be29dcf17696fdf3da85dffaf1ab37a49b217f130c2fc4e9d647bae53b6c",
+      "bytes": 4
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\calls.json",
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "bytes": 90
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\result.json",
+      "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+      "bytes": 521
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\calls.json",
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "bytes": 90
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\result.json",
+      "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+      "bytes": 520
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\calls.json",
+      "sha256": "2202ee9e69ddc0f461415196041d3142487582d3d370696a7b1282e63bfdf6a4",
+      "bytes": 22
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\result.json",
+      "sha256": "4a020fa11ab4c371e229a39589377c08f75f87d330fef75c11d27a5af45823a0",
+      "bytes": 1978
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first.consumed",
+      "sha256": "9fa29effff88e4a91119675d916c3a2aced5c6e60b0f3c969bc9d8ae3bcddfcb",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first\\result.json",
+      "sha256": "dbb23111c5513f2384edff913dc91d88507589c29aae5bcd74055c87948d7d8a",
+      "bytes": 1305
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first.consumed",
+      "sha256": "281d362c97c7f0ea889c36ae20693fab0bf906a64e2cd34bbf88ae150859d6cf",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\calls.json",
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "bytes": 90
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\result.json",
+      "sha256": "9de613a2b1520c87af8ac00cb2d78c3a1692cce5a743a2b82671f7fe34874309",
+      "bytes": 587
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first.consumed",
+      "sha256": "b14086a4282b405e7a94de9a5c5c5fd5f06e62b3e5e092f31e5284feb672b43e",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\calls.json",
+      "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+      "bytes": 90
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\result.json",
+      "sha256": "d42a988eef1b0c0d35678f4933068e940f06c1b2e6f1ebd4ac007ed511b5b408",
+      "bytes": 587
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second.consumed",
+      "sha256": "4d80c9394508a212c067ee9c5624b7776c4eec16da39fac152cb4b91e7a3ec2e",
+      "bytes": 5
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\final-budget-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "997a36f79909d1959f861eee50aeee1a8dc5b776f531713f83f50dd9ae66998f"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\final-comparison-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "4757482c2f689e99130ac72409ea7c942711a48fde9f2f7b3895d33bd05b49bd"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\final-tool-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "4757482c2f689e99130ac72409ea7c942711a48fde9f2f7b3895d33bd05b49bd"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\research-amendment-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "997a36f79909d1959f861eee50aeee1a8dc5b776f531713f83f50dd9ae66998f"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\reviewfix-final-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "997a36f79909d1959f861eee50aeee1a8dc5b776f531713f83f50dd9ae66998f"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\reviewfix-identity-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "997a36f79909d1959f861eee50aeee1a8dc5b776f531713f83f50dd9ae66998f"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\reviewfix-wb-tests\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "997a36f79909d1959f861eee50aeee1a8dc5b776f531713f83f50dd9ae66998f"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\tests-sealed\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "4757482c2f689e99130ac72409ea7c942711a48fde9f2f7b3895d33bd05b49bd"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\tests-v3\\RR001_SYNTHETIC_ONLY.json",
+      "syntheticOnly": true,
+      "sha256": "4757482c2f689e99130ac72409ea7c942711a48fde9f2f7b3895d33bd05b49bd"
+    }
+  ],
+  "scanRoots": [
+    "E:/Guangjing-RawReopen001-20261104",
+    "E:/Guangjing-RawReopen001-NativeStages-20261104",
+    "E:/Guangjing-RawReopen001-20261106"
+  ],
+  "ledgerRoot": "E:/Guangjing-RawReopen001-20261106/task-wide-ledger",
+  "policy": "Original V2.1 two-process allowance is already evidenced as consumed. A zero-run home preparation does not replenish it; no automatic grant for a new binary or machine.",
+  "newRawCalls": 0
+}

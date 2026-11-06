@@ -1,0 +1,19 @@
+{
+  "status": "NOT_BUILT_REQUIRED_MSVC_TOOLCHAIN_UNAVAILABLE",
+  "nativeCompilerInvocations": 0,
+  "rawCalls": 0,
+  "source": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "flags": "Unchanged upstream Makefile.msvc DLL target; COPT_OPT=/openmp",
+  "productionEquivalent": false,
+  "optionalComponents": "No RawSpeed/DNGSDK/LCMS/JPEG opt-in; must not claim production-equivalent",
+  "missing": [
+    "cl.exe",
+    "nmake.exe",
+    "dumpbin.exe",
+    "Windows SDK include/lib registered and active",
+    "x64 MSVC Developer shell"
+  ],
+  "compiler": null,
+  "sdk": null,
+  "developerTarget": null
+}

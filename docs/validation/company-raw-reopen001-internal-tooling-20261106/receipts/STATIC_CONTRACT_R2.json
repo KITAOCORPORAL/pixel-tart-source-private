@@ -1,0 +1,80 @@
+{
+  "version": "RR001-InternalV3-Contract",
+  "research": "5a4f233dea5ba11622b18380fea137c8f3944e53",
+  "source": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "staticContractComplete": true,
+  "researchAddendum": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "F1": "P1 quality UNAVAILABLE, original assignment untouched",
+  "F2": "Comparator requires checkpoint-specific complete typed state and run identity",
+  "F3": "Serial-ready image4 and allhex/CIELab compared before P6",
+  "nativeCompileVerified": false,
+  "nativeSelfTestVerified": false,
+  "executionReady": false,
+  "checkpoints": [
+    {
+      "id": "P1",
+      "payload": "active CFA plus full initialized image4 U16; CFA table and black/inline state",
+      "excluded": "allocation beyond declared active image; no structure/pointer bytes"
+    },
+    {
+      "id": "P2",
+      "payload": "small state after pre_scalecolors_cb, before scale branch",
+      "corrected": true
+    },
+    {
+      "id": "P3a",
+      "payload": "actual WB branch/sums, post-normalization pre_mul and scale_mul float bits"
+    },
+    {
+      "id": "P3b",
+      "payload": "full initialized image4 including non-CFA channels"
+    },
+    {
+      "id": "P4",
+      "payload": "recomputed dimensions/CFA/shrink/pointer generation; unsupported layout rejects"
+    },
+    {
+      "id": "P5",
+      "payload": "full image4 all rows including borders, plus CFA, typed algorithm inputs and actual selected branch/passes",
+      "equivalence": "Incoming initialized image and controls only; sparse CFA equality is insufficient. Internal scratch has no defined entry contents, is not hashed or declared equal."
+    },
+    {
+      "id": "P6",
+      "payload": "full valid RGB and separate initialized fourth-slot audit; own border interpolation included"
+    },
+    {
+      "id": "P7",
+      "payload": "full valid RGB plus initialized fourth-slot audit after optional postprocess/callbacks"
+    },
+    {
+      "id": "P8",
+      "payload": "effective out_cam valid columns only; raw-color bypass explicit"
+    },
+    {
+      "id": "P9",
+      "payload": "full valid RGB/audit4 plus histogram after original initialization"
+    },
+    {
+      "id": "P10",
+      "payload": "small state after postconvert/stretch/restore"
+    }
+  ],
+  "extraEvidence": [
+    "P0 saved typed black/matrix state",
+    "actual copy_bayer/copy_fuji entries and pointer algebra allocation extent",
+    "original adjust_bl/maximum/subtract-black entry+return-or-unwind",
+    "serial XTrans green-bounds complete image4 and allhex hash",
+    "cielab initialized lookup table hash and valid matrix columns",
+    "actual per-worker team/tile/scratch extent after parallel join; no synchronized per-pixel logging"
+  ],
+  "limits": [
+    "Compiled ABI, supported layout and lifecycle still require exact new native library self-test",
+    "State equality is not proof of actual shared-load timing or H1; no cached LIM loads/locks/algorithm changes",
+    "Unsupported callback-driven pointer/layout mutation invalidates capture",
+    "Optional component/build differences from production must remain explicit"
+  ],
+  "preparationSha256": "5c032c4b048cdf3c467db20decc9e2e8f2d7ae1e42764240c91ef3e30dfe494a",
+  "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "modifiedFileCount": 7,
+  "rawCalls": 0
+}

@@ -1,0 +1,78 @@
+{
+  "staticContractSha256": "50E23995AB7D0B8FD287E82E221A6DA006D24E2515C22E0967E8089C1E237313",
+  "implementationCommit": "973856b017555d96764d99db60ffb463be8eebd5",
+  "observerSourceCommit": "bc9fe4843d922e08a5576d6dc0188f151143a9fb",
+  "rawCalls": 0,
+  "preparedFileInventorySha256": "9DCE7C821061F0CB6E9F0C5A000BF18A9F87FEE2E4752B397D931C229A5F42C4",
+  "nativeAbiSelfTest": "NOT_RUN",
+  "host": {
+    "sha256": "68E5E49D1217715D9A8A706A9218B03EA09F210640AC1969A2685FDFDDB2D389",
+    "path": "E:/Guangjing-RawReopen001-20261106/host-reviewfix/RawNativeInternalHost.dll"
+  },
+  "files": [
+    {
+      "sha256": "730A35AE3D558080083C3103D9AC8100C3F6561678092ABE341701DFA331EB1D",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\.gitattributes"
+    },
+    {
+      "sha256": "032B26BD985BE30856415536CA5A0CE238B7F0CC61623F6221D6D69547D35632",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Budget.mjs"
+    },
+    {
+      "sha256": "7294C746D8546D92FA0C56577BD1D36616B0A94FA061785046A9B69D8C8D42F6",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Build-Isolated.ps1"
+    },
+    {
+      "sha256": "B9091372AC1240C52B401B7F2019EFB77DFB163F6752825551EF6F7E05308AA9",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Compare-Checkpoints.mjs"
+    },
+    {
+      "sha256": "DCFC127FB5C118B7561203B4ED646624BC9CF9BDE53C220215AD1687FCBB1AF1",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Discover-Toolchain.ps1"
+    },
+    {
+      "sha256": "AC53D07E5497F831F559367CA4C1A2AFAAC1F8316BE5DA0555ED173F16E50C4A",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Freeze.mjs"
+    },
+    {
+      "sha256": "B77A45191FE601FD6F5C61B22AFEBAADFE5004EA5339A53FAA9C013F75D73AD6",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Prepare-Internal.mjs"
+    },
+    {
+      "sha256": "0E68E6C4E03E8368BBFDF9C5AFB85ECC7D92EA98A77740076032310E6647D7A1",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Program.cs"
+    },
+    {
+      "sha256": "ECDD2FE3364EB407BE3F74A86C223B1B3049AE6A9F84F9CE25A2E63481580A32",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\RawNativeInternalHost.csproj"
+    },
+    {
+      "sha256": "9A36A9F9AFDD2C15A0C8E308196C3E89D853974F28FD1D461B280E26F3F2F6F3",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\README.md"
+    },
+    {
+      "sha256": "CE42B2EFA23806DA4F1EDABBAD4901C1A836FF319133507BAC6E4315B0D1F718",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\rr001_internal.h"
+    },
+    {
+      "sha256": "3CFF492B5F3CF779757815F930580C40A4A20691CB092453608B6EC12C711DD7",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Run-Bounded.ps1"
+    },
+    {
+      "sha256": "19EDF109771278598730745A075E8370F46409A47E039302CB47C9052E81C044",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Seal-Execution.mjs"
+    },
+    {
+      "sha256": "CBB2FEDF1A95D42B386A7C3FF97B1EB1EF2530032F93F40E4F90C45785B0599F",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Tests.mjs"
+    },
+    {
+      "sha256": "A80D0CBE00508D3821E1A28BF4D50FD8255ADAC1ACDA5DF826E2CB98C083624B",
+      "path": "E:\\Kitao-Worktrees\\raw-reopen001-native-20261106\\tools\\RawNativeInternalProbe\\Verify-Contract.mjs"
+    }
+  ],
+  "preparedSourceManifestSha256": "5C032C4B048CDF3C467DB20DECC9E2E8F2D7AE1E42764240C91EF3E30DFE494A",
+  "nativeLibrary": "NOT_BUILT",
+  "budgetHardeningCommit": "60cf0b5ec48418d57fb1e8eb8b89bdb5bc19dad2",
+  "researchAddendum": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f"
+}

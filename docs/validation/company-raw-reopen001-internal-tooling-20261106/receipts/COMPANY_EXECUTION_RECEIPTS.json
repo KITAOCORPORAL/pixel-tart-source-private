@@ -1,0 +1,549 @@
+[
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\EXECUTION_PLAN.json",
+    "bytes": 1159,
+    "sha256": "3577c105aa1416dce4a24e2d53587d4e947c29458b76675567f17d315538ab37",
+    "content": {
+      "createdAtUtc": "2026-11-04T05:37:38.020Z",
+      "timeZone": "Asia/Shanghai",
+      "productSource": "38dd3f92bb2db7238f7f058008887929ec971c93",
+      "auditBase": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+      "exactProcesses": 2,
+      "defaultDevelopmentsPerProcess": 1,
+      "sequential": true,
+      "automaticRetries": false,
+      "noOtherInputs": true,
+      "parameterPolicy": "Unmodified default assignments and native-inherited values, captured after open/unpack, configured immediately before wrapper commit and after process. No equality assumption based on input SHA.",
+      "observerSourceSha256": "0386EF63577436A3964A033FC8BECE52967C4997AE39EBE9CB460B8ADD9E9A9C",
+      "generatedDecoderSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+      "manifestSha256": "B27AB076E9BEBD5642593C9AA33288B115A100C26E770D22BDEEA8381CDF76CE",
+      "maximumPrivateOrWorkingBytes": 2147483648,
+      "masterBudgetBytes": 536870912,
+      "probeOnly": true,
+      "productRebuild": false,
+      "nativeAlgorithmChanged": false,
+      "nativeThreadPolicyChanged": false,
+      "stageFiles": "Full native RGB16 / copied managed RGB16 / float32 master / orientation-normalized float32, local only"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\first.consumed",
+    "bytes": 5,
+    "sha256": "f2cca2219b88e29ff20b734fef9c626adf3e1ff7eefe64284ff1a97f29cf70ce",
+    "content": 18196
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\PROCESS_RECEIPTS.json",
+    "bytes": 470,
+    "sha256": "16e7ff591231025a9dad9ecdbd28a693484c3a355421b0e39c73f81527a780dd",
+    "content": {
+      "peakPrivateBytesSampled": 8200192,
+      "samplePeriodMs": 50,
+      "slot": "first",
+      "automaticRetry": false,
+      "exitCode": 1,
+      "hardLimitBytes": 2147483648,
+      "peakWorkingSetBytesSampled": 29483008,
+      "peakWorkingSetOsObserved": 30416896,
+      "nativeThreadPolicy": "UNCHANGED",
+      "processId": 18196,
+      "finishedAtUtc": "2026-11-04T05:38:19.1112274+00:00",
+      "sequential": true,
+      "aborted": false,
+      "startedAtUtc": "2026-11-04T05:38:18.7448771+00:00"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\first\\result.json",
+    "bytes": 1364,
+    "sha256": "399d4babae7de4e5526534eeaa271ae6bea497ae032634c542cee45c6f1a7029",
+    "content": {
+      "status": "FAILED_NO_AUTOMATIC_RETRY",
+      "error": "System.TypeInitializationException: The type initializer for 'Sdcb.LibRaw.Natives.LibRawNative' threw an exception.\r\n ---> System.TypeInitializationException: The type initializer for 'Sdcb.LibRaw.Natives.LibRawNativeLoader' threw an exception.\r\n ---> System.InvalidOperationException: A resolver is already set for the assembly.\r\n   at System.Runtime.InteropServices.NativeLibrary.SetDllImportResolver(Assembly assembly, DllImportResolver resolver)\r\n   at Sdcb.LibRaw.Natives.LibRawNativeLoader..cctor()\r\n   --- End of inner exception stack trace ---\r\n   at Sdcb.LibRaw.Natives.LibRawNativeLoader.Init()\r\n   at Sdcb.LibRaw.Natives.LibRawNative..cctor()\r\n   --- End of inner exception stack trace ---\r\n   at Sdcb.LibRaw.Natives.LibRawNative.GetVersion()\r\n   at Sdcb.LibRaw.RawContext.get_Version()\r\n   at RawReopenStageProbe.Program.Main(String[] args)",
+      "version": "RAW-REOPEN-001-StageProbeV1",
+      "pid": 18196,
+      "elapsedMs": 261.0703,
+      "counts": {},
+      "peakWorkingSetOs": 34553856,
+      "peakWorkingSetSampled": 34545664,
+      "peakPrivateBytesSampled": 9887744,
+      "privateSamplePeriodMs": 50,
+      "scope": "Exactly one default native development in an isolated process; no App preview/export/reopen rerun; full stage binaries retained locally"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\EXECUTION_PLAN.json",
+    "bytes": 1165,
+    "sha256": "532ee1d96310138977ebb97766a259a139ca75c518b69d827cbe9d46f5a4fc20",
+    "content": {
+      "createdAtUtc": "2026-11-04T05:46:01.239Z",
+      "timeZone": "Asia/Shanghai",
+      "version": "RAW-REOPEN-001-StageProbeV1.1",
+      "processCount": 2,
+      "defaultDecodesPerProcess": 1,
+      "sequential": true,
+      "input": {
+        "Id": "company-02",
+        "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+        "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+      },
+      "rawDecodesAlreadyExecuted": 0,
+      "predecodeFailedProcess": 18196,
+      "noRetryForCompletedOrFailedDecode": true,
+      "softwareManifestSha256": "F643972E1AC2079DF4E394E3A617C018E9917B1A2A65432D4943D74E90377E47",
+      "observerSourceSha256": "515FB4710B41278C312C8851042D440957270CEF92B91BAACAA774CB7C754C4B",
+      "generatedDecoderSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+      "nativeThreadPolicy": "UNCHANGED",
+      "rawAndOutputParameters": "UNCHANGED_DEFAULT; snapshots captured per actual context",
+      "scope": "Only first and second, no Canon or Sony; no App/full audit rerun",
+      "hardMemoryCapBytes": 2147483648,
+      "expectedMasterBytes": 482236416,
+      "masterBudgetBytes": 536870912,
+      "predecodeFailedProcesses": [
+        18196,
+        30252
+      ]
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first.consumed",
+    "bytes": 5,
+    "sha256": "9fa29effff88e4a91119675d916c3a2aced5c6e60b0f3c969bc9d8ae3bcddfcb",
+    "content": 23144
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\PROCESS_RECEIPTS.json",
+    "bytes": 471,
+    "sha256": "c5fa6eb5ac46fe6979a25b0ac479ba0577798c48c8cdee77c966f2cced2b2fba",
+    "content": {
+      "finishedAtUtc": "2026-11-04T05:46:47.0941538+00:00",
+      "hardLimitBytes": 2147483648,
+      "peakWorkingSetOsObserved": 38592512,
+      "slot": "first",
+      "peakPrivateBytesSampled": 13725696,
+      "automaticRetry": false,
+      "samplePeriodMs": 50,
+      "sequential": true,
+      "processId": 23144,
+      "aborted": false,
+      "peakWorkingSetBytesSampled": 38588416,
+      "exitCode": 1,
+      "nativeThreadPolicy": "UNCHANGED",
+      "startedAtUtc": "2026-11-04T05:46:46.7141185+00:00"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\EXECUTION_PLAN.json",
+    "bytes": 1107,
+    "sha256": "e2dc66e93f73fd3f209c9122091d9c876a63f4fb66207befb4f03a7ac271f81a",
+    "content": {
+      "createdAtUtc": "2026-11-04T05:42:36.088Z",
+      "timeZone": "Asia/Shanghai",
+      "version": "RAW-REOPEN-001-StageProbeV1.1",
+      "processCount": 2,
+      "defaultDecodesPerProcess": 1,
+      "sequential": true,
+      "input": {
+        "Id": "company-02",
+        "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+        "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+      },
+      "rawDecodesAlreadyExecuted": 0,
+      "predecodeFailedProcess": 18196,
+      "noRetryForCompletedOrFailedDecode": true,
+      "softwareManifestSha256": "6830E30DEB5B8D85F0A05043FDEAAF22FD51BB3131F8706588FFB5B207B5F885",
+      "observerSourceSha256": "515FB4710B41278C312C8851042D440957270CEF92B91BAACAA774CB7C754C4B",
+      "generatedDecoderSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+      "nativeThreadPolicy": "UNCHANGED",
+      "rawAndOutputParameters": "UNCHANGED_DEFAULT; snapshots captured per actual context",
+      "scope": "Only first and second, no Canon or Sony; no App/full audit rerun",
+      "hardMemoryCapBytes": 2147483648,
+      "expectedMasterBytes": 482236416,
+      "masterBudgetBytes": 536870912
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first.consumed",
+    "bytes": 5,
+    "sha256": "281d362c97c7f0ea889c36ae20693fab0bf906a64e2cd34bbf88ae150859d6cf",
+    "content": 30252
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\PROCESS_RECEIPTS.json",
+    "bytes": 470,
+    "sha256": "7da3898d33e3804683fb120bfcf1305a4a348d9fb368aa5de8095b4df7cbd892",
+    "content": {
+      "hardLimitBytes": 2147483648,
+      "startedAtUtc": "2026-11-04T05:43:24.1543688+00:00",
+      "exitCode": 1,
+      "processId": 30252,
+      "finishedAtUtc": "2026-11-04T05:43:24.5601823+00:00",
+      "samplePeriodMs": 50,
+      "aborted": false,
+      "peakPrivateBytesSampled": 9543680,
+      "slot": "first",
+      "peakWorkingSetOsObserved": 34140160,
+      "nativeThreadPolicy": "UNCHANGED",
+      "sequential": true,
+      "automaticRetry": false,
+      "peakWorkingSetBytesSampled": 34107392
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\EXECUTION_PLAN.json",
+    "bytes": 1234,
+    "sha256": "204e99f39b7305695a92b46118586e6a722f989b07fa0b8c8fe10eefe16ecaa6",
+    "content": {
+      "version": "RAW-REOPEN-001-StageProbeV1.3",
+      "createdAtUtc": "2026-11-04T05:53:29.189Z",
+      "timeZone": "Asia/Shanghai",
+      "softwareManifestSha256": "19B60270F7CFCE05D5F6081DB72627362D612FFA54D1D0E9597AF967FF729F4C",
+      "observerSourceSha256": "AC9D3F8A70E68EE7A4DCDBF4C5FEBD93A4D7E44610FE6A25C9874412D22034C2",
+      "generatedSourceSha256": "5500EFC4D8480A2AF0E7DE4FC7AA760B3983877A936995BF8F6AB9CB20860CBA",
+      "noRawSerializationSelfTest": "PASS; all types, no native initialization",
+      "input": {
+        "Id": "company-02",
+        "Path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSCF0347.RAF",
+        "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+      },
+      "decodeProcesses": 2,
+      "defaultDevelopmentsPerProcess": 1,
+      "serial": true,
+      "automaticRetries": false,
+      "hardLimitBytes": 2147483648,
+      "masterBudgetBytes": 536870912,
+      "threadPolicy": "UNCHANGED",
+      "parameterAssignments": "UNCHANGED",
+      "failedSetupPids": [
+        18196,
+        30252,
+        23144
+      ],
+      "priorOpenFileCalls": 1,
+      "priorUnpackCalls": 0,
+      "priorDcrawProcessCalls": 0,
+      "fullRawDevelopmentsBeforePair": 0,
+      "note": "Preserve every setup failure; only first and second can develop; no third decoded input or extra retry allowed."
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first.consumed",
+    "bytes": 5,
+    "sha256": "b14086a4282b405e7a94de9a5c5c5fd5f06e62b3e5e092f31e5284feb672b43e",
+    "content": 35784
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\PROCESS_RECEIPTS.json",
+    "bytes": 1020,
+    "sha256": "a31d6f01141f9cc42aebbebc088b6ab4346bdae330178e6f81fa5d6e9879078d",
+    "content": [
+      {
+        "exitCode": 0,
+        "peakPrivateBytesSampled": 921321472,
+        "aborted": false,
+        "nativeThreadPolicy": "UNCHANGED",
+        "processId": 35784,
+        "peakWorkingSetOsObserved": 949080064,
+        "hardLimitBytes": 2147483648,
+        "samplePeriodMs": 50,
+        "slot": "first",
+        "peakWorkingSetBytesSampled": 949075968,
+        "startedAtUtc": "2026-11-04T05:54:15.9359338+00:00",
+        "finishedAtUtc": "2026-11-04T05:54:30.7539227+00:00",
+        "automaticRetry": false,
+        "sequential": true
+      },
+      {
+        "exitCode": 0,
+        "peakPrivateBytesSampled": 921042944,
+        "aborted": false,
+        "nativeThreadPolicy": "UNCHANGED",
+        "processId": 32688,
+        "peakWorkingSetOsObserved": 948678656,
+        "hardLimitBytes": 2147483648,
+        "samplePeriodMs": 50,
+        "slot": "second",
+        "peakWorkingSetBytesSampled": 948637696,
+        "startedAtUtc": "2026-11-04T05:54:30.7693406+00:00",
+        "finishedAtUtc": "2026-11-04T05:54:45.6283491+00:00",
+        "automaticRetry": false,
+        "sequential": true
+      }
+    ]
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second.consumed",
+    "bytes": 5,
+    "sha256": "4d80c9394508a212c067ee9c5624b7776c4eec16da39fac152cb4b91e7a3ec2e",
+    "content": 32688
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\calls.json",
+    "bytes": 90,
+    "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+    "content": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\first\\result.json",
+    "bytes": 587,
+    "sha256": "9de613a2b1520c87af8ac00cb2d78c3a1692cce5a743a2b82671f7fe34874309",
+    "content": {
+      "status": "COMPLETED",
+      "error": null,
+      "version": "RAW-REOPEN-001-StageProbeV1.3",
+      "pid": 35784,
+      "elapsedMs": 14672.3305,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetOs": 949080064,
+      "peakWorkingSetSampled": 949075968,
+      "peakPrivateBytesSampled": 921321472,
+      "privateSamplePeriodMs": 50,
+      "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\calls.json",
+    "bytes": 90,
+    "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+    "content": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_3\\second\\result.json",
+    "bytes": 587,
+    "sha256": "d42a988eef1b0c0d35678f4933068e940f06c1b2e6f1ebd4ac007ed511b5b408",
+    "content": {
+      "status": "COMPLETED",
+      "error": null,
+      "version": "RAW-REOPEN-001-StageProbeV1.3",
+      "pid": 32688,
+      "elapsedMs": 14737.1573,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetOs": 948678656,
+      "peakWorkingSetSampled": 948637696,
+      "peakPrivateBytesSampled": 921042944,
+      "privateSamplePeriodMs": 50,
+      "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-v1_1\\first\\result.json",
+    "bytes": 1305,
+    "sha256": "dbb23111c5513f2384edff913dc91d88507589c29aae5bcd74055c87948d7d8a",
+    "content": {
+      "status": "FAILED_NO_AUTOMATIC_RETRY",
+      "error": "System.DllNotFoundException: Unable to load DLL 'libraw.dll' or one of its dependencies: 找不到指定的模块。 (0x8007007E)\r\n   at System.Runtime.InteropServices.NativeLibrary.LoadLibraryByName(String libraryName, Assembly assembly, Nullable`1 searchPath, Boolean throwOnError)\r\n   at Sdcb.LibRaw.Natives.LibRawNativeLoader.LibRawImportResolver(String libraryName, Assembly assembly, Nullable`1 searchPath)\r\n   at System.Runtime.InteropServices.NativeLibrary.LoadLibraryCallbackStub(String libraryName, Assembly assembly, Boolean hasDllImportSearchPathFlags, UInt32 dllImportSearchPathFlags)\r\n   at Sdcb.LibRaw.Natives.LibRawNative.GetVersion()\r\n   at Sdcb.LibRaw.RawContext.get_Version()\r\n   at RawReopenStageProbe.Program.Main(String[] args)",
+      "version": "RAW-REOPEN-001-StageProbeV1.1",
+      "pid": 30252,
+      "elapsedMs": 280.919,
+      "counts": {},
+      "peakWorkingSetOs": 34140160,
+      "peakWorkingSetSampled": 34127872,
+      "peakPrivateBytesSampled": 9658368,
+      "privateSamplePeriodMs": 50,
+      "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\calls.json",
+    "bytes": 22,
+    "sha256": "2202ee9e69ddc0f461415196041d3142487582d3d370696a7b1282e63bfdf6a4",
+    "content": {
+      "OpenFile": 1
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\pair-final-v1_1\\first\\result.json",
+    "bytes": 1978,
+    "sha256": "4a020fa11ab4c371e229a39589377c08f75f87d330fef75c11d27a5af45823a0",
+    "content": {
+      "status": "FAILED_NO_AUTOMATIC_RETRY",
+      "error": "System.NotSupportedException: Specified method is not supported.\r\n   at System.Reflection.RuntimeMethodInfo.ThrowNoInvokeException()\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.PropertyInfo.GetValue(Object obj)\r\n   at RawReopenStageProbe.Probe.Snapshot(Object v, Int32 depth)\r\n   at RawReopenStageProbe.Probe.Parameters(String stage, RawContext ctx)\r\n   at RawReopenStageProbe.ObservedLibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken, Int32 viewingEdge)\r\n   at RawReopenStageProbe.ObservedLibRawDecoder.<>c__DisplayClass4_0.<DecodeAsync>b__0()\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RawReopenStageProbe.Program.Main(String[] args)",
+      "version": "RAW-REOPEN-001-StageProbeV1.1",
+      "pid": 23144,
+      "elapsedMs": 291.754,
+      "counts": {
+        "OpenFile": 1
+      },
+      "peakWorkingSetOs": 43438080,
+      "peakWorkingSetSampled": 43433984,
+      "peakPrivateBytesSampled": 16060416,
+      "privateSamplePeriodMs": 50,
+      "scope": "At most one default native development in an isolated process; completed counts are authoritative; no App preview/export/reopen rerun; full stage binaries retained locally"
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\EXECUTION_PLAN.json",
+    "bytes": 1082,
+    "sha256": "1e29a24ab353a2ff39a242d84c65b51130cecc52653af3b08e089d0b302c8602",
+    "content": {
+      "version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+      "frozenManifestSha256": "26C4C71CA9BF575E520FB2A419CBD1D3130DA9936C2F78EE36175E5D1E5A301D",
+      "sourceCommit": "14e62f56b9a24131ed071f5d01e5547391c0882a",
+      "processes": 2,
+      "rawFiles": 1,
+      "maxCallsPerProcess": {
+        "MakeDcrawMemoryImage": 1,
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1
+      },
+      "serial": true,
+      "automaticRetry": false,
+      "additionalThirdDecode": false,
+      "threadOverridesByObserver": false,
+      "startupAndEffectiveSnapshotsSeparated": true,
+      "oldOmpInheritanceWordingCorrected": true,
+      "inputId": "company-02",
+      "inputSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "observerDllSha256": "1CBD7FD8A1DA6878F2C5C3D1B1910BA272F78E98BA7C187CAFEB78BB50DFE4AA",
+      "nativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+      "noRawSelfTest": "frozen-self-test/self-test.json",
+      "offlineComparatorSelfTest": "comparator-self-test/self-test.json",
+      "peakLimitBytes": 2147483648,
+      "timeoutSecondsPerProcess": 600
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\first.consumed",
+    "bytes": 5,
+    "sha256": "25bf0c5d6d9a9c8d3a72f86f95edd24cd615449589bd71ad978c9e1a2fe46f01",
+    "content": 15284
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\freeze-v2_1\\second.consumed",
+    "bytes": 4,
+    "sha256": "6f56be29dcf17696fdf3da85dffaf1ab37a49b217f130c2fc4e9d647bae53b6c",
+    "content": 4908
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\PROCESS_RECEIPTS.json",
+    "bytes": 1019,
+    "sha256": "8a43791afd532dd3f1d748bebda153a1df77d62e11d76028a4bcd649163b98a8",
+    "content": [
+      {
+        "peakWorkingSetOsObserved": 724279296,
+        "processId": 15284,
+        "sequential": true,
+        "peakPrivateBytesSampled": 699195392,
+        "finishedAtUtc": "2026-11-04T09:14:29.7126100+00:00",
+        "slot": "first",
+        "startedAtUtc": "2026-11-04T09:14:23.4569976+00:00",
+        "peakWorkingSetBytesSampled": 715685888,
+        "aborted": false,
+        "exitCode": 0,
+        "automaticRetry": false,
+        "nativeThreadPolicy": "UNCHANGED",
+        "hardLimitBytes": 2147483648,
+        "samplePeriodMs": 50
+      },
+      {
+        "peakWorkingSetOsObserved": 724688896,
+        "processId": 4908,
+        "sequential": true,
+        "peakPrivateBytesSampled": 699195392,
+        "finishedAtUtc": "2026-11-04T09:14:36.0593856+00:00",
+        "slot": "second",
+        "startedAtUtc": "2026-11-04T09:14:29.7203926+00:00",
+        "peakWorkingSetBytesSampled": 716013568,
+        "aborted": false,
+        "exitCode": 0,
+        "automaticRetry": false,
+        "nativeThreadPolicy": "UNCHANGED",
+        "hardLimitBytes": 2147483648,
+        "samplePeriodMs": 50
+      }
+    ]
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\calls.json",
+    "bytes": 90,
+    "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+    "content": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\first\\result.json",
+    "bytes": 521,
+    "sha256": "055d4686987601329aa611b468a48d175fbc8dfb798bdfc854ad57bfb893f5fd",
+    "content": {
+      "version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+      "status": "OBSERVATION_COMPLETED_NOT_A_FIX",
+      "error": null,
+      "pid": 15284,
+      "elapsedMs": 5893.7643,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetOs": 724279296,
+      "peakPrivateBytesSampled": 699195392,
+      "peakWorkingBytesSampled": 715874304,
+      "memorySampleMs": 50,
+      "fullManagedPixelCopies": 0,
+      "maxManagedPixelRowBytes": 46512,
+      "appOrManagedFloatCalls": 0
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\calls.json",
+    "bytes": 90,
+    "sha256": "82280a3e03883454926ce5036bc2cc495fbee03c63947fd998a1e723ce92f895",
+    "content": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    }
+  },
+  {
+    "path": "E:\\Guangjing-RawReopen001-20261104\\native-boundaries-v2\\pair-v2_1\\second\\result.json",
+    "bytes": 520,
+    "sha256": "0395f75512ac55d8d954264e4215e0c2dc6401df610ca42dc93352c1009ab0f2",
+    "content": {
+      "version": "RAW-REOPEN-001-NativeBoundaryV2.1",
+      "status": "OBSERVATION_COMPLETED_NOT_A_FIX",
+      "error": null,
+      "pid": 4908,
+      "elapsedMs": 6030.2051,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetOs": 724688896,
+      "peakPrivateBytesSampled": 699195392,
+      "peakWorkingBytesSampled": 716017664,
+      "memorySampleMs": 50,
+      "fullManagedPixelCopies": 0,
+      "maxManagedPixelRowBytes": 46512,
+      "appOrManagedFloatCalls": 0
+    }
+  }
+]
