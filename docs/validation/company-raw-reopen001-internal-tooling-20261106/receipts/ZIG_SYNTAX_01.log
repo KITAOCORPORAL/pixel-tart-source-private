@@ -1,0 +1,19 @@
+zig: warning: argument unused during compilation: '-c' [-Wunused-command-line-argument]
+In file included from src/postprocessing/dcraw_process.cpp:17:
+In file included from src/postprocessing/../../internal/libraw_cxx_defs.h:29:
+./internal/defines.h:57:9: warning: 'strcasecmp' macro redefined [-Wmacro-redefined]
+   57 | #define strcasecmp stricmp
+      |         ^
+D:\Tools\REA\zig-x86_64-windows-0.15.2\lib\libc\include\any-windows-any/string.h:134:9: note: previous definition is here
+  134 | #define strcasecmp _stricmp
+      |         ^
+In file included from src/postprocessing/dcraw_process.cpp:17:
+In file included from src/postprocessing/../../internal/libraw_cxx_defs.h:29:
+./internal/defines.h:58:9: warning: 'strncasecmp' macro redefined [-Wmacro-redefined]
+   58 | #define strncasecmp strnicmp
+      |         ^
+D:\Tools\REA\zig-x86_64-windows-0.15.2\lib\libc\include\any-windows-any/string.h:133:9: note: previous definition is here
+  133 | #define strncasecmp _strnicmp
+      |         ^
+2 warnings generated.
+src/postprocessing/dcraw_process.cpp:1:1: error: FileNotFound
