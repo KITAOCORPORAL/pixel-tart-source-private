@@ -3,6 +3,19 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+// Validate member uniqueness before JSON.parse can replace an earlier member.
+// Keys are decoded before comparison, so "quality" and "qual\u0069ty" collide.
+export function parseUniqueJson(text,label='JSON'){
+ let at=0;const fail=message=>assert.fail(`${label}: ${message} at offset ${at}`);
+ const whitespace=()=>{while(at<text.length&&/[ \t\r\n]/.test(text[at]))at++;};
+ function string(){const start=at;if(text[at++]!=='"')fail('Expected string');while(at<text.length){const c=text[at++];if(c==='"')return JSON.parse(text.slice(start,at));if(c==='\\')at++;}fail('Unterminated string');}
+ function value(depth){if(depth>256)fail('JSON nesting limit');whitespace();const c=text[at];
+  if(c==='{'){at++;whitespace();const keys=new Set();if(text[at]==='}'){at++;return;}for(;;){whitespace();const key=string();if(keys.has(key))fail('Duplicate object key '+JSON.stringify(key));keys.add(key);whitespace();if(text[at++]!==':')fail('Expected colon');value(depth+1);whitespace();const separator=text[at++];if(separator==='}')return;if(separator!==',')fail('Expected comma or object end');}}
+  if(c==='['){at++;whitespace();if(text[at]===']'){at++;return;}for(;;){value(depth+1);whitespace();const separator=text[at++];if(separator===']')return;if(separator!==',')fail('Expected comma or array end');}}
+  if(c==='"'){string();return;}const token=/^(?:true|false|null|-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)/.exec(text.slice(at));if(!token)fail('Expected JSON value');at+=token[0].length;
+ }
+ value(0);whitespace();if(at!==text.length)fail('Trailing JSON input');return JSON.parse(text);
+}
 export const primaryOrder=['P1','P3b','P5','P6','P7','P9'];
 export const order=['P1','P3b','P5','XTRANS-serial-ready','P6','P7','P9'];
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -36,6 +49,11 @@ export function validateTyped(rows,states){
  const matrix=rows.filter(r=>r.kind==='float32-bits'&&r.name==='cielab-effective-xyz-cam');assert(matrix.length===3&&matrix.every(r=>hasNumbers(r.bits,3)),'CIELab valid matrix rows missing');
  const hex=named(rows,'defined-byte-span-hash','xtrans-fully-defined-allhex');assert(hex.bytes===3*3*2*8*2&&isHash(hex.sha256),'allhex missing');
  const serialPayload=one(rows,r=>r.kind==='payload'&&r.id==='XTRANS-serial-ready','serial-ready');assert(rows.indexOf(lab)<rows.indexOf(serialPayload)&&rows.indexOf(hex)<rows.indexOf(serialPayload),'Serial tables must precede parallel entry');
+ const p5Payload=one(rows,r=>r.kind==='payload'&&r.id==='P5','P5 entry capture');
+ const serialState=one(rows,r=>r.kind==='state'&&r.where==='xtrans-serial-green-bounds-complete','serial-ready state');
+ const p5At=rows.indexOf(p5Payload),labAt=rows.indexOf(lab),hexAt=rows.indexOf(hex),serialStateAt=rows.indexOf(serialState);
+ assert(p5At<labAt&&labAt<hexAt&&hexAt<serialStateAt&&serialStateAt<rows.indexOf(serialPayload),'Serial preparation records outside P5-to-serial-ready phase');
+ assert(matrix.every((r,i)=>rows.indexOf(r)===labAt+1+i)&&rows.indexOf(matrix[2])<hexAt,'CIELab matrix rows must belong to the same initialized lookup in the serial phase');
  states['XTRANS-serial-ready'].push(semantic(lab),...matrix.map(semantic),semantic(hex));
  const p8=one(rows,r=>r.kind==='state'&&r.where==='P8-effective-out-cam','P8 state');const out=rows.filter(r=>r.kind==='float32-bits'&&r.name==='effective-out_cam-row');assert(p8.colors===3&&p8.rawColor===0&&out.length===3&&out.every(r=>hasNumbers(r.bits,3)),'Effective 3x3 out_cam required for supported default output');assert(out.every(r=>rows.indexOf(r)>rows.indexOf(p8)&&rows.indexOf(r)<rows.indexOf(one(rows,r=>r.kind==='state'&&r.where==='P9','P9'))),'out_cam phase binding');
  states.P9.push(semantic(p8),...out.map(semantic));const histogram=named(rows,'defined-byte-span-hash','P9-initialized-histogram');assert(histogram.bytes===4*8192*4&&isHash(histogram.sha256),'Initialized histogram missing');states.P9.push(semantic(histogram));
@@ -43,8 +61,8 @@ export function validateTyped(rows,states){
 }
 function verifiedAux(root,p){assert(p.valid&&p.borderExcluded===0&&Number.isSafeInteger(p.width)&&Number.isSafeInteger(p.height)&&p.width>32&&p.height>32&&p.sourcePitch===p.width*8&&p.packedPitch===p.width*p.channels*2&&isHash(p.sha256),'Invalid auxiliary payload layout/hash');const file=path.join(root,`${p.id}.${p.channels===4?'image4':p.channels===3?'rgb':'cfa'}.u16`);const expected=p.width*p.height*p.channels*2;assert.equal(fs.statSync(file).size,expected,'Auxiliary file truncated');const h=crypto.createHash('sha256'),fd=fs.openSync(file,'r'),buf=Buffer.alloc(65536);try{let n;while((n=fs.readSync(fd,buf,0,buf.length,null)))h.update(buf.subarray(0,n));}finally{fs.closeSync(fd);}assert.equal(h.digest('hex'),p.sha256,'Auxiliary file hash mismatch');}
 export function load(root){
- const rows=fs.readFileSync(path.join(root,'native-events.jsonl'),'utf8').trim().split('\n').map(x=>JSON.parse(x));
- const result=JSON.parse(fs.readFileSync(path.join(root,'result.json'))),identity=JSON.parse(fs.readFileSync(path.join(root,'run-identity.json'))),loaded=JSON.parse(fs.readFileSync(path.join(root,'loaded-native.json')));
+ const rows=fs.readFileSync(path.join(root,'native-events.jsonl'),'utf8').trim().split('\n').map((x,i)=>parseUniqueJson(x,`native-events.jsonl:${i+1}`));
+ const result=parseUniqueJson(fs.readFileSync(path.join(root,'result.json'),'utf8'),'result.json'),identity=parseUniqueJson(fs.readFileSync(path.join(root,'run-identity.json'),'utf8'),'run-identity.json'),loaded=parseUniqueJson(fs.readFileSync(path.join(root,'loaded-native.json'),'utf8'),'loaded-native.json');
  assert.equal(result.status,'completed');assert(result.zeroRaw===false&&result.error===null,'Only a successful actual RAW host capture is comparable');
  for(const k of ['nativeSha256','bindingSha256','inputSha256','preparationSha256','contractSha256','nativeSelfTestSha256','manifestSha256','hostSha256'])assert(isHash(identity[k]),'Required run identity missing: '+k);
  assert.equal(identity.sourceCommit,'cccb97647fcee56801fa68231fa8a38aa8b52ef7');assert.equal(identity.inputSha256.toUpperCase(),'52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865');assert.equal(identity.bindingSha256.toUpperCase(),'6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3');assert.equal(identity.nativeSha256.toLowerCase(),loaded.sha256.toLowerCase());assert(identity.processId===result.runtime.ProcessId&&identity.reservationId===result.reservationId&&identity.reservationId,'Run identity/owner mismatch');assert.equal(result.runtime.environment.OMP_NUM_THREADS,'6','Original effective thread environment required');for(const name of ['OMP_DYNAMIC','OMP_THREAD_LIMIT','OMP_SCHEDULE','OMP_PROC_BIND','OMP_PLACES','KMP_AFFINITY','KMP_BLOCKTIME','OPENBLAS_NUM_THREADS','DOTNET_PROCESSOR_COUNT','COMPlus_ThreadPool_ForceMinWorkerThreads'])assert.equal(result.runtime.environment[name],null,'Missing/drifted effective environment');for(const name of ['OpenFile','Unpack','DcrawProcess','MakeDcrawMemoryImage'])assert.equal(result.counts[name],1,'Actual once-only calls required');

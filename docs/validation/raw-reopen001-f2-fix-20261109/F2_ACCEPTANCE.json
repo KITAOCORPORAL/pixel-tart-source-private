@@ -1,0 +1,154 @@
+{
+  "version": "RAW-REOPEN-001-F2AcceptanceV1",
+  "mode": "acceptance",
+  "comparisonSha256": "c10c53f9e2c53a1174863e11d7906ea6a7e93932685127ea9a868f40ac3b7612",
+  "researchEvidenceSha256": "347f2fcae1fe5bb8d801fd1a7bc9a57aa0b47814739f52cc1c5eb1a8eca17b2c",
+  "cases": [
+    {
+      "name": "normal original research control",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: CIELab matrix after P6",
+      "status": "PASS"
+    },
+    {
+      "name": "left-only rejects: CIELab matrix after P6",
+      "status": "PASS"
+    },
+    {
+      "name": "right-only rejects: CIELab matrix after P6",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: allhex before P5",
+      "status": "PASS"
+    },
+    {
+      "name": "left-only rejects: allhex before P5",
+      "status": "PASS"
+    },
+    {
+      "name": "right-only rejects: allhex before P5",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: duplicate JSON quality member",
+      "status": "PASS"
+    },
+    {
+      "name": "left-only rejects: duplicate JSON quality member",
+      "status": "PASS"
+    },
+    {
+      "name": "right-only rejects: duplicate JSON quality member",
+      "status": "PASS"
+    },
+    {
+      "name": "F3 preserves earlier serial boundary: serial-ready image4",
+      "status": "PASS"
+    },
+    {
+      "name": "F3 preserves earlier serial boundary: allhex",
+      "status": "PASS"
+    },
+    {
+      "name": "F3 preserves earlier serial boundary: CIELab lookup",
+      "status": "PASS"
+    },
+    {
+      "name": "F3 preserves earlier serial boundary: CIELab effective matrix",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid {}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid []",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid  {\"a\":[1,true,null,{\"b\":\"x\"}]} ",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid {\"a\":1,\"b\":{\"a\":2}}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid {\"escaped\\\\key\":\"quote\\\"\"}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser valid [-0,1.25,1e3,-2.1e-2,false]",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection {\"a\":1,\"a\":2}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection {\"a\":1,\"\\u0061\":2}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection {\"x\":{\"a\":1,\"a\":2}}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection [{\"a\":1,\"a\":1}]",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection {\"processId\":100,\"processId\":101}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser duplicate rejection {\"identity\":{\"hash\":\"a\",\"hash\":\"b\"}}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection {\"a\":1,}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection [1,]",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection {\"a\":01}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection {\"a\":\"x}",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection true false",
+      "status": "PASS"
+    },
+    {
+      "name": "strict parser syntax rejection {\"a\":NaN}",
+      "status": "PASS"
+    },
+    {
+      "name": "capture input duplicate member rejected run-identity.json",
+      "status": "PASS"
+    },
+    {
+      "name": "capture input duplicate member rejected loaded-native.json",
+      "status": "PASS"
+    },
+    {
+      "name": "capture input duplicate member rejected result.json",
+      "status": "PASS"
+    }
+  ],
+  "passed": 35,
+  "newRawCalls": 0,
+  "newGPUCalls": 0,
+  "newNativeInit": 0,
+  "sourceScope": "comparison only; original research fixture bytes verified",
+  "status": "F2_FIX_ACCEPTANCE_AND_F3_REGRESSION_PASS"
+}

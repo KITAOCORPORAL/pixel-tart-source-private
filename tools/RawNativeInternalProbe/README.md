@@ -45,3 +45,7 @@ Supported safe image layout is shrink0/fuji_width0, width=iwidth/height=iheight,
 `Tests.mjs <pinned-source> <NEW-root>` exercises source preservation, wrong anchors, P2 ordering, P5 full-state non-CFA/border detection, out_cam placement, exhausted/unknown quota, deduplication, persistent failed reservation, missing roots, tampered receipts and comparison failures. These are synthetic/static checks, **not native ABI/self-test or original defect reproduction**.
 
 Private RAW, pixel payloads/CSVs, generated vendor sources and binaries stay local. No production build or application packaging unless product functionality changes and an actual fix is separately validated through original preview/save-reopen/TIFF path. Current root cause remains OPEN / NOT_FIXED.
+
+## F2 phase and JSON member validation (2026-11-09)
+
+CIELab lookup, its three consecutive matrix rows and allhex must occur after the P5 payload and before the serial-ready state/payload, in that order. Duplicate decoded JSON object member names are rejected before replacement, including nested objects in event, result, identity and loaded-native inputs. Existing schema, record uniqueness and identity gates remain active. `F2-Comparison.Tests.mjs <original-research-fixtures> <research-evidence-hashes.json> <NEW-output> [review]` verifies the three byte-frozen research counterexamples; acceptance mode also covers one-sided failures, parser cases and all four F3 controls. Review mode performs only the three original counterexamples and one normal control.
