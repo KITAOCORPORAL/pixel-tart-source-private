@@ -1,0 +1,181 @@
+{
+  "version": "RawObservationRevisionReviewInputsV1",
+  "date": "2026-11-09",
+  "timezone": "Europe/Helsinki",
+  "productCommit": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "priorReview": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "researchBase": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "librawSourceRoot": "E:/Kitao-Research/raw-reopen-001-contract-20261104/libraw-0.21.1",
+  "localSnapshot": "E:/Kitao-Research/raw-observation-rereview-20261109",
+  "preparedRoot": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2",
+  "preparationSha256": "5c032c4b048cdf3c467db20decc9e2e8f2d7ae1e42764240c91ef3e30dfe494a",
+  "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "productFiles": [
+    {
+      "path": "tools/RawNativeInternalProbe/.gitattributes",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "730a35ae3d558080083c3103d9ac8100c3f6561678092abe341701dfa331eb1d",
+      "bytes": 29,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/.gitattributes"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Budget.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "032b26bd985be30856415536ca5a0ce238b7f0cc61623f6221d6d69547d35632",
+      "bytes": 5320,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Budget.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Build-Isolated.ps1",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "7294c746d8546d92fa0c56577bd1d36616b0a94fa061785046a9b69d8c8d42f6",
+      "bytes": 3720,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Build-Isolated.ps1"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "914f15c54e9400b4757b5010ec52d217b3f0882f03200cdddcd3c61730a1190a",
+      "bytes": 14745,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Compare-Checkpoints.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Discover-Toolchain.ps1",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "dcfc127fb5c118b7561203b4ed646624bc9cf9bde53c220215ad1687fcbb1af1",
+      "bytes": 2355,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Discover-Toolchain.ps1"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Freeze.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "ac53d07e5497f831f559367ca4c1a2afaac1f8316be5da0555ed173f16e50c4a",
+      "bytes": 2548,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Freeze.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Prepare-Internal.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "b77a45191fe601fd6f5c61b22afebaadfe5004ea5339a53faa9c013f75d73ad6",
+      "bytes": 12477,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Prepare-Internal.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Program.cs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "0e68e6c4e03e8368bbfdf9c5afb85ecc7d92ea98a77740076032310e6647d7a1",
+      "bytes": 12038,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Program.cs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/README.md",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "9a36a9f9afdd2c15a0c8e308196c3e89d853974f28fd1d461b280e26f3f2f6f3",
+      "bytes": 8727,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/README.md"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/RawNativeInternalHost.csproj",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "ecdd2fe3364eb407be3f74a86c223b1b3049ae6a9f84f9ce25a2e63481580a32",
+      "bytes": 564,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/RawNativeInternalHost.csproj"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Run-Bounded.ps1",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "3cff492b5f3cf779757815f930580c40a4a20691cb092453608b6ec12c711dd7",
+      "bytes": 3968,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Run-Bounded.ps1"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Seal-Execution.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "19edf109771278598730745a075e8370f46409a47e039302cb47c9052e81c044",
+      "bytes": 1670,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Seal-Execution.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Tests.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "4efff67b41833f30e33e9ebf5a07a5c29a76a08fbf9d9d3d95df818c38d6ef76",
+      "bytes": 11645,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Tests.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/Verify-Contract.mjs",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "a80d0cbe00508d3821e1a28bf4d50fd8255adac1acda5df826e2cb98c083624b",
+      "bytes": 5490,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/Verify-Contract.mjs"
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/rr001_internal.h",
+      "commit": "08bfae4a6e311609c95784e8373bead711d9997c",
+      "sha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "bytes": 13289,
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/fixed-product/tools/RawNativeInternalProbe/rr001_internal.h"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "src/postprocessing/dcraw_process.cpp",
+      "sha256": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458",
+      "bytes": 16448,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/postprocessing/dcraw_process.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/postprocessing/dcraw_process.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sha256": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f",
+      "bytes": 12293,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/preprocessing/raw2image.cpp",
+      "sha256": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130",
+      "bytes": 17582,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/preprocessing/raw2image.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/preprocessing/raw2image.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/demosaic/xtrans_demosaic.cpp",
+      "sha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+      "bytes": 18470,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/demosaic/xtrans_demosaic.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/demosaic/xtrans_demosaic.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/preprocessing/subtract_black.cpp",
+      "sha256": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544",
+      "bytes": 2703,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/preprocessing/subtract_black.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/preprocessing/subtract_black.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/utils/utils_libraw.cpp",
+      "sha256": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a",
+      "bytes": 17591,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/utils/utils_libraw.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/utils/utils_libraw.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "path": "src/demosaic/ahd_demosaic.cpp",
+      "sha256": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232",
+      "bytes": 10804,
+      "actualPath": "E:/Guangjing-RawReopen001-20261106/frozen-source-v3-r2/src/demosaic/ahd_demosaic.cpp",
+      "snapshotPath": "E:/Kitao-Research/raw-observation-rereview-20261109/generated/src/demosaic/ahd_demosaic.cpp",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    }
+  ],
+  "newRawCalls": 0,
+  "newGPUCalls": 0
+}

@@ -1,0 +1,57 @@
+{
+  "version": "RawObservationRevisionDeliveryV1",
+  "productCommit": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "priorReview": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "hashSemantics": "SHA256 of staged Git blob bytes; excludes this delivery manifest itself",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 38412,
+      "sha256": "f15160afe4f000b882d23699417eb5cf3e65c142634b2f7063b8b2a67b5275ab"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/INPUT_BINDING.json",
+      "bytes": 10000,
+      "sha256": "928933b79f236eb016c4cf559a11d7f8dc310d4c036b034230fe5b39a96c2513"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/PRODUCT_READBACK.json",
+      "bytes": 330,
+      "sha256": "5bdae8e54e33de1e538dc0d896b24c8d003c2c3b45c0a39efe5c01ba4a45ac74"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/REPORT.md",
+      "bytes": 9962,
+      "sha256": "9240159799edc5fbef0724500ff00b697583bfbf8066df31bd7ee7b8a2a2b729"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/RESULTS.json",
+      "bytes": 21164,
+      "sha256": "0b8a3d8cd6f1b2b12f494d5f7a0ac9e45d9899f69e3062be58ef8a3dbf0d151b"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/SYNTHETIC_EVIDENCE_HASHES.json",
+      "bytes": 103303,
+      "sha256": "347f2fcae1fe5bb8d801fd1a7bc9a57aa0b47814739f52cc1c5eb1a8eca17b2c"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/VERDICT.json",
+      "bytes": 2547,
+      "sha256": "296e07f1746155ca31166f8f1b5f176959efd76c3bf44091cd674f2838f0a253"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/revision-review-20261109/review.mjs",
+      "bytes": 13091,
+      "sha256": "c0eb839a1dc5028ca5d0d5357c6ce3db8288d152602125322bf5cbd65750268e"
+    }
+  ],
+  "decision": "F1_PASS_F2_REQUIRES_CORRECTION_F3_PASS_IN_SCOPE",
+  "newRawCalls": 0,
+  "newGPUCalls": 0,
+  "productMutations": 0
+}

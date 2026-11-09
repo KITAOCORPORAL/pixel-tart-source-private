@@ -1,0 +1,507 @@
+{
+  "version": "RawObservationRevisionIndependentReviewV1",
+  "fixedProductCommit": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "inputBindingSha256": "928933b79f236eb016c4cf559a11d7f8dc310d4c036b034230fe5b39a96c2513",
+  "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "results": [
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/.gitattributes",
+      "observationVerified": true,
+      "sha256": "730a35ae3d558080083c3103d9ac8100c3f6561678092abe341701dfa331eb1d"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Budget.mjs",
+      "observationVerified": true,
+      "sha256": "032b26bd985be30856415536ca5a0ce238b7f0cc61623f6221d6d69547d35632"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Build-Isolated.ps1",
+      "observationVerified": true,
+      "sha256": "7294c746d8546d92fa0c56577bd1d36616b0a94fa061785046a9b69d8c8d42f6"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "observationVerified": true,
+      "sha256": "914f15c54e9400b4757b5010ec52d217b3f0882f03200cdddcd3c61730a1190a"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Discover-Toolchain.ps1",
+      "observationVerified": true,
+      "sha256": "dcfc127fb5c118b7561203b4ed646624bc9cf9bde53c220215ad1687fcbb1af1"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Freeze.mjs",
+      "observationVerified": true,
+      "sha256": "ac53d07e5497f831f559367ca4c1a2afaac1f8316be5da0555ed173f16e50c4a"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Prepare-Internal.mjs",
+      "observationVerified": true,
+      "sha256": "b77a45191fe601fd6f5c61b22afebaadfe5004ea5339a53faa9c013f75d73ad6"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Program.cs",
+      "observationVerified": true,
+      "sha256": "0e68e6c4e03e8368bbfdf9c5afb85ecc7d92ea98a77740076032310e6647d7a1"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/README.md",
+      "observationVerified": true,
+      "sha256": "9a36a9f9afdd2c15a0c8e308196c3e89d853974f28fd1d461b280e26f3f2f6f3"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/RawNativeInternalHost.csproj",
+      "observationVerified": true,
+      "sha256": "ecdd2fe3364eb407be3f74a86c223b1b3049ae6a9f84f9ce25a2e63481580a32"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Run-Bounded.ps1",
+      "observationVerified": true,
+      "sha256": "3cff492b5f3cf779757815f930580c40a4a20691cb092453608b6ec12c711dd7"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Seal-Execution.mjs",
+      "observationVerified": true,
+      "sha256": "19edf109771278598730745a075e8370f46409a47e039302cb47c9052e81c044"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Tests.mjs",
+      "observationVerified": true,
+      "sha256": "4efff67b41833f30e33e9ebf5a07a5c29a76a08fbf9d9d3d95df818c38d6ef76"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/Verify-Contract.mjs",
+      "observationVerified": true,
+      "sha256": "a80d0cbe00508d3821e1a28bf4d50fd8255adac1acda5df826e2cb98c083624b"
+    },
+    {
+      "name": "fixed-product:tools/RawNativeInternalProbe/rr001_internal.h",
+      "observationVerified": true,
+      "sha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718"
+    },
+    {
+      "name": "actual-generated:src/postprocessing/dcraw_process.cpp",
+      "observationVerified": true,
+      "sha256": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "observationVerified": true,
+      "sha256": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/preprocessing/raw2image.cpp",
+      "observationVerified": true,
+      "sha256": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/demosaic/xtrans_demosaic.cpp",
+      "observationVerified": true,
+      "sha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/preprocessing/subtract_black.cpp",
+      "observationVerified": true,
+      "sha256": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/utils/utils_libraw.cpp",
+      "observationVerified": true,
+      "sha256": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "actual-generated:src/demosaic/ahd_demosaic.cpp",
+      "observationVerified": true,
+      "sha256": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232",
+      "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+      "originalBytesRestored": true,
+      "regeneratedFromFixedCommit": true
+    },
+    {
+      "name": "F1.generated.P1.no-early-quality-read",
+      "observationVerified": true,
+      "verdict": "PASS",
+      "P1Line": 74,
+      "originalQualityAssignmentLine": 102
+    },
+    {
+      "name": "baseline.full-loader-and-CLI",
+      "observationVerified": true,
+      "status": "NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-1"
+    },
+    {
+      "name": "F2.both-missing-P5-quality",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: P5 missing quality\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-2"
+    },
+    {
+      "name": "F2.both-missing-CFA-record",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: defined-byte-span-hash:xtrans-six-by-six missing/duplicate\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-3"
+    },
+    {
+      "name": "F2.both-missing-host-identity",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Required run identity missing: hostSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-4"
+    },
+    {
+      "name": "F2.both-empty-typed-states",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: scalar:callback-present-pre_subtractblack missing/duplicate\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-5"
+    },
+    {
+      "name": "F2.duplicate-scale-record",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: float32-bits:actual-scale_mul missing/duplicate\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-6"
+    },
+    {
+      "name": "F2.duplicate-P5-field-record",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: float32-bits:pre_mul missing/duplicate\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-7"
+    },
+    {
+      "name": "F2.wrong-stage-out-cam",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: out_cam phase binding\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-8"
+    },
+    {
+      "name": "F2.wrong-stage-CIELab-matrix-after-P6",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": false,
+      "requirementSatisfied": false,
+      "effectiveInputEqualReported": true,
+      "allStagesEffectiveInputEqual": true,
+      "comparatorStatus": "NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED",
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 0,
+      "error": "",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-9"
+    },
+    {
+      "name": "F2.wrong-stage-allhex-before-P5",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": false,
+      "requirementSatisfied": false,
+      "effectiveInputEqualReported": true,
+      "allStagesEffectiveInputEqual": true,
+      "comparatorStatus": "NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED",
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 0,
+      "error": "",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-10"
+    },
+    {
+      "name": "F2.duplicate-JSON-member-quality",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": false,
+      "requirementSatisfied": false,
+      "effectiveInputEqualReported": true,
+      "allStagesEffectiveInputEqual": true,
+      "comparatorStatus": "NEW_BUILD_THIS_PAIR_NOT_REPRODUCED_NOT_FIXED",
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 0,
+      "error": "",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-11"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:nativeSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: nativeSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-12"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:bindingSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-13"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:inputSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-14"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:preparationSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: preparationSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-15"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:contractSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: contractSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-16"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:nativeSelfTestSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: nativeSelfTestSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-17"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:manifestSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: manifestSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-18"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:hostSha256",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Different run/software identity: hostSha256\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-19"
+    },
+    {
+      "name": "F2.pair-identity-mismatch:sourceCommit",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-20"
+    },
+    {
+      "name": "F2.owner-process-mismatch",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Run identity/owner mismatch\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-21"
+    },
+    {
+      "name": "F2.reservation-owner-mismatch",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Run identity/owner mismatch\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-22"
+    },
+    {
+      "name": "F2.loaded-native-mismatch",
+      "observationVerified": true,
+      "expected": "REJECT",
+      "rejected": true,
+      "requirementSatisfied": true,
+      "effectiveInputEqualReported": false,
+      "allStagesEffectiveInputEqual": false,
+      "comparatorStatus": null,
+      "earliestDifferentObservedBoundary": null,
+      "exitCode": 1,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-23"
+    },
+    {
+      "name": "F3.earlier-serial-boundary:image4",
+      "observationVerified": true,
+      "earliestDifferentPayload": "XTRANS-serial-ready",
+      "earliestDifferentObservedBoundary": "XTRANS-serial-ready",
+      "H1": "UNKNOWN_NO_ACTUAL_CONSUMER_LOAD_EVIDENCE",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-24"
+    },
+    {
+      "name": "F3.earlier-serial-boundary:allhex",
+      "observationVerified": true,
+      "earliestDifferentPayload": "P6",
+      "earliestDifferentObservedBoundary": "XTRANS-serial-ready",
+      "H1": "UNKNOWN_NO_ACTUAL_CONSUMER_LOAD_EVIDENCE",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-25"
+    },
+    {
+      "name": "F3.earlier-serial-boundary:CIELab-table",
+      "observationVerified": true,
+      "earliestDifferentPayload": "P6",
+      "earliestDifferentObservedBoundary": "XTRANS-serial-ready",
+      "H1": "UNKNOWN_NO_ACTUAL_CONSUMER_LOAD_EVIDENCE",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-26"
+    },
+    {
+      "name": "F3.earlier-serial-boundary:CIELab-matrix",
+      "observationVerified": true,
+      "earliestDifferentPayload": "P6",
+      "earliestDifferentObservedBoundary": "XTRANS-serial-ready",
+      "H1": "UNKNOWN_NO_ACTUAL_CONSUMER_LOAD_EVIDENCE",
+      "caseDirectory": "E:\\Kitao-Research\\raw-observation-rereview-20261109\\independent-tests-final\\case-27"
+    }
+  ],
+  "checks": 50,
+  "requirementsNotSatisfied": [
+    "F2.wrong-stage-CIELab-matrix-after-P6",
+    "F2.wrong-stage-allhex-before-P5",
+    "F2.duplicate-JSON-member-quality"
+  ],
+  "newCalls": {
+    "RAW": 0,
+    "GPU": 0,
+    "nativeInit": 0,
+    "nativeBuild": 0,
+    "managedBuild": 0
+  },
+  "syntheticMetadataIsNotExecutionEvidence": true,
+  "H1": "UNKNOWN_PENDING_ACTUAL_TEAM_AND_CONSUMER_LOADS"
+}

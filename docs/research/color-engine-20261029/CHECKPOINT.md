@@ -1,3 +1,9 @@
+# 当前检查点：08bfae4a F1/F2/F3 复审（2026-11-09，Europe/Helsinki）
+
+固定08bfae4a6e311609c95784e8373bead711d9997c，复验71ba977a的三个具体问题。7份最终生成源码精确重生成匹配；header SHA ce42b2ef...d1f718。F1通过：P1只写quality=-1、不读未赋值局部。F3通过：serial-ready四槽/allhex/CIELab lookup/有效矩阵先差时均保留XTRANS-serial-ready，H1不归因。F2仍需修正：22拒绝反例中19拒绝；CIELab矩阵移至P6后、allhex移至P5前、重复JSON quality成员在两侧同时存在时仍接受并报effectiveInputEqual=true。50项行为观察，不是50项准入通过。新RAW/GPU/native init/原生或托管构建均0，V1封存；H1实际team和共享槽消费值UNKNOWN。见raw-reopen-001-contract-20261104/revision-review-20261109/REPORT.md及VERDICT.json。未改产品，不新增额度。
+
+---
+
 # 当前检查点：RAW-REOPEN-001 实际观测补丁审查（2026-11-06，Europe/Helsinki）
 
 从5a4f233d接续。实际产品未跟踪补丁与frozen-source-v3已按独立快照绑定，未合入产品分支。P2落点和小状态满足基线；P5全四槽/P6含边界RGB在支持布局上静态覆盖满足，运行均UNKNOWN。发现P1读取未初始化quality；新版比较器能检测已记录状态不同，但缺必需状态仍可相等；serial-ready额外payload未进入主比较，H1维持UNKNOWN_CONDITIONAL。94项源码/文件/合成核验；27份源锁/7份字节恢复通过。新RAW/native init/构建/GPU/参考数值运行均0；已有预算consumed2/remaining0，未新增额度。交付observation-patch-review-20261106/REPORT.md、DECISION.json及CONTRACT_AMENDMENT.json。状态REVIEW_COMPLETE / PATCH_REQUIRES_CHANGE / NOT_FIXED；不重跑，不改产品像素，V1锐化继续封存。

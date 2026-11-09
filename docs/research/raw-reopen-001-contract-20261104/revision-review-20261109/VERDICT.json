@@ -1,0 +1,73 @@
+{
+  "version": "RawObservationRevisionVerdictV1",
+  "date": "2026-11-09",
+  "timezone": "Europe/Helsinki",
+  "productCommit": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "priorReview": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+  "inputBindingSha256": "928933b79f236eb016c4cf559a11d7f8dc310d4c036b034230fe5b39a96c2513",
+  "sourceRegenerationMatchesActual": true,
+  "actualHeaderSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "actualDcrawProcessSha256": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458",
+  "F1": {
+    "verdict": "PASS",
+    "scope": "Exact generated P1 early-read closure",
+    "locations": [
+      "Prepare-Internal.mjs:7",
+      "Prepare-Internal.mjs:9",
+      "generated dcraw_process.cpp:74",
+      "generated dcraw_process.cpp:102"
+    ],
+    "evidence": "P1 assigns observer quality=-1; no g.quality=quality before original assignment; all seven generated files exactly regenerate"
+  },
+  "F2": {
+    "verdict": "REQUIRES_CORRECTION",
+    "rejectionCases": 22,
+    "correctlyRejected": 19,
+    "incorrectlyAccepted": [
+      "F2.wrong-stage-CIELab-matrix-after-P6",
+      "F2.wrong-stage-allhex-before-P5",
+      "F2.duplicate-JSON-member-quality"
+    ],
+    "locations": [
+      "Compare-Checkpoints.mjs:35-39",
+      "Compare-Checkpoints.mjs:46",
+      "Compare-Checkpoints.mjs:69-70"
+    ],
+    "minimumCorrection": [
+      "Bind CIELab valid rows and allhex to the observed interval after P5 and before serial-ready, with unique phase-local records. Both missing/misbound sides must reject.",
+      "Reject duplicate JSON member keys before last-key-wins decoding. Preserve current duplicate-record and run-identity rejection."
+    ]
+  },
+  "F3": {
+    "verdict": "PASS",
+    "scope": "Well-formed supported synthetic input comparison; F2 schema limitations remain",
+    "cases": [
+      "image4",
+      "allhex",
+      "CIELab-table",
+      "CIELab-matrix"
+    ],
+    "earliestDifferentObservedBoundary": "XTRANS-serial-ready",
+    "locations": [
+      "Compare-Checkpoints.mjs:7",
+      "Compare-Checkpoints.mjs:35-39",
+      "Compare-Checkpoints.mjs:69-73"
+    ]
+  },
+  "H1": {
+    "status": "UNKNOWN_PENDING_RUNTIME",
+    "actualParallelTeam": "UNKNOWN",
+    "sharedSlotConsumedValues": "UNKNOWN"
+  },
+  "overall": "F1_AND_F3_CLOSED_IN_REVIEW_SCOPE_F2_OPEN",
+  "executionReady": false,
+  "V1Sharpening": "SEALED_UNCHANGED",
+  "newCalls": {
+    "RAW": 0,
+    "GPU": 0,
+    "nativeInit": 0,
+    "nativeBuild": 0,
+    "managedBuild": 0
+  },
+  "productMutations": 0
+}

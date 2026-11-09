@@ -1,0 +1,65 @@
+// Independent source/hash and tiny synthetic-file review. No RAW/native/GPU entry points.
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const [outputRoot]=process.argv.slice(2);assert(outputRoot&&!fs.existsSync(outputRoot),'Fresh review result directory required');fs.mkdirSync(outputRoot,{recursive:true});
+const bindingBytes=fs.readFileSync(path.join(here,'INPUT_BINDING.json')),binding=JSON.parse(bindingBytes);
+const snapshot=binding.localSnapshot,tool=path.join(snapshot,'fixed-product/tools/RawNativeInternalProbe');
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const {load,compareStage,order}=await import(pathToFileURL(path.join(tool,'Compare-Checkpoints.mjs')));
+const {instrument,strip}=await import(pathToFileURL(path.join(tool,'Prepare-Internal.mjs')));
+const results=[];function check(name,fn){try{const details=fn();results.push({name,observationVerified:true,...details});}catch(e){results.push({name,observationVerified:false,error:e.stack});throw e;}}
+for(const r of binding.productFiles)check('fixed-product:'+r.path,()=>{const b=fs.readFileSync(r.snapshotPath);assert.equal(hash(b),r.sha256);assert.equal(hash(execFileSync('git',['show',binding.productCommit+':'+r.path])),r.sha256);return{sha256:r.sha256};});
+const originals=Object.fromEntries(binding.generatedFiles.map(r=>[r.path,execFileSync('git',['-C',binding.librawSourceRoot,'show',binding.sourceCommit+':'+r.path]).toString()]));
+const reproduced=instrument(originals);
+for(const r of binding.generatedFiles)check('actual-generated:'+r.path,()=>{const b=fs.readFileSync(r.actualPath);assert.equal(hash(b),r.sha256);assert.equal(hash(fs.readFileSync(r.snapshotPath)),r.sha256);assert.equal(hash(Buffer.from(reproduced[r.path].result)),r.sha256);assert.equal(strip(b.toString()),originals[r.path]);const header=fs.readFileSync(path.join(path.dirname(r.actualPath),'rr001_internal.h'));assert.equal(hash(header),binding.headerSha256);assert.equal(hash(fs.readFileSync(path.join(tool,'rr001_internal.h'))),binding.headerSha256);return{sha256:r.sha256,headerSha256:hash(header),originalBytesRestored:true,regeneratedFromFixedCommit:true};});
+const cpp=fs.readFileSync(path.join(snapshot,'generated/src/postprocessing/dcraw_process.cpp'),'utf8');
+check('F1.generated.P1.no-early-quality-read',()=>{const at=cpp.indexOf('quality = 2 + !IO.fuji_width;'),p1=cpp.indexOf('stage(imgdata,"P1",true)');assert(p1<at);assert(!cpp.slice(0,at).includes('g.quality=quality'));assert(cpp.slice(0,p1).includes('g.quality=-1'));return{verdict:'PASS',P1Line:cpp.slice(0,p1).split('\n').length,originalQualityAssignmentLine:cpp.slice(0,at).split('\n').length};});
+const stable={nativeSha256:'1'.repeat(64),bindingSha256:'6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3',inputSha256:'52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865',preparationSha256:'2'.repeat(64),contractSha256:'3'.repeat(64),nativeSelfTestSha256:'4'.repeat(64),manifestSha256:'5'.repeat(64),hostSha256:'6'.repeat(64),sourceCommit:binding.sourceCommit};
+function fixture(){let rows=[];const named=(kind,name,x)=>rows.push({kind,name,...x});
+ for(const name of ['pre_subtractblack','pre_scalecolors','pre_preinterpolate','pre_interpolate','post_interpolate','pre_converttorgb','post_converttorgb','interpolate_bayer','interpolate_xtrans'])named('scalar','callback-present-'+name,{value:0});
+ for(const name of ['compile-LIBRAW_USE_OPENMP','compile-LIBRAW_NOTHREADS','compile-NO_LCMS'])named('scalar',name,{value:1});
+ for(const id of order){
+  if(id==='P3b'){rows.push({kind:'state',where:'WB-entry-before-selection'});for(const name of ['pre_mul','cam_mul','user_mul'])named('float32-bits',name,{bits:[0,0,0,0]});rows.push({kind:'state',where:'P3a-after-WB-wavelet-before-scale-loop'});named('float32-bits','actual-scale_mul',{bits:[1,2,3,4]});}
+  if(id==='XTRANS-serial-ready'){named('defined-byte-span-hash','cielab-initialized-cbrt',{bytes:262144,sha256:'a'.repeat(64)});for(let i=0;i<3;i++)named('float32-bits','cielab-effective-xyz-cam',{bits:[1,2,3]});named('defined-byte-span-hash','xtrans-fully-defined-allhex',{bytes:288,sha256:'b'.repeat(64)});}
+  if(id==='P9'){rows.push({kind:'state',where:'P8-effective-out-cam',colors:3,rawColor:0});for(let i=0;i<3;i++)named('float32-bits','effective-out_cam-row',{bits:[1,2,3]});}
+  rows.push({kind:'state',where:id==='XTRANS-serial-ready'?'xtrans-serial-green-bounds-complete':id,width:40,height:40,iwidth:40,iheight:40,rawWidth:40,rawHeight:40,rawPitch:80,left:0,top:0,flip:0,declaredAllocationBytes:12800,allocWidth:40,allocHeight:40,filters:9,colors:3,shrink:0,fujiWidth:0,mixGreen:0,rawColor:0,zeroIsBad:0,quality:id==='P1'?-1:3,passes:3,branch:'xtrans',subtractInline:1,black:0,maximum:65535,dataMaximum:1,noAutoScale:0,noInterpolation:0,asShotWbApplied:0,rawOptions:2,userQual:-1,cameraWb:1,autoWb:0,fourColor:0,highlight:0,medPasses:0,progress:1,warnings:0});
+  for(const[name,n]of [['pre_mul',4],['cam_mul',4],['user_mul',4],['rgb_cam-defined',12]])named('float32-bits',name,{bits:Array(n).fill(0)});
+  for(const[name,n]of [['gamma',6],['aber',4]])named('float64-bits',name,{bits:Array(n).fill('0000000000000000')});
+  named('uint32-values','current-cblack-defined',{values:[0,0,0,0,0,0]});named('uint32-values','cropbox',{values:[0,0,0,0]});
+  for(const[name,n]of [['xtrans-six-by-six',36],['xtrans-absolute-six-by-six',36],['white-defined-8x8',128]])named('defined-byte-span-hash',name,{bytes:n,sha256:'c'.repeat(64)});
+  const channels=['P1','P3b','P5','XTRANS-serial-ready'].includes(id)?4:3;
+  rows.push({kind:'payload',id,channels,valid:true,fullInitializedInput:channels===4,borderExcluded:0,width:40,height:40,sourcePitch:320,packedPitch:40*channels*2});
+  if(['P1','P3b'].includes(id))rows.push({kind:'payload',id:id+'-cfa',channels:1,valid:true,fullInitializedInput:false,borderExcluded:0,width:40,height:40,sourcePitch:320,packedPitch:80});
+  if(['P6','P7','P9'].includes(id))rows.push({kind:'payload',id:id+'-audit4',channels:4,valid:true,fullInitializedInput:true,borderExcluded:0,width:40,height:40,sourcePitch:320,packedPitch:320});
+  if(id==='P9')named('defined-byte-span-hash','P9-initialized-histogram',{bytes:131072,sha256:'d'.repeat(64)});
+ }return rows;}
+const env=Object.fromEntries(['OMP_DYNAMIC','OMP_THREAD_LIMIT','OMP_SCHEDULE','OMP_PROC_BIND','OMP_PLACES','KMP_AFFINITY','KMP_BLOCKTIME','OPENBLAS_NUM_THREADS','DOTNET_PROCESSOR_COUNT','COMPlus_ThreadPool_ForceMinWorkerThreads'].map(k=>[k,null]));env.OMP_NUM_THREADS='6';
+let serial=0;
+function makePair(mutate=()=>{}){const dir=path.join(outputRoot,'case-'+(++serial));fs.mkdirSync(dir);let pair=[];for(let i=0;i<2;i++){const r=path.join(dir,i===0?'left':'right');fs.mkdirSync(r);let spec={rows:fixture(),identity:{...stable,processId:100+i,reservationId:'synthetic-'+i},loaded:{sha256:stable.nativeSha256},result:{status:'completed',zeroRaw:false,error:null,reservationId:'synthetic-'+i,runtime:{ProcessId:100+i,environment:env},counts:{OpenFile:1,Unpack:1,DcrawProcess:1,MakeDcrawMemoryImage:1},fixtureOnly:'FABRICATED_METADATA_NOT_EXECUTION'},pixels:{},rewriteLine:null};mutate(spec,i);
+  for(const p of spec.rows.filter(r=>r.kind==='payload')){const b=Buffer.alloc(p.width*p.height*p.channels*2);if(spec.pixels[p.id])spec.pixels[p.id](b);p.sha256=hash(b);fs.writeFileSync(path.join(r,`${p.id}.${p.channels===4?'image4':p.channels===3?'rgb':'cfa'}.u16`),b);}
+  let lines=spec.rows.map(x=>JSON.stringify(x));if(spec.rewriteLine)lines=lines.map(spec.rewriteLine);fs.writeFileSync(path.join(r,'native-events.jsonl'),lines.join('\n')+'\n');for(const[n,v]of [['result',spec.result],['run-identity',spec.identity],['loaded-native',spec.loaded]])fs.writeFileSync(path.join(r,n+'.json'),JSON.stringify(v,null,2)+'\n');pair.push(r);
+ }return{pair,dir};}
+function cli(c){const output=path.join(c.dir,'comparison');const run=spawnSync(process.execPath,[path.join(tool,'Compare-Checkpoints.mjs'),...c.pair,output],{encoding:'utf8'});return{exitCode:run.status,error:run.stderr.trim(),summary:fs.existsSync(path.join(output,'FIRST_DIFFERENCE.json'))?JSON.parse(fs.readFileSync(path.join(output,'FIRST_DIFFERENCE.json'))):null};}
+function rejection(name,mutate){check(name,()=>{const c=makePair(mutate),r=cli(c);const rejected=r.exitCode!==0;return{expected:'REJECT',rejected,requirementSatisfied:rejected,effectiveInputEqualReported:r.summary?.results?.some(x=>x.effectiveInputEqual)??false,allStagesEffectiveInputEqual:r.summary?.results?.every(x=>x.effectiveInputEqual)??false,comparatorStatus:r.summary?.status??null,earliestDifferentObservedBoundary:r.summary?.earliestDifferentObservedBoundary??null,exitCode:r.exitCode,error:r.error.split('\n').find(l=>l.includes('AssertionError'))??r.error.slice(0,300),caseDirectory:c.dir};});}
+check('baseline.full-loader-and-CLI',()=>{const c=makePair(),r=cli(c);assert.equal(r.exitCode,0,r.error);assert(r.summary.results.every(x=>x.effectiveInputEqual));return{status:r.summary.status,caseDirectory:c.dir};});
+rejection('F2.both-missing-P5-quality',s=>{delete s.rows.find(r=>r.where==='P5').quality;});
+rejection('F2.both-missing-CFA-record',s=>{s.rows=s.rows.filter(r=>r.name!=='xtrans-six-by-six');});
+rejection('F2.both-missing-host-identity',s=>{delete s.identity.hostSha256;});
+rejection('F2.both-empty-typed-states',s=>{s.rows=s.rows.filter(r=>r.kind==='payload');});
+rejection('F2.duplicate-scale-record',s=>{s.rows.push({...s.rows.find(r=>r.name==='actual-scale_mul')});});
+rejection('F2.duplicate-P5-field-record',s=>{const at=s.rows.findIndex(r=>r.where==='P5');s.rows.splice(at+2,0,structuredClone(s.rows[at+1]));});
+rejection('F2.wrong-stage-out-cam',s=>{const matrix=s.rows.filter(r=>r.name==='effective-out_cam-row');s.rows=s.rows.filter(r=>r.name!=='effective-out_cam-row');s.rows.splice(s.rows.findIndex(r=>r.where==='P8-effective-out-cam'),0,...matrix);});
+rejection('F2.wrong-stage-CIELab-matrix-after-P6',s=>{const matrix=s.rows.filter(r=>r.name==='cielab-effective-xyz-cam');s.rows=s.rows.filter(r=>r.name!=='cielab-effective-xyz-cam');s.rows.splice(s.rows.findIndex(r=>r.where==='P7'),0,...matrix);});
+rejection('F2.wrong-stage-allhex-before-P5',s=>{const hex=s.rows.find(r=>r.name==='xtrans-fully-defined-allhex');s.rows=s.rows.filter(r=>r!==hex);s.rows.splice(s.rows.findIndex(r=>r.where==='P5'),0,hex);});
+rejection('F2.duplicate-JSON-member-quality',s=>{s.rewriteLine=line=>line.includes('"where":"P5"')?line.replace('"quality":3','"quality":999,"quality":3'):line;});
+for(const key of Object.keys(stable))rejection('F2.pair-identity-mismatch:'+key,(s,i)=>{if(i===1){s.identity[key]=key==='sourceCommit'?'0'.repeat(40):'e'.repeat(64);if(key==='nativeSha256')s.loaded.sha256=s.identity[key];}});
+rejection('F2.owner-process-mismatch',(s,i)=>{if(i===1)s.result.runtime.ProcessId=999;});
+rejection('F2.reservation-owner-mismatch',(s,i)=>{if(i===1)s.result.reservationId='wrong';});
+rejection('F2.loaded-native-mismatch',(s,i)=>{if(i===1)s.loaded.sha256='e'.repeat(64);});
+for(const what of ['image4','allhex','CIELab-table','CIELab-matrix'])check('F3.earlier-serial-boundary:'+what,()=>{const c=makePair((s,i)=>{if(i!==1)return;s.pixels.P6=b=>b.writeUInt16LE(29,0);s.pixels['P6-audit4']=b=>b.writeUInt16LE(29,0);if(what==='image4')s.pixels['XTRANS-serial-ready']=b=>b.writeUInt16LE(7,6);if(what==='allhex')s.rows.find(r=>r.name==='xtrans-fully-defined-allhex').sha256='f'.repeat(64);if(what==='CIELab-table')s.rows.find(r=>r.name==='cielab-initialized-cbrt').sha256='f'.repeat(64);if(what==='CIELab-matrix')s.rows.find(r=>r.name==='cielab-effective-xyz-cam').bits[0]=17;});const r=cli(c);assert.equal(r.exitCode,0,r.error);assert(r.summary.results.find(x=>x.id==='P5').effectiveInputEqual);assert(!r.summary.results.find(x=>x.id==='P6').imageEqual);assert.equal(r.summary.earliestDifferentObservedBoundary,'XTRANS-serial-ready');assert.equal(r.summary.H1,'UNKNOWN_NO_ACTUAL_CONSUMER_LOAD_EVIDENCE');return{earliestDifferentPayload:r.summary.earliestDifferentPayload,earliestDifferentObservedBoundary:r.summary.earliestDifferentObservedBoundary,H1:r.summary.H1,caseDirectory:c.dir};});
+const unsatisfied=results.filter(x=>x.requirementSatisfied===false);const receipt={version:'RawObservationRevisionIndependentReviewV1',fixedProductCommit:binding.productCommit,inputBindingSha256:hash(bindingBytes),headerSha256:binding.headerSha256,results,checks:results.length,requirementsNotSatisfied:unsatisfied.map(x=>x.name),newCalls:{RAW:0,GPU:0,nativeInit:0,nativeBuild:0,managedBuild:0},syntheticMetadataIsNotExecutionEvidence:true,H1:'UNKNOWN_PENDING_ACTUAL_TEAM_AND_CONSUMER_LOADS'};fs.writeFileSync(path.join(outputRoot,'RESULTS.json'),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({checks:results.length,requirementsNotSatisfied:receipt.requirementsNotSatisfied,F3:results.filter(x=>x.name.startsWith('F3')),newCalls:receipt.newCalls},null,2));
