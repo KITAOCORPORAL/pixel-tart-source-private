@@ -1,0 +1,142 @@
+{
+  "version": "H1HardwareWindowPlanV1",
+  "validationCommit": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+  "researchCommit": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+  "nativeDllSha256": "305eec498644f01ec707e8ac3e58a4b5670043d35fbc853626ff13ac6ff15484",
+  "readyRva": 542832,
+  "readyByte": "4c",
+  "stopRva": 542935,
+  "stopByte": "48",
+  "sites": [
+    {
+      "rva": 532443,
+      "nextRva": 532446,
+      "bytes": "8b04d1",
+      "register": "rax",
+      "shift": 16,
+      "phase": "tile-copy-consumed-G",
+      "slots": [
+        1
+      ],
+      "sourceLine": 207
+    },
+    {
+      "rva": 533120,
+      "nextRva": 533125,
+      "bytes": "440fb74306",
+      "register": "r8",
+      "shift": 0,
+      "phase": "initial-LIM-upper",
+      "slots": [
+        3
+      ],
+      "sourceLine": 232
+    },
+    {
+      "rva": 533128,
+      "nextRva": 533132,
+      "bytes": "0fb75302",
+      "register": "rdx",
+      "shift": 0,
+      "phase": "initial-LIM-lower",
+      "slots": [
+        1
+      ],
+      "sourceLine": 232
+    },
+    {
+      "rva": 533800,
+      "nextRva": 533805,
+      "bytes": "0fb75cf306",
+      "register": "rbx",
+      "shift": 0,
+      "phase": "recalculation-LIM-upper",
+      "slots": [
+        3
+      ],
+      "sourceLine": 257
+    },
+    {
+      "rva": 533951,
+      "nextRva": 533956,
+      "bytes": "0fb74cf002",
+      "register": "rcx",
+      "shift": 0,
+      "phase": "recalculation-LIM-lower",
+      "slots": [
+        1
+      ],
+      "sourceLine": 257
+    },
+    {
+      "rva": 539071,
+      "nextRva": 539076,
+      "bytes": "668944d102",
+      "register": "rax",
+      "shift": 0,
+      "phase": "final-G-store",
+      "slots": [
+        1
+      ],
+      "sourceLine": 417
+    }
+  ],
+  "watch": [
+    {
+      "id": "C1-lower",
+      "x": 7460,
+      "y": 507,
+      "slot": 1,
+      "cfa": 2
+    },
+    {
+      "id": "C1-upper-control",
+      "x": 7460,
+      "y": 507,
+      "slot": 3,
+      "cfa": 2
+    },
+    {
+      "id": "C2-lower",
+      "x": 7461,
+      "y": 506,
+      "slot": 1,
+      "cfa": 0
+    },
+    {
+      "id": "C2-upper-control",
+      "x": 7461,
+      "y": 506,
+      "slot": 3,
+      "cfa": 0
+    }
+  ],
+  "maxEvents": 256,
+  "maximumRawProcesses": 2,
+  "expectedWriterTiles": {
+    "C1": [
+      499,
+      7443
+    ],
+    "C2": [
+      3,
+      7443
+    ]
+  },
+  "expectedCrossReaders": {
+    "C1": [
+      3,
+      7443
+    ],
+    "C2": [
+      499,
+      7443
+    ]
+  },
+  "support": "Actual mapped LIM/copy load consumed value different from own serial min witness and matching corresponding other-tile final-G store. This supports this execution mechanism, not original-DLL root-cause equivalence.",
+  "weaken": "Complete mapped window loads retain serial bounds despite captured other-tile writes; weakens the mechanism for these points/schedule only. Absence under debugger cannot falsify all schedules.",
+  "insufficient": "Missing ready/stop, truncation, wrong code/shape, no matching write or unknown required consumer site. Never substitute a peek.",
+  "perturbation": "Two software boundaries outside the worker; per-thread hardware data traps stop debugger threads and perturb scheduling substantially. Debug delivery order is not memory happens-before. Worker instructions remain byte-identical.",
+  "noFullFramePayloads": true,
+  "wholeP5P6Comparison": false
+}

@@ -1,0 +1,95 @@
+{
+  "version": "H1ActualConsumptionAdmissionV1",
+  "admitted": true,
+  "maximumRawProcesses": 2,
+  "createdUtc": "2026-11-09T08:56:23.375925+00:00",
+  "reviewKind": "Source/instruction self-review plus mechanical and real no-RAW debugger tests",
+  "frozenFiles": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\H1Host.deps.json",
+      "sha256": "82B963EC38D20455315642469695F6F99C689D0C9CDEFE5D93F10B996866BA4F"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\H1Host.dll",
+      "sha256": "99B0E51A180AE380EDE38D6BEDF1565E18334370C5846D9CE9531906DBEEBB8C"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\H1Host.exe",
+      "sha256": "521D7302881DBE482B2A3F8A565C898A477CEC7179BDB0041506BDFA134725B7"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\H1Host.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\raw_r.dll",
+      "sha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final\\Sdcb.LibRaw.dll",
+      "sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-h1-window\\debug_watch.py",
+      "sha256": "1A7BBD2722DF301D47E7E04186E106C034B3F19987EB9F33593F1D5A5E4B339E"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-h1-window\\prepare_plan.py",
+      "sha256": "0B6B304CE1DBE0F46BE6ECB7AFD51595F9D480414441286415C00D82C0606134"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-h1-window\\run_batch.py",
+      "sha256": "0AA3712C9DA1DCDAEAFB54A9C4CFC09DE18B98F907B82434A1575B81A7852FCF"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-h1-window\\Program.cs",
+      "sha256": "08AF2D66DD9682E079C8DD16272BD0AF83414FF15FB41F03E45488E90269646F"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-h1-window\\H1Host.csproj",
+      "sha256": "73A22AF1003BF6874A0B7EE22811D65763F3F18CC861818B2F23F514EC695254"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\PLAN.json",
+      "sha256": "EB2340DD0987C214F4F1C56D999CE4DEB17EA9E9F97222214055D71C71421106"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\OPTIMIZED_IDENTITY.json",
+      "sha256": "1C6AD693031C70ADFDE89B111B5E76B7107C100DAF3D00F9FDCBC69199F054C1"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\AUTHORIZATION.txt",
+      "sha256": "2350219CA4D3A02B0CA00746C9DEC038957270C9AFFAEFB43FDE2CD54C1D403F"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\admission-no-raw-selftest\\RECEIPT.json",
+      "sha256": "9924531DF30322184FCB286EA34B5B3BF1B36C64E59877ABD621C0119EFDE143"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final-no-raw-selftest\\result.json",
+      "sha256": "0A117747EB8ECF10488DEDBADFF5C5CB59FF799C5870CC0D2066A7DD8500457A"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\docs\\research\\raw-reopen-001-contract-20261104\\h1-window-20261109\\MEASUREMENT_REVIEW.md",
+      "sha256": "8BB1F656A5E74848E353CD251C3331C1EA6A2697B583331ABC78DD0F57C3A39D"
+    }
+  ],
+  "oldBatchEvidence": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\DELIVERY_BUDGET.json",
+      "sha256": "37EC77B9264C564906081CE35DC8E9AB4286E3DDAAD3AC5F177A743FFD1A71E5"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\validation-batch\\ledger\\first.consumed",
+      "sha256": "3BC6977EE22137BAB6AB47B925BD2E849C07BF12002D21AFEC08D26BEC6FF94A"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\validation-batch\\ledger\\second.consumed",
+      "sha256": "4387D5E932440E75F0353F85303660F1192ACDCF3E9A5E0DFAC6ADE60CA6D0BB"
+    }
+  ],
+  "oldBatchesUnchanged": true,
+  "fullP5P6Comparison": false,
+  "actualSharedReadsCapturedBy": "Architectural post-instruction destination registers, never reread watched memory",
+  "H1DecisionBeforeNewExecution": "INSUFFICIENT_EVIDENCE"
+}
