@@ -1,0 +1,26 @@
+{
+  "sourceSha": "623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+  "dirty": [],
+  "cwd": "E:\\Kitao-Worktrees\\r55-collage-favorites-20261109",
+  "dotnet": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "-p:Platform=x64",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-o",
+    "E:/Kitao-Deliveries/r55-collage-favorites-20261109/Guangjing-R55-CollageFavorites-Diagnostic-win-x64/app"
+  ],
+  "pid": 28108,
+  "exitCode": 0,
+  "seconds": 3.3229706287384033
+}

@@ -1,0 +1,282 @@
+{
+  "timezone": "Asia/Shanghai",
+  "recordedAt": "2026-11-09T14:36:03.029252+08:00",
+  "productSourceSha": "623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+  "testSourceSha": "221f5c9bcebfb1e1b1d28c6435b057f83d9b645d",
+  "scope": "Affected canvas/store/reference/save/export, planning 15-section and shell/tutorial checks only; not complete product/device suite",
+  "counts": {
+    "Core": 16,
+    "WpfRegression": 12,
+    "FullAppNativeUIAIndependentProcesses": 3,
+    "Passed": 31,
+    "Failed": 0,
+    "NotRun": 0
+  },
+  "regression": [
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 24540,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\001"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 25448,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\002"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 24356,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\003"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 17500,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\004"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27768,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\005"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.BrushLayerIsSameUndoModelAndPersistsOneStroke",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 25088,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\006"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+      "expected": 4,
+      "observed": 4,
+      "outcomes": [
+        "Passed",
+        "Passed",
+        "Passed",
+        "Passed"
+      ],
+      "pid": 23620,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\007"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27700,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\008"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 25344,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\009"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 26768,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\010"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27768,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\011"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ForeignProjectDocumentOrShotFailsClosed",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27532,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\012"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 28260,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\013"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 26100,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\014"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.CombinedPaletteKeepsAllSourceReferences",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 26980,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\015"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.DocumentTargetCannotOverwriteReferencedSource",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 19988,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\016"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.EveryOperationLeavesSourceHashUnchanged",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 23184,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\017"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasInspirationBoardLinkTests.BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 24064,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\018"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasProjectLinkTests.OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27484,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\019"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 24952,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\020"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27480,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\021"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 5864,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\022"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 26292,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\023"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27868,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\024"
+    },
+    {
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "expected": 1,
+      "observed": 1,
+      "outcomes": [
+        "Passed"
+      ],
+      "pid": 27376,
+      "directory": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-regression-01\\025"
+    }
+  ],
+  "appProcessIds": [
+    26160,
+    5304,
+    26416
+  ],
+  "limits": [
+    "No physical mouse input",
+    "No complete DPI matrix",
+    "No camera/device/online service acceptance",
+    "Synthetic PNG fixture; zero RAW calls",
+    "Earlier failed batches retained; final results do not erase failure evidence"
+  ]
+}

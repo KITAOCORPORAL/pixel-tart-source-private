@@ -1,0 +1,40 @@
+{
+  "productSourceSha": "623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+  "testSourceSha": "221f5c9bcebfb1e1b1d28c6435b057f83d9b645d",
+  "timezone": "Asia/Shanghai",
+  "createdAt": "2026-11-09T14:27:38.762453+08:00",
+  "WholeAppDiagnosticBuild": true,
+  "PhotographerTrialBuild": false,
+  "runtime": "win-x64 self-contained",
+  "peMachine": "0x8664",
+  "modules": [
+    "PixelTart.Modules.AssetLibrary.dll",
+    "PixelTart.Modules.OnlineSelection.dll",
+    "PixelTart.Modules.RawTool.dll"
+  ],
+  "installer": false,
+  "planningSections": 15,
+  "tutorial": "RETIRED",
+  "files": {
+    "KitaoPhotoSelector.exe": {
+      "sha256": "472a27aa4c2697a285c647834b9eca2a9470fcbe9bac0bf1f65755fc985a8953",
+      "bytes": 179200
+    },
+    "KitaoPhotoSelector.dll": {
+      "sha256": "2fbf4e1ec5de97787e6093bd7c43465b3ed01ea78fa15141feb56c578ef7dcff",
+      "bytes": 4067328
+    },
+    "RAWSelectionAssistant.Core.dll": {
+      "sha256": "35c44bad51db7972dee43b7dffbac9e40524fc8c38a33b4df08bfda87a86ba35",
+      "bytes": 7767552
+    },
+    "PixelTart.Modules.AssetLibrary.dll": {
+      "sha256": "e3c268fa69550fa794da279ea4dd415acbcc1d210cd94f259671eb7129cca594",
+      "bytes": 1240576
+    },
+    "raw_r.dll": {
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "bytes": 1102848
+    }
+  }
+}

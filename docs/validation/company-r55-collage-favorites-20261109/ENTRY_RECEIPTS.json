@@ -1,0 +1,93 @@
+{
+  "sourceSha": "221f5c9bcebfb1e1b1d28c6435b057f83d9b645d",
+  "runtime": "E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-entry-02\\runtime",
+  "results": [
+    {
+      "phase": "Phase1FavoriteViaVisibleMaterialShelf",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-favorites-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.Phase1FavoriteViaVisibleMaterialShelf",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-entry-02\\Phase1FavoriteViaVisibleMaterialShelf"
+      ],
+      "pid": 25788,
+      "exitCode": 0,
+      "seconds": 7.8324480056762695,
+      "results": [
+        {
+          "executionId": "351aa93b-04e9-4829-ba41-ef4bf4712ad2",
+          "testId": "11a39e66-c173-8298-ab14-1fde1e35d914",
+          "testName": "Phase1FavoriteViaVisibleMaterialShelf",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:06.7058026",
+          "startTime": "2026-11-09T14:26:01.8688439+08:00",
+          "endTime": "2026-11-09T14:26:08.5897580+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "351aa93b-04e9-4829-ba41-ef4bf4712ad2"
+        }
+      ]
+    },
+    {
+      "phase": "Phase2RestartFilterFavoriteAddAndSave",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-favorites-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.Phase2RestartFilterFavoriteAddAndSave",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-entry-02\\Phase2RestartFilterFavoriteAddAndSave"
+      ],
+      "pid": 16460,
+      "exitCode": 0,
+      "seconds": 5.941492319107056,
+      "results": [
+        {
+          "executionId": "38b458c7-2566-4f7c-a9b3-78ca6a8b9113",
+          "testId": "1a4de633-7298-880b-b3b8-94478e87826f",
+          "testName": "Phase2RestartFilterFavoriteAddAndSave",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:04.8882837",
+          "startTime": "2026-11-09T14:26:09.5700818+08:00",
+          "endTime": "2026-11-09T14:26:14.4733022+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "38b458c7-2566-4f7c-a9b3-78ca6a8b9113"
+        }
+      ]
+    },
+    {
+      "phase": "Phase3ReopenProjectExportAlphaAndUnfavorite",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-favorites-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.Phase3ReopenProjectExportAlphaAndUnfavorite",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-favorites-20261109\\final-entry-02\\Phase3ReopenProjectExportAlphaAndUnfavorite"
+      ],
+      "pid": 23180,
+      "exitCode": 0,
+      "seconds": 7.823200464248657,
+      "results": [
+        {
+          "executionId": "c066b7e3-2f9a-4268-8084-0a4705dd38f1",
+          "testId": "1fdd1d52-bd9f-8d56-9da9-c2e1bf9270d3",
+          "testName": "Phase3ReopenProjectExportAlphaAndUnfavorite",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:06.8228355",
+          "startTime": "2026-11-09T14:26:15.6125919+08:00",
+          "endTime": "2026-11-09T14:26:22.4509815+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c066b7e3-2f9a-4268-8084-0a4705dd38f1"
+        }
+      ]
+    }
+  ]
+}

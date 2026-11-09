@@ -1,3 +1,10 @@
+## 2026-11-09 R5.5 拼贴素材收藏（Asia/Shanghai）
+- 从产品38dd3f92建独立feature/r55-collage-favorites-20261109；最新产品f27f4409相对基线src零差异。保全65旧树/11脏树/未推与全部失败，不改A。
+- 最小复用现有FreeCanvas/素材身份/导入：独立引用收藏、取消收藏、收藏筛选、加入画布；修正切来源时旧列表选择被异步清空。收藏不借用照片评分、不缓存像素，当前库原子保存，非法/跨库引用明确拒绝。
+- 产品源码623d0a8ccab6305320fd2d93eda2bcdcc45711f3；测试221f5c9bcebfb1e1b1d28c6435b057f83d9b645d（只修UIA就绪等待）。最终发布DLL绑定Core16/WPF12/完整App原生UIA三进程3，共31PASS。真实工程菜单重开/系统另存为/PNG alpha和源hash读回；非物理鼠标、非完整DPI或设备验收。
+- 完整自包含包E:/Kitao-Deliveries/r55-collage-favorites-20261109/Guangjing-R55-CollageFavorites-Diagnostic-win-x64.zip；296文件ZIP逐项hash通过，ZIP SHA256 C591420060C2EA55DC169244A6AA76B32A0A011B27C8B24A8086929328EEA6DF。EXE/CMD真实全壳启动，CMD退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全模块/策划15/教程退役，无安装器。
+- 本轮RAW全部0；生产raw_r.dll F500C073…未替换；不整合A的观测库。各板块证据状态和下一项“素材已用角标”见docs/validation/company-r55-collage-favorites-20261109/MODULE_STATUS.md；完整报告同目录FINAL_REPORT.md。旧失败与最终推送读回留交付根。
+
 ## 2026-11-03 公司当前：旧灯台四提交远端保全与最小交互收回（Asia/Shanghai）
 - 四个真实旧提交9299749c87833b4b637b83d0f086d06ac6e1025f、a1a2a8f751b83bfce23982784d2d7f3cae86fb2d、2ed1dc358cb6f7acaaaa670db25c8233f873f415、27794d2f86313d7231f235b4fd1104eb4e95c106已先普通push独立远端分支 **preserve/company-lighttable-four-20261103**，HEAD27794d2f；完整链接/父链/逐提交审查见docs/validation/company-r55-lighttable-reclaim-20261103/FINAL_REPORT.md，不再仅本地保留。
 - 旧树E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030不reset/clean/stash、HEAD/tracked源码不改；相对旧上游仍4ahead但现已可远端审查。49个未跟踪文件（30PNG/19文档收据）只列路径/hash，均未自动上传，旧私人图片/输出/受限资源不入Git。
