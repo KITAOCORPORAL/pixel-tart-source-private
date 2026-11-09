@@ -1,0 +1,9 @@
+# 研究补丁许可证边界
+
+LibRaw0.21.1@cccb97647fcee56801fa68231fa8a38aa8b52ef7：原源头允许LGPL2.1或CDDL1.0选择；完整LICENSE.LGPL、LICENSE.CDDL、COPYRIGHT随此工具放在LICENSES。unifiedpatch含原上下文，候选是其修改，不能通过换名认定无许可义务。本次按用户明确要求提交隔离修复patch，不复制原完整算法源或binary进产品。
+
+自编generator/harness/诊断build脚本仅供本研究复现；外部生成的完整vendorsource、精确抽取函数组合、exe/DLL及真实像素留授权本地。candidate产物仍按原代码/依赖许可证审查分发，不获产品商业兼容或native包可复现构建批准。
+
+RT5.11固定db575c6690d30ce6428c0e1383bec8b8f1fb8d21在原process-internal-review已审的rawData独立输入/分离RGB设计为结构参考；本补丁没有复制或翻译其GPL3+公式/代码、没有更换tile/float算法。RT与LibRaw的Markesteijn血缘仍明确，不算两个独立运行真值。本轮测试是固定源算法内的正确所有权回归，而非新色彩科学/摄影色准验证。
+
+默认产品不接入，原PV4/5/6、旧锐化V1不变。未来产品接纳仍需真实候选/预览保存重开导出、性能内存及分发义务审查。

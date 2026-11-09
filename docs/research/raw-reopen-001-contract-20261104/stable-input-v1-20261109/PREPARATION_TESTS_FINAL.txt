@@ -1,0 +1,13 @@
+test_already_patched_source_rejected (__main__.Preparation.test_already_patched_source_rejected) ... ok
+test_existing_output_not_overwritten (__main__.Preparation.test_existing_output_not_overwritten) ... ok
+test_explicit_candidate_flag_required_before_output (__main__.Preparation.test_explicit_candidate_flag_required_before_output) ... ok
+test_formula_drift_rejected (__main__.Preparation.test_formula_drift_rejected) ... ok
+test_nested_source_output_refused (__main__.Preparation.test_nested_source_output_refused) ... ok
+test_output_not_read_before_initialization_or_before_join (__main__.Preparation.test_output_not_read_before_initialization_or_before_join) ... ok
+test_pristine_reproduces_executed_candidate (__main__.Preparation.test_pristine_reproduces_executed_candidate) ... ok
+test_reviewed_observer_reproduces_candidate (__main__.Preparation.test_reviewed_observer_reproduces_candidate) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.201s
+
+OK

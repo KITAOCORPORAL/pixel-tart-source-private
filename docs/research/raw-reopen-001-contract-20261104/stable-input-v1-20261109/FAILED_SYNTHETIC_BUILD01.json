@@ -1,0 +1,31 @@
+{
+  "version": "StableInputV1SyntheticBuildV1",
+  "compiler": "ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+  "compilerSha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+  "commands": [
+    [
+      "ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+      "-std=c++17",
+      "-O2",
+      "-fopenmp",
+      "-Wno-unknown-pragmas",
+      "raw-reopen001-shared-research\\stable-input-v1-20261109\\synthetic-build01\\algorithms.cpp",
+      "raw-reopen001-shared-research\\stable-input-v1-20261109\\synthetic-build01\\synthetic_main.cpp",
+      "-Iraw-reopen001-shared-research\\stable-input-v1-20261109\\synthetic-build01",
+      "-o",
+      "raw-reopen001-shared-research\\stable-input-v1-20261109\\synthetic-build01\\synthetic.exe"
+    ]
+  ],
+  "compileExitCode": 1,
+  "generatedAlgorithmSha256": "94e12f365023c2aa85e2bc7f2413fb835e0a1452f567b4a67af94200a99b4c1f",
+  "sourceHashes": {
+    "src/demosaic/xtrans_demosaic.cpp": "1c4aa7362d4059ea3952dbc9a09de73f13721aa18f65d2445d027e68352045af",
+    "src/demosaic/ahd_demosaic.cpp": "05db2e09c7963fc25f691eb36c84cf4593c05642282e5b3dcd19b4946600c4dc",
+    "src/demosaic/misc_demosaic.cpp": "d9ee430943c20a348dd73aae597526baa8a70a769b4ad3abf16462658c70bb7b",
+    "src/utils/utils_libraw.cpp": "a5dda3c94664b54b73a798b87379862a806d66ad4730a7ea5934a7122a8b24a8",
+    "src/tables/colorconst.cpp": "5d500ed6e8c019ce3b4b60bb83d72fc74004c2f9eab08a0030d92d4d1757cfdc",
+    "internal/defines.h": "7f5d88b42b2005c5319f544cc98c1a52261c63b2b1bc02e6e6fae66e974168d6",
+    "libraw/libraw_alloc.h": "37bd73b2a133ac7df778e0a02ed87aa20c86f85299f5ff0474521d2d29bdeb5a"
+  },
+  "scope": "Extracted exact upstream functions; surrogate storage/allocator, synthetic CFA only. Not LibRaw DLL/ABI/defaultdecoder build, not MSVC or VCOMP parity."
+}

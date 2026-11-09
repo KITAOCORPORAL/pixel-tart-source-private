@@ -1,0 +1,94 @@
+{
+  "version": "StableInputV1CompanyNativeHandoffV1",
+  "task": "RAW-REOPEN-001-STABLE-INPUT-V1-20261109",
+  "status": "WAIT_COMPANY_REQUIRED_MSVC_TOOLCHAIN",
+  "candidate": "XTransStableInputSeparateRgbV1",
+  "defaultOff": true,
+  "onlyIsolatedDiagnostic": true,
+  "researchBase": "701306788438c1d295541479ea0b1359e7cc85d8",
+  "nativeBase": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "reviewedObserverXtransSha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+  "candidateObserverXtransSha256": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+  "observerHeaderSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "prerequisites": [
+    "Fresh candidate-only source/build/host/output roots",
+    "All7reviewedobserverfiles andheader exactSHA; preparation/generatorproof; fullFILEinventoryfreeze",
+    "NativeMSVCOpenMPbuild with originalMakefile/COPT_OPT=/openmp, sameoptionalcomponents as sealed diagnostic, actualflags/runtime/DLL/exe/loadedmoduleidentity",
+    "Native+binding noRAWselftest and ABI/readback success before first RAW; not substituted by LLVMsurrogate",
+    "New authorization/config/ledger schema task, maximum2, reserve-before-spawn, old task consumed2files unchanged, failedslotconsumed andstop",
+    "Debugger NOT attached, no watchpoint runner, no OMP override or driver/math change"
+  ],
+  "nativeCompilerBaseline": "Existing company MSVC/VCOMP. Full original package bit-reproducibility still not claimed.",
+  "authorization": "Current user request explicitly authorizes one new independent candidate-only batch, two sameFuji processes afterbuild/selftest. Do not reuse or reset oldwindowledgers.",
+  "input": {
+    "name": "DSCF0347.RAF",
+    "sha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+    "fileContentsCopiedToGit": false
+  },
+  "parameters": {
+    "HalfSize": false,
+    "UseCameraWb": true,
+    "UseAutoWb": false,
+    "UseCameraMatrix": true,
+    "OutputColor": "sRGB",
+    "OutputBps": 16,
+    "UserFlip": 0,
+    "Interpolation": true,
+    "UserQual": -1,
+    "Threshold": 0,
+    "MedianPasses": 0,
+    "Highlight": 0,
+    "ExpCorrec": false,
+    "Gamma": [
+      0.45,
+      4.5
+    ],
+    "remaining": "Keep complete old actualconfigured snapshot unchanged; compare fullfields not onlythissubset",
+    "OMP": "Existingbindinginitializer behavior, no manualset/clear; recordbefore/after andactualteam; sourcepragma schedule(dynamic) unchanged",
+    "actualPassesRequired": 3,
+    "actualTRequired": 512,
+    "actualNdirRequired": 8
+  },
+  "counts": {
+    "maximumRawProcesses": 2,
+    "perProcessOpen": 1,
+    "perProcessUnpack": 1,
+    "perProcessProcess": 1,
+    "perProcessMemoryImage": 1,
+    "debuggerRuns": 0,
+    "automaticRetry": false,
+    "fullAppDecode": 0
+  },
+  "budget": {
+    "processWorkingSetBytes": 2147483648,
+    "timeoutSeconds": 600,
+    "sampleIntervalMs": 50,
+    "increaseBudgetOnFailure": false,
+    "extraRequestedOutputBytes": 241118208,
+    "extraLibRawMemmgrOverheadBytes": 1024,
+    "memmgrHardLimitClaim": false
+  },
+  "payloads": [
+    "OriginalP5typed4channel activeimage plus requiredserialinputstate",
+    "XTRANS-serial-ready typed4channel originalgreenbounds+allhex/CIELabmatrix beforecandidateallocation or explicitlysamephase",
+    "P6typed3channelRGB7752x5184 includingoriginalborder8",
+    "ExistingProcess/MemoryImage payload if observeralreadyemits; no secondframework orextraoldbaseline decode",
+    "Perprocessactualquality/passes/team/source/DLL/runtime/OMP/init/copyownership andresource counters"
+  ],
+  "comparison": {
+    "candidatePair": "Exactbit/values in sameP5/serialstate/P6layout, no threshold widening. Bothsuccess andsameinputs required.",
+    "storedBaseline": "Reuse existing4c322975 two-process P6 payloads if authorizedlocalfiles available andhashverified; report candidatefirst vs oldfirst/oldsecond independently withchangedchannels/pixels/max/firstbbox/border. Do NOT run oldbase again justtofillcomparison.",
+    "candidateVsFrozenInputOracle": "Synthetic exactall4slots passed; not aphysicalorindependentnumericaltruth",
+    "fullComparatorLimitation": "ExistingF2P8rawColorbypass guard must remain; if not admitted use existingverifiedinterpolationprefix only, do not weakenfullpipelinegate",
+    "missingOldFiles": "Report exactmissinghash/path, never re-decode tofakea storedreference"
+  },
+  "resultFields": {
+    "nativeDLLBuild": "NOT_RUN_HOME_TOOLCHAIN_MISSING",
+    "nativeSelfTest": "NOT_RUN",
+    "candidateRealPairP6Equal": null,
+    "candidateVsStoredFujiBaselineDifference": null,
+    "nativeExtraRssMeasuredBytes": null,
+    "nativeTimeMeasuredMs": null
+  },
+  "stop": "After thetwo slots, stop. On failurestopwithoutreplacement. No production integration or further candidate."
+}

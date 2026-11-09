@@ -1,0 +1,34 @@
+{
+  "version": "StableInputV1ExecutionReceiptV1",
+  "atAsiaShanghai": "2026-11-09T21:45:48.891133+08:00",
+  "counts": {
+    "realRaw": 0,
+    "librawInit": 0,
+    "OpenFile": 0,
+    "Unpack": 0,
+    "DcrawProcess": 0,
+    "MemoryImage": 0,
+    "candidateNativeDLLBuild": 0,
+    "nativeDecoderSelftest": 0,
+    "debuggerRuns": 0,
+    "gpu": 0,
+    "syntheticCompilerAttempts": 2,
+    "realHeadersSyntaxCompilerCalls": 1,
+    "syntheticExeInvocations": 1,
+    "syntheticCandidateSuccessfulCalls": 40,
+    "syntheticUpstreamTileOracleCalls": 56,
+    "syntheticUnpatchedCalls": 10,
+    "syntheticFailureChecks": 3
+  },
+  "checks": {
+    "CPPalgorithm": 43,
+    "PythonPreparationGuardsFinal": 8,
+    "geometryIntegerLengths": 3589,
+    "geometry2dCases": 9,
+    "metadata": 30
+  },
+  "nativeStatus": "NOT_RUN_HOME_REQUIRED_MSVC_TOOLCHAIN_MISSING",
+  "candidate": "IMPLEMENTED_DEFAULT_OFF_DIAGNOSTIC_ONLY",
+  "product": "NOT_ADMITTED",
+  "next": "Company independent2process sameFuji noDebugger afternewnativebuild/selftest; nooldledgerreset"
+}

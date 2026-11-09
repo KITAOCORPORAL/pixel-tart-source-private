@@ -1,0 +1,383 @@
+{
+  "version": "XTransStableInputGeometryV1",
+  "integerLengthsChecked": 3589,
+  "T": 512,
+  "stride": 496,
+  "axisIntervalsContiguousDisjoint": true,
+  "cases": [
+    {
+      "width": 512,
+      "height": 512,
+      "tileRows": 1,
+      "tileColumns": 1,
+      "writtenPixels": 250000,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        506,
+        506
+      ],
+      "lastRowTile": {
+        "origin": 3,
+        "readHalfOpen": [
+          3,
+          509
+        ],
+        "writeHalfOpen": [
+          6,
+          506
+        ],
+        "initialLocalLength": 506,
+        "adjustedLocalLength": 511
+      },
+      "lastColumnTile": {
+        "origin": 3,
+        "readHalfOpen": [
+          3,
+          509
+        ],
+        "writeHalfOpen": [
+          6,
+          506
+        ],
+        "initialLocalLength": 506,
+        "adjustedLocalLength": 511
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 518,
+      "height": 518,
+      "tileRows": 1,
+      "tileColumns": 1,
+      "writtenPixels": 256036,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        512,
+        512
+      ],
+      "lastRowTile": {
+        "origin": 3,
+        "readHalfOpen": [
+          3,
+          515
+        ],
+        "writeHalfOpen": [
+          6,
+          512
+        ],
+        "initialLocalLength": 512,
+        "adjustedLocalLength": 517
+      },
+      "lastColumnTile": {
+        "origin": 3,
+        "readHalfOpen": [
+          3,
+          515
+        ],
+        "writeHalfOpen": [
+          6,
+          512
+        ],
+        "initialLocalLength": 512,
+        "adjustedLocalLength": 517
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 519,
+      "height": 521,
+      "tileRows": 2,
+      "tileColumns": 2,
+      "writtenPixels": 258063,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        513,
+        515
+      ],
+      "lastRowTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          518
+        ],
+        "writeHalfOpen": [
+          507,
+          515
+        ],
+        "initialLocalLength": 19,
+        "adjustedLocalLength": 24
+      },
+      "lastColumnTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          516
+        ],
+        "writeHalfOpen": [
+          507,
+          513
+        ],
+        "initialLocalLength": 17,
+        "adjustedLocalLength": 22
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 1007,
+      "height": 1015,
+      "tileRows": 3,
+      "tileColumns": 2,
+      "writtenPixels": 997985,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        1001,
+        1009
+      ],
+      "lastRowTile": {
+        "origin": 995,
+        "readHalfOpen": [
+          995,
+          1012
+        ],
+        "writeHalfOpen": [
+          1003,
+          1009
+        ],
+        "initialLocalLength": 17,
+        "adjustedLocalLength": 22
+      },
+      "lastColumnTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          1004
+        ],
+        "writeHalfOpen": [
+          507,
+          1001
+        ],
+        "initialLocalLength": 505,
+        "adjustedLocalLength": 510
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 1014,
+      "height": 1014,
+      "tileRows": 2,
+      "tileColumns": 2,
+      "writtenPixels": 1004004,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        1008,
+        1008
+      ],
+      "lastRowTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          1011
+        ],
+        "writeHalfOpen": [
+          507,
+          1008
+        ],
+        "initialLocalLength": 512,
+        "adjustedLocalLength": 517
+      },
+      "lastColumnTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          1011
+        ],
+        "writeHalfOpen": [
+          507,
+          1008
+        ],
+        "initialLocalLength": 512,
+        "adjustedLocalLength": 517
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 1015,
+      "height": 1015,
+      "tileRows": 3,
+      "tileColumns": 3,
+      "writtenPixels": 1006009,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        1009,
+        1009
+      ],
+      "lastRowTile": {
+        "origin": 995,
+        "readHalfOpen": [
+          995,
+          1012
+        ],
+        "writeHalfOpen": [
+          1003,
+          1009
+        ],
+        "initialLocalLength": 17,
+        "adjustedLocalLength": 22
+      },
+      "lastColumnTile": {
+        "origin": 995,
+        "readHalfOpen": [
+          995,
+          1012
+        ],
+        "writeHalfOpen": [
+          1003,
+          1009
+        ],
+        "initialLocalLength": 17,
+        "adjustedLocalLength": 22
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 1024,
+      "height": 1024,
+      "tileRows": 3,
+      "tileColumns": 3,
+      "writtenPixels": 1024144,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        1018,
+        1018
+      ],
+      "lastRowTile": {
+        "origin": 995,
+        "readHalfOpen": [
+          995,
+          1021
+        ],
+        "writeHalfOpen": [
+          1003,
+          1018
+        ],
+        "initialLocalLength": 26,
+        "adjustedLocalLength": 31
+      },
+      "lastColumnTile": {
+        "origin": 995,
+        "readHalfOpen": [
+          995,
+          1021
+        ],
+        "writeHalfOpen": [
+          1003,
+          1018
+        ],
+        "initialLocalLength": 26,
+        "adjustedLocalLength": 31
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 1553,
+      "height": 1007,
+      "tileRows": 2,
+      "tileColumns": 4,
+      "writtenPixels": 1533295,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        1547,
+        1001
+      ],
+      "lastRowTile": {
+        "origin": 499,
+        "readHalfOpen": [
+          499,
+          1004
+        ],
+        "writeHalfOpen": [
+          507,
+          1001
+        ],
+        "initialLocalLength": 505,
+        "adjustedLocalLength": 510
+      },
+      "lastColumnTile": {
+        "origin": 1491,
+        "readHalfOpen": [
+          1491,
+          1550
+        ],
+        "writeHalfOpen": [
+          1499,
+          1547
+        ],
+        "initialLocalLength": 59,
+        "adjustedLocalLength": 64
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    },
+    {
+      "width": 7752,
+      "height": 5184,
+      "tileRows": 11,
+      "tileColumns": 16,
+      "writtenPixels": 40031280,
+      "outputWriteOverlapPixels": 0,
+      "writtenRectangleHalfOpen": [
+        6,
+        6,
+        7746,
+        5178
+      ],
+      "lastRowTile": {
+        "origin": 4963,
+        "readHalfOpen": [
+          4963,
+          5181
+        ],
+        "writeHalfOpen": [
+          4971,
+          5178
+        ],
+        "initialLocalLength": 218,
+        "adjustedLocalLength": 223
+      },
+      "lastColumnTile": {
+        "origin": 7443,
+        "readHalfOpen": [
+          7443,
+          7749
+        ],
+        "writeHalfOpen": [
+          7451,
+          7746
+        ],
+        "initialLocalLength": 306,
+        "adjustedLocalLength": 311
+      },
+      "untouchedOutsideRegion": "Output seeded from originalRGB3; commitfullRGB3 leaves slots3 unchanged, then originalborder_interpolate8 runs once"
+    }
+  ],
+  "fullFujiExtraBytes": 241118208,
+  "MiB": 229.9482421875,
+  "uninitializedOutputRead": "None: every3channel output initialized from stable image beforetile region; finaltiles onlyoverwrite uniquevalidsubrectangles",
+  "newRawOrPixelRuns": 0,
+  "limit": "OriginalT512 valid dimensions>=512 only. This is bounds/ownership arithmetic, not aRAWdecoder test."
+}

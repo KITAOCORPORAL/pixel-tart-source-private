@@ -1,0 +1,95 @@
+--- a/src/demosaic/xtrans_demosaic.cpp
++++ b/src/demosaic/xtrans_demosaic.cpp
+@@ -18,6 +18,7 @@
+ 
+ /*RR001I_BEGIN*/#include "rr001_internal.h"
+ /*RR001I_END*/#include "../../internal/dcraw_defs.h"
++#include <limits>
+ 
+ #define fcol(row, col) xtrans[(row + 6) % 6][(col + 6) % 6]
+ /*
+@@ -172,12 +173,33 @@
+   int buffer_count = 1;
+ #endif
+ 
++  // @candidate XTransStableInputSeparateRgbV1: diagnostic opt-in build only.
++  // Serial green-bound preparation above is complete. Keep image read-only
++  // until the unchanged OpenMP region has joined; preserve all source slots.
++  const size_t output_width = size_t(width), output_height = size_t(height);
++  const size_t size_limit = (std::numeric_limits<size_t>::max)();
++  if (!output_width || output_height > size_limit / output_width ||
++      output_width * output_height > size_limit / (3 * sizeof(ushort)))
++    throw LIBRAW_EXCEPTION_ALLOC;
++  const size_t output_pixels = output_width * output_height;
++  struct XTransOutputGuardV1 {
++    LibRaw *owner;
++    ushort (*pixels)[3];
++    ~XTransOutputGuardV1() { if (pixels) owner->free(pixels); }
++  } output = {this, (ushort(*)[3])malloc(output_pixels * 3 * sizeof(ushort))};
++  // Seed every RGB output pixel, including the untouched outside region.
++  // Thus no unwritten allocation/padding becomes input to border handling.
++  for (size_t p = 0; p < output_pixels; ++p)
++    memcpy(output.pixels[p], image[p], 3 * sizeof(ushort));
++  const ushort (*const stable_image)[4] = image;
++  ushort (*const final_rgb)[3] = output.pixels;
++
+   size_t buffer_size = LIBRAW_AHD_TILE * LIBRAW_AHD_TILE * (ndir * 11 + 6);/*RR001I_BEGIN*/
+ rr001i::xbegin(LIBRAW_AHD_TILE,ndir,passes,buffer_count,buffer_size);rr001i::bytes("xtrans-fully-defined-allhex",allhex,sizeof(allhex));rr001i::state(imgdata,"xtrans-serial-green-bounds-complete");rr001i::payload(imgdata,"XTRANS-serial-ready",4);/*RR001I_END*/
+   char** buffers = malloc_omp_buffers(buffer_count, buffer_size);
+ 
+ #if defined(LIBRAW_USE_OPENMP)
+-# pragma omp parallel for schedule(dynamic) default(none) firstprivate(buffers, allhex, passes, sgrow, sgcol, ndir) shared(dir) 
++# pragma omp parallel for schedule(dynamic) default(none) firstprivate(buffers, allhex, passes, sgrow, sgcol, ndir, stable_image, final_rgb) shared(dir) 
+ #endif
+     for (int top = 3; top < height - 19; top += LIBRAW_AHD_TILE - 16)
+     {
+@@ -207,7 +229,7 @@
+ rr001i::tile(top,left,mrow,mcol,buffer);/*RR001I_END*/
+             for (int row = top; row < mrow; row++)
+                 for (int col = left; col < mcol; col++)
+-                    memcpy(rgb[0][row - top][col - left], image[row * width + col], 6);
++                    memcpy(rgb[0][row - top][col - left], stable_image[row * width + col], 6);
+             int c;
+             FORC3 memcpy(rgb[c + 1], rgb[0], sizeof * rgb);
+ 
+@@ -220,7 +242,7 @@
+                     int f;
+                     if ((f = fcol(row, col)) == 1)
+                         continue;
+-                    ushort (*pix)[4] = image + row * width + col;
++                    const ushort (*pix)[4] = stable_image + row * width + col;
+                     short* hex = allhex[row % 3][col % 3][0];
+                     color[1][0] = 174 * (pix[hex[1]][1] + pix[hex[0]][1]) -
+                         46 * (pix[2 * hex[1]][1] + pix[2 * hex[0]][1]);
+@@ -249,7 +271,7 @@
+                             int f;
+                             if ((f = fcol(row, col)) == 1)
+                                 continue;
+-                            ushort(*pix)[4] = image + row * width + col;
++                            const ushort(*pix)[4] = stable_image + row * width + col;
+                             short* hex = allhex[row % 3][col % 3][1];
+                             for (int d = 3; d < 6; d++)
+                             {
+@@ -417,7 +439,7 @@
+                             FORC3 avg[c] += rgb[dd][row][col][c];
+                             avg[3]++;
+                         }
+-                    FORC3 image[(row + top) * width + col + left][c] = avg[c] / avg[3];
++                    FORC3 final_rgb[(row + top) * width + col + left][c] = avg[c] / avg[3];
+                 }
+         }
+     }
+@@ -429,6 +451,13 @@
+ /*RR001I_BEGIN*/rr001i::xend();
+ /*RR001I_END*/    free_omp_buffers(buffers, buffer_count);
+ 
++    // The implicit parallel-for join above is the only commit boundary.
++    // Preserve slot 3 (green upper-bound state) and the original border order.
++    for (size_t p = 0; p < output_pixels; ++p)
++      memcpy(image[p], output.pixels[p], 3 * sizeof(ushort));
++    free(output.pixels);
++    output.pixels = 0;
++
+ /*RR001I_BEGIN*/rr001i::event("xtrans-border-interpolate-8","enter");
+ /*RR001I_END*/    border_interpolate(8);/*RR001I_BEGIN*/
+ rr001i::event("xtrans-border-interpolate-8","return");/*RR001I_END*/

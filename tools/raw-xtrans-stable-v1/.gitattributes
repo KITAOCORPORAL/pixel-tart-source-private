@@ -1,0 +1,6 @@
+*.py -text whitespace=cr-at-eol
+*.cpp -text whitespace=cr-at-eol
+*.hpp -text whitespace=cr-at-eol
+*.ps1 -text whitespace=cr-at-eol
+*.patch -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+LICENSES/* -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

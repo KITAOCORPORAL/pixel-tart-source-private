@@ -1,0 +1,26 @@
+{
+  "version": "XTransStableInputSeparateRgbV1",
+  "defaultOff": true,
+  "isolation": "Standalone diagnostic build only; no product registration",
+  "inputSource": "N:\\pixart\\raw-reopen001-shared-research\\libraw-0.21.1\\src\\demosaic\\xtrans_demosaic.cpp",
+  "inputSha256": "1c4aa7362d4059ea3952dbc9a09de73f13721aa18f65d2445d027e68352045af",
+  "checkoutBytesSha256": "208bd3f9be33407299c365410ad5786abac6c63d20c5878bd79e07f2cc8377a7",
+  "checkoutNewlineNormalization": "CRLF to LF explicitly, locked canonical fullfileSHA required",
+  "candidateSha256": "b6500414c0c556c6a93ea25a26f59bb34056890ca93856d2a43b75da3a6116d1",
+  "patchSha256": "a24dab9c02fc7383ef8c77b95da507cc7dffdf1591369c034e4dd8e58cd66d62",
+  "proof": {
+    "workerOriginalSha256": "1fb17a092371f8896d4e28041b456e25d7c0882dbd9f2cc9bc6fba338d7651ad",
+    "workerInverseNormalizedExact": true,
+    "workerCandidateSha256": "d450d1fcbec7d858111085114445c7485028d823de036378dad560eb3dcb3288",
+    "remainingMutableImageWorkerUses": 0,
+    "sharedReadAliases": 3,
+    "outputStoreSites": 1,
+    "originalSchedule": "parallel for schedule(dynamic)",
+    "originalPassesAndFormulasPreserved": true
+  },
+  "extraBytesPerPixel": 6,
+  "real7752x5184ExtraRequestedBytes": 241118208,
+  "sourceOwner": "Original image kept stable after serial prep; compact independentRGB3 committed afterjoin before border8",
+  "memoryScope": "6N requestedbytes plus one libraw_memmgr extra_bytes allocation overhead; memmgr is ownership tracking, NOT a hard memory budget",
+  "numericalRuns": 0
+}

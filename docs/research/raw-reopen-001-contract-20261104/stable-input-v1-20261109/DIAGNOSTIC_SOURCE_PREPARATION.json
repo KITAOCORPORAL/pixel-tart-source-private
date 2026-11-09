@@ -1,0 +1,25 @@
+{
+  "version": "XTransStableInputSeparateRgbV1",
+  "status": "CANDIDATE_DIAGNOSTIC_SOURCE_ONLY_NOT_BUILT",
+  "sourceBase": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "observerBase": "701306788438c1d295541479ea0b1359e7cc85d8",
+  "observerHeaderSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "baselineObserverFilesMatched": 7,
+  "candidateXtransSha256": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+  "candidateProof": {
+    "workerOriginalSha256": "cf68034ff4985a52a00c8363514b94b979d2f9cf12c4c15141c4528c928e4db1",
+    "workerInverseNormalizedExact": true,
+    "workerCandidateSha256": "0dbb140401e617f899e8a2040fcdaff41488a5411d191215f4efb7570c71fe56",
+    "remainingMutableImageWorkerUses": 0,
+    "sharedReadAliases": 3,
+    "outputStoreSites": 1,
+    "originalSchedule": "parallel for schedule(dynamic)",
+    "originalPassesAndFormulasPreserved": true
+  },
+  "nativeBuild": 0,
+  "RAW": 0,
+  "productIntegration": false,
+  "defaultOff": true,
+  "budgetOldConsumedSlotsTouched": false,
+  "warning": "Existing Build-Isolated originalByteRestoration guard is not applicable to intentional candidate; do not weaken it. Use candidate-only build in this new root."
+}

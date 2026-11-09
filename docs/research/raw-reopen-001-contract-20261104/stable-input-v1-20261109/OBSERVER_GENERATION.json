@@ -1,0 +1,26 @@
+{
+  "version": "XTransStableInputSeparateRgbV1",
+  "defaultOff": true,
+  "isolation": "Standalone diagnostic build only; no product registration",
+  "inputSource": "N:\\pixart\\raw-reopen001-shared-research\\stable-input-v1-20261109\\frozen-observer-xtrans.cpp",
+  "inputSha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+  "checkoutBytesSha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+  "checkoutNewlineNormalization": "CRLF to LF explicitly, locked canonical fullfileSHA required",
+  "candidateSha256": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+  "patchSha256": "88cf00aa8de2ad7184b6df61d08b5cf7fc1184e01f57589c8449149d76157544",
+  "proof": {
+    "workerOriginalSha256": "cf68034ff4985a52a00c8363514b94b979d2f9cf12c4c15141c4528c928e4db1",
+    "workerInverseNormalizedExact": true,
+    "workerCandidateSha256": "0dbb140401e617f899e8a2040fcdaff41488a5411d191215f4efb7570c71fe56",
+    "remainingMutableImageWorkerUses": 0,
+    "sharedReadAliases": 3,
+    "outputStoreSites": 1,
+    "originalSchedule": "parallel for schedule(dynamic)",
+    "originalPassesAndFormulasPreserved": true
+  },
+  "extraBytesPerPixel": 6,
+  "real7752x5184ExtraRequestedBytes": 241118208,
+  "sourceOwner": "Original image kept stable after serial prep; compact independentRGB3 committed afterjoin before border8",
+  "memoryScope": "6N requestedbytes plus one libraw_memmgr extra_bytes allocation overhead; memmgr is ownership tracking, NOT a hard memory budget",
+  "numericalRuns": 0
+}

@@ -1,0 +1,31 @@
+{
+  "version": "StableInputV1HomeNativeReadinessV1",
+  "atAsiaShanghai": "2026-11-09T21:27:03.024198+08:00",
+  "tools": {
+    "cl.exe": null,
+    "nmake.exe": null,
+    "dumpbin.exe": null
+  },
+  "explicitLocations": [
+    {
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe",
+      "exists": false
+    },
+    {
+      "path": "C:\\Program Files\\Microsoft Visual Studio",
+      "exists": false
+    }
+  ],
+  "status": "NATIVE_DLL_NOT_BUILT_REQUIRED_MSVC_TOOLCHAIN_MISSING",
+  "missing": [
+    "cl.exe",
+    "nmake.exe",
+    "dumpbin.exe"
+  ],
+  "syntheticCompilerAvailable": true,
+  "syntheticCompilerScope": "FrozenLLVMclang/libomp for extracted exact functions and actual-header syntax only; not production MSVC/VCOMP native equivalence",
+  "nativeDLLBuild": 0,
+  "RAW": 0,
+  "DebuggerRuns": 0,
+  "nextResponsibleEndpoint": "Company existing MSVC/VCOMP toolchain; independent candidate-only two-process no-debugger batch requested by user; do not consume oldledgers"
+}

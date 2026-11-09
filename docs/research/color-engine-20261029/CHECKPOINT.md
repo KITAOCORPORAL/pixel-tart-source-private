@@ -1,3 +1,17 @@
+# 当前检查点：稳定输入独立修复候选V1（2026-11-09，Asia/Shanghai）
+
+从701306788438c1d295541479ea0b1359e7cc85d8独立接续research/raw-xtrans-stable-input-v1-20261109。H1局部消费机制已支持，不再抓同窗；实现唯一XTransStableInputSeparateRgbV1：parallel内原image只读、RGB3输出独立，join后提交，slot3/原border8顺序保留。原插值公式/质量/512/496分块/schedule(dynamic)不改，原worker仅地址重定向，逆归一文本0差。
+
+候选及诊断observer补丁已生成，真实LibRaw头文件语法编译通过。40次候选synthetic调用对56次原算法单tile隔离oracle合并结果全四槽0差，passes1/3、请求1/2/6/重复6及双毒值，输入stable/joincommit/border/内存释放通过；另3拒绝条件，43C++checks。8准备守卫通过，3589长度/9二维末端几何证明写区连续无重叠。单tile对原版0差，多tile合成与原串行有变化，不假称Fuji基线效果。旧窗口/旧输出/收据保留。
+
+额外内存6N=241118208bytes约229.95MiB（本Fuji）+原memmgr开销1024；增加两次全域RGB复制。完整nativeRSS/time未知。家庭cl/nmake/dumpbin与原MSVCSDK缺失，仅用原LLVM/libomp合成harness，未构建/运行fullnativeDLL；真实RAW/Open/Unpack/Process/MemoryImage/debugger/GPU均0。按用户fallback交公司同工具链，先nativebuild+noRAWselftest/新manifest，再新任务独立2进程同Fuji无调试器对照；旧ledger不重置、不重跑baseline。P6一致性/与已存baseline差异/真实资源字段为null，不写PASS。
+
+权威docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/REPORT.md、COMPANY_HANDOFF.md和COMPANY_NATIVE_PLAN.json；patch/generator/build/无RAW自检在tools/raw-xtrans-stable-v1。完整外部材料raw-reopen001-shared-research/stable-input-v1-20261109（candidate-source、observer-candidate-source、diagnostic-source01、synthetic-build02）。候选只隔离诊断defaultoff/NOT_ADMITTED，产品src/UI/default/旧锐化封存不动。当前CANDIDATE_IMPLEMENTED_SYNTHETIC_PASS / NATIVE_PAIR_PENDING_COMPANY，本批停止扩窗。最终Git交付身份由实际push读回。
+
+---
+
+## 以下保留原历史检查点，不回写旧未知/失败状态
+
 # 当前检查点：H1实际共享槽消费获支持（2026-11-09）
 
 从4c322975/0750a014接续。预执行方案/工具50836e58已冻结并通过无RAW门禁；优化清单与旧obj的377个.text段逐段相同，六处实际load/store PC及有效地址校验。独立H1批次两进程PID28120/8736，各一次Open/Unpack/Process/MemoryImage，86事件/进程，未截断无UNKNOWN，不采整图、不重比P5/P6。第二进程C2(7461,506)serial min34；tileA(top3,left7443,thread24408)实际G store62，tileB(top499,left7443,thread25752)复制/初次LIM/重算LIM共11次实际load消费62，上界119不变。消费值来自真实后指令寄存器，非peek或缓存宏参数。H1 SUPPORTED_IN_OBSERVED_EXECUTION_WINDOW，原故障ROOT_CAUSE_OPEN/NOT_FIXED；调试器强扰动，不证明全部旧差异或O_first。第一进程本窗口未见可区分污染不能全局反证。旧consumed证据hash保持，新consumed2/remaining0不追加第三次。F2收口，V1封存。见h1-window-20261109/REPORT.md、ANALYSIS、POSITIVE_EVENT_WITNESSES与重叠图。

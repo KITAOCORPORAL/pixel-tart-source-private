@@ -1,0 +1,55 @@
+{
+  "version": "StableInputV1SourceParityV1",
+  "baselineCommit": "701306788438c1d295541479ea0b1359e7cc85d8",
+  "reviewed7Files": [
+    {
+      "path": "src/postprocessing/dcraw_process.cpp",
+      "baseline": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458",
+      "candidate": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458",
+      "intentionallyChanged": false
+    },
+    {
+      "path": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "baseline": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f",
+      "candidate": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f",
+      "intentionallyChanged": false
+    },
+    {
+      "path": "src/preprocessing/raw2image.cpp",
+      "baseline": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130",
+      "candidate": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130",
+      "intentionallyChanged": false
+    },
+    {
+      "path": "src/demosaic/xtrans_demosaic.cpp",
+      "baseline": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc",
+      "candidate": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+      "intentionallyChanged": true
+    },
+    {
+      "path": "src/preprocessing/subtract_black.cpp",
+      "baseline": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544",
+      "candidate": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544",
+      "intentionallyChanged": false
+    },
+    {
+      "path": "src/utils/utils_libraw.cpp",
+      "baseline": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a",
+      "candidate": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a",
+      "intentionallyChanged": false
+    },
+    {
+      "path": "src/demosaic/ahd_demosaic.cpp",
+      "baseline": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232",
+      "candidate": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232",
+      "intentionallyChanged": false
+    }
+  ],
+  "allOther6ObserverSourcesUnchanged": true,
+  "observerHeaderSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "fixedT": 512,
+  "fixedSchedule": "dynamic",
+  "rawCalls": 0,
+  "candidateDLLBuilt": false,
+  "realLibRawHeaderSyntaxExitCode": 0
+}
