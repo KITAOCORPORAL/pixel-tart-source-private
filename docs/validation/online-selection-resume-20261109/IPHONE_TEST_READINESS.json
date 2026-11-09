@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "processId": 38964,
+  "steps": [
+    {
+      "check": "collection database migrated",
+      "pass": true
+    },
+    {
+      "check": "unconfirmed protected phone gallery ready",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS HTML entry returned 200",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS authorized gallery returned 200",
+      "pass": true
+    },
+    {
+      "check": "phone album is unconfirmed and editable",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS protected preview returned 200",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS preview is an actual decodable JPEG",
+      "pass": true
+    }
+  ]
+}

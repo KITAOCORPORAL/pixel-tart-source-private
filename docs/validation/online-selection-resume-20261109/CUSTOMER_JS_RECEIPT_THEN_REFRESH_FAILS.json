@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "mode": "receipt-then-refresh-fails",
+  "browser": false,
+  "safari": false,
+  "checks": [
+    "confirmation remains successful based on persisted server receipt even when subsequent requests fail"
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/media-session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/assets",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/choices/b7442564-f4fe-428b-b88a-fe8abb225795",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/choices/b7442564-f4fe-428b-b88a-fe8abb225795",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/choices/b7442564-f4fe-428b-b88a-fe8abb225795",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/10f8e34cac790cb3ba1ae55d39e4ddb562ed/confirm",
+      "status": 200
+    }
+  ]
+}

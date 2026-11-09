@@ -60,6 +60,8 @@ public sealed class OnlineSelectionPersistenceWpfTests
         Assert.IsTrue(reopenedAsset.IsFavorite);
         Assert.AreEqual("客户备注", reopenedAsset.CustomerNote);
         Assert.AreEqual("已选 1/8", workspace.ProjectPage.SelectionSummary);
+        StringAssert.Contains(workspace.ProjectPage.ConfirmationReceiptText, "服务器回执");
+        StringAssert.Contains(workspace.ProjectPage.ConfirmationReceiptText, $"v{result.SelectionVersion} / r{result.Revision}");
     }
 
     [TestMethod]

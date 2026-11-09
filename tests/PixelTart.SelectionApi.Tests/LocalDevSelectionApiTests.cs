@@ -96,6 +96,15 @@ public sealed class LocalDevSelectionApiTests
         Assert.HasCount(1, confirmed.Items);
         Assert.IsTrue(confirmed.Items[0].Selected);
         Assert.AreEqual("保留这张", confirmed.Items[0].CustomerNote);
+        var publish = await host.PostAuthorizedAsync<LocalDevPublishResponse>(
+            $"{SelectionApiRouteNames.Projects}/{created.Project.Id}/publish", created.DevAccessToken, null);
+        var customerReceipt = await host.GetAuthorizedAsync<LocalDevPublicProjectResponse>(
+            $"{SelectionApiRouteNames.ClientProjects}/{created.Project.PublicId}", publish.DevAccessToken);
+        Assert.IsNotNull(customerReceipt.Confirmation);
+        Assert.AreEqual(confirmed.ProjectId, customerReceipt.Confirmation.ProjectId);
+        Assert.AreEqual(confirmed.Revision, customerReceipt.Confirmation.Revision);
+        Assert.AreEqual(confirmed.ConfirmedAtUtc, customerReceipt.Confirmation.ConfirmedAtUtc);
+        Assert.AreEqual(confirmed.Items.Single().ImageId, customerReceipt.Confirmation.Items.Single().ImageId);
 
         var locked = await host.PutAuthorizedRawAsync(
             $"{SelectionApiRouteNames.ClientProjects}/{created.Project.PublicId}/choices/{asset.SelectionAssetId}", created.DevAccessToken,

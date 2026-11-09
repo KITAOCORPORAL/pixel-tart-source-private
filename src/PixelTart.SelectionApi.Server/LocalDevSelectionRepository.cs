@@ -537,6 +537,17 @@ public sealed class LocalDevSelectionRepository
     {
         var project = await WithProjectAsync(projectId, token, false, cancellationToken).ConfigureAwait(false);
         if (!project.IsLocked) throw new SelectionApiException(404, "FinalSelectionUnavailable", "The customer has not confirmed the current selection.");
+        return await ReadConfirmedSnapshotAsync(projectId, cancellationToken).ConfigureAwait(false);
+    }
+
+    public async Task<LocalDevSnapshotRecord?> GetPublicConfirmationAsync(Guid projectId, string token, CancellationToken cancellationToken = default)
+    {
+        var project = await WithProjectAsync(projectId, token, true, cancellationToken).ConfigureAwait(false);
+        return project.IsLocked ? await ReadConfirmedSnapshotAsync(projectId, cancellationToken).ConfigureAwait(false) : null;
+    }
+
+    private async Task<LocalDevSnapshotRecord> ReadConfirmedSnapshotAsync(Guid projectId, CancellationToken cancellationToken)
+    {
         await using var connection = await OpenAsync(cancellationToken).ConfigureAwait(false);
         var command = connection.CreateCommand();
         command.CommandText = "SELECT SelectionVersion,Revision,ConfirmedAtUtc,ItemsJson,IsLocked FROM SelectionSnapshots WHERE ProjectId=$project ORDER BY SelectionVersion DESC LIMIT 1;";

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "nativeWindow": true,
+  "appPid": 37928,
+  "assetId": "3c063a92-0eaf-4f5b-9ec5-9f21245a0262",
+  "projectId": "4326bad2-e530-4560-872d-8bb5f44e8b05",
+  "checks": [
+    "Native create project dialog accepted name, customer and target count",
+    "Native file picker selected synthetic JPEG",
+    "Actual proxy JPEG generated",
+    "Native publish button created project and uploaded proxy",
+    "Published project and service-issued protected URL persisted"
+  ]
+}

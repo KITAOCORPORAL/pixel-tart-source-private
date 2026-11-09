@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "nativeRevokeButton": true,
+  "http": [
+    {
+      "path": "/s/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 404
+    },
+    {
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 404
+    }
+  ]
+}

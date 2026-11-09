@@ -224,7 +224,7 @@ public sealed class HttpOnlineSelectionProvider : IOnlineSelectionProvider, IDis
     private static SelectionFinalResult ToResult(FinalSelectionSnapshotResponse snapshot) => new(snapshot.ProjectId, snapshot.ConfirmedAtUtc,
         snapshot.Items.Select(item => new SelectionFinalItem(item.SelectionProjectId, item.ImageId, item.OriginalFileName,
             item.Selected, item.Favorite, item.CustomerNote, item.ExtraSelected) { SourceAssetId = item.SourceAssetId }).ToArray())
-    { SelectionVersion = snapshot.SelectionVersion, IsLocked = snapshot.IsLocked };
+    { SelectionVersion = snapshot.SelectionVersion, Revision = snapshot.Revision, IsLocked = snapshot.IsLocked };
 
     private void UpdateAccess(SelectionProjectResponse project, LocalDevSelectionAccess existing) =>
         _access[project.Id] = existing with { PublicId = project.PublicId, SelectionVersion = project.SelectionVersion, Revision = project.Revision };

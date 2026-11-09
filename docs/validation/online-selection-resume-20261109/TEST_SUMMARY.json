@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "suites": [
+    {
+      "suite": "api",
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "trx_sha256": "dc4d3fc51dda89572168fcf5f1fcb6f1dbc6c3ccc52748a62a1ece0640dfc104"
+    },
+    {
+      "suite": "core",
+      "total": 37,
+      "passed": 37,
+      "failed": 0,
+      "trx_sha256": "958c277f7ababa4296ba3e82c544696a4d329f540f2f3c5d1e72c43c015efeb4"
+    },
+    {
+      "suite": "wpf",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "trx_sha256": "9874787666be1720991254db888eb8470b0370ee94da829d0d8dcd071ec89d1c"
+    }
+  ],
+  "passed": 71,
+  "native_app": true,
+  "safari_device": false
+}

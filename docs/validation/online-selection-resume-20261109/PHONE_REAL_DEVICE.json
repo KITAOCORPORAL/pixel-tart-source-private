@@ -1,0 +1,15 @@
+{
+  "status": "WAITING_FOR_USER",
+  "device": "iPhone 13",
+  "browser": "Safari",
+  "projectId": "4a3648e4-5696-41b5-9932-18e776c4943b",
+  "assetId": "5898c135-510e-44c8-86d8-4c43649378f6",
+  "syntheticImage": "PHONE_TEST.JPG",
+  "clientUrlFile": "artifacts/online-selection-http/iphone13-safari/PHONE_URL.txt",
+  "serverEntry": "Tailscale HTTPS -> 127.0.0.1:17649",
+  "requiredNetwork": "same tailnet",
+  "phoneSelectionSubmittedByAgent": false,
+  "humanResult": null,
+  "serverConfirmation": null,
+  "acceptanceRule": "Need user report of visible image, selection, successful server receipt; then PC refresh, reopen and matching collection verification. Automated JS and native PC album results do not count as Safari evidence."
+}

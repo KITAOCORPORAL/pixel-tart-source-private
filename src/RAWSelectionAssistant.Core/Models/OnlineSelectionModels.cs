@@ -189,6 +189,7 @@ public sealed record SelectionFinalResult(
     IReadOnlyList<SelectionFinalItem> Items)
 {
     public int SelectionVersion { get; init; } = 1;
+    public long Revision { get; init; }
     public bool IsLocked { get; init; } = true;
 }
 

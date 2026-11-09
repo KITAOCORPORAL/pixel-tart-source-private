@@ -41,8 +41,8 @@
                         </TextBlock>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" />
-                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" HorizontalAlignment="Right" />
+                        <CheckBox Content="客户已选" IsChecked="{Binding IsSelected, Mode=OneWay}" IsHitTestVisible="False" Focusable="False" />
+                        <CheckBox Content="客户收藏" IsChecked="{Binding IsFavorite, Mode=OneWay}" IsHitTestVisible="False" Focusable="False" HorizontalAlignment="Right" />
                     </Grid>
                 </Grid>
             </Border>
@@ -103,6 +103,7 @@
                             <TextBlock Text="{Binding Project.Name, TargetNullValue=在线选片项目}" Style="{StaticResource SectionTitleText}" />
                             <ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/><TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
                             <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Style="{StaticResource SecondaryBodyText}" />
+                            <TextBlock Text="{Binding ConfirmationReceiptText}" TextWrapping="Wrap" Style="{StaticResource MinimumCaptionText}" />
                         </StackPanel>
                         <TextBlock Text="{Binding ProjectStatusText}" HorizontalAlignment="Right" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center" />
                     </Grid>

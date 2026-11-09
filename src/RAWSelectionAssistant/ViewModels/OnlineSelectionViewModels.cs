@@ -167,7 +167,8 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
     public IOnlineSelectionProvider Provider => _provider;
     public SelectionProject? Project { get => _project; private set { if (SetProperty(ref _project, value)) { OnPropertyChanged(nameof(IsProjectOpen)); OnPropertyChanged(nameof(ProjectStatusText)); RefreshCommandStates(); } } }
     public SelectionRule? Rule { get => _rule; private set => SetProperty(ref _rule, value); }
-    public SelectionFinalResult? FinalResult { get => _finalResult; private set { if (SetProperty(ref _finalResult, value)) RefreshCommandStates(); } }
+    public SelectionFinalResult? FinalResult { get => _finalResult; private set { if (SetProperty(ref _finalResult, value)) { OnPropertyChanged(nameof(ConfirmationReceiptText)); RefreshCommandStates(); } } }
+    public string ConfirmationReceiptText => FinalResult is null ? "等待客户确认" : $"服务器回执 · v{FinalResult.SelectionVersion} / r{FinalResult.Revision} · {FinalResult.ConfirmedAtUtc.ToLocalTime():yyyy-MM-dd HH:mm:ss}";
     public OnlineSelectionProjectTab SelectedTab { get => _selectedTab; private set { if (SetProperty(ref _selectedTab, value)) { OnPropertyChanged(nameof(SelectedTabText)); } } }
     public string SelectedTabText => SelectedTab switch
     {
@@ -433,7 +434,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
             if (!response.Success || response.Value is null) { StatusText = response.Message; return; }
             var assets = Assets.Select(item => item.ToModel()).ToArray();
             SelectionHttpWorkflow.ValidateFinal(Project, assets, response.Value);
-            if (FinalResult is not null && response.Value.SelectionVersion < FinalResult.SelectionVersion) throw new InvalidDataException("服务返回了过期结果。");
+            if (FinalResult is not null && (response.Value.SelectionVersion < FinalResult.SelectionVersion || (response.Value.SelectionVersion == FinalResult.SelectionVersion && response.Value.Revision < FinalResult.Revision))) throw new InvalidDataException("服务返回了过期结果。");
             Project = Project with { Status = SelectionProjectStatus.ClientConfirmed };
             await ApplyFinalResultAsync(response.Value, cancellationToken);
             if (WriteCollectionProjectAsync is not null)

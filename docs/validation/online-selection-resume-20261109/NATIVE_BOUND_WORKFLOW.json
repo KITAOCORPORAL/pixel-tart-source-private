@@ -1,0 +1,46 @@
+{
+  "checks": [
+    "Opened corresponding project from native project history",
+    "Workflow displayed customer-selected filename"
+  ],
+  "readback": [
+    {
+      "name": "当前工作区 · 归片工作区",
+      "type": "ControlType.Text",
+      "offscreen": false
+    },
+    {
+      "name": "归片工作区",
+      "type": "ControlType.Button",
+      "offscreen": false
+    },
+    {
+      "name": "PHONE_TEST.JPG",
+      "type": "ControlType.Custom",
+      "offscreen": false
+    },
+    {
+      "name": "PHONE_TEST.JPG",
+      "type": "ControlType.Text",
+      "offscreen": false
+    },
+    {
+      "name": "PHONE_TEST",
+      "type": "ControlType.Custom",
+      "offscreen": false
+    },
+    {
+      "name": "PHONE_TEST",
+      "type": "ControlType.Text",
+      "offscreen": false
+    },
+    {
+      "name": "项目已载入，可继续工作。",
+      "type": "ControlType.Text",
+      "offscreen": false
+    }
+  ],
+  "appPid": 10556,
+  "nativeWindow": true,
+  "status": "PASS"
+}

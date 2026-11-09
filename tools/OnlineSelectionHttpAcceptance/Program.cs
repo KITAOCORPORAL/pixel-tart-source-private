@@ -42,6 +42,7 @@ internal static class Program
                 else if (args[0] == "reopen") await Reopen();
                 else if (args[0] == "seed") await Seed();
                 else if (args[0] == "collect") await Collect();
+                else if (args[0] == "phone-status") await PhoneStatus();
                 else throw new ArgumentException("Expected roundtrip or reopen.");
                 exit = 0;
                 await File.WriteAllTextAsync(Path.Combine(Root, args[0] + "-receipt.json"), JsonSerializer.Serialize(new { status = "PASS", processId = Environment.ProcessId, steps = Receipts }, Json));
@@ -164,6 +165,8 @@ internal static class Program
         await Request(HttpMethod.Put, clientStem + "/choices/" + asset.Id, clientToken, new { selected = false, favorite = false, expectedSelectionVersion = version, expectedRevision = choice.GetProperty("revision").GetInt64(), operationId = Guid.NewGuid().ToString("N") }, expected: 409);
         await vm.ProjectPage.RefreshResultsAsync();
         Check(vm.ProjectPage.FinalResult?.Items.Single().Selected == true, "desktop refresh read actual customer confirmation");
+        Check(vm.ProjectPage.FinalResult!.Revision == confirmed.GetProperty("revision").GetInt64(), "desktop persisted exact server confirmation revision");
+        Check(vm.ProjectPage.ConfirmationReceiptText.Contains("服务器回执"), "PC presents server receipt to photographer");
         var collection = (await repository.ListAsync()).Single(item => item.Id == project.CollectionProjectId);
         Check(collection.SelectionInputs.SequenceEqual(new[] { asset.OriginalFileName }), "confirmed filenames written to bound collection project");
         Check((await repository.ListAsync()).Single(item => item.Id == sentinel.Id).SelectionInputs.SequenceEqual(new[] { "DO_NOT_CHANGE.JPG" }), "unrelated collection project unchanged");
@@ -191,7 +194,7 @@ internal static class Program
     }
     private static async Task Seed()
     {
-        var source = Path.Combine(Root, "PHONE_TEST.JPG"); Fixture(source);
+        var source = Path.Combine(Root, "PHONE_TEST.JPG"); if (!File.Exists(source)) Fixture(source);
         var repository = await Repository(); using var provider = Provider(); var vm = Workspace(provider, repository);
         await vm.RefreshAsync();
         if (vm.Projects.Count > 0) await vm.OpenProjectAsync(vm.Projects.Single());
@@ -212,6 +215,21 @@ internal static class Program
         api.Headers.Add("X-PixelTart-Dev-Token", clientToken);
         using var response = await phone.SendAsync(api);
         Check(response.IsSuccessStatusCode, "phone HTTPS authorized gallery returned 200");
+        var publicView = JsonDocument.Parse(await response.Content.ReadAsStringAsync()).RootElement;
+        Check(!publicView.GetProperty("isLocked").GetBoolean(), "phone album is unconfirmed and editable");
+        var clientStem = "/v1/client/selection/" + vm.ProjectPage.Project.PublicId;
+        using var mediaRequest = new HttpRequestMessage(HttpMethod.Post, new Uri(issuedUrl, clientStem + "/media-session"));
+        mediaRequest.Headers.Add("X-PixelTart-Dev-Token", clientToken);
+        using var mediaResponse = await phone.SendAsync(mediaRequest);
+        mediaResponse.EnsureSuccessStatusCode();
+        var mediaToken = JsonDocument.Parse(await mediaResponse.Content.ReadAsStringAsync()).RootElement.GetProperty("token").GetString();
+        using var imageRequest = new HttpRequestMessage(HttpMethod.Get, new Uri(issuedUrl, clientStem + "/assets/" + vm.ProjectPage.Assets.Single().Id + "/preview"));
+        imageRequest.Headers.Add("X-PixelTart-Media-Token", mediaToken);
+        using var imageResponse = await phone.SendAsync(imageRequest);
+        Check(imageResponse.IsSuccessStatusCode, "phone HTTPS protected preview returned 200");
+        using var imageBytes = new MemoryStream(await imageResponse.Content.ReadAsByteArrayAsync());
+        var preview = BitmapDecoder.Create(imageBytes, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad).Frames[0];
+        Check(preview.PixelWidth > 0 && preview.PixelHeight > 0, "phone HTTPS preview is an actual decodable JPEG");
         await File.WriteAllTextAsync(Path.Combine(Root, "identity.json"), JsonSerializer.Serialize(new { projectId = vm.ProjectPage.Project!.Id, collectionId = vm.ProjectPage.Project.CollectionProjectId, assetId = vm.ProjectPage.Assets.Single().Id }, Json));
     }
 
@@ -225,6 +243,18 @@ internal static class Program
         Check(project.SelectionInputs.SequenceEqual(new[] { "PHONE_TEST.JPG" }), "web client result persisted to bound collection project");
     }
 
+    private static async Task PhoneStatus()
+    {
+        using var provider = Provider();
+        var store = new JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile);
+        var snapshot = await store.LoadAsync(); var project = snapshot.Projects.Single();
+        var progress = await provider.GetSelectionProgressAsync(project.Id);
+        var final = await provider.GetFinalSelectionAsync(project.Id);
+        Console.WriteLine(JsonSerializer.Serialize(new { projectId = project.Id, progress = progress.Value,
+            confirmed = final.Success, serverReceipt = final.Value,
+            deviceResult = "Awaiting user report: iPhone 13 Safari; server confirmation alone does not establish client device identity." }, Json));
+    }
+
     private static async Task Reopen()
     {
         using var provider = Provider(); var repository = await Repository(); var vm = Workspace(provider, repository);
@@ -232,6 +262,7 @@ internal static class Program
         await vm.OpenProjectAsync(vm.Projects.Single());
         Check(vm.ProjectPage.FinalResult?.Items.Single().Selected == true && vm.ProjectPage.Assets.Single().IsSelected, "new process restored confirmed result and checkbox state");
         Check(provider.GetClientUrl(vm.ProjectPage.Project!.Id) is not null, "new process decrypted persisted service access");
+        Check(vm.ProjectPage.FinalResult!.Revision > 0 && vm.ProjectPage.ConfirmationReceiptText.Contains("服务器回执"), "new process restored exact server receipt revision");
         await vm.ProjectPage.RefreshResultsAsync();
         Check(vm.ProjectPage.StatusText.Contains("写入对应归片项目"), "new process re-fetched and wrote collection via actual command");
         var projects = await repository.ListAsync();

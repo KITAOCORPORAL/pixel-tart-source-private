@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "Gracefully closed original complete App",
+    "Started different process with same isolated workspace",
+    "Reopened exact selection project",
+    "Native selected count restored to 1/1",
+    "Exact server receipt version and revision restored"
+  ],
+  "status": "PASS",
+  "oldPid": 37928,
+  "nativeWindow": true,
+  "newPid": 10556
+}

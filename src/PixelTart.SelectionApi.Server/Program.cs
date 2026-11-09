@@ -211,7 +211,11 @@ public partial class Program
             var project = await repository.GetPublicProjectAsync(publicId, AccessToken(request), token).ConfigureAwait(false);
             var rule = await repository.GetPublicRuleAsync(project.Id, AccessToken(request), token).ConfigureAwait(false);
             var progress = await repository.GetProgressAsync(project.Id, AccessToken(request), true, token).ConfigureAwait(false);
-            return Results.Ok(new LocalDevPublicProjectResponse(ToProjectResponse(project), rule, progress, project.IsLocked));
+            var confirmation = await repository.GetPublicConfirmationAsync(project.Id, AccessToken(request), token).ConfigureAwait(false);
+            return Results.Ok(new LocalDevPublicProjectResponse(ToProjectResponse(project), rule, progress, project.IsLocked)
+            {
+                Confirmation = confirmation is null ? null : ToSnapshotResponse(confirmation)
+            });
         });
 
         app.MapGet(SelectionApiRouteNames.ClientAssets, async (string publicId, string? cursor, int? limit, HttpRequest request, LocalDevSelectionRepository repository, CancellationToken token) =>

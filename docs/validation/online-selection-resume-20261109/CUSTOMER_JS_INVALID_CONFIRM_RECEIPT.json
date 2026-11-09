@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "mode": "invalid-confirm-receipt",
+  "browser": false,
+  "safari": false,
+  "checks": [
+    "HTTP 200 with wrong project receipt was rejected",
+    "customer remains able to retry, not falsely confirmed"
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc/media-session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc/assets",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc/choices/ec2bc798-e3ae-455e-ab36-7d8122bcdb90",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc/choices/ec2bc798-e3ae-455e-ab36-7d8122bcdb90",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc/choices/ec2bc798-e3ae-455e-ab36-7d8122bcdb90",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/d5a6b1adeb2903791a8671b13a6a8e1b1bfc",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "runtime": "v26.1.0",
+  "browser": false,
+  "safari": false,
+  "mode": "normal",
+  "checks": [
+    "shipped JS loaded protected gallery",
+    "fragment token removed from location",
+    "three toggles use distinct acknowledged operation IDs",
+    "validated server receipt locks checkboxes",
+    "reload restores selected and confirmed state"
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/media-session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/assets",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/choices/3c063a92-0eaf-4f5b-9ec5-9f21245a0262",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/choices/3c063a92-0eaf-4f5b-9ec5-9f21245a0262",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/choices/3c063a92-0eaf-4f5b-9ec5-9f21245a0262",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/confirm",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/media-session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/c18bc1eeee93510ab7cf915669b397332903/assets",
+      "status": 200
+    }
+  ]
+}

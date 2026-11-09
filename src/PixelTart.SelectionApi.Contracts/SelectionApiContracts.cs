@@ -58,7 +58,10 @@ public sealed record LocalDevPublishResponse(Guid ProjectId, string PublicId, st
 {
     public string? ClientUrl { get; init; }
 }
-public sealed record LocalDevPublicProjectResponse(SelectionProjectResponse Project, SelectionRuleResponse Rule, SelectionProgressResponse Progress, bool IsLocked);
+public sealed record LocalDevPublicProjectResponse(SelectionProjectResponse Project, SelectionRuleResponse Rule, SelectionProgressResponse Progress, bool IsLocked)
+{
+    public FinalSelectionSnapshotResponse? Confirmation { get; init; }
+}
 public sealed record SelectionRuleResponse(int TargetCount, int MinimumCount, int MaximumCount, bool AllowExtraSelections, bool AllowComments, bool AllowFavorites, bool AllowDownload, bool ShowFileNames, bool ApplyWatermark, DateTimeOffset? DeadlineUtc, bool RequirePin, bool LockAfterConfirmation)
 {
     public DateTimeOffset? AccessExpiresAtUtc { get; init; }

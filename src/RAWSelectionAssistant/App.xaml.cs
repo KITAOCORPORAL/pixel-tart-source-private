@@ -365,6 +365,17 @@ public partial class App : Application
 
             StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
+            if (e.Args.Contains("--online-selection", StringComparer.Ordinal))
+            {
+                _mainViewModel.NavigateCommand.Execute("OnlineSelection");
+                await onlineSelectionPage.RefreshAsync();
+                var projectArgument = e.Args.FirstOrDefault(argument => argument.StartsWith("--selection-project=", StringComparison.Ordinal));
+                if (Guid.TryParse(projectArgument?["--selection-project=".Length..], out var selectionProjectId))
+                {
+                    var selected = onlineSelectionPage.Projects.FirstOrDefault(item => item.Project.Id == selectionProjectId);
+                    if (selected is not null) await onlineSelectionPage.OpenProjectAsync(selected);
+                }
+            }
             StartupStage("09 Restore Session");
 #if PHOTOGRAPHER_TRIAL
             _mainViewModel.NavigateCommand.Execute("ReferenceColor");
