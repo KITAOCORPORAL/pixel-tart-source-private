@@ -1,3 +1,9 @@
+# 当前检查点：F2窄复核关闭（2026-11-09）
+
+修复提交64d4dc6edf46de8b19897a912bfa070f8f70dcc4已固定。仅三个研究原反例与一个正常对照4项通过；F2 CLOSED_IN_REVIEW_SCOPE，F1/F3沿用fcd4f4f9，不重复研究。H1仍UNKNOWN，待真实P5/serial-ready/P6收据，串行先差则先追串行。见f2-closure-20261109。新增RAW/GPU/native执行0，V1封存。
+
+---
+
 # 当前检查点：08bfae4a F1/F2/F3 复审（2026-11-09，Europe/Helsinki）
 
 固定08bfae4a6e311609c95784e8373bead711d9997c，复验71ba977a的三个具体问题。7份最终生成源码精确重生成匹配；header SHA ce42b2ef...d1f718。F1通过：P1只写quality=-1、不读未赋值局部。F3通过：serial-ready四槽/allhex/CIELab lookup/有效矩阵先差时均保留XTRANS-serial-ready，H1不归因。F2仍需修正：22拒绝反例中19拒绝；CIELab矩阵移至P6后、allhex移至P5前、重复JSON quality成员在两侧同时存在时仍接受并报effectiveInputEqual=true。50项行为观察，不是50项准入通过。新RAW/GPU/native init/原生或托管构建均0，V1封存；H1实际team和共享槽消费值UNKNOWN。见raw-reopen-001-contract-20261104/revision-review-20261109/REPORT.md及VERDICT.json。未改产品，不新增额度。

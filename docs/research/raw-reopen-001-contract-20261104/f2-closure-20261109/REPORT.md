@@ -1,0 +1,11 @@
+# F2 修复提交窄复核
+
+固定修复提交64d4dc6edf46de8b19897a912bfa070f8f70dcc4，基于诊断c156bb83；研究前次复审fcd4f4f9。代码从实际修复提交导出到独立只读快照，比较器和复核器精确SHA见FIX_BINDING.json。
+
+本次收到修复提交后只运行三个原反例及一个正常对照，4项全部通过：原CIELab有效矩阵移到P6之后拒绝、原allhex移到P5之前拒绝、原quality重复JSON成员拒绝；正常输入仍比较相同。原研究文件逐字节SHA先校验。没有重复F1/F3研究、没有增加RAW/GPU/native执行。产品提交前额外35项验收/38项回归是实现侧证据，不混算为本次窄复核。
+
+F2在本次合同范围内关闭。F1/F3沿用fcd4f4f9通过结论。原始RAW故障仍NOT_FIXED，H1的真实并行team及共享槽消费值仍UNKNOWN。后续运行先比较P5、XTRANS-serial-ready、P6；若串行阶段先差，不归因为并行tile。
+
+补丁使CIELab lookup、紧随的三行有效矩阵、allhex严格处在P5 payload之后与serial-ready state/payload之前；重复对象成员在JSON.parse覆盖前被拒绝，四种记录/身份输入均经该解析检查。原schema、记录唯一性、身份检查保留。没有改观测header或生成CPP；其身份仍为前次通过的R2，具体native自检和新批次收据必须另行绑定。
+
+复现固定提交导出的 F2-Comparison.Tests.mjs，输入原研究independent-tests-final和SYNTHETIC_EVIDENCE_HASHES.json，指定新结果目录及最后参数review。真实运行事实尚未到达，不以本收据替代native自检或RAW复现。V1锐化继续封存。

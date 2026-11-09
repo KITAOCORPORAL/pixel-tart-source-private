@@ -1,0 +1,16 @@
+{
+  "fixCommit": "64d4dc6edf46de8b19897a912bfa070f8f70dcc4",
+  "files": [
+    {
+      "path": "tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "sha256": "c10c53f9e2c53a1174863e11d7906ea6a7e93932685127ea9a868f40ac3b7612",
+      "bytes": 17134
+    },
+    {
+      "path": "tools/RawNativeInternalProbe/F2-Comparison.Tests.mjs",
+      "sha256": "7adb4c1a3ac7790e2de87b3c3aefe4d7bcc513c678af42364b09706f283f2694",
+      "bytes": 5229
+    }
+  ],
+  "scope": "Only three original counterexamples and normal control after fix commit"
+}

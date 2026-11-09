@@ -1,0 +1,30 @@
+{
+  "version": "RAW-REOPEN-001-F2AcceptanceV1",
+  "mode": "review",
+  "comparisonSha256": "c10c53f9e2c53a1174863e11d7906ea6a7e93932685127ea9a868f40ac3b7612",
+  "researchEvidenceSha256": "347f2fcae1fe5bb8d801fd1a7bc9a57aa0b47814739f52cc1c5eb1a8eca17b2c",
+  "cases": [
+    {
+      "name": "normal original research control",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: CIELab matrix after P6",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: allhex before P5",
+      "status": "PASS"
+    },
+    {
+      "name": "original counterexample rejects: duplicate JSON quality member",
+      "status": "PASS"
+    }
+  ],
+  "passed": 4,
+  "newRawCalls": 0,
+  "newGPUCalls": 0,
+  "newNativeInit": 0,
+  "sourceScope": "comparison only; original research fixture bytes verified",
+  "status": "F2_THREE_ORIGINAL_COUNTEREXAMPLES_AND_NORMAL_CONTROL_PASS"
+}
