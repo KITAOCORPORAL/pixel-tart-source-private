@@ -20,11 +20,12 @@ public sealed partial class FreeCanvasView : UserControl
     private readonly Border _floatingBorder = new() { Padding=new(4),CornerRadius=new(6),HorizontalAlignment=HorizontalAlignment.Left,VerticalAlignment=VerticalAlignment.Top };
     private readonly Border _drawer = new() { Width=264,Padding=new(8),Visibility=Visibility.Visible };
     private readonly ListBox _sources = new() { SelectionMode=SelectionMode.Extended };
-    private readonly ComboBox _sourceKind = new() { ItemsSource=new[] { "素材库","灵感板","临时收集","当前项目","最近使用" },SelectedIndex=0,Margin=new(0,6,0,6) };
+    private readonly ComboBox _sourceKind = new() { ItemsSource=new[] { "素材库","灵感板","临时收集","当前项目","收藏","最近使用" },SelectedIndex=0,Margin=new(0,6,0,6) };
     private readonly TextBox _sourceSearch = new() { ToolTip="搜索素材",Margin=new(0,4,0,6) };
     private readonly Button _zoomButton = new() { Padding=new(8,5,8,5),Margin=new(2) };
     private readonly TextBox _name = new() { Width=160,Margin=new(8,2,8,2) };
     private Point? _sourceDrag;
+    private int _sourceRefresh;
     private bool _discardPending;
     private readonly Button _undoButton, _redoButton;
     private readonly Button _moreButton;
@@ -72,7 +73,8 @@ public sealed partial class FreeCanvasView : UserControl
         DockPanel.SetDock(_status,Dock.Bottom);root.Children.Add(_status);
         _drawer.SetResourceReference(BackgroundProperty,"Brush.Panel");DockPanel.SetDock(_drawer,Dock.Left);root.Children.Add(_drawer);
         var drawerPanel=new DockPanel();_drawer.Child=drawerPanel;
-        var sourceHeader=new StackPanel();sourceHeader.Children.Add(new TextBlock{Text="素材",FontWeight=FontWeights.SemiBold});sourceHeader.Children.Add(_sourceKind);sourceHeader.Children.Add(_sourceSearch);sourceHeader.Children.Add(Button("加入所选素材",()=>AddSources()));DockPanel.SetDock(sourceHeader,Dock.Top);drawerPanel.Children.Add(sourceHeader);drawerPanel.Children.Add(_sources);
+        var sourceHeader=new StackPanel();sourceHeader.Children.Add(new TextBlock{Text="素材",FontWeight=FontWeights.SemiBold});sourceHeader.Children.Add(_sourceKind);sourceHeader.Children.Add(_sourceSearch);sourceHeader.Children.Add(Button("加入所选素材",()=>AddSources()));sourceHeader.Children.Add(_favoriteButton);DockPanel.SetDock(sourceHeader,Dock.Top);drawerPanel.Children.Add(sourceHeader);drawerPanel.Children.Add(_sources);
+        InitializeFavorites();
         _sourceKind.SelectionChanged+=(_,_)=>_=RefreshSourcesAsync();_sourceSearch.TextChanged+=(_,_)=>_=RefreshSourcesAsync();
         _sources.PreviewMouseLeftButtonDown+=(_,e)=>_sourceDrag=e.GetPosition(_sources);
         _sources.PreviewMouseMove+=(_,e)=>{if(e.LeftButton!=MouseButtonState.Pressed||_sourceDrag is not Point start||(e.GetPosition(_sources)-start).Length<8)return;_sourceDrag=null;var values=_sources.SelectedItems.Cast<CanvasObject>().ToArray();if(values.Length>0)DragDrop.DoDragDrop(_sources,new DataObject("PixelTart.CanvasSources",values),DragDropEffects.Copy);};
@@ -193,9 +195,10 @@ public sealed partial class FreeCanvasView : UserControl
     }
     private async Task RefreshSourcesAsync()
     {
-        if(SourceLoader is null)return;var source=_sourceKind.SelectedItem?.ToString()??"素材库";var search=_sourceSearch.Text;
-        try{var items=await SourceLoader(source,search);if(source==_sourceKind.SelectedItem?.ToString()&&search==_sourceSearch.Text)_sources.ItemsSource=items;}
-        catch(Exception exception)when(exception is IOException or InvalidOperationException){_status.Text=$"素材暂不可用：{exception.Message}";}
+        if(SourceLoader is null)return;var generation=++_sourceRefresh;var source=_sourceKind.SelectedItem?.ToString()??"素材库";var search=_sourceSearch.Text;
+        _sources.ItemsSource=null; // Do not accept a selection from the previous filter while loading.
+        try{var items=await SourceLoader(source,search);var favorites=FavoriteLoader is null?new HashSet<CanvasFavorite>():await FavoriteLoader();if(generation==_sourceRefresh&&source==_sourceKind.SelectedItem?.ToString()&&search==_sourceSearch.Text){_favoriteIdentities=favorites;_sources.ItemsSource=items;UpdateFavoriteButton();}}
+        catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidOperationException or System.Text.Json.JsonException){_status.Text=$"素材暂不可用：{exception.Message}";}
     }
     private void AddSources(){var center=Surface.ScreenToWorld(new(Surface.ActualWidth/2,Surface.ActualHeight/2));Editor.Add(_sources.SelectedItems.Cast<CanvasObject>().Select((item,index)=>item with{X=center.X+index*24,Y=center.Y+index*24}));Surface.Focus();}
     private async Task SaveBoardAsync(bool selection,Guid? board=null)

@@ -10,6 +10,19 @@ namespace PixelTart.Modules.AssetLibrary;
 public sealed partial class AssetLibraryViewModel
 {
     public string CanvasDirectory => Path.Combine(Path.GetDirectoryName(_databasePath)!, "canvases");
+    private CanvasFavoriteStore CanvasFavorites => new(CanvasDirectory);
+    public Task<IReadOnlySet<CanvasFavorite>> LoadCanvasFavoritesAsync() => CanvasFavorites.LoadAsync(_lifetimeCancellation.Token);
+    public async Task SetCanvasFavoritesAsync(IReadOnlyList<CanvasObject> objects, bool favorite)
+    {
+        var identities = new List<CanvasFavorite>();
+        foreach (var item in objects)
+        {
+            if (!item.IsImage || item.LibraryId != _libraryIdForTray || item.AssetId is not Guid id || await _repository.GetAssetAsync(id, _lifetimeCancellation.Token) is null)
+                throw new InvalidDataException("素材不属于当前素材库，未更改收藏。");
+            identities.Add(new(item.LibraryId, id));
+        }
+        await CanvasFavorites.SetAsync(identities, favorite, _lifetimeCancellation.Token);
+    }
     public Guid CanvasLibraryId => _libraryIdForTray;
     public IVisualAnalysisService VisualAnalysisService => _visualAnalysis;
     public Task<AssetItem?> GetAssetForAnalysisAsync(Guid assetId)=>_repository.GetAssetAsync(assetId,_lifetimeCancellation.Token);
@@ -52,6 +65,11 @@ public sealed partial class AssetLibraryViewModel
             var query=new AssetLibraryQuery(PageSize:500, SearchText:search);
             var assets=new List<AssetItem>();
             do{var page=await _repository.QueryAsync(query,_lifetimeCancellation.Token);assets.AddRange(page.Items);query=query with{Cursor=page.NextCursor};}while(query.Cursor is not null);
+            if(source=="收藏")
+            {
+                var favorites=await LoadCanvasFavoritesAsync();
+                assets=assets.Where(asset=>favorites.Contains(new(_libraryIdForTray,asset.AssetId))).ToList();
+            }
             if(source=="当前项目")
             {
                 if(projectId is null)return [];

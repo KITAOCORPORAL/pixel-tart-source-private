@@ -48,6 +48,8 @@ public partial class AssetLibraryPage
         canvas.RelocateAsset=item=>item.AssetId is Guid id?_viewModel.RelocateAssetAsync(item.LibraryId,id,item.ContentHash):Task.CompletedTask;
         _canvas=canvas;
         canvas.SourceLoader=(source,search)=>_viewModel.LoadCanvasSourcesAsync(source,search,editor.Document.ProjectId);
+        canvas.FavoriteLoader=_viewModel.LoadCanvasFavoritesAsync;
+        canvas.SetFavorites=_viewModel.SetCanvasFavoritesAsync;
         canvas.SaveBoard=(objects,target)=>_viewModel.SaveCanvasBoardAsync(objects,target,editor.Document.ProjectId);
         canvas.BoardLoader=_viewModel.CanvasBoardsAsync;
         canvas.ViewAsset=async item=>
