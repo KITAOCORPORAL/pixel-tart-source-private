@@ -1,5 +1,7 @@
 # 当前检查点：稳定输入独立修复候选V1（2026-11-09，Asia/Shanghai）
 
+实现/patch/合成提交ea081ecb0930600fce9ee2e714c741fcd3c12b7e正常push exit0，创建独立远端分支。其后独立ls-remote两次443超时，当前读回未确认；工具文本换行身份修正及首次检查失败完整保留，不改候选/exe。remote记录见stable-input-v1-20261109/REMOTE_READBACK.json，最终HEAD与读回由最后Git命令报告。
+
 从701306788438c1d295541479ea0b1359e7cc85d8独立接续research/raw-xtrans-stable-input-v1-20261109。H1局部消费机制已支持，不再抓同窗；实现唯一XTransStableInputSeparateRgbV1：parallel内原image只读、RGB3输出独立，join后提交，slot3/原border8顺序保留。原插值公式/质量/512/496分块/schedule(dynamic)不改，原worker仅地址重定向，逆归一文本0差。
 
 候选及诊断observer补丁已生成，真实LibRaw头文件语法编译通过。40次候选synthetic调用对56次原算法单tile隔离oracle合并结果全四槽0差，passes1/3、请求1/2/6/重复6及双毒值，输入stable/joincommit/border/内存释放通过；另3拒绝条件，43C++checks。8准备守卫通过，3589长度/9二维末端几何证明写区连续无重叠。单tile对原版0差，多tile合成与原串行有变化，不假称Fuji基线效果。旧窗口/旧输出/收据保留。

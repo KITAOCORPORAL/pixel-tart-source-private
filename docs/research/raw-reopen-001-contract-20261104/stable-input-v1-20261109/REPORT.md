@@ -99,6 +99,6 @@ LibRaw0.21.1为LGPL2.1或CDDL1.0；patch少量上下文及抽取实际算法仍�
 
 Git按本次用户明确“提交补丁与合成验证”提交自编生成/诊断构建/无RAW测试源、小型unifiedpatch、hash/统计；完整vendor源、exe/DLL、合成完整输出与任何真实私有像素仍留授权外部目录。
 
-失败原样保留：文件创建helper初始引号错误未写出文件；首次generator拒绝CRLF时尚未生成候选，改为显式canonicalhash及rawhash分账；初build01因surrogate漏fcol无法编译，修support后新build02成功，算法patch未调参。无RAW重试，无调试器运行。
+失败原样保留：文件创建helper初始引号错误未写出文件；首次generator拒绝CRLF时尚未生成候选，改为显式canonicalhash及rawhash分账；初build01因surrogate漏fcol无法编译，修support后新build02成功，算法patch未调参。无RAW重试，无调试器运行。首次提交时，工具字节检查将4份非执行文本（许可证和.gitignore）的CRLF/LF存储差异误当执行文件漂移而拒绝；随后的PowerShell命令未随Python失败停止，已提交。该执行失误保留在FAILURES_AND_LIMITS，POST_COMMIT_BYTE_READBACK实读确认14份其它工具逐字节相同，4份仅换行差异；现分列worktree与Gitblob身份，不把原检查改写成成功，也没有改候选/补丁/exe。
 
 研究当前交付 **CANDIDATE_IMPLEMENTED_SYNTHETIC_PASS / NATIVE_PAIR_PENDING_COMPANY**。新增真实RAW/Open/Unpack/Process/MemoryImage/debugger/GPU/产品build均0；合成算法调用和编译已如实单列。原问题候选修复有效性尚待原生两次对照，不宣称完整摄影/产品通过。本批到handoff停止，不再抓H1窗口。

@@ -5,11 +5,6 @@
   "base": "701306788438c1d295541479ea0b1359e7cc85d8",
   "files": [
     {
-      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
-      "bytes": 43232,
-      "sha256": "e1e98fafd2c1c6b125575fe34c0b07cfd56633188c0f40a5855d80772fb5e384"
-    },
-    {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/.gitattributes",
       "bytes": 69,
       "sha256": "28f998aa8a90b7bc59a00ec5d13d15e606de948f47a32ab30cba5c4b9f797979"
@@ -46,8 +41,8 @@
     },
     {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/FAILURES_AND_LIMITS.json",
-      "bytes": 1694,
-      "sha256": "ea519debc0cee2c42bfe588339a7dcb3d46497c86740e283df0531af8e8fb926"
+      "bytes": 2437,
+      "sha256": "5d3e2e5ebecafd881e7e71a1672663953fa8fe24a2bfe7f5646671ab02cd4a82"
     },
     {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/FINAL_CHECKS.json",
@@ -80,6 +75,11 @@
       "sha256": "9dca32cd3e6cea7391b015d66db445e669d5560cb63f94e0da9fbfdf157326c0"
     },
     {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/POST_COMMIT_BYTE_READBACK.json",
+      "bytes": 6871,
+      "sha256": "c764c1784882681c0847efeb9ddfe706e50b0fe878fad82868f69caab8f99cd0"
+    },
+    {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/PREPARATION_TESTS.txt",
       "bytes": 920,
       "sha256": "a297b160410c68db6f914f9541de643d6d6ea670faeaddf4ba30fdbef6e83686"
@@ -90,14 +90,19 @@
       "sha256": "68a75e787ab24f9f981b44f0a00bb20c9b12e1fbbbe2fac756849c2276c8ccd6"
     },
     {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/REMOTE_READBACK.json",
+      "bytes": 885,
+      "sha256": "45fbdb25b659782f405bafb9c9bf0fe80b2ad0933a35c5745e548cf39e77f9c2"
+    },
+    {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/REPORT.md",
-      "bytes": 11808,
-      "sha256": "ec7a502071b117ffaa9ea819458b2840b0c1066f8e34c7b41f6d8fb4b499935e"
+      "bytes": 12257,
+      "sha256": "fcc87d43351251c803160f68244229205efcc7f2ce3b5cfae9c84647ea392b46"
     },
     {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/SOURCE_AND_OUTPUT_LOCK.json",
-      "bytes": 12448,
-      "sha256": "91b30ca14b3a9478eafcfdffbaae0292f9966205272b2640d4e674958b9ff71d"
+      "bytes": 17035,
+      "sha256": "6f989c6580411787fd171ec9c6714952e7f3b5fe7fcb523cc28e0c5b64332583"
     },
     {
       "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-20261109/SOURCE_PARITY.json",
@@ -223,6 +228,11 @@
       "path": "tools/raw-xtrans-stable-v1/test_preparation.py",
       "bytes": 3199,
       "sha256": "277028a4246fbf20243de3dcdd930d399a4e028d3c131a678d63cdd43049626a"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 43317,
+      "sha256": "cf45637b75d6bc3f59db418abfceb1881e1710479bb7ba627dca53beaa6fbaa8"
     }
   ],
   "newFullVendorSourceOrBinary": false,

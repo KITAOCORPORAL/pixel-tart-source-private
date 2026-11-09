@@ -1,0 +1,13 @@
+{
+  "version": "StableInputV1RemoteDeliveryReceiptV1",
+  "atAsiaShanghai": "2026-11-09T21:57:53.777690+08:00",
+  "branch": "research/raw-xtrans-stable-input-v1-20261109",
+  "implementationCommit": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+  "implementationPushCommand": "SUCCESS exit0 createdremote branch ea081ecb",
+  "independentRemoteReadback": "FAILED_NETWORK before metadata-fix commit; connect github443 timedout21081ms/21122ms",
+  "lastLocallyTrackedOriginHead": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+  "sourceByteCorrection": "POST_COMMIT_BYTE_READBACK confirms14exact tools,4nonexecutionnewlineonly; no algorithm/patch/exe drift",
+  "nativeRealRawPair": "NOT_RUN_HOME_MSVC_MISSING",
+  "newRawCalls": 0,
+  "note": "Historical network receipt at this time. Final documentation commit push/readback reported separately, no premature remote success claim."
+}
