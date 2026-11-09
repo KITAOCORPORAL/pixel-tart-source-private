@@ -4,7 +4,8 @@ namespace RAWSelectionAssistant.Core.Models;
 
 public enum OnlineSelectionProviderKind
 {
-    None
+    None,
+    LocalDev
 }
 
 public enum SelectionProjectStatus
@@ -69,7 +70,7 @@ public sealed record SelectionProject(
     Guid? CoverAssetId,
     DateTimeOffset CreatedAtUtc,
     DateTimeOffset UpdatedAtUtc,
-    string? LocalSourceDirectory = null);
+    string? LocalSourceDirectory = null){ public Guid? WorkflowProjectId { get; init; } }
 
 public sealed record SelectionAsset(
     Guid Id,
@@ -176,7 +177,7 @@ public sealed record SelectionFinalItem(
 public sealed record SelectionFinalResult(
     Guid SelectionProjectId,
     DateTimeOffset ConfirmedAtUtc,
-    IReadOnlyList<SelectionFinalItem> Items);
+    IReadOnlyList<SelectionFinalItem> Items){ public int SelectionVersion {get;init;}=1; public long Revision {get;init;} public bool IsLocked {get;init;} }
 
 public sealed record SelectionRawMatch(
     SelectionFinalItem Selection,

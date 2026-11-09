@@ -186,6 +186,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         FinancePage = financePage;
         OnlineSelectionPage = onlineSelectionPage ?? new OnlineSelectionViewModel(
             store: new Core.Services.OnlineSelection.JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile));
+        OnlineSelectionPage.ProjectPage.WorkflowHandoff = AcceptOnlineSelectionWorkflowAsync;
         RawToJpegPage = rawToJpegPage;
         BatchCompressionPage = batchCompressionPage;
         PublishingPage = publishingPage;

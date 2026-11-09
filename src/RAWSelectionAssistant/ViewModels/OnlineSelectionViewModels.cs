@@ -43,7 +43,7 @@ public sealed class OnlineSelectionAssetViewModel : ObservableObject
     public string LocalSourcePath => _asset.LocalSourcePath;
     public string? ProxyJpegPath => _asset.ProxyJpegPath;
     public SelectionAssetStatus Status => _asset.Status;
-    public string StatusText => SelectionDisplayText.AssetStatus(Status);
+    public string StatusText => Status == SelectionAssetStatus.Ready ? string.IsNullOrWhiteSpace(CloudAssetId) ? "本地代理就绪 · 未上传" : "服务已确认上传" : SelectionDisplayText.AssetStatus(Status);
     public string? CloudAssetId => _asset.CloudAssetId;
     public bool IsCover => _asset.IsCover;
     public ImageSource? Thumbnail { get => _thumbnail; private set => SetProperty(ref _thumbnail, value); }
@@ -107,7 +107,7 @@ public sealed class OnlineSelectionProjectListItemViewModel
     public string DeadlineText => Project.DeadlineUtc is null ? "未设置截止时间" : $"截止 {Project.DeadlineUtc.Value.ToLocalTime():yyyy-MM-dd}";
 }
 
-public sealed class OnlineSelectionProjectViewModel : ObservableObject
+public sealed partial class OnlineSelectionProjectViewModel : ObservableObject
 {
     private static readonly ConditionalWeakTable<ISelectionWorkspaceStore, SemaphoreSlim> StoreWriteGates = new();
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> FileStoreWriteGates = new(StringComparer.OrdinalIgnoreCase);
@@ -151,6 +151,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         PublishCommand = new AsyncRelayCommand(_ => PublishAsync(), _ => !IsBusy && IsProjectOpen);
         SyncResultsCommand = new AsyncRelayCommand(_ => ChooseAndSyncResultsAsync(), _ => !IsBusy && IsProjectOpen && FinalResult is not null);
         DeleteCloudAssetCommand = new AsyncRelayCommand(parameter => DeleteCloudAssetAsync(parameter as OnlineSelectionAssetViewModel), _ => !IsBusy && IsProjectOpen);
+        InitializeHttpCommands();
     }
 
     public ObservableCollection<OnlineSelectionAssetViewModel> Assets { get; }
@@ -202,6 +203,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         cancellationToken.ThrowIfCancellationRequested();
         Project = project;
         Rule = rule ?? SelectionRule.Default(project.Id, project.TargetCount, project.DeadlineUtc);
+        if(rule is null && _provider is IHttpOnlineSelectionWorkflow)Rule=Rule with{AllowComments=false,AllowExtraSelections=false};
         Assets.Clear();
         var recoveredInterruptedProxy = false;
         foreach (var asset in assets ?? [])
@@ -366,13 +368,17 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
     public async Task PublishAsync(CancellationToken cancellationToken = default)
     {
         if (Project is null || Rule is null) return;
+        if(_provider is IHttpOnlineSelectionWorkflow && FinalResult?.IsLocked==true){StatusText="客户已确认并锁定，不能再次发布。";return;}
         IsBusy = true;
         try
         {
             var validation = SelectionProjectValidator.ValidateForPublish(Project, Rule, Assets.Select(asset => asset.ToModel()));
             if (!validation.IsValid) { StatusText = validation.Message; return; }
             var publish = new SelectionPublish(Guid.NewGuid(), Project.Id, Project.PublicId, 1, DateTimeOffset.UtcNow, Rule.AccessExpiresAtUtc);
-            var result = await _provider.PublishProjectAsync(Project.Id, publish, cancellationToken).ConfigureAwait(true);
+            if(_provider is IHttpOnlineSelectionWorkflow && Assets.Any(asset=>asset.Status!=SelectionAssetStatus.Ready||string.IsNullOrWhiteSpace(asset.CloudAssetId))){StatusText="请先上传代理，等待服务确认后再发布。";return;}
+            var publishingProjectId=Project.Id;
+            var result = _provider is IHttpOnlineSelectionWorkflow http ? await http.PublishWithRuleAsync(Project.Id,publish,Rule,cancellationToken).ConfigureAwait(true) : await _provider.PublishProjectAsync(Project.Id, publish, cancellationToken).ConfigureAwait(true);
+            if(Project?.Id!=publishingProjectId)return;
             StatusText = result.Success ? "项目已发布；客户可通过受保护链接进入选片。" : result.Message;
             if (result.Success) Project = Project with { Status = SelectionProjectStatus.Published, UpdatedAtUtc = DateTimeOffset.UtcNow };
             await SaveAsync(cancellationToken).ConfigureAwait(true);
@@ -395,8 +401,10 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
             var result = await _syncService.SynchronizeAsync(FinalResult, rawPaths, archiveDirectory, cancellationToken).ConfigureAwait(true);
             StatusText = result.Message;
             if (result.State == SelectionSyncState.Completed) Project = Project with { Status = SelectionProjectStatus.ClientConfirmed, UpdatedAtUtc = DateTimeOffset.UtcNow };
+            if(WorkflowHandoff is not null&&FinalResult.IsLocked){var workflowId=await WorkflowHandoff(Project,FinalResult,Assets.Select(x=>x.ToModel()).ToArray(),archiveDirectory).ConfigureAwait(true);Project=Project with{WorkflowProjectId=workflowId};StatusText=result.State==SelectionSyncState.Completed?"客户结果已归档并返回对应归片项目；未执行复制。":"客户结果已归档并返回对应归片项目；RAW 匹配仍需确认，未执行复制。";}
             await SaveAsync(cancellationToken).ConfigureAwait(true);
         }
+        catch(Exception error)when(error is System.IO.IOException or UnauthorizedAccessException or InvalidOperationException){StatusText="结果同步未完成，已确认结果和原片保留："+error.Message;}
         finally { IsBusy = false; }
     }
 
@@ -540,6 +548,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         (PublishCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (SyncResultsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (DeleteCloudAssetCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        RefreshHttpCommandStates();
     }
 }
 
@@ -581,7 +590,7 @@ public sealed class OnlineSelectionViewModel : ObservableObject
             && (StatusFilter == "全部项目" || item.StatusText == StatusFilter);
         ProjectPage = new OnlineSelectionProjectViewModel(_provider, _store, _syncService,
             _proxyService, _proxyRootDirectory, _dialogs);
-        CreateProjectCommand = new RelayCommand(_ => IsCreateModalOpen = true, _ => !IsBusy);
+        CreateProjectCommand = new RelayCommand(_ => IsCreateModalOpen = true, _ => !IsBusy && !ProjectPage.IsBusy);
         CancelCreateCommand = new RelayCommand(_ => IsCreateModalOpen = false);
         CreateAndImportCommand = new AsyncRelayCommand(parameter => parameter is IEnumerable<string> paths
             ? CreateProjectAsync(paths)
@@ -591,8 +600,9 @@ public sealed class OnlineSelectionViewModel : ObservableObject
             OnlineSelectionProjectListItemViewModel item => OpenProjectAsync(item.Project),
             SelectionProject project => OpenProjectAsync(project),
             _ => Task.CompletedTask
-        }, _ => !IsBusy);
+        }, _ => !IsBusy && !ProjectPage.IsBusy);
         RefreshCommand = new AsyncRelayCommand(_ => RefreshAsync(), _ => !IsBusy);
+        ProjectPage.PropertyChanged+=(_,e)=>{if(e.PropertyName==nameof(OnlineSelectionProjectViewModel.IsBusy)){(OpenProjectCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();(CreateProjectCommand as RelayCommand)?.RaiseCanExecuteChanged();}};
     }
 
     public ObservableCollection<OnlineSelectionProjectListItemViewModel> Projects { get; }
@@ -681,7 +691,10 @@ public sealed class OnlineSelectionViewModel : ObservableObject
         {
             Projects.Add(new(project));
             SelectedProject = project;
-            await ProjectPage.OpenProjectAsync(project, SelectionRule.Default(project.Id, targetCount, project.DeadlineUtc), cancellationToken: cancellationToken).ConfigureAwait(true);
+            var initialRule=SelectionRule.Default(project.Id,targetCount,project.DeadlineUtc);
+            if(_provider is IHttpOnlineSelectionWorkflow)initialRule=initialRule with{AllowComments=false,AllowExtraSelections=false};
+            await ProjectPage.OpenProjectAsync(project, initialRule, cancellationToken: cancellationToken).ConfigureAwait(true);
+            if(_provider is IHttpOnlineSelectionWorkflow)await ProjectPage.EnsureRemoteProjectAsync(cancellationToken).ConfigureAwait(true);
             await ProjectPage.ImportAssetsAsync(selectedPaths, cancellationToken).ConfigureAwait(true);
             IsCreateModalOpen = false;
             await RefreshAsync(cancellationToken).ConfigureAwait(true);

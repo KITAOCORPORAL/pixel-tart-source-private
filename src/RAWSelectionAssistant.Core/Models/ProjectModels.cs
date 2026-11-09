@@ -12,6 +12,7 @@ public enum PhotoProjectStatus
 public sealed class PhotoProjectRecord
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid? SourceOnlineSelectionProjectId { get; set; }
     public string Name { get; set; } = string.Empty;
     public PhotoProjectStatus Status { get; set; } = PhotoProjectStatus.Draft;
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
