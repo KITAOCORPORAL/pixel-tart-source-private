@@ -58,11 +58,16 @@ public sealed class CanvasFavoriteAppAcceptanceTests
     private static async Task NativeSelectSource(MainWindow window,string name)
     {
         var handle=new WindowInteropHelper(window).Handle;
-        await Task.Run(()=>
+        await Task.Run(async()=>
         {
-            var shelf=AutomationElement.FromHandle(handle).FindFirst(TreeScope.Descendants,new PropertyCondition(AutomationElement.AutomationIdProperty,"CanvasSources"));Assert.IsNotNull(shelf);
-            var item=shelf.FindFirst(TreeScope.Descendants,new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty,ControlType.ListItem),new PropertyCondition(AutomationElement.NameProperty,name)));Assert.IsNotNull(item);
-            ((SelectionItemPattern)item.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
+            AutomationElement? item=null;var deadline=DateTime.UtcNow.AddSeconds(10);
+            while(item is null&&DateTime.UtcNow<deadline)
+            {
+                var shelf=AutomationElement.FromHandle(handle).FindFirst(TreeScope.Descendants,new PropertyCondition(AutomationElement.AutomationIdProperty,"CanvasSources"));
+                item=shelf?.FindFirst(TreeScope.Descendants,new AndCondition(new PropertyCondition(AutomationElement.ControlTypeProperty,ControlType.ListItem),new PropertyCondition(AutomationElement.NameProperty,name)));
+                if(item is null)await Task.Delay(50);
+            }
+            Assert.IsNotNull(item,"Native shelf selection ready");((SelectionItemPattern)item.GetCurrentPattern(SelectionItemPattern.Pattern)).Select();
         });
     }
     private static async Task NativeFavoriteFilter(MainWindow window)
