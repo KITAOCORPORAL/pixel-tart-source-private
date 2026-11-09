@@ -27,5 +27,4 @@
   </ItemGroup>
 
   <ItemGroup><EmbeddedResource Include="Resources/OriginalFrames/*" /><EmbeddedResource Include="Resources/InstantColor/*" /></ItemGroup>
-<ItemGroup><ProjectReference Include="../PixelTart.SelectionApi.Contracts/PixelTart.SelectionApi.Contracts.csproj" /></ItemGroup>
 </Project>

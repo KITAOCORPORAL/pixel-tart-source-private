@@ -302,7 +302,7 @@ public partial class App : Application
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService);
             var onlineSelectionPage = new OnlineSelectionViewModel(
-                OnlineSelectionProviderFactory.CreateDefault(AppDataPaths.OnlineSelectionDirectory),
+                RAWSelectionAssistant.Services.OnlineSelection.OnlineSelectionProviderConfiguration.Create(AppDataPaths.OnlineSelectionDirectory),
                 new JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile),
                 new SelectionResultSyncService(normalizer),
                 _compositionRoot.SelectionProxyJpegService,

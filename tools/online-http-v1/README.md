@@ -2,7 +2,7 @@
 
 基线37ea6c9a，旧分支349bf4006faf9b80a3691b7d9fd368271ca58ebd只读参考。复用其API DTO/route命名、LocalSelectionObjectStorage、LocalDevJpegVariantService，以及HTTP/DPAPI访问存储模式。未合并旧UI/mini-program/预览shell，也不修改旧分支或279条脏状态。新LocalDev单进程JSON仓储/角色鉴权替代旧服务的单token流程，以支持稳定ID幂等创建、独立owner/client权限、撤销/过期和确认快照。
 
-正式App默认Provider=None；只在显式进程配置PIXELTART_SELECTION_ENDPOINT（loopback HTTP或明确HTTPS根）和PIXELTART_SELECTION_OWNER_KEY（至少32字符）时选择HTTP测试适配器。App不自动启动监听器。当前首片规则支持目标/最少/最多、文件名、收藏和确认锁定；不支持收费、加选、PIN、水印、客户备注和原图下载，对这些发布请求明确拒绝，不默默忽略。
+Core默认Factory保留None且无HTTP/凭据实现；真实HTTP适配器与配置选择位于桌面Services/OnlineSelection基础设施层，原ProductionCoreContainsNoHttpLocalhostOrCredentials断言原样保留。正式App默认Provider=None；只在显式进程配置PIXELTART_SELECTION_ENDPOINT（loopback HTTP或明确HTTPS根）和PIXELTART_SELECTION_OWNER_KEY（至少32字符）时选择HTTP测试适配器。App不自动启动监听器。当前首片规则支持目标/最少/最多、文件名、收藏和确认锁定；不支持收费、加选、PIN、水印、客户备注和原图下载，对这些发布请求明确拒绝，不默默忽略。
 
 完整测试包解压后，运行Start-OnlineSelection-LocalTest.cmd：生成独立本机测试根/owner创建凭据，启动包内自包含LocalDev服务与完整诊断桌面。正常Start-Guangjing-Diagnostic.cmd仍不配置provider。停止服务用Stop-OnlineSelection-LocalTest.cmd，仅停止与本Root记录相符的PID/EXE/启动时间，不删除数据。所有凭据/链接/数据库/图片只留用户测试根，勿提交或打入包。默认不更改防火墙、DNS、系统服务或全局环境变量。
 

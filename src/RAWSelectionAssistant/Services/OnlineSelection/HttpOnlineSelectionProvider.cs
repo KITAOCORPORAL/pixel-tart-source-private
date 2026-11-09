@@ -1,3 +1,5 @@
+using System.IO;
+using System.Net.Http;
 using System.Collections.Concurrent;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -6,7 +8,8 @@ using System.Text;
 using System.Text.Json;
 using PixelTart.SelectionApi.Contracts;
 using RAWSelectionAssistant.Core.Models;
-namespace RAWSelectionAssistant.Core.Services.OnlineSelection;
+using RAWSelectionAssistant.Core.Services.OnlineSelection;
+namespace RAWSelectionAssistant.Services.OnlineSelection;
 
 /// <summary>Explicitly configured loopback HTTP/HTTPS test adapter; no listener or implicit cloud service.</summary>
 public sealed class HttpOnlineSelectionProvider : IHttpOnlineSelectionWorkflow, IDisposable

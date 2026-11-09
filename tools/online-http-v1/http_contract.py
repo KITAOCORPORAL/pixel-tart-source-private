@@ -1,7 +1,7 @@
 from pathlib import Path
 import json,uuid,urllib.request,urllib.error,hashlib,time,sys
 from PIL import Image
-base=Path('E:/Kitao-Deliveries/online-selection-http-v1-20261109');conn=json.loads((base/'dev-http01/PRIVATE_CONNECTION.json').read_text(encoding='utf-8-sig'));out=base/'http-contract01';out.mkdir(exist_ok=False)
+base=Path('E:/Kitao-Deliveries/online-selection-http-v1-20261109');conn=json.loads(Path(sys.argv[1]if len(sys.argv)>1 else base/'dev-http01/PRIVATE_CONNECTION.json').read_text(encoding='utf-8-sig'));out=base/(sys.argv[2]if len(sys.argv)>2 else'http-contract01');out.mkdir(exist_ok=False)
 p=out/'proxy.jpg';Image.new('RGB',(64,48),(225,140,60)).save(p,'JPEG',quality=85);image=p.read_bytes();requests=[]
 def request(method,path,body=None,token=None,headers=None,expected=200):
  h=dict(headers or {});data=body
