@@ -3,6 +3,19 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+// Validate member uniqueness before JSON.parse can replace an earlier member.
+// Keys are decoded before comparison, so "quality" and "qual\u0069ty" collide.
+export function parseUniqueJson(text,label='JSON'){
+ let at=0;const fail=message=>assert.fail(`${label}: ${message} at offset ${at}`);
+ const whitespace=()=>{while(at<text.length&&/[ \t\r\n]/.test(text[at]))at++;};
+ function string(){const start=at;if(text[at++]!=='"')fail('Expected string');while(at<text.length){const c=text[at++];if(c==='"')return JSON.parse(text.slice(start,at));if(c==='\\')at++;}fail('Unterminated string');}
+ function value(depth){if(depth>256)fail('JSON nesting limit');whitespace();const c=text[at];
+  if(c==='{'){at++;whitespace();const keys=new Set();if(text[at]==='}'){at++;return;}for(;;){whitespace();const key=string();if(keys.has(key))fail('Duplicate object key '+JSON.stringify(key));keys.add(key);whitespace();if(text[at++]!==':')fail('Expected colon');value(depth+1);whitespace();const separator=text[at++];if(separator==='}')return;if(separator!==',')fail('Expected comma or object end');}}
+  if(c==='['){at++;whitespace();if(text[at]===']'){at++;return;}for(;;){value(depth+1);whitespace();const separator=text[at++];if(separator===']')return;if(separator!==',')fail('Expected comma or array end');}}
+  if(c==='"'){string();return;}const token=/^(?:true|false|null|-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)/.exec(text.slice(at));if(!token)fail('Expected JSON value');at+=token[0].length;
+ }
+ value(0);whitespace();if(at!==text.length)fail('Trailing JSON input');return JSON.parse(text);
+}
 export const primaryOrder=['P1','P3b','P5','P6','P7','P9'];
 export const order=['P1','P3b','P5','XTRANS-serial-ready','P6','P7','P9'];
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -40,7 +53,7 @@ export function validateCaptureMetadata(rows){
  const p5=records.P5,p6=records.P6,serial=records['XTRANS-serial-ready'];
  const lab=named(rows,'defined-byte-span-hash','cielab-initialized-cbrt'),hex=named(rows,'defined-byte-span-hash','xtrans-fully-defined-allhex');
  between(lab,p5.p,serial.s,'CIELab initialization');between(hex,lab,serial.s,'allhex');
- const matrix=rows.filter(r=>r.kind==='float32-bits'&&r.name==='cielab-effective-xyz-cam');assert(matrix.length===3,'CIELab valid rows missing/duplicate');for(const r of matrix)between(r,lab,hex,'CIELab matrix');
+ const matrix=rows.filter(r=>r.kind==='float32-bits'&&r.name==='cielab-effective-xyz-cam');assert(matrix.length===3,'CIELab valid rows missing/duplicate');for(const r of matrix)between(r,lab,hex,'CIELab matrix');assert(matrix.every((r,i)=>at(r)===at(lab)+1+i),'CIELab rows must immediately follow their initialized lookup');
  const p8=state('P8-effective-out-cam');bound(p8);between(p8,payload('P7-audit4'),records.P9.s,'P8');
  const out=rows.filter(r=>r.kind==='float32-bits'&&r.name==='effective-out_cam-row'),bypass=rows.filter(r=>r.kind==='event'&&r.name==='out-cam');if(p8.rawColor===0){assert(out.length===3&&bypass.length===0,'out_cam rows missing/duplicate');for(const r of out)between(r,p8,records.P9.s,'out_cam');}else{assert(p8.rawColor===1&&out.length===0&&bypass.length===1&&bypass[0].phase==='not-consumed-raw-color-bypass','Explicit raw-color matrix bypass required');between(bypass[0],p8,records.P9.s,'out_cam bypass');}
  between(named(rows,'defined-byte-span-hash','P9-initialized-histogram'),payload('P9-audit4'),state('P10-after-postconvert-stretch-restore'),'P9 histogram');
@@ -110,8 +123,8 @@ function verifiedAux(root,p,rgbPair=null){
  }finally{fs.closeSync(fd);if(rgbFd!==null)fs.closeSync(rgbFd);}
 }
 export function load(root){
- const rows=fs.readFileSync(path.join(root,'native-events.jsonl'),'utf8').trim().split('\n').map(x=>JSON.parse(x));
- const result=JSON.parse(fs.readFileSync(path.join(root,'result.json'))),identity=JSON.parse(fs.readFileSync(path.join(root,'run-identity.json'))),loaded=JSON.parse(fs.readFileSync(path.join(root,'loaded-native.json')));
+ const rows=fs.readFileSync(path.join(root,'native-events.jsonl'),'utf8').trim().split('\n').map(x=>parseUniqueJson(x,'native-events.jsonl'));
+ const result=parseUniqueJson(fs.readFileSync(path.join(root,'result.json'),'utf8'),'result.json'),identity=parseUniqueJson(fs.readFileSync(path.join(root,'run-identity.json'),'utf8'),'run-identity.json'),loaded=parseUniqueJson(fs.readFileSync(path.join(root,'loaded-native.json'),'utf8'),'loaded-native.json');
  assert.equal(result.status,'completed');assert(result.zeroRaw===false&&result.error===null,'Only a successful actual RAW host capture is comparable');
  for(const k of ['nativeSha256','bindingSha256','inputSha256','preparationSha256','contractSha256','nativeSelfTestSha256','manifestSha256','hostSha256'])assert(isHash(identity[k]),'Required run identity missing: '+k);
  assert.equal(identity.sourceCommit,'cccb97647fcee56801fa68231fa8a38aa8b52ef7');assert.equal(identity.inputSha256.toUpperCase(),'52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865');assert.equal(identity.bindingSha256.toUpperCase(),'6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3');assert.equal(identity.nativeSha256.toLowerCase(),loaded.sha256.toLowerCase());assert(identity.processId===result.runtime.ProcessId&&identity.reservationId===result.reservationId&&identity.reservationId,'Run identity/owner mismatch');assert.equal(result.runtime.environment.OMP_NUM_THREADS,'6','Original effective thread environment required');for(const name of ['OMP_DYNAMIC','OMP_THREAD_LIMIT','OMP_SCHEDULE','OMP_PROC_BIND','OMP_PLACES','KMP_AFFINITY','KMP_BLOCKTIME','OPENBLAS_NUM_THREADS','DOTNET_PROCESSOR_COUNT','COMPlus_ThreadPool_ForceMinWorkerThreads'])assert.equal(result.runtime.environment[name],null,'Missing/drifted effective environment');for(const name of ['OpenFile','Unpack','DcrawProcess','MakeDcrawMemoryImage'])assert.equal(result.counts[name],1,'Actual once-only calls required');
