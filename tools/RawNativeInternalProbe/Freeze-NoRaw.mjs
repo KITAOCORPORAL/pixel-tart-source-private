@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const[hostRoot,prepared,contract,out]=process.argv.slice(2);
+assert(hostRoot&&prepared&&contract&&out&&!fs.existsSync(out),'Usage: Freeze-NoRaw.mjs <isolated-host> <prepared> <contract> <NEW-manifest>');
+const identity=p=>({Path:path.resolve(p),Sha256:crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex').toUpperCase()});
+const p=JSON.parse(fs.readFileSync(path.join(prepared,'PREPARATION.json'))),c=JSON.parse(fs.readFileSync(contract));
+assert.equal(p.source,'cccb97647fcee56801fa68231fa8a38aa8b52ef7');assert(c.staticContractComplete&&c.source===p.source&&c.preparationSha256.toUpperCase()===identity(path.join(prepared,'PREPARATION.json')).Sha256);
+const binding=identity(path.join(hostRoot,'Sdcb.LibRaw.dll'));assert.equal(binding.Sha256,'6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3');
+const vars=['OMP_NUM_THREADS','OMP_DYNAMIC','OMP_THREAD_LIMIT','OMP_SCHEDULE','OMP_PROC_BIND','OMP_PLACES','KMP_AFFINITY','KMP_BLOCKTIME','OPENBLAS_NUM_THREADS','DOTNET_PROCESSOR_COUNT','COMPlus_ThreadPool_ForceMinWorkerThreads'];
+const startup=Object.fromEntries(vars.map(n=>[n,process.env[n]??null])),effective={...startup,OMP_NUM_THREADS:startup.OMP_NUM_THREADS??'6'};
+assert.equal(effective.OMP_NUM_THREADS,'6','Expected original effective binding environment; do not override');
+const files=fs.readdirSync(hostRoot).filter(n=>/\.(dll|exe|json)$/.test(n)).map(n=>identity(path.join(hostRoot,n)));
+files.push(identity(path.join(prepared,'PREPARATION.json')),identity(path.join(prepared,'FILES.json')));for(const f of p.modifiedFiles)files.push(identity(path.join(prepared,f.path)));
+const manifest={Version:'RR001-InternalV3',Purpose:'NO_RAW_SELF_TEST_ONLY',Native:identity(path.join(hostRoot,'raw_r.dll')),Binding:binding,Input:{Path:'NO_RAW_INPUT_ACCESS_PERMITTED',Sha256:'NOT_APPLICABLE_NO_RAW'},Files:files,Contract:identity(contract),NativeSelfTest:null,SourceCommit:p.source,PreparationSha256:identity(path.join(prepared,'PREPARATION.json')).Sha256,StartupEnvironment:startup,EffectiveEnvironment:effective,productionEquivalent:false,authorization:'NO RAW. Original consumed=2 remaining=0. This manifest cannot satisfy existing decode input/selftest guards.'};
+fs.writeFileSync(out,JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});console.log('Frozen no-RAW self-test identity only; no photo path, RAW ticket or decode manifest.');

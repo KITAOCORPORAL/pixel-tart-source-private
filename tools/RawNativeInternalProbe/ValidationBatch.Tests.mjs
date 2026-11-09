@@ -1,0 +1,13 @@
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {audit,reserve,TASK,sha} from './ValidationBatch.mjs';
+const root=process.argv[2];assert(root&&!fs.existsSync(root));fs.mkdirSync(root,{recursive:true});fs.writeFileSync(path.join(root,'RR001_SYNTHETIC_ONLY.json'),JSON.stringify({zeroRaw:true,purpose:'tool-tests'}));let cases=[];const test=(name,f)=>{f();cases.push(name);};
+const auth=path.join(root,'auth.txt'),old=path.join(root,'old.json');fs.writeFileSync(auth,'synthetic explicit two-process batch authorization');fs.writeFileSync(old,JSON.stringify({consumed:2,remaining:0}));const c={task:TASK,maximum:2,authorization:{path:auth,sha256:sha(fs.readFileSync(auth))},oldTaskEvidence:{path:old,sha256:sha(fs.readFileSync(old))},ledgerRoot:path.join(root,'ledger')};
+test('new explicit batch begins at zero without erasing exhausted old ledger',()=>{const a=audit(c);assert.equal(a.oldTaskConsumed,2);assert.equal(a.consumed,0);assert.equal(a.remaining,2);});
+test('wrong authorization hash rejects',()=>assert.throws(()=>audit({...c,authorization:{...c.authorization,sha256:'wrong'}})));
+test('old ledger identity cannot be silently reset',()=>assert.throws(()=>audit({...c,oldTaskEvidence:{...c.oldTaskEvidence,sha256:'wrong'}})));
+test('maximum cannot be inflated',()=>assert.throws(()=>audit({...c,maximum:3})));
+test('serial slot order enforced before reservation',()=>assert.throws(()=>reserve(c,'second','manifest')));
+test('first slot durable before any launch',()=>{reserve(c,'first','manifest');assert.equal(audit(c).consumed,1);});
+test('failed launch cannot refund or repeat first slot',()=>assert.throws(()=>reserve(c,'first','manifest')));
+test('second slot exhausts fixed batch; third attempt denied',()=>{reserve(c,'second','manifest');assert.equal(audit(c).remaining,0);assert.throws(()=>reserve(c,'second','manifest'));});
+test('original ledger remains byte-identical',()=>assert.equal(sha(fs.readFileSync(old)),c.oldTaskEvidence.sha256));
+fs.writeFileSync(path.join(root,'SELF_TESTS.json'),JSON.stringify({status:'PASS_SYNTHETIC_BATCH_ONLY',cases,passed:cases.length,newRawCalls:0,nativeInit:0},null,2)+'\n');console.log(JSON.stringify({passed:cases.length,newRawCalls:0}));
