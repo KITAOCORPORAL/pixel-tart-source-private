@@ -1,3 +1,9 @@
+# 当前检查点：新批次P6首差已读回（2026-11-09）
+
+F2修复64d4dc6e的三个原反例与正常对照4项通过，研究cb0093a0已关闭F2。原生线DLL305EEC49...15484已实际编译/无RAW自检通过，header仍ce42b2ef...d1f718。复用本轮独立批次两进程PID26928/20016真实输出，旧consumed2保留、新consumed2/remaining0；研究未新增解码。P1/P3b/P5/serial-ready完整输入状态相同，实际XTrans passes3/T512/ndir8/team6，P6有5127通道差、max815，首差(7451,497,R)。64d4完整比较器在P8因实际rawColor旁路拒绝，保留失败；只读插值prefix独立验证首差P6，不冒充下游完整链准入。H1前提成立、实际共享槽消费值仍UNKNOWN，不宣布根因。见runtime-followup-20261109。V1封存，不追加第三次解码。
+
+---
+
 # 当前检查点：F2窄复核关闭（2026-11-09）
 
 修复提交64d4dc6edf46de8b19897a912bfa070f8f70dcc4已固定。仅三个研究原反例与一个正常对照4项通过；F2 CLOSED_IN_REVIEW_SCOPE，F1/F3沿用fcd4f4f9，不重复研究。H1仍UNKNOWN，待真实P5/serial-ready/P6收据，串行先差则先追串行。见f2-closure-20261109。新增RAW/GPU/native执行0，V1封存。

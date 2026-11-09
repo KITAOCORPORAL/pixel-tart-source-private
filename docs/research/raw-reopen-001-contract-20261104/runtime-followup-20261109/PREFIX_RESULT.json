@@ -1,0 +1,146 @@
+{
+  "version": "RawInterpolationPrefixReadbackV1",
+  "comparatorFix": "64d4dc6edf46de8b19897a912bfa070f8f70dcc4",
+  "comparatorSha256": "c10c53f9e2c53a1174863e11d7906ea6a7e93932685127ea9a868f40ac3b7612",
+  "scope": "Validated prefix only: P1/P3b/P5/serial-ready/P6. Full downstream comparator rejected observed rawColor bypass; that assertion is unchanged.",
+  "earliestDifferentObservedBoundary": "P6",
+  "results": [
+    {
+      "id": "P1",
+      "requiredStateComplete": true,
+      "identitiesVerified": true,
+      "stateEqual": true,
+      "imageEqual": true,
+      "effectiveInputEqual": true,
+      "equal": true,
+      "contextSha256First": "c2d69f8c87b2bc371c22d4dfd97eabe441a6f059294a35a59d3e00b04ac993cf",
+      "contextSha256Second": "c2d69f8c87b2bc371c22d4dfd97eabe441a6f059294a35a59d3e00b04ac993cf",
+      "firstHash": "54f7fcbecef1fb464fb38e1e0ac6dbf89317ae4390644b02a9add5182b5bba3d",
+      "secondHash": "54f7fcbecef1fb464fb38e1e0ac6dbf89317ae4390644b02a9add5182b5bba3d",
+      "changedChannels": 0,
+      "maxU16": 0,
+      "meanU16": 0,
+      "firstDifference": null,
+      "bounds": null
+    },
+    {
+      "id": "P3b",
+      "requiredStateComplete": true,
+      "identitiesVerified": true,
+      "stateEqual": true,
+      "imageEqual": true,
+      "effectiveInputEqual": true,
+      "equal": true,
+      "contextSha256First": "58f874fcb817ee66841c5e967a3652a86ac8836f9f566b3ee658dc4161ff67e7",
+      "contextSha256Second": "58f874fcb817ee66841c5e967a3652a86ac8836f9f566b3ee658dc4161ff67e7",
+      "firstHash": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+      "secondHash": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+      "changedChannels": 0,
+      "maxU16": 0,
+      "meanU16": 0,
+      "firstDifference": null,
+      "bounds": null
+    },
+    {
+      "id": "P5",
+      "requiredStateComplete": true,
+      "identitiesVerified": true,
+      "stateEqual": true,
+      "imageEqual": true,
+      "effectiveInputEqual": true,
+      "equal": true,
+      "contextSha256First": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+      "contextSha256Second": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+      "firstHash": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+      "secondHash": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+      "changedChannels": 0,
+      "maxU16": 0,
+      "meanU16": 0,
+      "firstDifference": null,
+      "bounds": null
+    },
+    {
+      "id": "XTRANS-serial-ready",
+      "requiredStateComplete": true,
+      "identitiesVerified": true,
+      "stateEqual": true,
+      "imageEqual": true,
+      "effectiveInputEqual": true,
+      "equal": true,
+      "contextSha256First": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+      "contextSha256Second": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+      "firstHash": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+      "secondHash": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+      "changedChannels": 0,
+      "maxU16": 0,
+      "meanU16": 0,
+      "firstDifference": null,
+      "bounds": null
+    },
+    {
+      "id": "P6",
+      "requiredStateComplete": true,
+      "identitiesVerified": true,
+      "stateEqual": true,
+      "imageEqual": false,
+      "effectiveInputEqual": false,
+      "equal": false,
+      "contextSha256First": "88ee6012e8147ce5e58f07f138eb857573194010fb73f28f2e4e1482cef2c3a0",
+      "contextSha256Second": "88ee6012e8147ce5e58f07f138eb857573194010fb73f28f2e4e1482cef2c3a0",
+      "firstHash": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+      "secondHash": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+      "changedChannels": 5127,
+      "maxU16": 815,
+      "meanU16": 0.00036978542906224653,
+      "firstDifference": {
+        "x": 7451,
+        "y": 497,
+        "channel": 0,
+        "first": 164,
+        "second": 150
+      },
+      "bounds": {
+        "left": 507,
+        "right": 7691,
+        "top": 497,
+        "bottom": 4480
+      }
+    }
+  ],
+  "processes": [
+    {
+      "processId": 26928,
+      "reservationId": "deae5d87-dccc-468a-a898-9d935770cd27",
+      "nativeSha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484",
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetBytes": 683532288,
+      "actualTeams": [
+        6
+      ],
+      "tileRecords": 176
+    },
+    {
+      "processId": 20016,
+      "reservationId": "7f0f6103-3728-4e78-a68e-981842203200",
+      "nativeSha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484",
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetBytes": 683347968,
+      "actualTeams": [
+        6
+      ],
+      "tileRecords": 176
+    }
+  ],
+  "H1": "PREREQUISITES_OBSERVED_CONSUMER_VALUES_UNKNOWN_NOT_ROOT_CAUSE_PROOF",
+  "newDecodeCallsByThisOfflineCheck": 0
+}

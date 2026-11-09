@@ -1,0 +1,63 @@
+{
+  "version": "RawRuntimeFollowupDeliveryV1",
+  "diagnosticFix": "64d4dc6edf46de8b19897a912bfa070f8f70dcc4",
+  "F2ClosureResearch": "cb0093a0",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 39625,
+      "sha256": "79436c56627a2abed659e929491c50dc2a4e5be6dad06883c9ded26e8f12f2e9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/f2-closure-20261109/InterpolationPrefix.mjs",
+      "bytes": 8516,
+      "sha256": "7ffe7720d1ee48fe30a1624b9670b864d1f4e44cb8e8c35c9d01cc61ffcf8b07"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/ACTUAL_INTERPOLATOR.json",
+      "bytes": 394,
+      "sha256": "d6182c0efed2dc49bb45676db1bb04aa435ceed3a7ebc067f42d40fd8ed28d6e"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/FULL_COMPARISON_REJECTION.json",
+      "bytes": 431,
+      "sha256": "8ce746a33d1bd7d435e3d4a93a82a8aa561413b3e5126cdb85602d28c2f8dc65"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/PREFIX_RESULT.json",
+      "bytes": 5159,
+      "sha256": "b79fd944d686cee9b8429f60027ba229eff57af835ed7f3a2f4f9a78f244c39f"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/REPORT.md",
+      "bytes": 4909,
+      "sha256": "648ee677c2a3101b4d07aaa063fdf7bece9e43ef2ad282c74696673d89603910"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/RUNTIME_BINDING.json",
+      "bytes": 6824,
+      "sha256": "4cfd341fa69e17506c75742008892d2ee914af7ffb43f0e4b91fc8470484665e"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/first-actual-tile-witness.json",
+      "bytes": 634,
+      "sha256": "1bbba81303775a070814f9b2d82aa7b6cb4346c4aa4bdf5fd0fde8c64ad52bcc"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/runtime-followup-20261109/second-actual-tile-witness.json",
+      "bytes": 634,
+      "sha256": "4e75175322f9383a18fe5c60a4949ff4c11f86bec9adce999ff11c6f5c32cdd9"
+    }
+  ],
+  "hashSemantics": "Staged Git blob SHA256; manifest excludes itself",
+  "actualNewBatchProcesses": 2,
+  "additionalResearchDecodeCalls": 0,
+  "earliestValidatedPrefixDifference": "P6",
+  "H1": "PRECONDITIONS_MET_CONSUMER_VALUES_UNKNOWN",
+  "V1": "SEALED"
+}
