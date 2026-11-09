@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "processId": 7984,
+  "steps": [
+    {
+      "check": "collection database migrated",
+      "pass": true
+    },
+    {
+      "check": "unconfirmed protected phone gallery ready",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS HTML entry returned 200",
+      "pass": true
+    },
+    {
+      "check": "phone HTTPS authorized gallery returned 200",
+      "pass": true
+    }
+  ]
+}

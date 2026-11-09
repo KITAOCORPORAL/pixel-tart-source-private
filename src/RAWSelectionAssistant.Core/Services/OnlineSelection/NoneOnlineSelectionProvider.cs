@@ -47,4 +47,11 @@ public sealed class NoneOnlineSelectionProvider : IOnlineSelectionProvider
 public static class OnlineSelectionProviderFactory
 {
     public static IOnlineSelectionProvider CreateDefault() => new NoneOnlineSelectionProvider();
+
+    public static IOnlineSelectionProvider CreateConfigured(string accessStorePath)
+    {
+        var endpoint = Environment.GetEnvironmentVariable("GUANGJING_SELECTION_BASE_URL");
+        return string.IsNullOrWhiteSpace(endpoint) ? CreateDefault()
+            : new HttpOnlineSelectionProvider(new Uri(endpoint, UriKind.Absolute), accessStorePath);
+    }
 }

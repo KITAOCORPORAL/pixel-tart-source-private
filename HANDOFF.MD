@@ -318,3 +318,10 @@
 - 完整主程序：E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026/Guangjing-UI-Cleanup-Final-Diagnostic-win-x64；隔离Start-Guangjing-Diagnostic.bat。不是Setup。
 - 原生一次点击coordinate input geometry is unavailable，JPEG/画布保存退出新进程/A-B整链均NOT_RUN。内验图片是离屏合成，不是桌面实机证据。
 - 先前静态教程逐字断言4项已改成真实命令/状态绑定，安全导出/不覆盖原件回归保留；源副本错误短态+展开详情/日志，不放宽禁止回退。
+
+
+## 在线选片首版 · 2026-11-09
+- 独立分支 feature/online-selection-http-20261109，基线 37ea6c9a；先 fetch，按路径复用旧 LocalDev 原型，全部旧树和未提交文件保留。
+- 真实 HTTP / HTTPS 与 PC 命令、SQLite 归片回写通过：45 项 HTTP、7 项独立进程恢复、14 个 HTTPS 请求的交付 JS 验证、71 项回归。详见 docs/validation/online-selection-http-20261109/FINAL_REPORT.md。
+- 最终服务 17648，现有 Tailscale Serve 已指向该端口。手机需同一 tailnet；完整链接在忽略目录 artifacts/online-selection-http/phone/PHONE_URL.txt。完整 App 启动脚本：tools/OnlineSelectionHttpAcceptance/Start-OnlineSelectionApp.cmd。
+- 完整 App Release 已发布；原生窗口启动被自动审批拒绝，Safari 真机未运行。待人工手机勾选确认、PC 刷新、重开恢复、对应归片与撤销验证。Node adapter 不能当 Safari 验收。浏览器扩展未开始。

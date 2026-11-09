@@ -148,6 +148,9 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
             ? ImportAssetsAsync(paths)
             : ChooseAndImportAssetsAsync(), _ => !IsBusy && IsProjectOpen);
         RetryFailedCommand = new AsyncRelayCommand(_ => RetryFailedAsync(), _ => !IsBusy && Assets.Any(asset => asset.Status == SelectionAssetStatus.Failed));
+        RefreshResultsCommand = new AsyncRelayCommand(_ => RefreshResultsAsync(), _ => !IsBusy && IsProjectOpen);
+        UnpublishCommand = new AsyncRelayCommand(_ => UnpublishAsync(), _ => !IsBusy && IsProjectOpen);
+        CopyClientLinkCommand = new RelayCommand(_ => { if (!string.IsNullOrWhiteSpace(ClientUrl)) System.Windows.Clipboard.SetText(ClientUrl); }, _ => !string.IsNullOrWhiteSpace(ClientUrl));
         PublishCommand = new AsyncRelayCommand(_ => PublishAsync(), _ => !IsBusy && IsProjectOpen);
         SyncResultsCommand = new AsyncRelayCommand(_ => ChooseAndSyncResultsAsync(), _ => !IsBusy && IsProjectOpen && FinalResult is not null);
         DeleteCloudAssetCommand = new AsyncRelayCommand(parameter => DeleteCloudAssetAsync(parameter as OnlineSelectionAssetViewModel), _ => !IsBusy && IsProjectOpen);
@@ -188,6 +191,11 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
     public ICommand SelectTabCommand { get; }
     public ICommand AddAssetsCommand { get; }
     public ICommand RetryFailedCommand { get; }
+    public ICommand RefreshResultsCommand { get; }
+    public ICommand UnpublishCommand { get; }
+    public ICommand CopyClientLinkCommand { get; }
+    public string? ClientUrl => Project is null || Project.Status == SelectionProjectStatus.Draft ? null : (_provider as HttpOnlineSelectionProvider)?.GetClientUrl(Project.Id);
+    public Func<SelectionProject, SelectionFinalResult, IReadOnlyList<SelectionAsset>, CancellationToken, Task>? WriteCollectionProjectAsync { get; set; }
     public ICommand PublishCommand { get; }
     public ICommand SyncResultsCommand { get; }
     public ICommand DeleteCloudAssetCommand { get; }
@@ -201,6 +209,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
     {
         cancellationToken.ThrowIfCancellationRequested();
         Project = project;
+        OnPropertyChanged(nameof(ClientUrl));
         Rule = rule ?? SelectionRule.Default(project.Id, project.TargetCount, project.DeadlineUtc);
         Assets.Clear();
         var recoveredInterruptedProxy = false;
@@ -236,6 +245,7 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
             return;
         }
         if (Project is null) return;
+        if (_provider is HttpOnlineSelectionProvider && FinalResult is not null) { StatusText = "客户已经确认，本版请新建项目追加照片。"; return; }
         IsBusy = true;
         try
         {
@@ -369,14 +379,70 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         IsBusy = true;
         try
         {
+            if (_provider is HttpOnlineSelectionProvider http && FinalResult is null)
+            {
+                await new SelectionHttpWorkflow(http).PrepareAsync(Project, Rule, Assets.Select(item => item.ToModel()).ToArray(), async prepared =>
+                {
+                    Project = prepared.Project;
+                    foreach (var item in prepared.Assets) Assets.First(asset => asset.Id == item.Id).Apply(item);
+                    await SaveAsync(cancellationToken);
+                }, cancellationToken).ConfigureAwait(true);
+            }
             var validation = SelectionProjectValidator.ValidateForPublish(Project, Rule, Assets.Select(asset => asset.ToModel()));
             if (!validation.IsValid) { StatusText = validation.Message; return; }
             var publish = new SelectionPublish(Guid.NewGuid(), Project.Id, Project.PublicId, 1, DateTimeOffset.UtcNow, Rule.AccessExpiresAtUtc);
             var result = await _provider.PublishProjectAsync(Project.Id, publish, cancellationToken).ConfigureAwait(true);
             StatusText = result.Success ? "项目已发布；客户可通过受保护链接进入选片。" : result.Message;
-            if (result.Success) Project = Project with { Status = SelectionProjectStatus.Published, UpdatedAtUtc = DateTimeOffset.UtcNow };
+            if (result.Success)
+            {
+                Project = Project with { PublicId = result.Value!.PublicId, Status = FinalResult is null ? SelectionProjectStatus.Published : SelectionProjectStatus.ClientConfirmed, UpdatedAtUtc = DateTimeOffset.UtcNow };
+                OnPropertyChanged(nameof(ClientUrl));
+                (CopyClientLinkCommand as RelayCommand)?.RaiseCanExecuteChanged();
+            }
             await SaveAsync(cancellationToken).ConfigureAwait(true);
         }
+        catch (Exception error) when (error is IOException or System.Net.Http.HttpRequestException or TaskCanceledException)
+        {
+            StatusText = "发布未完成：" + error.Message;
+            await SaveAsync(CancellationToken.None);
+        }
+        finally { IsBusy = false; }
+    }
+
+    public async Task UnpublishAsync(CancellationToken cancellationToken = default)
+    {
+        if (Project is null) return;
+        IsBusy = true;
+        try
+        {
+            var result = await _provider.UnpublishAsync(Project.Id, cancellationToken);
+            StatusText = result.Success ? "发布已撤销，旧链接立即失效。" : result.Message;
+            if (result.Success) { Project = Project with { Status = SelectionProjectStatus.Draft }; OnPropertyChanged(nameof(ClientUrl)); await SaveAsync(cancellationToken); }
+        }
+        catch (Exception error) when (error is IOException or System.Net.Http.HttpRequestException or TaskCanceledException) { StatusText = "撤销未完成：" + error.Message; }
+        finally { IsBusy = false; }
+    }
+
+    public async Task RefreshResultsAsync(CancellationToken cancellationToken = default)
+    {
+        if (Project is null) return;
+        IsBusy = true;
+        try
+        {
+            var response = await _provider.GetFinalSelectionAsync(Project.Id, cancellationToken);
+            if (!response.Success || response.Value is null) { StatusText = response.Message; return; }
+            var assets = Assets.Select(item => item.ToModel()).ToArray();
+            SelectionHttpWorkflow.ValidateFinal(Project, assets, response.Value);
+            if (FinalResult is not null && response.Value.SelectionVersion < FinalResult.SelectionVersion) throw new InvalidDataException("服务返回了过期结果。");
+            Project = Project with { Status = SelectionProjectStatus.ClientConfirmed };
+            await ApplyFinalResultAsync(response.Value, cancellationToken);
+            if (WriteCollectionProjectAsync is not null)
+            {
+                await WriteCollectionProjectAsync(Project, response.Value, assets, cancellationToken);
+                StatusText = $"已收回 {SelectedCount} 张确认结果并写入对应归片项目。";
+            }
+        }
+        catch (Exception error) when (error is IOException or System.Net.Http.HttpRequestException or TaskCanceledException) { StatusText = "刷新未完成：" + error.Message; }
         finally { IsBusy = false; }
     }
 
@@ -538,6 +604,9 @@ public sealed class OnlineSelectionProjectViewModel : ObservableObject
         (AddAssetsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (RetryFailedCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (PublishCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (RefreshResultsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (UnpublishCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
+        (CopyClientLinkCommand as RelayCommand)?.RaiseCanExecuteChanged();
         (SyncResultsCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
         (DeleteCloudAssetCommand as AsyncRelayCommand)?.RaiseCanExecuteChanged();
     }
@@ -673,7 +742,8 @@ public sealed class OnlineSelectionViewModel : ObservableObject
             StatusText = "目标数量必须是大于零的数字。";
             return;
         }
-        var project = SelectionProjectFactory.CreateDraft(ProjectName, ClientName, targetCount, Deadline?.ToUniversalTime());
+        var project = SelectionProjectFactory.CreateDraft(ProjectName, ClientName, targetCount, Deadline?.ToUniversalTime(), selectedPaths.FirstOrDefault() is { } firstPath ? Path.GetDirectoryName(firstPath) : null);
+        project = project with { CollectionProjectId = project.Id };
         var validation = SelectionProjectValidator.ValidateDraft(project);
         if (!validation.IsValid) { StatusText = validation.Message; return; }
         IsBusy = true;
@@ -703,7 +773,7 @@ public sealed class OnlineSelectionViewModel : ObservableObject
 
     public async Task OpenProjectAsync(SelectionProject? project, CancellationToken cancellationToken = default)
     {
-        if (project is null) return;
+        if (project is null || ProjectPage.IsBusy) return;
         IsBusy = true;
         try
         {

@@ -2500,6 +2500,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     {
         var project = parameter as PhotoProjectRecord ?? ProjectHistory.FirstOrDefault();
         if (project is null) return;
+        project = (await _projectHistoryService.LoadAllAsync()).FirstOrDefault(item => item.Id == project.Id) ?? project;
         _currentProject = project;
         Sources.Clear();
         foreach (var path in project.SourceDirectories)
@@ -2547,7 +2548,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         OnPropertyChanged(nameof(CurrentProjectStatus));
     }
 
-    private async Task ReloadProjectHistoryAsync()
+    public async Task ReloadProjectHistoryAsync()
     {
         ProjectHistory.Clear();
         foreach (var project in await _projectHistoryService.LoadVisibleAsync()) ProjectHistory.Add(project);

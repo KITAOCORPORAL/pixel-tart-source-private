@@ -4,7 +4,8 @@ namespace RAWSelectionAssistant.Core.Models;
 
 public enum OnlineSelectionProviderKind
 {
-    None
+    None,
+    Http
 }
 
 public enum SelectionProjectStatus
@@ -69,7 +70,10 @@ public sealed record SelectionProject(
     Guid? CoverAssetId,
     DateTimeOffset CreatedAtUtc,
     DateTimeOffset UpdatedAtUtc,
-    string? LocalSourceDirectory = null);
+    string? LocalSourceDirectory = null)
+{
+    public Guid? CollectionProjectId { get; init; }
+}
 
 public sealed record SelectionAsset(
     Guid Id,
@@ -84,7 +88,10 @@ public sealed record SelectionAsset(
     DateTimeOffset UpdatedAtUtc,
     long? ProxyBytes = null,
     string? CloudAssetId = null,
-    string? LastErrorCode = null);
+    string? LastErrorCode = null)
+{
+    public Guid? SourceAssetId { get; init; }
+}
 
 public sealed record SelectionRule(
     Guid ProjectId,
@@ -171,12 +178,19 @@ public sealed record SelectionFinalItem(
     bool Selected,
     bool Favorite,
     string? CustomerNote,
-    bool ExtraSelected);
+    bool ExtraSelected)
+{
+    public Guid? SourceAssetId { get; init; }
+}
 
 public sealed record SelectionFinalResult(
     Guid SelectionProjectId,
     DateTimeOffset ConfirmedAtUtc,
-    IReadOnlyList<SelectionFinalItem> Items);
+    IReadOnlyList<SelectionFinalItem> Items)
+{
+    public int SelectionVersion { get; init; } = 1;
+    public bool IsLocked { get; init; } = true;
+}
 
 public sealed record SelectionRawMatch(
     SelectionFinalItem Selection,

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "processId": 34636,
+  "steps": [
+    {
+      "check": "collection database migrated",
+      "pass": true
+    },
+    {
+      "check": "new process restored one project from disk",
+      "pass": true
+    },
+    {
+      "check": "new process restored confirmed result and checkbox state",
+      "pass": true
+    },
+    {
+      "check": "new process decrypted persisted service access",
+      "pass": true
+    },
+    {
+      "check": "new process re-fetched and wrote collection via actual command",
+      "pass": true
+    },
+    {
+      "check": "writeback retry did not duplicate collection project",
+      "pass": true
+    },
+    {
+      "check": "SQLite collection inputs survived new process",
+      "pass": true
+    }
+  ]
+}

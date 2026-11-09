@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "suites": [
+    {
+      "suite": "selection-api-final",
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "trx_sha256": "03728926c9e24458262c5a546e7894ff373b3ad1e4b29845771166e320409f45"
+    },
+    {
+      "suite": "selection-core-final",
+      "total": 37,
+      "passed": 37,
+      "failed": 0,
+      "trx_sha256": "f36dd8b41b59527717c572100bcdaa70ab378ff95e0b8699ed0e5867f0109b68"
+    },
+    {
+      "suite": "selection-wpf-final",
+      "total": 21,
+      "passed": 21,
+      "failed": 0,
+      "trx_sha256": "a4e8fcb38ac6433645a6dade59e5b32c2a6bd9d458e5fab2e9bb95e1ee8cfca3"
+    }
+  ],
+  "passed": 71
+}

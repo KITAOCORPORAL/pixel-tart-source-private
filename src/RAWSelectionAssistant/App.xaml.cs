@@ -302,12 +302,18 @@ public partial class App : Application
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService);
             var onlineSelectionPage = new OnlineSelectionViewModel(
-                OnlineSelectionProviderFactory.CreateDefault(),
+                OnlineSelectionProviderFactory.CreateConfigured(Path.Combine(AppDataPaths.OnlineSelectionDirectory, "http-access.bin")),
                 new JsonSelectionWorkspaceStore(AppDataPaths.OnlineSelectionWorkspaceFile),
                 new SelectionResultSyncService(normalizer),
                 _compositionRoot.SelectionProxyJpegService,
                 Path.Combine(AppDataPaths.OnlineSelectionDirectory, "Proxies"),
                 dialogService);
+            var selectionCollectionWriter = new SelectionCollectionProjectWriter(_compositionRoot.ProjectRepository);
+            onlineSelectionPage.ProjectPage.WriteCollectionProjectAsync = async (selection, result, assets, token) =>
+            {
+                await selectionCollectionWriter.WriteAsync(selection, result, assets, token);
+                if (_mainViewModel is not null) await _mainViewModel.ReloadProjectHistoryAsync();
+            };
 
             _mainViewModel = new MainViewModel(
                 normalizer,

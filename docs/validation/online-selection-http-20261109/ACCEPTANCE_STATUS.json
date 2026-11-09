@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-09",
+  "timezone": "Asia/Shanghai",
+  "base": "37ea6c9abaae94a3f4e2ac6b615837eb02e89633",
+  "branch": "feature/online-selection-http-20261109",
+  "prototype": "origin/feature/online-selection-v1@349bf400",
+  "real_http": "PASS: 45 recorded checks and HTTP responses",
+  "new_process_reopen": "PASS: 7 checks in a distinct executable process",
+  "shipped_customer_javascript": "PASS: 14 real HTTPS requests, DOM adapter under Node; no browser",
+  "desktop_web_result_writeback": "PASS: actual ViewModel and SQLite writer",
+  "existing_https_entry": "PASS: existing Tailscale Serve targets 127.0.0.1:17648; same tailnet required",
+  "safari_real_device": "NOT_RUN: human Safari interaction needed; unconfirmed synthetic project ready",
+  "complete_app_release_publish": "PASS",
+  "complete_app_native_window": "NOT_RUN: automatic approval review rejected native executable launch",
+  "browser_webview_cdp": "NOT_USED",
+  "initial_service": "17646 test process left running after automatic approval rejected stop command; final service is 17648",
+  "local_only_files": "PHONE_URL.txt, encrypted access, workspace, server DB and proxy objects remain under ignored artifacts; secrets are absent from versioned receipts",
+  "preservation": "all old worktrees and primary uncommitted files preserved; no reset/clean/stash/rebase",
+  "scope": "online selection v1; browser extension work not started"
+}

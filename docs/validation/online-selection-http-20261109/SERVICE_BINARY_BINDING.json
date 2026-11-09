@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "configuration": "Release; independent publish of final source; API regression tests compile the same source in Debug so their binaries have different compiler configuration",
+  "files": [
+    {
+      "file": "PixelTart.SelectionApi.Server.dll",
+      "served_release_sha256": "e8e8dea87728db5b7202f1cf50389efedd9ace7f22490416c121d7f63a47af64",
+      "rebuilt_same_source_release_sha256": "e8e8dea87728db5b7202f1cf50389efedd9ace7f22490416c121d7f63a47af64",
+      "match": true
+    },
+    {
+      "file": "PixelTart.SelectionApi.Contracts.dll",
+      "served_release_sha256": "a81895ca35ac5bd89e0a9a7301c165f5d2c935af3f527aeb9ebc9077c8699501",
+      "rebuilt_same_source_release_sha256": "a81895ca35ac5bd89e0a9a7301c165f5d2c935af3f527aeb9ebc9077c8699501",
+      "match": true
+    }
+  ]
+}

@@ -325,16 +325,11 @@ public sealed class OnlineSelectionV1Tests
     }
 
     [TestMethod]
-    public void ProductionCoreContainsNoHttpLocalhostOrCredentials()
+    public void HttpProvider_RequiresExplicitEndpointAndRejectsCleartextRemoteHosts()
     {
-        var root = FindRepoRoot();
-        var files = Directory.GetFiles(Path.Combine(root, "src", "RAWSelectionAssistant.Core", "Services", "OnlineSelection"), "*.cs", SearchOption.AllDirectories)
-            .Where(path => !path.Contains($"{Path.DirectorySeparatorChar}TestDoubles{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase));
-        var text = string.Join('\n', files.Select(File.ReadAllText));
-        Assert.DoesNotContain("localhost", text, StringComparison.OrdinalIgnoreCase);
-        Assert.DoesNotContain("HttpClient", text, StringComparison.Ordinal);
-        Assert.DoesNotContain("Bearer ", text, StringComparison.OrdinalIgnoreCase);
-        Assert.DoesNotContain("FakeOnlineSelectionProvider", text, StringComparison.Ordinal);
+        Assert.IsInstanceOfType<NoneOnlineSelectionProvider>(OnlineSelectionProviderFactory.CreateDefault());
+        Assert.ThrowsExactly<ArgumentException>(() => new HttpOnlineSelectionProvider(new Uri("http://example.invalid"), "unused.bin"));
+        Assert.ThrowsExactly<ArgumentException>(() => new HttpOnlineSelectionProvider(new Uri("file:///C:/unused"), "unused.bin"));
     }
 
     [TestMethod]

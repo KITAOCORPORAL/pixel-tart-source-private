@@ -1,0 +1,206 @@
+{
+  "status": "PASS",
+  "processId": 10248,
+  "steps": [
+    {
+      "check": "collection database migrated",
+      "pass": true
+    },
+    {
+      "check": "actual WPF proxy renderer produced a JPEG",
+      "pass": true
+    },
+    {
+      "check": "actual desktop publish command completed: \u9879\u76EE\u5DF2\u53D1\u5E03\uFF1B\u5BA2\u6237\u53EF\u901A\u8FC7\u53D7\u4FDD\u62A4\u94FE\u63A5\u8FDB\u5165\u9009\u7247\u3002",
+      "pass": true
+    },
+    {
+      "check": "upload queue persisted server acknowledgement",
+      "pass": true
+    },
+    {
+      "check": "desktop owner credential persisted",
+      "pass": true
+    },
+    {
+      "check": "server issued protected URL",
+      "pass": true
+    },
+    {
+      "check": "customer token differs from owner token",
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects",
+      "status": 201
+    },
+    {
+      "check": "create replay retains project identity #0",
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects",
+      "status": 201
+    },
+    {
+      "check": "create replay retains project identity #1",
+      "pass": true
+    },
+    {
+      "check": "upload replay retains asset identity",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/s/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/selection.js",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/selection.css",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/51021512-aec7-4dcf-aa1d-d75dc30a1cf4",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects/51021512-aec7-4dcf-aa1d-d75dc30a1cf4/unpublish",
+      "status": 401
+    },
+    {
+      "check": "created isolated second project",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/f70e5616-2130-4c5f-a81a-3708a65c2d75",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/assets",
+      "status": 200
+    },
+    {
+      "check": "retries created exactly one remote asset",
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/media-session",
+      "status": 200
+    },
+    {
+      "check": "real protected JPEG HTTP response 200",
+      "pass": true
+    },
+    {
+      "check": "remote proxy strips private metadata",
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/choices/d87d9a8a-df7c-4d74-be8d-65419849116c",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/choices/d87d9a8a-df7c-4d74-be8d-65419849116c",
+      "status": 200
+    },
+    {
+      "check": "choice retry did not increment revision twice",
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/confirm",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/confirm",
+      "status": 200
+    },
+    {
+      "check": "confirm retry retained one snapshot",
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93/choices/d87d9a8a-df7c-4d74-be8d-65419849116c",
+      "status": 409
+    },
+    {
+      "check": "desktop refresh read actual customer confirmation",
+      "pass": true
+    },
+    {
+      "check": "confirmed filenames written to bound collection project",
+      "pass": true
+    },
+    {
+      "check": "unrelated collection project unchanged",
+      "pass": true
+    },
+    {
+      "check": "existing result sync service wrote real archive",
+      "pass": true
+    },
+    {
+      "check": "wrong project result refused before writeback",
+      "pass": true
+    },
+    {
+      "check": "desktop unpublish command acknowledged",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/s/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 404
+    },
+    {
+      "check": "revocation invalidated an already issued image session",
+      "pass": true
+    },
+    {
+      "check": "republish retains confirmed lock",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/530c9db41d3dee41bcc4040d813d62f07e93",
+      "status": 404
+    },
+    {
+      "check": "source file byte identity preserved",
+      "pass": true
+    }
+  ]
+}

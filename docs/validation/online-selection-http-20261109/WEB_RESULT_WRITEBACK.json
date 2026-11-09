@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "processId": 28308,
+  "steps": [
+    {
+      "check": "collection database migrated",
+      "pass": true
+    },
+    {
+      "check": "actual customer JavaScript result collected by desktop command",
+      "pass": true
+    },
+    {
+      "check": "web client result persisted to bound collection project",
+      "pass": true
+    }
+  ]
+}

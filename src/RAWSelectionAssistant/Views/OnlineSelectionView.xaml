@@ -58,7 +58,7 @@
                 <TextBlock Text="云服务未配置时，仅可本地选片。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
+                <TextBlock Text="{Binding ServiceStatusText}" ToolTip="发布前生成并上传代理；客户确认后点击刷新客户结果。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
                 <Button Content="创建选片项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding CreateProjectCommand}" AutomationProperties.Name="创建选片项目" />
                 <Button Content="刷新" Style="{StaticResource Av2GhostButton}" Command="{Binding RefreshCommand}" Margin="{DynamicResource SpacingHorizontal8}" AutomationProperties.Name="刷新在线选片项目" />
             </StackPanel>
@@ -102,6 +102,7 @@
                         <StackPanel>
                             <TextBlock Text="{Binding Project.Name, TargetNullValue=在线选片项目}" Style="{StaticResource SectionTitleText}" />
                             <ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/><TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
+                            <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Style="{StaticResource SecondaryBodyText}" />
                         </StackPanel>
                         <TextBlock Text="{Binding ProjectStatusText}" HorizontalAlignment="Right" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center" />
                     </Grid>
@@ -115,10 +116,13 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Content="添加照片" Style="{StaticResource Av2SecondaryButton}" Command="{Binding AddAssetsCommand}" />
+                            <Button Content="刷新客户结果" Command="{Binding RefreshResultsCommand}" Style="{StaticResource Av2SecondaryButton}" Margin="8,0" />
+                            <Button Content="复制选片链接" Command="{Binding CopyClientLinkCommand}" Style="{StaticResource Av2SecondaryButton}" Margin="8,0" />
+                            <Button Content="撤销发布" Command="{Binding UnpublishCommand}" Style="{StaticResource Av2GhostButton}" Margin="8,0" />
                             <Button Content="发布项目" Style="{StaticResource Av2PrimaryButton}" Command="{Binding PublishCommand}" Margin="{DynamicResource SpacingHorizontal8}" />
-                        </StackPanel>
+                        </WrapPanel>
                     </local:StudioPageHeader>
 
                     <Grid Grid.Row="2">
