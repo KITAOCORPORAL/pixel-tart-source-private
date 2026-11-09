@@ -1,0 +1,83 @@
+{
+  "beforeCount": 67,
+  "afterCount": 67,
+  "existingTreeHeadPorcelainUnpushedChanges": [
+    {
+      "before": {
+        "worktree": "E:/Kitao-Worktrees/r55-collage-used-20261109",
+        "HEAD": "42476a1c1ab73f8aedf3ada973c8302efa83204f",
+        "branch": "refs/heads/feature/r55-collage-used-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [],
+        "error": "",
+        "unpushedFromHead": []
+      },
+      "after": {
+        "worktree": "E:/Kitao-Worktrees/r55-collage-used-20261109",
+        "HEAD": "5645a9af4388f1752faed7212d94e5df622c7e53",
+        "branch": "refs/heads/feature/r55-collage-used-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [
+          "?? docs/validation/company-r55-collage-used-20261109/.gitattributes",
+          "?? docs/validation/company-r55-collage-used-20261109/.gitignore",
+          "?? docs/validation/company-r55-collage-used-20261109/BUILD_IDENTITY.JSON",
+          "?? docs/validation/company-r55-collage-used-20261109/ENTRY_RECEIPTS.json",
+          "?? docs/validation/company-r55-collage-used-20261109/FILE_MANIFEST.JSON",
+          "?? docs/validation/company-r55-collage-used-20261109/FINAL-PUBLISH.JSON",
+          "?? docs/validation/company-r55-collage-used-20261109/FINAL_REPORT.md",
+          "?? docs/validation/company-r55-collage-used-20261109/MODULE_STATUS.md",
+          "?? docs/validation/company-r55-collage-used-20261109/ONLINE_PROVIDER_NEXT_SLICE.md",
+          "?? docs/validation/company-r55-collage-used-20261109/ONLINE_PROVIDER_SOURCE_AUDIT.json",
+          "?? docs/validation/company-r55-collage-used-20261109/PACKAGE_RECEIPT.JSON",
+          "?? docs/validation/company-r55-collage-used-20261109/PUBLISHED_BINDINGS.JSON",
+          "?? docs/validation/company-r55-collage-used-20261109/SOURCE_IDENTITY.json",
+          "?? docs/validation/company-r55-collage-used-20261109/TEST_SUMMARY.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/CMD_SMOKE.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/EXE_SMOKE.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/NATIVE_EXPORT_DIALOG.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/REGRESSION.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/USAGE.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/USAGE_EXPORT.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/USAGE_PHASE2.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/dev-build01.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/dev-build02.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/dev-build03.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/final-core-build.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/final-runner-build.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/final-wpf-build.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/smoke-build.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/smoke-build02.json",
+          "?? docs/validation/company-r55-collage-used-20261109/receipts/smoke-build03.json"
+        ],
+        "unpushedFromHead": [
+          "5645a9af4388f1752faed7212d94e5df622c7e53 test(collage): verify published EXE and CMD through bounded native UIA smoke",
+          "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2 feat(collage): derive used-material shelf badges from current canvas identities"
+        ]
+      }
+    },
+    {
+      "before": {
+        "worktree": "E:/Kitao-Worktrees/raw-observation-review-20261106",
+        "HEAD": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+        "branch": "refs/heads/research/raw-observation-rereview-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [],
+        "error": "",
+        "unpushedFromHead": []
+      },
+      "after": {
+        "worktree": "E:/Kitao-Worktrees/raw-observation-review-20261106",
+        "HEAD": "50836e58eedf90b5e40a0cd08973a69a09118539",
+        "branch": "refs/heads/research/raw-h1-window-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [],
+        "unpushedFromHead": [
+          "50836e58eedf90b5e40a0cd08973a69a09118539 research(raw): freeze bounded architectural X-Trans watchpoint plan and no-RAW tests"
+        ]
+      }
+    }
+  ],
+  "newTree": "E:/Kitao-Worktrees/r55-collage-used-20261109",
+  "byteHashLimitation": "Compares HEAD/porcelain/unpushed list; not a full bytewise snapshot of foreign dirty files",
+  "noResetStashMergeClean": true
+}

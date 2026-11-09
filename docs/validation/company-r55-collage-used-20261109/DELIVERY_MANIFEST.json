@@ -1,0 +1,175 @@
+{
+  "scope": "All documentation/metadata files in this delivery except manifest; media/databases/binaries retained locally",
+  "files": [
+    {
+      "bytes": 29,
+      "sha256": "730A35AE3D558080083C3103D9AC8100C3F6561678092ABE341701DFA331EB1D",
+      "path": ".gitattributes"
+    },
+    {
+      "bytes": 59,
+      "sha256": "C986C4B62778F4E41995769F04D14FE023A3F7775145010A32D6F0FE9A42F6E0",
+      "path": ".gitignore"
+    },
+    {
+      "bytes": 1713,
+      "sha256": "598C2B2D64C3A96AF41A534EBAE265549F24967BA38331BC38298ED039AC9F6D",
+      "path": "BUILD_IDENTITY.JSON"
+    },
+    {
+      "bytes": 3316,
+      "sha256": "F9FA241E464632D9EEB192B66D9FEC5A6E3725FA9261B4740E3A59DD0A4FF237",
+      "path": "CHANGED_FILES.json"
+    },
+    {
+      "bytes": 4627,
+      "sha256": "D260197AA10400FA08A0E848F105BA4FFF4472F64D7BD195647960AEDDEA74BF",
+      "path": "ENTRY_RECEIPTS.json"
+    },
+    {
+      "bytes": 51508,
+      "sha256": "0C3E867B3B32C7F790199F0FB303370B58074764CBBA9CCDA3B6AA5A521CC4CB",
+      "path": "FILE_MANIFEST.JSON"
+    },
+    {
+      "bytes": 6437,
+      "sha256": "143A04658AD16D66849557F439BC97D389656F73E27E3D19327868FB79B90962",
+      "path": "FINAL_REPORT.md"
+    },
+    {
+      "bytes": 791,
+      "sha256": "F9B00E06325367DB8AAC262FA3CA4AFAA89BAC9AA9F880FC191A7AE4B0ACC88D",
+      "path": "FINAL-PUBLISH.JSON"
+    },
+    {
+      "bytes": 3069,
+      "sha256": "8B3BD0AAF48F375363F346FC157B70BED3EB19C96C29D72AB157A11DF10F0693",
+      "path": "MODULE_STATUS.md"
+    },
+    {
+      "bytes": 7194,
+      "sha256": "007BD9293FA238C00A7CFADA34B95187CA4CA731D921856093A660009A931949",
+      "path": "ONLINE_PROVIDER_NEXT_SLICE.md"
+    },
+    {
+      "bytes": 2478,
+      "sha256": "AF930E17FE199A88825EA2D9000F70CBE98B8F0F6AA23B8E04C6D2353CC1B6FC",
+      "path": "ONLINE_PROVIDER_SOURCE_AUDIT.json"
+    },
+    {
+      "bytes": 504,
+      "sha256": "94C10A14B581773B6A07C7B36D1D1EA60295CD3917644F1D8A24160A7A014D85",
+      "path": "PACKAGE_RECEIPT.JSON"
+    },
+    {
+      "bytes": 14314,
+      "sha256": "48BADCEC1159BD62C158C395AF935F6DC92A260E77EFAEA1DD1C06022FC6640B",
+      "path": "PUBLISHED_BINDINGS.JSON"
+    },
+    {
+      "bytes": 1772,
+      "sha256": "856326089E2F6075A335BF4408E2186751560651007BCA50FF92299940CAB9B6",
+      "path": "receipts/CMD_SMOKE.json"
+    },
+    {
+      "bytes": 763,
+      "sha256": "1110FB663C9C25BFAFFF2FBA88BBCC1E7BC3CA16DAAEF976509D3CCBBEDA624D",
+      "path": "receipts/dev-build01.json"
+    },
+    {
+      "bytes": 926,
+      "sha256": "CD6B58680260D593D530960A96511E68436437577A332BF0C0DD14A6B4A0188B",
+      "path": "receipts/dev-build02.json"
+    },
+    {
+      "bytes": 928,
+      "sha256": "8D4A078355CAEA7629A04AA74466C2543C96A48B3E361985749A31C731C72764",
+      "path": "receipts/dev-build03.json"
+    },
+    {
+      "bytes": 1773,
+      "sha256": "0F7ACE52A0CEAD5023D3037E84D36B4380EEEDB59AFCCAC605AB28E44F46C0A8",
+      "path": "receipts/EXE_SMOKE.json"
+    },
+    {
+      "bytes": 543,
+      "sha256": "1EC99FE762179B560F857A1EF72FCA42BA2639E56966FCFA5030F3409B55E751",
+      "path": "receipts/final-core-build.json"
+    },
+    {
+      "bytes": 437,
+      "sha256": "7DAECF5E8123F0BEEE1E49BA304C02C70B1A849FED8259F10F726A28E98FFE5E",
+      "path": "receipts/final-runner-build.json"
+    },
+    {
+      "bytes": 630,
+      "sha256": "30973C137203ECB292F6D9B642F5E9A91561A61E055DF02391D038C2317E1005",
+      "path": "receipts/final-wpf-build.json"
+    },
+    {
+      "bytes": 198,
+      "sha256": "E78FE0522BE1BF6C619040C6D2F776FA86940F7D1FBE2CE81194983063BA70D9",
+      "path": "receipts/NATIVE_EXPORT_DIALOG.json"
+    },
+    {
+      "bytes": 47381,
+      "sha256": "ACF49EAF91D90A261F07E0BFB41765B8956ED512D7478831CCF243BB804B69C1",
+      "path": "receipts/REGRESSION.json"
+    },
+    {
+      "bytes": 538,
+      "sha256": "49E961BDEDAF12E2ED9ED47C792E75C619782812EE788DC30852A855D06B3A2F",
+      "path": "receipts/smoke-build.json"
+    },
+    {
+      "bytes": 539,
+      "sha256": "0F921E8FFA08EC102C0E35F006F88B4715BFF9CAC5F00FF96006862C93CA6752",
+      "path": "receipts/smoke-build02.json"
+    },
+    {
+      "bytes": 538,
+      "sha256": "CF14A466AA7FE26F2DCE9D99748111AC65C9113CC54B61E1C6F2E03147FA7B26",
+      "path": "receipts/smoke-build03.json"
+    },
+    {
+      "bytes": 544,
+      "sha256": "8E3705E47E855F10CA38C96C765A7070BA10534FF887270030FD53D51440928E",
+      "path": "receipts/USAGE_EXPORT.json"
+    },
+    {
+      "bytes": 98,
+      "sha256": "12C634FE95A6D44322BE9D1733F84DDDFD5DA9E86C9EAA4AE3B63EF9A2233B04",
+      "path": "receipts/USAGE_PHASE2.json"
+    },
+    {
+      "bytes": 470,
+      "sha256": "A8853B0263838B0166040A4A300E441F439B0CA59B267A101D524711D21B287F",
+      "path": "receipts/USAGE.json"
+    },
+    {
+      "bytes": 4836,
+      "sha256": "FC661DF4518F867C2F58C96B7FAD09E49B95B29B4A6630149D3A70C0B4CF5C84",
+      "path": "receipts/WORKTREE_PRESERVATION.json"
+    },
+    {
+      "bytes": 1745,
+      "sha256": "9284BA5E648EA7FBC3182AE2FC063659F12967CCF056A4C5BE0A393E4D88CD70",
+      "path": "SOURCE_IDENTITY.json"
+    },
+    {
+      "bytes": 1292,
+      "sha256": "31C613A879FAA16BEDF90977EF3F23D3A6BFAAF83EE32D93A5AF70C80B99C186",
+      "path": "TEST_SUMMARY.json"
+    },
+    {
+      "bytes": 663,
+      "sha256": "4E20BC83E04B16349AF50BFA9426D978A8961569722B4A1590AFB3988F3192D8",
+      "path": "VALIDATION.json"
+    },
+    {
+      "bytes": 1136,
+      "sha256": "582BA9A1C6D700B8DF953AEFA5791B6BCF9DFC79F5711AC182ECAF72BC6BFE2C",
+      "path": "WORKTREE_PRESERVATION.json"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "sourceSha": "42476a1c1ab73f8aedf3ada973c8302efa83204f",
+  "dirty": [
+    " M src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+    " M tests/RAWSelectionAssistant.WpfTests/CanvasFavoriteAppAcceptanceTests.cs",
+    "?? src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.Usage.cs",
+    "?? tests/RAWSelectionAssistant.WpfTests/CanvasUsageAppAcceptanceTests.cs",
+    "?? tests/RAWSelectionAssistant.WpfTests/CanvasUsageStateTests.cs",
+    "?? tools/collage-used/"
+  ],
+  "cwd": "E:\\Kitao-Worktrees\\r55-collage-used-20261109",
+  "dotnet": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:Platform=x64"
+  ],
+  "pid": 10432,
+  "exitCode": 0,
+  "seconds": 9.4237539768219
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "Read-only current production interface and real composition/callsite audit",
+  "productSource": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "productionOnlineDiff": [],
+  "onlineBranch": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+  "status": "INTERFACE_AUDIT_COMPLETE_NOT_NETWORK_ACCEPTED",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/OnlineSelectionContracts.cs",
+      "sha256": "AAFBB2E4DA663EF5653E952B6072EEE37B3A34EEDE3F9A953999E8C87A972E29"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/NoneOnlineSelectionProvider.cs",
+      "sha256": "23E948E601311C3D3110B2127190BA4F07EA2F19A4ED2B5A169ECADDC4F3CB63"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionUploadQueue.cs",
+      "sha256": "47AD76B43C5019A0479CEA11399E56372F0CC3CE321B3ABCEACC060CA08737CE"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionProxyJpegService.cs",
+      "sha256": "24FDFA4DAC233A7E4C0703859C590761C89CE14E8763D8AD3DCA14A44ACEA820"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionWorkspaceStores.cs",
+      "sha256": "A799D4314F0A72868481C7A75D060509271D3C33FDD30DEC43B647205DEAADB3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultSyncService.cs",
+      "sha256": "7462F4B9F8A81C935305801C72DBCD1204D205CB04C8A8B7B4855D55D1EBAF76"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OnlineSelectionModels.cs",
+      "sha256": "6ACE7732ABC3EB9F71D2B209FC14677410674C51DEDD231D9C62937C2ECB6C47"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+      "sha256": "713B3DC2D183B5560E71F71A68D626142183EA8A35452874E7C443709A70709C"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/App.xaml.cs",
+      "sha256": "D28C96919CF0A3701C646537DBC9598A19134B0D6F233BDF58317FF716C6F677"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ApplicationCompositionRoot.cs",
+      "sha256": "85747D6F7432D3822E89D9F66FA0025B29ACB88822B73D716525AD8FF8D1B320"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/OnlineSelection/WpfSelectionProxyRenderer.cs",
+      "sha256": "ACA906AF95CE77AD0D4C0E83767C87E5C4977EBAA373F34EBD76CF023FC7FBAB"
+    }
+  ],
+  "onlineProviderServiceRequests": 0
+}

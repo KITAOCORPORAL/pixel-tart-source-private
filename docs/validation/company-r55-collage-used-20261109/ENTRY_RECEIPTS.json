@@ -1,0 +1,93 @@
+{
+  "sourceSha": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "runtime": "E:\\Kitao-Deliveries\\r55-collage-used-20261109\\final-entry01\\runtime",
+  "results": [
+    {
+      "phase": "UsedPhase1AddRemoveMultiplicityUndoRedoAndSave",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-used-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.UsedPhase1AddRemoveMultiplicityUndoRedoAndSave",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-used-20261109\\final-entry01\\UsedPhase1AddRemoveMultiplicityUndoRedoAndSave"
+      ],
+      "pid": 10392,
+      "exitCode": 0,
+      "seconds": 10.50087285041809,
+      "results": [
+        {
+          "executionId": "349d6b9a-1948-4109-8e66-4583780e0669",
+          "testId": "1526c996-9dfe-8fe3-a5e8-ad07a491120f",
+          "testName": "UsedPhase1AddRemoveMultiplicityUndoRedoAndSave",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:09.5422439",
+          "startTime": "2026-11-09T16:27:51.6387600+08:00",
+          "endTime": "2026-11-09T16:28:01.1961468+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "349d6b9a-1948-4109-8e66-4583780e0669"
+        }
+      ]
+    },
+    {
+      "phase": "UsedPhase2RestartSwitchCanvasAndUnfavoriteKeepsUsage",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-used-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.UsedPhase2RestartSwitchCanvasAndUnfavoriteKeepsUsage",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-used-20261109\\final-entry01\\UsedPhase2RestartSwitchCanvasAndUnfavoriteKeepsUsage"
+      ],
+      "pid": 6936,
+      "exitCode": 0,
+      "seconds": 7.411755323410034,
+      "results": [
+        {
+          "executionId": "727ffafa-e672-4cff-b949-e641f88ffc06",
+          "testId": "1cf36d8a-5d70-8069-8b42-dbdd5e0d68fb",
+          "testName": "UsedPhase2RestartSwitchCanvasAndUnfavoriteKeepsUsage",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:06.4655174",
+          "startTime": "2026-11-09T16:28:02.1762646+08:00",
+          "endTime": "2026-11-09T16:28:08.6567677+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "727ffafa-e672-4cff-b949-e641f88ffc06"
+        }
+      ]
+    },
+    {
+      "phase": "UsedPhase3SwitchLibraryRestoreOriginalAndExport",
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\r55-collage-used-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.UsedPhase3SwitchLibraryRestoreOriginalAndExport",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\r55-collage-used-20261109\\final-entry01\\UsedPhase3SwitchLibraryRestoreOriginalAndExport"
+      ],
+      "pid": 7544,
+      "exitCode": 0,
+      "seconds": 9.496689081192017,
+      "results": [
+        {
+          "executionId": "fb854e13-431a-4000-9cb6-3079e90cb8a1",
+          "testId": "1915b0d6-d357-8422-b12e-c1f1a32eba83",
+          "testName": "UsedPhase3SwitchLibraryRestoreOriginalAndExport",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:08.5412815",
+          "startTime": "2026-11-09T16:28:09.6323002+08:00",
+          "endTime": "2026-11-09T16:28:18.1885782+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "fb854e13-431a-4000-9cb6-3079e90cb8a1"
+        }
+      ]
+    }
+  ]
+}

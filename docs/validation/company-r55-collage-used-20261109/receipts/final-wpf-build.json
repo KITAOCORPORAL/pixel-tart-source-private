@@ -1,0 +1,20 @@
+{
+  "sourceSha": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "dirty": [],
+  "cwd": "E:\\Kitao-Worktrees\\r55-collage-used-20261109",
+  "dotnet": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:Platform=x64",
+    "-p:SourceRevisionId=02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+    "-p:IncludeSourceRevisionInInformationalVersion=true"
+  ],
+  "pid": 28572,
+  "exitCode": 0,
+  "seconds": 13.617822647094727
+}

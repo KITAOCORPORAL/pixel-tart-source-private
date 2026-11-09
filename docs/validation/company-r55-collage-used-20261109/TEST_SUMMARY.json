@@ -1,0 +1,42 @@
+{
+  "newRawOpen": 0,
+  "smoke": {
+    "cmdExit": 0,
+    "appExit": 0,
+    "cmd": "PASS",
+    "primaryNavigation": 10,
+    "toolbox": 1,
+    "exe": "PASS"
+  },
+  "scope": "Final selected published-DLL-bound tests only",
+  "newRawMemoryImage": 0,
+  "counts": {
+    "FullAppNativeUIAIndependentProcesses": 3,
+    "Core": 16,
+    "Passed": 33,
+    "WpfRegression": 14,
+    "NotRun": 0,
+    "Failed": 0
+  },
+  "physicalMouseAcceptance": "NOT_RUN",
+  "completeDpiAcceptance": "NOT_RUN",
+  "earlyFailuresPreserved": [
+    "dev-build01 missing test System.IO using",
+    "dev-state01 missing XAML x namespace, corrected product template",
+    "standalone-exe-smoke readiness race in smoke harness, product later loaded normally",
+    "standalone-exe-smoke02 child process exit-code wrapper error after successful native navigation/close"
+  ],
+  "productSourceSha": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "appPids": [
+    27932,
+    4680,
+    13068
+  ],
+  "timezone": "Asia/Shanghai",
+  "newRawProcess": 0,
+  "newRawUnpack": 0,
+  "noProductChangeAfterFrozenPublish": true,
+  "publishedBindings": 29,
+  "wpfAcceptanceSourceSha": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "publishedLaunchSmokeSourceSha": "5645a9af4388f1752faed7212d94e5df622c7e53"
+}

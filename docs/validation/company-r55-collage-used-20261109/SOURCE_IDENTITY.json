@@ -1,0 +1,36 @@
+{
+  "productFiles": [
+    "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+    "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.Usage.cs"
+  ],
+  "productDiffFromPublishSource": [],
+  "smokeSource": "5645a9af4388f1752faed7212d94e5df622c7e53",
+  "productSource": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2",
+  "fileHashes": [
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "workingFileSha256": "5F63B38A8C0632B785A80340018F6C2EA6B7CD93986F3C99774E13801E41BDF7",
+      "gitBlob": "aef2ee038cfa00d186b3037a4f369619c3d93029"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.Usage.cs",
+      "workingFileSha256": "64A6F6DFF89C935537863A897AEBD3C36F92B4426980CA9B69617DE9C4CC8AC8",
+      "gitBlob": "4d7fa95fbe4538e60ae0e5beed765258c6531e57"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/CanvasUsageAppAcceptanceTests.cs",
+      "workingFileSha256": "F2C81B5DCD631F994F2E8935CBF1B8973925016459BB7C4EBCECB8BEA0726768",
+      "gitBlob": "97aecf4ed941ea21d2e93b18e6d0afbbb9b24d95"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/CanvasUsageStateTests.cs",
+      "workingFileSha256": "523C14461B33258348999E92EF6374FF519F14C13654B96C45D9EF1E0421214A",
+      "gitBlob": "b431efdce442b080f8af13d50a3cd1b61dcec385"
+    }
+  ],
+  "productionNativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+  "CoreOrRendererOrImportSchemaChanged": false,
+  "baselineFeature": "623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+  "baselineDelivery": "42476a1c1ab73f8aedf3ada973c8302efa83204f",
+  "wpfAcceptanceSource": "02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2"
+}

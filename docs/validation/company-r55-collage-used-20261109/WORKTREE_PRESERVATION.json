@@ -1,0 +1,30 @@
+{
+  "writesToOtherTreesByThisTask": 0,
+  "targetOwnChangesExpected": true,
+  "sourceDirtyPreservation": "HEAD/porcelain/unpushed comparison, not bytewise proof of every unrelated dirty/ignored file",
+  "existingTreesCompared": 67,
+  "noResetStashCleanMerge": true,
+  "foreignChanges": [
+    {
+      "before": {
+        "worktree": "E:/Kitao-Worktrees/raw-observation-review-20261106",
+        "HEAD": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+        "branch": "refs/heads/research/raw-observation-rereview-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [],
+        "error": "",
+        "unpushedFromHead": []
+      },
+      "after": {
+        "worktree": "E:/Kitao-Worktrees/raw-observation-review-20261106",
+        "HEAD": "50836e58eedf90b5e40a0cd08973a69a09118539",
+        "branch": "refs/heads/research/raw-h1-window-20261109",
+        "statusReturnCode": 0,
+        "porcelain": [],
+        "unpushedFromHead": [
+          "50836e58eedf90b5e40a0cd08973a69a09118539 research(raw): freeze bounded architectural X-Trans watchpoint plan and no-RAW tests"
+        ]
+      }
+    }
+  ]
+}

@@ -1,3 +1,10 @@
+## 2026-11-09 R5.5 拼贴素材“已用”角标（Asia/Shanghai）
+- 从收藏交付42476a1c/功能623d0a8c独立接续feature/r55-collage-used-20261109，产品源码02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2。只改FreeCanvasView模板及Usage partial两产品文件，复用CanvasEditor.Changed，从当前文档LibraryId+AssetId派生，不增持久字段/导入身份/收藏存储，隐藏锁定和重复实例计入。
+- 最终发布DLL29项绑定；Core16+WPF14+完整App独立原生UIA3=33PASS。PID27932→4680→13068走真实素材栏/编辑移出/撤销重做/保存/新建和重开画布/最近库切换/取消收藏/系统导出；最后实例移除清标、有其它实例保留、跨库同ID不交叉、取消收藏对象仍在均通过。不是物理鼠标或完整DPI验收。
+- 透明PNG1920×1080，透明2006100/非透明67500，源hash不变，工程不含派生状态。发布EXE/CMD真实启动读回10主导航+工具箱，正常关闭退出0。早期构建/模板x命名空间失败、冒烟工具就绪/退出码读取失败保留；产品模板在冻结前修复，后续只修工具不重建包。
+- 全模块诊断ZIP E:/Kitao-Deliveries/r55-collage-used-20261109/Guangjing-R55-CollageUsed-Diagnostic-win-x64.zip，77197962bytes、296文件逐项ZIP SHA读回，SHA7CEC005C3E3455960059A341A6C115C479783CBB2F8187BD6A9FEDF884BF9FED。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，策划15/教程退役/全模块保持，无安装器；native仍F500C073…，本轮RAW四API0，不宣称修复A问题。
+- 在线provider只读核对完成：正式App已接真实代理生成与JSON本地持久化，默认仍None；远端create/get、生产上传队列、结果刷新未完整接线。首片为单项目/单张代理/单客户受保护入口/确认回写，需固定API v1、鉴权/幂等/规则/发布凭证/最终确认合同及HTTPS测试部署。未替换provider、未部署、服务请求0，不把mock当联网验收。
+- 报告docs/validation/company-r55-collage-used-20261109/FINAL_REPORT.md；接口及下一片ONLINE_PROVIDER_NEXT_SLICE.md。本地根E:/Kitao-Deliveries/r55-collage-used-20261109；所有既有树/脏文件/未推成果与失败证据保留，最终远端HEAD普通推送后另读回。
 ## 2026-11-09 R5.5 拼贴素材收藏（Asia/Shanghai）
 - 从产品38dd3f92建独立feature/r55-collage-favorites-20261109；最新产品f27f4409相对基线src零差异。保全65旧树/11脏树/未推与全部失败，不改A。
 - 最小复用现有FreeCanvas/素材身份/导入：独立引用收藏、取消收藏、收藏筛选、加入画布；修正切来源时旧列表选择被异步清空。收藏不借用照片评分、不缓存像素，当前库原子保存，非法/跨库引用明确拒绝。
