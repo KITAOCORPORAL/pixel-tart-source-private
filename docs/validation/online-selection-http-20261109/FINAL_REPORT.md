@@ -55,3 +55,10 @@ PC 发布命令用稳定 Guid 和预先保存的 Windows 用户加密凭据创�
 ## 未执行原因
 
 自动审批拒绝了原生 App 启动，因此未操作原生窗口。自动审批也拒绝了初始服务停止命令，17646 旧测试进程保留，最终使用独立 17648 服务。未绕过自动审批。后续服务构建需使用独立输出目录，避免运行中 DLL 占用。未使用 Browser、WebView、Computer Use 或 CDP。Safari 需要人工操作现成测试链接。
+
+
+## Git 交付回读
+
+实现提交为 `6f28d5ba5ead64ed5083516d236e2a2271580deb`。本地工作树已提交。推送时 GitHub 443 超时，远端回读同样失败；随后本机已有代理的 HTTPS 请求也失败，因此不能声称提交已推送。
+
+可导入 Git bundle 已生成并通过 git bundle verify：`artifacts/online-selection-http/online-selection-http-20261109.bundle`，包含实现分支，前置提交为指定基线 37ea6c9a。网络恢复后可在本分支执行 git push -u origin feature/online-selection-http-20261109；无须合并或改动旧树。

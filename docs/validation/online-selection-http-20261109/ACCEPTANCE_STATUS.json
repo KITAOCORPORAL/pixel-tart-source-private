@@ -16,5 +16,6 @@
   "initial_service": "17646 test process left running after automatic approval rejected stop command; final service is 17648",
   "local_only_files": "PHONE_URL.txt, encrypted access, workspace, server DB and proxy objects remain under ignored artifacts; secrets are absent from versioned receipts",
   "preservation": "all old worktrees and primary uncommitted files preserved; no reset/clean/stash/rebase",
-  "scope": "online selection v1; browser extension work not started"
+  "scope": "online selection v1; browser extension work not started",
+  "git_delivery": "Local implementation commit 6f28d5ba5ead64ed5083516d236e2a2271580deb; direct GitHub HTTPS push failed (port 443 timeout), local proxy HTTPS failed too; verified offline Git bundle available under ignored artifacts."
 }
