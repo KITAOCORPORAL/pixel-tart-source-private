@@ -1,0 +1,270 @@
+{
+  "events": [
+    {
+      "process": "second",
+      "sequence": 42,
+      "phase": "final-G-store",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 24408,
+      "tile": [
+        3,
+        7443
+      ],
+      "rva": "0x839bf",
+      "instructionBytes": "668944d102",
+      "destinationOrStoreSourceRegister": "rax",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 43,
+      "phase": "tile-copy-consumed-G",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x81fdb",
+      "instructionBytes": "8b04d1",
+      "destinationOrStoreSourceRegister": "rax",
+      "postRegisterValue": 4063350,
+      "extractShift": 16,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 46,
+      "phase": "initial-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x82288",
+      "instructionBytes": "0fb75302",
+      "destinationOrStoreSourceRegister": "rdx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 48,
+      "phase": "initial-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x82288",
+      "instructionBytes": "0fb75302",
+      "destinationOrStoreSourceRegister": "rdx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 50,
+      "phase": "initial-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x82288",
+      "instructionBytes": "0fb75302",
+      "destinationOrStoreSourceRegister": "rdx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 52,
+      "phase": "initial-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x82288",
+      "instructionBytes": "0fb75302",
+      "destinationOrStoreSourceRegister": "rdx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 62,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 64,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 66,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 74,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 76,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    },
+    {
+      "process": "second",
+      "sequence": 78,
+      "phase": "recalculation-LIM-lower",
+      "coordinate": [
+        7461,
+        506
+      ],
+      "slot": 1,
+      "value": 62,
+      "threadId": 25752,
+      "tile": [
+        499,
+        7443
+      ],
+      "rva": "0x825bf",
+      "instructionBytes": "0fb74cf002",
+      "destinationOrStoreSourceRegister": "rcx",
+      "postRegisterValue": 62,
+      "extractShift": 0,
+      "effectiveAddressVerified": true
+    }
+  ],
+  "sequenceMeaning": "Debugger delivery order, not a global happens-before claim",
+  "valuesFrom": "Actual post-instruction GPR, not watched-memory peeks"
+}

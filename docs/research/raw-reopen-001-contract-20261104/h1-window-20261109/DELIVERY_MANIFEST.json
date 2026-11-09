@@ -1,0 +1,163 @@
+{
+  "version": "H1WindowDeliveryV1",
+  "actualValidationBase": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+  "researchBase": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+  "executionPlanCommit": "50836e58eedf90b5e40a0cd08973a69a09118539",
+  "decision": "H1_SUPPORTED_IN_OBSERVED_EXECUTION_WINDOW_ROOT_CAUSE_OPEN",
+  "hashSemantics": "SHA256 of staged Git blob bytes; excludes this delivery manifest itself",
+  "newRawProcesses": 2,
+  "newGPUCalls": 0,
+  "wholeP5P6Comparison": false,
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 40698,
+      "sha256": "7b4d5cf42b58d545d2d2814c55fe5aacd4d0007eb9c6aba4e876e184c713a881"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/.gitattributes",
+      "bytes": 27,
+      "sha256": "c089985639038cc07dc37c07a8d0d543df7ddf9b1873a948000494a6e230530d"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/ADMISSION_GATE.json",
+      "bytes": 4420,
+      "sha256": "22ab9a9789288e1203c47476bb7965add0f9d0e16d3bef92ed1733128eee2177"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/ANALYSIS.json",
+      "bytes": 7785,
+      "sha256": "f36af7bc17d2dbc6e46f2f926b219ce47a3110cd782f16b57ec08e5220144f97"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/BASELINE_BINDING.json",
+      "bytes": 2497,
+      "sha256": "8dd2f48af21c6056c05556eff4d84a17927b4cbd730a5b7abe82804185597f0c"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/BATCH_RECEIPT.json",
+      "bytes": 1771,
+      "sha256": "4b1d7de1abe478286ca2a02ee49634eef9ab00680d4bbf15ce253f6ec3c463c0"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/EVIDENCE_FORMAT_BINDING.json",
+      "bytes": 3291,
+      "sha256": "bb8608ef1054fb415ee4a90c1e7fc0ec60ac48b1657869b59b4daecac2aada9c"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/EXECUTED_CODE_BINDING.json",
+      "bytes": 1478,
+      "sha256": "c5290cc5f08acdbfd601bead3551f238762799862ab6f1926fbcd3dcef77682f"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/LOCAL_REGISTER_PROPAGATION.json",
+      "bytes": 524,
+      "sha256": "7e41fef6a4241f778d4e0652a524162bae8746ae82a38b554e840f36174fbbb4"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/MEASUREMENT_REVIEW.md",
+      "bytes": 5740,
+      "sha256": "8bb1f656a5e74848e353cd251c3331c1ea6a2697b583331abc78dd0f57c3a39d"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/NO_RAW_DEBUGGER_SELFTEST.json",
+      "bytes": 6673,
+      "sha256": "d10f0e6036f0064a5a5b5a145430802f73bf166c693440b1b1e015927c8ca92b"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/NO_RAW_HOST_SELFTEST.json",
+      "bytes": 424,
+      "sha256": "7248dd78e8ea281fbb60514f91ff093ac65866a323eb988fa0515cf891f8f725"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/OLD_WINDOW_WITNESSES.json",
+      "bytes": 607,
+      "sha256": "1554fc3d2df42fe1e833b5aa7535978cd08748308d2778031fb3476ae557acfe"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/OPTIMIZED_IDENTITY.json",
+      "bytes": 496,
+      "sha256": "8b5311d8a5bb784033bc403b0d89dead014f5879671696178c043065e413fd42"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/OVERLAP_MAP.png",
+      "bytes": 79323,
+      "sha256": "d670220b6235c3947486e9f3da522f0099a4e9d068ed27d3ddd95f89d3d7991c"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/PARAMETER_PARITY.json",
+      "bytes": 519,
+      "sha256": "e8b1ad9f0ec7ce291a4e1ebb9522ece41cc2ce9c841ac6944f401e410e8251dd"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/PLAN.json",
+      "bytes": 3342,
+      "sha256": "bc2dc4f92026bae2695d00ec92d2461745a36214844860cd934ee867d6d8a8c9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/POSITIVE_EVENT_WITNESSES.json",
+      "bytes": 5904,
+      "sha256": "45d108ff117eab2e41e0d2171174140d483fc7e42c2b4620f01bf6d17e2ab181"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/PROVENANCE.json",
+      "bytes": 3346,
+      "sha256": "0961cfe27b972bda13ec838386d031884623eed4aa9169dc65a537a72319bd47"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/REPORT.md",
+      "bytes": 7737,
+      "sha256": "6db3a8ea5e3028c7d6b52268f0b5908ad53a54414b69ab99f2ad7e35cfe98cc7"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/h1-window-20261109/REUSED_INPUT_BINDING.json",
+      "bytes": 4389,
+      "sha256": "2f90447641256be1e0a163b475769001955f8d870ce112d6035f0b93b910e184"
+    },
+    {
+      "path": "tools/raw-h1-window/.gitattributes",
+      "bytes": 90,
+      "sha256": "f4ad51c7dda55fcbc38ba811d8773f89e0ba228ee6f0ac222b5719013908a2b1"
+    },
+    {
+      "path": "tools/raw-h1-window/H1Host.csproj",
+      "bytes": 395,
+      "sha256": "73a22af1003bf6874a0b7ee22811d65763f3f18cc861818b2f23f514ec695254"
+    },
+    {
+      "path": "tools/raw-h1-window/Program.cs",
+      "bytes": 6448,
+      "sha256": "08af2d66dd9682e079c8dd16272bd0af83414ff15fb41f03e45488e90269646f"
+    },
+    {
+      "path": "tools/raw-h1-window/README.md",
+      "bytes": 2466,
+      "sha256": "e781aeadc5618cae7a41f71a2cf0e8fed4fe0ffb0a91fe23b4b3cc9d131dc001"
+    },
+    {
+      "path": "tools/raw-h1-window/analyze.py",
+      "bytes": 5740,
+      "sha256": "b500d97641492fa1b6873bd8f65846c21fbcba533025cdb4b2f72d0259c4da3e"
+    },
+    {
+      "path": "tools/raw-h1-window/debug_watch.py",
+      "bytes": 11748,
+      "sha256": "1a7bbd2722df301d47e7e04186e106c034b3f19987eb9f33593f1d5a5e4b339e"
+    },
+    {
+      "path": "tools/raw-h1-window/prepare_plan.py",
+      "bytes": 5554,
+      "sha256": "0b6b304ce1dbe0f46be6ecb7afd51595f9d480414441286415c00d82c0606134"
+    },
+    {
+      "path": "tools/raw-h1-window/run_batch.py",
+      "bytes": 4558,
+      "sha256": "0aa3712c9da1dcdaeafb54a9c4cfc09de18b98f907b82434a1575b81a7852fcf"
+    },
+    {
+      "path": "tools/raw-h1-window/selftest.cpp",
+      "bytes": 648,
+      "sha256": "32b69b30d506ad5bf36e0339111a877b16f75efc47199f0905885302aefb651d"
+    }
+  ]
+}

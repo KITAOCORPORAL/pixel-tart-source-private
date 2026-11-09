@@ -1,0 +1,16 @@
+{
+  "oldValidationCommit": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+  "oldConfigSha256": "ca1a7408318d88da230f149eca0d62949dd373d5ba3a06c2e5aa63b06abb5ffa",
+  "new": [
+    {
+      "process": "first",
+      "sha256": "ca1a7408318d88da230f149eca0d62949dd373d5ba3a06c2e5aa63b06abb5ffa",
+      "semanticEqualToOldValidatedConfig": true
+    },
+    {
+      "process": "second",
+      "sha256": "ca1a7408318d88da230f149eca0d62949dd373d5ba3a06c2e5aa63b06abb5ffa",
+      "semanticEqualToOldValidatedConfig": true
+    }
+  ]
+}

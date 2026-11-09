@@ -1,0 +1,14 @@
+{
+  "authority": "Derived local optimized-instruction replay using actually observed registers; not a second algorithm execution or full-image counterfactual",
+  "process": "second",
+  "consumerEventSequence": 48,
+  "rawColorAccumulator": 14269,
+  "sar8Candidate": 55,
+  "actualConsumedLower": 62,
+  "actualConsumedUpper": 119,
+  "derivedThisLIMResult": 62,
+  "localSameOperandsWithSerialLower34": 55,
+  "observedCarriedRDXAtNextUpperLoad": 62,
+  "notDirectlyTrappedPrivateStore": true,
+  "noWholeOutputCausalClaim": true
+}

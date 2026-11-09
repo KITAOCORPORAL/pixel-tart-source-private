@@ -1,0 +1,54 @@
+{
+  "validationCommit": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+  "researchCommit": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+  "librawCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "headerGitBlobSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "generatedSourceFiles": [
+    {
+      "path": "src/postprocessing/dcraw_process.cpp",
+      "insertions": 73,
+      "originalSha256": "81efb3bab8631285123414f5e6dc2de62069e2340bf54e7dae41a55d7540c540",
+      "generatedSha256": "33e7474533ef7290516753aba40397b3f39e3dd8f660825416b38b37c8c46458"
+    },
+    {
+      "path": "src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "insertions": 18,
+      "originalSha256": "531b7f9176006933a58d638f8e2f96cf9bfa300375ddab5b4034708fe1045ea2",
+      "generatedSha256": "f91703b93b8eb1d8ad09e1a583b499feab6cb7e31030a7937d77984cb9c3330f"
+    },
+    {
+      "path": "src/preprocessing/raw2image.cpp",
+      "insertions": 7,
+      "originalSha256": "c7086786e96c03601de4bee5215532fa14d7a83da6fcbe8af912cf209d1e5d8f",
+      "generatedSha256": "462da26fb330ececbe50c690799c95c8f472d68ed2dcbcedd44f4662ef589130"
+    },
+    {
+      "path": "src/demosaic/xtrans_demosaic.cpp",
+      "insertions": 6,
+      "originalSha256": "1c4aa7362d4059ea3952dbc9a09de73f13721aa18f65d2445d027e68352045af",
+      "generatedSha256": "cf4616cc0f437d28e52b6131b5e241ee2da96e587c8b86f4d62c76f58e8c84fc"
+    },
+    {
+      "path": "src/preprocessing/subtract_black.cpp",
+      "insertions": 3,
+      "originalSha256": "87a09f0428e675f40381029c3600411ed9097a7bf58a47bb204e2e3c826296eb",
+      "generatedSha256": "8774920911375ed61235f171ca8aa6bedcf4cc9c2bca9280e80679fe34b28544"
+    },
+    {
+      "path": "src/utils/utils_libraw.cpp",
+      "insertions": 3,
+      "originalSha256": "a5dda3c94664b54b73a798b87379862a806d66ad4730a7ea5934a7122a8b24a8",
+      "generatedSha256": "0601a36b97608ffa4a7e2b173bcaf453f851790750cd5b8fe91f953d9ec5cf3a"
+    },
+    {
+      "path": "src/demosaic/ahd_demosaic.cpp",
+      "insertions": 2,
+      "originalSha256": "05db2e09c7963fc25f691eb36c84cf4593c05642282e5b3dcd19b4946600c4dc",
+      "generatedSha256": "f84703a8523310aabf34c25eaa55ebbf5b3dbae20d1dafa49e0ce6f545523232"
+    }
+  ],
+  "actualDllSha256": "305eec498644f01ec707e8ac3e58a4b5670043d35fbc853626ff13ac6ff15484",
+  "inputSha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+  "workerAlgorithmInstructionsRewritten": false,
+  "parentBoundaryBreakpointsRestored": true
+}

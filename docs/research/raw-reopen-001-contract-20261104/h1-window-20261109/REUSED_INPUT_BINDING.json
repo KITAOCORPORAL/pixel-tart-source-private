@@ -1,0 +1,154 @@
+{
+  "oldStageMetadata": [
+    {
+      "process": "first",
+      "sourceCommit": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+      "path": "docs/validation/raw-reopen001-native-validation-20261109/receipts/batch/first/native-events.jsonl",
+      "gitBlobSha256": "3ea6a02e1d988a60ca5416ded41311e8288d69ff6691fd12ee557d9a83f9b40b",
+      "originalLocalSha256": "3ea6a02e1d988a60ca5416ded41311e8288d69ff6691fd12ee557d9a83f9b40b",
+      "semanticRecordsEqual": true,
+      "actualPriorTiles": [
+        {
+          "kind": "tile",
+          "worker": 0,
+          "team": 6,
+          "top": 3,
+          "left": 7443,
+          "mrow": 515,
+          "mcol": 7749,
+          "scratchPointerDiagnosticOnly": "2517aa28040",
+          "scratchBytes": 24641536,
+          "T": 512,
+          "ndir": 8
+        },
+        {
+          "kind": "tile",
+          "worker": 1,
+          "team": 6,
+          "top": 499,
+          "left": 7443,
+          "mrow": 1011,
+          "mcol": 7749,
+          "scratchPointerDiagnosticOnly": "2517c1bf040",
+          "scratchBytes": 24641536,
+          "T": 512,
+          "ndir": 8
+        }
+      ],
+      "stageHashes": [
+        {
+          "id": "P5",
+          "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+          "width": 7752,
+          "height": 5184,
+          "channels": 4
+        },
+        {
+          "id": "XTRANS-serial-ready",
+          "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+          "width": 7752,
+          "height": 5184,
+          "channels": 4
+        },
+        {
+          "id": "P6",
+          "sha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+          "width": 7752,
+          "height": 5184,
+          "channels": 3
+        }
+      ]
+    },
+    {
+      "process": "second",
+      "sourceCommit": "4c322975c546ac90a568cc1301e520477a3ca8d4",
+      "path": "docs/validation/raw-reopen001-native-validation-20261109/receipts/batch/second/native-events.jsonl",
+      "gitBlobSha256": "bacf391927e50c0c8b38b0ba25a2917613c22cba403d0813568ea326e069c93e",
+      "originalLocalSha256": "bacf391927e50c0c8b38b0ba25a2917613c22cba403d0813568ea326e069c93e",
+      "semanticRecordsEqual": true,
+      "actualPriorTiles": [
+        {
+          "kind": "tile",
+          "worker": 0,
+          "team": 6,
+          "top": 3,
+          "left": 7443,
+          "mrow": 515,
+          "mcol": 7749,
+          "scratchPointerDiagnosticOnly": "2df493f5040",
+          "scratchBytes": 24641536,
+          "T": 512,
+          "ndir": 8
+        },
+        {
+          "kind": "tile",
+          "worker": 1,
+          "team": 6,
+          "top": 499,
+          "left": 7443,
+          "mrow": 1011,
+          "mcol": 7749,
+          "scratchPointerDiagnosticOnly": "2df4ab83040",
+          "scratchBytes": 24641536,
+          "T": 512,
+          "ndir": 8
+        }
+      ],
+      "stageHashes": [
+        {
+          "id": "P5",
+          "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+          "width": 7752,
+          "height": 5184,
+          "channels": 4
+        },
+        {
+          "id": "XTRANS-serial-ready",
+          "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+          "width": 7752,
+          "height": 5184,
+          "channels": 4
+        },
+        {
+          "id": "P6",
+          "sha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+          "width": 7752,
+          "height": 5184,
+          "channels": 3
+        }
+      ]
+    }
+  ],
+  "oldDifferenceCsv": {
+    "localPath": "E:\\Guangjing-RawReopen001-F2Fix-20261109\\validated-interpolation-prefix\\P6.changes.csv",
+    "sha256": "73924c17126aeb19d99bdc0eba6bcbe677957ed0115f5aac51948d9b179a8324",
+    "selectedMeasuredDifferences": [
+      {
+        "x": "7451",
+        "y": "497",
+        "channel": "0",
+        "first": "164",
+        "second": "150",
+        "delta": "-14"
+      },
+      {
+        "x": "7461",
+        "y": "506",
+        "channel": "1",
+        "first": "62",
+        "second": "65",
+        "delta": "3"
+      },
+      {
+        "x": "7460",
+        "y": "507",
+        "channel": "1",
+        "first": "56",
+        "second": "34",
+        "delta": "-22"
+      }
+    ],
+    "notSourceExampleCoordinates": true
+  },
+  "wholeP5P6ComparisonRepeated": false
+}

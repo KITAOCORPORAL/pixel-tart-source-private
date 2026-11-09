@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETED_TWO_NO_RETRY",
+  "processes": [
+    {
+      "slot": "first",
+      "debuggerExitCode": 0,
+      "reservationId": "f47cdea2-d2da-497d-9ef9-6015ee8e9997",
+      "processId": 28120,
+      "events": 86,
+      "unknownAccesses": 0,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "debugReceiptSha256": "785DD32F0D961F31C7DCF8A240CD67835D5C680FF75EF930154418EF77D82BAF",
+      "hostReceiptSha256": "D78E4F8677289F292A4CCBC4FD9312D00CE7DFB5BD73F34C9E16E5EC2D77C43A"
+    },
+    {
+      "slot": "second",
+      "debuggerExitCode": 0,
+      "reservationId": "71656ea0-2be4-49b6-806d-bfa97c7454d0",
+      "processId": 8736,
+      "events": 86,
+      "unknownAccesses": 0,
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "debugReceiptSha256": "BAA4AE5E08389D7FD89BA9B0F7CD19239790B48902F7324FA7DBD4B06C84F24D",
+      "hostReceiptSha256": "4027D97C26847F22AC93171045EA1F7503ABE1F7CCAA6BD839B6CCC5BE53D405"
+    }
+  ],
+  "consumed": 2,
+  "remaining": 0,
+  "oldBatchEvidence": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\DELIVERY_BUDGET.json",
+      "sha256": "37EC77B9264C564906081CE35DC8E9AB4286E3DDAAD3AC5F177A743FFD1A71E5"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\validation-batch\\ledger\\first.consumed",
+      "sha256": "3BC6977EE22137BAB6AB47B925BD2E849C07BF12002D21AFEC08D26BEC6FF94A"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\validation-batch\\ledger\\second.consumed",
+      "sha256": "4387D5E932440E75F0353F85303660F1192ACDCF3E9A5E0DFAC6ADE60CA6D0BB"
+    }
+  ],
+  "wholeP5P6Comparison": false
+}

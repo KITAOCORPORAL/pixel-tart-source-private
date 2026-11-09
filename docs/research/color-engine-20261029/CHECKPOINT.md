@@ -1,3 +1,9 @@
+# 当前检查点：H1实际共享槽消费获支持（2026-11-09）
+
+从4c322975/0750a014接续。预执行方案/工具50836e58已冻结并通过无RAW门禁；优化清单与旧obj的377个.text段逐段相同，六处实际load/store PC及有效地址校验。独立H1批次两进程PID28120/8736，各一次Open/Unpack/Process/MemoryImage，86事件/进程，未截断无UNKNOWN，不采整图、不重比P5/P6。第二进程C2(7461,506)serial min34；tileA(top3,left7443,thread24408)实际G store62，tileB(top499,left7443,thread25752)复制/初次LIM/重算LIM共11次实际load消费62，上界119不变。消费值来自真实后指令寄存器，非peek或缓存宏参数。H1 SUPPORTED_IN_OBSERVED_EXECUTION_WINDOW，原故障ROOT_CAUSE_OPEN/NOT_FIXED；调试器强扰动，不证明全部旧差异或O_first。第一进程本窗口未见可区分污染不能全局反证。旧consumed证据hash保持，新consumed2/remaining0不追加第三次。F2收口，V1封存。见h1-window-20261109/REPORT.md、ANALYSIS、POSITIVE_EVENT_WITNESSES与重叠图。
+
+---
+
 # 当前检查点：新批次P6首差已读回（2026-11-09）
 
 F2修复64d4dc6e的三个原反例与正常对照4项通过，研究cb0093a0已关闭F2。原生线DLL305EEC49...15484已实际编译/无RAW自检通过，header仍ce42b2ef...d1f718。复用本轮独立批次两进程PID26928/20016真实输出，旧consumed2保留、新consumed2/remaining0；研究未新增解码。P1/P3b/P5/serial-ready完整输入状态相同，实际XTrans passes3/T512/ndir8/team6，P6有5127通道差、max815，首差(7451,497,R)。64d4完整比较器在P8因实际rawColor旁路拒绝，保留失败；只读插值prefix独立验证首差P6，不冒充下游完整链准入。H1前提成立、实际共享槽消费值仍UNKNOWN，不宣布根因。见runtime-followup-20261109。V1封存，不追加第三次解码。

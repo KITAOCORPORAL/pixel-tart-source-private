@@ -1,0 +1,83 @@
+{
+  "files": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\GATE.json",
+      "bytes": 4420,
+      "sha256": "22ab9a9789288e1203c47476bb7965add0f9d0e16d3bef92ed1733128eee2177"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\PLAN.json",
+      "bytes": 3484,
+      "sha256": "eb2340dd0987c214f4f1c56d999ce4deb17ea9e9f97222214055d71c71421106"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\MARKED_SELFTEST_CONFIG.json",
+      "bytes": 1643,
+      "sha256": "171fc5886120281ae8871742f6ba93b8dd4132d94aec39171f8d62ed109da291"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\widetest.exe",
+      "bytes": 10240,
+      "sha256": "62c8c022e8e83fa99d30cec42fc22069e4eda6e14594f78413664d95e62bbb58"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\admission-no-raw-selftest\\RECEIPT.json",
+      "bytes": 6967,
+      "sha256": "9924531df30322184fcb286ea34b5b3bf1b36c64e59877abd621c0119efde143"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\negative-code-selftest\\FAILURE.json",
+      "bytes": 1721,
+      "sha256": "e853584d9af5409b45dc06b91b581600859c4e2613946e74208c7e599d0e1a84"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\cap-selftest\\RECEIPT.json",
+      "bytes": 1746,
+      "sha256": "3cbbb847ee6bb311bfee985dcd51741d20833875a0c533b1021ed6b5936af2c2"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\marked-no-raw-selftest\\RECEIPT.json",
+      "bytes": 2162,
+      "sha256": "11500cad84ec1fd8543d4bf168f849f18b87686ec9607d1df66687dd529fcfbb"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\host-final-no-raw-selftest\\result.json",
+      "bytes": 639,
+      "sha256": "0a117747eb8ecf10488dedbadff5c5cb59ff799c5870cc0d2066a7dd8500457a"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\OPTIMIZED_IDENTITY.json",
+      "bytes": 504,
+      "sha256": "1c6ad693031c70adfde89b111b5e76b7107c100daf3d00f9fdcbc69199f054c1"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\LISTING_BUILD.log",
+      "bytes": 21,
+      "sha256": "ad53d9be5109376a7bb19159b604bb78c7f6aa29870b85adc592b891ad57766a"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\HOST_FINAL_BUILD.log",
+      "bytes": 835,
+      "sha256": "da85a265df6aa6f6d76de3487df4c55fc5cc17ce9d734bae923c39f9eae69950"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\THREADTEST_BUILD.log",
+      "bytes": 161,
+      "sha256": "ee326e247da8744134a97db5e34abe3e5d864699bc12c14453e53ebfef513d94"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\WIDETEST_BUILD.log",
+      "bytes": 157,
+      "sha256": "0bd4178cfddd38790c5547047ca201788196d8fdb822fe0e464b46b0cff6ff66"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\SELFTEST_BUILD.log",
+      "bytes": 157,
+      "sha256": "4b6b6d80d9cef912081a55af92948a5532e43eb94c74b8ad6985c8f707833aa3"
+    }
+  ],
+  "initialMarkerTestCoverage": "3 instead of required 7; gate did not admit RAW; export-based marker corrected before final test",
+  "rawInstructionsAndParametersUnchanged": true,
+  "actualWholeFrameCapturesThisBatch": 0,
+  "compilerListingTextSectionsIdentical": 377
+}

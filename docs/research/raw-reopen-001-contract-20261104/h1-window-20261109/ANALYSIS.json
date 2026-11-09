@@ -1,0 +1,249 @@
+{
+  "version": "H1WindowVerdictV1",
+  "H1": "SUPPORTED_IN_OBSERVED_EXECUTION_WINDOW",
+  "rootCause": "OPEN_NOT_FIXED",
+  "processes": [
+    {
+      "process": "first",
+      "pid": 28120,
+      "events": 86,
+      "unknownAccesses": 0,
+      "truncated": false,
+      "actualObservedWorkerThreads": [
+        10196,
+        23528
+      ],
+      "candidateResults": [
+        {
+          "candidate": "C1",
+          "coordinate": [
+            7460,
+            507
+          ],
+          "serialLower": 34,
+          "serialUpper": 85,
+          "actualWriterValue": 34,
+          "writerThread": 10196,
+          "writerTile": [
+            499,
+            7443
+          ],
+          "crossReaderTile": [
+            3,
+            7443
+          ],
+          "crossActualConsumedValues": [
+            34
+          ],
+          "crossReads": 11,
+          "matchedNonInitialConsumedLoads": 0,
+          "upperControlUnchanged": true,
+          "mechanismObserved": false
+        },
+        {
+          "candidate": "C2",
+          "coordinate": [
+            7461,
+            506
+          ],
+          "serialLower": 34,
+          "serialUpper": 119,
+          "actualWriterValue": 71,
+          "writerThread": 23528,
+          "writerTile": [
+            3,
+            7443
+          ],
+          "crossReaderTile": [
+            499,
+            7443
+          ],
+          "crossActualConsumedValues": [
+            34
+          ],
+          "crossReads": 11,
+          "matchedNonInitialConsumedLoads": 0,
+          "upperControlUnchanged": true,
+          "mechanismObserved": false
+        }
+      ],
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetBytes": 767074304,
+      "elapsedSeconds": 5.09687440000198,
+      "verdict": "NO_DISTINGUISHABLE_CONTAMINATION_IN_THIS_WINDOW_NOT_GLOBAL_FALSIFICATION"
+    },
+    {
+      "process": "second",
+      "pid": 8736,
+      "events": 86,
+      "unknownAccesses": 0,
+      "truncated": false,
+      "actualObservedWorkerThreads": [
+        24408,
+        25752
+      ],
+      "candidateResults": [
+        {
+          "candidate": "C1",
+          "coordinate": [
+            7460,
+            507
+          ],
+          "serialLower": 34,
+          "serialUpper": 85,
+          "actualWriterValue": 56,
+          "writerThread": 25752,
+          "writerTile": [
+            499,
+            7443
+          ],
+          "crossReaderTile": [
+            3,
+            7443
+          ],
+          "crossActualConsumedValues": [
+            34
+          ],
+          "crossReads": 11,
+          "matchedNonInitialConsumedLoads": 0,
+          "upperControlUnchanged": true,
+          "mechanismObserved": false
+        },
+        {
+          "candidate": "C2",
+          "coordinate": [
+            7461,
+            506
+          ],
+          "serialLower": 34,
+          "serialUpper": 119,
+          "actualWriterValue": 62,
+          "writerThread": 24408,
+          "writerTile": [
+            3,
+            7443
+          ],
+          "crossReaderTile": [
+            499,
+            7443
+          ],
+          "crossActualConsumedValues": [
+            62
+          ],
+          "crossReads": 11,
+          "matchedNonInitialConsumedLoads": 11,
+          "upperControlUnchanged": true,
+          "mechanismObserved": true
+        }
+      ],
+      "counts": {
+        "OpenFile": 1,
+        "Unpack": 1,
+        "DcrawProcess": 1,
+        "MakeDcrawMemoryImage": 1
+      },
+      "peakWorkingSetBytes": 767090688,
+      "elapsedSeconds": 5.000387899999623,
+      "verdict": "H1_SUPPORTED_IN_OBSERVED_WINDOW"
+    }
+  ],
+  "newRawProcesses": 2,
+  "newGPUCalls": 0,
+  "wholeP5P6Comparison": false,
+  "oldBatchEvidenceUnchanged": true,
+  "caveats": [
+    "Hardware/software debugging substantially perturbs scheduling.",
+    "Delivery sequence is not memory happens-before.",
+    "No claim that all old output differences or O_first are explained.",
+    "No full-frame difference or cross-run P5 equality was measured in this new bounded batch."
+  ],
+  "gateSha256": "22AB9A9789288E1203C47476BB7965ADD0F9D0E16D3BEF92ED1733128EEE2177",
+  "planSha256": "EB2340DD0987C214F4F1C56D999CE4DEB17EA9E9F97222214055D71C71421106",
+  "evidence": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\debug\\RECEIPT.json",
+      "sha256": "785DD32F0D961F31C7DCF8A240CD67835D5C680FF75EF930154418EF77D82BAF",
+      "bytes": 94843
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\host\\result.json",
+      "sha256": "D78E4F8677289F292A4CCBC4FD9312D00CE7DFB5BD73F34C9E16E5EC2D77C43A",
+      "bytes": 678
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\host\\startup.json",
+      "sha256": "6636C6F0E78A47082DCCB8CF30970371DD702920AA9AC699143CC6FC63A82461",
+      "bytes": 442
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\host\\configured-output.json",
+      "sha256": "CA1A7408318D88DA230F149ECA0D62949DD373D5BA3A06C2E5AA63B06ABB5FFA",
+      "bytes": 1731
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\host\\loaded-native.json",
+      "sha256": "D8C7B7F9CFF10A6D8087915B4A73D4C07D5CABAEA0F2875B6F087BC853CF49C6",
+      "bytes": 846
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\WATCH_CONFIG.json",
+      "sha256": "DB71F3518EF1F5F0544B66C17E05F7350FA0B0B04B9BAFF8AE1D6A7D02E30523",
+      "bytes": 2701
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\first\\HOST_MANIFEST.json",
+      "sha256": "C0A35CE85C228A0503EAE4C198FBE56C3954D533D3A9CF139D7D86580F1BF089",
+      "bytes": 3677
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\ledger\\first.consumed",
+      "sha256": "FE40FC1860E527A78BC78BD5A4F2CE84EDE302467F7EE12BB1970568E5B88F40",
+      "bytes": 644
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\debug\\RECEIPT.json",
+      "sha256": "BAA4AE5E08389D7FD89BA9B0F7CD19239790B48902F7324FA7DBD4B06C84F24D",
+      "bytes": 94849
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\host\\result.json",
+      "sha256": "4027D97C26847F22AC93171045EA1F7503ABE1F7CCAA6BD839B6CCC5BE53D405",
+      "bytes": 677
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\host\\startup.json",
+      "sha256": "E3B205D7E81314CB955EAB515085510BB338F8F36E9892F8F479F13B91122F63",
+      "bytes": 441
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\host\\configured-output.json",
+      "sha256": "CA1A7408318D88DA230F149ECA0D62949DD373D5BA3A06C2E5AA63B06ABB5FFA",
+      "bytes": 1731
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\host\\loaded-native.json",
+      "sha256": "D8C7B7F9CFF10A6D8087915B4A73D4C07D5CABAEA0F2875B6F087BC853CF49C6",
+      "bytes": 846
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\WATCH_CONFIG.json",
+      "sha256": "9A8C7BA38451FED22DF4E34B2354FC81F08D2F7BF1575FB1885C539AE8330BD5",
+      "bytes": 2703
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\second\\HOST_MANIFEST.json",
+      "sha256": "575FA5CD597DFFB56C62714FD1AB749ACDFFAD55B80C33CCFD075BCEC9F7E4CD",
+      "bytes": 3678
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-H1Window-20261109\\batch-01\\ledger\\second.consumed",
+      "sha256": "7F01D04A9FEB1B59B7C8AB2CBCB28A54A6E75B032CAFD557339D964319C5F5F6",
+      "bytes": 645
+    }
+  ]
+}
