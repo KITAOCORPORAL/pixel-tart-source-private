@@ -35,9 +35,21 @@ public sealed partial class FreeCanvasView : UserControl
         Editor=editor;_store=store;_observed=editor.Document;Surface=new(editor,provider);
         if(provider is IAssetThumbnailProvider thumbnails)AsyncThumbnail.SetScopedProvider(this,thumbnails);
         _sources.ItemTemplate=(DataTemplate)XamlReader.Parse("""
-            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary">
+            <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary" xmlns:canvas="clr-namespace:PixelTart.Modules.AssetLibrary.FreeCanvas;assembly=PixelTart.Modules.AssetLibrary">
               <StackPanel Width="72" Margin="1,4">
-                <Image Width="70" Height="70" Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding SourcePath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="180" />
+                <Grid Width="70" Height="70">
+                  <Image Width="70" Height="70" Stretch="Uniform" local:AsyncThumbnail.SourcePath="{Binding SourcePath}" local:AsyncThumbnail.AssetId="{Binding AssetId}" local:AsyncThumbnail.ContentHash="{Binding ContentHash}" local:AsyncThumbnail.DecodeWidth="180" />
+                  <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="2" Padding="4,2" CornerRadius="3" Background="{DynamicResource Brush.Panel}" IsHitTestVisible="False" AutomationProperties.AutomationId="CanvasMaterialUsedBadge" AutomationProperties.Name="已用">
+                    <Border.Visibility>
+                      <MultiBinding>
+                        <MultiBinding.Converter><canvas:CanvasMaterialUsageVisibilityConverter /></MultiBinding.Converter>
+                        <Binding />
+                        <Binding Path="UsedMaterialKeys" RelativeSource="{RelativeSource AncestorType={x:Type canvas:FreeCanvasView}}" />
+                      </MultiBinding>
+                    </Border.Visibility>
+                    <TextBlock Text="已用" FontSize="10" Foreground="{DynamicResource Brush.Text.Primary}" />
+                  </Border>
+                </Grid>
                 <TextBlock Text="{Binding Name}" Width="70" FontSize="11" Margin="0,3,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}" />
               </StackPanel>
             </DataTemplate>
@@ -91,6 +103,7 @@ public sealed partial class FreeCanvasView : UserControl
             if(Surface.IsKeyboardFocusWithin||Keyboard.FocusedElement is TextBox or ComboBox)return;
             Surface.HandleShortcut(e);
         };
+        UpdateUsedMaterials();
         UpdateTools();
     }
     public CanvasEditor Editor { get; }
@@ -109,6 +122,7 @@ public sealed partial class FreeCanvasView : UserControl
     private void EditorChanged(object? sender,EventArgs args)
     {
         UpdateTools();
+        UpdateUsedMaterials();
         if(ReferenceEquals(_observed,Editor.Document))return;
         _observed=Editor.Document;_status.Text="正在保存…";_saveTimer.Stop();_saveTimer.Start();
     }

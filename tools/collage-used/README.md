@@ -1,0 +1,9 @@
+# R5.5 current-canvas material usage badge
+
+Derived UI state only: a current CanvasDocument object's nonempty LibraryId+AssetId marks matching shelf materials as used. Duplicate, hidden and locked instances count. The last removal clears the badge; Undo/Redo, document replacement and fresh library shelf items update from the existing CanvasEditor.Changed and item template. No new persisted field, asset ID, import or favorite store; shelf state is not exported into the canvas image.
+
+`build.py <NEW-log-label> <dotnet args...>` records command/source/dirty/PID/result using the existing SDK. Use WholeAppDiagnosticBuild=true, PhotographerTrialBuild=false and Platform=x64. `run_acceptance.py <NEW-batch>` starts three independent full-App TestHost processes with one explicitly isolated data root: native shelf add/remove/undo/redo; app restart + real saved/new canvas menus + unfavorite; actual recent-library switching + restore + native transparent PNG export. Native UIA acts on visible controls; fixture library/PNG creation/import use existing production commands. No physical mouse or full DPI claim. Dev failures remain local and separate from final published-DLL-bound acceptance.
+
+`run_cases.py <NEW-root> <vstest-filter> <exact-expected-count>` refuses existing directories, checks actual TRX outcomes, and isolates the current-process data paths. WPF singleton-sensitive groups must be separate processes. Published product DLLs must be hash-bound to both WPF and Core hosts before final acceptance. Build/test timeout or nonzero exit is not a pass.
+
+Private media, runtime databases, synthetic bitmaps, screenshots and package binaries remain in the external delivery root. Production native DLL and RAW algorithms are unchanged. Online-provider follow-up is a read-only interface/callsite audit and a versioned first-delivery proposal, not a new connected provider.

@@ -17,7 +17,7 @@ using RAWSelectionAssistant.ViewModels;
 namespace RAWSelectionAssistant.WpfTests;
 
 [TestClass][DoNotParallelize]
-public sealed class CanvasFavoriteAppAcceptanceTests
+public sealed partial class CanvasFavoriteAppAcceptanceTests
 {
     private static string Root => Environment.GetEnvironmentVariable("KITAO_FAVORITES_ACCEPTANCE_ROOT") ?? throw new InvalidOperationException("Isolated root required.");
     private sealed record Receipt(int ProcessId,string LibraryPath,Guid CanvasId,Guid LibraryId,Guid AssetId,string ContentHash);
