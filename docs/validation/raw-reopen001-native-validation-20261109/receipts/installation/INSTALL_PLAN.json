@@ -1,0 +1,32 @@
+{
+  "paths": {
+    "shared": "E:/BuildTools/Shared",
+    "cache": "E:/BuildTools/PackageCache",
+    "install": "E:/BuildTools/VS2022-RR001"
+  },
+  "startedUtc": "2026-11-09T05:44:31.6741316+00:00",
+  "arguments": [
+    "--quiet",
+    "--wait",
+    "--norestart",
+    "--nocache",
+    "--installPath",
+    "E:/BuildTools/VS2022-RR001",
+    "--path",
+    "cache=E:/BuildTools/PackageCache",
+    "--path",
+    "shared=E:/BuildTools/Shared",
+    "--add",
+    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "--add",
+    "Microsoft.VisualStudio.Component.Windows11SDK.26100"
+  ],
+  "authority": "Explicit user permission for minimal installation with adequate disk and company install authority; elevated Administrator verified",
+  "systemSdkAndInstallerMayUseC": true,
+  "minimumComponents": [
+    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "Microsoft.VisualStudio.Component.Windows11SDK.26100"
+  ],
+  "executable": "E:/Guangjing-RawReopen001-NoRaw-20261109/installer/vs_BuildTools.exe",
+  "newRawCalls": 0
+}

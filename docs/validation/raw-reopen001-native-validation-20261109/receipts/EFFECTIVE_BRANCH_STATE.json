@@ -1,0 +1,84 @@
+[
+  {
+    "outCamBypass": [
+      {
+        "kind": "event",
+        "sequence": 16,
+        "name": "out-cam",
+        "phase": "not-consumed-raw-color-bypass"
+      }
+    ],
+    "P8outputColors": 3,
+    "P9histogram": [
+      {
+        "kind": "defined-byte-span-hash",
+        "name": "P9-initialized-histogram",
+        "bytes": 131072,
+        "sha256": "3ddc9756d032f0f8563c49c3a528934ff27577ba8d6e97a3001b43a0bf724252"
+      }
+    ],
+    "actualScaleBits": [
+      {
+        "kind": "float32-bits",
+        "name": "actual-scale_mul",
+        "bits": [
+          1089293584,
+          1082687789,
+          1090794984,
+          1082687789
+        ]
+      }
+    ],
+    "slot": "first",
+    "actualWbEvents": [
+      {
+        "kind": "event",
+        "sequence": 9,
+        "name": "WB-camera-multipliers",
+        "phase": "selected"
+      }
+    ],
+    "P8rawColor": 1
+  },
+  {
+    "outCamBypass": [
+      {
+        "kind": "event",
+        "sequence": 16,
+        "name": "out-cam",
+        "phase": "not-consumed-raw-color-bypass"
+      }
+    ],
+    "P8outputColors": 3,
+    "P9histogram": [
+      {
+        "kind": "defined-byte-span-hash",
+        "name": "P9-initialized-histogram",
+        "bytes": 131072,
+        "sha256": "44adaa1c02a12dc69db435cdce669fe8919b9a27d6f3fcb59fbf8c846f0a6e03"
+      }
+    ],
+    "actualScaleBits": [
+      {
+        "kind": "float32-bits",
+        "name": "actual-scale_mul",
+        "bits": [
+          1089293584,
+          1082687789,
+          1090794984,
+          1082687789
+        ]
+      }
+    ],
+    "slot": "second",
+    "actualWbEvents": [
+      {
+        "kind": "event",
+        "sequence": 9,
+        "name": "WB-camera-multipliers",
+        "phase": "selected"
+      }
+    ],
+    "P8rawColor": 1
+  }
+]

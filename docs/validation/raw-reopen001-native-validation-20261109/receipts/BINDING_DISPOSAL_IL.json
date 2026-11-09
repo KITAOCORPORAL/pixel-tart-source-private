@@ -1,0 +1,116 @@
+{
+  "sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+  "nativeInit": 0,
+  "ilHex": "027B860200042D3A027B850200047E7400000A287D00000A2C21027B8502000428F5000006027B8502000428F6000006027E7400000A7D8502000402177D860200042A",
+  "instructions": [
+    {
+      "operand": "",
+      "offset": 0,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "Boolean _disposed",
+      "offset": 1,
+      "opcode": "ldfld"
+    },
+    {
+      "operand": "",
+      "offset": 6,
+      "opcode": "brtrue.s"
+    },
+    {
+      "operand": "",
+      "offset": 8,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "IntPtr _r",
+      "offset": 9,
+      "opcode": "ldfld"
+    },
+    {
+      "operand": "IntPtr Zero",
+      "offset": 14,
+      "opcode": "ldsfld"
+    },
+    {
+      "operand": "Boolean op_Inequality(IntPtr, IntPtr)",
+      "offset": 19,
+      "opcode": "call"
+    },
+    {
+      "operand": "",
+      "offset": 24,
+      "opcode": "brfalse.s"
+    },
+    {
+      "operand": "",
+      "offset": 26,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "IntPtr _r",
+      "offset": 27,
+      "opcode": "ldfld"
+    },
+    {
+      "operand": "Void Recycle(IntPtr)",
+      "offset": 32,
+      "opcode": "call"
+    },
+    {
+      "operand": "",
+      "offset": 37,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "IntPtr _r",
+      "offset": 38,
+      "opcode": "ldfld"
+    },
+    {
+      "operand": "Void Close(IntPtr)",
+      "offset": 43,
+      "opcode": "call"
+    },
+    {
+      "operand": "",
+      "offset": 48,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "IntPtr Zero",
+      "offset": 49,
+      "opcode": "ldsfld"
+    },
+    {
+      "operand": "IntPtr _r",
+      "offset": 54,
+      "opcode": "stfld"
+    },
+    {
+      "operand": "",
+      "offset": 59,
+      "opcode": "ldarg.0"
+    },
+    {
+      "operand": "",
+      "offset": 60,
+      "opcode": "ldc.i4.1"
+    },
+    {
+      "operand": "Boolean _disposed",
+      "offset": 61,
+      "opcode": "stfld"
+    },
+    {
+      "operand": "",
+      "offset": 66,
+      "opcode": "ret"
+    }
+  ],
+  "rawCalls": 0,
+  "method": "Void Dispose(Boolean)",
+  "binding": "E:\\Guangjing-RawReopen001-20261104\\probe-build-v1_3\\Sdcb.LibRaw.dll",
+  "observation": "Metadata IL only; no native calls or type initialization. Recycle/Close entry counts are inferred from Dispose logic unless separately instrumented."
+}

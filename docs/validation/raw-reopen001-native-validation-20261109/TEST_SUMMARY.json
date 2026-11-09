@@ -1,0 +1,65 @@
+{
+  "actualTeam": 6,
+  "rootCause": "OPEN",
+  "earliestDifference": "P6",
+  "nativeNoRawSelfTest": {
+    "processes": 1,
+    "passed": true,
+    "Initialize": 1,
+    "ManagedDispose": 1,
+    "nativeRecycleCloseDirectlyMeasured": false,
+    "rawCounts": 0
+  },
+  "nativeBuild": {
+    "sdk": "10.0.26100.0",
+    "attempts": 1,
+    "dllSha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484",
+    "passed": true,
+    "compiler": "MSVC19.44.35229 x64"
+  },
+  "BIndependentFeatureLine": true,
+  "dateZone": "Asia/Shanghai",
+  "changedChannels": 5127,
+  "status": "REPRODUCED_P6_XTRANS_RETURN_ROOT_CAUSE_OPEN_NOT_FIXED",
+  "passes": 3,
+  "pixelFiles": 26,
+  "productFix": "NOT_FIXED",
+  "batchSyntheticChecks": 9,
+  "staticAndSyntheticChecks": 90,
+  "originalBudget": {
+    "consumed": 2,
+    "remaining": 0,
+    "unchanged": true
+  },
+  "AProductBuilds": 0,
+  "AProductChanges": 0,
+  "newBatch": {
+    "remaining": 0,
+    "id": "RAW-REOPEN-001-VALIDATION-20261109",
+    "OpenFile": 2,
+    "retry": 0,
+    "thirdProcess": 0,
+    "pid": [
+      26928,
+      20016
+    ],
+    "Unpack": 2,
+    "DcrawProcess": 2,
+    "consumed": 2,
+    "MakeDcrawMemoryImage": 2
+  },
+  "nativeApiCallsDuringOfflineComparison": 0,
+  "before": [
+    "P1",
+    "P3b",
+    "P5",
+    "XTRANS-serial-ready"
+  ],
+  "changedPixels": 2984,
+  "ndir": 8,
+  "maxU16": 815,
+  "pixelBytesLocal": 6751309824,
+  "T": 512,
+  "finalComparatorSource": "8723a4bdf074bb8a1cc8b546802050aa59823ec6",
+  "originalOtherComparatorP8RejectionPreserved": true
+}

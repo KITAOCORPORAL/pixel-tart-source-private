@@ -1,0 +1,113 @@
+{
+  "Version": "RR001-InternalV3",
+  "Purpose": "NO_RAW_SELF_TEST_ONLY",
+  "Native": {
+    "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\raw_r.dll",
+    "Sha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484"
+  },
+  "Binding": {
+    "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\Sdcb.LibRaw.dll",
+    "Sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+  },
+  "Input": {
+    "Path": "NO_RAW_INPUT_ACCESS_PERMITTED",
+    "Sha256": "NOT_APPLICABLE_NO_RAW"
+  },
+  "Files": [
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\RawNativeInternalHost.deps.json",
+      "Sha256": "C6F6CA830A8E6353044E8F1E572A3F4B942549CEB733477E99C7FC999C7AA257"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\RawNativeInternalHost.dll",
+      "Sha256": "776944C2D4E46B40A0DB2C2383466150EBBC8175CC5EF05B5E73D773EDFEA068"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\RawNativeInternalHost.exe",
+      "Sha256": "8E5E20ED58EAC6664FA6834FDC5D8BEB708F6A46E1D49185115B6BEBB8D76C3E"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\RawNativeInternalHost.runtimeconfig.json",
+      "Sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\raw_r.dll",
+      "Sha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\runtime01\\Sdcb.LibRaw.dll",
+      "Sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\PREPARATION.json",
+      "Sha256": "5C032C4B048CDF3C467DB20DECC9E2E8F2D7AE1E42764240C91EF3E30DFE494A"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\FILES.json",
+      "Sha256": "9DCE7C821061F0CB6E9F0C5A000BF18A9F87FEE2E4752B397D931C229A5F42C4"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\postprocessing\\dcraw_process.cpp",
+      "Sha256": "33E7474533EF7290516753ABA40397B3F39E3DD8F660825416B38B37C8C46458"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\postprocessing\\postprocessing_utils_dcrdefs.cpp",
+      "Sha256": "F91703B93B8EB1D8AD09E1A583B499FEAB6CB7E31030A7937D77984CB9C3330F"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\preprocessing\\raw2image.cpp",
+      "Sha256": "462DA26FB330ECECBE50C690799C95C8F472D68ED2DCBCEDD44F4662EF589130"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\demosaic\\xtrans_demosaic.cpp",
+      "Sha256": "CF4616CC0F437D28E52B6131B5E241EE2DA96E587C8B86F4D62C76F58E8C84FC"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\preprocessing\\subtract_black.cpp",
+      "Sha256": "8774920911375ED61235F171CA8AA6BEDCF4CC9C2BCA9280E80679FE34B28544"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\utils\\utils_libraw.cpp",
+      "Sha256": "0601A36B97608FFA4A7E2B173BCAF453F851790750CD5B8FE91F953D9EC5CF3A"
+    },
+    {
+      "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\source-r2-build01\\src\\demosaic\\ahd_demosaic.cpp",
+      "Sha256": "F84703A8523310AABF34C25EAA55EBBF5B3DBAE20D1DAFA49E0CE6F545523232"
+    }
+  ],
+  "Contract": {
+    "Path": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\CONTRACT_BUILD01.json",
+    "Sha256": "50E23995AB7D0B8FD287E82E221A6DA006D24E2515C22E0967E8089C1E237313"
+  },
+  "NativeSelfTest": null,
+  "SourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "PreparationSha256": "5C032C4B048CDF3C467DB20DECC9E2E8F2D7AE1E42764240C91EF3E30DFE494A",
+  "StartupEnvironment": {
+    "OMP_NUM_THREADS": null,
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  },
+  "EffectiveEnvironment": {
+    "OMP_NUM_THREADS": "6",
+    "OMP_DYNAMIC": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_SCHEDULE": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "KMP_AFFINITY": null,
+    "KMP_BLOCKTIME": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "DOTNET_PROCESSOR_COUNT": null,
+    "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+  },
+  "productionEquivalent": false,
+  "authorization": "NO RAW. Original consumed=2 remaining=0. This manifest cannot satisfy existing decode input/selftest guards."
+}

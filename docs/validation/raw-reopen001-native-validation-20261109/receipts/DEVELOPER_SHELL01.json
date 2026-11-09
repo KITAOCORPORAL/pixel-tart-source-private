@@ -1,0 +1,25 @@
+{
+  "vcToolsVersion": "14.44.35207",
+  "sdk": "E:\\Windows Kits\\10\\",
+  "sdkVersion": "10.0.26100.0\\",
+  "host": "x64",
+  "scope": "Current process only, actual installed x64 VsDevCmd",
+  "target": "x64",
+  "threadEnvironmentBefore": {
+    "KMP_AFFINITY": null,
+    "OMP_DYNAMIC": null,
+    "OMP_PROC_BIND": null,
+    "OMP_PLACES": null,
+    "OMP_NUM_THREADS": null,
+    "OMP_SCHEDULE": null,
+    "KMP_BLOCKTIME": null,
+    "OMP_THREAD_LIMIT": null
+  },
+  "vsPath": "E:/BuildTools/VS2022-RR001",
+  "tools": {
+    "cl.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\cl.exe",
+    "nmake.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe",
+    "dumpbin.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\dumpbin.exe"
+  },
+  "threadEnvironmentUnchanged": true
+}

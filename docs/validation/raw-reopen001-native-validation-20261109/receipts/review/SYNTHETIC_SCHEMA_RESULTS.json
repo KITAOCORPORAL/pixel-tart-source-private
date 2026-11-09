@@ -1,0 +1,89 @@
+{
+  "purpose": "SYNTHETIC_ONLY_NO_RAW_NO_NATIVE",
+  "actualRawCalls": 0,
+  "actualNativeApiCalls": 0,
+  "nativeCompilerInvocations": 0,
+  "results": [
+    {
+      "name": "positive typed fixture",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "F2 schema state width40/payload width80",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "F3 allhex before P1 accepted",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "F3 P8/out_cam before P1 accepted",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "F2 fractional quality accepted",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "F2 no tile/runtime xtrans metadata accepted",
+      "accepted": true,
+      "detail": true
+    },
+    {
+      "name": "full loader positive control",
+      "accepted": true,
+      "detail": 7
+    },
+    {
+      "name": "F2 full loader accepts P5 state40x40 with payload80x40",
+      "accepted": true,
+      "detail": [
+        {
+          "id": "P1",
+          "width": 40,
+          "stateWidth": 40
+        },
+        {
+          "id": "P3b",
+          "width": 40,
+          "stateWidth": 40
+        },
+        {
+          "id": "P5",
+          "width": 80,
+          "stateWidth": 40
+        },
+        {
+          "id": "XTRANS-serial-ready",
+          "width": 40,
+          "stateWidth": 40
+        },
+        {
+          "id": "P6",
+          "width": 40,
+          "stateWidth": 40
+        },
+        {
+          "id": "P7",
+          "width": 40,
+          "stateWidth": 40
+        },
+        {
+          "id": "P9",
+          "width": 40,
+          "stateWidth": 40
+        }
+      ]
+    },
+    {
+      "name": "F3 full loader accepts P8/out_cam before P1",
+      "accepted": true,
+      "detail": 7
+    }
+  ]
+}

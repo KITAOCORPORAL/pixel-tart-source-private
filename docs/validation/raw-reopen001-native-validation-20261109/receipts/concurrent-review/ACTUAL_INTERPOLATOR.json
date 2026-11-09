@@ -1,0 +1,20 @@
+[
+  {
+    "process": "first",
+    "measuredScalars": {
+      "compile-LIBRAW_USE_OPENMP": 1,
+      "actual-xtrans-passes": 3,
+      "actual-xtrans-T": 512,
+      "actual-xtrans-ndir": 8
+    }
+  },
+  {
+    "process": "second",
+    "measuredScalars": {
+      "compile-LIBRAW_USE_OPENMP": 1,
+      "actual-xtrans-passes": 3,
+      "actual-xtrans-T": 512,
+      "actual-xtrans-ndir": 8
+    }
+  }
+]

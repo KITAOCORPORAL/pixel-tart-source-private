@@ -1,0 +1,8 @@
+{
+  "change": "Invoke unchanged binding RawContext.Version initializer before explicit NativeLibrary handle lookup",
+  "reason": "Preserve original binding startup ordering: OMP default is assigned before first native load; no second resolver, no manual OMP write",
+  "before": "NativeLibrary.Load then RawContext.Version",
+  "after": "RawContext.Version then NativeLibrary.Load exact same isolated path",
+  "nativePixelOrAlgorithmChange": false,
+  "rawCallsBeforeRun": 0
+}

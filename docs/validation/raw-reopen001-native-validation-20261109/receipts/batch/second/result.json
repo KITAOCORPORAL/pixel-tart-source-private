@@ -1,0 +1,35 @@
+{
+  "reservationId": "7f0f6103-3728-4e78-a68e-981842203200",
+  "status": "completed",
+  "error": null,
+  "zeroRaw": false,
+  "counts": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 1,
+    "MakeDcrawMemoryImage": 1
+  },
+  "runtime": {
+    "ProcessId": 20016,
+    "ProcessorCount": 12,
+    "os": "Microsoft Windows 10.0.19045",
+    "runtime": ".NET 10.0.10",
+    "architecture": "X64",
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    }
+  },
+  "peakWorkingSetBytes": 683347968,
+  "privateBytesAtExit": 12787712,
+  "fullManagedImageCopies": 0
+}

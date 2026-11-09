@@ -1,0 +1,998 @@
+Microsoft (R) COFF/PE Dumper Version 14.44.35229.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file E:\Guangjing-RawReopen001-NoRaw-20261109\native-build01\host\raw_r.dll
+
+PE signature found
+
+File Type: DLL
+
+FILE HEADER VALUES
+            8664 machine (x64)
+               5 number of sections
+        6AF16292 time date stamp Mon Nov  9 14:05:06 2026
+               0 file pointer to symbol table
+               0 number of symbols
+              F0 size of optional header
+            2022 characteristics
+                   Executable
+                   Application can handle large (>2GB) addresses
+                   DLL
+
+OPTIONAL HEADER VALUES
+             20B magic # (PE32+)
+           14.44 linker version
+           9A600 size of code
+           8E400 size of initialized data
+               0 size of uninitialized data
+           998CC entry point (00000001800998CC)
+            1000 base of code
+       180000000 image base (0000000180000000 to 000000018012BFFF)
+            1000 section alignment
+             200 file alignment
+            6.00 operating system version
+            0.00 image version
+            6.00 subsystem version
+               0 Win32 version
+          12C000 size of image
+             400 size of headers
+               0 checksum
+               2 subsystem (Windows GUI)
+             160 DLL characteristics
+                   High Entropy Virtual Addresses
+                   Dynamic base
+                   NX compatible
+          100000 size of stack reserve
+            1000 size of stack commit
+          100000 size of heap reserve
+            1000 size of heap commit
+               0 loader flags
+              10 number of directories
+           C8160 [    6BE4] RVA [size] of Export Directory
+           CED44 [     154] RVA [size] of Import Directory
+               0 [       0] RVA [size] of Resource Directory
+          125000 [    4074] RVA [size] of Exception Directory
+               0 [       0] RVA [size] of Certificates Directory
+          12A000 [    140C] RVA [size] of Base Relocation Directory
+           C0AB0 [      1C] RVA [size] of Debug Directory
+               0 [       0] RVA [size] of Architecture Directory
+               0 [       0] RVA [size] of Global Pointer Directory
+               0 [       0] RVA [size] of Thread Storage Directory
+           C0970 [     140] RVA [size] of Load Configuration Directory
+               0 [       0] RVA [size] of Bound Import Directory
+           9C000 [     4F0] RVA [size] of Import Address Table Directory
+               0 [       0] RVA [size] of Delay Import Directory
+               0 [       0] RVA [size] of COM Descriptor Directory
+               0 [       0] RVA [size] of Reserved Directory
+
+
+SECTION HEADER #1
+   .text name
+   9A48C virtual size
+    1000 virtual address (0000000180001000 to 000000018009B48B)
+   9A600 size of raw data
+     400 file pointer to raw data (00000400 to 0009A9FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60000020 flags
+         Code
+         Execute Read
+
+SECTION HEADER #2
+  .rdata name
+   33DE2 virtual size
+   9C000 virtual address (000000018009C000 to 00000001800CFDE1)
+   33E00 size of raw data
+   9AA00 file pointer to raw data (0009AA00 to 000CE7FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         Read Only
+
+  Debug Directories
+
+        Time Type        Size      RVA  Pointer
+    -------- ------- -------- -------- --------
+    6AF16292 coffgrp      2B8 000C11C8    BFBC8
+
+  Section contains the following exports for libraw.dll
+
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+         577 number of functions
+         577 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00001540 ??0LibRaw@@QEAA@AEBV0@@Z
+          2    1 0001F310 ??0LibRaw@@QEAA@I@Z
+          3    2 00001720 ??0LibRaw_abstract_datastream@@QEAA@AEBV0@@Z
+          4    3 00001720 ??0LibRaw_abstract_datastream@@QEAA@XZ
+          5    4 00001730 ??0LibRaw_bigfile_buffered_datastream@@QEAA@AEBV0@@Z
+          6    5 000017D0 ??0LibRaw_bigfile_buffered_datastream@@QEAA@PEBD@Z
+          7    6 00001B90 ??0LibRaw_bigfile_buffered_datastream@@QEAA@PEB_W@Z
+          8    7 00001D40 ??0LibRaw_bigfile_datastream@@QEAA@AEBV0@@Z
+          9    8 00001DA0 ??0LibRaw_bigfile_datastream@@QEAA@PEBD@Z
+         10    9 00001F10 ??0LibRaw_bigfile_datastream@@QEAA@PEB_W@Z
+         11    A 00002080 ??0LibRaw_buffer_datastream@@QEAA@AEBV0@@Z
+         12    B 000020B0 ??0LibRaw_buffer_datastream@@QEAA@PEBX_K@Z
+         13    C 000020D0 ??0LibRaw_windows_datastream@@QEAA@AEBV0@@Z
+         14    D 00002120 ??0LibRaw_windows_datastream@@QEAA@PEAX@Z
+         15    E 00002180 ??0LibRaw_windows_datastream@@QEAA@PEBD@Z
+         16    F 00002490 ??0libraw_memmgr@@QEAA@I@Z
+         17   10 0001F680 ??1LibRaw@@UEAA@XZ
+         18   11 00002590 ??1LibRaw_abstract_datastream@@UEAA@XZ
+         19   12 000025A0 ??1LibRaw_bigfile_buffered_datastream@@UEAA@XZ
+         20   13 00002610 ??1LibRaw_bigfile_datastream@@UEAA@XZ
+         21   14 00002590 ??1LibRaw_buffer_datastream@@UEAA@XZ
+         22   15 00002660 ??1LibRaw_windows_datastream@@UEAA@XZ
+         23   16 000026D0 ??1libraw_memmgr@@QEAA@XZ
+         24   17 000029B0 ??4LibRaw@@QEAAAEAV0@AEBV0@@Z
+         25   18 00002BF0 ??4LibRaw_abstract_datastream@@QEAAAEAV0@AEBV0@@Z
+         26   19 00002C00 ??4LibRaw_bigfile_buffered_datastream@@QEAAAEAV0@AEBV0@@Z
+         27   1A 00002CE0 ??4LibRaw_bigfile_datastream@@QEAAAEAV0@AEBV0@@Z
+         28   1B 00002D30 ??4LibRaw_buffer_datastream@@QEAAAEAV0@AEBV0@@Z
+         29   1C 00002BF0 ??4LibRaw_bufio_params@@QEAAAEAU0@$$QEAU0@@Z
+         30   1D 00002BF0 ??4LibRaw_bufio_params@@QEAAAEAU0@AEBU0@@Z
+         31   1E 00002D50 ??4LibRaw_windows_datastream@@QEAAAEAV0@AEBV0@@Z
+         32   1F 00002D90 ??4libraw_memmgr@@QEAAAEAV0@AEBV0@@Z
+         33   20 0009C8C0 ??_7LibRaw@@6B@
+         34   21 0009C618 ??_7LibRaw_abstract_datastream@@6B@
+         35   22 0009C6A0 ??_7LibRaw_bigfile_buffered_datastream@@6B@
+         36   23 0009C7B0 ??_7LibRaw_bigfile_datastream@@6B@
+         37   24 0009C728 ??_7LibRaw_buffer_datastream@@6B@
+         38   25 0009C838 ??_7LibRaw_windows_datastream@@6B@
+         39   26 00003160 ??_FLibRaw@@QEAAXXZ
+         40   27 000031C0 ?COLOR@LibRaw@@QEAAHHH@Z
+         41   28 0004A8B0 ?Canon_CameraSettings@LibRaw@@IEAAXI@Z
+         42   29 000E39C8 ?Canon_D30_linenums_2_StdWBi@LibRaw@@1Vlibraw_static_table_t@@A
+         43   2A 000E39D8 ?Canon_G9_linenums_2_StdWBi@LibRaw@@1Vlibraw_static_table_t@@A
+         44   2B 000E39B8 ?Canon_KeyIs0x0410_Len2048_linenums_2_StdWBi@LibRaw@@1Vlibraw_static_table_t@@A
+         45   2C 000E39A8 ?Canon_KeyIs0x0410_Len3072_linenums_2_StdWBi@LibRaw@@1Vlibraw_static_table_t@@A
+         46   2D 000E3998 ?Canon_KeyIsZero_Len2048_linenums_2_StdWBi@LibRaw@@1Vlibraw_static_table_t@@A
+         47   2E 0004AB50 ?Canon_WBCTpresets@LibRaw@@IEAAXF@Z
+         48   2F 0004AEF0 ?Canon_WBpresets@LibRaw@@IEAAXHH@Z
+         49   30 000E3988 ?Canon_wbi2std@LibRaw@@1Vlibraw_static_table_t@@A
+         50   31 00003200 ?FC@LibRaw@@QEAAHHH@Z
+         51   32 00003220 ?FCF@LibRaw@@IEAAHHH@Z
+         52   33 000E39F8 ?FujiCCT_K@LibRaw@@1Vlibraw_static_table_t@@A
+         53   34 000E39E8 ?Fuji_wb_list1@LibRaw@@1Vlibraw_static_table_t@@A
+         54   35 000E3A08 ?Fuji_wb_list2@LibRaw@@1Vlibraw_static_table_t@@A
+         55   36 0006F560 ?GetNormalizedModel@LibRaw@@IEAAXXZ
+         56   37 0006D6B0 ?HassyRawFormat_idx2HR@LibRaw@@IEAAPEBDI@Z
+         57   38 00061620 ?KodakIllumMatrix@LibRaw@@IEAAFIPEAM@Z
+         58   39 00061800 ?Kodak_DCR_WBtags@LibRaw@@IEAAXHIH@Z
+         59   3A 00061950 ?Kodak_KDC_WBtags@LibRaw@@IEAAXHH@Z
+         60   3B 000455A0 ?Nikon_NRW_WBtag@LibRaw@@IEAAXHH@Z
+         61   3C 000E3A38 ?Oly_wb_list1@LibRaw@@1Vlibraw_static_table_t@@A
+         62   3D 000E3A48 ?Oly_wb_list2@LibRaw@@1Vlibraw_static_table_t@@A
+         63   3E 00003280 ?Open@LibRaw_windows_datastream@@IEAAXPEAX@Z
+         64   3F 0005B970 ?PentaxISO@LibRaw@@IEAAXG@Z
+         65   40 0005BCE0 ?PentaxLensInfo@LibRaw@@IEAAX_KI@Z
+         66   41 000E3A18 ?Pentax_wb_list1@LibRaw@@1Vlibraw_static_table_t@@A
+         67   42 000E3A28 ?Pentax_wb_list2@LibRaw@@1Vlibraw_static_table_t@@A
+         68   43 00071320 ?SetStandardIlluminants@LibRaw@@IEAAXIPEBD@Z
+         69   44 000E3A78 ?Sony_SR2_wb_list1@LibRaw@@1Vlibraw_static_table_t@@A
+         70   45 000E3A68 ?Sony_SR2_wb_list@LibRaw@@1Vlibraw_static_table_t@@A
+         71   46 000E3A58 ?Sony_SRF_wb_list@LibRaw@@1Vlibraw_static_table_t@@A
+         72   47 0004B110 ?_CanonConvertAperture@LibRaw@@KAMG@Z
+         73   48 0002C710 ?aRGB_coeff@LibRaw@@IEAAXQEAY02N@Z
+         74   49 00089F30 ?aahd_interpolate@LibRaw@@IEAAXXZ
+         75   4A 0001D190 ?adjust_bl@LibRaw@@IEAAXXZ
+         76   4B 0001D610 ?adjust_maximum@LibRaw@@QEAAHXZ
+         77   4C 0001D730 ?adjust_sizes_info_only@LibRaw@@QEAAHXZ
+         78   4D 0001D880 ?adjust_to_raw_inset_crop@LibRaw@@QEAAHIM@Z
+         79   4E 0002E090 ?adobe_coeff@LibRaw@@UEAAHIPEBDH@Z
+         80   4F 00039700 ?adobe_copy_pixel@LibRaw@@IEAAXIIPEAPEAG@Z
+         81   50 00084D70 ?ahd_interpolate@LibRaw@@IEAAXXZ
+         82   51 00084E30 ?ahd_interpolate_build_homogeneity_map@LibRaw@@IEAAXHHPEAY2CAA@CAA@2FPEAY1CAA@1D@Z
+         83   52 000850E0 ?ahd_interpolate_combine_homogeneous_pixels@LibRaw@@IEAAXHHPEAY2CAA@CAA@2GPEAY1CAA@1D@Z
+         84   53 00085440 ?ahd_interpolate_green_h_and_v@LibRaw@@IEAAXHHPEAY2CAA@CAA@2G@Z
+         85   54 00085670 ?ahd_interpolate_r_and_b_and_convert_to_cielab@LibRaw@@IEAAXHHPEAY2CAA@CAA@2GPEAY2CAA@CAA@2F@Z
+         86   55 000859B0 ?ahd_interpolate_r_and_b_in_rgb_and_convert_to_cielab@LibRaw@@IEAAXHHPEAY1CAA@2GPEAY1CAA@2F@Z
+         87   56 000360E0 ?android_loose_load_raw@LibRaw@@IEAAXXZ
+         88   57 00036300 ?android_tight_load_raw@LibRaw@@IEAAXXZ
+         89   58 00062670 ?apply_tiff@LibRaw@@IEAAXXZ
+         90   59 00098180 ?bad_pixels@LibRaw@@IEAAXPEBD@Z
+         91   5A 0007A840 ?blend_highlights@LibRaw@@IEAAXXZ
+         92   5B 0007F7A0 ?border_interpolate@LibRaw@@IEAAXH@Z
+         93   5C 000364A0 ?broadcom_load_raw@LibRaw@@IEAAXXZ
+         94   5D 000035A0 ?buffering_off@LibRaw_abstract_datastream@@UEAAXXZ
+         95   5E 000035B0 ?buffering_off@LibRaw_bigfile_buffered_datastream@@UEAAXXZ
+         96   5F 000D0000 ?bufsize@LibRaw_bufio_params@@2HA
+         97   60 0001DB70 ?calloc@LibRaw@@IEAAPEAX_K0@Z
+         98   61 000035C0 ?calloc@libraw_memmgr@@QEAAPEAX_K0@Z
+         99   62 0002C820 ?cam_xyz_coeff@LibRaw@@IEAAXQEAY03MQEAY02N@Z
+        100   63 00005040 ?cameraCount@LibRaw@@SAHXZ
+        101   64 00005050 ?cameraList@LibRaw@@SAPEAPEBDXZ
+        102   65 00071470 ?cameramakeridx2maker@LibRaw@@SAPEBDI@Z
+        103   66 0002E650 ?canon_600_auto_wb@LibRaw@@IEAAXXZ
+        104   67 0002EC10 ?canon_600_coeff@LibRaw@@IEAAXXZ
+        105   68 0002EDD0 ?canon_600_color@LibRaw@@IEAAHQEAHH@Z
+        106   69 0002EEF0 ?canon_600_correct@LibRaw@@IEAAXXZ
+        107   6A 0002F030 ?canon_600_fixed_wb@LibRaw@@IEAAXH@Z
+        108   6B 0002F1B0 ?canon_600_load_raw@LibRaw@@IEAAXXZ
+        109   6C 0002F390 ?canon_has_lowbits@LibRaw@@IEAAHXZ
+        110   6D 0002F440 ?canon_load_raw@LibRaw@@IEAAXXZ
+        111   6E 00078DC0 ?canon_s2is@LibRaw@@IEAAHXZ
+        112   6F 0002F800 ?canon_sraw_load_raw@LibRaw@@IEAAXXZ
+        113   70 000037E0 ?capabilities@LibRaw@@SAIXZ
+        114   71 0001DBF0 ?checkCancel@LibRaw@@IEAAXXZ
+        115   72 00085CB0 ?cielab@LibRaw@@IEAAXQEAGQEAF@Z
+        116   73 000699A0 ?ciff_block_1030@LibRaw@@IEAAXXZ
+        117   74 00003620 ?cleanup@libraw_memmgr@@QEAAXXZ
+        118   75 0001DC20 ?clearCancelFlag@LibRaw@@UEAAXXZ
+        119   76 000175A0 ?convertFloatToInt@LibRaw@@QEAAXMMM@Z
+        120   77 0007CFB0 ?convert_to_rgb@LibRaw@@IEAAXXZ
+        121   78 00024670 ?convert_to_rgb_loop@LibRaw@@MEAAXQEAY03M@Z
+        122   79 00028340 ?copy_bayer@LibRaw@@MEAAXQEAGPEAG@Z
+        123   7A 000285A0 ?copy_fuji_uncropped@LibRaw@@MEAAXQEAGPEAG@Z
+        124   7B 00005060 ?copy_line_to_bayer@LibRaw@@IEAAXPEAUfuji_compressed_block@@HHH@Z
+        125   7C 00005210 ?copy_line_to_xtrans@LibRaw@@IEAAXPEAUfuji_compressed_block@@HHH@Z
+        126   7D 00029C80 ?copy_mem_image@LibRaw@@QEAAHPEAXHH@Z
+        127   7E 0002CBB0 ?crop_masked_pixels@LibRaw@@IEAAXXZ
+        128   7F 0002FFD0 ?crw_init_tables@LibRaw@@IEAAXIQEAPEAG@Z
+        129   80 00008BF0 ?crxConvertPlaneLineDf@LibRaw@@IEAAXPEAXH@Z
+        130   81 0000F2E0 ?crxDecodePlane@LibRaw@@IEAAHPEAXI@Z
+        131   82 00014550 ?crxLoadDecodeLoop@LibRaw@@MEAAXPEAXH@Z
+        132   83 000146A0 ?crxLoadFinalizeLoopE3@LibRaw@@MEAAXPEAXH@Z
+        133   84 000146E0 ?crxLoadRaw@LibRaw@@IEAAXXZ
+        134   85 00014DF0 ?crxParseImageHeader@LibRaw@@IEAAHPEAEHH@Z
+        135   86 0002AED0 ?cubic_spline@LibRaw@@IEAAXPEBH0H@Z
+        136   87 0008C370 ?dcb@LibRaw@@IEAAXHH@Z
+        137   88 0008C560 ?dcb_color2@LibRaw@@IEAAXPEAY02M@Z
+        138   89 0008C940 ?dcb_color3@LibRaw@@IEAAXPEAY02M@Z
+        139   8A 0008CD20 ?dcb_color@LibRaw@@IEAAXXZ
+        140   8B 0008D140 ?dcb_color_full@LibRaw@@IEAAXXZ
+        141   8C 00091690 ?dcb_copy_to_buffer@LibRaw@@IEAAXPEAY02M@Z
+        142   8D 00091700 ?dcb_correction2@LibRaw@@IEAAXXZ
+        143   8E 00091A60 ?dcb_correction@LibRaw@@IEAAXXZ
+        144   8F 00091CE0 ?dcb_decide@LibRaw@@IEAAXPEAY02M0@Z
+        145   90 00092530 ?dcb_hor@LibRaw@@IEAAXPEAY02M@Z
+        146   91 00092650 ?dcb_map@LibRaw@@IEAAXXZ
+        147   92 00092850 ?dcb_nyquist@LibRaw@@IEAAXXZ
+        148   93 00092A30 ?dcb_pp@LibRaw@@IEAAXXZ
+        149   94 00092CE0 ?dcb_refinement@LibRaw@@IEAAXXZ
+        150   95 000946C0 ?dcb_restore_from_buffer@LibRaw@@IEAAXPEAY02M@Z
+        151   96 00094720 ?dcb_ver@LibRaw@@IEAAXPEAY02M@Z
+        152   97 0002A120 ?dcraw_clear_mem@LibRaw@@SAXPEAUlibraw_processed_image_t@@@Z
+        153   98 0002A130 ?dcraw_make_mem_image@LibRaw@@UEAAPEAUlibraw_processed_image_t@@PEAH@Z
+        154   99 0002A2F0 ?dcraw_make_mem_thumb@LibRaw@@UEAAPEAUlibraw_processed_image_t@@PEAH@Z
+        155   9A 00023C70 ?dcraw_ppm_tiff_writer@LibRaw@@QEAAHPEBD@Z
+        156   9B 000255C0 ?dcraw_process@LibRaw@@QEAAHXZ
+        157   9C 00023070 ?dcraw_thumb_writer@LibRaw@@QEAAHPEBD@Z
+        158   9D 00017920 ?deflate_dng_load_raw@LibRaw@@IEAAXXZ
+        159   9E 0001DC30 ?derror@LibRaw@@IEAAXXZ
+        160   9F 00086830 ?dht_interpolate@LibRaw@@IEAAXXZ
+        161   A0 000371A0 ?eight_bit_load_raw@LibRaw@@IEAAXXZ
+        162   A1 00003680 ?eof@LibRaw_bigfile_buffered_datastream@@UEAAHXZ
+        163   A2 000036C0 ?eof@LibRaw_bigfile_datastream@@UEAAHXZ
+        164   A3 00003700 ?eof@LibRaw_buffer_datastream@@UEAAHXZ
+        165   A4 00003710 ?error_count@LibRaw@@QEAAHXZ
+        166   A5 00024A70 ?exp_bef@LibRaw@@IEAAXMM@Z
+        167   A6 00094860 ?fbdd@LibRaw@@IEAAXH@Z
+        168   A7 00094930 ?fbdd_correction2@LibRaw@@IEAAXPEAY02N@Z
+        169   A8 00094C20 ?fbdd_correction@LibRaw@@IEAAXXZ
+        170   A9 000953C0 ?fbdd_green@LibRaw@@IEAAXXZ
+        171   AA 0002D110 ?fcol@LibRaw@@QEAAHHH@Z
+        172   AB 00003720 ?fillBufferAt@LibRaw_bigfile_buffered_datastream@@IEAA_NH_J@Z
+        173   AC 00039CE0 ?fill_holes@LibRaw@@IEAAXH@Z
+        174   AD 0006CEC0 ?find_green@LibRaw@@IEAAMHHHH@Z
+        175   AE 0001DD00 ?find_ifd_by_offset@LibRaw@@IEAAHH@Z
+        176   AF 000035A0 ?fix_after_rawspeed@LibRaw@@IEAAXH@Z
+        177   B0 00096B40 ?flip_index@LibRaw@@IEAAHHH@Z
+        178   B1 000037E0 ?fname@LibRaw_abstract_datastream@@UEAAPEBDXZ
+        179   B2 000037F0 ?fname@LibRaw_bigfile_buffered_datastream@@UEAAPEBDXZ
+        180   B3 00003810 ?fname@LibRaw_bigfile_datastream@@UEAAPEBDXZ
+        181   B4 00003830 ?forget_ptr@libraw_memmgr@@AEAAXPEAX@Z
+        182   B5 0001DD40 ?free@LibRaw@@IEAAXPEAX@Z
+        183   B6 000038A0 ?free@libraw_memmgr@@QEAAXPEAX@Z
+        184   B7 0001DDC0 ?free_image@LibRaw@@QEAAXXZ
+        185   B8 0001DE50 ?free_omp_buffers@LibRaw@@IEAAXPEAPEADH@Z
+        186   B9 000194D0 ?fuji_14bit_load_raw@LibRaw@@IEAAXXZ
+        187   BA 000053E0 ?fuji_bayer_decode_block@LibRaw@@IEAAXPEAUfuji_compressed_block@@PEBUfuji_compressed_params@@H@Z
+        188   BB 00005E00 ?fuji_compressed_load_raw@LibRaw@@IEAAXXZ
+        189   BC 00006270 ?fuji_decode_loop@LibRaw@@MEAAXPEAUfuji_compressed_params@@HPEA_JPEAIPEAE@Z
+        190   BD 000068F0 ?fuji_decode_strip@LibRaw@@IEAAXPEAUfuji_compressed_params@@H_JIPEAE@Z
+        191   BE 0007EF60 ?fuji_rotate@LibRaw@@MEAAXXZ
+        192   BF 0002BF70 ?gamma_curve@LibRaw@@IEAAXNNHH@Z
+        193   C0 0002A6E0 ?get2@LibRaw@@IEAAGXZ
+        194   C1 0002A750 ?get4@LibRaw@@IEAAIXZ
+        195   C2 0004F840 ?getOlympus_CameraType2@LibRaw@@IEAAXXZ
+        196   C3 0004FA40 ?getOlympus_SensorTemperature@LibRaw@@IEAAXI@Z
+        197   C4 0004B160 ?get_CanonArea@LibRaw@@IEAA?AUlibraw_area_t@@XZ
+        198   C5 00003920 ?get_char@LibRaw_bigfile_buffered_datastream@@UEAAHXZ
+        199   C6 000039B0 ?get_char@LibRaw_bigfile_datastream@@UEAAHXZ
+        200   C7 000039C0 ?get_char@LibRaw_buffer_datastream@@UEAAHXZ
+        201   C8 0001FD40 ?get_decoder_info@LibRaw@@UEAAHPEAUlibraw_decoder_info_t@@@Z
+        202   C9 000039F0 ?get_internal_data_pointer@LibRaw@@QEAAPEAUlibraw_internal_data_t@@XZ
+        203   CA 0002A580 ?get_mem_image_format@LibRaw@@QEBAXPEAH000@Z
+        204   CB 00078E30 ?get_timestamp@LibRaw@@IEAAXH@Z
+        205   CC 00030050 ?getbithuff@LibRaw@@IEAAIHPEAG@Z
+        206   CD 0002A7E0 ?getint@LibRaw@@IEAAIH@Z
+        207   CE 0002A800 ?getreal@LibRaw@@IEAANH@Z
+        208   CF 00003A00 ?gets@LibRaw_bigfile_buffered_datastream@@UEAAPEADPEADH@Z
+        209   D0 00003B50 ?gets@LibRaw_bigfile_datastream@@UEAAPEADPEADH@Z
+        210   D1 00003BA0 ?gets@LibRaw_buffer_datastream@@UEAAPEADPEADH@Z
+        211   D2 0001DF50 ?getwords@LibRaw@@KAHPEADQEAPEADHH@Z
+        212   D3 0007DA80 ?green_matching@LibRaw@@IEAAXXZ
+        213   D4 00052720 ?guess_RAFDataGeneration@LibRaw@@IEAAHPEAE@Z
+        214   D5 0006D2F0 ?guess_byte_order@LibRaw@@IEAAFH@Z
+        215   D6 00019970 ?hasselblad_full_load_raw@LibRaw@@IEAAXXZ
+        216   D7 0003A740 ?hasselblad_load_raw@LibRaw@@IEAAXXZ
+        217   D8 0007AEC0 ?hat_transform@LibRaw@@IEAAXPEAM0HHH@Z
+        218   D9 00017B10 ?have_fpdata@LibRaw@@QEAAHXZ
+        219   DA 000714B0 ?identify@LibRaw@@IEAAXXZ
+        220   DB 00073E10 ?identify_finetune_by_filesize@LibRaw@@IEAAXH@Z
+        221   DC 00073F20 ?identify_finetune_dcr@LibRaw@@IEAAXQEADHH@Z
+        222   DD 00077580 ?identify_finetune_pentax@LibRaw@@IEAAXXZ
+        223   DE 00077870 ?identify_process_dng_fields@LibRaw@@IEAAXXZ
+        224   DF 0003ABD0 ?imacon_full_load_raw@LibRaw@@IEAAXXZ
+        225   E0 00007170 ?init_fuji_block@LibRaw@@IEAAXPEAUfuji_compressed_block@@PEBUfuji_compressed_params@@_JI@Z
+        226   E1 000074F0 ?init_fuji_compr@LibRaw@@IEAAXPEAUfuji_compressed_params@@@Z
+        227   E2 0002D1B0 ?initdata@LibRaw@@IEAAXXZ
+        228   E3 0002AA70 ?int_to_float@LibRaw@@IEAAMH@Z
+        229   E4 0001E010 ?is_canon_600@LibRaw@@MEAAHXZ
+        230   E5 0001E030 ?is_coolscan_nef@LibRaw@@QEAAHXZ
+        231   E6 0001E050 ?is_curve_linear@LibRaw@@IEAAHXZ
+        232   E7 00017FB0 ?is_floating_point@LibRaw@@QEAAHXZ
+        233   E8 00003C50 ?is_fuji_rotated@LibRaw@@QEAAHXZ
+        234   E9 0001E090 ?is_jpeg_thumb@LibRaw@@QEAAHXZ
+        235   EA 0001E0A0 ?is_nikon_sraw@LibRaw@@QEAAHXZ
+        236   EB 0001E0C0 ?is_phaseone_compressed@LibRaw@@MEAAHXZ
+        237   EC 0001E100 ?is_sraw@LibRaw@@QEAAHXZ
+        238   ED 00003C60 ?jpeg_src@LibRaw_abstract_datastream@@UEAAHPEAX@Z
+        239   EE 00003C60 ?jpeg_src@LibRaw_buffer_datastream@@UEAAHPEAX@Z
+        240   EF 00096B90 ?jpeg_thumb_writer@LibRaw@@IEAAXPEAU_iobuf@@PEADH@Z
+        241   F0 00037710 ?kodak_262_load_raw@LibRaw@@IEAAXXZ
+        242   F1 000379A0 ?kodak_65000_decode@LibRaw@@IEAAHPEAFH@Z
+        243   F2 00037C20 ?kodak_65000_load_raw@LibRaw@@IEAAXXZ
+        244   F3 00037E40 ?kodak_c330_load_raw@LibRaw@@IEAAXXZ
+        245   F4 000380D0 ?kodak_c603_load_raw@LibRaw@@IEAAXXZ
+        246   F5 00038350 ?kodak_dc120_load_raw@LibRaw@@IEAAXXZ
+        247   F6 000035A0 ?kodak_jpeg_load_raw@LibRaw@@IEAAXXZ
+        248   F7 00038490 ?kodak_radc_load_raw@LibRaw@@IEAAXXZ
+        249   F8 00039020 ?kodak_rgb_load_raw@LibRaw@@IEAAXXZ
+        250   F9 00039280 ?kodak_thumb_load_raw@LibRaw@@IEAAXXZ
+        251   FA 00023220 ?kodak_thumb_loader@LibRaw@@IEAAXXZ
+        252   FB 00039350 ?kodak_ycbcr_load_raw@LibRaw@@IEAAXXZ
+        253   FC 00096930 ?lch_to_rgb@LibRaw@@IEAAXPEAY02N@Z
+        254   FD 0003ACD0 ?leaf_hdr_load_raw@LibRaw@@IEAAXXZ
+        255   FE 00020560 ?libraw_openfile_tail@LibRaw@@IEAAHPEAVLibRaw_abstract_datastream@@@Z
+        256   FF 00003C70 ?libraw_powf64l@LibRaw@@SAMMM@Z
+        257  100 0001E130 ?libraw_swab@LibRaw@@IEAAXPEAX_K@Z
+        258  101 0007F970 ?lin_interpolate@LibRaw@@IEAAXXZ
+        259  102 0007FE10 ?lin_interpolate_loop@LibRaw@@MEAAXPEAHH@Z
+        260  103 0002C660 ?linear_table@LibRaw@@IEAAXI@Z
+        261  104 000301C0 ?ljpeg_diff@LibRaw@@IEAAHPEAG@Z
+        262  105 00030260 ?ljpeg_end@LibRaw@@IEAAXPEAUjhead@@@Z
+        263  106 000302E0 ?ljpeg_idct@LibRaw@@IEAAXPEAUjhead@@@Z
+        264  107 000309E0 ?ljpeg_row@LibRaw@@IEAAPEAGHPEAUjhead@@@Z
+        265  108 00030DD0 ?ljpeg_row_unrolled@LibRaw@@IEAAPEAGHPEAUjhead@@@Z
+        266  109 000313F0 ?ljpeg_start@LibRaw@@IEAAHPEAUjhead@@H@Z
+        267  10A 00003C90 ?lock@LibRaw_abstract_datastream@@UEAAHXZ
+        268  10B 00039810 ?lossless_dng_load_raw@LibRaw@@IEAAXXZ
+        269  10C 00031890 ?lossless_jpeg_load_raw@LibRaw@@IEAAXXZ
+        270  10D 000035A0 ?lossy_dng_load_raw@LibRaw@@IEAAXXZ
+        271  10E 00031B50 ?make_decoder@LibRaw@@IEAAPEAGPEBE@Z
+        272  10F 00031B70 ?make_decoder_ref@LibRaw@@IEAAPEAGPEAPEBE@Z
+        273  110 0001E140 ?malloc@LibRaw@@IEAAPEAX_K@Z
+        274  111 00003CA0 ?malloc@libraw_memmgr@@QEAAPEAX_K@Z
+        275  112 0001E1A0 ?malloc_omp_buffers@LibRaw@@IEAAPEAPEADH_K@Z
+        276  113 00039F70 ?median4@LibRaw@@IEAAHPEAH@Z
+        277  114 0007B490 ?median_filter@LibRaw@@IEAAXXZ
+        278  115 00003CE0 ?mem_ptr@libraw_memmgr@@AEAAXPEAX@Z
+        279  116 0002D460 ?memmem@LibRaw@@KAPEAXPEAD_K01@Z
+        280  117 00031C80 ?minolta_rd175_load_raw@LibRaw@@IEAAXXZ
+        281  118 00078F60 ?minolta_z2@LibRaw@@IEAAHXZ
+        282  119 00019A50 ?nikon_14bit_load_raw@LibRaw@@IEAAXXZ
+        283  11A 00079020 ?nikon_3700@LibRaw@@IEAAXXZ
+        284  11B 00036710 ?nikon_coolscan_load_raw@LibRaw@@IEAAXXZ
+        285  11C 00079140 ?nikon_e2100@LibRaw@@IEAAHXZ
+        286  11D 00079200 ?nikon_e995@LibRaw@@IEAAHXZ
+        287  11E 00036BD0 ?nikon_he_load_raw_placeholder@LibRaw@@IEAAXXZ
+        288  11F 00019C30 ?nikon_load_padded_packed_raw@LibRaw@@IEAAXXZ
+        289  120 00031E90 ?nikon_load_raw@LibRaw@@IEAAXXZ
+        290  121 00019D70 ?nikon_load_sraw@LibRaw@@IEAAXXZ
+        291  122 0001A2B0 ?nikon_load_striped_packed_raw@LibRaw@@IEAAXXZ
+        292  123 00032220 ?nikon_read_curve@LibRaw@@IEAAXXZ
+        293  124 00032400 ?nikon_yuv_load_raw@LibRaw@@IEAAXXZ
+        294  125 00032750 ?nokia_load_raw@LibRaw@@IEAAXXZ
+        295  126 00032AB0 ?olympus_load_raw@LibRaw@@IEAAXXZ
+        296  127 000205F0 ?open_bayer@LibRaw@@UEAAHPEBEIGGGGGGEEIII@Z
+        297  128 00020940 ?open_buffer@LibRaw@@QEAAHPEBX_K@Z
+        298  129 00020A50 ?open_datastream@LibRaw@@UEAAHPEAVLibRaw_abstract_datastream@@@Z
+        299  12A 00022BC0 ?open_file@LibRaw@@QEAAHPEBD@Z
+        300  12B 00022C60 ?open_file@LibRaw@@QEAAHPEB_W@Z
+        301  12C 00003D90 ?output_params_ptr@LibRaw@@QEAAPEAUlibraw_output_params_t@@XZ
+        302  12D 000037E0 ?own_filtering_supported@LibRaw@@IEAAHXZ
+        303  12E 0003AEB0 ?p1raw@LibRaw@@IEAAHII@Z
+        304  12F 0003AEE0 ?p1rawc@LibRaw@@IEAAHIIAEAI@Z
+        305  130 00039B90 ?packed_dng_load_raw@LibRaw@@IEAAXXZ
+        306  131 00037310 ?packed_load_raw@LibRaw@@IEAAXXZ
+        307  132 00036BF0 ?packed_tiled_dng_load_raw@LibRaw@@IEAAXXZ
+        308  133 00033020 ?pana_data@LibRaw@@IEAAIHPEAI@Z
+        309  134 0001A510 ?panasonicC6_load_raw@LibRaw@@IEAAXXZ
+        310  135 0001ADA0 ?panasonicC7_load_raw@LibRaw@@IEAAXXZ
+        311  136 000334C0 ?panasonic_load_raw@LibRaw@@IEAAXXZ
+        312  137 0005B510 ?parseAdobePanoMakernote@LibRaw@@IEAAXXZ
+        313  138 00052800 ?parseAdobeRAFMakernote@LibRaw@@IEAAXXZ
+        314  139 00048BE0 ?parseCR3@LibRaw@@IEAAH_J0AEAFPEAD11@Z
+        315  13A 00049F20 ?parseCR3_CTMD@LibRaw@@IEAAHF@Z
+        316  13B 0004A1A0 ?parseCR3_Free@LibRaw@@IEAAXXZ
+        317  13C 0004B1B0 ?parseCanonMakernotes@LibRaw@@IEAAXIIII@Z
+        318  13D 0004F4C0 ?parseEpsonMakernote@LibRaw@@IEAAXHHI@Z
+        319  13E 000592E0 ?parseFujiMakernotes@LibRaw@@IEAAXIIII@Z
+        320  13F 0006D6F0 ?parseHassyModel@LibRaw@@IEAAXXZ
+        321  140 00051BD0 ?parseLeicaInternalBodySerial@LibRaw@@IEAAHI@Z
+        322  141 00051D00 ?parseLeicaLensID@LibRaw@@IEAAXXZ
+        323  142 00051D60 ?parseLeicaLensName@LibRaw@@IEAAHI@Z
+        324  143 00051E20 ?parseLeicaMakernote@LibRaw@@IEAAXHHI@Z
+        325  144 00045650 ?parseNikonMakernote@LibRaw@@IEAAXHHI@Z
+        326  145 0004FB00 ?parseOlympusMakernotes@LibRaw@@IEAAXHIIII@Z
+        327  146 000502F0 ?parseOlympus_CameraSettings@LibRaw@@IEAAXHIIII@Z
+        328  147 00050730 ?parseOlympus_Equipment@LibRaw@@IEAAXIIII@Z
+        329  148 00050CB0 ?parseOlympus_ImageProcessing@LibRaw@@IEAAXIIII@Z
+        330  149 000517A0 ?parseOlympus_RawInfo@LibRaw@@IEAAXIIII@Z
+        331  14A 0005C140 ?parsePentaxMakernotes@LibRaw@@IEAAXHIIII@Z
+        332  14B 0005D040 ?parseRicohMakernotes@LibRaw@@IEAAXHIIII@Z
+        333  14C 000483C0 ?parseSamsungMakernotes@LibRaw@@IEAAXHIIII@Z
+        334  14D 0005DB00 ?parseSigmaMakernote@LibRaw@@IEAAXHHI@Z
+        335  14E 0003DC40 ?parseSonyLensFeatures@LibRaw@@IEAAXEE@Z
+        336  14F 0003E310 ?parseSonyLensType2@LibRaw@@IEAAXEE@Z
+        337  150 0003E520 ?parseSonyMakernotes@LibRaw@@IEAAXHIIIIAEAPEAEAEAG0101010101010101@Z
+        338  151 00041840 ?parseSonySR2@LibRaw@@IEAAXPEAEIII@Z
+        339  152 000427A0 ?parseSonySRF@LibRaw@@IEAAXI@Z
+        340  153 000792D0 ?parse_broadcom@LibRaw@@IEAAXXZ
+        341  154 00069C80 ?parse_ciff@LibRaw@@IEAAXHHH@Z
+        342  155 000793C0 ?parse_cine@LibRaw@@IEAAXXZ
+        343  156 0001E250 ?parse_custom_cameras@LibRaw@@IEAAIIQEAUlibraw_custom_camera_t@@PEAPEAD@Z
+        344  157 0005FE90 ?parse_exif@LibRaw@@IEAAXH@Z
+        345  158 00060E90 ?parse_exif_interop@LibRaw@@IEAAXH@Z
+        346  159 00059BB0 ?parse_fuji@LibRaw@@IEAAXH@Z
+        347  15A 000078B0 ?parse_fuji_compressed_header@LibRaw@@IEAAXXZ
+        348  15B 0005B340 ?parse_fuji_thumbnail@LibRaw@@IEAAXH@Z
+        349  15C 00061060 ?parse_gps@LibRaw@@IEAAXH@Z
+        350  15D 000612B0 ?parse_gps_libraw@LibRaw@@IEAAXH@Z
+        351  15E 00079710 ?parse_jpeg@LibRaw@@IEAAHH@Z
+        352  15F 00061A30 ?parse_kodak_ifd@LibRaw@@IEAAXH@Z
+        353  160 000798F0 ?parse_kyocera@LibRaw@@IEAAXXZ
+        354  161 0005DD80 ?parse_makernote@LibRaw@@IEAAXHH@Z
+        355  162 0005F150 ?parse_makernote_0xc634@LibRaw@@IEAAXHHI@Z
+        356  163 0006C8C0 ?parse_minolta@LibRaw@@IEAAXH@Z
+        357  164 0006B280 ?parse_mos@LibRaw@@IEAAX_J@Z
+        358  165 0006BA20 ?parse_phase_one@LibRaw@@IEAAXH@Z
+        359  166 00079B70 ?parse_qt@LibRaw@@IEAAXH@Z
+        360  167 00079C90 ?parse_riff@LibRaw@@IEAAXH@Z
+        361  168 0007A050 ?parse_rollei@LibRaw@@IEAAXXZ
+        362  169 0007A440 ?parse_sinar_ia@LibRaw@@IEAAXXZ
+        363  16A 0007A640 ?parse_smal@LibRaw@@IEAAXHH@Z
+        364  16B 0007A760 ?parse_thumb_note@LibRaw@@IEAAXHII@Z
+        365  16C 00063E40 ?parse_tiff@LibRaw@@IEAAHH@Z
+        366  16D 00063F20 ?parse_tiff_ifd@LibRaw@@IEAAHH@Z
+        367  16E 000035A0 ?parse_x3f@LibRaw@@IEAAXXZ
+        368  16F 0001B1A0 ?pentax_4shot_load_raw@LibRaw@@IEAAXXZ
+        369  170 000339D0 ?pentax_load_raw@LibRaw@@IEAAXXZ
+        370  171 0003AF10 ?ph1_bithuff@LibRaw@@IEAAIHPEAG@Z
+        371  172 00022D60 ?phase_one_allocate_tempbuffer@LibRaw@@IEAAXXZ
+        372  173 0003B000 ?phase_one_correct@LibRaw@@QEAAHXZ
+        373  174 0003C400 ?phase_one_fix_col_pixel_avg@LibRaw@@IEAAXII@Z
+        374  175 0003C4E0 ?phase_one_fix_pixel_grad@LibRaw@@IEAAXII@Z
+        375  176 0003C8F0 ?phase_one_flat_field@LibRaw@@IEAAXHH@Z
+        376  177 00022D90 ?phase_one_free_tempbuffer@LibRaw@@IEAAXXZ
+        377  178 0003CD90 ?phase_one_load_raw@LibRaw@@IEAAXXZ
+        378  179 0003CFB0 ?phase_one_load_raw_c@LibRaw@@IEAAXXZ
+        379  17A 0001B5B0 ?phase_one_load_raw_s@LibRaw@@IEAAXXZ
+        380  17B 00022DC0 ?phase_one_subtract_black@LibRaw@@QEAAHPEAG0@Z
+        381  17C 00003DA0 ?powf_lim@LibRaw@@SAMMMM@Z
+        382  17D 00080810 ?ppg_interpolate@LibRaw@@IEAAXXZ
+        383  17E 000809B0 ?pre_interpolate@LibRaw@@IEAAXXZ
+        384  17F 0004E2F0 ?processCanonCameraInfo@LibRaw@@IEAAX_KPEAEIII@Z
+        385  180 00047C40 ?processNikonLensData@LibRaw@@IEAAXPEAEI@Z
+        386  181 0006F410 ?process_Hassy_Lens@LibRaw@@IEAAXH@Z
+        387  182 00043270 ?process_Sony_0x0116@LibRaw@@IEAAXPEAEG_K@Z
+        388  183 000432D0 ?process_Sony_0x2010@LibRaw@@IEAAXPEAEG@Z
+        389  184 00043430 ?process_Sony_0x9050@LibRaw@@IEAAXPEAEG_K@Z
+        390  185 00044780 ?process_Sony_0x9400@LibRaw@@IEAAXPEAEG_K@Z
+        391  186 00044A70 ?process_Sony_0x9402@LibRaw@@IEAAXPEAEG@Z
+        392  187 00044B30 ?process_Sony_0x9403@LibRaw@@IEAAXPEAEG@Z
+        393  188 00044B80 ?process_Sony_0x9406@LibRaw@@IEAAXPEAEG@Z
+        394  189 00044BD0 ?process_Sony_0x940c@LibRaw@@IEAAXPEAEG@Z
+        395  18A 00044CF0 ?process_Sony_0x940e@LibRaw@@IEAAXPEAEG_K@Z
+        396  18B 0002D4D0 ?pseudoinverse@LibRaw@@IEAAXPEAY02N0H@Z
+        397  18C 00033C90 ?quicktake_100_load_raw@LibRaw@@IEAAXXZ
+        398  18D 000285D0 ?raw2image@LibRaw@@QEAAHXZ
+        399  18E 00028B40 ?raw2image_ex@LibRaw@@QEAAHH@Z
+        400  18F 00029710 ?raw2image_start@LibRaw@@QEAAXXZ
+        401  190 00003DC0 ?raw_was_read@LibRaw@@IEAAHXZ
+        402  191 00003E10 ?read@LibRaw_bigfile_buffered_datastream@@UEAAHPEAX_K1@Z
+        403  192 00003FC0 ?read@LibRaw_bigfile_datastream@@UEAAHPEAX_K1@Z
+        404  193 00004010 ?read@LibRaw_buffer_datastream@@UEAAHPEAX_K1@Z
+        405  194 000040A0 ?readAt@LibRaw_bigfile_buffered_datastream@@IEAA_JPEAX_K_J@Z
+        406  195 0002AD70 ?read_shorts@LibRaw@@IEAAXPEAGI@Z
+        407  196 0001E540 ?realloc@LibRaw@@IEAAPEAXPEAX_K@Z
+        408  197 00004110 ?realloc@libraw_memmgr@@QEAAPEAXPEAX_K@Z
+        409  198 000041A0 ?reconstruct_base@LibRaw_windows_datastream@@IEAAXXZ
+        410  199 0007B720 ?recover_highlights@LibRaw@@IEAAXXZ
+        411  19A 0001F6C0 ?recycle@LibRaw@@QEAAXXZ
+        412  19B 0001E600 ?recycle_datastream@LibRaw@@QEAAXXZ
+        413  19C 0006D450 ?removeExcessiveSpaces@LibRaw@@KAXPEAD@Z
+        414  19D 0006D4D0 ?remove_caseSubstr@LibRaw@@KAXPEAD0@Z
+        415  19E 0006D5C0 ?remove_trailing_spaces@LibRaw@@KAXPEAD_K@Z
+        416  19F 0002DB70 ?remove_zeroes@LibRaw@@IEAAXXZ
+        417  1A0 00096A60 ?rgb_to_lch@LibRaw@@IEAAXPEAY02N@Z
+        418  1A1 00034400 ?rollei_load_raw@LibRaw@@IEAAXXZ
+        419  1A2 0002DDE0 ?romm_coeff@LibRaw@@IEAAXQEAY02M@Z
+        420  1A3 00034600 ?samsung2_load_raw@LibRaw@@IEAAXXZ
+        421  1A4 00034830 ?samsung3_load_raw@LibRaw@@IEAAXXZ
+        422  1A5 00034D70 ?samsung_load_raw@LibRaw@@IEAAXXZ
+        423  1A6 0007DE20 ?scale_colors@LibRaw@@IEAAXXZ
+        424  1A7 00024E00 ?scale_colors_loop@LibRaw@@MEAAXQEAM@Z
+        425  1A8 000041C0 ?scanf_one@LibRaw_bigfile_buffered_datastream@@UEAAHPEBDPEAX@Z
+        426  1A9 000042E0 ?scanf_one@LibRaw_bigfile_datastream@@UEAAHPEBDPEAX@Z
+        427  1AA 00004310 ?scanf_one@LibRaw_buffer_datastream@@UEAAHPEBDPEAX@Z
+        428  1AB 00004390 ?seek@LibRaw_bigfile_buffered_datastream@@UEAAH_JH@Z
+        429  1AC 00004410 ?seek@LibRaw_bigfile_datastream@@UEAAH_JH@Z
+        430  1AD 00004450 ?seek@LibRaw_buffer_datastream@@UEAAH_JH@Z
+        431  1AE 0004A270 ?selectCRXFrame@LibRaw@@IEAAHFI@Z
+        432  1AF 0004A390 ?selectCRXTrack@LibRaw@@IEAAXXZ
+        433  1B0 000044F0 ?selectStringBuffer@LibRaw_bigfile_buffered_datastream@@IEAAH_JAEA_J@Z
+        434  1B1 0001E650 ?setCancelFlag@LibRaw@@UEAAXXZ
+        435  1B2 0004F280 ?setCanonBodyFeatures@LibRaw@@IEAAX_K@Z
+        436  1B3 00052560 ?setLeicaBodyFeatures@LibRaw@@IEAAXH@Z
+        437  1B4 00078D40 ?setMakeFromIndex@LibRaw@@QEAAHI@Z
+        438  1B5 00051B10 ?setOlympusBodyFeatures@LibRaw@@IEAAX_K@Z
+        439  1B6 0005D720 ?setPentaxBodyFeatures@LibRaw@@IEAAX_K@Z
+        440  1B7 0005DA20 ?setPhaseOneFeatures@LibRaw@@IEAAX_K@Z
+        441  1B8 00044FF0 ?setSonyBodyFeatures@LibRaw@@IEAAX_K@Z
+        442  1B9 00004680 ?set_bufsize@LibRaw_bufio_params@@SAXH@Z
+        443  1BA 00004690 ?set_dataerror_handler@LibRaw@@QEAAXP6AXPEAXPEBDH@Z0@Z
+        444  1BB 000035A0 ?set_dng_host@LibRaw@@QEAAXPEAX@Z
+        445  1BC 000046A0 ?set_exifparser_handler@LibRaw@@QEAAXP6AXPEAXHHHI0_J@Z0@Z
+        446  1BD 000046B0 ?set_progress_handler@LibRaw@@QEAAXP6AHPEAXW4LibRaw_progress@@HH@Z0@Z
+        447  1BE 000037E0 ?set_rawspeed_camerafile@LibRaw@@QEAAHPEAD@Z
+        448  1BF 0002AE10 ?sget2@LibRaw@@IEAAGPEAE@Z
+        449  1C0 0002AE40 ?sget2Rev@LibRaw@@IEAAGPEAE@Z
+        450  1C1 0002AE70 ?sget4@LibRaw@@IEAAIPEAE@Z
+        451  1C2 000046C0 ?sgetn@LibRaw@@SAIHPEAE@Z
+        452  1C3 0002AEC0 ?sgetreal@LibRaw@@IEAANHPEAE@Z
+        453  1C4 0002E520 ?simple_coeff@LibRaw@@IEAAXH@Z
+        454  1C5 0003D550 ?sinar_4shot_load_raw@LibRaw@@IEAAXXZ
+        455  1C6 000046F0 ?size@LibRaw_bigfile_buffered_datastream@@UEAA_JXZ
+        456  1C7 00004700 ?size@LibRaw_bigfile_datastream@@UEAA_JXZ
+        457  1C8 00004710 ?size@LibRaw_buffer_datastream@@UEAA_JXZ
+        458  1C9 00004700 ?size@LibRaw_windows_datastream@@UEAA_JXZ
+        459  1CA 00039FD0 ?smal_decode_segment@LibRaw@@IEAAXQEAY01IH@Z
+        460  1CB 0003A4E0 ?smal_v6_load_raw@LibRaw@@IEAAXXZ
+        461  1CC 0003A550 ?smal_v9_load_raw@LibRaw@@IEAAXXZ
+        462  1CD 0001B8D0 ?sony_arq_load_raw@LibRaw@@IEAAXXZ
+        463  1CE 000351F0 ?sony_arw2_load_raw@LibRaw@@IEAAXXZ
+        464  1CF 00035A90 ?sony_arw_load_raw@LibRaw@@IEAAXXZ
+        465  1D0 000452D0 ?sony_decrypt@LibRaw@@IEAAXPEAIHHH@Z
+        466  1D1 00036E80 ?sony_ljpeg_load_raw@LibRaw@@IEAAXXZ
+        467  1D2 00035CD0 ?sony_load_raw@LibRaw@@IEAAXXZ
+        468  1D3 0001E660 ?sraw_midpoint@LibRaw@@QEAAHXZ
+        469  1D4 0002DED0 ?strcasestr@LibRaw@@KAPEADPEADPEBD@Z
+        470  1D5 0001ECE0 ?stread@LibRaw@@KAHPEAD_KPEAVLibRaw_abstract_datastream@@@Z
+        471  1D6 0001ED30 ?strerror@LibRaw@@SAPEBDH@Z
+        472  1D7 0007F340 ?stretch@LibRaw@@IEAAXXZ
+        473  1D8 0002DF30 ?strnlen@LibRaw@@KA_KPEBD_K@Z
+        474  1D9 0001ED40 ?strprogress@LibRaw@@SAPEBDW4LibRaw_progress@@@Z
+        475  1DA 000984D0 ?subtract@LibRaw@@IEAAXPEBD@Z
+        476  1DB 00023E10 ?subtract_black@LibRaw@@QEAAHXZ
+        477  1DC 00023E30 ?subtract_black_internal@LibRaw@@QEAAHXZ
+        478  1DD 000E3978 ?tagtype_dataunit_bytes@LibRaw@@1Vlibraw_static_table_t@@A
+        479  1DE 00004720 ?tell@LibRaw_bigfile_buffered_datastream@@UEAA_JXZ
+        480  1DF 00004760 ?tell@LibRaw_bigfile_datastream@@UEAA_JXZ
+        481  1E0 000046F0 ?tell@LibRaw_buffer_datastream@@UEAA_JXZ
+        482  1E1 00023B60 ?thumbOK@LibRaw@@QEAAH_J@Z
+        483  1E2 0002DF70 ?tiff_get@LibRaw@@IEAAXIPEAI000@Z
+        484  1E3 00096CA0 ?tiff_head@LibRaw@@IEAAXPEAUtiff_hdr@@H@Z
+        485  1E4 00097980 ?tiff_set@LibRaw@@IEAAXPEAUtiff_hdr@@PEAGGGHH@Z
+        486  1E5 0001EEB0 ?tiff_sget@LibRaw@@IEAAFIPEAEIPEA_JPEAI212PEAH@Z
+        487  1E6 0006D610 ?trimSpaces@LibRaw@@KAXPEAD@Z
+        488  1E7 00003C60 ?try_dngsdk@LibRaw@@IEAAHXZ
+        489  1E8 0001CF00 ?try_rawspeed@LibRaw@@IEAAHXZ
+        490  1E9 00018010 ?uncompressed_fp_dng_load_raw@LibRaw@@IEAAXXZ
+        491  1EA 000035A0 ?unlock@LibRaw_abstract_datastream@@UEAAXXZ
+        492  1EB 0001BB40 ?unpack@LibRaw@@QEAAHXZ
+        493  1EC 00020540 ?unpack_function_name@LibRaw@@QEAAPEBDXZ
+        494  1ED 0001C2E0 ?unpack_thumb@LibRaw@@QEAAHXZ
+        495  1EE 0001CE60 ?unpack_thumb_ex@LibRaw@@QEAAHH@Z
+        496  1EF 000375D0 ?unpacked_load_raw@LibRaw@@IEAAXXZ
+        497  1F0 0003D750 ?unpacked_load_raw_FujiDBP@LibRaw@@IEAAXXZ
+        498  1F1 0001BA60 ?unpacked_load_raw_fuji_f700s20@LibRaw@@IEAAXXZ
+        499  1F2 00037080 ?unpacked_load_raw_reversed@LibRaw@@IEAAXXZ
+        500  1F3 000047A0 ?valid@LibRaw_bigfile_buffered_datastream@@UEAAHXZ
+        501  1F4 000047C0 ?valid@LibRaw_bigfile_datastream@@UEAAHXZ
+        502  1F5 000047C0 ?valid@LibRaw_buffer_datastream@@UEAAHXZ
+        503  1F6 000037E0 ?valid_for_dngsdk@LibRaw@@IEAAHXZ
+        504  1F7 00017920 ?vc5_dng_load_raw_placeholder@LibRaw@@IEAAXXZ
+        505  1F8 0001F090 ?version@LibRaw@@SAPEBDXZ
+        506  1F9 0001F0A0 ?versionNumber@LibRaw@@SAHXZ
+        507  1FA 00080D50 ?vng_interpolate@LibRaw@@IEAAXXZ
+        508  1FB 0007C8D0 ?wavelet_denoise@LibRaw@@IEAAXXZ
+        509  1FC 000037E0 ?wfname@LibRaw_abstract_datastream@@UEAAPEB_WXZ
+        510  1FD 000047D0 ?wfname@LibRaw_bigfile_buffered_datastream@@UEAAPEB_WXZ
+        511  1FE 000047F0 ?wfname@LibRaw_bigfile_datastream@@UEAAPEB_WXZ
+        512  1FF 00097A60 ?write_ppm_tiff@LibRaw@@IEAAXXZ
+        513  200 000035A0 ?x3f_load_raw@LibRaw@@IEAAXXZ
+        514  201 00007BD0 ?xtrans_decode_block@LibRaw@@IEAAXPEAUfuji_compressed_block@@PEBUfuji_compressed_params@@H@Z
+        515  202 00083AD0 ?xtrans_interpolate@LibRaw@@IEAAXH@Z
+        516  203 0001F0C0 default_data_callback
+        517  204 000048F0 libraw_COLOR
+        518  205 00004940 libraw_adjust_sizes_info_only
+        519  206 00004960 libraw_cameraCount
+        520  207 00004970 libraw_cameraList
+        521  208 00004980 libraw_capabilities
+        522  209 00004990 libraw_close
+        523  20A 000049B0 libraw_dcraw_clear_mem
+        524  20B 000049C0 libraw_dcraw_make_mem_image
+        525  20C 000049F0 libraw_dcraw_make_mem_thumb
+        526  20D 00004A20 libraw_dcraw_ppm_tiff_writer
+        527  20E 00004A40 libraw_dcraw_process
+        528  20F 00004A60 libraw_dcraw_thumb_writer
+        529  210 00004A80 libraw_free_image
+        530  211 00004AA0 libraw_get_cam_mul
+        531  212 00004AD0 libraw_get_color_maximum
+        532  213 00004AF0 libraw_get_decoder_info
+        533  214 00004B10 libraw_get_iheight
+        534  215 00004B20 libraw_get_imgother
+        535  216 00004B40 libraw_get_iparams
+        536  217 00004B60 libraw_get_iwidth
+        537  218 00004B70 libraw_get_lensinfo
+        538  219 00004B90 libraw_get_pre_mul
+        539  21A 00004BC0 libraw_get_raw_height
+        540  21B 00004BD0 libraw_get_raw_width
+        541  21C 00004BE0 libraw_get_rgb_cam
+        542  21D 00004C30 libraw_init
+        543  21E 00004C70 libraw_open_bayer
+        544  21F 00004CD0 libraw_open_buffer
+        545  220 00004CF0 libraw_open_file
+        546  221 00004D10 libraw_open_wfile
+        547  222 00004D30 libraw_raw2image
+        548  223 00004D50 libraw_recycle
+        549  224 00004D70 libraw_recycle_datastream
+        550  225 00004D90 libraw_set_adjust_maximum_thr
+        551  226 00004DB0 libraw_set_bright
+        552  227 00004DD0 libraw_set_dataerror_handler
+        553  228 00004DF0 libraw_set_demosaic
+        554  229 00004E10 libraw_set_exifparser_handler
+        555  22A 00004E30 libraw_set_fbdd_noiserd
+        556  22B 00004E50 libraw_set_gamma
+        557  22C 00004E80 libraw_set_highlight
+        558  22D 00004EA0 libraw_set_no_auto_bright
+        559  22E 00004EC0 libraw_set_output_bps
+        560  22F 00004EE0 libraw_set_output_color
+        561  230 00004F00 libraw_set_output_tif
+        562  231 00004F20 libraw_set_progress_handler
+        563  232 00004F40 libraw_set_user_mul
+        564  233 0001F190 libraw_strerror
+        565  234 00004F70 libraw_strprogress
+        566  235 00004F80 libraw_subtract_black
+        567  236 00004FA0 libraw_unpack
+        568  237 00004FC0 libraw_unpack_function_name
+        569  238 00004FE0 libraw_unpack_thumb
+        570  239 00005000 libraw_unpack_thumb_ex
+        571  23A 00005020 libraw_version
+        572  23B 00005030 libraw_versionNumber
+        573  23C 00027AE0 rr001i_abi
+        574  23D 00027B60 rr001i_begin
+        575  23E 00027CC0 rr001i_end
+        576  23F 00027D90 rr001i_lifecycle_test
+        577  240 00027E50 rr001i_self_test
+
+  Section contains the following imports:
+
+    MSVCP140.dll
+             18009C0C0 Import Address Table
+             1800CEF58 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                         28E ?_Xlength_error@std@@YAXPEBD@Z
+
+    VCOMP140.DLL
+             18009C0D0 Import Address Table
+             1800CEF68 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          38 _vcomp_enter_critsect
+                          45 _vcomp_leave_critsect
+                          3E _vcomp_for_static_end
+                          41 _vcomp_for_static_simple_init
+                          43 _vcomp_fork
+                          3A _vcomp_for_dynamic_init
+                          3C _vcomp_for_dynamic_next
+                          35 _vcomp_barrier
+                          61 omp_get_num_threads
+                          5E omp_get_max_threads
+                          62 omp_get_thread_num
+                          5F omp_get_nested
+                          5D omp_get_dynamic
+
+    WS2_32.dll
+             18009C1E0 Import Address Table
+             1800CF078 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                             Ordinal     8
+                             Ordinal    15
+                             Ordinal     9
+                             Ordinal    14
+
+    bcrypt.dll
+             18009C4B0 Import Address Table
+             1800CF348 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           6 BCryptCreateHash
+                          25 BCryptHashData
+                          23 BCryptGetProperty
+                          1D BCryptFinishHash
+                          29 BCryptOpenAlgorithmProvider
+                           2 BCryptCloseAlgorithmProvider
+                           E BCryptDestroyHash
+
+    KERNEL32.dll
+             18009C000 Import Address Table
+             1800CEE98 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                         5B8 SetUnhandledExceptionFilter
+                         39A InitializeSListHead
+                         142 DisableThreadLibraryCalls
+                         31A GetSystemTimeAsFileTime
+                         246 GetCurrentThreadId
+                         242 GetCurrentProcessId
+                         481 QueryPerformanceCounter
+                         3B0 IsDebuggerPresent
+                         3B8 IsProcessorFeaturePresent
+                         5D8 TerminateProcess
+                         241 GetCurrentProcess
+                          DE CreateFileA
+                         5FB UnhandledExceptionFilter
+                         518 RtlVirtualUnwind
+                         511 RtlLookupFunctionEntry
+                         509 RtlCaptureContext
+                          DF CreateFileMappingA
+                         5FE UnmapViewOfFile
+                         412 MapViewOfFile
+                          9D CloseHandle
+                         4A9 ReadFile
+                         278 GetFileSizeEx
+                          E6 CreateFileW
+
+    VCRUNTIME140.dll
+             18009C140 Import Address Table
+             1800CEFD8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          25 __std_type_info_destroy_list
+                          1C __current_exception_context
+                          1B __current_exception
+                           8 __C_specific_handler
+                          41 strrchr
+                          3E memset
+                          3B memcmp
+                          3A memchr
+                          40 strchr
+                          23 __std_terminate
+                          3C memcpy
+                          42 strstr
+                          3D memmove
+                          36 _purecall
+                          21 __std_exception_copy
+                          22 __std_exception_destroy
+                           1 _CxxThrowException
+
+    VCRUNTIME140_1.dll
+             18009C1D0 Import Address Table
+             1800CF068 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           0 __CxxFrameHandler4
+
+    api-ms-win-crt-runtime-l1-1-0.dll
+             18009C2D0 Import Address Table
+             1800CF168 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          3A _invoke_watson
+                          21 _errno
+                          37 _initterm_e
+                          3F _seh_filter_dll
+                          22 _execute_onexit_table
+                          3C _register_onexit_function
+                          36 _initterm
+                          1E _crt_atexit
+                          18 _configure_narrow_argv
+                          16 _cexit
+                          33 _initialize_narrow_environment
+                          34 _initialize_onexit_table
+                          67 terminate
+
+    api-ms-win-crt-stdio-l1-1-0.dll
+             18009C340 Import Address Table
+             1800CF1D8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           3 __stdio_common_vfprintf
+                          80 fputs
+                           D __stdio_common_vsprintf
+                          77 fflush
+                          76 ferror
+                          10 __stdio_common_vsscanf
+                          7D fopen
+                          8A fwrite
+                          26 _fileno
+                          57 _setmode
+                           6 __stdio_common_vfscanf
+                          33 _ftelli64
+                          13 __stdio_common_vswprintf_s
+                          2F _fseeki64
+                          83 fread
+                          7A fgets
+                          78 fgetc
+                          75 feof
+                          74 fclose
+                          7F fputc
+                          7E fopen_s
+                          63 _wfopen_s
+                           F __stdio_common_vsprintf_s
+                           0 __acrt_iob_func
+
+    api-ms-win-crt-heap-l1-1-0.dll
+             18009C240 Import Address Table
+             1800CF0D8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          1A realloc
+                          19 malloc
+                          18 free
+                          17 calloc
+                           8 _callnewh
+
+    api-ms-win-crt-filesystem-l1-1-0.dll
+             18009C228 Import Address Table
+             1800CF0C0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          1F _stat64
+                          3C _wstat64
+
+    api-ms-win-crt-math-l1-1-0.dll
+             18009C270 Import Address Table
+             1800CF108 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          90 cos
+                          B2 exp
+                          FE pow
+                          DA log
+                          7D ceilf
+                          E6 logf
+                          FF powf
+                         10A roundf
+                          BF floorf
+                         117 sqrtf
+                         116 sqrt
+
+    api-ms-win-crt-string-l1-1-0.dll
+             18009C408 Import Address Table
+             1800CF2A0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          34 _strnicmp
+                          8C strncat
+                          64 isalnum
+                          94 strtok
+                          8B strlen
+                          68 isdigit
+                          A1 wcscpy_s
+                          86 strcmp
+                          8E strncmp
+                          88 strcpy
+                          8F strncpy
+                          6E isspace
+                          A3 wcslen
+                          2A _stricmp
+
+    api-ms-win-crt-convert-l1-1-0.dll
+             18009C208 Import Address Table
+             1800CF0A0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          50 atoi
+                          61 strtol
+                          4F atof
+
+    api-ms-win-crt-utility-l1-1-0.dll
+             18009C498 Import Address Table
+             1800CF330 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          19 qsort
+                           E _swab
+
+    api-ms-win-crt-time-l1-1-0.dll
+             18009C480 Import Address Table
+             1800CF318 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          28 _mktime64
+                          23 _localtime64
+
+SECTION HEADER #3
+   .data name
+   54DC8 virtual size
+   D0000 virtual address (00000001800D0000 to 0000000180124DC7)
+   53E00 size of raw data
+   CE800 file pointer to raw data (000CE800 to 001225FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         Read Write
+
+SECTION HEADER #4
+  .pdata name
+    4074 virtual size
+  125000 virtual address (0000000180125000 to 0000000180129073)
+    4200 size of raw data
+  122600 file pointer to raw data (00122600 to 001267FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         Read Only
+
+SECTION HEADER #5
+  .reloc name
+    140C virtual size
+  12A000 virtual address (000000018012A000 to 000000018012B40B)
+    1600 size of raw data
+  126800 file pointer to raw data (00126800 to 00127DFF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42000040 flags
+         Initialized Data
+         Discardable
+         Read Only
+
+  Summary
+
+       55000 .data
+        5000 .pdata
+       34000 .rdata
+        2000 .reloc
+       9B000 .text

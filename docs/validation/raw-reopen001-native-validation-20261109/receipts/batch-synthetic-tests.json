@@ -1,0 +1,17 @@
+{
+  "status": "PASS_SYNTHETIC_BATCH_ONLY",
+  "cases": [
+    "new explicit batch begins at zero without erasing exhausted old ledger",
+    "wrong authorization hash rejects",
+    "old ledger identity cannot be silently reset",
+    "maximum cannot be inflated",
+    "serial slot order enforced before reservation",
+    "first slot durable before any launch",
+    "failed launch cannot refund or repeat first slot",
+    "second slot exhausts fixed batch; third attempt denied",
+    "original ledger remains byte-identical"
+  ],
+  "passed": 9,
+  "newRawCalls": 0,
+  "nativeInit": 0
+}

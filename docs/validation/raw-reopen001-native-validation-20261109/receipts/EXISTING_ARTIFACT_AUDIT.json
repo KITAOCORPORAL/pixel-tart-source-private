@@ -1,0 +1,36 @@
+{
+  "fetchHeads": {
+    "company": "c156bb83e741e1fd61142431a203d62e62a9e44b",
+    "review": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f"
+  },
+  "existingArtifactSearch": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-20261106\\native-build-preflight\\BUILD_STATUS.json",
+      "bytes": 616,
+      "receipt": {
+        "status": "NOT_BUILT_REQUIRED_MSVC_TOOLCHAIN_UNAVAILABLE",
+        "nativeCompilerInvocations": 0,
+        "rawCalls": 0,
+        "source": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+        "flags": "Unchanged upstream Makefile.msvc DLL target; COPT_OPT=/openmp",
+        "productionEquivalent": false,
+        "optionalComponents": "No RawSpeed/DNGSDK/LCMS/JPEG opt-in; must not claim production-equivalent",
+        "missing": [
+          "cl.exe",
+          "nmake.exe",
+          "dumpbin.exe",
+          "Windows SDK include/lib registered and active",
+          "x64 MSVC Developer shell"
+        ],
+        "compiler": null,
+        "sdk": null,
+        "developerTarget": null
+      },
+      "lastWriteUtc": "2026-11-06T06:47:06.9218381Z",
+      "sha256": "D283D01890457A1D4039E6B62038717EC44BA5CD16B66F17114C48D01A51C593"
+    }
+  ],
+  "newerNativeBinaryOrSuccessfulSelfTestFound": false,
+  "reuseDecision": "No new native output/selftest exists in company InternalV3 roots; original only toolchain-missing build preflight retained",
+  "rawCalls": 0
+}

@@ -1,0 +1,466 @@
+[
+  {
+    "actualScalars": [
+      {
+        "kind": "scalar",
+        "name": "compile-LIBRAW_USE_OPENMP",
+        "value": 1
+      },
+      {
+        "kind": "scalar",
+        "name": "compile-LIBRAW_NOTHREADS",
+        "value": 0
+      },
+      {
+        "kind": "scalar",
+        "name": "compile-NO_LCMS",
+        "value": 1
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-passes",
+        "value": 3
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-T",
+        "value": 512
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-ndir",
+        "value": 8
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-compiled",
+        "value": 200203
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-max-threads",
+        "value": 6
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-dynamic",
+        "value": 0
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-nested",
+        "value": 0
+      }
+    ],
+    "actualTeams": [
+      6
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    },
+    "tileCount": 176,
+    "binaries": [
+      {
+        "bytes": 241118208,
+        "name": "memory-rgb16.u16"
+      },
+      {
+        "bytes": 80372736,
+        "name": "P1-cfa.cfa.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P1.image4.u16"
+      },
+      {
+        "bytes": 80372736,
+        "name": "P3b-cfa.cfa.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P3b.image4.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P5.image4.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P6-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P6.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P7-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P7.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P9-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P9.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "XTRANS-serial-ready.image4.u16"
+      }
+    ],
+    "payloads": [
+      {
+        "id": "P1",
+        "channels": 4,
+        "valid": true,
+        "sha256": "54f7fcbecef1fb464fb38e1e0ac6dbf89317ae4390644b02a9add5182b5bba3d",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P1-cfa",
+        "channels": 1,
+        "valid": true,
+        "sha256": "b26bf3f9bf7244e4910a5cdadc9993ead8d2853f25f83e4547a7b892f819d1da",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P3b",
+        "channels": 4,
+        "valid": true,
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P3b-cfa",
+        "channels": 1,
+        "valid": true,
+        "sha256": "5f20ef8ff0de8f68457f5c6245c46f99b2fa5a826c97ab6408123047ebf31409",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P5",
+        "channels": 4,
+        "valid": true,
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "XTRANS-serial-ready",
+        "channels": 4,
+        "valid": true,
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P6",
+        "channels": 3,
+        "valid": true,
+        "sha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P6-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "c21174b5b416165d3dbbf8f039a9079d38f749c2a9ff542354059879dd45a604",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P7",
+        "channels": 3,
+        "valid": true,
+        "sha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P7-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "c21174b5b416165d3dbbf8f039a9079d38f749c2a9ff542354059879dd45a604",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P9",
+        "channels": 3,
+        "valid": true,
+        "sha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P9-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "c21174b5b416165d3dbbf8f039a9079d38f749c2a9ff542354059879dd45a604",
+        "width": 7752,
+        "height": 5184
+      }
+    ],
+    "status": "completed",
+    "counts": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    },
+    "slot": "first",
+    "pid": 26928
+  },
+  {
+    "actualScalars": [
+      {
+        "kind": "scalar",
+        "name": "compile-LIBRAW_USE_OPENMP",
+        "value": 1
+      },
+      {
+        "kind": "scalar",
+        "name": "compile-LIBRAW_NOTHREADS",
+        "value": 0
+      },
+      {
+        "kind": "scalar",
+        "name": "compile-NO_LCMS",
+        "value": 1
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-passes",
+        "value": 3
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-T",
+        "value": 512
+      },
+      {
+        "kind": "scalar",
+        "name": "actual-xtrans-ndir",
+        "value": 8
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-compiled",
+        "value": 200203
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-max-threads",
+        "value": 6
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-dynamic",
+        "value": 0
+      },
+      {
+        "kind": "scalar",
+        "name": "omp-nested",
+        "value": 0
+      }
+    ],
+    "actualTeams": [
+      6
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    },
+    "tileCount": 176,
+    "binaries": [
+      {
+        "bytes": 241118208,
+        "name": "memory-rgb16.u16"
+      },
+      {
+        "bytes": 80372736,
+        "name": "P1-cfa.cfa.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P1.image4.u16"
+      },
+      {
+        "bytes": 80372736,
+        "name": "P3b-cfa.cfa.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P3b.image4.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P5.image4.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P6-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P6.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P7-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P7.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "P9-audit4.image4.u16"
+      },
+      {
+        "bytes": 241118208,
+        "name": "P9.rgb.u16"
+      },
+      {
+        "bytes": 321490944,
+        "name": "XTRANS-serial-ready.image4.u16"
+      }
+    ],
+    "payloads": [
+      {
+        "id": "P1",
+        "channels": 4,
+        "valid": true,
+        "sha256": "54f7fcbecef1fb464fb38e1e0ac6dbf89317ae4390644b02a9add5182b5bba3d",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P1-cfa",
+        "channels": 1,
+        "valid": true,
+        "sha256": "b26bf3f9bf7244e4910a5cdadc9993ead8d2853f25f83e4547a7b892f819d1da",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P3b",
+        "channels": 4,
+        "valid": true,
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P3b-cfa",
+        "channels": 1,
+        "valid": true,
+        "sha256": "5f20ef8ff0de8f68457f5c6245c46f99b2fa5a826c97ab6408123047ebf31409",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P5",
+        "channels": 4,
+        "valid": true,
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "XTRANS-serial-ready",
+        "channels": 4,
+        "valid": true,
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P6",
+        "channels": 3,
+        "valid": true,
+        "sha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P6-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "9a1ed4e41fff7c244137ac478740cacde40a534d21ba27620c1da1e588f27f46",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P7",
+        "channels": 3,
+        "valid": true,
+        "sha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P7-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "9a1ed4e41fff7c244137ac478740cacde40a534d21ba27620c1da1e588f27f46",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P9",
+        "channels": 3,
+        "valid": true,
+        "sha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+        "width": 7752,
+        "height": 5184
+      },
+      {
+        "id": "P9-audit4",
+        "channels": 4,
+        "valid": true,
+        "sha256": "9a1ed4e41fff7c244137ac478740cacde40a534d21ba27620c1da1e588f27f46",
+        "width": 7752,
+        "height": 5184
+      }
+    ],
+    "status": "completed",
+    "counts": {
+      "OpenFile": 1,
+      "Unpack": 1,
+      "DcrawProcess": 1,
+      "MakeDcrawMemoryImage": 1
+    },
+    "slot": "second",
+    "pid": 20016
+  }
+]

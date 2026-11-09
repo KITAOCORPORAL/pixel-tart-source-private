@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "slot": "first",
+      "strictUniqueJson": true,
+      "geometryPhaseParallelAndTypedState": true,
+      "stateKeys": [
+        "P1",
+        "P3b",
+        "P5",
+        "XTRANS-serial-ready",
+        "P6",
+        "P7",
+        "P9"
+      ],
+      "newRawCalls": 0
+    },
+    {
+      "slot": "second",
+      "strictUniqueJson": true,
+      "geometryPhaseParallelAndTypedState": true,
+      "stateKeys": [
+        "P1",
+        "P3b",
+        "P5",
+        "XTRANS-serial-ready",
+        "P6",
+        "P7",
+        "P9"
+      ],
+      "newRawCalls": 0
+    }
+  ],
+  "numericalComparisonUnchanged": "Same verified pixel files; arithmetic loops unchanged by strict parser integration",
+  "newRawCalls": 0
+}

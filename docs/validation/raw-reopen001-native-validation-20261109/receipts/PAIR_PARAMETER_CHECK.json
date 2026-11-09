@@ -1,0 +1,34 @@
+{
+  "newRawCallsInThisOfflineCheck": 0,
+  "scope": "Existing exposed configured/output values only, not hidden scratch state",
+  "userInputSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "twoProcesses": [
+    {
+      "exactTypedJsonEqual": true,
+      "file": "configured-output.json"
+    },
+    {
+      "exactTypedJsonEqual": true,
+      "file": "opened-output.json"
+    }
+  ],
+  "effective": {
+    "UserQual": -1,
+    "Gamma": [
+      0.45,
+      4.5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "Interpolation": true,
+    "OutputColor": 1,
+    "UserFlip": 0,
+    "UseAutoWb": false,
+    "UseCameraWb": true,
+    "NoAutoBright": false,
+    "OutputBps": 16,
+    "HalfSize": false
+  }
+}

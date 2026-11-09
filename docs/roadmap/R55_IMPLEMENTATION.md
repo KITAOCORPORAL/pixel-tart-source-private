@@ -1,3 +1,11 @@
+## 2026-11-09 RAW-REOPEN-001：真实编译、自检及新授权双进程，首差P6（Asia/Shanghai）
+- 从c156bb83/观测R2源码08bfae4a独立接续diagnostic/raw-reopen001-validation-20261109；fetch无更新native产物。原生七CPP/header与冻结R2逐字节一致；公司许可/管理员与空间满足，最小安装MSVC x64工具及SDK26100。一次nmake真实构建成功，compiler19.44.35229，75翻译单元+1link；未重复旧失败预检或Zig。
+- native DLL SHA305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484；host SHA776944C2D4E46B40A0DB2C2383466150EBBC8175CC5EF05B5E73D773EDFEA068。真实无RAW自检PID26240成功：ABI/data381256/布局/hash/文件生命周期，Initialize1/托管Dispose1/释放后访问拒绝；native Recycle/Close导出调用数从固定binding IL推断，不冒称实测或内部recycle总数。
+- 最新用户明确授权本轮独立两次批次，旧consumed2/remaining0收据hash保持。新批次RAW-REOPEN-001-VALIDATION-20261109启动前持久预留，PID26928→20016串行各一次Open/Unpack/Process/Memory；均exit0，consumed2/remaining0，无重试/第三次。原参数/线程策略保持，实际team6/passes3/T512/ndir8。
+- 完整比较门禁退出0：P1/P3b/P5/serial-ready全域含边缘/非CFA四槽及必需状态相同；P6首次5127通道/2984像素差，max815，最大(2493,510,R)=4769/5584。P7/P9同组；P8实测rawColor1矩阵旁路，不伪称消费out_cam。末尾border8不写本次变化内部点为源码/坐标推断，仍无实际consumer load时序，H1/根因OPEN/NOT_FIXED。
+- 研究sidecar确认F1并补比较器三门禁：几何/extent绑定、CIELab/allhex和P8严格窗口、实际并行证据。85项门禁及实际metadata通过，追加并行64d4dc6严格JSON解析后最终90项通过；原生源码未改，只对同一pair离线重比，无追加解码。执行源码feba0f94，定量比较源码f2aa53ff/最终比较器8723a4bd，runtime manifest全部执行前后相同。
+- 一次安装exit0；E编译器逻辑1.752GB、E SDK1.791GB，C installer149MB及ProgramData18MB；安装窗口盘用量C+896MB/E+5.222GB含并发工作区，详见收据。进程级Developer shell环境，OMP/KMP未手改，系统MSVC/OpenMP依赖与旧hash一致。本任务未修改既有树/未推成果/失败。收尾发现并行旧诊断64d4dc6和研究0750a014推进，已只读接续并保留P8旧完整比较拒绝，研究独立prefix同样证P6首差。
+- A产品源码仍38dd3f92、功能源码零修改，不重建RAW修复包；旧完整包/全模块/策划15/教程退役保持。B拼贴收藏是独立产品分支/包，不算RAW修复。报告docs/validation/raw-reopen001-native-validation-20261109/FINAL_REPORT.md；本地E:/Guangjing-RawReopen001-NoRaw-20261109，26个像素文件6,751,309,824bytes仅本机。
 ## 2026-11-06 RAW-REOPEN-001：内部阶段工具已实现，原生验证与执行仍受阻（Asia/Shanghai）
 - fetch确认家庭1cabb0cfcbe2184fb55c066326cbd3c1d1bd23eb、研究5a4f233dea5ba11622b18380fea137c8f3944e53；公司62工作树/10脏树及asset-library-v1的8个未推提交只读保留。从家庭HEAD建独立diagnostic/raw-reopen001-native-20261106，不合研究/不重置旧树。
 - 新tools/RawNativeInternalProbe实际实现7CPP可逆插入、27份源码锁、修正P2、实际WB/scale_mul/out_cam、全初始化P5四槽（含边缘/非CFA）、P6 RGB+第四槽、实际分支/回调/后处理、worker/tile/join记录、独立bounded host/runner和全任务账本。旧V2.1 DLL hash/ABI检查未删未改；新库不能靠放宽旧guard运行。

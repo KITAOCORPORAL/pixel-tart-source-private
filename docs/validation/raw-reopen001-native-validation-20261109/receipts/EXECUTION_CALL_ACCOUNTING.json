@@ -1,0 +1,33 @@
+{
+  "localPixelBytes": 6751309824,
+  "noAutomaticRetry": true,
+  "rawNativeRecycleClose": "Wrapper disposal path inferred; per-export entries not instrumented",
+  "runtimeFilesCount": 91,
+  "observerNativeR2Unchanged": true,
+  "result": "COMPLETED_PAIR_AWAITING_FINAL_OFFLINE_COMPARISON",
+  "newRawCounts": {
+    "OpenFile": 2,
+    "DcrawProcess": 2,
+    "MakeDcrawMemoryImage": 2,
+    "Unpack": 2
+  },
+  "pixelFiles": 26,
+  "algorithmOrThreadStrategyChanged": false,
+  "noThirdDecode": true,
+  "noRawSelfTestCounts": {
+    "MakeDcrawMemoryImage": 0,
+    "Unpack": 0,
+    "ManagedDispose": 1,
+    "Initialize": 1,
+    "DcrawProcess": 0,
+    "OpenFile": 0
+  },
+  "rawProcesses": [
+    26928,
+    20016
+  ],
+  "rawNativeInitialize": "Two wrapper-owned initializations implied by pinned OpenFile path; not directly counted at C export",
+  "sameCaptureReusedForComparatorFixes": true,
+  "newBatch": "explicit current user authorization; consumed2 remaining0",
+  "oldTask": "consumed2 remaining0 unchanged"
+}

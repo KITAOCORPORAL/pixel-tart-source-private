@@ -1,0 +1,79 @@
+{
+  "status": "NO_IDENTIFIED_NATIVE_COMPILE_OR_UB_BLOCKER_COMPARATOR_GAPS",
+  "headAtReport": "3e3c33d3b530af56212f729404c76066b2fff04b",
+  "stableCheck": [
+    {
+      "name": "Prepare-Internal.mjs",
+      "unchangedSinceReview": true
+    },
+    {
+      "name": "rr001_internal.h",
+      "unchangedSinceReview": true
+    },
+    {
+      "name": "Compare-Checkpoints.mjs",
+      "unchangedSinceReview": true
+    },
+    {
+      "name": "Verify-Contract.mjs",
+      "unchangedSinceReview": true
+    },
+    {
+      "name": "Build-Isolated.ps1",
+      "unchangedSinceReview": true
+    },
+    {
+      "name": "Tests.mjs",
+      "unchangedSinceReview": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "priority": 2,
+      "category": "F2 layout binding",
+      "file": "E:/Kitao-Worktrees/raw-reopen001-noraw-20261109/tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "lines": [
+        19,
+        22,
+        52,
+        57
+      ],
+      "finding": "Each state and payload is validated independently, but their dimensions, pitch and initialized extent are never bound to one another. Full load accepts P5 state40x40 with payload80x40, marking requiredStateComplete/identityVerified true.",
+      "fix": "For every exact state/payload pair require safe integer dimensions, payload.width/height===state.width/height, sourcePitch===state.iwidth*8, packedPitch===state.width*channels*2, and expected payload span within validated declared allocation. Reject before returning capture.",
+      "nativeRebuildRequired": false,
+      "syntheticEvidence": "F2 full loader accepts P5 state40x40 with payload80x40"
+    },
+    {
+      "id": "S2",
+      "priority": 2,
+      "category": "F3 phase binding",
+      "file": "E:/Kitao-Worktrees/raw-reopen001-noraw-20261109/tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "lines": [
+        35,
+        41
+      ],
+      "finding": "CIELab/allhex have only an upper boundary before serial payload, and P8/out_cam only before P9. The loader accepts P8/out_cam before P1; typed validator accepts allhex before P1.",
+      "fix": "Bind indexed windows P5 payload < CIELab initialization/tables < allhex < serial-ready state/payload < P6 state/payload, and P7 payload < P8 state < its typed rows/out_cam < P9 state/payload. Bind histogram after P9 payload and before P10. Keep the existing primary order and uniqueness checks.",
+      "nativeRebuildRequired": false,
+      "syntheticEvidence": "F3 full loader accepts P8/out_cam before P1; F3 allhex before P1 accepted"
+    },
+    {
+      "id": "S3",
+      "priority": 2,
+      "category": "F2 runtime evidence completeness",
+      "file": "E:/Kitao-Worktrees/raw-reopen001-noraw-20261109/tools/RawNativeInternalProbe/Compare-Checkpoints.mjs",
+      "lines": [
+        15,
+        42
+      ],
+      "finding": "The complete positive schema contains zero actual-xtrans-passes/T/ndir, omp runtime scalars or tile records and still passes. Runtime evidence being mandatory in the generator does not make it mandatory in the offline reader.",
+      "fix": "Require exactly one actual-xtrans-passes/T/ndir record bound to the XTrans serial window and at least one valid tile for this supported large-frame path; validate team/worker/tile geometry/scratch extent and compile-conditional omp runtime records. Keep worker scheduling out of semantic pixel equality and H1 UNKNOWN without consumer-load evidence.",
+      "nativeRebuildRequired": false,
+      "syntheticEvidence": "F2 no tile/runtime xtrans metadata accepted"
+    }
+  ],
+  "rawCalls": 0,
+  "nativeApiCalls": 0,
+  "nativeCompilerInvocations": 0
+}

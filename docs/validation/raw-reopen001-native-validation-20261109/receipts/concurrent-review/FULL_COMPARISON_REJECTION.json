@@ -1,0 +1,9 @@
+{
+  "comparatorFix": "64d4dc6edf46de8b19897a912bfa070f8f70dcc4",
+  "status": "REJECTED",
+  "observedAssertion": "Effective 3x3 out_cam required for supported default output",
+  "observedP8RawColor": 1,
+  "observedOutCam": "not-consumed-raw-color-bypass",
+  "nativeCallsByComparison": 0,
+  "action": "Preserve failure; independently validate interpolation prefix only, without fabricating downstream matrix or relaxing assertion"
+}

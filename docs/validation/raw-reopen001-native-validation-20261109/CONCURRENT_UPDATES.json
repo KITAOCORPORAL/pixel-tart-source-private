@@ -1,0 +1,18 @@
+{
+  "uniqueParserTests": 90,
+  "additionalNativeBuilds": 0,
+  "finalComparatorCommit": "8723a4bdf074bb8a1cc8b546802050aa59823ec6",
+  "preservedOtherFullComparatorFailure": "64d4dc6 requires P8 rawColor0; actual rawColor1 bypass rejected there; rejection kept, no fake matrix",
+  "additionalNativeSelfTests": 0,
+  "writesToThoseTreesByThisTask": 0,
+  "additionalRawCalls": 0,
+  "observedDuringRun": {
+    "priorDiagnosticAfter": "64d4dc6edf46de8b19897a912bfa070f8f70dcc4",
+    "researchAfter": "0750a014a03ebf5a77a89f837bf29d2bc53c1775",
+    "researchBefore": "71ba977ac2d2ca1b039a59fb3a4b2e3f28882a4f",
+    "priorDiagnosticBefore": "c156bb83e741e1fd61142431a203d62e62a9e44b"
+  },
+  "offlineMetadataToolFailure": "One ESM absolute E: import rejected; changed to file URL, then metadata recheck passed. Zero native/RAW calls.",
+  "reuse": "Strict unique JSON parser and immediate CIELab row binding integrated from 64d4dc6; research prefix independently confirms same observed P6 pair",
+  "ourDomain": "Captured RGB/typed-state diagnostics with explicit consumed-out_cam versus raw-color bypass branches, not approval of downstream production color equivalence"
+}

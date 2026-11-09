@@ -1,0 +1,17 @@
+{
+  "target": "x64",
+  "originalSha256": "B36195DE1FD6F6F5FB9761A7700F3D5A69EAC877D43E3BC51C2B51C92E43F5A5",
+  "sdkVersion": "10.0.26100.0",
+  "actualBuildSucceeded": true,
+  "missing": [],
+  "actualTools": {
+    "dumpbin": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/dumpbin.exe",
+    "nmake": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/nmake.exe",
+    "compiler": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe"
+  },
+  "originalBytes": 92321740,
+  "originalPath": "E:/Guangjing-RawReopen001-NoRaw-20261109/native-build01/TOOLCHAIN.json",
+  "sdk": "E:/Windows Kits/10",
+  "reason": "Original Discover-Toolchain serialized registry PS provider objects recursively, producing92MB metadata. No original receipt changed.",
+  "type": "Derived compact summary; full original receipt retained locally and bound by SHA"
+}

@@ -1,0 +1,49 @@
+{
+  "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "addedObserverDependency": "bcrypt.dll",
+  "peReceiptSha256": "5BB0147A67A0343B012591B43BCBAB71C1126F874640FAD6D154B80EA4EB9723",
+  "target": "win-x64",
+  "peReceipt": "E:/Guangjing-RawReopen001-NoRaw-20261109/native-build01/native-pe.log",
+  "inventorySha256": "9DCE7C821061F0CB6E9F0C5A000BF18A9F87FEE2E4752B397D931C229A5F42C4",
+  "flags": "/EHsc /MP /MD /I. /DWIN32 /O2 /W0 /nologo /openmp /DLIBRAW_BUILDLIB; DLL target /LD",
+  "upstreamByteRestoration": true,
+  "optionalComponents": "No RawSpeed/DNG SDK/LCMS/JPEG opt-in; new binary, not production-equivalent",
+  "sdkPath": "E:/Windows Kits/10",
+  "r2ObserverBaseline": "08bfae4a6e311609c95784e8373bead711d9997c",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "newRawCallsSoFar": 0,
+  "nativeSelfTest": "NO_RAW_SELF_TEST_COMPLETED",
+  "buildLogSha256": "D0F188FAF7E433812FB971EAFE2016AF08A87B4ACB457591E395349B71B4D5F5",
+  "compilerAndTools": [
+    {
+      "sha256": "FE251EF50A1545B1B0835EE17B1E785459712B38D79E45B5C1D3D28970A36619",
+      "fileVersion": "19.44.35229.0",
+      "path": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe"
+    },
+    {
+      "sha256": "CE6B50C2D8E6704B671EC116E52CE9D2FBC1D20DD28C5B895B5421ADDDF94EBB",
+      "fileVersion": "14.44.35229.0",
+      "path": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/nmake.exe"
+    },
+    {
+      "sha256": "A364AF801A8539E4324D9489313DBF001D959128451FC99A27B24676BBAC058F",
+      "fileVersion": "14.44.35229.0",
+      "path": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.exe"
+    },
+    {
+      "sha256": "CFEE7ED764B7B0866AAE0BE12F9C0AD2A7F5AECC4046BA2B7DE26335827CA815",
+      "fileVersion": "14.44.35229.0",
+      "path": "E:/BuildTools/VS2022-RR001/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/dumpbin.exe"
+    }
+  ],
+  "sdkVersion": "10.0.26100.0",
+  "compilerVersionReceipt": "E:/Guangjing-RawReopen001-NoRaw-20261109/native-build01/compiler-version.log",
+  "preparationSha256": "5C032C4B048CDF3C467DB20DECC9E2E8F2D7AE1E42764240C91EF3E30DFE494A",
+  "buildAttemptCount": 1,
+  "nativeDll": {
+    "sha256": "305EEC498644F01EC707E8AC3E58A4B5670043D35FBC853626FF13AC6FF15484",
+    "bytes": 1211904,
+    "path": "E:/Guangjing-RawReopen001-NoRaw-20261109/runtime01/raw_r.dll"
+  },
+  "nativeHeaderAndSevenCppSameAsR2": true
+}
