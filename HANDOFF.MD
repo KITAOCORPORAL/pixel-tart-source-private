@@ -325,3 +325,10 @@
 - 真实 HTTP / HTTPS 与 PC 命令、SQLite 归片回写通过：45 项 HTTP、7 项独立进程恢复、14 个 HTTPS 请求的交付 JS 验证、71 项回归。详见 docs/validation/online-selection-http-20261109/FINAL_REPORT.md。
 - 最终服务 17648，现有 Tailscale Serve 已指向该端口。手机需同一 tailnet；完整链接在忽略目录 artifacts/online-selection-http/phone/PHONE_URL.txt。完整 App 启动脚本：tools/OnlineSelectionHttpAcceptance/Start-OnlineSelectionApp.cmd。
 - 完整 App Release 已发布；原生窗口启动被自动审批拒绝，Safari 真机未运行。待人工手机勾选确认、PC 刷新、重开恢复、对应归片与撤销验证。Node adapter 不能当 Safari 验收。浏览器扩展未开始。
+
+
+## 在线选片续接 · 2026-11-09 Asia/Shanghai
+- fetch 后续接本机 8652a02c，产品源码 feef4bc25a13d26a297bad39af99f3332bf9ce25 已推送并回读。旧树和未提交成果保留。
+- 本轮补真实服务器确认回执验证/恢复、PC 持久化修订及只读客户标记、准确项目启动参数。完整 App 原生创建、选 JPEG、发布、刷新、关闭重开、对应归片历史、撤销旧链接全部实操通过。47 项 HTTP、8 项新进程恢复、71 回归通过。
+- 最终服务本机 17649，原 Tailscale Serve 指向它。PC 两入口 tools/OnlineSelectionHttpAcceptance/01-PC-Publish.cmd、03-PC-Collect.cmd；数据根 artifacts/online-selection-http/iphone13-safari/IsolatedApp。
+- iPhone 13 Safari 尚待用户点，保持其项目 4a3648e4-5696-41b5-9932-18e776c4943b 未确认；完整链接仅在 artifacts/online-selection-http/iphone13-safari/PHONE_URL.txt。已给用户链接和两步操作。不得把原生专用相册/Node adapter 验证计为手机通过。当前权威报告 docs/validation/online-selection-resume-20261109/FINAL_REPORT.md。浏览器扩展未开工。
