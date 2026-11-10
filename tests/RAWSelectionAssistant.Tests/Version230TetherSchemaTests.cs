@@ -15,7 +15,7 @@ public sealed class Version230TetherSchemaTests
         await using var connection = await setup.Database.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT MAX(Version) FROM SchemaInfo;";
-        Assert.AreEqual(7L, (long)(await command.ExecuteScalarAsync())!);
+        Assert.AreEqual(8L, (long)(await command.ExecuteScalarAsync())!);
     }
 
     [TestMethod]
