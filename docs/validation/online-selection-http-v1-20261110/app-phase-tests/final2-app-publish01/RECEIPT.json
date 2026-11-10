@@ -1,0 +1,31 @@
+{
+  "sourceSha": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+  "dirty": [],
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.HttpPhase2RestartUploadPublishAndCopyLink",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final2-app-publish01"
+  ],
+  "pid": 22168,
+  "exitCode": 0,
+  "seconds": 17.101277589797974,
+  "expected": 1,
+  "results": [
+    {
+      "executionId": "bb6f38cb-0c0e-4184-ab44-02cac56f2163",
+      "testId": "19829db7-bc43-823b-a37b-42613c3d4c16",
+      "testName": "HttpPhase2RestartUploadPublishAndCopyLink",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:16.0522383",
+      "startTime": "2026-11-09T20:38:22.3495683+08:00",
+      "endTime": "2026-11-09T20:38:38.4161222+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "bb6f38cb-0c0e-4184-ab44-02cac56f2163"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "notImported": [
+    "old preview WPF shell",
+    "old branch UI design migration",
+    "WeChat mini-program",
+    "unrelated artifacts/deletions",
+    "single-token SQLite authorization implementation"
+  ],
+  "baseProduct": "37ea6c9abaae94a3f4e2ac6b615837eb02e89633",
+  "selected": [
+    {
+      "gitBlob": "52e7643a59f200cd9804440540b65cb5e6ea848b",
+      "currentSha256": "176C2C14A4D4AF486BDEDBF37F42BABB257486E897C4E29B9DAB8898894F0D70",
+      "adaptation": "Append-only idempotency/digest/publish-with-rule response extensions",
+      "path": "src/PixelTart.SelectionApi.Contracts/SelectionApiContracts.cs",
+      "sameCanonicalText": false,
+      "referenceExportSha256": "CFBE917688AEF64B8197A9600CD41191AD6F95625B295315C407C5579278DDE7",
+      "referenceCommit": "349bf4006faf9b80a3691b7d9fd368271ca58ebd"
+    },
+    {
+      "gitBlob": "192a9fb5d22c2407c7f139a5c6279597a3791735",
+      "currentSha256": "1603E784F37D637B692D37E643646DDC22698503ED373718AD11988C010DE63A",
+      "adaptation": "Reused image variant and object storage implementation; line endings only",
+      "path": "src/PixelTart.SelectionApi.Server/LocalDevJpegVariantService.cs",
+      "sameCanonicalText": true,
+      "referenceExportSha256": "1603E784F37D637B692D37E643646DDC22698503ED373718AD11988C010DE63A",
+      "referenceCommit": "349bf4006faf9b80a3691b7d9fd368271ca58ebd"
+    },
+    {
+      "gitBlob": "1163e051eb27d8b389a7f8be7aed6799bd4d65d3",
+      "currentSha256": "10F1110BFC532E2234BA63D09634B0911CB26B3CB25C2938E4388E13894A8590",
+      "adaptation": "Reused image variant and object storage implementation; line endings only",
+      "path": "src/PixelTart.SelectionApi.Server/SelectionObjectStorage.cs",
+      "sameCanonicalText": true,
+      "referenceExportSha256": "10F1110BFC532E2234BA63D09634B0911CB26B3CB25C2938E4388E13894A8590",
+      "referenceCommit": "349bf4006faf9b80a3691b7d9fd368271ca58ebd"
+    }
+  ],
+  "httpClient": "Reuse authorized-request, typed response and DPAPI atomic access-store pattern; adapt stable IDs, role split, digest confirmation and final result versions",
+  "repositoryDecision": "New LocalDev atomic versioned-file repository is isolated from desktop workspace; explicit single process lock; no old service DB or dirty tree migrated",
+  "oldBranchHeadNotMoved": true,
+  "sourcePin": "349bf4006faf9b80a3691b7d9fd368271ca58ebd",
+  "oldBranchWorkingTreeWrites": 0
+}

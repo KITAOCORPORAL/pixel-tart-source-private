@@ -1,3 +1,11 @@
+## 2026-11-10 在线选片 HTTP v1（Europe/Berlin；Asia/Shanghai 同日）
+- 独立分支feature/online-selection-http-v1-20261109，从37ea6c9a/产品02702071接续；首个功能34b72f44，最终产品c44f800a428ba097e024c91e7691dbf3b6a17355；启动验收支持81bc7be9，之后仅工具/交接。旧349bf400固定只读参考，不合旧树、不改其dirty。
+- 正式桌面建项目→生成代理→服务确认上传→带规则发布→复制受保护链接；响应式网页勾选确认锁定；PC新增可见刷新客户结果入口，校验项目/素材/版本/修订后落盘，既有同步入口返回归片项目；独立进程重开保留版本1/修订4和关联。None配置提示保持，HTTP/凭据在桌面基础设施，Core原无传输断言未放宽。
+- 最终发布DLL30条绑定；Core52+WPF38回归90PASS，加完整App四独立阶段4PASS，共94条所选TRX通过；最终真实服务请求44条。重试不增项目/素材、跨项目/角色拒绝、锁定409、过期410、撤销页404/API401通过。原生UIA/真实系统对话框与实际浏览器点击，不冒称物理鼠标/手机。
+- 全模块自包含包：E:/Kitao-Deliveries/online-selection-http-v1-20261109/Guangjing-OnlineSelectionV1-FullApp-Diagnostic-win-x64.zip；851文件逐项及ZIP读回，158575491 bytes，SHA256 95FDF2C86B2A05AAC9FACCB030ED3BBC75D52EC0B889C61F3B86E88B74E18194。Start-OnlineSelection-LocalTest.cmd启动包内LocalDev和完整桌面并生成合成JPEG；正常EXE/CMD启动退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全部模块/策划15/教程退役，无Setup。
+- 交付状态LOCAL_HTTP_V1_READY_FOR_REVIEW_PHONE_PENDING；LocalDev loopback/single-owner/production=false；物理iPhone Safari与微信NOT_RUN_ENVIRONMENT_NOT_READY，缺已授权HTTPS和设备；390px仅桌面响应式。全产品仍PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。PC/手机档期同步独立；本轮四项RAW调用0，native未换。
+- 唯一当前报告docs/validation/online-selection-http-v1-20261110/FINAL_REPORT.md；本地原始E:/Kitao-Deliveries/online-selection-http-v1-20261109。凭证/链接/库/像素不进Git/包。后续文档HEAD及远端精确读回见completion-20261110/PUSH_READBACK.json，勿与c44f800a产品源混写。旧失败/旧报告均保留。
+
 ## 2026-11-09 R5.5 拼贴素材“已用”角标（Asia/Shanghai）
 - 从收藏交付42476a1c/功能623d0a8c独立接续feature/r55-collage-used-20261109，产品源码02702071e1eda7e8f51c806a7e1aeb8fa9bb18c2。只改FreeCanvasView模板及Usage partial两产品文件，复用CanvasEditor.Changed，从当前文档LibraryId+AssetId派生，不增持久字段/导入身份/收藏存储，隐藏锁定和重复实例计入。
 - 最终发布DLL29项绑定；Core16+WPF14+完整App独立原生UIA3=33PASS。PID27932→4680→13068走真实素材栏/编辑移出/撤销重做/保存/新建和重开画布/最近库切换/取消收藏/系统导出；最后实例移除清标、有其它实例保留、跨库同ID不交叉、取消收藏对象仍在均通过。不是物理鼠标或完整DPI验收。

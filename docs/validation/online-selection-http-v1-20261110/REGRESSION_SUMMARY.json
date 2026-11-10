@@ -1,0 +1,2599 @@
+{
+  "sourceSha": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+  "runs": [
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+      "pid": 20220,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\001"
+      ],
+      "seconds": 0.9044890403747559,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "76d5c795-a73b-44c8-84e8-9d6e9022f97a",
+          "testId": "1c1c23f9-387d-8dc4-889d-8b7e6ba48b98",
+          "testName": "FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0496266",
+          "startTime": "2026-11-09T20:29:27.9329771+08:00",
+          "endTime": "2026-11-09T20:29:27.9990403+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "76d5c795-a73b-44c8-84e8-9d6e9022f97a"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\001"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+      "pid": 8256,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\002"
+      ],
+      "seconds": 0.8925409317016602,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "75754be8-2e76-4286-a1b5-c02e2c138a0d",
+          "testId": "16c4c2b6-5fc8-8ac0-b134-990ad41bf642",
+          "testName": "InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0439280",
+          "startTime": "2026-11-09T20:29:28.8677368+08:00",
+          "endTime": "2026-11-09T20:29:28.9282900+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "75754be8-2e76-4286-a1b5-c02e2c138a0d"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\002"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+      "pid": 8012,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\003"
+      ],
+      "seconds": 1.0523428916931152,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e5a07301-b839-4767-8d18-9dc1d5aa8d21",
+          "testId": "11570e7f-43de-8648-ab10-0f794624ff38",
+          "testName": "ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.2002428",
+          "startTime": "2026-11-09T20:29:29.7959529+08:00",
+          "endTime": "2026-11-09T20:29:30.0128869+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e5a07301-b839-4767-8d18-9dc1d5aa8d21"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\003"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+      "pid": 18032,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\004"
+      ],
+      "seconds": 0.8667199611663818,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "386a5d40-e779-4793-b8b0-c36c57438d9b",
+          "testId": "11958889-422d-8a15-8891-e2b755fece49",
+          "testName": "ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0110758",
+          "startTime": "2026-11-09T20:29:30.8936234+08:00",
+          "endTime": "2026-11-09T20:29:30.9198808+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "386a5d40-e779-4793-b8b0-c36c57438d9b"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\004"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+      "pid": 1580,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasProductClosureTests.OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\005"
+      ],
+      "seconds": 0.8603699207305908,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e63d4846-3f70-4d2e-a4f2-5430736125ec",
+          "testId": "17a3e66b-56b2-8e1c-bd21-65336d936cfb",
+          "testName": "OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0186232",
+          "startTime": "2026-11-09T20:29:31.7867300+08:00",
+          "endTime": "2026-11-09T20:29:31.8202641+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e63d4846-3f70-4d2e-a4f2-5430736125ec"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\005"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.BrushLayerIsSameUndoModelAndPersistsOneStroke",
+      "pid": 20884,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.CanvasProductClosureTests.BrushLayerIsSameUndoModelAndPersistsOneStroke",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\006"
+      ],
+      "seconds": 0.8635909557342529,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e016b848-7e39-4aea-a409-ea015dbe4acf",
+          "testId": "1fc20c0c-0295-8606-b65e-aa1d9cc82655",
+          "testName": "BrushLayerIsSameUndoModelAndPersistsOneStroke",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0180822",
+          "startTime": "2026-11-09T20:29:32.6862954+08:00",
+          "endTime": "2026-11-09T20:29:32.7187735+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e016b848-7e39-4aea-a409-ea015dbe4acf"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\006"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+      "pid": 19160,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\007"
+      ],
+      "seconds": 1.0547256469726562,
+      "exitCode": 0,
+      "expected": 4,
+      "results": [
+        {
+          "executionId": "df67e54d-ad27-46e2-9d8b-baafc5a423ee",
+          "testId": "12538ed6-4753-8d99-b350-236d061d51e4",
+          "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (False,1,False)",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1978980",
+          "startTime": "2026-11-09T20:29:33.5900379+08:00",
+          "endTime": "2026-11-09T20:29:33.8072783+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "df67e54d-ad27-46e2-9d8b-baafc5a423ee"
+        },
+        {
+          "executionId": "191d1152-8e27-4ca0-8c7d-ca94796bd114",
+          "testId": "1e98f9b2-b516-84e5-8001-f4811b171ea8",
+          "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (False,18,False)",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1979104",
+          "startTime": "2026-11-09T20:29:33.5901036+08:00",
+          "endTime": "2026-11-09T20:29:33.8072801+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "191d1152-8e27-4ca0-8c7d-ca94796bd114"
+        },
+        {
+          "executionId": "aac91f73-38fd-405a-a9d0-c495979449fb",
+          "testId": "1771f5ae-fa3e-899c-bf0f-00792774d6d6",
+          "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (True,22,True)",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1979073",
+          "startTime": "2026-11-09T20:29:33.5900540+08:00",
+          "endTime": "2026-11-09T20:29:33.8072877+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "aac91f73-38fd-405a-a9d0-c495979449fb"
+        },
+        {
+          "executionId": "69cd458f-8ddc-40c8-b7d5-8894e7df3a86",
+          "testId": "1ac339f4-a89b-85b0-af3d-338e183db6ba",
+          "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (True,1,False)",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1979086",
+          "startTime": "2026-11-09T20:29:33.5900460+08:00",
+          "endTime": "2026-11-09T20:29:33.8072844+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "69cd458f-8ddc-40c8-b7d5-8894e7df3a86"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\007"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+      "pid": 14408,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\008"
+      ],
+      "seconds": 0.8765885829925537,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "ef6c2db3-c270-4680-83cb-72da0c466370",
+          "testId": "1df2ee3d-0801-881c-a5b0-d14d40eb6ce2",
+          "testName": "RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0243300",
+          "startTime": "2026-11-09T20:29:34.6840882+08:00",
+          "endTime": "2026-11-09T20:29:34.7251047+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "ef6c2db3-c270-4680-83cb-72da0c466370"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\008"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+      "pid": 23708,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\009"
+      ],
+      "seconds": 0.8645384311676025,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "9868f7dc-bd8d-4055-a569-ebd45b548336",
+          "testId": "1ee18abc-6c41-854a-af55-f0b4e5eb3b05",
+          "testName": "RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0153888",
+          "startTime": "2026-11-09T20:29:35.5944467+08:00",
+          "endTime": "2026-11-09T20:29:35.6254208+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "9868f7dc-bd8d-4055-a569-ebd45b548336"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\009"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionProxySafetyClosureTests.GenerateAsync_PassesPrivateDefaultsFlushesAndPreservesSourceIdentity",
+      "pid": 17272,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionProxySafetyClosureTests.GenerateAsync_PassesPrivateDefaultsFlushesAndPreservesSourceIdentity",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\010"
+      ],
+      "seconds": 0.8776688575744629,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "a218e326-f657-4cc7-8a27-dcb93cc1c31b",
+          "testId": "14e7b199-f1ab-8bd3-83d5-c0457fa6b7ad",
+          "testName": "GenerateAsync_PassesPrivateDefaultsFlushesAndPreservesSourceIdentity",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0292563",
+          "startTime": "2026-11-09T20:29:36.4917406+08:00",
+          "endTime": "2026-11-09T20:29:36.5373998+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "a218e326-f657-4cc7-8a27-dcb93cc1c31b"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\010"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.DefaultProvider_IsNoneAndNeverPretendsConfigured",
+      "pid": 25336,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.DefaultProvider_IsNoneAndNeverPretendsConfigured",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\011"
+      ],
+      "seconds": 0.8544459342956543,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "40e61f9f-4b10-4cd7-a47d-aa3f5a09c8a5",
+          "testId": "10d09683-75b5-880d-bc6d-90eb1af26e11",
+          "testName": "DefaultProvider_IsNoneAndNeverPretendsConfigured",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0048485",
+          "startTime": "2026-11-09T20:29:37.4053906+08:00",
+          "endTime": "2026-11-09T20:29:37.4251186+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "40e61f9f-4b10-4cd7-a47d-aa3f5a09c8a5"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\011"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.NoneProvider_AllOperationsReturnExplicitNotConfigured",
+      "pid": 10096,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.NoneProvider_AllOperationsReturnExplicitNotConfigured",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\012"
+      ],
+      "seconds": 0.858494758605957,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "23afae46-64ff-42ed-90f4-5d465ecf85ea",
+          "testId": "18ff0fd3-baec-88cb-9d44-e849dbebad37",
+          "testName": "NoneProvider_AllOperationsReturnExplicitNotConfigured",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0069397",
+          "startTime": "2026-11-09T20:29:38.3002522+08:00",
+          "endTime": "2026-11-09T20:29:38.3220317+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "23afae46-64ff-42ed-90f4-5d465ecf85ea"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\012"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData",
+      "pid": 18964,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\013"
+      ],
+      "seconds": 0.8573460578918457,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "28573d5a-0d09-4649-b77e-365140939ee4",
+          "testId": "1ae5b4cc-7cec-8881-8bb5-2bb443c51e6c",
+          "testName": "ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0063643",
+          "startTime": "2026-11-09T20:29:39.1932592+08:00",
+          "endTime": "2026-11-09T20:29:39.2145293+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "28573d5a-0d09-4649-b77e-365140939ee4"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\013"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+      "pid": 19836,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\014"
+      ],
+      "seconds": 0.8716676235198975,
+      "exitCode": 0,
+      "expected": 8,
+      "results": [
+        {
+          "executionId": "610a9999-becf-49fb-967e-c3c970a65660",
+          "testId": "1c6b02c6-1e20-860c-8569-e51d6f9d074b",
+          "testName": "ProjectStatus_HasChinesePresentation (Archived,\"已归档\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053925",
+          "startTime": "2026-11-09T20:29:40.0904552+08:00",
+          "endTime": "2026-11-09T20:29:40.1151166+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "610a9999-becf-49fb-967e-c3c970a65660"
+        },
+        {
+          "executionId": "fc2ac5bf-0464-4820-b063-5d6e626af541",
+          "testId": "149044c6-0716-8d93-81a6-9089d4750380",
+          "testName": "ProjectStatus_HasChinesePresentation (ClientConfirmed,\"已完成\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053575",
+          "startTime": "2026-11-09T20:29:40.0904726+08:00",
+          "endTime": "2026-11-09T20:29:40.1151124+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "fc2ac5bf-0464-4820-b063-5d6e626af541"
+        },
+        {
+          "executionId": "8963817e-5d90-47c0-9b6c-5e2bde70cc88",
+          "testId": "1ccb9f5e-2ba5-85da-8a1e-9e84afb601dc",
+          "testName": "ProjectStatus_HasChinesePresentation (Draft,\"准备中\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053758",
+          "startTime": "2026-11-09T20:29:40.0903824+08:00",
+          "endTime": "2026-11-09T20:29:40.1151026+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "8963817e-5d90-47c0-9b6c-5e2bde70cc88"
+        },
+        {
+          "executionId": "3357dbd0-e410-4aa6-b97c-d90aa7d678bb",
+          "testId": "14d04bcb-198f-8578-8e71-e7a8e1756e59",
+          "testName": "ProjectStatus_HasChinesePresentation (Uploading,\"准备中\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0054051",
+          "startTime": "2026-11-09T20:29:40.0903664+08:00",
+          "endTime": "2026-11-09T20:29:40.1151015+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "3357dbd0-e410-4aa6-b97c-d90aa7d678bb"
+        },
+        {
+          "executionId": "06c01491-a415-4689-b612-db2cf65f4052",
+          "testId": "177385d2-b341-8ca1-8148-1ecbd8d6bc39",
+          "testName": "ProjectStatus_HasChinesePresentation (Ready,\"准备中\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053980",
+          "startTime": "2026-11-09T20:29:40.0903911+08:00",
+          "endTime": "2026-11-09T20:29:40.1151013+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "06c01491-a415-4689-b612-db2cf65f4052"
+        },
+        {
+          "executionId": "c690d446-5a6d-4564-9a50-96982dad228a",
+          "testId": "18cf47a5-7c58-8bec-a9e1-974e15fbc0a1",
+          "testName": "ProjectStatus_HasChinesePresentation (Published,\"待客户选择\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0054037",
+          "startTime": "2026-11-09T20:29:40.0904671+08:00",
+          "endTime": "2026-11-09T20:29:40.1151073+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c690d446-5a6d-4564-9a50-96982dad228a"
+        },
+        {
+          "executionId": "84d6d351-c0eb-4af9-b9a6-c9dcda3816e2",
+          "testId": "127ac94d-937d-8b4f-a7cb-7e7e3d0bd588",
+          "testName": "ProjectStatus_HasChinesePresentation (Selecting,\"客户选择中\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053841",
+          "startTime": "2026-11-09T20:29:40.0903586+08:00",
+          "endTime": "2026-11-09T20:29:40.1151227+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "84d6d351-c0eb-4af9-b9a6-c9dcda3816e2"
+        },
+        {
+          "executionId": "e75f44fb-44a3-4b67-a8ee-421e5af83b43",
+          "testId": "1ab1c3b1-764d-8107-ab7f-f9f0edefb8e8",
+          "testName": "ProjectStatus_HasChinesePresentation (Closed,\"已关闭\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053774",
+          "startTime": "2026-11-09T20:29:40.0903746+08:00",
+          "endTime": "2026-11-09T20:29:40.1151012+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e75f44fb-44a3-4b67-a8ee-421e5af83b43"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\014"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+      "pid": 21916,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\015"
+      ],
+      "seconds": 0.8631165027618408,
+      "exitCode": 0,
+      "expected": 6,
+      "results": [
+        {
+          "executionId": "e61e1d65-6207-419a-a7d6-bfdf837200dd",
+          "testId": "1fa6ecdd-382e-8f77-b4cc-9ba3e661c75f",
+          "testName": "AssetStatus_HasChinesePresentation (Ready,\"已就绪\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053877",
+          "startTime": "2026-11-09T20:29:40.9928213+08:00",
+          "endTime": "2026-11-09T20:29:41.0165911+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e61e1d65-6207-419a-a7d6-bfdf837200dd"
+        },
+        {
+          "executionId": "e2b54b95-0eb5-474d-b26b-9691fe290236",
+          "testId": "15e21de5-0f5a-8882-88d2-7ef897976ba4",
+          "testName": "AssetStatus_HasChinesePresentation (Queued,\"等待上传\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053772",
+          "startTime": "2026-11-09T20:29:40.9927483+08:00",
+          "endTime": "2026-11-09T20:29:41.0165998+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e2b54b95-0eb5-474d-b26b-9691fe290236"
+        },
+        {
+          "executionId": "6b79426b-2bd9-4b73-aba8-c7cc222d10e7",
+          "testId": "1b948c3b-2ac1-8aff-a76a-117e60bbc931",
+          "testName": "AssetStatus_HasChinesePresentation (DeletedCloudCopy,\"云端副本已删除\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053907",
+          "startTime": "2026-11-09T20:29:40.9927403+08:00",
+          "endTime": "2026-11-09T20:29:41.0165911+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "6b79426b-2bd9-4b73-aba8-c7cc222d10e7"
+        },
+        {
+          "executionId": "bba29a63-cf6a-47f9-93af-52cdddd25fd8",
+          "testId": "13e5b846-74f3-8c91-afcd-c02cb2944d15",
+          "testName": "AssetStatus_HasChinesePresentation (Uploading,\"上传中\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053751",
+          "startTime": "2026-11-09T20:29:40.9928080+08:00",
+          "endTime": "2026-11-09T20:29:41.0165967+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "bba29a63-cf6a-47f9-93af-52cdddd25fd8"
+        },
+        {
+          "executionId": "04b1c500-fb74-4b1f-b2ff-93f21d928183",
+          "testId": "143982f0-2c16-87b3-b803-75f9cb278d0f",
+          "testName": "AssetStatus_HasChinesePresentation (LocalOnly,\"仅本地\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053709",
+          "startTime": "2026-11-09T20:29:40.9928161+08:00",
+          "endTime": "2026-11-09T20:29:41.0165924+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "04b1c500-fb74-4b1f-b2ff-93f21d928183"
+        },
+        {
+          "executionId": "62ed20cb-d5b5-4cbc-99d7-8957c3634a00",
+          "testId": "16795f73-3b78-8748-a51d-2f3b2f012d05",
+          "testName": "AssetStatus_HasChinesePresentation (Failed,\"上传失败\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0053869",
+          "startTime": "2026-11-09T20:29:40.9927561+08:00",
+          "endTime": "2026-11-09T20:29:41.0165905+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "62ed20cb-d5b5-4cbc-99d7-8957c3634a00"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\015"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.PublishGate_RequiresProjectRuleAndReadyAsset",
+      "pid": 21748,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.PublishGate_RequiresProjectRuleAndReadyAsset",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\016"
+      ],
+      "seconds": 0.8546197414398193,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "b1bebe5a-c5df-4323-b6ba-d0924c77a9ff",
+          "testId": "1d411f5a-0df9-89e1-ad7c-a7da4ef89196",
+          "testName": "PublishGate_RequiresProjectRuleAndReadyAsset",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0074926",
+          "startTime": "2026-11-09T20:29:41.8871724+08:00",
+          "endTime": "2026-11-09T20:29:41.9138333+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "b1bebe5a-c5df-4323-b6ba-d0924c77a9ff"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\016"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ClientProjection_HidesPathsCloudIdsAndOperationalState",
+      "pid": 27560,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ClientProjection_HidesPathsCloudIdsAndOperationalState",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\017"
+      ],
+      "seconds": 0.8760042190551758,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "de82ddbc-27b8-4e2c-adbf-80ecafeef6a9",
+          "testId": "19a96064-5d91-8fcd-8f13-91b1fccd5e3c",
+          "testName": "ClientProjection_HidesPathsCloudIdsAndOperationalState",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0247549",
+          "startTime": "2026-11-09T20:29:42.7864002+08:00",
+          "endTime": "2026-11-09T20:29:42.8260653+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "de82ddbc-27b8-4e2c-adbf-80ecafeef6a9"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\017"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_OneFailureDoesNotBlockOtherAssets",
+      "pid": 26940,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_OneFailureDoesNotBlockOtherAssets",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\018"
+      ],
+      "seconds": 0.8634500503540039,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "320bb2fb-2538-440f-a6e3-89ffcf0add27",
+          "testId": "1c5307df-bdec-8a0d-ad0f-268a6092009f",
+          "testName": "UploadQueue_OneFailureDoesNotBlockOtherAssets",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0127393",
+          "startTime": "2026-11-09T20:29:43.6962525+08:00",
+          "endTime": "2026-11-09T20:29:43.7241987+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "320bb2fb-2538-440f-a6e3-89ffcf0add27"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\018"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_PauseAndResumeHaveExplicitState",
+      "pid": 2196,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_PauseAndResumeHaveExplicitState",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\019"
+      ],
+      "seconds": 0.865849494934082,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "3faacf65-0cc8-4f6e-8641-40ee12cd4e06",
+          "testId": "166e2d64-5983-896c-9044-d5c1c0c17b87",
+          "testName": "UploadQueue_PauseAndResumeHaveExplicitState",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0110501",
+          "startTime": "2026-11-09T20:29:44.5989508+08:00",
+          "endTime": "2026-11-09T20:29:44.6251898+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "3faacf65-0cc8-4f6e-8641-40ee12cd4e06"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\019"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.CloudDeleteContract_DoesNotTouchLocalFile",
+      "pid": 29344,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.CloudDeleteContract_DoesNotTouchLocalFile",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\020"
+      ],
+      "seconds": 0.8674938678741455,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "d462f167-aa5e-48ff-a677-4b110f53722b",
+          "testId": "1c8612c9-7f25-85d8-a756-142e04b6f9e0",
+          "testName": "CloudDeleteContract_DoesNotTouchLocalFile",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0128744",
+          "startTime": "2026-11-09T20:29:45.4962520+08:00",
+          "endTime": "2026-11-09T20:29:45.5242825+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "d462f167-aa5e-48ff-a677-4b110f53722b"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\020"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched",
+      "pid": 10540,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\021"
+      ],
+      "seconds": 0.8719618320465088,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "fbc03134-6c4a-463f-8ae1-c1f458d8dd31",
+          "testId": "127bf07b-62d4-85bb-818c-14237c236ac0",
+          "testName": "ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0224854",
+          "startTime": "2026-11-09T20:29:46.3972835+08:00",
+          "endTime": "2026-11-09T20:29:46.4363080+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "fbc03134-6c4a-463f-8ae1-c1f458d8dd31"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\021"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_UnsupportedNeverCreatesOutput",
+      "pid": 27136,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_UnsupportedNeverCreatesOutput",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\022"
+      ],
+      "seconds": 0.8613159656524658,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "8b256bf1-13bb-420d-8854-60f74f409413",
+          "testId": "12b3ff62-2f26-8820-8a80-17689b81496c",
+          "testName": "ProxyJpeg_UnsupportedNeverCreatesOutput",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0104872",
+          "startTime": "2026-11-09T20:29:47.3036602+08:00",
+          "endTime": "2026-11-09T20:29:47.3306057+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "8b256bf1-13bb-420d-8854-60f74f409413"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\022"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath",
+      "pid": 24128,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\023"
+      ],
+      "seconds": 0.8993382453918457,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "04893658-0e02-42b8-b577-169c1f39b6a9",
+          "testId": "1ee3f35c-5966-81e2-b0f1-f94d422d0f4e",
+          "testName": "FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0539694",
+          "startTime": "2026-11-09T20:29:48.1995352+08:00",
+          "endTime": "2026-11-09T20:29:48.2703245+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "04893658-0e02-42b8-b577-169c1f39b6a9"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\023"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions",
+      "pid": 9068,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\024"
+      ],
+      "seconds": 0.9079124927520752,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "b0e5042b-44ac-4cae-b32f-402dfbf44f27",
+          "testId": "1e318bd5-6e42-8f7e-a51b-2698c93177e0",
+          "testName": "FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0583004",
+          "startTime": "2026-11-09T20:29:49.1385700+08:00",
+          "endTime": "2026-11-09T20:29:49.2137634+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "b0e5042b-44ac-4cae-b32f-402dfbf44f27"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\024"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete",
+      "pid": 21300,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\025"
+      ],
+      "seconds": 0.9040465354919434,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "694ee104-16ae-4c6e-9d40-b516c85371d3",
+          "testId": "16bd0c90-1b48-801b-ace7-5130e1292c34",
+          "testName": "FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0545571",
+          "startTime": "2026-11-09T20:29:50.0837096+08:00",
+          "endTime": "2026-11-09T20:29:50.1550088+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "694ee104-16ae-4c6e-9d40-b516c85371d3"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\025"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory",
+      "pid": 26128,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\026"
+      ],
+      "seconds": 0.9260356426239014,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "d92e9384-343b-475f-93ed-e956bf250522",
+          "testId": "16da7ec4-8036-81bd-af32-ff1cb5f6e3e6",
+          "testName": "JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0763165",
+          "startTime": "2026-11-09T20:29:51.0239655+08:00",
+          "endTime": "2026-11-09T20:29:51.1172185+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "d92e9384-343b-475f-93ed-e956bf250522"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\026"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults",
+      "pid": 22952,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\027"
+      ],
+      "seconds": 0.9401695728302002,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e19f787c-23bb-45b9-a3d6-c212b60bc3b3",
+          "testId": "1ed7dff9-304e-8314-b067-e11865e2d8c3",
+          "testName": "JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0835542",
+          "startTime": "2026-11-09T20:29:51.9919368+08:00",
+          "endTime": "2026-11-09T20:29:52.0921005+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e19f787c-23bb-45b9-a3d6-c212b60bc3b3"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\027"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal",
+      "pid": 18308,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\028"
+      ],
+      "seconds": 0.9144208431243896,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "7366d27e-f840-4859-9099-0eaff472ba61",
+          "testId": "1e7a5a3c-0868-82c2-a9b0-6bb3069ff9b1",
+          "testName": "JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0596992",
+          "startTime": "2026-11-09T20:29:52.9646493+08:00",
+          "endTime": "2026-11-09T20:29:53.0408219+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "7366d27e-f840-4859-9099-0eaff472ba61"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\028"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile",
+      "pid": 10948,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\029"
+      ],
+      "seconds": 0.863884449005127,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "60c93224-7c98-4022-af4b-076aa9dfcfd9",
+          "testId": "1ccf90d8-7f99-8ee3-8537-0d0d923ace17",
+          "testName": "ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0193116",
+          "startTime": "2026-11-09T20:29:53.9069843+08:00",
+          "endTime": "2026-11-09T20:29:53.9429890+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "60c93224-7c98-4022-af4b-076aa9dfcfd9"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\029"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive",
+      "pid": 20548,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\030"
+      ],
+      "seconds": 0.9093174934387207,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "268b6e31-5d9f-4b98-b180-f7d06a889abd",
+          "testId": "11487950-a984-8dc1-afe1-941f6107fb72",
+          "testName": "ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0581636",
+          "startTime": "2026-11-09T20:29:54.8145106+08:00",
+          "endTime": "2026-11-09T20:29:54.8891879+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "268b6e31-5d9f-4b98-b180-f7d06a889abd"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\030"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_RequiresExplicitDestinationDirectory",
+      "pid": 3140,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_RequiresExplicitDestinationDirectory",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\031"
+      ],
+      "seconds": 0.8594186305999756,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "7bee29bf-116c-48d9-b09e-5c7127d40ebf",
+          "testId": "12e8afa5-ffe8-8cf2-9221-ec2e6ffb791b",
+          "testName": "ResultArchive_RequiresExplicitDestinationDirectory",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0096154",
+          "startTime": "2026-11-09T20:29:55.7603017+08:00",
+          "endTime": "2026-11-09T20:29:55.7846596+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "7bee29bf-116c-48d9-b09e-5c7127d40ebf"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\031"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProductionCoreContainsNoHttpLocalhostOrCredentials",
+      "pid": 296,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProductionCoreContainsNoHttpLocalhostOrCredentials",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\032"
+      ],
+      "seconds": 0.8558230400085449,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "5595d58b-7be2-453a-9a7d-66e029340011",
+          "testId": "15df934f-0de7-8b31-adf5-e40ccd7ce129",
+          "testName": "ProductionCoreContainsNoHttpLocalhostOrCredentials",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0068088",
+          "startTime": "2026-11-09T20:29:56.6552408+08:00",
+          "endTime": "2026-11-09T20:29:56.6774659+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "5595d58b-7be2-453a-9a7d-66e029340011"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\032"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FakeProvider_IsCompiledOnlyByTestProject",
+      "pid": 28796,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FakeProvider_IsCompiledOnlyByTestProject",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\033"
+      ],
+      "seconds": 0.9074087142944336,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "671336aa-18e4-4ddd-8499-4bcd97b1190f",
+          "testId": "19077dfd-f4b3-8256-89b0-56b2df278511",
+          "testName": "FakeProvider_IsCompiledOnlyByTestProject",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0485699",
+          "startTime": "2026-11-09T20:29:57.5515961+08:00",
+          "endTime": "2026-11-09T20:29:57.6152557+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "671336aa-18e4-4ddd-8499-4bcd97b1190f"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\033"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+      "pid": 21172,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\034"
+      ],
+      "seconds": 1.0847675800323486,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "d2ec0495-c0ba-4b41-a841-1efb5929aa52",
+          "testId": "10a7a991-5c34-8b21-869c-712a3709a196",
+          "testName": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.2313544",
+          "startTime": "2026-11-09T20:29:58.4928881+08:00",
+          "endTime": "2026-11-09T20:29:58.7392876+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "d2ec0495-c0ba-4b41-a841-1efb5929aa52"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\034"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+      "pid": 28448,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\035"
+      ],
+      "seconds": 0.8888654708862305,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e0bb8697-3299-4540-a49a-0112419ad0b2",
+          "testId": "10ded0f0-3b4d-8495-aa48-4e22db73e757",
+          "testName": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0389955",
+          "startTime": "2026-11-09T20:29:59.6135275+08:00",
+          "endTime": "2026-11-09T20:29:59.6677465+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e0bb8697-3299-4540-a49a-0112419ad0b2"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\035"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ForeignProjectDocumentOrShotFailsClosed",
+      "pid": 5072,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ForeignProjectDocumentOrShotFailsClosed",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\036"
+      ],
+      "seconds": 0.8767063617706299,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c4055b65-539c-4c83-8968-9f9d771ad0f6",
+          "testId": "19930dc0-30ad-8a96-91e5-f8f557148864",
+          "testName": "ForeignProjectDocumentOrShotFailsClosed",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0174889",
+          "startTime": "2026-11-09T20:30:00.5466891+08:00",
+          "endTime": "2026-11-09T20:30:00.5795920+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c4055b65-539c-4c83-8968-9f9d771ad0f6"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\036"
+    },
+    {
+      "kind": "Core",
+      "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+      "pid": 9484,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\037"
+      ],
+      "seconds": 0.8549127578735352,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "658af77d-2eba-4c02-a151-947f650e464c",
+          "testId": "1a2de947-5d68-8641-9e86-226f8ccf3844",
+          "testName": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0044024",
+          "startTime": "2026-11-09T20:30:01.4531067+08:00",
+          "endTime": "2026-11-09T20:30:01.4723626+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "658af77d-2eba-4c02-a151-947f650e464c"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\037"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.IdentityDerivedUsageTracksMultiplicityUndoAndHiddenObjects",
+      "pid": 28820,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.IdentityDerivedUsageTracksMultiplicityUndoAndHiddenObjects",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\038"
+      ],
+      "seconds": 1.3351073265075684,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "147c80c9-36b9-41f9-ab89-31e83a4b67fc",
+          "testId": "1179adaa-8cbb-86da-802d-1601aa9a2029",
+          "testName": "IdentityDerivedUsageTracksMultiplicityUndoAndHiddenObjects",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.3544066",
+          "startTime": "2026-11-09T20:30:03.5998789+08:00",
+          "endTime": "2026-11-09T20:30:03.9701735+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "147c80c9-36b9-41f9-ab89-31e83a4b67fc"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\038"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.SameAssetIdInAnotherLibraryAndNonAssetObjectsDoNotCrossMark",
+      "pid": 25568,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.SameAssetIdInAnotherLibraryAndNonAssetObjectsDoNotCrossMark",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\039"
+      ],
+      "seconds": 1.3034851551055908,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "99d19cfb-4921-4a92-af50-70cba2911796",
+          "testId": "1f42be37-a967-85de-a9a2-5000ad5cbaaf",
+          "testName": "SameAssetIdInAnotherLibraryAndNonAssetObjectsDoNotCrossMark",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.3342419",
+          "startTime": "2026-11-09T20:30:04.9706726+08:00",
+          "endTime": "2026-11-09T20:30:05.3207033+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "99d19cfb-4921-4a92-af50-70cba2911796"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\039"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+      "pid": 28532,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\040"
+      ],
+      "seconds": 0.9577224254608154,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "f70348db-2aee-4123-b0df-db428ed2523d",
+          "testId": "1c38c2cd-ef6d-8f03-8af3-13873cc49658",
+          "testName": "PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0850137",
+          "startTime": "2026-11-09T20:30:06.3093314+08:00",
+          "endTime": "2026-11-09T20:30:06.4095801+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "f70348db-2aee-4123-b0df-db428ed2523d"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\040"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.CombinedPaletteKeepsAllSourceReferences",
+      "pid": 5296,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.CombinedPaletteKeepsAllSourceReferences",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\041"
+      ],
+      "seconds": 0.8924212455749512,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "9c7f7ca6-130a-452e-9ccd-55146ab7db06",
+          "testId": "14e35727-9ced-8bad-be63-7a068683094d",
+          "testName": "CombinedPaletteKeepsAllSourceReferences",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0157335",
+          "startTime": "2026-11-09T20:30:07.3070365+08:00",
+          "endTime": "2026-11-09T20:30:07.3375446+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "9c7f7ca6-130a-452e-9ccd-55146ab7db06"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\041"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.DocumentTargetCannotOverwriteReferencedSource",
+      "pid": 27684,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.DocumentTargetCannotOverwriteReferencedSource",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\042"
+      ],
+      "seconds": 0.8914244174957275,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "cabcf9c6-d912-4432-8c67-6453c4bde645",
+          "testId": "14c97b55-35c0-869a-94ed-b77b856d1e7b",
+          "testName": "DocumentTargetCannotOverwriteReferencedSource",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0240724",
+          "startTime": "2026-11-09T20:30:08.2251581+08:00",
+          "endTime": "2026-11-09T20:30:08.2647110+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "cabcf9c6-d912-4432-8c67-6453c4bde645"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\042"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.EveryOperationLeavesSourceHashUnchanged",
+      "pid": 29624,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.EveryOperationLeavesSourceHashUnchanged",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\043"
+      ],
+      "seconds": 0.94950270652771,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "512d6c33-0bab-4ace-918b-678a0d54f6c2",
+          "testId": "18ce8580-e406-8bb5-8241-efc50a587573",
+          "testName": "EveryOperationLeavesSourceHashUnchanged",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0762638",
+          "startTime": "2026-11-09T20:30:09.1588567+08:00",
+          "endTime": "2026-11-09T20:30:09.2507136+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "512d6c33-0bab-4ace-918b-678a0d54f6c2"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\043"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasInspirationBoardLinkTests.BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+      "pid": 20936,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasInspirationBoardLinkTests.BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\044"
+      ],
+      "seconds": 1.285496711730957,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "22ea280a-5794-403f-a5fc-43af44f3efa8",
+          "testId": "1ebf68e3-31df-8df2-b3a1-def38a515cc6",
+          "testName": "BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.4026521",
+          "startTime": "2026-11-09T20:30:10.1450601+08:00",
+          "endTime": "2026-11-09T20:30:10.5636062+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "22ea280a-5794-403f-a5fc-43af44f3efa8"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\044"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.CanvasProjectLinkTests.OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+      "pid": 8352,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasProjectLinkTests.OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\045"
+      ],
+      "seconds": 0.9448807239532471,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "7ba8d36c-bcca-4606-b6e6-1a8bbf0dfca9",
+          "testId": "1b1ea8bc-73c1-8bf9-919b-b0a041bff634",
+          "testName": "OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0729005",
+          "startTime": "2026-11-09T20:30:11.4657409+08:00",
+          "endTime": "2026-11-09T20:30:11.5543799+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "7ba8d36c-bcca-4606-b6e6-1a8bbf0dfca9"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\045"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+      "pid": 22888,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\046"
+      ],
+      "seconds": 0.9160075187683105,
+      "exitCode": 0,
+      "expected": 5,
+      "results": [
+        {
+          "executionId": "10e39b01-7bb9-4fee-aa3e-02d94a4f4d96",
+          "testId": "1c3ee089-3c31-8e5b-9d63-03dcbce472e5",
+          "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"asset\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0019042",
+          "startTime": "2026-11-09T20:30:12.5012767+08:00",
+          "endTime": "2026-11-09T20:30:12.5034527+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "10e39b01-7bb9-4fee-aa3e-02d94a4f4d96"
+        },
+        {
+          "executionId": "183a085e-8acd-4c43-af54-e5b879d1b7b2",
+          "testId": "1e4aaf27-b676-8ea2-9b63-06c9866034b1",
+          "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"project\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0329181",
+          "startTime": "2026-11-09T20:30:12.4497322+08:00",
+          "endTime": "2026-11-09T20:30:12.4978675+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "183a085e-8acd-4c43-af54-e5b879d1b7b2"
+        },
+        {
+          "executionId": "74b9d8e1-0fe4-4377-aca5-646dfe59b128",
+          "testId": "13398f5b-4c2d-89a7-913d-5356f1bb4fa2",
+          "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"revision\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0000650",
+          "startTime": "2026-11-09T20:30:12.5039441+08:00",
+          "endTime": "2026-11-09T20:30:12.5040415+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "74b9d8e1-0fe4-4377-aca5-646dfe59b128"
+        },
+        {
+          "executionId": "1b6c821b-ba05-47b3-87b4-7b20ddbc14f7",
+          "testId": "12961104-59c2-8a55-baf8-22bfaa5edb30",
+          "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"version\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0001360",
+          "startTime": "2026-11-09T20:30:12.5037426+08:00",
+          "endTime": "2026-11-09T20:30:12.5039216+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "1b6c821b-ba05-47b3-87b4-7b20ddbc14f7"
+        },
+        {
+          "executionId": "3f84a0e3-ea8b-4431-8aca-8f9c7563aba1",
+          "testId": "16c8403a-72cd-8196-9196-6fe397352fc0",
+          "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"lock\")",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0001187",
+          "startTime": "2026-11-09T20:30:12.5040589+08:00",
+          "endTime": "2026-11-09T20:30:12.5051434+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "3f84a0e3-ea8b-4431-8aca-8f9c7563aba1"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\046"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.ValidConfirmedKnownIdsPersistAfterValidation",
+      "pid": 27144,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.ValidConfirmedKnownIdsPersistAfterValidation",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\047"
+      ],
+      "seconds": 0.9178154468536377,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "725a8bb7-dd63-401f-8701-c333c6b892ea",
+          "testId": "1b776a58-65af-8fef-853b-68f59b6620ae",
+          "testName": "ValidConfirmedKnownIdsPersistAfterValidation",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0372425",
+          "startTime": "2026-11-09T20:30:13.4040335+08:00",
+          "endTime": "2026-11-09T20:30:13.4572559+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "725a8bb7-dd63-401f-8701-c333c6b892ea"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\047"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ConcurrentProjectSaves_PreserveEachProjectsAssetsRulesAndFinalResults",
+      "pid": 21920,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ConcurrentProjectSaves_PreserveEachProjectsAssetsRulesAndFinalResults",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\048"
+      ],
+      "seconds": 0.9843549728393555,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "43b5d941-1fc6-4001-bba4-a50b46036334",
+          "testId": "14efa945-3258-8d3f-9cbb-1493c71f1c7a",
+          "testName": "ConcurrentProjectSaves_PreserveEachProjectsAssetsRulesAndFinalResults",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1055191",
+          "startTime": "2026-11-09T20:30:14.3590478+08:00",
+          "endTime": "2026-11-09T20:30:14.4808701+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "43b5d941-1fc6-4001-bba4-a50b46036334"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\048"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ReopenProject_RestoresFinalResultAndAssetChoices",
+      "pid": 3296,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ReopenProject_RestoresFinalResultAndAssetChoices",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\049"
+      ],
+      "seconds": 0.9373011589050293,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c1a3d254-f445-4bc0-9949-925e12633b8e",
+          "testId": "11d1c1ac-b7db-8f4e-b32f-f513eaff8cd4",
+          "testName": "ReopenProject_RestoresFinalResultAndAssetChoices",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0632992",
+          "startTime": "2026-11-09T20:30:15.3755703+08:00",
+          "endTime": "2026-11-09T20:30:15.4533761+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c1a3d254-f445-4bc0-9949-925e12633b8e"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\049"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.AssetThumbnail_PrefersExistingProxyImage",
+      "pid": 26892,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.AssetThumbnail_PrefersExistingProxyImage",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\050"
+      ],
+      "seconds": 0.9178075790405273,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "e7f96f4e-cb44-47aa-ba78-3bb0bf597878",
+          "testId": "1947e296-89f2-894d-ab83-1df0ab3c72cd",
+          "testName": "AssetThumbnail_PrefersExistingProxyImage",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0413135",
+          "startTime": "2026-11-09T20:30:16.3535478+08:00",
+          "endTime": "2026-11-09T20:30:16.4093191+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "e7f96f4e-cb44-47aa-ba78-3bb0bf597878"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\050"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.View_UsesChineseStatusPhotoFirstThumbnailAndAv2Resources",
+      "pid": 28816,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.View_UsesChineseStatusPhotoFirstThumbnailAndAv2Resources",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\051"
+      ],
+      "seconds": 0.8881425857543945,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c6e4eb4f-660d-4fa1-8dde-45cd7d7b4ff6",
+          "testId": "10ef52d1-05c7-849e-93fe-4795831f2d5e",
+          "testName": "View_UsesChineseStatusPhotoFirstThumbnailAndAv2Resources",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0061827",
+          "startTime": "2026-11-09T20:30:17.3138451+08:00",
+          "endTime": "2026-11-09T20:30:17.3349019+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c6e4eb4f-660d-4fa1-8dde-45cd7d7b4ff6"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\051"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged",
+      "pid": 29468,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\052"
+      ],
+      "seconds": 0.991981029510498,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "83ed39d4-a276-4d5c-a195-a9416160d159",
+          "testId": "14c2b6d0-16e1-8429-84fa-8479dce56010",
+          "testName": "JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1158952",
+          "startTime": "2026-11-09T20:30:18.2269460+08:00",
+          "endTime": "2026-11-09T20:30:18.3581291+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "83ed39d4-a276-4d5c-a195-a9416160d159"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\052"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults",
+      "pid": 27972,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\053"
+      ],
+      "seconds": 0.9523906707763672,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "17103d55-348e-44a5-99e0-594502e5b2c7",
+          "testId": "14adf43c-3aaa-889e-b20c-bd099e1f14e9",
+          "testName": "RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0733067",
+          "startTime": "2026-11-09T20:30:19.2595600+08:00",
+          "endTime": "2026-11-09T20:30:19.3491899+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "17103d55-348e-44a5-99e0-594502e5b2c7"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\053"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart",
+      "pid": 19060,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\054"
+      ],
+      "seconds": 1.065284252166748,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "62690c14-1846-4770-8541-c9f04e7e0649",
+          "testId": "148986df-aa9f-813b-9579-031c72d2389a",
+          "testName": "ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.1816721",
+          "startTime": "2026-11-09T20:30:20.2518803+08:00",
+          "endTime": "2026-11-09T20:30:20.4498996+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "62690c14-1846-4770-8541-c9f04e7e0649"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\054"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit",
+      "pid": 22268,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\055"
+      ],
+      "seconds": 0.9538147449493408,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c75a8690-110c-427d-9b58-8c137c63a00d",
+          "testId": "11b988f7-9e0d-8dbf-b293-e3f3a9ae2424",
+          "testName": "ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0755935",
+          "startTime": "2026-11-09T20:30:21.3495281+08:00",
+          "endTime": "2026-11-09T20:30:21.4413148+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c75a8690-110c-427d-9b58-8c137c63a00d"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\055"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure",
+      "pid": 2820,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\056"
+      ],
+      "seconds": 0.9363241195678711,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c086bd59-3619-44d1-b1cb-b4a2df72edf7",
+          "testId": "1f602578-96f5-8bb9-bafc-f2f92dbbac5b",
+          "testName": "OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0596531",
+          "startTime": "2026-11-09T20:30:22.3410750+08:00",
+          "endTime": "2026-11-09T20:30:22.4152190+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c086bd59-3619-44d1-b1cb-b4a2df72edf7"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\056"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch",
+      "pid": 28864,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\057"
+      ],
+      "seconds": 0.9433467388153076,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "4a503c67-6dd8-426e-967c-ae8c494fa78b",
+          "testId": "19a5fa2b-43b8-89e6-8049-c06d055413ac",
+          "testName": "ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0647185",
+          "startTime": "2026-11-09T20:30:23.3160672+08:00",
+          "endTime": "2026-11-09T20:30:23.3961101+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "4a503c67-6dd8-426e-967c-ae8c494fa78b"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\057"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog",
+      "pid": 20672,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\058"
+      ],
+      "seconds": 0.9600863456726074,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "636bc37c-f694-48cb-a994-3bec58203a63",
+          "testId": "1d3abdbc-46bf-8237-a9cd-4efbc84701f5",
+          "testName": "AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0808783",
+          "startTime": "2026-11-09T20:30:24.2948667+08:00",
+          "endTime": "2026-11-09T20:30:24.3921597+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "636bc37c-f694-48cb-a994-3bec58203a63"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\058"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft",
+      "pid": 6936,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\059"
+      ],
+      "seconds": 0.9528875350952148,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "f9548e65-39c0-42a9-b412-e743b28951c1",
+          "testId": "1b9965d1-2c5b-8db2-90ca-673a61ee9883",
+          "testName": "CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0713906",
+          "startTime": "2026-11-09T20:30:25.2959115+08:00",
+          "endTime": "2026-11-09T20:30:25.3832864+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "f9548e65-39c0-42a9-b412-e743b28951c1"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\059"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.SyncResultsCommand_WithoutParameterChoosesArchiveDirectory",
+      "pid": 24340,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.SyncResultsCommand_WithoutParameterChoosesArchiveDirectory",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\060"
+      ],
+      "seconds": 0.9344649314880371,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "a2ba0347-f9fe-4682-b467-b9fd16ff6c7b",
+          "testId": "111d9a84-3e29-8d9a-b5cc-9c8350fe7678",
+          "testName": "SyncResultsCommand_WithoutParameterChoosesArchiveDirectory",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0598006",
+          "startTime": "2026-11-09T20:30:26.2795209+08:00",
+          "endTime": "2026-11-09T20:30:26.3549777+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "a2ba0347-f9fe-4682-b467-b9fd16ff6c7b"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\060"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable",
+      "pid": 20236,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\061"
+      ],
+      "seconds": 0.8984096050262451,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "945801c1-8ceb-4a62-81dd-db4a741e2ab4",
+          "testId": "161c9c6c-c65e-8cdd-a5d9-10a5ce56218e",
+          "testName": "ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0279478",
+          "startTime": "2026-11-09T20:30:27.2481213+08:00",
+          "endTime": "2026-11-09T20:30:27.2908239+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "945801c1-8ceb-4a62-81dd-db4a741e2ab4"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\061"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService",
+      "pid": 32,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\062"
+      ],
+      "seconds": 0.9416325092315674,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "1edfa721-d851-41d3-8579-bb6c1b3b5b88",
+          "testId": "14433da5-a6bd-878d-b8ec-dbc0e79e3633",
+          "testName": "CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0639160",
+          "startTime": "2026-11-09T20:30:28.1919950+08:00",
+          "endTime": "2026-11-09T20:30:28.2703028+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "1edfa721-d851-41d3-8579-bb6c1b3b5b88"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\062"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles",
+      "pid": 28520,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\063"
+      ],
+      "seconds": 0.9207043647766113,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "19fdab84-4c9b-4916-8f89-cf46cd1b7cc8",
+          "testId": "1b20de4f-5fe3-876b-bb7c-7ae63ce9748c",
+          "testName": "ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0451176",
+          "startTime": "2026-11-09T20:30:29.1639757+08:00",
+          "endTime": "2026-11-09T20:30:29.2252560+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "19fdab84-4c9b-4916-8f89-cf46cd1b7cc8"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\063"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage",
+      "pid": 8492,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\064"
+      ],
+      "seconds": 0.8764362335205078,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "a52497bc-0236-4455-b6a4-1a87102599ad",
+          "testId": "16d6dd3a-49e3-8d14-80f6-a296022e4cf9",
+          "testName": "ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0052255",
+          "startTime": "2026-11-09T20:30:30.1225115+08:00",
+          "endTime": "2026-11-09T20:30:30.1428646+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "a52497bc-0236-4455-b6a4-1a87102599ad"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\064"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts",
+      "pid": 18308,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\065"
+      ],
+      "seconds": 0.887991189956665,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "2ab4fe37-3941-41d3-a273-efd0b9049a02",
+          "testId": "10de2d1d-372b-84fe-b208-dc2de5768e7d",
+          "testName": "OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0054833",
+          "startTime": "2026-11-09T20:30:31.0457333+08:00",
+          "endTime": "2026-11-09T20:30:31.0662047+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "2ab4fe37-3941-41d3-a273-efd0b9049a02"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\065"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "pid": 26728,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\066"
+      ],
+      "seconds": 1.8650062084197998,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "9f57a72b-2897-4260-999b-6332160ced05",
+          "testId": "1244cc47-3158-8407-af8d-c4af44419dce",
+          "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.9841886",
+          "startTime": "2026-11-09T20:30:31.9568453+08:00",
+          "endTime": "2026-11-09T20:30:32.9569631+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "9f57a72b-2897-4260-999b-6332160ced05"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\066"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "pid": 20032,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\067"
+      ],
+      "seconds": 0.9211924076080322,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "2b14da92-dd94-43b1-894a-e7162c54287e",
+          "testId": "10da616f-35cf-8abf-b7a2-bc247898e6d6",
+          "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0441408",
+          "startTime": "2026-11-09T20:30:33.8638492+08:00",
+          "endTime": "2026-11-09T20:30:33.9224621+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "2b14da92-dd94-43b1-894a-e7162c54287e"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\067"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+      "pid": 2680,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\068"
+      ],
+      "seconds": 4.928821802139282,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "ccedfb5d-838c-48d3-b71f-ed8b123b11f3",
+          "testId": "19110759-40be-866c-a013-b312e9da30b8",
+          "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:03.9750295",
+          "startTime": "2026-11-09T20:30:34.8170537+08:00",
+          "endTime": "2026-11-09T20:30:38.8074258+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "ccedfb5d-838c-48d3-b71f-ed8b123b11f3"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\068"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "pid": 24008,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.FullShellKeepsPrimaryNavigationAndContentTemplates",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\069"
+      ],
+      "seconds": 1.8686072826385498,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "f58a019c-e37b-4f33-b75b-53ea67eb4f64",
+          "testId": "14bcd9a3-5e9a-813f-906b-1dae4ee5a500",
+          "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.9859999",
+          "startTime": "2026-11-09T20:30:39.7826768+08:00",
+          "endTime": "2026-11-09T20:30:40.7848854+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "f58a019c-e37b-4f33-b75b-53ea67eb4f64"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\069"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "pid": 29188,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\070"
+      ],
+      "seconds": 1.1673669815063477,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "751faf51-5f44-46d6-b69a-e82798dffdac",
+          "testId": "11ea7541-ac5d-807c-af0b-404f9a935a8b",
+          "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.2817965",
+          "startTime": "2026-11-09T20:30:41.6908353+08:00",
+          "endTime": "2026-11-09T20:30:41.9888058+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "751faf51-5f44-46d6-b69a-e82798dffdac"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\070"
+    },
+    {
+      "kind": "Wpf",
+      "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "pid": 21288,
+      "args": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\Kitao-Worktrees\\online-selection-http-v1-20261109\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+        "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+        "/Logger:trx;LogFileName=results.trx",
+        "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\071"
+      ],
+      "seconds": 0.8816962242126465,
+      "exitCode": 0,
+      "expected": 1,
+      "results": [
+        {
+          "executionId": "c0eaa76b-a04b-4dee-a9dc-259cc9588064",
+          "testId": "1ade27b3-f491-8445-9dd4-8df5e4498304",
+          "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+          "computerName": "PC-20250309WEIZ",
+          "duration": "00:00:00.0124777",
+          "startTime": "2026-11-09T20:30:42.8902836+08:00",
+          "endTime": "2026-11-09T20:30:42.9180778+08:00",
+          "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+          "outcome": "Passed",
+          "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+          "relativeResultsDirectory": "c0eaa76b-a04b-4dee-a9dc-259cc9588064"
+        }
+      ],
+      "ok": true,
+      "directory": "E:\\Kitao-Deliveries\\online-selection-http-v1-20261109\\final-regression-02\\071"
+    }
+  ],
+  "counts": {
+    "Passed": 90
+  },
+  "ok": true
+}

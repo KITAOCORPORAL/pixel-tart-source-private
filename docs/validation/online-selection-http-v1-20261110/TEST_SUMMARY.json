@@ -1,0 +1,58 @@
+{
+  "productSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+  "testSupportHead": "81bc7be925a0fe7d2600ec275a6049a621e283de",
+  "regression": {
+    "core": 52,
+    "wpf": 38,
+    "passed": 90,
+    "failed": 0,
+    "methods": 71,
+    "source": "c44f800a428ba097e024c91e7691dbf3b6a17355"
+  },
+  "appPhases": [
+    {
+      "name": "final2-app-offline01",
+      "toolSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "productSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "test": "HttpPhase1OfflineDraftAndProxyPersist",
+      "outcome": "Passed",
+      "runnerPid": 25004
+    },
+    {
+      "name": "final2-app-publish01",
+      "toolSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "productSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "test": "HttpPhase2RestartUploadPublishAndCopyLink",
+      "outcome": "Passed",
+      "runnerPid": 22168
+    },
+    {
+      "name": "final2-app-sync01",
+      "toolSource": "81bc7be925a0fe7d2600ec275a6049a621e283de",
+      "productSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "test": "HttpPhase3RefreshConfirmedResultAndSyncWorkflow",
+      "outcome": "Passed",
+      "runnerPid": 20728
+    },
+    {
+      "name": "completion-app-reopen-20261110",
+      "toolSource": "81bc7be925a0fe7d2600ec275a6049a621e283de",
+      "productSource": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "test": "HttpPhase4ReopenPersistsConfirmedResultAndRevoke",
+      "outcome": "Passed",
+      "runnerPid": 27820
+    }
+  ],
+  "totalFinalTrxPass": 94,
+  "publishedDllBindings": 30,
+  "standaloneSmoke": [
+    "configured packaged LocalTest launcher",
+    "normal published EXE",
+    "normal published CMD"
+  ],
+  "loggedServiceRequests": 44,
+  "physicalPhone": "NOT_RUN_ENVIRONMENT_NOT_READY",
+  "newRawCalls": 0,
+  "productUnchangedAfterFreeze": true,
+  "overall": "LOCAL_HTTP_V1_READY_FOR_REVIEW_PHONE_PENDING"
+}

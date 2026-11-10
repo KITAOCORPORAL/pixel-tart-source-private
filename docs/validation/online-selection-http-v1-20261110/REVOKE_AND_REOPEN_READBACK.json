@@ -1,0 +1,33 @@
+{
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/s/b9084bd24666eba15b90905a8cbbc368e93d",
+      "status": 404,
+      "expected": 404
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/b9084bd24666eba15b90905a8cbbc368e93d",
+      "status": 401,
+      "expected": 401
+    }
+  ],
+  "desktopProjectRecords": 1,
+  "desktopAssetRecords": 1,
+  "totalIsolatedTestAlbums": 3,
+  "confirmedRevision": 4,
+  "clientGrantRemoved": true,
+  "serviceStateSha256": "10081b9b54123a91948c7a42e67e937f750d1290ad3f074b5358b7e5427353a7",
+  "storedSourcePaths": false,
+  "reopen": {
+    "processId": 29096,
+    "projectId": "ee662b0e-27f5-48f5-a7d5-9320d49d34b7",
+    "workflowId": "ff2b32b2-c0d2-45e8-bb33-6386c372b4ba",
+    "resultVersion": 1,
+    "revision": 4,
+    "selected": 1,
+    "persistedWithoutHttpRefresh": true
+  },
+  "newRawCalls": 0
+}

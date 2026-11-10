@@ -1,0 +1,15 @@
+{
+  "finalBatchOnly": true,
+  "total": 44,
+  "methodsAndStatus": {
+    "GET 200": 20,
+    "POST 200": 14,
+    "GET 404": 2,
+    "PUT 200": 1,
+    "GET 401": 4,
+    "PUT 409": 1,
+    "GET 410": 2
+  },
+  "credentialHeadersLogged": false,
+  "historicalDevelopmentRequestsExcluded": true
+}

@@ -1,0 +1,71 @@
+{
+  "productSourceSha": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+  "baselineDelivery": "37ea6c9abaae94a3f4e2ac6b615837eb02e89633",
+  "sourceReference": "349bf4006faf9b80a3691b7d9fd368271ca58ebd",
+  "WholeAppDiagnosticBuild": true,
+  "PhotographerTrialBuild": false,
+  "desktopRuntime": "win-x64 self-contained",
+  "serviceRuntime": "win-x64 self-contained LocalDev, production=false, loopback only",
+  "planningSections": 15,
+  "tutorial": "RETIRED",
+  "installer": false,
+  "calendarSyncChanged": false,
+  "files": {
+    "app/KitaoPhotoSelector.exe": {
+      "sha256": "bf14ae226746a17dbe06a399b517a0bae1eb3519056ecbc5889d90d4982726a4",
+      "bytes": 179200
+    },
+    "app/KitaoPhotoSelector.dll": {
+      "sha256": "f321019e8fa2f2953662d0b342e15667feef6b6acfc0451cc3081c05a90c3ed9",
+      "bytes": 4124160
+    },
+    "app/RAWSelectionAssistant.Core.dll": {
+      "sha256": "d2f6b532dbcc839c4d67468adae8f0aaaf928a736e15d54317a8d4ff0843ff45",
+      "bytes": 7769600
+    },
+    "app/PixelTart.SelectionApi.Contracts.dll": {
+      "sha256": "e7f762def1ea007e6c6a554677a12069758c1ecb8ef352adb323113fdf39c94a",
+      "bytes": 66048
+    },
+    "app/PixelTart.Modules.AssetLibrary.dll": {
+      "sha256": "e01c0630534da8050cc45260a8f93f0416fa199f1edee59da4a77d6134e8db0b",
+      "bytes": 1244160
+    },
+    "app/PixelTart.Modules.OnlineSelection.dll": {
+      "sha256": "dc5799ecad86118b75e2cad19a57eb9c69c9cb101c7214b0a2c02a4748e80000",
+      "bytes": 11264
+    },
+    "app/PixelTart.Modules.RawTool.dll": {
+      "sha256": "b32d0f4a425a2a98aeae38a7aa66bdd9f56d0081574b852693838ea063a69faa",
+      "bytes": 10752
+    },
+    "app/raw_r.dll": {
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "bytes": 1102848
+    },
+    "selection-service/PixelTart.SelectionApi.Server.exe": {
+      "sha256": "8f708927630f535a8b01da362fb139fb1d741f3de211a924498eee70f3fe11d1",
+      "bytes": 162304
+    },
+    "selection-service/PixelTart.SelectionApi.Server.dll": {
+      "sha256": "33c3ba09ac4d0187623c506e8d7e0354fab42ebf5540d4df736a87ecc19103af",
+      "bytes": 78848
+    },
+    "selection-service/PixelTart.SelectionApi.Contracts.dll": {
+      "sha256": "67c8004f0749351fa4fe0b738b763701b3bb6cf0f4a746325a0a284c7c2cb324",
+      "bytes": 66560
+    },
+    "selection-service/wwwroot/selection.html": {
+      "sha256": "070d7f0dc531e56a765162c4a05d3b5dde24fabb568091816659209f5cfddd99",
+      "bytes": 822
+    },
+    "selection-service/wwwroot/selection-client.js": {
+      "sha256": "e25662b95e1f45a4612015348e132ad087f9327e4f989f7742212a2da2fbfbf7",
+      "bytes": 3802
+    },
+    "selection-service/wwwroot/selection-client.css": {
+      "sha256": "37560524ef6a7a79f53e2008ad3cdf22aee1e542aafcf08f5ed771db454aa74f",
+      "bytes": 1167
+    }
+  }
+}

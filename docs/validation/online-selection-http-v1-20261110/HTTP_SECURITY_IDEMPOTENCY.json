@@ -1,0 +1,128 @@
+{
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/ee662b0e-27f5-48f5-a7d5-9320d49d34b7/final-selection",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/c1deaf4b-aedf-47a3-baf5-9450d3a13614",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/c1deaf4b-aedf-47a3-baf5-9450d3a13614",
+      "status": 401,
+      "expected": 401,
+      "code": "InvalidToken"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/ee662b0e-27f5-48f5-a7d5-9320d49d34b7",
+      "status": 401,
+      "expected": 401,
+      "code": "InvalidToken"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/f91e266f19bfa0de3863e7263bacbf3e0196",
+      "status": 401,
+      "expected": 401,
+      "code": "InvalidToken"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/b9084bd24666eba15b90905a8cbbc368e93d/choices/26291c73-093d-4bd8-9aa7-7018f32c08d6",
+      "status": 409,
+      "expected": 409,
+      "code": "SelectionLocked"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/ee662b0e-27f5-48f5-a7d5-9320d49d34b7/final-selection",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects/ee662b0e-27f5-48f5-a7d5-9320d49d34b7/assets/26291c73-093d-4bd8-9aa7-7018f32c08d6/proxy",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/selection-projects/ee662b0e-27f5-48f5-a7d5-9320d49d34b7/progress",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects/93133eca-7210-47a8-871c-d48fbe585ed6/assets/13f29b82-309d-4fa4-93d8-f3551777bead/proxy",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/v1/selection-projects/93133eca-7210-47a8-871c-d48fbe585ed6/publish",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/4239de48ca2bd2a17d06cc4d30d84894e943",
+      "status": 200,
+      "expected": 200,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/4239de48ca2bd2a17d06cc4d30d84894e943",
+      "status": 410,
+      "expected": 410,
+      "code": "LinkExpired"
+    },
+    {
+      "method": "GET",
+      "path": "/s/4239de48ca2bd2a17d06cc4d30d84894e943",
+      "status": 410,
+      "expected": 410,
+      "code": null
+    }
+  ],
+  "desktopProjectId": "ee662b0e-27f5-48f5-a7d5-9320d49d34b7",
+  "desktopAssetId": "26291c73-093d-4bd8-9aa7-7018f32c08d6",
+  "desktopProjectInstances": 1,
+  "desktopUploadedAssets": 1,
+  "wrongProjectReadDenied": true,
+  "customerCannotReadOwnerApi": true,
+  "confirmedMutationDenied": true,
+  "lockedSnapshotUnchanged": true,
+  "lateUploadReplayIdempotent": true,
+  "expiredPageAndApiDenied": true,
+  "syntheticProxyOnly": true,
+  "newRawCalls": 0
+}

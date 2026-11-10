@@ -13,3 +13,14 @@ Core默认Factory保留None且无HTTP/凭据实现；真实HTTP适配器与配�
 可重放：build.py用既有SDK记录新构建批次；start_service.py显式隔离Root/端口启动真实Kestrel；run_case.py分别在独立完整App TestHost中跑HttpPhase1..4。原生UIA操作WPF入口，文件/文件夹选择通过实际系统对话框与已观察ID的Win32确认消息；不是直接注入导入模型，也不宣称物理鼠标/DPI。浏览器真实勾选/确认用受保护链接，在阶段2与阶段3之间进行。http_negative.py是实际HTTP权限/锁定/幂等/过期验证，不能替代桌面或浏览器入口；guard tests中的fake只用于恶意结果防护，绝不算HTTP闭环。
 
 首版服务只监听loopback，production=false，单摄影师测试环境，不是公网多租户服务。物理iPhone Safari/微信实测须有明确授权HTTPS入口与设备；当前桌面浏览器390px仅响应式证据。PC/手机档期同步不在本轮范围。
+
+2026-11-10 本机闭环已封存，当前报告见 `docs/validation/online-selection-http-v1-20261110/FINAL_REPORT.md`。最终产品c44f800a；94条所选TRX PASS（90相关回归+4独立完整App阶段），最终批次44条服务请求；物理手机仍待授权HTTPS/设备。
+
+补充核验工具（仓库根运行，只用于隔离合成数据）：
+
+```text
+python tools/online-http-v1/verify_revoke.py <PRIVATE_CONNECTION.json> <app-evidence> <workspace.json> <new-receipt.json>
+python tools/online-http-v1/seal_delivery.py <delivery-root> <new-docs-dir>
+```
+
+`verify_revoke.py`在桌面HttpPhase4后只读检查撤销请求及重开版本；不输出凭证。`seal_delivery.py`核对冻结产品、发布绑定/所选TRX/实际请求和包排除项，生成逐文件清单、ZIP及公开证据。两者拒绝覆盖既有结果；封存工具用于本轮固定布局的独立交付根，已存在ZIP时须保留原件并选新根，不自动重跑业务或RAW。
