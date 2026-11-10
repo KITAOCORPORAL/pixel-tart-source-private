@@ -1,0 +1,205 @@
+{
+  "version": "StableInputCompanyDeliveryV1",
+  "base": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+  "status": "PARTIAL_NATIVE_READY_CANDIDATE_PAIR_UNAVAILABLE",
+  "nativeBuilds": 1,
+  "rawAttemptProcesses": 1,
+  "actualCalls": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 0,
+    "MakeDcrawMemoryImage": 0
+  },
+  "remainingUnusedSlot": 1,
+  "batchStopped": true,
+  "newDebuggerRuns": 0,
+  "newGPUCalls": 0,
+  "hashSemantics": "SHA256 of normalized staged Git blob bytes; excludes this manifest itself",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 43977,
+      "sha256": "d45e180859305fdd1c49cf63d3a1ce29c049be77b9a773e6528a7a102e9c0cf8"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/BUDGET_STOPPED.json",
+      "bytes": 808,
+      "sha256": "b3e6a4d60db4f635a3259764e90839ccb426523eaf3ee79bbdac98a76d4b677d"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/BUDGET_TIMERFIX_TESTS.json",
+      "bytes": 142,
+      "sha256": "105d834064c9cd7eaacd720005e7f9a4e25a5ea18f3183733bd82affd1675723"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/CANDIDATE_CONTRACT.json",
+      "bytes": 1296,
+      "sha256": "67f4de0a2dead1325002f9ea605291fc723f71aa6dfb5d6b4f8b3281d428b820"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/CONSUMED.json",
+      "bytes": 444,
+      "sha256": "ced1e3137b3a9094145eb9e80fd783b9ffa16e677c91878b9e9e4f0190cf4494"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/EVIDENCE_FORMAT_BINDING.json",
+      "bytes": 3885,
+      "sha256": "1d937c0235ef97df7e76d26f3f241d1c62299eec3414318d17db8f830fa66e47"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FAILED_PROCESS_RESULT.json",
+      "bytes": 2801,
+      "sha256": "2f4e0baaa9b609679a2da1855b5dca7d91028d532ac01fea11e96c8cd3642ecf"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FAILED_SELFTEST_BINDING.json",
+      "bytes": 2128,
+      "sha256": "b778fb65cabdd8a76ef0657513c85d82e9deda737a04fab13a97a690187a6c26"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_NO_RAW_RESULT.json",
+      "bytes": 1162,
+      "sha256": "df17a6fa20dd9d2b1e45cf7c0e0754c02eed38d42030daf9f6b3814bacd9d24b"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_NO_RAW_SELFTEST.json",
+      "bytes": 12623,
+      "sha256": "a7bcf5974ccfc378c0dce0a4974c3ba22e366466d6d7cc91b7160f6be6f33882"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_TIMER_TEST.json",
+      "bytes": 433,
+      "sha256": "883fe9c021c2d17bc4b6ef11ccda8decd8847ec297397054425660cbcf8251ca"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/LOCAL_AUDIT_BEFORE.json",
+      "bytes": 880,
+      "sha256": "01fc4f952644a1ee86d34cdcf092d192fff3019686b33fd5dc20f9e6f8f39752"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/METRICS_TESTS.json",
+      "bytes": 170,
+      "sha256": "f42eda1b5e298262072d2578b02f71a4b4d50b3ce3e80bf6eead03542c4885e4"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/MISSING_COMPARISON.json",
+      "bytes": 945,
+      "sha256": "fb4e21a4c9038caa5769d10c14a0eb2d5e63b07bc8b2d10a785d6cba0aabaa00"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/NATIVE_BUILD_STATUS.json",
+      "bytes": 1096,
+      "sha256": "caa254faf82fe34afc0777fc498d64295680661ef969e4a600ae5848088bdcef"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/NO_RAW_SELFTEST_BEFORE_RUN.json",
+      "bytes": 12439,
+      "sha256": "52b6e88c02f36befae0cb2a750fe2483aa61886ea10ec54b5e4b88fef3f3692d"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/OUTCOME.json",
+      "bytes": 2024,
+      "sha256": "1ba74754d4207a83d3a92246f1a10018b27f10ab4460f8a37e718e896ca8fb46"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/PROCESS_RESOURCE_RECEIPT.json",
+      "bytes": 469,
+      "sha256": "3099cba35a9f07742effaaf76bd6d29b80cbcefb4f1cb7b06a5c6f685c204ca1"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/PROVENANCE.json",
+      "bytes": 6275,
+      "sha256": "5fbec555d26045a5f58fe971048cf4f989b9d459a3cc1c9e7cb3780080521e95"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/REPORT.md",
+      "bytes": 8306,
+      "sha256": "706ca321091273cc6e73c85b086459f4ac21445a016d15de1efb1bcf97c54b49"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/RESOURCE_SAMPLES.json",
+      "bytes": 1095,
+      "sha256": "c48b498db88dcabb4baff449869869313fd1f4ccbe979e923a2cc70986ae3873"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/SOURCE_PREPARATION.json",
+      "bytes": 31674,
+      "sha256": "38e6bf3d5b97dc0eceafb895104aea09be54d258d373abfa0636e59203ec45b4"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/STOP_AFTER_FAILURE.json",
+      "bytes": 519,
+      "sha256": "49cac6d30dea56c32f886eee5b31fc6014d6bd426de54b73dda39200f54dbe69"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/STORED_BASELINE_IDENTITIES.json",
+      "bytes": 553,
+      "sha256": "1d74b7af2594aaba54c8e4c6339ce384355e49758e0affffd3886fb65b709f17"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/Budget.Tests.mjs",
+      "bytes": 2209,
+      "sha256": "7792ff416a8f99f6aa0b381fe544162b91460c8944b614eeb75c1560079be31b"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/CandidateBatch.mjs",
+      "bytes": 2747,
+      "sha256": "2d9f0f07c51893cdfa6c04f4de770808b23f193ebab5c783f74fed917acd84f2"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/Metrics.Tests.py",
+      "bytes": 1226,
+      "sha256": "6fedba3e8ef710df01e5e36c588c1a348f9fc85c55e86170468ae9e538f5e7c3"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/Program.cs",
+      "bytes": 16471,
+      "sha256": "b336841889a0fc084c49342123085fea2cecbc41be8f532a3c74049dca910738"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/RawStableCandidateHost.csproj",
+      "bytes": 565,
+      "sha256": "81384f30bf1dd740ed54fbde55ed983ca123f627332d1bd8d5bc6de78256f40e"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/ReviewedCompare.mjs",
+      "bytes": 25556,
+      "sha256": "8299189fac4ee8e3b2e2dbe502e1d49c66363ff19bd356c7537811ccb0e5cb29"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/Run-CandidateBatch.ps1",
+      "bytes": 4928,
+      "sha256": "df50a0c82767f8dfb66a3e7f55128a5a5e5830b4517c04ac56e966c0861f3fa0"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/SOURCE_ADAPTATION.md",
+      "bytes": 1604,
+      "sha256": "d229ae46243b88de787df8d0ae85aedef5854611d4aaea396d7293e805e3f30d"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/analyze_candidate.py",
+      "bytes": 3904,
+      "sha256": "2a1d9014277e9395e20b763b263c7da8f3e30cfa1d46e295974f5b87763a5615"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/freeze_execution.py",
+      "bytes": 3723,
+      "sha256": "8d4c769ac1ce2b984ec35b0d16807c43ca9df0fa7350baf406f1f502fc53be40"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/metrics.py",
+      "bytes": 3374,
+      "sha256": "8b6e7524d2cb7a7112cac1d0f6b565378d10593cb310e3789cf3c2480754b212"
+    }
+  ]
+}

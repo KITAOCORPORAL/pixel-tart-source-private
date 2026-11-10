@@ -1,0 +1,20 @@
+{
+  "version": "CandidateNativeContractV1",
+  "candidate": "XTransStableInputSeparateRgbV1",
+  "sourceCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "researchCommit": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+  "nativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+  "preparationSha256": "434772E650FE40837992ED2B9CE62EC1AB40A42290720892E0C31F10B5BD797B",
+  "candidateObserverXtransSha256": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+  "observerHeaderSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "checkpointContractVerified": true,
+  "checkpointScope": "Pinned original six observer CPPs and ce42 header; exact reviewed f11 candidate preserves checkpoints and public layout",
+  "intentionalPixelChange": true,
+  "originalByteRestoration": false,
+  "productIntegration": false,
+  "expectedConfigurationPath": "E:\\Guangjing-RawReopen001-NoRaw-20261109\\validation-batch\\pair01\\first\\configured-output.json",
+  "expectedConfigurationSha256": "CA1A7408318D88DA230F149ECA0D62949DD373D5BA3A06C2E5AA63B06ABB5FFA",
+  "requestedExtraRgbBytes": 241118208,
+  "actualAllocationPointerTrace": "NOT_INDEPENDENTLY_INSTRUMENTED",
+  "internalExclusiveStageTiming": "NOT_INSTRUMENTED_PINNED_SOURCE_UNCHANGED"
+}

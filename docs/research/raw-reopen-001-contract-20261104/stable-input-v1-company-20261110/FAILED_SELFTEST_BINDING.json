@@ -1,0 +1,36 @@
+{
+  "rawCalls": 0,
+  "reason": "No-RAW harness used managed zero defaults instead of native initialized defaults; no decode parameters changed",
+  "preservedFailedRuntime": [
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\RawStableCandidateHost.deps.json",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\RawStableCandidateHost.deps.json",
+      "sha256": "27D03539F8C7113AD4ABCDE76775BA0A4C4D1174D88F9D2612CB063E0BFFBA6D"
+    },
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\RawStableCandidateHost.dll",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\RawStableCandidateHost.dll",
+      "sha256": "4CBC6001507677F611FB9CAF4E52234B44DB82E71E18CEDB9FE65D51323CFD4A"
+    },
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\RawStableCandidateHost.exe",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\RawStableCandidateHost.exe",
+      "sha256": "4E462E09793C32278FF88F9DBD8B68A5B591E3CFC66EB63B035FFB9E0F482AF1"
+    },
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\RawStableCandidateHost.runtimeconfig.json",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\RawStableCandidateHost.runtimeconfig.json",
+      "sha256": "C230A317A54DD960BCBEB5F347F52E18DC665A26F7EFDA2159FCED9A5AC7E097"
+    },
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\raw_r.dll",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\raw_r.dll",
+      "sha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F"
+    },
+    {
+      "originalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\Sdcb.LibRaw.dll",
+      "preservedPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-selftest-runtime\\Sdcb.LibRaw.dll",
+      "sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "task": "RAW-REOPEN-001-STABLE-INPUT-V1-20261109",
+  "status": "STOPPED_AFTER_FIRST_FAILURE",
+  "reservationId": "465c8218-4d3c-48f4-9545-6522f86796e2",
+  "pid": 28684,
+  "reason": "Host timing journal used CreateNew repeatedly for stage-times.json",
+  "consumed": 1,
+  "remaining": 1,
+  "automaticRetry": false,
+  "nextSlotAutomaticallyAllowed": false,
+  "counts": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 0,
+    "MakeDcrawMemoryImage": 0
+  },
+  "createdUtc": "2026-11-10T02:29:32.132799+00:00"
+}

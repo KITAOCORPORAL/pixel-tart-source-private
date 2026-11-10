@@ -1,0 +1,46 @@
+{
+  "reservationId": null,
+  "status": "NATIVE_NO_RAW_SELF_TEST_COMPLETED",
+  "error": null,
+  "zeroRaw": true,
+  "counts": {
+    "Initialize": 1,
+    "ManagedDispose": 1
+  },
+  "runtime": {
+    "ProcessId": 10008,
+    "ProcessorCount": 12,
+    "os": "Microsoft Windows 10.0.19045",
+    "runtime": ".NET 10.0.10",
+    "architecture": "X64",
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    },
+    "debuggerAttached": false
+  },
+  "peakWorkingSetBytes": 36564992,
+  "privateBytesAtExit": 12603392,
+  "fullManagedImageCopies": 0,
+  "candidate": "XTransStableInputSeparateRgbV1",
+  "stageTimesMs": {
+    "NoRawTimerA": 0.0248,
+    "NoRawTimerB": 0.0161,
+    "NoRawTimerThrows": 0.1667
+  },
+  "stageActionReturned": {
+    "NoRawTimerA": true,
+    "NoRawTimerB": true,
+    "NoRawTimerThrows": false
+  },
+  "debuggerAttached": false
+}

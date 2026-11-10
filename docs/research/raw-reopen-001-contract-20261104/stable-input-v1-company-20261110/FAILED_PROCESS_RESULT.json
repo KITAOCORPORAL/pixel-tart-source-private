@@ -1,0 +1,40 @@
+{
+  "reservationId": "465c8218-4d3c-48f4-9545-6522f86796e2",
+  "status": "FAILED_NO_RETRY",
+  "error": "System.IO.IOException: The file \u0027E:\\Guangjing-RawReopen001-StableV1-20261110\\pair\\first\\stage-times.json\u0027 already exists.\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.FileStream..ctor(String path, FileMode mode)\r\n   at Program.Write(String name, Object o)\r\n   at Program.Timed(String name, Action action)\r\n   at Program.Timed(String name, Action action)\r\n   at Program.\u003C\u003Ec__DisplayClass33_0.\u003CMain\u003Eb__0()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task\u0026 currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at Program.Main(String[] args)",
+  "zeroRaw": false,
+  "counts": {
+    "OpenFile": 1,
+    "Unpack": 1
+  },
+  "runtime": {
+    "ProcessId": 28684,
+    "ProcessorCount": 12,
+    "os": "Microsoft Windows 10.0.19045",
+    "runtime": ".NET 10.0.10",
+    "architecture": "X64",
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    },
+    "debuggerAttached": false
+  },
+  "peakWorkingSetBytes": 117731328,
+  "privateBytesAtExit": 12599296,
+  "fullManagedImageCopies": 0,
+  "candidate": "XTransStableInputSeparateRgbV1",
+  "stageTimesMs": {
+    "OpenFile": 1.7154,
+    "Unpack": 95.2315
+  },
+  "debuggerAttached": false
+}

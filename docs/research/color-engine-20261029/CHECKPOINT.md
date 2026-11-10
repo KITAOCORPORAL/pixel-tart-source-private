@@ -1,3 +1,9 @@
+# 当前检查点：stable-input公司原生已就绪，候选批次停止（2026-11-10）
+
+从ea081ecb接续，既有MSVC/OpenMP一次编译DLL157BBA02...8FDC67F，candidate source f11b4e4b/header ce42保持；原生ABI/布局/生命周期/真实native默认参数全字段自检通过。首次真实候选进程PID28684消耗first槽，Open1/Unpack1后新增计时回执CreateNew文件冲突，Process/Memory0，P5/serial/P6未生成。此为宿主journal错误，不能判候选数学失败。已修复为退出时单次汇总并无RAW验证连续scope及异常保留，预算12/metrics10合成检查通过；没有追加RAW。账本consumed1/remaining1但STOP_AFTER_FAILURE使launchAllowed=false，旧五份消费证据hash不变。两份旧P6完整hash核验可用，所有候选pair/基线差异/插值RSS字段UNKNOWN。暂不进入产品回归，V1封存。见stable-input-v1-company-20261110/REPORT.md、OUTCOME和MISSING_COMPARISON。取得两份成功输出需明确新独立批次授权，不回滚失败slot。
+
+---
+
 # 当前检查点：稳定输入独立修复候选V1（2026-11-09，Asia/Shanghai）
 
 从701306788438c1d295541479ea0b1359e7cc85d8独立接续research/raw-xtrans-stable-input-v1-20261109。H1局部消费机制已支持，不再抓同窗；实现唯一XTransStableInputSeparateRgbV1：parallel内原image只读、RGB3输出独立，join后提交，slot3/原border8顺序保留。原插值公式/质量/512/496分块/schedule(dynamic)不改，原worker仅地址重定向，逆归一文本0差。

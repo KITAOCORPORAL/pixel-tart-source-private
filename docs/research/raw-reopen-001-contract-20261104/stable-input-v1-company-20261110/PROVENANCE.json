@@ -1,0 +1,134 @@
+{
+  "nativeBuildFlags": "/EHsc /MP /MD /I. /DWIN32 /O2 /W0 /nologo /openmp /DLIBRAW_BUILDLIB; DLL /LD",
+  "sameOptionalComponentsAsOriginalDiagnostic": true,
+  "productionEquivalent": false,
+  "compilerSha256": "FE251EF50A1545B1B0835EE17B1E785459712B38D79E45B5C1D3D28970A36619",
+  "sdk": "E:\\Windows Kits\\10\\",
+  "files": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\native-build\\compiler-version.log",
+      "bytes": 1062,
+      "sha256": "27E642A15911D656108E52C44D4D36C8E528EEBB50676F086ACD840F32AA24A9"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\native-build\\native-build.log",
+      "bytes": 14125,
+      "sha256": "05839183681E209E7F26C8777E06B844A785B542329DC2175601FEAE5F2AF443"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\native-build\\native-pe.log",
+      "bytes": 52644,
+      "sha256": "5436ACA5B78EA1A4720832893F098536DF1DA01852E26777F92940F1C40FA395"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\DEVELOPER_SHELL.json",
+      "bytes": 905,
+      "sha256": "E53571A2EA95AA037D70A5ED368CA1E5F0E6A256C9CF2B972979CC516C7AB90B"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest-timerfix-final\\loaded-native.json",
+      "bytes": 564,
+      "sha256": "9FFCA7F5FD33F81913E24BBBEE408A980C2BAC96B8A0B6CA8BEB0CE8585F30E3"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest-timerfix-final\\post-test-loaded-dependencies.json",
+      "bytes": 10114,
+      "sha256": "C8A372473949829FA1FB5225BBF2E901A53F55D9C079F35A02D3A6383D8D4D0A"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\NO_RAW_MANIFEST_TIMERFIX_FINAL.json",
+      "bytes": 48053,
+      "sha256": "50500E98F7F014BD56218D31ADA374E9D2965B4EE169FC1034110C2E3CF1A77B"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\FAILED_RUN_IDENTITY_READBACK.json",
+      "bytes": 106508,
+      "sha256": "03A2717D1016F8E17C5899C4560C34F04DB05E994430484ED59F306E737940FD"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-host-source\\Program.cs",
+      "bytes": 15592,
+      "sha256": "00F914F19A92795B83B28D2C59A148742D4916899514F81B369112C995D8070C"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\failed-raw-source\\Program.cs",
+      "bytes": 15659,
+      "sha256": "05365E70435AB44ADBF54A166F3813FCBFCEF2F847B060F55BF4ECA233192C2F"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime\\RawStableCandidateHost.dll",
+      "bytes": 57344,
+      "sha256": "5F6B1E13E9A1248EEC53D1D8D5C4FAC0971D1DF9470A8A6241E69624A25BBD28"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\runtime-timerfix-final\\RawStableCandidateHost.dll",
+      "bytes": 60416,
+      "sha256": "2495E225B1864CB0363E2C681865AAEE63D1392BEE778ED3FBD1185226BBF625"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\AUTHORIZATION.txt",
+      "bytes": 483,
+      "sha256": "E78EE2B1B9BABC02DF38B561F72A56B2B4BD253B6BB625BD08B23AED8769F105"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\EXECUTION_MANIFEST.json",
+      "bytes": 60425,
+      "sha256": "3D11B5F0CA729A31B23DFEF926ACAEAE5FD9C6597029D0DC0789A56248E32B7E"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest\\result.json",
+      "bytes": 1132,
+      "sha256": "44F02E988B646FB6699A5BB8C71E0E51BBBDAF58ADB9E06912F40B3A2190D61B"
+    }
+  ],
+  "finalSourceFiles": [
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\.gitattributes",
+      "sha256": "A79691A93B46E49CE460C26EF22AFCC03D6ECA1E63BF2EDBC20E96159510F6C9"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\analyze_candidate.py",
+      "sha256": "2A1D9014277E9395E20B763B263C7DA8F3E30CFA1D46E295974F5B87763A5615"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Budget.Tests.mjs",
+      "sha256": "7792FF416A8F99F6AA0B381FE544162B91460C8944B614EEB75C1560079BE31B"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\CandidateBatch.mjs",
+      "sha256": "2D9F0F07C51893CDFA6C04F4DE770808B23F193EBAB5C783F74FED917ACD84F2"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\freeze_execution.py",
+      "sha256": "8D4C769AC1CE2B984EC35B0D16807C43CA9DF0FA7350BAF406F1F502FC53BE40"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\metrics.py",
+      "sha256": "8B6E7524D2CB7A7112CAC1D0F6B565378D10593CB310E3789CF3C2480754B212"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Metrics.Tests.py",
+      "sha256": "6FEDBA3E8EF710DF01E5E36C588C1A348F9FC85C55E86170468AE9E538F5E7C3"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Program.cs",
+      "sha256": "B336841889A0FC084C49342123085FEA2CECBC41BE8F532A3C74049DCA910738"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\RawStableCandidateHost.csproj",
+      "sha256": "81384F30BF1DD740ED54FBDE55ED983CA123F627332D1BD8D5BC6DE78256F40E"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\ReviewedCompare.mjs",
+      "sha256": "A377B06754B780691533D386FE325FE1148CE3E164DE2DE24698A13A2A5FBEF7"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Run-CandidateBatch.ps1",
+      "sha256": "DF50A0C82767F8DFB66A3E7F55128A5A5E5830B4517C04AC56E966C0861F3FA0"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\SOURCE_ADAPTATION.md",
+      "sha256": "D229AE46243B88DE787DF8D0AE85AEDEF5854611D4AAEA396D7293E805E3F30D"
+    }
+  ]
+}

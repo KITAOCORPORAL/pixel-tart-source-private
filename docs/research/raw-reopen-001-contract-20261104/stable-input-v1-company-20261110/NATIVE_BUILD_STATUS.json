@@ -1,0 +1,19 @@
+{
+  "version": "XTransStableInputSeparateRgbV1",
+  "status": "NATIVE_BUILT_PENDING_NO_RAW_HOST_SELFTEST_AND_NEW_TWO_PROCESS_BATCH",
+  "rawCalls": 0,
+  "debuggerRuns": 0,
+  "nativeBuildAttempts": 1,
+  "tools": {
+    "cl.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\cl.exe",
+    "nmake.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe",
+    "dumpbin.exe": "E:\\BuildTools\\VS2022-RR001\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\dumpbin.exe"
+  },
+  "source": "E:\\Guangjing-RawReopen001-StableV1-20261110\\candidate-source",
+  "preparationSha256": "434772E650FE40837992ED2B9CE62EC1AB40A42290720892E0C31F10B5BD797B",
+  "flags": "Original Makefile.msvc DLL target and COPT_OPT=/openmp, no optional component change",
+  "productionEquivalent": false,
+  "reason": "Candidate diagnostic source only; not product package",
+  "nativePath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\candidate-source\\bin\\libraw.dll",
+  "nativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F"
+}

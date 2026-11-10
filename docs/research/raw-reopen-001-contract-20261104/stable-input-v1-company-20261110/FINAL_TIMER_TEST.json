@@ -1,0 +1,16 @@
+{
+  "protocol": "AggregateOnceV2",
+  "unit": "ms",
+  "scope": "Managed API boundaries; DcrawProcess includes native stage capture hash/IO",
+  "times": {
+    "NoRawTimerA": 0.0248,
+    "NoRawTimerB": 0.0161,
+    "NoRawTimerThrows": 0.1667
+  },
+  "actionReturned": {
+    "NoRawTimerA": true,
+    "NoRawTimerB": true,
+    "NoRawTimerThrows": false
+  },
+  "internalP5SerialP6ExclusiveTiming": "NOT_INSTRUMENTED_UNCHANGED_PINNED_HEADER"
+}

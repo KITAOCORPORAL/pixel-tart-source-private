@@ -1,0 +1,61 @@
+{
+  "note": "Original local bytes may carry BOM/CRLF; Git text copies use LF, semantic equality verified.",
+  "files": [
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/NATIVE_BUILD_STATUS.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\native-build\\BUILD_STATUS.json",
+      "originalBytesSha256": "33dc6ac89b2f638233b7b713afbe1c09136a8ba1665e34fb1e62362371d904f5",
+      "gitBlobSha256": "caa254faf82fe34afc0777fc498d64295680661ef969e4a600ae5848088bdcef",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_NO_RAW_SELFTEST.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest-timerfix-final\\NO_RAW_SELF_TEST.json",
+      "originalBytesSha256": "d81af6454ada43547241a7e61a9d88ae878c72edcc6c8033cc1e9850934d04c3",
+      "gitBlobSha256": "a7bcf5974ccfc378c0dce0a4974c3ba22e366466d6d7cc91b7160f6be6f33882",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_NO_RAW_RESULT.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest-timerfix-final\\result.json",
+      "originalBytesSha256": "686ccc956c2cfc0fb19b0c66163ed130391b42923e3433892a16a6a09a4ed049",
+      "gitBlobSha256": "df17a6fa20dd9d2b1e45cf7c0e0754c02eed38d42030daf9f6b3814bacd9d24b",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FINAL_TIMER_TEST.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\no-raw-selftest-timerfix-final\\stage-times.json",
+      "originalBytesSha256": "c5f6809aaf1ef58045bb5746a2d5365600418bf66d2905b4ab4834de63298ad2",
+      "gitBlobSha256": "883fe9c021c2d17bc4b6ef11ccda8decd8847ec297397054425660cbcf8251ca",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/FAILED_PROCESS_RESULT.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\pair\\first\\result.json",
+      "originalBytesSha256": "14bc0c6c7a22692b73477e9350bb51dd5e4e51144463fbe213cebd6a6ba60deb",
+      "gitBlobSha256": "2f4e0baaa9b609679a2da1855b5dca7d91028d532ac01fea11e96c8cd3642ecf",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/CONSUMED.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\ledger\\first.consumed",
+      "originalBytesSha256": "ced1e3137b3a9094145eb9e80fd783b9ffa16e677c91878b9e9e4f0190cf4494",
+      "gitBlobSha256": "ced1e3137b3a9094145eb9e80fd783b9ffa16e677c91878b9e9e4f0190cf4494",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/STOP_AFTER_FAILURE.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\ledger\\STOP_AFTER_FAILURE.json",
+      "originalBytesSha256": "49cac6d30dea56c32f886eee5b31fc6014d6bd426de54b73dda39200f54dbe69",
+      "gitBlobSha256": "49cac6d30dea56c32f886eee5b31fc6014d6bd426de54b73dda39200f54dbe69",
+      "semanticJsonEqual": true
+    },
+    {
+      "gitPath": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-company-20261110/STORED_BASELINE_IDENTITIES.json",
+      "localOriginalPath": "E:\\Guangjing-RawReopen001-StableV1-20261110\\STORED_BASELINE_IDENTITIES.json",
+      "originalBytesSha256": "ebfff45cd9e7840d8b4614a063cb5260b5807b45cb6ccd3c89abf5454815b839",
+      "gitBlobSha256": "1d74b7af2594aaba54c8e4c6339ce384355e49758e0affffd3886fb65b709f17",
+      "semanticJsonEqual": true
+    }
+  ]
+}
