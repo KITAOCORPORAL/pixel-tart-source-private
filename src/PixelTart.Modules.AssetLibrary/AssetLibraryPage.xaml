@@ -1048,6 +1048,7 @@
                         <TextBlock Text="{Binding InspectorAssetOrigin, StringFormat=素材来源：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" />
                         <TextBlock Text="{Binding SelectedAsset.SourcePath, StringFormat=路径：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}" TextTrimming="CharacterEllipsis"
                                    AutomationProperties.AutomationId="AssetInspectorSourcePath" AutomationProperties.Name="素材路径" />
+                        <Button Content="打开原网页" Command="{Binding OpenCapturedPageCommand}" AutomationProperties.AutomationId="OpenCapturedSourcePage" AutomationProperties.Name="打开采集原网页" Style="{DynamicResource PixelTart.Button.Ghost}" HorizontalAlignment="Left" Margin="0,6" />
                         <TextBlock Text="{Binding InspectorFileSize, StringFormat=文件大小：{0}}" Style="{DynamicResource PixelTart.Type.Metadata}"
                                    AutomationProperties.AutomationId="AssetInspectorFileSize" AutomationProperties.Name="文件大小" />
 

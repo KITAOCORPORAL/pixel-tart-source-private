@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import{parseSrcset,chooseOriginal,validateReceipt}from'../../extensions/guangjing-chrome/source.mjs';
+const page='http://127.0.0.1:51291/srcset.html';
+assert.equal(parseSrcset('/s.jpg 320w, /o.jpg 1600w',page)[1].rank,1600);
+assert.equal(chooseOriginal({pageUrl:page,clickedUrl:'http://127.0.0.1:51291/s.jpg',images:[{currentSrc:'http://127.0.0.1:51291/s.jpg',srcset:'/s.jpg 320w, /o.jpg 1600w'}]}).imageUrl,'http://127.0.0.1:51291/o.jpg');
+assert.equal(chooseOriginal({pageUrl:page,clickedUrl:'http://127.0.0.1:51291/s.jpg',images:[{currentSrc:'http://127.0.0.1:51291/s.jpg',srcset:'/s.jpg 1x, /o.jpg 2x'}]}).sourceSelection,'srcset-2x');
+assert.throws(()=>parseSrcset('/s.jpg 320w, /o.jpg 2x',page));
+assert.throws(()=>chooseOriginal({pageUrl:page,clickedUrl:'http://127.0.0.1:51291/s.jpg',images:[{currentSrc:'http://127.0.0.1:51291/s.jpg',srcset:'/s.jpg 320w, /o.jpg 1600w'},{currentSrc:'http://127.0.0.1:51291/s.jpg',srcset:'/s.jpg 320w, /another.jpg 1600w'}]}));
+const row={id:'capture',destination:{libraryId:'library',projectId:'project',boardId:null},contentSha256:'a'.repeat(64)};
+const receipt={captureId:'capture',libraryId:'library',projectId:'project',boardId:null,assetId:'11111111-1111-1111-1111-111111111111',contentSha256:'a'.repeat(64),outcome:'Imported'};
+assert.equal(validateReceipt(row,{ok:true,code:'Completed',receipt}).assetId,receipt.assetId);
+assert.throws(()=>validateReceipt(row,{ok:true,code:'Completed',receipt:{...receipt,projectId:'another'}}));
+assert.throws(()=>validateReceipt(row,{ok:true,code:'Completed',receipt:{...receipt,contentSha256:'b'.repeat(64)}}));
+assert.throws(()=>validateReceipt(row,{ok:true,code:'Completed',receipt:{...receipt,assetId:null}}));
+console.log('Source choice and strict actual-asset receipt guards: 9 PASS');

@@ -423,6 +423,7 @@ public partial class App : Application
 #endif
             window.ContentRendered+=(_,_)=>{_startupWindow?.Complete();_startupWindow=null;};
             window.Show();
+            StartBrowserCaptureBridge();
             await ColorStudioAcceptanceFixture.LoadAsync(_mainViewModel, window);
             await _compositionRoot.BookingReminderScheduler.StartAsync();
             _logService.Info($"{Branding.ProductName}已启动。");
@@ -448,6 +449,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+        _capturePipe?.Dispose();
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE
         CompleteP3AutomatedExit(e);
 #else

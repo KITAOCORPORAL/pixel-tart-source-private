@@ -143,4 +143,5 @@
   <ItemGroup><PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" /></ItemGroup>
   <ItemGroup><None Update="ThirdPartyNotices/OpenXML-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
 <ItemGroup><Content Include="../RAWSelectionAssistant.Core/Services/Projects/LightTablePort/LICENSE-LightTable-MIT.txt" Link="Licenses/LightTable-MIT.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="..\PixelTart.BrowserCapture.Contracts\PixelTart.BrowserCapture.Contracts.csproj" /></ItemGroup>
 </Project>
