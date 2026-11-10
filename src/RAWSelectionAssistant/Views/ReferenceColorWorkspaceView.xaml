@@ -149,6 +149,7 @@
     <Button x:Name="ContextRailButton" Content="{views:StudioText AuxPanel}" Click="OnToggleAuxRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <views:StudioExportMenu Margin="8,0,0,0" />
     <Button Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
+    <TextBlock Text="{Binding DecoderDiagnosticStatus}" Margin="8,0,0,0" VerticalAlignment="Center"><TextBlock.Style><Style TargetType="TextBlock"><Style.Triggers><DataTrigger Binding="{Binding DecoderDiagnosticStatus}" Value=""><Setter Property="Visibility" Value="Collapsed" /></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
    </WrapPanel>
   </Grid>
   <Grid IsEnabled="{Binding InstantEditingAllowed}" x:Name="WorkspaceGrid" Grid.Row="1">

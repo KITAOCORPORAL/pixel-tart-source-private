@@ -70,6 +70,9 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
     string FilterScope = "All", int MinimumRating = 0, string ColorLabelFilter = "All", int Version = 1,
     ColorStudioLayout? Layout = null)
 {
+    // Diagnostic decode request only; old recipes/schema and normal saves stay unchanged.
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public string? DiagnosticRawDecoderIdentity {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
     public bool EmbeddedVersionsAuthoritative {get;init;}
     public ColorStudioSessionDocument Normalize()

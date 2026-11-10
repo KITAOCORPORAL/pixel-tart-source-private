@@ -47,8 +47,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task SaveSessionAsync(string path,CancellationToken token=default)
     {
         if(IsFilmTaskRunning||filmRequestPending)throw new InvalidOperationException("胶片任务正在计算；完成或取消后再保存项目。");
+        using var diagnosticSave=RAWSelectionAssistant.Services.Diagnostics.DiagnosticProductOperation.Begin("DarkroomSave");
         await _projectSaveGate.WaitAsync(token);
-        try{await SaveSessionCoreAsync(path,token);}finally{_projectSaveGate.Release();}
+        try{await SaveSessionCoreAsync(path,token);diagnosticSave.Complete();}finally{_projectSaveGate.Release();}
     }
     private async Task SaveSessionCoreAsync(string path, CancellationToken token = default)
     {
@@ -60,7 +61,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput){VariantsExpanded=item.VariantsExpanded}).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
-            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true};
+            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true,DiagnosticRawDecoderIdentity=diagnosticRawEnabled?RAWSelectionAssistant.Services.Diagnostics.XTransStableDiagnostic.CandidateId:loadedDiagnosticDecoderIdentity};
         path=Path.GetFullPath(path);
         if(Targets.Any(t=>string.Equals(Path.GetFullPath(t.Path),path,StringComparison.OrdinalIgnoreCase)))throw new IOException("不能将工作文件保存到源照片路径。");
         // Session embeds its versions as one portable snapshot. Repository persistence is an
@@ -75,9 +76,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
+        using var diagnosticOpen=RAWSelectionAssistant.Services.Diagnostics.DiagnosticProductOperation.Begin("DarkroomProjectReopen");
         ResetViewingFilmCompletion();
         CancelLightPrintTask(true);await LightPrintPreviewWork;ClearPhotographerPreviews();await StopComparisonAsync();
-        if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
+        if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);diagnosticOpen.Complete();return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting||IsFilmTaskRunning||filmRequestPending)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");ReleaseViewing();
         using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);
         _sessionPreparationCancellation=preparation;token=preparation.Token;
@@ -108,9 +110,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(fingerprint!=await ColorStudioSessionStore.FingerprintAsync(path,token))throw new IOException("项目在移交前改变，工作区未修改。");
         if(_disposed||!ReferenceEquals(ActiveTarget,expectedActive)||expectedRevision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException("项目准备期间工作区已改变。",token);
         await LoadSessionCoreAsync(path,token,document,staged);
+        RestoreDiagnosticDecoderRequest(document.DiagnosticRawDecoderIdentity);
         UpdateComparisonAvailability();
         _sessionFingerprints[Path.GetFullPath(path)]=fingerprint;
         _r53SavedRevision = _r53EditRevision; _r53Autosave.Stop(); R53SaveStatus = "已保存"; OnPropertyChanged(nameof(R53SaveStatus));
+        diagnosticOpen.Complete();
         }
         finally{_sessionPreparationCancellation=null;_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}
     }

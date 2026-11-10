@@ -186,7 +186,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         _matchV4Executor = matchV4Executor;
         _assetRepositoryFactory = assetRepositoryFactory;
-        _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? new LibRawDecoder());
+        diagnosticRawEnabled=rawDecoder is null&&RAWSelectionAssistant.Services.Diagnostics.XTransStableDiagnostic.Enabled;
+        _rawPipeline = new RawMatchTiff16ProductPipeline(rawDecoder ?? RAWSelectionAssistant.Services.Diagnostics.XTransStableDiagnostic.Create());
         InitializeFilmstrip();
         InitializeSessionCommands();
         Editor = new TetherReferenceModeViewModel(
@@ -762,11 +763,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             StatusText="请选择要导入的照片；文件选择窗口已打开。";
             var paths = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入待调色照片（源文件只读）"], StudioLocalizationService.Current["ImagesRaw"] + "|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.cr2;*.cr3;*.nef;*.arw;*.raf;*.rw2;*.orf;*.dng;*.pef;*.nrw;*.ori;*.3fr;*.fff;*.iiq;*.srw;*.rwl;*.x3f", true);
             if(paths.Count==0){StatusText="已取消导入；现有照片和调整保持不变。";return;}
+            using var diagnosticOperation=RAWSelectionAssistant.Services.Diagnostics.DiagnosticProductOperation.Begin("DarkroomImport");
             IsLoading=true;
             var items=paths.Distinct(StringComparer.OrdinalIgnoreCase).Select(GetOrCreateTarget).ToArray();
             using var gate=new SemaphoreSlim(3,3);
             await Task.WhenAll(items.Select(async item=>{await gate.WaitAsync();try{await LoadThumbnailAsync(item,CancellationToken.None);}finally{gate.Release();}}));
             if(items.Length>0){items[0].IsSelected=true;await ActivateTargetAsync(items[0]);}
+            if(items.Length>0&&items.All(i=>i.Status!=ReferenceTargetStatus.Failed)&&ActiveTarget is not null)diagnosticOperation.Complete();
         }
         catch(Exception error)when(error is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or System.Runtime.InteropServices.COMException or System.ComponentModel.Win32Exception)
         {
@@ -785,6 +788,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
         var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder(items.Any(x=>x.RawDefinition?.ColorState is not null)?$"导出 {items.Count} 张 · 实际ICC：{string.Join(" / ",items.Select(x=>x.RawDefinition?.ColorState?.Output.Label??"sRGB").Distinct())}":StudioLocalizationService.Current.Format("QuickExportTitle", items.Count, string.Join(" / ", items.Select(x => StudioQuickExport.Extension(x.Path,format).TrimStart('.').ToUpperInvariant()).Distinct())), null) : acceptanceDirectory);
         if (directory is null) return;
+        using var diagnosticExport=RAWSelectionAssistant.Services.Diagnostics.DiagnosticProductOperation.Begin("DarkroomTiffExport");
         _lastExportDirectory = directory;
         _lastExportFormat = format;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
@@ -859,6 +863,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             }
             ExportFailureSummary = failed.Count == 0 ? "" : StudioLocalizationService.Current.Format("ExportFailures", failed.Count, string.Join(", ", frozen.Where(entry => entry.Item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial).Select(entry => entry.Item.FileName + " (" + StudioLocalizationService.Current[entry.Item.Error ?? ""] + ")")));
             SetStatus("ExportFinished", ExportCompleted - failed.Count, failed.Count);
+            if(failed.Count==0)diagnosticExport.Complete();
         }
         catch (OperationCanceledException) { SetExportStatus("ExportStopped", ExportCompleted, ExportTotal); StatusText = "已停止导出；已完成文件保留，未完成文件已清理。"; }
         finally { _exportCancellation.Dispose(); _exportCancellation = null; RaiseExportCommands(); }

@@ -50,6 +50,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+#if XTRANS_STABLE_INPUT_V1_DIAGNOSTIC
+        Title += " · XTrans 隔离诊断";
+#endif
 #if MODULAR_HARNESS_DEV_PREVIEW
         Title = "光镜 [Modular Harness Dev]";
 #endif
