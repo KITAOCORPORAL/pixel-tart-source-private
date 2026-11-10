@@ -1,0 +1,147 @@
+{
+  "recordedAtUtc": "2026-11-10T07:50:03.202556+00:00",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "companyRoot": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "assets": [
+    [
+      "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+      "srcset-original-1600.jpg",
+      "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      1600,
+      1200,
+      "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01\\Capture-Test.ptlibrary\\assets\\managed\\486ffaf3379b4ad49c51ce7bfbb9e7f2_srcset-original-1600.jpg"
+    ],
+    [
+      "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "ordinary-640.jpg",
+      "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      640,
+      480,
+      "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01\\Capture-Test.ptlibrary\\assets\\managed\\88490206e6c54597973d4a1042abbfb7_ordinary-640.jpg"
+    ]
+  ],
+  "projectLinks": [
+    [
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+      "reference"
+    ],
+    [
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "reference"
+    ]
+  ],
+  "projects": [
+    [
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "采集项目 A",
+      0
+    ],
+    [
+      "cecefe53-6e46-499d-9560-c6eddaf0813b",
+      "待失效测试项目",
+      0
+    ],
+    [
+      "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+      "采集项目 B",
+      0
+    ]
+  ],
+  "boards": [
+    [
+      "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "采集灵感板 A",
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      0
+    ]
+  ],
+  "boardLinks": [
+    [
+      "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2"
+    ],
+    [
+      "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "88490206-e6c5-4597-973d-4a1042abbfb7"
+    ]
+  ],
+  "assetCount": 2,
+  "projectLinkCount": 2,
+  "boardLinkCount": 2,
+  "ordinaryAssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+  "srcsetAssetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+  "temporaryProjectId": "cecefe53-6e46-499d-9560-c6eddaf0813b",
+  "temporaryProjectReady": true,
+  "temporaryProjectArchived": false,
+  "registryMatchesActualPackage": true,
+  "desktopNativeReadiness": {
+    "ok": true,
+    "code": "Ready",
+    "message": "请选择明确目的地。",
+    "destinations": {
+      "libraries": [
+        {
+          "id": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+          "name": "浏览器采集测试库"
+        },
+        {
+          "id": "c8a508bc-a91b-417b-826e-e6b76c12a614",
+          "name": "第二测试库"
+        }
+      ],
+      "projects": [
+        {
+          "id": "cecefe53-6e46-499d-9560-c6eddaf0813b",
+          "name": "待失效测试项目"
+        },
+        {
+          "id": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+          "name": "采集项目 B"
+        },
+        {
+          "id": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+          "name": "采集项目 A"
+        }
+      ],
+      "boards": [
+        {
+          "id": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+          "name": "采集灵感板 A"
+        }
+      ]
+    },
+    "receipt": null,
+    "retryable": false
+  },
+  "httpFixtures": [
+    {
+      "path": "/ordinary.html",
+      "status": 200,
+      "sha256": "1ffbc9f925b51c830fd23bddc968253bb0d26ddc45c7e9eeeffc23453d8be866"
+    },
+    {
+      "path": "/srcset.html",
+      "status": 200,
+      "sha256": "9e0a43bd67a66abf2e30318e6c5b80322b886a1e8e9e6f02ea3f3bebc708610b"
+    },
+    {
+      "path": "/unavailable.html",
+      "status": 200,
+      "sha256": "bf1d646bbc89e9860ff99e65e46da1a44510745e0811453f42a34a827908d1e4"
+    },
+    {
+      "path": "/srcset-original-1600.jpg",
+      "status": 200,
+      "sha256": "6ed3adb68235721c463d4e0ed1db7e760bdf8d5b4a0d96adf7eeffaa0c7bfe59"
+    },
+    {
+      "path": "/denied-original-2400.jpg",
+      "status": 403,
+      "sha256": "d32bce6e2af1e8ea06b152438bc111a83227b364c94ba863b029c48f4db9ed88"
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+## 2026-11-10 真实Chrome五项验收准备（Asia/Shanghai）
+- 接续fb37c703，冻结产品ed5d15d4/安装a3c4a35c不变。查到更新srcset真实回执31acf2cd，AssetId486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2；库尺寸和托管JPEG均1600×1200，hash等声明原图且不等320缩略图，实际Chrome页currentSrc仍320候选，已保留不要求重发；只待用户补界面提示。
+- company01基线2素材/2项目关联/2板引用，A/B及未使用临时“待失效测试项目”有效。51292三静态页200、原图1600可读、故意失败最高候选403；步骤4另备51293/pending.html专用未入库960×640新图，用来验证关闭期间IDB保留与同项重试新增仅1份。
+- 操作短清单docs/validation/chrome-capture-five-case-20261110/USER_ACTIONS.md。先让用户回报1、2、3A、3B；4必须由代理关闭/重开桌面后分两次用户操作，5必须用户先选临时目标不发送、代理使其失效后再直接发送（不能刷新目标）。代理承担启动/核验/SQL/文件哈希，不动现有队列。
+- 协调工具tools/chrome-capture/real_chrome_round.py只作用明确隔离根，Native目录probe单列。原始本轮位置见本地CHROME_FIVE_CASE_ROUND.json，界面反馈只用实际用户原文，不能拿协议模拟代替。当前PREPARED_WAITING_USER_REAL_CHROME_UI_FEEDBACK，五项最终回执未签发；批量侧栏在五项全过前不启动。产品源码未变，无需重建诊断包。
+
 ## 2026-11-10 公司Chrome普通JPEG真实单图已入库（Europe/Berlin）
 - 用户反馈“已发送”，company01真实journal Completed采集287b50b2-74be-4aeb-856a-b5e5ea6a36b4；实际AssetId 88490206-e6c5-4597-973d-4a1042abbfb7，测试库/项目A/板A关联读回一致。640×480原始JPEG与托管副本SHA相同，库总1条/同hash1条，没有用机器探针成果代替。
 - 旧保留ID39cdab10在桌面未提交；本次是实际新完成的287b50b2，以真实记录为准，没有重写旧ID/清队列/重载扩展。桌面PID4280实际原生按钮打开原网页，公司Chrome标签1541117533显示匹配URL和640×480图。
