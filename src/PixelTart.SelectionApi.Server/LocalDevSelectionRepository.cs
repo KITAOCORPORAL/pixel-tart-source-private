@@ -38,6 +38,8 @@ public sealed class LocalDevSelectionRepository:IDisposable
  public Task<SelectionProgressResponse> Progress(Guid id,string token,CancellationToken ct)=>State(db=>Task.FromResult(ProgressOf(Auth(db,id,token))),ct:ct);
  public Task<bool> Delete(Guid id,Guid asset,string token,CancellationToken ct)=>State(db=>{var p=Auth(db,id,token);if(p.Locked||p.Status=="Published")throw Fail(409,"SelectionLocked","Unpublish before deleting a cloud copy.");p.Assets.Remove(asset);p.Revision++;return Task.FromResult(true);},true,ct);
  public async Task<string> Media(string pub,Guid asset,string token,string variant,CancellationToken ct){var p=await Client(pub,token,ct);if(!p.Assets.TryGetValue(asset,out var a))throw Fail(404,"AssetNotFound","Asset is not in this album.");return variant switch{"thumb"=>a.Thumb,"preview"=>a.Preview,_=>throw Fail(404,"VariantNotFound","Variant unavailable.")};}
+ // Customer and owner views share the persisted confirmation identity. Names still follow the customer rule.
+ public static LocalDevPublicProjectResponse PublicView(StoredProject p)=>new(Project(p),RuleOf(p),ProgressOf(p),p.Locked){Confirmation=p.Locked?Snapshot(p,true):null};
  public static SelectionProjectResponse Project(StoredProject p)=>new(p.Id,p.PublicId,p.Name,p.Status,p.Target,p.Deadline){ClientDisplayName=p.Client,SelectionVersion=p.Version,Revision=p.Revision};
  static LocalDevAssetUploadResponse Uploaded(StoredProject p,StoredAsset a)=>new(p.Id,a.Id,null,a.Name,"Ready",a.Bytes,0,0,p.Version,p.Revision){UploadSha256=a.UploadSha};
  static SelectionMutationResponse Mutation(StoredProject p,Guid? asset)=>new(p.Id,asset,p.Version,p.Revision,p.Locked,DateTimeOffset.UtcNow);

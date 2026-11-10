@@ -1,0 +1,21 @@
+{
+  "baseline": "8e447075301074fd1a3c966b34ec64635dd72eb2",
+  "reference": "c36e1f38323bdb11bf4f731421893ff5cabfce00",
+  "referenceProduct": "feef4bc25a13d26a297bad39af99f3332bf9ce25",
+  "strategy": "Selective behavior port; preserve transport-free Core and baseline desktop architecture",
+  "sourceFiles": [
+    {
+      "path": "src/PixelTart.SelectionApi.Server/wwwroot/selection.js",
+      "gitBlob": "15b1d578db18ea20ce7d727fc99287c222622747"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Server/LocalDevSelectionRepository.cs",
+      "gitBlob": "6f4419225df85c442b522b1ba115daa1cc5c1fa4"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Contracts/SelectionApiContracts.cs",
+      "gitBlob": "846450ddf6a659d0b0c067c96044ad04772ce53b"
+    }
+  ],
+  "otherBranchesPreserved": true
+}

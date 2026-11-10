@@ -48,7 +48,10 @@ public sealed record SelectionAssetPageResponse(IReadOnlyList<SelectionAssetResp
 public sealed record SelectionAssetResponse(Guid SelectionAssetId, Guid? SourceAssetId, string OriginalFileName, string? ThumbUrl, string? PreviewUrl, string Status, int SortOrder){ public bool Selected {get;init;} public bool Favorite {get;init;} }
 public sealed record LocalDevCreateProjectResponse(SelectionProjectResponse Project, string DevAccessToken);
 public sealed record LocalDevPublishResponse(Guid ProjectId, string PublicId, string DevAccessToken, int SelectionVersion, long Revision, bool IsLocked);
-public sealed record LocalDevPublicProjectResponse(SelectionProjectResponse Project, SelectionRuleResponse Rule, SelectionProgressResponse Progress, bool IsLocked);
+public sealed record LocalDevPublicProjectResponse(SelectionProjectResponse Project, SelectionRuleResponse Rule, SelectionProgressResponse Progress, bool IsLocked)
+{
+    public FinalSelectionSnapshotResponse? Confirmation { get; init; }
+}
 public sealed record SelectionRuleResponse(int TargetCount, int MinimumCount, int MaximumCount, bool AllowExtraSelections, bool AllowComments, bool AllowFavorites, bool AllowDownload, bool ShowFileNames, bool ApplyWatermark, DateTimeOffset? DeadlineUtc, bool RequirePin, bool LockAfterConfirmation);
 public sealed record UpsertSelectionRuleRequest(int TargetCount, int MinimumCount, int MaximumCount, bool AllowExtraSelections, long ExtraSelectionPriceMinor, bool AllowComments, bool AllowFavorites, bool AllowDownload, bool ShowFileNames, bool ApplyWatermark, DateTimeOffset? DeadlineUtc, bool RequirePin, bool LockAfterConfirmation);
 public sealed record SelectionMutationResponse(Guid ProjectId, Guid? SelectionAssetId, int SelectionVersion, long Revision, bool IsLocked, DateTimeOffset UpdatedAtUtc);

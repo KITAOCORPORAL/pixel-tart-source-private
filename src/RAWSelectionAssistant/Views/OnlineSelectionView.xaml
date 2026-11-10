@@ -41,8 +41,8 @@
                         </TextBlock>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" />
-                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" HorizontalAlignment="Right" />
+                        <CheckBox Content="已选" IsChecked="{Binding IsSelected}" IsEnabled="{Binding DataContext.CanEditLocalSelection, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                        <CheckBox Content="收藏" IsChecked="{Binding IsFavorite}" IsEnabled="{Binding DataContext.CanEditLocalSelection, RelativeSource={RelativeSource AncestorType=ItemsControl}}" HorizontalAlignment="Right" />
                     </Grid>
                 </Grid>
             </Border>
@@ -104,6 +104,8 @@
                             <ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/><TextBlock Text="{Binding SelectionSummary}" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
                             <TextBlock Text="{Binding UploadSummary}" AutomationProperties.AutomationId="OnlineUploadSummary" Style="{StaticResource SecondaryBodyText}" />
                             <TextBlock Text="{Binding StatusText}" AutomationProperties.AutomationId="OnlineOperationStatus" TextWrapping="Wrap" Style="{StaticResource SecondaryBodyText}" />
+                        <TextBlock Text="{Binding ConfirmationReceiptText}" TextWrapping="Wrap" AutomationProperties.AutomationId="OnlineConfirmationReceipt" Margin="8" />
+
                         </StackPanel>
                         <TextBlock Text="{Binding ProjectStatusText}" HorizontalAlignment="Right" Style="{StaticResource MinimumCaptionText}" Foreground="{DynamicResource PrimaryBrush}" VerticalAlignment="Center" />
                     </Grid>

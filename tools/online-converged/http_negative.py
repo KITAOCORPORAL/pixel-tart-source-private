@@ -1,0 +1,28 @@
+from pathlib import Path
+import sys,json,uuid,hashlib,time,datetime,urllib.request,urllib.error,urllib.parse
+root=Path('E:/Kitao-Deliveries/online-selection-converged-20261110');conn=json.loads(Path(sys.argv[1]if len(sys.argv)>1 else root/'dev-http01/PRIVATE_CONNECTION.json').read_text(encoding='utf-8-sig'));evidence=Path(sys.argv[2])if len(sys.argv)>2 else root/'dev07-app-evidence';pub=json.loads((evidence/'HTTP_PUBLISHED.json').read_text(encoding='utf-8-sig'));workspace=json.loads((Path(sys.argv[3])if len(sys.argv)>3 else root/'dev07-app-runtime/OnlineSelection/workspace.json').read_text(encoding='utf-8-sig'));project=workspace['Projects'][0];asset=workspace['Assets'][0];share=(evidence/'SHARE_LINK.secret.txt').read_text(encoding='utf-8-sig');client=urllib.parse.parse_qs(urllib.parse.urlsplit(share).fragment)['token'][0];rows=[]
+def call(method,path,body=None,token=None,headers=None,expected=200):
+ h=dict(headers or {});data=body
+ if body is not None and not isinstance(body,bytes):data=json.dumps(body).encode();h['Content-Type']='application/json'
+ if token:h['Authorization']='Bearer '+token
+ req=urllib.request.Request(conn['endpoint'].rstrip('/')+path,data=data,method=method,headers=h)
+ try:
+  with urllib.request.urlopen(req,timeout=15)as r:status=r.status;raw=r.read()
+ except urllib.error.HTTPError as e:status=e.code;raw=e.read()
+ code=None
+ try:value=json.loads(raw);code=value.get('code')if isinstance(value,dict)else None
+ except:value=None
+ rows.append({'method':method,'path':path,'status':status,'expected':expected,'code':code});assert status==expected,(path,status,raw[:300]);return value
+body={'name':project['Name'],'clientDisplayName':project['ClientDisplayName'],'targetCount':project['TargetCount'],'deadlineUtc':project['DeadlineUtc'],'clientProjectId':project['Id']};headers={'X-Owner-Key':conn['ownerKey'],'Idempotency-Key':'project:'+project['Id'].replace('-','')};again=call('POST','/v1/selection-projects',body,headers=headers);owner=again['devAccessToken'];id=project['Id'];public=again['project']['publicId'];before=call('GET',f'/v1/selection-projects/{id}/final-selection',token=owner)
+other=json.loads((Path(sys.argv[4])if len(sys.argv)>4 else root/'http-contract01/PRIVATE_OWNER.json').read_text(encoding='utf-8-sig'));otherProject=call('GET',f'/v1/selection-projects/{other["id"]}',token=other['owner'])
+call('GET',f'/v1/selection-projects/{other["id"]}',token=owner,expected=401)
+call('GET',f'/v1/selection-projects/{id}',token=client,expected=401)
+call('GET',f'/v1/client/selection/{otherProject["publicId"]}',token=client,expected=401)
+call('PUT',f'/v1/client/selection/{public}/choices/{asset["Id"]}',{'selected':False,'favorite':False,'expectedSelectionVersion':1,'expectedRevision':before['revision'],'operationId':str(uuid.uuid4())},client,expected=409)
+after=call('GET',f'/v1/selection-projects/{id}/final-selection',token=owner);assert before==after
+image=Path(asset['ProxyJpegPath']).read_bytes();sha=hashlib.sha256(image).hexdigest().upper();upload={'Content-Type':'image/jpeg','X-Original-File-Name':urllib.parse.quote(asset['OriginalFileName']),'X-Content-SHA256':sha,'Idempotency-Key':f'asset:{id.replace("-","")}:{asset["Id"].replace("-","")}:{sha}'}
+replayed=call('POST',f'/v1/selection-projects/{id}/assets/{asset["Id"]}/proxy',image,owner,upload);assert replayed['selectionAssetId']==asset['Id'];progress=call('GET',f'/v1/selection-projects/{id}/progress',token=owner);assert progress['total']==1
+expiryId=str(uuid.uuid4());expireBody={'name':'Expiration synthetic only','clientDisplayName':'test','targetCount':1,'deadlineUtc':None,'clientProjectId':expiryId};create=call('POST','/v1/selection-projects',expireBody,headers={'X-Owner-Key':conn['ownerKey'],'Idempotency-Key':'project:'+expiryId.replace('-','')});expiryOwner=create['devAccessToken'];expiryAsset=str(uuid.uuid4());upload2={**upload,'Idempotency-Key':f'asset:{expiryId.replace("-","")}:{expiryAsset.replace("-","")}:{sha}'};call('POST',f'/v1/selection-projects/{expiryId}/assets/{expiryAsset}/proxy',image,expiryOwner,upload2)
+rule={'targetCount':1,'minimumCount':0,'maximumCount':1,'allowExtraSelections':False,'extraSelectionPriceMinor':0,'allowComments':False,'allowFavorites':True,'allowDownload':False,'showFileNames':True,'applyWatermark':False,'deadlineUtc':None,'requirePin':False,'lockAfterConfirmation':True};expire=(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(seconds=3)).isoformat();grant=call('POST',f'/v1/selection-projects/{expiryId}/publish',{'rule':rule,'accessExpiresAtUtc':expire},expiryOwner);expiryClient=urllib.parse.parse_qs(urllib.parse.urlsplit(grant['protectedUrl']).fragment)['token'][0];call('GET',f'/v1/client/selection/{grant["publicId"]}',token=expiryClient);time.sleep(3.3);call('GET',f'/v1/client/selection/{grant["publicId"]}',token=expiryClient,expected=410);call('GET',f'/s/{grant["publicId"]}',expected=410)
+db=json.loads((Path(conn['root'])/'Data/selection-v1.json').read_text(encoding='utf-8-sig'));measured=sum(k.replace('-','').lower()==id.replace('-','').lower()for k in db);assert measured==1
+result={'requests':rows,'desktopProjectId':id,'desktopAssetId':asset['Id'],'desktopProjectInstances':measured,'desktopUploadedAssets':progress['total'],'wrongProjectReadDenied':True,'customerCannotReadOwnerApi':True,'confirmedMutationDenied':True,'lockedSnapshotUnchanged':True,'lateUploadReplayIdempotent':True,'expiredPageAndApiDenied':True,'syntheticProxyOnly':True,'newRawCalls':0};(root/(sys.argv[5]if len(sys.argv)>5 else'HTTP_SECURITY_IDEMPOTENCY.json')).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items()if k!='requests'},indent=2))

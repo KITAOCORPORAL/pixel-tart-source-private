@@ -9,11 +9,11 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass][DoNotParallelize]
 public sealed class OnlineHttpResultGuardTests
 {
- [TestMethod][DataRow("project")][DataRow("asset")][DataRow("version")][DataRow("revision")][DataRow("lock")]
+ [TestMethod][DataRow("project")][DataRow("asset")][DataRow("version")][DataRow("revision")][DataRow("lock")][DataRow("time")]
  public Task InvalidRemoteResultDoesNotReplaceSavedConfirmation(string bad)=>RunSta(async()=>
  {
   var project=SelectionProjectFactory.CreateDraft("guard","synthetic",1);var asset=new SelectionAsset(Guid.NewGuid(),project.Id,"synthetic.jpg","",null,SelectionAssetStatus.Ready,0,false,DateTimeOffset.UtcNow,DateTimeOffset.UtcNow,CloudAssetId:"confirmed");var rule=SelectionRule.Default(project.Id,1);var good=new SelectionFinalItem(project.Id,asset.Id,asset.OriginalFileName,true,false,null,false);var previous=new SelectionFinalResult(project.Id,DateTimeOffset.UtcNow,[good]){SelectionVersion=1,Revision=8,IsLocked=true};
-  var malformed=previous with{Revision=9};if(bad=="project")malformed=malformed with{SelectionProjectId=Guid.NewGuid()};if(bad=="asset")malformed=malformed with{Items=[good with{ImageId=Guid.NewGuid()}]};if(bad=="version")malformed=malformed with{SelectionVersion=2};if(bad=="revision")malformed=malformed with{Revision=7};if(bad=="lock")malformed=malformed with{IsLocked=false};
+  var malformed=previous with{Revision=9};if(bad=="project")malformed=malformed with{SelectionProjectId=Guid.NewGuid()};if(bad=="asset")malformed=malformed with{Items=[good with{ImageId=Guid.NewGuid()}]};if(bad=="version")malformed=malformed with{SelectionVersion=2};if(bad=="revision")malformed=malformed with{Revision=7};if(bad=="lock")malformed=malformed with{IsLocked=false};if(bad=="time")malformed=malformed with{ConfirmedAtUtc=default};
   var store=new InMemorySelectionWorkspaceStore(new([project],[asset],[rule],[previous]));var page=new OnlineSelectionProjectViewModel(new GuardOnlyProvider(malformed),store,new SelectionResultSyncService(new FileNameNormalizer()));await page.OpenProjectAsync(project,rule,[asset],previous);await page.RefreshCustomerResultsAsync();Assert.AreSame(previous,page.FinalResult);Assert.AreEqual(8L,(await store.LoadAsync()).FinalResults.Single().Revision);Assert.IsTrue(page.StatusText.Contains("无效"));
  });
  [TestMethod]public Task ValidConfirmedKnownIdsPersistAfterValidation()=>RunSta(async()=>
