@@ -1,0 +1,70 @@
+[
+  {
+    "process": "first",
+    "pid": 20220,
+    "hostOsPeakWorkingSetBytes": 831299584,
+    "hostOsPeakWorkingSetMiB": 792.7890625,
+    "privateBytesPeak50ms": 808312832,
+    "privateBytesPeak50msMiB": 770.8671875,
+    "sampleCount": 211,
+    "requestedSampleIntervalMs": 50,
+    "maxObservedIntervalMs": 80.9497,
+    "elapsedWallMs": 14048.8009,
+    "stageTimesMs": {
+      "OpenFile": 1.8316,
+      "Unpack": 93.3955,
+      "DcrawProcess": 11365.228,
+      "MakeDcrawMemoryImage": 91.9814,
+      "WriteAndHashMemoryRGB16": 1847.8691
+    },
+    "stageTimingScope": "API wall time, including native capture/hash/IO inside DcrawProcess; not pure demosaic compute",
+    "internalP5SerialP6ExclusiveMs": null,
+    "guardTriggered": false,
+    "deltaToStoredBaseline": [
+      {
+        "baseline": "first",
+        "osPeakWorkingSetDeltaBytes": 147767296,
+        "sampledPrivatePeakDeltaBytes": 148623360
+      },
+      {
+        "baseline": "second",
+        "osPeakWorkingSetDeltaBytes": 147951616,
+        "sampledPrivatePeakDeltaBytes": 149032960
+      }
+    ]
+  },
+  {
+    "process": "second",
+    "pid": 9948,
+    "hostOsPeakWorkingSetBytes": 831062016,
+    "hostOsPeakWorkingSetMiB": 792.5625,
+    "privateBytesPeak50ms": 808128512,
+    "privateBytesPeak50msMiB": 770.69140625,
+    "sampleCount": 376,
+    "requestedSampleIntervalMs": 50,
+    "maxObservedIntervalMs": 80.22599999999875,
+    "elapsedWallMs": 24645.8866,
+    "stageTimesMs": {
+      "OpenFile": 1.7002,
+      "Unpack": 96.4334,
+      "DcrawProcess": 22566.1974,
+      "MakeDcrawMemoryImage": 95.812,
+      "WriteAndHashMemoryRGB16": 1134.104
+    },
+    "stageTimingScope": "API wall time, including native capture/hash/IO inside DcrawProcess; not pure demosaic compute",
+    "internalP5SerialP6ExclusiveMs": null,
+    "guardTriggered": false,
+    "deltaToStoredBaseline": [
+      {
+        "baseline": "first",
+        "osPeakWorkingSetDeltaBytes": 147529728,
+        "sampledPrivatePeakDeltaBytes": 148439040
+      },
+      {
+        "baseline": "second",
+        "osPeakWorkingSetDeltaBytes": 147714048,
+        "sampledPrivatePeakDeltaBytes": 148848640
+      }
+    ]
+  }
+]

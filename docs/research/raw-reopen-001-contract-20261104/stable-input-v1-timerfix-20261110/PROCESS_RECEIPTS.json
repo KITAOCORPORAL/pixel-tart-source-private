@@ -1,0 +1,36 @@
+[
+  {
+    "spawnOrRunError": null,
+    "limitBytes": 2147483648,
+    "endedAtUtc": "2026-11-10T03:35:32.0071238+00:00",
+    "reservationId": "2248efd1-4796-42b5-aaaa-9723dcf5c237",
+    "slot": "first",
+    "startedAtUtc": "2026-11-10T03:35:17.9580701+00:00",
+    "sampleMs": 50,
+    "exitCode": 0,
+    "elapsedGuardMs": 14048.8009,
+    "peakPrivateBytes50ms": 808312832,
+    "pid": 20220,
+    "aborted": false,
+    "automaticRetry": false,
+    "status": "completed",
+    "peakWorkingSetOsObserved": 831299584
+  },
+  {
+    "spawnOrRunError": null,
+    "limitBytes": 2147483648,
+    "endedAtUtc": "2026-11-10T03:35:57.5317682+00:00",
+    "reservationId": "ff85fba1-62dc-4e96-905a-84b34d467fdb",
+    "slot": "second",
+    "startedAtUtc": "2026-11-10T03:35:32.8858771+00:00",
+    "sampleMs": 50,
+    "exitCode": 0,
+    "elapsedGuardMs": 24645.8866,
+    "peakPrivateBytes50ms": 808128512,
+    "pid": 9948,
+    "aborted": false,
+    "automaticRetry": false,
+    "status": "completed",
+    "peakWorkingSetOsObserved": 831062016
+  }
+]

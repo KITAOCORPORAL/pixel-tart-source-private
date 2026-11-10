@@ -1,0 +1,353 @@
+{
+  "status": "NATIVE_CANDIDATE_PAIR_ANALYZED",
+  "candidateP5Equal": true,
+  "candidateSerialInputEqual": true,
+  "candidateP6BitExact": true,
+  "pairMetrics": {
+    "width": 7752,
+    "height": 5184,
+    "channels": 3,
+    "firstSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+    "secondSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+    "bitExact": true,
+    "firstDifference": null,
+    "maxDifference": null,
+    "bounds": null,
+    "regions": {
+      "whole": {
+        "pixels": 40186368,
+        "changedChannels": 0,
+        "changedPixels": 0,
+        "sumAbsU16": 0,
+        "maxU16": 0,
+        "meanAbsU16": 0.0
+      },
+      "outerBorder8": {
+        "pixels": 206720,
+        "changedChannels": 0,
+        "changedPixels": 0,
+        "sumAbsU16": 0,
+        "maxU16": 0,
+        "meanAbsU16": 0.0
+      },
+      "tileSeamBand8ExcludingBorder": {
+        "pixels": 2439680,
+        "changedChannels": 0,
+        "changedPixels": 0,
+        "sumAbsU16": 0,
+        "maxU16": 0,
+        "meanAbsU16": 0.0
+      },
+      "interiorNonSeam": {
+        "pixels": 37539968,
+        "changedChannels": 0,
+        "changedPixels": 0,
+        "sumAbsU16": 0,
+        "maxU16": 0,
+        "meanAbsU16": 0.0
+      }
+    },
+    "borderDefinition": "outer8 pixels",
+    "seamDefinition": "[seam-8,seam+8), seam507+496*k; union of row/column bands excluding outer8"
+  },
+  "versusStoredBaselines": [
+    {
+      "candidate": "first",
+      "baseline": "first",
+      "metrics": {
+        "width": 7752,
+        "height": 5184,
+        "channels": 3,
+        "firstSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+        "secondSha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+        "bitExact": false,
+        "firstDifference": {
+          "x": 507,
+          "y": 8,
+          "channel": 2,
+          "first": 28,
+          "second": 25,
+          "signedDelta": -3
+        },
+        "maxDifference": {
+          "x": 2501,
+          "y": 792,
+          "channel": 1,
+          "first": 3053,
+          "second": 2183,
+          "signedDelta": -870
+        },
+        "bounds": {
+          "left": 8,
+          "right": 7690,
+          "top": 8,
+          "bottom": 5175
+        },
+        "regions": {
+          "whole": {
+            "pixels": 40186368,
+            "changedChannels": 330309,
+            "changedPixels": 197896,
+            "sumAbsU16": 3192010,
+            "maxU16": 870,
+            "meanAbsU16": 0.026476722985598833
+          },
+          "outerBorder8": {
+            "pixels": 206720,
+            "changedChannels": 0,
+            "changedPixels": 0,
+            "sumAbsU16": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "tileSeamBand8ExcludingBorder": {
+            "pixels": 2439680,
+            "changedChannels": 324549,
+            "changedPixels": 194727,
+            "sumAbsU16": 3134866,
+            "maxU16": 835,
+            "meanAbsU16": 0.4283165551766352
+          },
+          "interiorNonSeam": {
+            "pixels": 37539968,
+            "changedChannels": 5760,
+            "changedPixels": 3169,
+            "sumAbsU16": 57144,
+            "maxU16": 870,
+            "meanAbsU16": 0.0005074058667284959
+          }
+        },
+        "borderDefinition": "outer8 pixels",
+        "seamDefinition": "[seam-8,seam+8), seam507+496*k; union of row/column bands excluding outer8"
+      }
+    },
+    {
+      "candidate": "first",
+      "baseline": "second",
+      "metrics": {
+        "width": 7752,
+        "height": 5184,
+        "channels": 3,
+        "firstSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+        "secondSha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+        "bitExact": false,
+        "firstDifference": {
+          "x": 507,
+          "y": 8,
+          "channel": 2,
+          "first": 28,
+          "second": 25,
+          "signedDelta": -3
+        },
+        "maxDifference": {
+          "x": 2501,
+          "y": 792,
+          "channel": 1,
+          "first": 3053,
+          "second": 2183,
+          "signedDelta": -870
+        },
+        "bounds": {
+          "left": 8,
+          "right": 7691,
+          "top": 8,
+          "bottom": 5175
+        },
+        "regions": {
+          "whole": {
+            "pixels": 40186368,
+            "changedChannels": 329974,
+            "changedPixels": 197705,
+            "sumAbsU16": 3188013,
+            "maxU16": 870,
+            "meanAbsU16": 0.026443569122743316
+          },
+          "outerBorder8": {
+            "pixels": 206720,
+            "changedChannels": 0,
+            "changedPixels": 0,
+            "sumAbsU16": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "tileSeamBand8ExcludingBorder": {
+            "pixels": 2439680,
+            "changedChannels": 324218,
+            "changedPixels": 194538,
+            "sumAbsU16": 3130931,
+            "maxU16": 835,
+            "meanAbsU16": 0.4277789163606156
+          },
+          "interiorNonSeam": {
+            "pixels": 37539968,
+            "changedChannels": 5756,
+            "changedPixels": 3167,
+            "sumAbsU16": 57082,
+            "maxU16": 870,
+            "meanAbsU16": 0.0005068553423735826
+          }
+        },
+        "borderDefinition": "outer8 pixels",
+        "seamDefinition": "[seam-8,seam+8), seam507+496*k; union of row/column bands excluding outer8"
+      }
+    },
+    {
+      "candidate": "second",
+      "baseline": "first",
+      "metrics": {
+        "width": 7752,
+        "height": 5184,
+        "channels": 3,
+        "firstSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+        "secondSha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+        "bitExact": false,
+        "firstDifference": {
+          "x": 507,
+          "y": 8,
+          "channel": 2,
+          "first": 28,
+          "second": 25,
+          "signedDelta": -3
+        },
+        "maxDifference": {
+          "x": 2501,
+          "y": 792,
+          "channel": 1,
+          "first": 3053,
+          "second": 2183,
+          "signedDelta": -870
+        },
+        "bounds": {
+          "left": 8,
+          "right": 7690,
+          "top": 8,
+          "bottom": 5175
+        },
+        "regions": {
+          "whole": {
+            "pixels": 40186368,
+            "changedChannels": 330309,
+            "changedPixels": 197896,
+            "sumAbsU16": 3192010,
+            "maxU16": 870,
+            "meanAbsU16": 0.026476722985598833
+          },
+          "outerBorder8": {
+            "pixels": 206720,
+            "changedChannels": 0,
+            "changedPixels": 0,
+            "sumAbsU16": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "tileSeamBand8ExcludingBorder": {
+            "pixels": 2439680,
+            "changedChannels": 324549,
+            "changedPixels": 194727,
+            "sumAbsU16": 3134866,
+            "maxU16": 835,
+            "meanAbsU16": 0.4283165551766352
+          },
+          "interiorNonSeam": {
+            "pixels": 37539968,
+            "changedChannels": 5760,
+            "changedPixels": 3169,
+            "sumAbsU16": 57144,
+            "maxU16": 870,
+            "meanAbsU16": 0.0005074058667284959
+          }
+        },
+        "borderDefinition": "outer8 pixels",
+        "seamDefinition": "[seam-8,seam+8), seam507+496*k; union of row/column bands excluding outer8"
+      }
+    },
+    {
+      "candidate": "second",
+      "baseline": "second",
+      "metrics": {
+        "width": 7752,
+        "height": 5184,
+        "channels": 3,
+        "firstSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+        "secondSha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+        "bitExact": false,
+        "firstDifference": {
+          "x": 507,
+          "y": 8,
+          "channel": 2,
+          "first": 28,
+          "second": 25,
+          "signedDelta": -3
+        },
+        "maxDifference": {
+          "x": 2501,
+          "y": 792,
+          "channel": 1,
+          "first": 3053,
+          "second": 2183,
+          "signedDelta": -870
+        },
+        "bounds": {
+          "left": 8,
+          "right": 7691,
+          "top": 8,
+          "bottom": 5175
+        },
+        "regions": {
+          "whole": {
+            "pixels": 40186368,
+            "changedChannels": 329974,
+            "changedPixels": 197705,
+            "sumAbsU16": 3188013,
+            "maxU16": 870,
+            "meanAbsU16": 0.026443569122743316
+          },
+          "outerBorder8": {
+            "pixels": 206720,
+            "changedChannels": 0,
+            "changedPixels": 0,
+            "sumAbsU16": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "tileSeamBand8ExcludingBorder": {
+            "pixels": 2439680,
+            "changedChannels": 324218,
+            "changedPixels": 194538,
+            "sumAbsU16": 3130931,
+            "maxU16": 835,
+            "meanAbsU16": 0.4277789163606156
+          },
+          "interiorNonSeam": {
+            "pixels": 37539968,
+            "changedChannels": 5756,
+            "changedPixels": 3167,
+            "sumAbsU16": 57082,
+            "maxU16": 870,
+            "meanAbsU16": 0.0005068553423735826
+          }
+        },
+        "borderDefinition": "outer8 pixels",
+        "seamDefinition": "[seam-8,seam+8), seam507+496*k; union of row/column bands excluding outer8"
+      }
+    }
+  ],
+  "stageTimes": [
+    {
+      "OpenFile": 1.8316,
+      "Unpack": 93.3955,
+      "DcrawProcess": 11365.228,
+      "MakeDcrawMemoryImage": 91.9814,
+      "WriteAndHashMemoryRGB16": 1847.8691
+    },
+    {
+      "OpenFile": 1.7002,
+      "Unpack": 96.4334,
+      "DcrawProcess": 22566.1974,
+      "MakeDcrawMemoryImage": 95.812,
+      "WriteAndHashMemoryRGB16": 1134.104
+    }
+  ],
+  "regressionDecision": "ELIGIBLE_FOR_TARGETED_PRODUCT_REGRESSION_NOT_PRODUCTION",
+  "rawCallsByAnalysis": 0
+}

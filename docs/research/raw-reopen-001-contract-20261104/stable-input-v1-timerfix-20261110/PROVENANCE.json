@@ -1,0 +1,129 @@
+{
+  "base": "3ea52612ea39915cb3e8c0d9a2e33f27b0cb1026",
+  "task": "RAW-REOPEN-001-STABLE-INPUT-V1-TIMERFIX-20261110",
+  "nativeCandidateSourceBase": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+  "upstream": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "candidateObserverSourceSha256": "f11b4e4b46cf1c863f0af0fa469be05ad2e4a3f3d1c854ace4b66064528dbb18",
+  "headerSha256": "ce42b2efa23806da4f1edabbad4901c1a836ff319133507bac6e4315b0d1f718",
+  "nativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+  "bindingSha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+  "hostSha256": "9677A367EAA4C6FECEEAE2CEB9511C04BD5840EE01544E6519819F34CF032975",
+  "executionManifestSha256": "DBC084D0E4EF99AA0EE83AB413BC24F8B5D92B095EEBF679664B9A0D981B9F1D",
+  "nativeSelfTestSha256": "F3F7FD69673A70007A51A4018E210DA439BD5F74B4BFD4E1272DAA8B2D0FA742",
+  "nativeRebuildCountThisTask": 0,
+  "managedAdmissionBuilds": 1,
+  "files": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\result.json",
+      "sha256": "45117738322975DF0ECB5ACC9E8914EC7E3E1ED9612385EC8B61AC35DC62B9D5",
+      "bytes": 1398
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\run-identity.json",
+      "sha256": "123C72C5B5A7C5C98AB5682DEB5F5B2F5E1200F75FF19767CBBC773C2A4A6329",
+      "bytes": 860
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\native-events.jsonl",
+      "sha256": "931D51EFAA1194E354375630920B1EB46533B4FAE58324A0FABA12D9A8DA1AAF",
+      "bytes": 71141
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\configured-output.json",
+      "sha256": "CA1A7408318D88DA230F149ECA0D62949DD373D5BA3A06C2E5AA63B06ABB5FFA",
+      "bytes": 1731
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\loaded-native.json",
+      "sha256": "9931EEA8C31C305B674EFB5E88DB1024BCE486963FEEC0A6075106B8B517E4AC",
+      "bytes": 558
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\loaded-dependencies.json",
+      "sha256": "777EA0C319CAFA4C83A5D4B4FABB0AFF50DF1E8F9EB79D444757AEFA40FC595C",
+      "bytes": 10096
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\calls.json",
+      "sha256": "A221F4B0ABDCB8687F0CD6820C4FBDB7C97A2E21283683B3514A4726F508723D",
+      "bytes": 177
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\first\\stage-times.json",
+      "sha256": "85584F888144C26F711C8E6580B6D441D31383813C9D6E881C5C274A0E1AF912",
+      "bytes": 581
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\ledger\\first.consumed",
+      "sha256": "0A1E45A78AA11C63F077ED6B3EEE73BBBF426F659310921DDD9EB6C599133E51",
+      "bytes": 453
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\result.json",
+      "sha256": "55C04CBA0B1C0408A7F010E640C2C3279A0A5034DFF57E0D643AD5C4199C5FF4",
+      "bytes": 1396
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\run-identity.json",
+      "sha256": "BDD22E2208EBEF482C675D1B5E0E6A93283C07846B4EF919BAAAF554036F407E",
+      "bytes": 859
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\native-events.jsonl",
+      "sha256": "823CD74287DCF2F05FAB9296347A122688DD5403CFE93FF948D683DDAE673FBC",
+      "bytes": 71141
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\configured-output.json",
+      "sha256": "CA1A7408318D88DA230F149ECA0D62949DD373D5BA3A06C2E5AA63B06ABB5FFA",
+      "bytes": 1731
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\loaded-native.json",
+      "sha256": "9931EEA8C31C305B674EFB5E88DB1024BCE486963FEEC0A6075106B8B517E4AC",
+      "bytes": 558
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\loaded-dependencies.json",
+      "sha256": "C443E4F347F7C20D87E615B2327063FE35E8ADACC5D1456E515D209C40A52950",
+      "bytes": 10096
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\calls.json",
+      "sha256": "3782B64AD539DCF478875D25D3075A3A9F5CE13349A5D7E23A3D5CDBC0CF8071",
+      "bytes": 177
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\pair\\second\\stage-times.json",
+      "sha256": "7FE116EEA8703C8456EEA6F78FA548BCF2ACFF3375A48A781D0D195771806549",
+      "bytes": 580
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\ledger\\second.consumed",
+      "sha256": "43696E801D1A2B1FCBC74839355A06D498723AA00F7FB9E16FE9A6B1E8E2D48A",
+      "bytes": 454
+    }
+  ],
+  "frozenRuntimeCode": [
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Program.cs",
+      "Sha256": "7802383F69752E0BB51128376F948E206E09D65D50DBF743A9CC885FF89887C8"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\RawStableCandidateHost.csproj",
+      "Sha256": "81384F30BF1DD740ED54FBDE55ED983CA123F627332D1BD8D5BC6DE78256F40E"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\CandidateBatch.mjs",
+      "Sha256": "1D5A5261FCF79050A91AB8CAE7F6841C642C5A32FAD66CA2A5F268DCFFD1BF70"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\Run-CandidateBatch.ps1",
+      "Sha256": "DF50A0C82767F8DFB66A3E7F55128A5A5E5830B4517C04AC56E966C0861F3FA0"
+    },
+    {
+      "Path": "E:\\Kitao-Worktrees\\raw-observation-review-20261106\\tools\\raw-xtrans-stable-v1\\company\\freeze_execution.py",
+      "Sha256": "C4BCFE12AAD2CAAAC362EF5D05E3C7D24DB3BF7B3D3F41588C35A21CC7C6B65A"
+    }
+  ]
+}

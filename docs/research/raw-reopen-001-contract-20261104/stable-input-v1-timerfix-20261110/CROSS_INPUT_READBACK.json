@@ -1,0 +1,169 @@
+{
+  "status": "ALL_STORED_INPUT_STATES_AND_PAYLOAD_HASHES_EQUAL",
+  "scope": "Read existing files only; no old or new RAW decoder calls; software identities intentionally differ and are not equated",
+  "data": {
+    "candidateFirst": {
+      "P5": {
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "stateSha256": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      },
+      "XTRANS-serial-ready": {
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "stateSha256": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      }
+    },
+    "candidateSecond": {
+      "P5": {
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "stateSha256": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      },
+      "XTRANS-serial-ready": {
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "stateSha256": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      }
+    },
+    "storedFirst": {
+      "P5": {
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "stateSha256": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      },
+      "XTRANS-serial-ready": {
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "stateSha256": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      }
+    },
+    "storedSecond": {
+      "P5": {
+        "sha256": "d318658d1d3cceec5a16c5bc2a79fec2e61fd4cb9db10f124f87a547a8413d52",
+        "stateSha256": "54ea6c51737884162d1f682363b8675a76863fc0f1f0c1b13033720cf9a067e7",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      },
+      "XTRANS-serial-ready": {
+        "sha256": "2cbc041c69fb324b4880b7907f6730cd8cbe9d20d9f543900d3354274cb209ac",
+        "stateSha256": "7244905d53909f2a305e2a614830cc160d643d2d53ad1c8024e09b410bf2fcda",
+        "layout": {
+          "width": 7752,
+          "height": 5184,
+          "channels": 4,
+          "sourcePitch": 62016,
+          "packedPitch": 62016
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "candidate": "candidateFirst",
+      "baseline": "storedFirst",
+      "id": "P5",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateFirst",
+      "baseline": "storedFirst",
+      "id": "XTRANS-serial-ready",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateFirst",
+      "baseline": "storedSecond",
+      "id": "P5",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateFirst",
+      "baseline": "storedSecond",
+      "id": "XTRANS-serial-ready",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateSecond",
+      "baseline": "storedFirst",
+      "id": "P5",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateSecond",
+      "baseline": "storedFirst",
+      "id": "XTRANS-serial-ready",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateSecond",
+      "baseline": "storedSecond",
+      "id": "P5",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    },
+    {
+      "candidate": "candidateSecond",
+      "baseline": "storedSecond",
+      "id": "XTRANS-serial-ready",
+      "payloadEqual": true,
+      "stateEqual": true,
+      "layoutEqual": true
+    }
+  ],
+  "rawCalls": 0
+}

@@ -1,0 +1,20 @@
+{
+  "protocol": "AggregateOnceV2",
+  "unit": "ms",
+  "scope": "Managed API boundaries; DcrawProcess includes native stage capture hash/IO",
+  "times": {
+    "OpenFile": 1.7002,
+    "Unpack": 96.4334,
+    "DcrawProcess": 22566.1974,
+    "MakeDcrawMemoryImage": 95.812,
+    "WriteAndHashMemoryRGB16": 1134.104
+  },
+  "actionReturned": {
+    "OpenFile": true,
+    "Unpack": true,
+    "DcrawProcess": true,
+    "MakeDcrawMemoryImage": true,
+    "WriteAndHashMemoryRGB16": true
+  },
+  "internalP5SerialP6ExclusiveTiming": "NOT_INSTRUMENTED_UNCHANGED_PINNED_HEADER"
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "process": "first",
+    "decoder": {
+      "DecoderFlags": 4096,
+      "DecoderName": "unpacked_load_raw()"
+    },
+    "actualBranch": "xtrans",
+    "userQual": -1,
+    "effectiveQuality": 3,
+    "actualPasses": 3,
+    "actualT": 512,
+    "actualNdir": 8,
+    "compileOpenMp": 1,
+    "actualTeams": [
+      6
+    ],
+    "observedWorkers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tileCount": 176,
+    "actualScratchBytesPerWorker": [
+      24641536
+    ],
+    "declaredInputImageBytes": 321490944,
+    "requestedCandidateExtraRgbBytes": 241118208,
+    "candidateOutputPointerIndependentlyTraced": false,
+    "debuggerAttached": false
+  },
+  {
+    "process": "second",
+    "decoder": {
+      "DecoderFlags": 4096,
+      "DecoderName": "unpacked_load_raw()"
+    },
+    "actualBranch": "xtrans",
+    "userQual": -1,
+    "effectiveQuality": 3,
+    "actualPasses": 3,
+    "actualT": 512,
+    "actualNdir": 8,
+    "compileOpenMp": 1,
+    "actualTeams": [
+      6
+    ],
+    "observedWorkers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tileCount": 176,
+    "actualScratchBytesPerWorker": [
+      24641536
+    ],
+    "declaredInputImageBytes": 321490944,
+    "requestedCandidateExtraRgbBytes": 241118208,
+    "candidateOutputPointerIndependentlyTraced": false,
+    "debuggerAttached": false
+  }
+]

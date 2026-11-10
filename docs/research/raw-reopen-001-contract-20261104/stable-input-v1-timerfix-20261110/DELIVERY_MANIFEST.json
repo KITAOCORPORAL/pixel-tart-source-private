@@ -1,0 +1,194 @@
+{
+  "version": "StableInputTimerFixDeliveryV1",
+  "base": "3ea52612ea39915cb3e8c0d9a2e33f27b0cb1026",
+  "task": "RAW-REOPEN-001-STABLE-INPUT-V1-TIMERFIX-20261110",
+  "status": "ISOLATED_NATIVE_SINGLE_SAMPLE_PAIR_PASS",
+  "nativeRebuilds": 0,
+  "newRawProcesses": 2,
+  "newDebuggerRuns": 0,
+  "newGPUCalls": 0,
+  "oldFailedBatchUnchanged": true,
+  "P5Equal": true,
+  "serialEqual": true,
+  "P6BitExact": true,
+  "candidateDefaultOff": true,
+  "productRegressionExecuted": false,
+  "hashSemantics": "SHA256 of staged Git blob bytes; excludes this manifest itself",
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 45203,
+      "sha256": "336e90dee51033ebfb9ea95acc0ce063ffdcab8fd610d360e093038a938b4795"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/ACTUAL_XTRANS.json",
+      "bytes": 1350,
+      "sha256": "87cf618184bf51bde2367666458d61246a1512f072201ec940b5a5dabbe2eafe"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/BUDGET_FINAL.json",
+      "bytes": 1241,
+      "sha256": "cff5c2be687a18a9867ccb430df12529be83814c9c369aa54abff3edf7884c97"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/BUDGET_GATE.json",
+      "bytes": 241,
+      "sha256": "4384bfc685303cefffc6cf29c04eebfb4da0089803cc5186b8d5243a0ef50fe0"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/BUDGET_TESTS.json",
+      "bytes": 142,
+      "sha256": "86f0bd14c11d08538d91e9eef2b48f41a7c97bd6195c25854bb62263cb2bc8dd"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/CROSS_INPUT_READBACK.json",
+      "bytes": 4913,
+      "sha256": "c8f2225b22fd9dba615c33cd60a702cfded829a1c33a325a584827ed97afbd18"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/DYNAMIC_ASSIGNMENT.json",
+      "bytes": 337,
+      "sha256": "e6197b196e6e98d00b02bde07c8eb18cbd882f3d673450414dc9746601a0e6b7"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/EVIDENCE_FORMAT_BINDING.json",
+      "bytes": 4031,
+      "sha256": "9a00d5961e9eb917227af23ab07cb6f16437129ad5c8185c3f0c66dedc4616bd"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/FIRST_CONSUMED.json",
+      "bytes": 453,
+      "sha256": "0a1e45a78aa11c63f077ed6b3eee73bbbf426f659310921ddd9eb6c599133e51"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/FIRST_RESULT.json",
+      "bytes": 1347,
+      "sha256": "878013b90c96bdc9c4ceb913c4464516346291c7d123de7094dac04e9752d1cf"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/FIRST_TIMING.json",
+      "bytes": 562,
+      "sha256": "e5e8096a5722f4dc924c2a3ef635540f533fabf1fe92640ff0df5cd382a58249"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/FULL_COMPARISON.json",
+      "bytes": 10086,
+      "sha256": "5cb7f52e5bad7c3b978b9d3f9fd75d6960a59b90a281606e2a89d142a2f82e70"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/HOST_REUSE_PARITY.json",
+      "bytes": 442,
+      "sha256": "122e7e2dcd45b56072a210c1994b84b5cadde7e6d00d6e68ad8bc97af048b269"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/NEW_NO_RAW_SELFTEST.json",
+      "bytes": 12800,
+      "sha256": "241255b008590d14f8f93e41371e36f3654b3e7163a54b5ef30f0ea771c7c5e7"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/NO_RAW_RESULT.json",
+      "bytes": 1590,
+      "sha256": "eb9da2515d7a6cdb05c2b33b7b479052c1e66fedab5e7775dcd1829347f3573e"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/NO_RAW_TIMING_JOURNAL.json",
+      "bytes": 861,
+      "sha256": "fe7ad57d6674ff715e3616bccdefeb29c9faac10091eb7f5c490c188065e3ae9"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/OLD_FAILURE_BINDING.json",
+      "bytes": 1565,
+      "sha256": "e534719d4016ee49ed4ae1ae3e49e24bb534b25dab970084c644d7da8e432acb"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/OUTCOME.json",
+      "bytes": 1564,
+      "sha256": "568964371352298ce42d21adc287932ec10362db38e86e4215259704e22da961"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/PARAMETER_PARITY.json",
+      "bytes": 2008,
+      "sha256": "801805714f45a07c59a302620113c25164c1b715e214c3f6c70f409c42e21fc5"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/PROCESS_RECEIPTS.json",
+      "bytes": 1027,
+      "sha256": "2be78a866348336bcce17bad0e9a58683aa34ad3a4d523b07353a7cb246e0e73"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/PROVENANCE.json",
+      "bytes": 6078,
+      "sha256": "30fac5695720e0e02291cb3c7e91be4744b8c7755cf5e5f920f6e9d090dce020"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/REPORT.md",
+      "bytes": 9445,
+      "sha256": "861f204ff915c588d4dae26ea13c27f73e33855b41e505fb69af59eb5423c412"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/RESOURCE_REPORT.json",
+      "bytes": 2150,
+      "sha256": "70e4c22e019b9e6ece742b2151acba0b878588566a1ef0e3e8127b6561e2fd0b"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/SECOND_CONSUMED.json",
+      "bytes": 454,
+      "sha256": "43696e801d1a2b1fcbc74839355a06d498723aa00f7fb9e16fe9a6b1e8e2d48a"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/SECOND_RESULT.json",
+      "bytes": 1345,
+      "sha256": "5e89d6354f97e3229a29e81e56dc98687123ccc1ef6826a46e18c684c33849aa"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/SECOND_TIMING.json",
+      "bytes": 561,
+      "sha256": "be492fbc90522c30409cbc4dd2beb2f03de5965847b297c3498dab90fc1662b8"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/STORED_BASELINE_IDENTITIES.json",
+      "bytes": 553,
+      "sha256": "1d74b7af2594aaba54c8e4c6339ce384355e49758e0affffd3886fb65b709f17"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/TIMING_ORDER_GATE.json",
+      "bytes": 341,
+      "sha256": "43cdd1a903042626affe812f6064aca2e128d5777a2d5543673e656dc1cfee9b"
+    },
+    {
+      "path": "docs/research/raw-reopen-001-contract-20261104/stable-input-v1-timerfix-20261110/TYPED_PAIR.json",
+      "bytes": 5282,
+      "sha256": "8830b6b47b2a0d3c7df04ef245f0200972f429b716e6a29bde6da655147937b4"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/CandidateBatch.mjs",
+      "bytes": 2756,
+      "sha256": "1d5a5261fcf79050a91ab8cae7f6841c642c5a32fad66ca2a5f268dcffd1bf70"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/Program.cs",
+      "bytes": 17075,
+      "sha256": "7802383f69752e0bb51128376f948e206e09d65d50dbf743a9cc885ff89887c8"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/SOURCE_ADAPTATION.md",
+      "bytes": 2087,
+      "sha256": "ee4bdec5641de863c7fa51d618f358a2075eee759660511c024114d0bb46aa86"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/cross_input_readback.mjs",
+      "bytes": 2488,
+      "sha256": "c5f9b68cacef63f96e4ff0831f47adc2f9294168817724ffde147de7d1eace19"
+    },
+    {
+      "path": "tools/raw-xtrans-stable-v1/company/freeze_execution.py",
+      "bytes": 4334,
+      "sha256": "c4bcfe12aad2caaac362ef5d05e3c7d24db3bf7b3d3f41588c35a21cc7c6b65a"
+    }
+  ]
+}

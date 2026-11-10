@@ -1,0 +1,52 @@
+{
+  "reservationId": "ff85fba1-62dc-4e96-905a-84b34d467fdb",
+  "status": "completed",
+  "error": null,
+  "zeroRaw": false,
+  "counts": {
+    "OpenFile": 1,
+    "Unpack": 1,
+    "DcrawProcess": 1,
+    "MakeDcrawMemoryImage": 1
+  },
+  "runtime": {
+    "ProcessId": 9948,
+    "ProcessorCount": 12,
+    "os": "Microsoft Windows 10.0.19045",
+    "runtime": ".NET 10.0.10",
+    "architecture": "X64",
+    "environment": {
+      "OMP_NUM_THREADS": "6",
+      "OMP_DYNAMIC": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_SCHEDULE": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null,
+      "KMP_AFFINITY": null,
+      "KMP_BLOCKTIME": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "DOTNET_PROCESSOR_COUNT": null,
+      "COMPlus_ThreadPool_ForceMinWorkerThreads": null
+    },
+    "debuggerAttached": false
+  },
+  "peakWorkingSetBytes": 831062016,
+  "privateBytesAtExit": 14757888,
+  "fullManagedImageCopies": 0,
+  "candidate": "XTransStableInputSeparateRgbV1",
+  "stageTimesMs": {
+    "OpenFile": 1.7002,
+    "Unpack": 96.4334,
+    "DcrawProcess": 22566.1974,
+    "MakeDcrawMemoryImage": 95.812,
+    "WriteAndHashMemoryRGB16": 1134.104
+  },
+  "stageActionReturned": {
+    "OpenFile": true,
+    "Unpack": true,
+    "DcrawProcess": true,
+    "MakeDcrawMemoryImage": true,
+    "WriteAndHashMemoryRGB16": true
+  },
+  "debuggerAttached": false
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "protocol": "AggregateOnceV2",
+  "observedSyntheticOrder": [
+    "OpenFile",
+    "Unpack",
+    "DcrawProcess",
+    "MakeDcrawMemoryImage",
+    "WriteAndHashMemoryRGB16"
+  ],
+  "actualDecoderCalls": 0,
+  "aggregateJournalFiles": 1,
+  "allFiveScopesReturned": true,
+  "exceptionPreserved": true,
+  "noDebugger": true
+}

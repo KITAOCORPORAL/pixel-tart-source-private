@@ -1,20 +1,23 @@
 from pathlib import Path
 import json,hashlib,os,sys
 root=Path(sys.argv[1]);read=lambda p:json.loads(Path(p).read_text(encoding='utf-8-sig'));sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest().upper();identity=lambda p:dict(Path=str(Path(p).resolve()),Sha256=sha(p))
-m=read(root/'NO_RAW_MANIFEST_02.json');selftest=root/'no-raw-selftest-02/NO_RAW_SELF_TEST.json';s=read(selftest);assert s['status']=='NATIVE_NO_RAW_SELF_TEST_COMPLETED' and s['zeroRaw'];assert s['nativeSha256']==m['Native']['Sha256'] and s['preparationSha256']==m['PreparationSha256'];assert s['nativeSelfTestEvidence']['syntheticExportReturnCode']==s['nativeSelfTestEvidence']['lifecycleExportReturnCode']==0;assert s['counts']=={'Initialize':1,'ManagedDispose':1};assert s['lifecycleEvidence']['managedDisposeReturned'] and s['lifecycleEvidence']['postDisposeAccessRejected'];assert s['runtime']['debuggerAttached'] is False
+m=read(root/'NO_RAW_MANIFEST.json');selftest=root/'no-raw-selftest/NO_RAW_SELF_TEST.json';s=read(selftest);assert s['status']=='NATIVE_NO_RAW_SELF_TEST_COMPLETED' and s['zeroRaw'];assert s['nativeSha256']==m['Native']['Sha256'] and s['preparationSha256']==m['PreparationSha256'];assert s['nativeSelfTestEvidence']['syntheticExportReturnCode']==s['nativeSelfTestEvidence']['lifecycleExportReturnCode']==0;assert s['counts']=={'Initialize':1,'ManagedDispose':1};assert s['lifecycleEvidence']['managedDisposeReturned'] and s['lifecycleEvidence']['postDisposeAccessRejected'];assert s['runtime']['debuggerAttached'] is False
 for f in m['Files']+[m['Native'],m['Binding'],m['Contract']]:assert sha(f['Path'])==f['Sha256']
 for f in s['loadedDependencies']:
  assert sha(f['Path'])==f['Sha256']
  if not any(x['Path'].lower()==f['Path'].lower() for x in m['Files']):m['Files'].append(f)
+timing=read(root/'TIMING_ORDER_GATE.json');assert timing['status']=='PASS' and timing['aggregateJournalFiles']==1 and timing['actualDecoderCalls']==0;assert s['timingSelfTest']['syntheticApiOrder']==['OpenFile','Unpack','DcrawProcess','MakeDcrawMemoryImage','WriteAndHashMemoryRGB16']
 company=Path(__file__).resolve().parent
 for n in ['Program.cs','RawStableCandidateHost.csproj','CandidateBatch.mjs','Run-CandidateBatch.ps1','freeze_execution.py']:m['Files'].append(identity(company/n))
 # Every historical consumed receipt stays unchanged; candidate uses a different ledger/task.
 oldpaths=[Path('E:/Guangjing-RawReopen001-20261106/DELIVERY_BUDGET.json'),*[Path('E:/Guangjing-RawReopen001-NoRaw-20261109/validation-batch/ledger')/(s+'.consumed') for s in ['first','second']],*[Path('E:/Guangjing-RawReopen001-H1Window-20261109/batch-01/ledger')/(s+'.consumed') for s in ['first','second']]]
-auth=root/'AUTHORIZATION.txt';assert auth.exists();batch=dict(task='RAW-REOPEN-001-STABLE-INPUT-V1-20261109',maximum=2,ledgerRoot=str(root/'ledger'),authorization=dict(path=str(auth),sha256=sha(auth).lower()),oldEvidence=[dict(path=str(p),sha256=sha(p).lower()) for p in oldpaths],failedAttemptsConsume=True,automaticRetry=False)
+failure=read(root/'OLD_FAILURE_BINDING.json');oldpaths += [Path(r['path']) for r in failure['files']];oldpaths=list(dict.fromkeys(oldpaths))
+for r in failure['files']:assert sha(r['path'])==r['sha256'],'Old failure evidence drift'
+auth=root/'AUTHORIZATION.txt';assert auth.exists();batch=dict(task='RAW-REOPEN-001-STABLE-INPUT-V1-TIMERFIX-20261110',maximum=2,ledgerRoot=str(root/'ledger'),authorization=dict(path=str(auth),sha256=sha(auth).lower()),oldEvidence=[dict(path=str(p),sha256=sha(p).lower()) for p in oldpaths],failedAttemptsConsume=True,automaticRetry=False)
 assert not (root/'ledger').exists(),'Do not reset or replace any candidate ledger'
 config=root/'BATCH_CONFIG.json'
 with config.open('x',encoding='utf-8',newline='\n') as f:json.dump(batch,f,indent=2);f.write('\n')
-for p in [config,auth,*oldpaths]:m['Files'].append(identity(p))
+for p in [config,auth,root/'OLD_FAILURE_BINDING.json',root/'HOST_REUSE_PARITY.json',root/'TIMING_ORDER_GATE.json',*oldpaths]:m['Files'].append(identity(p))
 oldmanifest=read('E:/Guangjing-RawReopen001-NoRaw-20261109/VALIDATION_MANIFEST01.json');inp=oldmanifest['Input'];assert sha(inp['Path'])==inp['Sha256']=='52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865'
 m.update(Input=inp,NativeSelfTest=identity(selftest),ValidationBatchId=batch['task'],Purpose='EXPLICIT_ISOLATED_CANDIDATE_TWO_PROCESS_NO_DEBUGGER')
 with (root/'EXECUTION_MANIFEST.json').open('x',encoding='utf-8',newline='\n') as f:json.dump(m,f,indent=2);f.write('\n')

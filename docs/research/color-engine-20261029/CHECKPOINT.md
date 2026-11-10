@@ -1,3 +1,9 @@
+# 当前检查点：stable-input新独立两进程通过（2026-11-10）
+
+接续3ea52612，新task RAW-REOPEN-001-STABLE-INPUT-V1-TIMERFIX-20261110。旧first.consumed/STOP/日志hash保留，旧consumed1/rem1仍停止；新账本consumed2/rem0。复用DLL157BBA02...8FDC67F，无native重编；仅新TaskId准入与五阶段无RAW顺序测试做托管版本化，原计时/处理行精确一致。无RAW ABI/生命周期/参数/计时门禁及预算12测试通过；PID20220/9948各一次Open/Unpack/Process/Memory，均completed无debugger/guard触发。P5与serial完整有效状态相同，且与两份已存旧输入也同；实际team6、passes3/T512/ndir8。P6所有120559104 RGB样本逐位0差，sha9266ca59...bdf024；对旧baseline1/2分别197896/197705差异像素、max870、meanAbs0.0264767230/0.0264435691，外圈8为0，带外3169/3167不能忽略。峰值RSS831299584/831062016B，Private50ms峰808312832/808128512B；wall14.0488/24.6459s含IO，不作速度提升结论。具备受控产品回归评估条件但本轮未接产品/未做preview-reopen-export/历史golden验收；候选隔离、V1封存。见stable-input-v1-timerfix-20261110/REPORT.md与OUTCOME。两次后停止，不追加解码。
+
+---
+
 # 当前检查点：stable-input公司原生已就绪，候选批次停止（2026-11-10）
 
 从ea081ecb接续，既有MSVC/OpenMP一次编译DLL157BBA02...8FDC67F，candidate source f11b4e4b/header ce42保持；原生ABI/布局/生命周期/真实native默认参数全字段自检通过。首次真实候选进程PID28684消耗first槽，Open1/Unpack1后新增计时回执CreateNew文件冲突，Process/Memory0，P5/serial/P6未生成。此为宿主journal错误，不能判候选数学失败。已修复为退出时单次汇总并无RAW验证连续scope及异常保留，预算12/metrics10合成检查通过；没有追加RAW。账本consumed1/remaining1但STOP_AFTER_FAILURE使launchAllowed=false，旧五份消费证据hash不变。两份旧P6完整hash核验可用，所有候选pair/基线差异/插值RSS字段UNKNOWN。暂不进入产品回归，V1封存。见stable-input-v1-company-20261110/REPORT.md、OUTCOME和MISSING_COMPARISON。取得两份成功输出需明确新独立批次授权，不回滚失败slot。
