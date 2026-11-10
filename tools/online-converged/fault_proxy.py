@@ -23,10 +23,24 @@ class Handler(BaseHTTPRequestHandler):
         path=self.path.split("?",1)[0]; marker=(mode,path); fault=None
         if path in blocked:
             self.send(503,b'{"message":"Controlled subsequent network failure"}'); record(self.command,path,503,"after-confirm-view-failure"); return
-        data=self.rfile.read(int(self.headers.get("Content-Length","0"))) if self.command in ["POST","PUT"] else None
+        data=None
+        if self.command in ["POST","PUT"]:
+            if self.headers.get("Transfer-Encoding", "").lower()=="chunked":
+                chunks=[]; total=0
+                while True:
+                    size=int(self.rfile.readline().strip().split(b";",1)[0],16)
+                    if not size:
+                        while self.rfile.readline() not in [b"\r\n",b"\n",b""]: pass
+                        break
+                    total+=size
+                    if total>64*1024*1024: raise ValueError("Bounded test request exceeded")
+                    chunks.append(self.rfile.read(size)); assert self.rfile.read(2)==b"\r\n"
+                data=b"".join(chunks)
+            else:
+                data=self.rfile.read(int(self.headers.get("Content-Length","0")))
         if mode=="confirm-wrong-project" and self.command=="POST" and path.endswith("/confirm") and marker not in used:
             used.add(marker); body=json.dumps(dict(projectId=str(uuid.uuid4()),selectionVersion=1,revision=999,isLocked=True,items=[],confirmedAtUtc=datetime.datetime.now(datetime.timezone.utc).isoformat())).encode(); self.send(200,body); record(self.command,path,200,mode); return
-        headers={k:v for k,v in self.headers.items() if k.lower() not in ["host","connection","content-length","accept-encoding"]}
+        headers={k:v for k,v in self.headers.items() if k.lower() not in ["host","connection","content-length","accept-encoding","transfer-encoding"]}
         try:
             with urllib.request.urlopen(urllib.request.Request(backend.rstrip("/")+self.path,data=data,headers=headers,method=self.command),timeout=30) as response:
                 status=response.status; body=response.read(); content_type=response.headers.get("Content-Type","application/json")
