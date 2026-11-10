@@ -16,14 +16,24 @@ public sealed partial class SqliteProjectRepository(IPixelTartDatabase database)
         project.UpdatedAt = DateTimeOffset.UtcNow;
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using (var identity = connection.CreateCommand())
+        {
+            identity.Transaction = transaction;
+            identity.CommandText = "SELECT SourceOnlineSelectionProjectId FROM Projects WHERE Id=$id;";
+            identity.Parameters.AddWithValue("$id", project.Id.ToString("D"));
+            var stored = await identity.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
+            if (stored is string origin && project.SourceOnlineSelectionProjectId is Guid incoming && Guid.Parse(origin) != incoming)
+                throw new InvalidDataException("The workflow project belongs to another selection project.");
+        }
         await using (var command = connection.CreateCommand())
         {
             command.Transaction = transaction;
             command.CommandText = """
-                INSERT INTO Projects(Id,Name,ProjectType,WorkflowState,RootPath,CreatedAt,UpdatedAt,LastOpenedAt,IsArchived)
-                VALUES($id,$name,$type,$state,$root,$created,$updated,$opened,0)
-                ON CONFLICT(Id) DO UPDATE SET Name=excluded.Name,ProjectType=excluded.ProjectType,WorkflowState=excluded.WorkflowState,RootPath=excluded.RootPath,UpdatedAt=excluded.UpdatedAt,LastOpenedAt=excluded.LastOpenedAt;
+                INSERT INTO Projects(Id,Name,ProjectType,WorkflowState,RootPath,CreatedAt,UpdatedAt,LastOpenedAt,IsArchived,SourceOnlineSelectionProjectId)
+                VALUES($id,$name,$type,$state,$root,$created,$updated,$opened,0,$selectionOrigin)
+                ON CONFLICT(Id) DO UPDATE SET Name=excluded.Name,ProjectType=excluded.ProjectType,WorkflowState=excluded.WorkflowState,RootPath=excluded.RootPath,UpdatedAt=excluded.UpdatedAt,LastOpenedAt=excluded.LastOpenedAt,SourceOnlineSelectionProjectId=COALESCE(Projects.SourceOnlineSelectionProjectId,excluded.SourceOnlineSelectionProjectId);
                 """;
+            command.Parameters.AddWithValue("$selectionOrigin", (object?)project.SourceOnlineSelectionProjectId?.ToString("D") ?? DBNull.Value);
             command.Parameters.AddWithValue("$id", project.Id.ToString("D")); command.Parameters.AddWithValue("$name", project.Name); command.Parameters.AddWithValue("$type", project.Category.ToString()); command.Parameters.AddWithValue("$state", project.Status.ToString());
             command.Parameters.AddWithValue("$root", (object?)project.OutputDirectory ?? DBNull.Value); command.Parameters.AddWithValue("$created", project.CreatedAt.ToString("O")); command.Parameters.AddWithValue("$updated", project.UpdatedAt.ToString("O")); command.Parameters.AddWithValue("$opened", project.UpdatedAt.ToString("O"));
             await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
@@ -52,11 +62,11 @@ public sealed partial class SqliteProjectRepository(IPixelTartDatabase database)
         await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         var projects = new List<PhotoProjectRecord>();
         await using var command = connection.CreateCommand();
-        command.CommandText = "SELECT Id,Name,ProjectType,WorkflowState,RootPath,CreatedAt,UpdatedAt FROM Projects WHERE IsArchived=0 ORDER BY UpdatedAt DESC;";
+        command.CommandText = "SELECT Id,Name,ProjectType,WorkflowState,RootPath,CreatedAt,UpdatedAt,SourceOnlineSelectionProjectId FROM Projects WHERE IsArchived=0 ORDER BY UpdatedAt DESC;";
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
         {
-            projects.Add(new PhotoProjectRecord { Id = Guid.Parse(reader.GetString(0)), Name = reader.GetString(1), Category = Enum.TryParse<CollectionCategory>(reader.GetString(2), out var category) ? category : CollectionCategory.JpegAndRaw, Status = Enum.TryParse<PhotoProjectStatus>(reader.GetString(3), out var status) ? status : PhotoProjectStatus.Draft, OutputDirectory = reader.IsDBNull(4) ? string.Empty : reader.GetString(4), CreatedAt = DateTimeOffset.Parse(reader.GetString(5)), UpdatedAt = DateTimeOffset.Parse(reader.GetString(6)) });
+            projects.Add(new PhotoProjectRecord { SourceOnlineSelectionProjectId = reader.IsDBNull(7) ? null : Guid.Parse(reader.GetString(7)), Id = Guid.Parse(reader.GetString(0)), Name = reader.GetString(1), Category = Enum.TryParse<CollectionCategory>(reader.GetString(2), out var category) ? category : CollectionCategory.JpegAndRaw, Status = Enum.TryParse<PhotoProjectStatus>(reader.GetString(3), out var status) ? status : PhotoProjectStatus.Draft, OutputDirectory = reader.IsDBNull(4) ? string.Empty : reader.GetString(4), CreatedAt = DateTimeOffset.Parse(reader.GetString(5)), UpdatedAt = DateTimeOffset.Parse(reader.GetString(6)) });
         }
         foreach (var project in projects)
         {

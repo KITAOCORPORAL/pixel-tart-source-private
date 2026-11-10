@@ -84,8 +84,8 @@ public sealed class IdentityBridgeFoundationTests
         var tetherAssetId = await SeedTetherAssetAsync(database, temp);
 
         var upgraded = await new DatabaseMigrator(database, backup).MigrateAsync();
-        Assert.IsTrue(upgraded.Success, upgraded.ErrorMessage); Assert.AreEqual(7, upgraded.CurrentVersion);
-        Assert.IsTrue(File.Exists(upgraded.BackupPath)); Assert.HasCount(1, upgraded.AppliedMigrations);
+        Assert.IsTrue(upgraded.Success, upgraded.ErrorMessage); Assert.AreEqual(8, upgraded.CurrentVersion);
+        Assert.IsTrue(File.Exists(upgraded.BackupPath)); Assert.HasCount(2, upgraded.AppliedMigrations);
         await using (var connection = await database.OpenConnectionAsync())
         {
             Assert.AreEqual("ok", await ScalarAsync(connection, "PRAGMA integrity_check;"));

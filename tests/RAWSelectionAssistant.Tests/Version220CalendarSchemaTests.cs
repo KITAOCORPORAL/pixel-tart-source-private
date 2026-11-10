@@ -61,7 +61,7 @@ public sealed class Version220CalendarSchemaTests
         var result = await new DatabaseMigrator(database, new DatabaseBackupService(database, backupRoot)).MigrateAsync();
         Assert.IsTrue(result.Success);
         Assert.AreEqual(1, result.PreviousVersion);
-        Assert.AreEqual(7, result.CurrentVersion);
+        Assert.AreEqual(8, result.CurrentVersion);
         Assert.IsNotNull(result.BackupPath);
         Assert.IsTrue(File.Exists(result.BackupPath));
     }

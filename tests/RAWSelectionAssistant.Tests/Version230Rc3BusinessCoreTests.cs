@@ -37,7 +37,7 @@ public sealed class Version230Rc3BusinessCoreTests
         using var setup = await DatabaseSetup.CreateAsync();
         var result = await new DatabaseMigrator(setup.Database, new DatabaseBackupService(setup.Database, setup.Temp.Combine("repeat-backups"))).MigrateAsync();
         Assert.IsTrue(result.Success);
-        Assert.AreEqual(7, result.CurrentVersion);
+        Assert.AreEqual(8, result.CurrentVersion);
     }
 
     [TestMethod]

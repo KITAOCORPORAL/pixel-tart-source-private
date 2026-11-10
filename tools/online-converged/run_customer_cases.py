@@ -3,9 +3,9 @@ from pathlib import Path
 from PIL import Image
 import datetime, hashlib, json, subprocess, sys, urllib.request, urllib.parse, uuid
 root=Path.cwd(); delivery=Path("E:/Kitao-Deliveries/online-selection-converged-20261110")
-connection=json.loads((delivery/"PRIVATE_ACTUAL_CONNECTION.json").read_text(encoding="utf-8-sig"))
+connection=json.loads((Path(sys.argv[2]) if len(sys.argv)>2 else delivery/"PRIVATE_ACTUAL_CONNECTION.json").read_text(encoding="utf-8-sig"))
 out=delivery/sys.argv[1]; out.mkdir(exist_ok=False)
-control=delivery/"fault-proxy02/control.json"
+control=Path(connection.get("faultControl",str(delivery/"fault-proxy02/control.json")))
 endpoint=connection["endpoint"].rstrip("/")
 Image.new("RGB",(96,64),(221,141,45)).save(out/"SYNTHETIC.JPG","JPEG",quality=85)
 image=(out/"SYNTHETIC.JPG").read_bytes(); sha=hashlib.sha256(image).hexdigest().upper()
