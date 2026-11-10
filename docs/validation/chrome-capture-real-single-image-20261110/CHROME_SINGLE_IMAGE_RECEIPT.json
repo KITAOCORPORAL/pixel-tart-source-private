@@ -1,0 +1,139 @@
+{
+  "status": "PASS_USER_CHROME_SEND_DESKTOP_IMPORT_AND_SOURCE_OPEN",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "installationFixCommit": "a3c4a35cf35d2eaa518bd0dba893a616d551691b",
+  "actualPackage": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64",
+  "actualDesktopPid": 4280,
+  "userFeedback": {
+    "userText": "已发送",
+    "source": "Direct user message in this conversation",
+    "observedAtBerlin": "2026-11-10T08:02:15.121676+01:00"
+  },
+  "capture": {
+    "CaptureId": "287b50b2-74be-4aeb-856a-b5e5ea6a36b4",
+    "LibraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "ProjectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+    "BoardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+    "PageUrl": "http://127.0.0.1:51292/ordinary.html",
+    "ImageUrl": "http://127.0.0.1:51292/ordinary-640.jpg",
+    "PageTitle": "光镜 JPEG 右键采集验收",
+    "CapturedAtUtc": "2026-11-10T06:56:34.428+00:00",
+    "ContentHash": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+    "AssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "Outcome": "Imported",
+    "ImportedAtUtc": "2026-11-10T06:56:56.8943558+00:00"
+  },
+  "previousCaptureId": "39cdab10-fcab-4a76-8663-4403125baf48",
+  "previousCaptureWasNotRewritten": true,
+  "asset": {
+    "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "displayName": "ordinary-640.jpg",
+    "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+    "managedCopyPath": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01\\Capture-Test.ptlibrary\\assets\\managed\\88490206e6c54597973d4a1042abbfb7_ordinary-640.jpg"
+  },
+  "libraryAssetCount": 1,
+  "sameHashAssetCount": 1,
+  "projectLinks": [
+    [
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "reference"
+    ]
+  ],
+  "boardLinks": [
+    [
+      "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "88490206-e6c5-4597-973d-4a1042abbfb7"
+    ]
+  ],
+  "managedOriginalHashMatchesFixture": true,
+  "chromeExtensionUi": "User-operated; not controlled through blocked extension-page tooling",
+  "scope": "Actual company01 data root; not native protocol machine evidence",
+  "originalPageOpenedInActualChrome": {
+    "browser": "Actual company Chrome",
+    "tabId": "1541117533",
+    "url": "http://127.0.0.1:51292/ordinary.html",
+    "title": "光镜 JPEG 右键采集验收",
+    "image": {
+      "complete": true,
+      "currentSrc": "http://127.0.0.1:51292/ordinary-640.jpg",
+      "naturalHeight": 480,
+      "naturalWidth": 640
+    },
+    "trigger": "Published Guangjing desktop OpenCapturedSourcePage native UIA action after actual user capture",
+    "extensionPageNotAccessed": true
+  },
+  "nativeSourceAction": {
+    "pid": 4280,
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+    "sourceActionExists": true,
+    "selectedSourcePath": null,
+    "operation": "open-source",
+    "scope": "Native UIA published full desktop; not Chrome context-menu evidence"
+  },
+  "frozenFileBindings": {
+    "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+    "verifiedFiles": [
+      {
+        "file": "app/KitaoPhotoSelector.exe",
+        "sha256": "0f95e8704bb8e8f73c26bf7dad723c6d8b6531e0ea7ef06e5699f0a79df20e4e"
+      },
+      {
+        "file": "app/KitaoPhotoSelector.dll",
+        "sha256": "3b030f0918f28a3df7c4b569bf8289647072b584dc5b43de68f757a56f488e54"
+      },
+      {
+        "file": "app/RAWSelectionAssistant.Core.dll",
+        "sha256": "c5c68cf99426105de7eee333c59e8f0dc5ac20e614ce742371c1f9635d288447"
+      },
+      {
+        "file": "app/PixelTart.Modules.AssetLibrary.dll",
+        "sha256": "64613f7c7b54f95ebdf56cbeaa9db28e983b2e2a2844ba736370712617cc760f"
+      },
+      {
+        "file": "app/PixelTart.BrowserCapture.Contracts.dll",
+        "sha256": "d9317cb4a7f23fef93a77d6c681bde4410bae66c1f72b7c3730ff13c4ca6a1b1"
+      },
+      {
+        "file": "app/raw_r.dll",
+        "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+      },
+      {
+        "file": "native-host/Guangjing.Capture.NativeHost.exe",
+        "sha256": "b63da78df64d8ca7ed024584bfca6aea07ed72cf110560433fbf129693468b2e"
+      },
+      {
+        "file": "native-host/Guangjing.Capture.NativeHost.dll",
+        "sha256": "5474e995841ea678471c078c75adc9328d65fe2255644834ab5f9d661ee27780"
+      },
+      {
+        "file": "extension/manifest.json",
+        "sha256": "cb6ff6bb73906c2989f8341976e0840a33f69973846d7af1960dd741b1691b66"
+      },
+      {
+        "file": "extension/background.js",
+        "sha256": "0755c69ce2bd329cb2ae58b938b49fc63b96b15b543d35a28da7e92bf9f314c9"
+      },
+      {
+        "file": "extension/source.mjs",
+        "sha256": "df386ea398c28ca861fd8b0d7c22f2d1dae30299cf4e6fb53424866a2229ea24"
+      },
+      {
+        "file": "extension/capture.js",
+        "sha256": "6fbf819592cb5016d93b64cba19dfc0d8bd848e01393353e6aa98e2024f56139"
+      }
+    ],
+    "changed": false
+  },
+  "extensionPageSuccessDisplay": "NOT_OBSERVED_BY_AGENT_URL_POLICY",
+  "remainingRealChromeAcceptance": [
+    "srcset highest-original selection",
+    "unavailable original without thumbnail fallback",
+    "repeat send and same image other project",
+    "desktop unavailable pending item / reopen retry",
+    "invalid destination no automatic reroute"
+  ],
+  "overallFirstVersionAcceptance": "PARTIAL_OTHER_REAL_CHROME_SCENARIOS_PENDING",
+  "browserExtensionStorageClearedOrReloadedByAgent": false
+}

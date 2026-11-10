@@ -1,3 +1,9 @@
+## 2026-11-10 公司Chrome普通JPEG真实单图已入库（Europe/Berlin）
+- 用户反馈“已发送”，company01真实journal Completed采集287b50b2-74be-4aeb-856a-b5e5ea6a36b4；实际AssetId 88490206-e6c5-4597-973d-4a1042abbfb7，测试库/项目A/板A关联读回一致。640×480原始JPEG与托管副本SHA相同，库总1条/同hash1条，没有用机器探针成果代替。
+- 旧保留ID39cdab10在桌面未提交；本次是实际新完成的287b50b2，以真实记录为准，没有重写旧ID/清队列/重载扩展。桌面PID4280实际原生按钮打开原网页，公司Chrome标签1541117533显示匹配URL和640×480图。
+- 状态PASS_USER_CHROME_SEND_DESKTOP_IMPORT_AND_SOURCE_OPEN；扩展页绿色提示代理因URL策略未直接观察。首版整体仍PARTIAL，余下srcset/原图失败/重复与跨项目/桌面暂不可用重开/目标失效真实Chrome场景待验。
+- 产品ed5d15d4冻结，安装交付a3c4a35c，12关键文件hash匹配，无src/extensions变化、不重建，RAW0。回执docs/validation/chrome-capture-real-single-image-20261110/CHROME_SINGLE_IMAGE_RECEIPT.json，说明REPORT.md，本地E:\Kitao-Deliveries\chrome-capture-v1-20261110\chrome-real-capture-20261110T070215Z。旧记录与其他待处理页保留。
+
 ## 2026-11-10 公司Chrome安装修复完成、原待处理项待发送（Europe/Berlin）
 - 接续feature/chrome-capture-v1-20261110@189178e3，实际包E:/Kitao-Deliveries/11.10/Guangjing-ChromeCaptureV1-Diagnostic-win-x64。旧prepare显式传"%~dp0"造成尾引号进入路径，且pause掩盖Native失败；已改为无包路径--prepare并传播errorlevel。源码模板/打包复制/含空格及失败退出门禁已入仓。
 - 实际Native Host无包路径准备成功，数据根company01及pipe保持；当前命令与Chrome用户SID一致，HKCU专有NativeMessagingHost默认值32/64视图注册并读回，manifest/exe/扩展ID匹配11.10实际路径，旧值本地备份，HKLM未动。配套桌面PID4280，真实桥接Ready返回2库/3项目/1板。
