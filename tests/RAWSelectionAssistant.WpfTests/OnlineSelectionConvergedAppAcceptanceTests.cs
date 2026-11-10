@@ -11,8 +11,11 @@ public sealed partial class CanvasFavoriteAppAcceptanceTests
         var page = main.OnlineSelectionPage.ProjectPage;
         var before = page.FinalResult;
         await NativeInvoke(window, "OnlineRefreshResults");
-        await Wait(() => !page.IsBusy && page.StatusText.Contains("无效"), "Reject real HTTP wrong-project result");
+        await Wait(() => !page.IsBusy && (page.StatusText.Contains("不匹配") || page.StatusText.Contains("无效")), "Reject real HTTP wrong-project result");
         Assert.AreEqual(before, page.FinalResult);
+        var workspacePath = Path.Combine(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT")!, "OnlineSelection", "workspace.json");
+        var stored = JsonDocument.Parse(await File.ReadAllTextAsync(workspacePath));
+        Assert.AreEqual(0, stored.RootElement.GetProperty("FinalResults").GetArrayLength());
         await File.WriteAllTextAsync(Path.Combine(Root, "HTTP_WRONG_PROJECT_REJECTED.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=page.Project!.Id, rejected=true, previousResultRetained=true, page.StatusText }));
     });
 
