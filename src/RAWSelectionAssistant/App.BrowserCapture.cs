@@ -62,6 +62,7 @@ public partial class App
             var boards=await tray.ListCollectionsAsync(token);
             if(request.Operation=="destinations")return new(true,"Ready","请选择明确目的地。",new(libraries.Select(x=>new CaptureLibraryOption(x.LibraryId,x.DisplayName)).ToArray(),projects.Select(x=>new CaptureOption(x.Id,x.Name)).ToArray(),boards.Select(x=>new CaptureOption(x.CollectionId,x.Name)).ToArray()));
             if(request.Operation!="capture"||request.Capture is not{} capture)return new(false,"InvalidRequest","不支持此采集请求。");
+            if(capture.Destination is null||capture.PageUrl is null||capture.ImageUrl is null||capture.PageTitle is null||capture.FileName is null||capture.ContentSha256 is null||capture.ImageBase64 is null)throw new InvalidDataException("采集请求缺少必要字段。");
             var target=capture.Destination;
             var library=libraries.SingleOrDefault(x=>x.LibraryId==target.LibraryId);
             bool Valid()=>library is not null && (target.ProjectId is null||projects.Any(p=>p.Id==target.ProjectId)) && (target.BoardId is null||boards.Any(b=>b.CollectionId==target.BoardId && (b.ProjectId is null||projects.Any(p=>p.Id==b.ProjectId)) && (target.ProjectId is null||b.ProjectId is null||b.ProjectId==target.ProjectId)));

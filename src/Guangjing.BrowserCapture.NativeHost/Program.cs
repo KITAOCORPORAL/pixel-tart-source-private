@@ -50,7 +50,7 @@ try
     var reply = JsonSerializer.Deserialize<CaptureReply>(response, CaptureWire.Json) ?? throw new IOException("Missing desktop receipt.");
     await CaptureWire.WriteAsync(output, reply, CaptureWire.MaximumResponseBytes);
 }
-catch (Exception e) when (e is IOException or UnauthorizedAccessException or JsonException or OperationCanceledException or ArgumentException)
+catch (Exception e) when (e is IOException or InvalidDataException or UnauthorizedAccessException or JsonException or OperationCanceledException or ArgumentException)
 {
     await CaptureWire.WriteAsync(output, new CaptureReply(false, "BridgeUnavailable", "本机桥接未完成；待处理采集已保留，请重试或检查配套桌面入口。", Retryable:true), CaptureWire.MaximumResponseBytes);
 }

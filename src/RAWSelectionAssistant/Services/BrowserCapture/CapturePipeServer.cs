@@ -19,7 +19,7 @@ public sealed class CapturePipeServer : IDisposable
                     var request=data is null?null:JsonSerializer.Deserialize<CaptureRequest>(data,CaptureWire.Json);
                     var reply=request is null?new CaptureReply(false,"InvalidRequest","采集请求无效。"):await handler(request,timeout.Token);
                     await CaptureWire.WriteAsync(pipe,reply,CaptureWire.MaximumResponseBytes,timeout.Token);
-                }catch(Exception e)when(e is IOException or JsonException or OperationCanceledException){if(_stop.IsCancellationRequested)break;}
+                }catch(Exception e)when(e is IOException or InvalidDataException or ArgumentException or JsonException or OperationCanceledException){if(_stop.IsCancellationRequested)break;}
             }
         });
     }
