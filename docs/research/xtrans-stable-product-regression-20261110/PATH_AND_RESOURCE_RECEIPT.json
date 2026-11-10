@@ -1,0 +1,151 @@
+{
+  "productSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "rawBatch": {
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "maximumHeavyDecodes": 6,
+    "consumed": 0,
+    "remaining": 6,
+    "pathEvidenceFiles": 0,
+    "steps": {
+      "A-cold": 1,
+      "A-cache": 0,
+      "A-rebuild": 1,
+      "B-cold": 1,
+      "B-cache": 0,
+      "B-rebuild": 1,
+      "control-A": 1,
+      "control-B": 1
+    }
+  },
+  "paths": [
+    {
+      "step": "A-cold",
+      "status": "BLOCKED_BEFORE_PRODUCT_COMMAND",
+      "observedEntry": "Darkroom -> Import / Export -> Import photos -> source-read-only file dialog",
+      "productPathBegin": false,
+      "heavyDecodeConsumed": 0,
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "A-cache",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "A-rebuild",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "B-cold",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "B-cache",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "B-rebuild",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "control-A",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    },
+    {
+      "step": "control-B",
+      "status": "NOT_RUN",
+      "timings": {
+        "coldOpenMs": null,
+        "cacheOpenMs": null,
+        "rebuildMs": null,
+        "exportMs": null
+      },
+      "peakWorkingSetBytes": null,
+      "peakPrivateBytes50ms": null,
+      "decodedTiffPixelComparison": "NOT_RUN",
+      "tiffBitDepth": null,
+      "tiffIccSha256": null
+    }
+  ],
+  "unavailableReason": "Desktop input rejected before the import dialog could be submitted",
+  "excludedIdleProcess": {
+    "pid": 24024,
+    "exitReceipt": "ui-steps/A-cold/EXIT.json",
+    "reason": "Lifetime contains dialogs and extended idle; no ProductPathBegin or decode reservation"
+  }
+}

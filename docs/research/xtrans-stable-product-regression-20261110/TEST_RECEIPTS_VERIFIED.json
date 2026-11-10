@@ -1,0 +1,464 @@
+{
+  "status": "PASS_EXISTING_RESULTS_READBACK",
+  "rerun": false,
+  "passed": 61,
+  "notExecuted": 1,
+  "suites": [
+    {
+      "file": "tests-cache/xtrans-cache-gates.trx",
+      "sha256": "51FF7CFE5CED764A75BD5A453CCE18FEEFF3E26A70DDACAD32696EA541DC26BC",
+      "counts": {
+        "total": "5",
+        "executed": "5",
+        "passed": "5",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "InvalidCacheIsRejectedAndReplacementPreservesHistoryWithoutOverwritingPayload",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "FormalBuildCannotActivateCandidateFromEnvironmentAlone",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "DuplicateKeysAndPathTraversalAreRejected",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CandidateAndDefaultCacheCannotShareEntriesAndOffRouteRetainsDefault",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "LegacyProjectRecipeRoundtripRemainsSchema1AndDiagnosticMarkerIsExplicit",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "file": "tests-core/pv456-core.trx",
+      "sha256": "A233AE7AE8501EF5DF840FA424C9C30CEF1D10A18C43516020C201D195754D2E",
+      "counts": {
+        "total": "43",
+        "executed": "43",
+        "passed": "43",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "DefaultOldDefinitionUnchangedWideMasterBypassesDisplayAndPreservesExtendedValues",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "RenderedLegacyRawMatchesExistingFullPrecisionExportAndRejectsRepeatedGains",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CropPositionFitAndLegacyHaveOneIsotropicMapping",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "HighPrecisionColorRangeWithoutSamplesIsExactIdentity",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "ColorDirectionsAreNotConflatedAndItype600SharedBaseIsExplicit",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "AllEightProfilesRoundTripFrozenSnapshotsAndTileWithoutSeamsForExif1To8",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "SessionRoundTripPreservesTargetsSelectionFiltersEngineAndProtectsAssetMetadata",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "D65ProfileNeutralAdaptsToD50AndDoesNotRoundtripThroughSrgb",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "DisabledEffectPreservesPv4ExactlyAndNoLegacyFilmIsMigrated",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "RegionUsesExactOriginalPixelsForAllExifOrientations",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "InvalidVersionsMalformedGeometryAndDuplicateWhiteBalanceAreRejected",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CubeSampleGridMatchesPinnedProvenanceAndIndependentPythonMetrics",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "AllExifOrientationsMatchFullRowsTilesAndSavedDice",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "InputRecipeSeparatesCacheKeysAndKeepsLegacyFingerprint",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "SessionRejectsDuplicateTargetIdentityBeforeReplacingCurrentDocument",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "Pv4Pv5Pv6ReopenedLegacyPixelsMatchIndependentBaseShaGoldenForAllOrientations",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "RandomSubstreamsAndNormalizedGeometryAreDeterministicAndIndependentOfOutputSize",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "LayoutRoundTripPreservesWidthsModesAndOldFilesRemainCompatible",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "AreaPreviewAntialiasesCheckerboardAndThinLinesAfterFullDisplayInLinearLight",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "StreamingRowsMatchHistoricalFullTiffBytesAndCancelAtomically",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "RawCapabilityListsFormatsWithoutClaimingVerification",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "EightBitFallbackCannotPretendToBeProfessionalTiff",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "ProfessionalDecodeMatchPreviewAndAtomicTiffShareFrozenState",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "FrozenMasterRejectsSourceMutationBeforeExport",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "TimelineBothPathsRequireFullDevelopmentAfterCompleteEjectionAndNeverExposeSkip",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CategorySyncPreservesMultipleRangesAndUnselectedNodesWithoutDuplicateIds",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "TiffCancellationStopsBeforeCompletion",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "GlobalBudgetCombinesOwnersAndWorkAndReleasesReservations",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CancellationInsideLargeEditLoopIsPromptAndReleasesAdmission",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CancelDuringEditsReleasesWorkAndNeverReturnsMaster",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "TiffIccRejectsInvalidProfile",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "UnsupportedReferencesEnginesAndVersionsFailExplicitly",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "Tiff16BitPreservesDimensions",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "ExistingDestinationIsNotReplacedByProductExport",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "V1RemainsReadableAndV2BypassIsExactWithoutImplicitMigration",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "file": "tests-wpf/BatchSevenRawProductTests.trx",
+      "sha256": "689612B895ADC8AC789EF2DDCB742E0897DC2D9CC46E27C3EB03B2E5870F8863",
+      "counts": {
+        "total": "5",
+        "executed": "4",
+        "passed": "4",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "ThreeRealEncodersPreservePrecisionOrientationProfileAndPixelContract",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+          "outcome": "NotExecuted",
+          "messages": [
+            "Assert.Inconclusive 失败。Authorized local corpus opt-in required."
+          ]
+        },
+        {
+          "name": "NativeViewportDebouncesAndRejectsStaleExposureAndKeepsOneMaster",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "CancellingRowEncoderPreservesExistingDestinationAndLeavesNoPartialOutput",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "PublishingKeepsRawDefinitionRejectsFakeIccAndUsesActualJpegQuality",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "file": "tests-wpf/BatchTenLegacyRawProductTests.trx",
+      "sha256": "21959648F7F8E52B0815711A14EAB3E3C9B30DC47CD57517E3C4160DB9A3287F",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "UnsupportedEngineAndCancelledRebuildPreservePreviousVersion",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "LegacyRawCurrentEditsVersionSwitchReopenExportAndPublishingUseFullPixels",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "file": "tests-wpf/ProfessionalRawWorkspaceTests.trx",
+      "sha256": "653A3B62F3675C991CC73BD423A154B0EF527DD3E8CD11A3E664168AB509618E",
+      "counts": {
+        "total": "4",
+        "executed": "4",
+        "passed": "4",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "R53OriginalToExistingProfessionalVariantRefreshesReadOnlyState",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "LegacyRawSessionTransferKeepsHighPrecisionSourceForSubsequentEditing",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    },
+    {
+      "file": "tests-wpf/RawMatchTiff16ProductWpfTests.trx",
+      "sha256": "B40DD31596DBA632A329BF0788A06FD620B551CEC0607F61C9F44A3BEA5DB3D0",
+      "counts": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "UnsupportedRawIsExplainedWithoutCorruptExport",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes",
+          "outcome": "Passed",
+          "messages": []
+        },
+        {
+          "name": "WorkspaceImportsRawPreviewsAndExportsGenuineTiff16",
+          "outcome": "Passed",
+          "messages": []
+        }
+      ]
+    }
+  ]
+}

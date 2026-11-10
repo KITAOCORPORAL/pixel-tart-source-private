@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-10",
+  "timezone": "Europe/Helsinki",
+  "status": "PARTIAL_ENVIRONMENT_BLOCKED",
+  "productBaseHead": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
+  "productBaseSourceSha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "featureProductSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "candidateResearchSha": "53e2355d0bad80b364504145780778e165763d94",
+  "candidateNativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+  "defaultNativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+  "defaultNativeMatchesPublishedPackage": true,
+  "candidateIntegration": "explicit diagnostic compile flag AND environment opt-in; separate worker; default native library preserved",
+  "frozenFilesVerified": 65,
+  "oldLedgersUnchanged": true,
+  "realRawBatch": {
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "maximumHeavyDecodes": 6,
+    "consumed": 0,
+    "remaining": 6,
+    "pathEvidenceFiles": 0,
+    "steps": {
+      "A-cold": 1,
+      "A-cache": 0,
+      "A-rebuild": 1,
+      "B-cold": 1,
+      "B-cache": 0,
+      "B-rebuild": 1,
+      "control-A": 1,
+      "control-B": 1
+    }
+  },
+  "paths": [
+    {
+      "step": "A-cold",
+      "status": "BLOCKED_BEFORE_PRODUCT_COMMAND",
+      "observedEntry": "Darkroom -> Import / Export -> Import photos -> source-read-only file dialog",
+      "productPathBegin": false,
+      "heavyDecodeConsumed": 0
+    },
+    {
+      "step": "A-cache",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "A-rebuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "B-cold",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "B-cache",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "B-rebuild",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "control-A",
+      "status": "NOT_RUN"
+    },
+    {
+      "step": "control-B",
+      "status": "NOT_RUN"
+    }
+  ],
+  "environment": {
+    "session": "console Administrator session 1 Active",
+    "captureError": "FrameArrived timed out: timed out waiting on channel",
+    "activationError": "GetCursorPos failed: Access denied (0x80070005)",
+    "ocuObservation": "Visible file dialog and typed filename; click, Return and Alt+O did not submit the dialog",
+    "cleanup": "Verified isolated PID 24024 stopped before any path evidence or RAW reservation",
+    "doesNotProveDesktopLocked": true
+  },
+  "conclusions": {
+    "repeatability": "Existing research pair P6 bit-exact; real product path repeatability NOT_RUN",
+    "photographicAppearance": "Five fixed stored-input crop triplets inspected at 100%; no obvious new continuous seam or broad halo; local pixel differences remain; no general photography acceptance",
+    "compatibility": "Existing synthetic/cache/recipe/formal-off and PV4/5/6 tests read back; 61 passed, 1 not executed; real save-reopen and non-XTrans control NOT_RUN",
+    "resources": "Product cold-open/cache-open/rebuild/export timings and peaks UNAVAILABLE; idle app lifetime is excluded"
+  },
+  "tiff": {
+    "realProductExport": "NOT_RUN",
+    "decodedPixelRepeatability": "NOT_RUN",
+    "bitDepth": "NOT_MEASURED",
+    "icc": "NOT_MEASURED"
+  },
+  "newRawDecoderCalls": 0,
+  "newNativeBuilds": 0,
+  "formalIntegration": false
+}

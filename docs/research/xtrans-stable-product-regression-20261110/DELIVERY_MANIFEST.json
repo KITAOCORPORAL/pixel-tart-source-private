@@ -1,0 +1,79 @@
+{
+  "status": "PARTIAL_ENVIRONMENT_BLOCKED",
+  "featureProductSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "containsNativeBinaries": false,
+  "containsRawInputs": false,
+  "containsPhotoCrops": false,
+  "files": [
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/FIXED_CROP_VERIFICATION.json",
+      "bytes": 15832,
+      "sha256": "d77a73ef439758723b53ec9c2f7235e7d14287518ed536908999844856b22f89"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/IDENTITY_VERIFICATION.json",
+      "bytes": 11387,
+      "sha256": "2b8f354941e4118a286868855bd201186008aef1239e744ec92809edf10a54bf"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/PATH_AND_RESOURCE_RECEIPT.json",
+      "bytes": 3953,
+      "sha256": "b3c1a896d11b58a51d49d8a9af51b38ca9c8899023f6de36bf51db4934a429ac"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/REPORT.md",
+      "bytes": 7669,
+      "sha256": "c3d1bd858b7b03d209564dedd3181a5af51341d0761050666afdb94cc5783a70"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/RUNBOOK.md",
+      "bytes": 3744,
+      "sha256": "f29f7f1082817f0832eaf351d1d45947c002d195b9751bb961ef25cfd1c94c32"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/STATUS.json",
+      "bytes": 3251,
+      "sha256": "b9555420afa9811f5f2cbfe57b6adb54cd4b628eb1476558756390dedf9ed6aa"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/STORED_P6_READBACK.json",
+      "bytes": 1962,
+      "sha256": "e68c9287c954307d598f4d3492ab3363236877f4e134e8b89a06803c2637a480"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/TEST_RECEIPTS_VERIFIED.json",
+      "bytes": 14328,
+      "sha256": "7f27704839c9c78eaab69b9fa7546e53d9b92497f3ca188aaf284d4107588b09"
+    },
+    {
+      "path": "tools/XTransProductRegression/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "tools/XTransProductRegression/README.md",
+      "bytes": 1976,
+      "sha256": "2eb500db4d828ce7c216020ae55aafe85a1d8b2ad557bfd83b018d91637c870a"
+    },
+    {
+      "path": "tools/XTransProductRegression/launch_app.py",
+      "bytes": 7089,
+      "sha256": "fbf51bcf8c6cfa7f9df19836ab1d3a93ddacf2399227fce4321a7e5583ec7d22"
+    },
+    {
+      "path": "tools/XTransProductRegression/readback_p6.py",
+      "bytes": 2118,
+      "sha256": "c50ef66511f91ebab11a00ccf8f8e6b8190cf642b453db1452c3e42c69d1d183"
+    },
+    {
+      "path": "tools/XTransProductRegression/verify_evidence.py",
+      "bytes": 10181,
+      "sha256": "048ab0b40cf3e9ebe44f21e9bea7732f5f08b1118c698efd40f52bf923716a61"
+    }
+  ]
+}

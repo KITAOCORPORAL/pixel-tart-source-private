@@ -1,0 +1,66 @@
+{
+  "status": "PASS_STORED_P6_READBACK",
+  "newRawDecoderCalls": 0,
+  "bytesPerP6": 241118208,
+  "candidatePairSha256": "9266ca59bc012266a7423d4b5538f7250e1ccca92c2129f3218e80fcd5bdf024",
+  "candidateP6BitExact": true,
+  "previousMetricsScope": "Existing research report; source hashes and selected maximum coordinate independently re-read in this continuation",
+  "baselines": [
+    {
+      "baseline": "old-first",
+      "sha256": "29679cc68306f140612583da3b37876bb270c816e40b8434f4496ba1ec4109d7",
+      "maxDifferenceCoordinate": [
+        2501,
+        792,
+        "G"
+      ],
+      "candidate": 3053,
+      "old": 2183,
+      "absoluteDifference": 870,
+      "previousWholeImageMetrics": {
+        "pixels": 40186368,
+        "changedChannels": 330309,
+        "changedPixels": 197896,
+        "sumAbsU16": 3192010,
+        "maxU16": 870,
+        "meanAbsU16": 0.026476722985598833
+      },
+      "previousNonSeamMetrics": {
+        "pixels": 37539968,
+        "changedChannels": 5760,
+        "changedPixels": 3169,
+        "sumAbsU16": 57144,
+        "maxU16": 870,
+        "meanAbsU16": 0.0005074058667284959
+      }
+    },
+    {
+      "baseline": "old-second",
+      "sha256": "2af6dd9524cdb87d8ecab0a624d49495a806d1d78935fd6cad3d9ec6cd91003b",
+      "maxDifferenceCoordinate": [
+        2501,
+        792,
+        "G"
+      ],
+      "candidate": 3053,
+      "old": 2183,
+      "absoluteDifference": 870,
+      "previousWholeImageMetrics": {
+        "pixels": 40186368,
+        "changedChannels": 329974,
+        "changedPixels": 197705,
+        "sumAbsU16": 3188013,
+        "maxU16": 870,
+        "meanAbsU16": 0.026443569122743316
+      },
+      "previousNonSeamMetrics": {
+        "pixels": 37539968,
+        "changedChannels": 5756,
+        "changedPixels": 3167,
+        "sumAbsU16": 57082,
+        "maxU16": 870,
+        "meanAbsU16": 0.0005068553423735826
+      }
+    }
+  ]
+}

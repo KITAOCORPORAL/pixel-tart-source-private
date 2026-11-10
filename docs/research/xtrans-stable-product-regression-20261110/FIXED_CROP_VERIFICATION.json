@@ -1,0 +1,498 @@
+{
+  "status": "PASS",
+  "source": "existing saved MakeMemoryImage RGB16, neutral product render",
+  "productSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "rawDecoderCalls": 0,
+  "storedFinishedInputs": [
+    {
+      "label": "old-first",
+      "sha256": "94E26BC81905555DC5137A941C783ECE167E7BD14AD2D5D27D5B0D5364C76A8E",
+      "bytes": 241118208
+    },
+    {
+      "label": "old-second",
+      "sha256": "90E317FB5CD15BA7BC6D9639702381BF9E7939BE60AFEE6479B516E486364C4E",
+      "bytes": 241118208
+    },
+    {
+      "label": "candidate",
+      "sha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+      "bytes": 241118208
+    }
+  ],
+  "pngCount": 30,
+  "rgb48Count": 15,
+  "allPngCrcsPassed": true,
+  "allDecodedPixelsMatchReceipt": true,
+  "iccSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+  "iccValidationScope": "byte identity only; inherited product profile, no independent ICC color-accuracy validation",
+  "files": [
+    {
+      "file": "1-max-difference-old-first-8.png",
+      "bytes": 151350,
+      "sha256": "2F673CBD2B9C2685F1E31A997E5A07119FC43D3F2A5E96708D88F07B7BC1D1ED"
+    },
+    {
+      "file": "1-max-difference-old-first-16.png",
+      "bytes": 362887,
+      "sha256": "C7BEAA7774FCE990F664CA90C5B661B62070CCB587D7B94B4DAD4AA3E12DD276"
+    },
+    {
+      "file": "1-max-difference-old-first.rgb48",
+      "bytes": 393216,
+      "sha256": "8D7E23C29D290E45EEB55E6FF6921FCA1C7A99351DF72FF21342ED9D237DC96D"
+    },
+    {
+      "file": "2-vertical-seam-old-first-8.png",
+      "bytes": 129005,
+      "sha256": "414969B42E2A4E9FD319F008361E7A34615A193760770CF121E794D8DE647A2E"
+    },
+    {
+      "file": "2-vertical-seam-old-first-16.png",
+      "bytes": 312132,
+      "sha256": "800A74B8073FD90C338C02B9ECF188897E8551B6698B801DAEF0C0A6A8CA19F1"
+    },
+    {
+      "file": "2-vertical-seam-old-first.rgb48",
+      "bytes": 393216,
+      "sha256": "F25496EB09070C1860FC5F49D7B428619EFE1D6268CB8D768FAF0F57E7794358"
+    },
+    {
+      "file": "3-vertical-seam-old-first-8.png",
+      "bytes": 125198,
+      "sha256": "4A716BB814B7561AD87FD65F95F705F61864DF4CAD05B7EEBC3C33E2970B6EE1"
+    },
+    {
+      "file": "3-vertical-seam-old-first-16.png",
+      "bytes": 339805,
+      "sha256": "20FDBDDDE03C2A8823A6469BC2AF83125907BBCB9287E80FDBB5F8CC8A3A29A3"
+    },
+    {
+      "file": "3-vertical-seam-old-first.rgb48",
+      "bytes": 393216,
+      "sha256": "3CC24E6E83AF1A2ADB64B0BCA65D6131C8CF0E6267D55F7B08802129DDE58D10"
+    },
+    {
+      "file": "4-outside-seam-band-old-first-8.png",
+      "bytes": 152233,
+      "sha256": "D689CBE0350097FD402DD90ED0523EF028002608C3D396C94303B03E064B4C01"
+    },
+    {
+      "file": "4-outside-seam-band-old-first-16.png",
+      "bytes": 370288,
+      "sha256": "7AF3ECB41DB176FE2AA1B1A3C02B8DC16C87BBCA199A6B6CE8363EA876E84549"
+    },
+    {
+      "file": "4-outside-seam-band-old-first.rgb48",
+      "bytes": 393216,
+      "sha256": "D2735CE8480EF4F379B81C91ECB883B8BE17EB81A7DAE42BC0F2705EB96CFB0B"
+    },
+    {
+      "file": "5-horizontal-seam-old-first-8.png",
+      "bytes": 122798,
+      "sha256": "42A00CB4C5823E3DCCC375E8B6F2511E6DB445C2D28BE93A909369ACB5F1BB8A"
+    },
+    {
+      "file": "5-horizontal-seam-old-first-16.png",
+      "bytes": 347501,
+      "sha256": "374D5CDBC36773BA1E79DD08F1D5952CFE5DBBE040B8945924D96730D09E5F3E"
+    },
+    {
+      "file": "5-horizontal-seam-old-first.rgb48",
+      "bytes": 393216,
+      "sha256": "4BD00138227DF1EBDE98119AFF4146A53E3A9BC42F1AEA873E60FAF5FD781F87"
+    },
+    {
+      "file": "1-max-difference-old-second-8.png",
+      "bytes": 151350,
+      "sha256": "2F673CBD2B9C2685F1E31A997E5A07119FC43D3F2A5E96708D88F07B7BC1D1ED"
+    },
+    {
+      "file": "1-max-difference-old-second-16.png",
+      "bytes": 362887,
+      "sha256": "C7BEAA7774FCE990F664CA90C5B661B62070CCB587D7B94B4DAD4AA3E12DD276"
+    },
+    {
+      "file": "1-max-difference-old-second.rgb48",
+      "bytes": 393216,
+      "sha256": "8D7E23C29D290E45EEB55E6FF6921FCA1C7A99351DF72FF21342ED9D237DC96D"
+    },
+    {
+      "file": "2-vertical-seam-old-second-8.png",
+      "bytes": 129005,
+      "sha256": "414969B42E2A4E9FD319F008361E7A34615A193760770CF121E794D8DE647A2E"
+    },
+    {
+      "file": "2-vertical-seam-old-second-16.png",
+      "bytes": 312132,
+      "sha256": "800A74B8073FD90C338C02B9ECF188897E8551B6698B801DAEF0C0A6A8CA19F1"
+    },
+    {
+      "file": "2-vertical-seam-old-second.rgb48",
+      "bytes": 393216,
+      "sha256": "F25496EB09070C1860FC5F49D7B428619EFE1D6268CB8D768FAF0F57E7794358"
+    },
+    {
+      "file": "3-vertical-seam-old-second-8.png",
+      "bytes": 125199,
+      "sha256": "ED56B7AF72B809C5E15307CC04EA1562168AEB444BFFA6A9CA3E87A3665219C5"
+    },
+    {
+      "file": "3-vertical-seam-old-second-16.png",
+      "bytes": 339806,
+      "sha256": "86CC6F0EB342087BEBCDD591028842BA5B83A3F15AC5A15157FDF054D4550649"
+    },
+    {
+      "file": "3-vertical-seam-old-second.rgb48",
+      "bytes": 393216,
+      "sha256": "58C3C5D95DCC03D14EBB5CA70F96339BF3E09111C4E23A00C9F6936241F3EC44"
+    },
+    {
+      "file": "4-outside-seam-band-old-second-8.png",
+      "bytes": 152233,
+      "sha256": "D689CBE0350097FD402DD90ED0523EF028002608C3D396C94303B03E064B4C01"
+    },
+    {
+      "file": "4-outside-seam-band-old-second-16.png",
+      "bytes": 370288,
+      "sha256": "7AF3ECB41DB176FE2AA1B1A3C02B8DC16C87BBCA199A6B6CE8363EA876E84549"
+    },
+    {
+      "file": "4-outside-seam-band-old-second.rgb48",
+      "bytes": 393216,
+      "sha256": "D2735CE8480EF4F379B81C91ECB883B8BE17EB81A7DAE42BC0F2705EB96CFB0B"
+    },
+    {
+      "file": "5-horizontal-seam-old-second-8.png",
+      "bytes": 122798,
+      "sha256": "42A00CB4C5823E3DCCC375E8B6F2511E6DB445C2D28BE93A909369ACB5F1BB8A"
+    },
+    {
+      "file": "5-horizontal-seam-old-second-16.png",
+      "bytes": 347501,
+      "sha256": "374D5CDBC36773BA1E79DD08F1D5952CFE5DBBE040B8945924D96730D09E5F3E"
+    },
+    {
+      "file": "5-horizontal-seam-old-second.rgb48",
+      "bytes": 393216,
+      "sha256": "4BD00138227DF1EBDE98119AFF4146A53E3A9BC42F1AEA873E60FAF5FD781F87"
+    },
+    {
+      "file": "1-max-difference-candidate-8.png",
+      "bytes": 151351,
+      "sha256": "ABA4CDF73A200E0A330E57C84BC44C7417408CDE17F501098DBEABFF38E51FC8"
+    },
+    {
+      "file": "1-max-difference-candidate-16.png",
+      "bytes": 362886,
+      "sha256": "E298A477FE4A65FCEC2A8AF2E4615D5F7E8E0FA9FA8665EF68218F666C9C7795"
+    },
+    {
+      "file": "1-max-difference-candidate.rgb48",
+      "bytes": 393216,
+      "sha256": "DCB2D0838E2121CDB054430CFD36525FAFA25C4E5EA69E04FE5000C8482373DF"
+    },
+    {
+      "file": "2-vertical-seam-candidate-8.png",
+      "bytes": 129007,
+      "sha256": "83EDDDD541603A64A5413701C4149B146DCEE7149D2D91D34835E2C0514CF6F0"
+    },
+    {
+      "file": "2-vertical-seam-candidate-16.png",
+      "bytes": 312027,
+      "sha256": "35D3D5F005F7F6AC2CF839603DCD3F8B00B0B265CF13F0643A356F12934DD48B"
+    },
+    {
+      "file": "2-vertical-seam-candidate.rgb48",
+      "bytes": 393216,
+      "sha256": "93AAC19D87A261C5E37BD065EC432C7F267CABFEBDB31E6BEA080F5907656007"
+    },
+    {
+      "file": "3-vertical-seam-candidate-8.png",
+      "bytes": 125190,
+      "sha256": "7F31759A4EFD823CE36796A2A35081BC20E05CCC0BDBD890CC0005F162920F76"
+    },
+    {
+      "file": "3-vertical-seam-candidate-16.png",
+      "bytes": 339764,
+      "sha256": "E138F89E58809E86AE1D067C0C916BC340AB00673450775718594FEB3CF6B0A6"
+    },
+    {
+      "file": "3-vertical-seam-candidate.rgb48",
+      "bytes": 393216,
+      "sha256": "15BE5F4F3CC317ABE4672966F00714696F56184C2B6CD58DA1A32E922D5DEBEF"
+    },
+    {
+      "file": "4-outside-seam-band-candidate-8.png",
+      "bytes": 152232,
+      "sha256": "838563E6B96FF02EDA27601AEBE611C33351D268E6F0B7EAA9912B64E3D07793"
+    },
+    {
+      "file": "4-outside-seam-band-candidate-16.png",
+      "bytes": 370297,
+      "sha256": "618540BD404DE298696647502927AD117D3FFB42C553ACAEC88D0B00D1F18BAA"
+    },
+    {
+      "file": "4-outside-seam-band-candidate.rgb48",
+      "bytes": 393216,
+      "sha256": "8802E2B5AC97952DFFD37B9C88BAA5BC95585F9E5D498F0BB74592DA2173D75E"
+    },
+    {
+      "file": "5-horizontal-seam-candidate-8.png",
+      "bytes": 122806,
+      "sha256": "0C52A6A32B8189DCED18D9EF4CDEB4AC6FBA8DF04E704BDCEDB44843733C9D7B"
+    },
+    {
+      "file": "5-horizontal-seam-candidate-16.png",
+      "bytes": 347516,
+      "sha256": "CDF144A29EF67A2A215993E3AA46F846B74C02C1D96A3C835C4890C5BE0CD2DC"
+    },
+    {
+      "file": "5-horizontal-seam-candidate.rgb48",
+      "bytes": 393216,
+      "sha256": "8CC5B6A5F45D5EE8B74B742DDA523C7A8D3BFCB40D2E03A915D4B89F994CEC9F"
+    }
+  ],
+  "comparisons": [
+    {
+      "roi": "1-max-difference",
+      "x": 2373,
+      "y": 664,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 44,
+        "changedChannels": 54,
+        "maxChannelDifference": 32,
+        "meanAbsoluteDifferencePerChannel": 0.0013376871744791667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 54,
+        "changedChannels": 68,
+        "maxChannelDifference": 8107,
+        "meanAbsoluteDifferencePerChannel": 0.3490041097005208,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "1-max-difference",
+      "x": 2373,
+      "y": 664,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 44,
+        "changedChannels": 54,
+        "maxChannelDifference": 32,
+        "meanAbsoluteDifferencePerChannel": 0.0013376871744791667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 54,
+        "changedChannels": 68,
+        "maxChannelDifference": 8107,
+        "meanAbsoluteDifferencePerChannel": 0.3490041097005208,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "2-vertical-seam",
+      "x": 2363,
+      "y": 1736,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 311,
+        "changedChannels": 408,
+        "maxChannelDifference": 28,
+        "meanAbsoluteDifferencePerChannel": 0.006154378255208333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 408,
+        "changedChannels": 553,
+        "maxChannelDifference": 7041,
+        "meanAbsoluteDifferencePerChannel": 1.5896759033203125,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "2-vertical-seam",
+      "x": 2363,
+      "y": 1736,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 311,
+        "changedChannels": 408,
+        "maxChannelDifference": 28,
+        "meanAbsoluteDifferencePerChannel": 0.006154378255208333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 408,
+        "changedChannels": 553,
+        "maxChannelDifference": 7041,
+        "meanAbsoluteDifferencePerChannel": 1.5896759033203125,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "3-vertical-seam",
+      "x": 1867,
+      "y": 2248,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 492,
+        "changedChannels": 646,
+        "maxChannelDifference": 13,
+        "meanAbsoluteDifferencePerChannel": 0.007090250651041667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 665,
+        "changedChannels": 953,
+        "maxChannelDifference": 3564,
+        "meanAbsoluteDifferencePerChannel": 1.8036753336588542,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "3-vertical-seam",
+      "x": 1867,
+      "y": 2248,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 493,
+        "changedChannels": 647,
+        "maxChannelDifference": 13,
+        "meanAbsoluteDifferencePerChannel": 0.0070953369140625,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 666,
+        "changedChannels": 955,
+        "maxChannelDifference": 3564,
+        "meanAbsoluteDifferencePerChannel": 1.8050740559895833,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "4-outside-seam-band",
+      "x": 2372,
+      "y": 1219,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 83,
+        "changedChannels": 111,
+        "maxChannelDifference": 20,
+        "meanAbsoluteDifferencePerChannel": 0.0016377766927083333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 127,
+        "changedChannels": 173,
+        "maxChannelDifference": 5245,
+        "meanAbsoluteDifferencePerChannel": 0.4143473307291667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "4-outside-seam-band",
+      "x": 2372,
+      "y": 1219,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 83,
+        "changedChannels": 111,
+        "maxChannelDifference": 20,
+        "meanAbsoluteDifferencePerChannel": 0.0016377766927083333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 127,
+        "changedChannels": 173,
+        "maxChannelDifference": 5245,
+        "meanAbsoluteDifferencePerChannel": 0.4143473307291667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "5-horizontal-seam",
+      "x": 4096,
+      "y": 2859,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 479,
+        "changedChannels": 747,
+        "maxChannelDifference": 19,
+        "meanAbsoluteDifferencePerChannel": 0.008371988932291666,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 668,
+        "changedChannels": 1141,
+        "maxChannelDifference": 4804,
+        "meanAbsoluteDifferencePerChannel": 2.1463521321614585,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "5-horizontal-seam",
+      "x": 4096,
+      "y": 2859,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 479,
+        "changedChannels": 747,
+        "maxChannelDifference": 19,
+        "meanAbsoluteDifferencePerChannel": 0.008371988932291666,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 668,
+        "changedChannels": 1141,
+        "maxChannelDifference": 4804,
+        "meanAbsoluteDifferencePerChannel": 2.1463521321614585,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    }
+  ]
+}
