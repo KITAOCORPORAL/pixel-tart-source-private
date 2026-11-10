@@ -95,7 +95,13 @@ public partial class App
             var safe=Path.GetFileName(capture.FileName);if(string.IsNullOrWhiteSpace(safe)||safe!=capture.FileName||safe.IndexOfAny(Path.GetInvalidFileNameChars())>=0)safe="capture-"+hash[..12]+extension;
             safe=Path.GetFileNameWithoutExtension(safe)[..Math.Min(100,Path.GetFileNameWithoutExtension(safe).Length)]+extension;
             var sourceRoot=Path.Combine(AppDataPaths.Root,"BrowserCapture","originals",hash);Directory.CreateDirectory(sourceRoot);var source=Path.Combine(sourceRoot,safe);
-            if(!File.Exists(source)){await using var file=new FileStream(source,FileMode.CreateNew,FileAccess.Write,FileShare.None,81920,true);await file.WriteAsync(bytes,token);await file.FlushAsync(token);}
+            if(!File.Exists(source)){
+                var temporary=source+"."+capture.CaptureId.ToString("N")+".part";
+                try{
+                    await using(var file=new FileStream(temporary,FileMode.CreateNew,FileAccess.Write,FileShare.None,81920,true)){await file.WriteAsync(bytes,token);await file.FlushAsync(token);file.Flush(true);}
+                    File.Move(temporary,source,false);
+                }finally{if(File.Exists(temporary))File.Delete(temporary);}
+            }
             else if(!Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(source,token))).Equals(hash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("采集缓存内容发生变化。");
             var imported=await vm.ImportBrowserImageAsync(source,library.ManagedAssetsPath,token);
             // Re-read destination identities after import; a deleted target never falls through to another target.

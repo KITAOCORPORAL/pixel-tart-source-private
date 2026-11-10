@@ -28,6 +28,8 @@ if(args[0]=="ui")
     if(root==null)throw new IOException("Desktop window unavailable");var source=root.FindFirst(TreeScope.Descendants,new PropertyCondition(AutomationElement.AutomationIdProperty,"OpenCapturedSourcePage"));
     if(args.Length>3&&args[3]=="open-source"){if(source==null)throw new IOException("Visible original-page action not found");((InvokePattern)source.GetCurrentPattern(InvokePattern.Pattern)).Invoke();await Task.Delay(300);}
     var info=root.FindFirst(TreeScope.Descendants,new PropertyCondition(AutomationElement.AutomationIdProperty,"AssetInspectorSourcePath"));
+    var tree=root.FindAll(TreeScope.Descendants,Condition.TrueCondition); var controls=new List<object>();foreach(AutomationElement item in tree){if(controls.Count>=250)break;try{controls.Add(new{item.Current.AutomationId,item.Current.Name,type=item.Current.ControlType.ProgrammaticName,item.Current.IsOffscreen});}catch(ElementNotAvailableException){}}
+    await File.WriteAllTextAsync(args[2]+".tree.json",JsonSerializer.Serialize(controls,new JsonSerializerOptions{WriteIndented=true}));
     await File.WriteAllTextAsync(args[2],JsonSerializer.Serialize(new{pid,title=root.Current.Name,sourceActionExists=source!=null,selectedSourcePath=info?.Current.Name,operation=args.Length>3?args[3]:"inspect",scope="Native UIA published full desktop; not Chrome context-menu evidence"},new JsonSerializerOptions{WriteIndented=true}));return;
 }
 if(args[0]=="close")
