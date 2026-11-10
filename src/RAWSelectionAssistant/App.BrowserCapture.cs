@@ -96,7 +96,7 @@ public partial class App
             safe=Path.GetFileNameWithoutExtension(safe)[..Math.Min(100,Path.GetFileNameWithoutExtension(safe).Length)]+extension;
             var sourceRoot=Path.Combine(AppDataPaths.Root,"BrowserCapture","originals",hash);Directory.CreateDirectory(sourceRoot);var source=Path.Combine(sourceRoot,safe);
             if(!File.Exists(source)){
-                var temporary=source+"."+capture.CaptureId.ToString("N")+".part";
+                var temporary=source+"."+Guid.NewGuid().ToString("N")+".part";
                 try{
                     await using(var file=new FileStream(temporary,FileMode.CreateNew,FileAccess.Write,FileShare.None,81920,true)){await file.WriteAsync(bytes,token);await file.FlushAsync(token);file.Flush(true);}
                     File.Move(temporary,source,false);

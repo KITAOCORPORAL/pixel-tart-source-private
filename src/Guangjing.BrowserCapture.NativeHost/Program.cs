@@ -12,7 +12,9 @@ if(args.Length>0 && args[0]=="--prepare")
     var package=Path.GetFullPath(args.Length>1?args[1]:Path.Combine(AppContext.BaseDirectory,".."));
     var identity=JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(package,"extension","DEVELOPMENT_ID.json"))).RootElement;
     var extensionId=identity.GetProperty("extensionId").GetString()!;
-    var runtime=args.Length>2?Path.GetFullPath(args[2]):Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"KitaoDiagnostic","ChromeCaptureV1-"+extensionId);
+    string? previousRoot=null;var previousConfig=Path.Combine(package,"native-host","capture-host-config.json");
+    if(File.Exists(previousConfig))try{using var previous=JsonDocument.Parse(await File.ReadAllTextAsync(previousConfig));var value=previous.RootElement.GetProperty("dataRoot").GetString();if(value is not null&&Path.IsPathFullyQualified(value)&&Directory.Exists(value))previousRoot=value;}catch(Exception e)when(e is JsonException or IOException or KeyNotFoundException){}
+    var runtime=args.Length>2?Path.GetFullPath(args[2]):previousRoot??Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"KitaoDiagnostic","ChromeCaptureV1-"+extensionId);
     var sid=System.Security.Principal.WindowsIdentity.GetCurrent().User!.Value;
     var pipe="guangjing.capture."+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(sid+"|"+runtime)))[..24].ToLowerInvariant();
     var native=Path.Combine(package,"native-host");Directory.CreateDirectory(native);
