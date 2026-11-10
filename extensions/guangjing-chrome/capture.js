@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);let id=new URLSearchParams(location.sear
 const rpc=async message=>{const reply=await chrome.runtime.sendMessage(message);if(!reply?.ok)throw new Error(reply?.error||"采集连接失败。");return reply.value;};
 function message(text){$("status").textContent=text;}
 function selected(){return{libraryId:$("library").value,projectId:$("project").value||null,boardId:$("board").value||null};}
-function update(){const valid=!!$("library").value;$("send").disabled=busy||!row?.imageBytes||!targets||!valid||row.status==="completed";$("fetch").disabled=busy||row?.status==="completed";}
+function update(){const valid=!!$("library").value;$("send").disabled=busy||!row?.imageBytes||!targets||!valid||row.status==="completed";$("fetch").disabled=busy||row?.status==="completed"||!!row?.attemptedDestination;}
 function options(element,items,label){element.replaceChildren(new Option(label,""));for(const item of items)element.add(new Option(item.name,item.id));}
 function chooseSaved(target){
  if(!target)return;let invalid=false;
@@ -21,7 +21,7 @@ async function loadTargets(){
  }catch(error){targets=null;message(error.message);}update();
 }
 async function render(){
- if(!id){const pending=(await list()).filter(x=>x.status!=="retargeted");$("queue").replaceChildren();if(!pending.length)$("queue").textContent="没有待处理采集。请在网页图片上右键，选择“发送到光镜”。";
+ if(!id){const pending=(await list()).filter(x=>x.status!=="retargeted");$("queue").replaceChildren();if(new URLSearchParams(location.search).has("queueFull"))$("queue").textContent="已有20项待处理，请先完成待处理项后再采集。";else if(!pending.length)$("queue").textContent="没有待处理采集。请在网页图片上右键，选择“发送到光镜”。";
   for(const item of pending){const button=document.createElement("button");button.className="queueItem";button.textContent=(item.status==="completed"?"已入库 · ":"待处理 · ")+(item.pageTitle||item.fileName||"图片");button.onclick=()=>{location.href="capture.html?id="+item.id;};$("queue").append(button);}return;}
  row=await get(id);if(!row){$("queue").textContent="待处理项不存在。";return;}$("queue").hidden=true;$("editor").hidden=false;
  $("source").textContent=(row.pageTitle||"网页图片")+"\n"+row.imageUrl;$("permissionHint").textContent="读取原图只会请求本次图片域名的访问权限："+new URL(row.imageUrl).hostname;

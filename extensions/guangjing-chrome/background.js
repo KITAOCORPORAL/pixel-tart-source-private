@@ -1,5 +1,5 @@
 import{chooseOriginal,httpUrl,MAX_IMAGE_BYTES,validateReceipt}from"./source.mjs";
-import{get,save,list}from"./queue.mjs";
+import{get,save,saveMany,mutate,list}from"./queue.mjs";
 const HOST="com.guangjing.capture";
 const installMenu=()=>chrome.contextMenus.removeAll(()=>chrome.contextMenus.create({id:"send-to-guangjing",title:"发送到光镜",contexts:["image"]}));
 chrome.runtime.onInstalled.addListener(installMenu);chrome.runtime.onStartup.addListener(installMenu);
@@ -30,18 +30,23 @@ async function readPageImage(tabId,url){
  const value=result[0]?.result;if(!value||value.permission)throw new Error(value?.error||"页面已关闭，请允许读取本次图片域名后重试原图。");if(value.error)throw new Error(value.error);return fromBase64(value.data);
 }
 async function fetchOriginal(row){
+ const fetchToken=crypto.randomUUID();
+ row=await mutate(row.id,current=>current.attemptedDestination||current.status==="completed"?current:{...current,fetchToken,status:"reading",error:""});
+ if(!row||row.fetchToken!==fetchToken)return row;
+ let fetched;
  try{
   const origin=new URL(row.imageUrl).origin+"/*";
   const allowed=await chrome.permissions.contains({origins:[origin]});
   const bytes=allowed?await readOwnResponse(row.imageUrl):await readPageImage(row.tabId,row.imageUrl);
   if(!bytes.length)throw new Error("原图为空，未使用缩略图。");
-  row.imageBytes=bytes.buffer;row.contentSha256=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",bytes)),b=>b.toString(16).padStart(2,"0")).join("");row.status="ready";row.error="";
- }catch(error){row.status="originalUnavailable";row.error=error.message;}
- return save(row);
+  fetched={imageBytes:bytes.buffer,contentSha256:Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",bytes)),b=>b.toString(16).padStart(2,"0")).join(""),status:"ready",error:""};
+ }catch(error){fetched={status:"originalUnavailable",error:error.message};}
+ return mutate(row.id,current=>current.fetchToken===fetchToken&&!current.attemptedDestination&&current.status!=="completed"?{...current,...fetched}:current);
 }
+
 chrome.contextMenus.onClicked.addListener(async(info,tab)=>{
  if(info.menuItemId!=="send-to-guangjing"||!tab?.id)return;
- if((await list()).filter(x=>x.status!=="completed").length>=20){await chrome.windows.create({url:chrome.runtime.getURL("capture.html?queueFull=1"),type:"popup",width:460,height:710});return;}
+ if((await list()).filter(x=>!["completed","retargeted"].includes(x.status)).length>=20){await chrome.windows.create({url:chrome.runtime.getURL("capture.html?queueFull=1"),type:"popup",width:460,height:710});return;}
  const id=crypto.randomUUID();let row={id,tabId:tab.id,pageUrl:info.pageUrl||tab.url,pageTitle:tab.title||"",capturedAtUtc:new Date().toISOString(),status:"reading",imageUrl:info.srcUrl,renderedImageUrl:info.srcUrl};
  try{
   row.pageUrl=httpUrl(row.pageUrl);const details=await chrome.scripting.executeScript({target:{tabId:tab.id},func:clicked=>Array.from(document.images).filter(img=>img.currentSrc===clicked||img.src===clicked).map(img=>({src:img.src,currentSrc:img.currentSrc,srcset:img.srcset,sources:Array.from(img.parentElement?.tagName==="PICTURE"?img.parentElement.querySelectorAll("source"):[]).map(s=>({srcset:s.srcset,active:!s.media||matchMedia(s.media).matches}))})),args:[info.srcUrl]});
@@ -55,10 +60,11 @@ async function sendCapture(id,destination){
  let row=await get(id);if(!row)throw new Error("待处理项已不存在。");if(!row.imageBytes)throw new Error(row.error||"原图尚未读取，不能入库。");
  const target={libraryId:destination.libraryId,projectId:destination.projectId||null,boardId:destination.boardId||null};
  if(!target.libraryId)throw new Error("请重新选择明确素材库。");
+ let superseded=null;
  if(row.attemptedDestination&&JSON.stringify(row.attemptedDestination)!==JSON.stringify(target)){
-  const old=row;row={...row,id:crypto.randomUUID(),status:"ready",receipt:null,attemptedDestination:null};old.status="retargeted";old.imageBytes=null;await save(old);
+  const old=row;row={...row,id:crypto.randomUUID(),status:"ready",receipt:null,attemptedDestination:null};old.status="retargeted";old.imageBytes=null;superseded=old;
  }
- row.destination=target;row.attemptedDestination=target;row.status="pending";row.error="";await save(row);
+ row.destination=target;row.attemptedDestination=target;row.status="pending";row.error="";if(superseded)await saveMany([superseded,row]);else await save(row);
  try{
   const reply=await native({operation:"capture",capture:{captureId:row.id,destination:target,pageUrl:row.pageUrl,imageUrl:row.imageUrl,renderedImageUrl:row.renderedImageUrl,sourceSelection:row.sourceSelection,pageTitle:row.pageTitle,capturedAtUtc:row.capturedAtUtc,fileName:row.fileName,contentSha256:row.contentSha256,imageBase64:base64(new Uint8Array(row.imageBytes))}});
   if(!reply.ok)throw new Error(reply.message||"桌面未确认入库。");
