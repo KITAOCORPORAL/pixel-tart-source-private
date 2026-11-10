@@ -1,0 +1,38 @@
+{
+  "status": "READY_FOR_MANUAL_CHROME_LOAD",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "checkedAtUtc": "2026-11-10T05:36:08.765507+00:00",
+  "httpChecks": [
+    {
+      "path": "/ordinary.html",
+      "status": 200,
+      "sha256": "1ffbc9f925b51c830fd23bddc968253bb0d26ddc45c7e9eeeffc23453d8be866"
+    },
+    {
+      "path": "/srcset.html",
+      "status": 200,
+      "sha256": "9e0a43bd67a66abf2e30318e6c5b80322b886a1e8e9e6f02ea3f3bebc708610b"
+    },
+    {
+      "path": "/unavailable.html",
+      "status": 200,
+      "sha256": "bf1d646bbc89e9860ff99e65e46da1a44510745e0811453f42a34a827908d1e4"
+    },
+    {
+      "path": "/srcset-original-1600.jpg",
+      "status": 200,
+      "sha256": "6ed3adb68235721c463d4e0ed1db7e760bdf8d5b4a0d96adf7eeffaa0c7bfe59"
+    },
+    {
+      "path": "/denied-original-2400.jpg",
+      "status": 403,
+      "sha256": "d32bce6e2af1e8ea06b152438bc111a83227b364c94ba863b029c48f4db9ed88"
+    }
+  ],
+  "companyRoot": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "initialCompanyAssetCount": 0,
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "registryWrittenByAgent": false,
+  "chromeContextMenu": "NOT_RUN",
+  "companyRootSeparateFromNativeMachineEvidence": true
+}

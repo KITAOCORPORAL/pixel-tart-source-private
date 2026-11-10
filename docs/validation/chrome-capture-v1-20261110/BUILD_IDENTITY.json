@@ -1,0 +1,68 @@
+{
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "baseline": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
+  "previousFrozenProduct": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "nativeHost": "com.guangjing.capture",
+  "WholeAppDiagnosticBuild": true,
+  "PhotographerTrialBuild": false,
+  "modules": "FULL",
+  "planningSections": 15,
+  "tutorial": "RETIRED",
+  "installer": false,
+  "nativeMessaging": "Windows current-user Named Pipe + Chrome stdio",
+  "maxImageBytes": 16777216,
+  "maxPixels": 32000000,
+  "chromeContextMenuAcceptance": "WAITING_FOR_MANUAL_EXTENSION_LOAD",
+  "rawCalls": 0,
+  "files": {
+    "app/KitaoPhotoSelector.exe": {
+      "bytes": 179200,
+      "sha256": "0f95e8704bb8e8f73c26bf7dad723c6d8b6531e0ea7ef06e5699f0a79df20e4e"
+    },
+    "app/KitaoPhotoSelector.dll": {
+      "bytes": 4151296,
+      "sha256": "3b030f0918f28a3df7c4b569bf8289647072b584dc5b43de68f757a56f488e54"
+    },
+    "app/RAWSelectionAssistant.Core.dll": {
+      "bytes": 7788032,
+      "sha256": "c5c68cf99426105de7eee333c59e8f0dc5ac20e614ce742371c1f9635d288447"
+    },
+    "app/PixelTart.Modules.AssetLibrary.dll": {
+      "bytes": 1253888,
+      "sha256": "64613f7c7b54f95ebdf56cbeaa9db28e983b2e2a2844ba736370712617cc760f"
+    },
+    "app/PixelTart.BrowserCapture.Contracts.dll": {
+      "bytes": 26624,
+      "sha256": "d9317cb4a7f23fef93a77d6c681bde4410bae66c1f72b7c3730ff13c4ca6a1b1"
+    },
+    "app/raw_r.dll": {
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+    },
+    "native-host/Guangjing.Capture.NativeHost.exe": {
+      "bytes": 162304,
+      "sha256": "b63da78df64d8ca7ed024584bfca6aea07ed72cf110560433fbf129693468b2e"
+    },
+    "native-host/Guangjing.Capture.NativeHost.dll": {
+      "bytes": 25088,
+      "sha256": "5474e995841ea678471c078c75adc9328d65fe2255644834ab5f9d661ee27780"
+    },
+    "extension/manifest.json": {
+      "bytes": 1001,
+      "sha256": "cb6ff6bb73906c2989f8341976e0840a33f69973846d7af1960dd741b1691b66"
+    },
+    "extension/background.js": {
+      "bytes": 8338,
+      "sha256": "0755c69ce2bd329cb2ae58b938b49fc63b96b15b543d35a28da7e92bf9f314c9"
+    },
+    "extension/source.mjs": {
+      "bytes": 3046,
+      "sha256": "df386ea398c28ca861fd8b0d7c22f2d1dae30299cf4e6fb53424866a2229ea24"
+    },
+    "extension/capture.js": {
+      "bytes": 4713,
+      "sha256": "6fbf819592cb5016d93b64cba19dfc0d8bd848e01393353e6aa98e2024f56139"
+    }
+  }
+}

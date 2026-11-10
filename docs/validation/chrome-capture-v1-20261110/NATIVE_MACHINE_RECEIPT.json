@@ -1,0 +1,177 @@
+{
+  "status": "PASS_NATIVE_PROTOCOL_DESKTOP_MACHINE_CHECKS",
+  "chromeContextMenu": "NOT_RUN_REQUIRES_MANUAL_EXTENSION_LOAD",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "firstDesktopPid": 8872,
+  "reopenedDesktopPid": 34428,
+  "assetId": "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+  "contentSha256": "831578e607ff9681313e18cf86df17cb391d911bf7a12460b658bafb3bb2c460",
+  "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+  "projectA": "2a22fc63-ffbb-4a89-9291-f4f65cf0f844",
+  "projectB": "f83d19ff-9c9a-48aa-bc68-67b3fd5e0dea",
+  "rows": [
+    {
+      "name": "original_import_and_project_board_association",
+      "result": {
+        "ok": true,
+        "code": "Completed",
+        "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u53ca\u76ee\u7684\u5730\u5173\u8054\u3002",
+        "destinations": null,
+        "receipt": {
+          "captureId": "035d0f5c-3d20-4b7f-a6d6-57bfcca90211",
+          "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+          "projectId": "2a22fc63-ffbb-4a89-9291-f4f65cf0f844",
+          "boardId": "739fb398-502e-4dac-8210-e460fedb5dd8",
+          "assetId": "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+          "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+          "outcome": "Imported",
+          "pageUrl": "http://127.0.0.1:51291/ordinary.html",
+          "capturedAtUtc": "2026-11-10T05:10:35.900422+00:00",
+          "importedAtUtc": "2026-11-10T05:10:36.7086991+00:00"
+        },
+        "retryable": false
+      }
+    },
+    {
+      "name": "same_capture_replayed",
+      "result": {
+        "ok": true,
+        "code": "Completed",
+        "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u3002",
+        "destinations": null,
+        "receipt": {
+          "captureId": "035d0f5c-3d20-4b7f-a6d6-57bfcca90211",
+          "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+          "projectId": "2a22fc63-ffbb-4a89-9291-f4f65cf0f844",
+          "boardId": "739fb398-502e-4dac-8210-e460fedb5dd8",
+          "assetId": "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+          "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+          "outcome": "Imported",
+          "pageUrl": "http://127.0.0.1:51291/ordinary.html",
+          "capturedAtUtc": "2026-11-10T05:10:35.900422+00:00",
+          "importedAtUtc": "2026-11-10T05:10:36.7086991+00:00"
+        },
+        "retryable": false
+      }
+    },
+    {
+      "name": "same_image_other_project_reuses_asset",
+      "result": {
+        "ok": true,
+        "code": "Completed",
+        "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u53ca\u76ee\u7684\u5730\u5173\u8054\u3002",
+        "destinations": null,
+        "receipt": {
+          "captureId": "8a4c53f5-5403-49a7-b746-d7ff32601210",
+          "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+          "projectId": "f83d19ff-9c9a-48aa-bc68-67b3fd5e0dea",
+          "boardId": null,
+          "assetId": "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+          "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+          "outcome": "Reused",
+          "pageUrl": "http://127.0.0.1:51291/ordinary.html",
+          "capturedAtUtc": "2026-11-10T05:10:35.900422+00:00",
+          "importedAtUtc": "2026-11-10T05:10:37.4506306+00:00"
+        },
+        "retryable": false
+      }
+    },
+    {
+      "name": "desktop_closed_keeps_request_retryable",
+      "result": {
+        "ok": false,
+        "code": "DesktopUnavailable",
+        "message": "\u5149\u955c\u684c\u9762\u6682\u4e0d\u53ef\u7528\uff0c\u91c7\u96c6\u5df2\u4fdd\u7559\u3002\u8bf7\u6253\u5f00\u914d\u5957\u684c\u9762\u5165\u53e3\u540e\u91cd\u8bd5\u3002",
+        "destinations": null,
+        "receipt": null,
+        "retryable": true
+      }
+    },
+    {
+      "name": "same_capture_after_full_desktop_restart",
+      "result": {
+        "ok": true,
+        "code": "Completed",
+        "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u3002",
+        "destinations": null,
+        "receipt": {
+          "captureId": "035d0f5c-3d20-4b7f-a6d6-57bfcca90211",
+          "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+          "projectId": "2a22fc63-ffbb-4a89-9291-f4f65cf0f844",
+          "boardId": "739fb398-502e-4dac-8210-e460fedb5dd8",
+          "assetId": "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+          "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+          "outcome": "Imported",
+          "pageUrl": "http://127.0.0.1:51291/ordinary.html",
+          "capturedAtUtc": "2026-11-10T05:10:35.900422+00:00",
+          "importedAtUtc": "2026-11-10T05:10:36.7086991+00:00"
+        },
+        "retryable": false
+      }
+    },
+    {
+      "name": "invalid_destination_rejected_without_reroute",
+      "result": {
+        "ok": false,
+        "code": "DestinationInvalid",
+        "message": "\u539f\u76ee\u7684\u5730\u5df2\u5931\u6548\uff0c\u8bf7\u91cd\u65b0\u9009\u62e9\uff1b\u6ca1\u6709\u6539\u9001\u5176\u4ed6\u9879\u76ee\u3002",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "name": "missing_capture_fields_rejected",
+      "result": {
+        "ok": false,
+        "code": "CaptureRejected",
+        "message": "\u91c7\u96c6\u8bf7\u6c42\u7f3a\u5c11\u5fc5\u8981\u5b57\u6bb5\u3002",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "name": "wrong_extension_origin",
+      "result": {
+        "ok": false,
+        "code": "BridgeUnavailable",
+        "message": "\u672c\u673a\u6865\u63a5\u672a\u5b8c\u6210\uff1b\u5f85\u5904\u7406\u91c7\u96c6\u5df2\u4fdd\u7559\uff0c\u8bf7\u91cd\u8bd5\u6216\u68c0\u67e5\u914d\u5957\u684c\u9762\u5165\u53e3\u3002",
+        "destinations": null,
+        "receipt": null,
+        "retryable": true
+      }
+    },
+    {
+      "name": "oversize_native_frame",
+      "result": {
+        "ok": false,
+        "code": "BridgeUnavailable",
+        "message": "\u672c\u673a\u6865\u63a5\u672a\u5b8c\u6210\uff1b\u5f85\u5904\u7406\u91c7\u96c6\u5df2\u4fdd\u7559\uff0c\u8bf7\u91cd\u8bd5\u6216\u68c0\u67e5\u914d\u5957\u684c\u9762\u5165\u53e3\u3002",
+        "destinations": null,
+        "receipt": null,
+        "retryable": true
+      }
+    }
+  ],
+  "finalDatabaseState": {
+    "assets": [
+      [
+        "0773c6e4-3ab2-42ea-b256-c4bb56579084",
+        "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+        "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\machine04\\Capture-Test.ptlibrary\\assets\\managed\\0773c6e43ab242eab256c4bb56579084_ordinary-640.jpg"
+      ]
+    ],
+    "links": [
+      [
+        "2a22fc63-ffbb-4a89-9291-f4f65cf0f844",
+        "0773c6e4-3ab2-42ea-b256-c4bb56579084"
+      ],
+      [
+        "f83d19ff-9c9a-48aa-bc68-67b3fd5e0dea",
+        "0773c6e4-3ab2-42ea-b256-c4bb56579084"
+      ]
+    ]
+  },
+  "newRawCalls": 0
+}

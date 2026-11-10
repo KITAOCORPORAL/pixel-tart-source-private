@@ -1,0 +1,57 @@
+{
+  "status": "PASS_NEW_PENDING_IMAGE_AFTER_RESTART_AND_INTERRUPTED_CACHE",
+  "scope": "Actual native host/full desktop. Extension IndexedDB and Chrome right-click remain separate manual acceptance.",
+  "captureId": "9fc9dc37-97a3-4a33-9037-d49bf703524f",
+  "assetId": "9ffbed93-f403-46bd-b1c4-11eaf88aeda8",
+  "contentSha256": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+  "desktopUnavailable": {
+    "ok": false,
+    "code": "DesktopUnavailable",
+    "message": "\u5149\u955c\u684c\u9762\u6682\u4e0d\u53ef\u7528\uff0c\u91c7\u96c6\u5df2\u4fdd\u7559\u3002\u8bf7\u6253\u5f00\u914d\u5957\u684c\u9762\u5165\u53e3\u540e\u91cd\u8bd5\u3002",
+    "destinations": null,
+    "receipt": null,
+    "retryable": true
+  },
+  "importedAfterRestart": {
+    "ok": true,
+    "code": "Completed",
+    "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u53ca\u76ee\u7684\u5730\u5173\u8054\u3002",
+    "destinations": null,
+    "receipt": {
+      "captureId": "9fc9dc37-97a3-4a33-9037-d49bf703524f",
+      "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+      "projectId": "f83d19ff-9c9a-48aa-bc68-67b3fd5e0dea",
+      "boardId": null,
+      "assetId": "9ffbed93-f403-46bd-b1c4-11eaf88aeda8",
+      "contentSha256": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      "outcome": "Imported",
+      "pageUrl": "http://127.0.0.1:51291/srcset.html",
+      "capturedAtUtc": "2026-11-10T05:10:52.668533+00:00",
+      "importedAtUtc": "2026-11-10T05:10:59.4317121+00:00"
+    },
+    "retryable": false
+  },
+  "replay": {
+    "ok": true,
+    "code": "Completed",
+    "message": "\u5149\u955c\u5df2\u786e\u8ba4\u5165\u5e93\u3002",
+    "destinations": null,
+    "receipt": {
+      "captureId": "9fc9dc37-97a3-4a33-9037-d49bf703524f",
+      "libraryId": "73683281-075f-4fb9-98de-850a64f51d85",
+      "projectId": "f83d19ff-9c9a-48aa-bc68-67b3fd5e0dea",
+      "boardId": null,
+      "assetId": "9ffbed93-f403-46bd-b1c4-11eaf88aeda8",
+      "contentSha256": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      "outcome": "Imported",
+      "pageUrl": "http://127.0.0.1:51291/srcset.html",
+      "capturedAtUtc": "2026-11-10T05:10:52.668533+00:00",
+      "importedAtUtc": "2026-11-10T05:10:59.4317121+00:00"
+    },
+    "retryable": false
+  },
+  "staleIncompleteCacheDidNotPoisonRetry": true,
+  "managedFileHashMatches": true,
+  "chromeContextMenu": "NOT_RUN",
+  "desktopPid": 34680
+}

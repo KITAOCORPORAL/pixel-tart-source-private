@@ -1,3 +1,11 @@
+## 2026-11-10 Chrome单图采集开发版待载入（Europe/Berlin；Asia/Shanghai同日）
+- 从在线验收2661f2d3/产品7769b8ee建立feature/chrome-capture-v1-20261110；冻结功能产品ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c。右键“发送到光镜”+库/项目/灵感板+最近目的地、IndexedDB待处理、原图/srcset最高候选、严格实际AssetId回执已实现。批量/侧栏下一轮。
+- Native Messaging当前用户stdio→CurrentUserOnly管道→完整桌面既有身份导入/托管副本/项目及灵感板关联。相同CaptureId稳定指纹重试，同图A→B复用；源网页按钮默认可见并实际打开公司Chrome。Core无HTTP/凭据原断言不改并通过，本轮RAW0/native不换。
+- 源选择/回执9PASS，Core4TRX PASS，最终实际NativeHost+完整桌面9项PASS，新待处理原图桌面关闭→重开及中断缓存恢复PASS；普通图AssetId 0773c6e4-3ab2-42ea-b256-c4bb56579084，1600原图 9ffbed93-f403-46bd-b1c4-11eaf88aeda8。实际EXE/CMD启动退出0。协议探针不是Chrome右键验收。
+- 状态READY_FOR_CHROME_MANUAL_LOAD_PARTIAL_ACCEPTANCE；公司Chrome真实右键闭环NOT_RUN，等待用户加载开发扩展并导入生成HKCU注册文件。稳定ID obgahfdabcpkohkdcnidpmeooceomogk。代理未改注册表/Chrome配置；脚本准备曾被自动审批拒绝，只返回blocked by policy，已换可检查.reg和前台测试页入口。
+- 开发包E:\Kitao-Deliveries\chrome-capture-v1-20261110\Guangjing-ChromeCaptureV1-Diagnostic-win-x64.zip，511文件逐项/ZIP读回；SHA256 B6907CE46E02EE4DE8C26D1D5659254C7709DF0694D61C0ADEAD24A2A0DAB491。全部模块/策划15/教程退役/诊断标记保留，无安装器。company01为独立初始0素材验收根，machine04是协议检查根，不能混用成果。
+- 当前报告docs/validation/chrome-capture-v1-20261110/PRE_CHROME_REPORT.md；安装步骤同目录INSTALL_AND_CHROME_ACCEPTANCE.md。当前测试页127.0.0.1:51292，ordinary/srcset/unavailable；失败原图403不采缩略图。用户加载后继续真实Chrome项目选择→入库→打开源网页、重复、重开重试和目标失效，全部通过再提交最终Chrome回执。
+
 ## 2026-11-10 phone01 Safari反馈后最终收口（Europe/Berlin；Asia/Shanghai同日）
 - 用户按指定iPhoneSafari两步操作反馈“已显示成功”；同一phone01服务器保存v1/r4、已选1张、锁定true，项目80d225b5-1644-4842-936e-85abb13172f4、素材5696d77c-7ca8-46d2-ace9-24f064573563核对一致。最终状态PASS_HUMAN_SAFARI_PC_COLLECT_REOPEN，PHONE_FINAL_RECEIPT已签发。
 - 产品源7769b8ee63ad46cd22efb154145766c45b34ba69、操作前交付ca712a3c冻结；本轮src零变更/不重建包。30条发布DLL绑定与ZIP原哈希复核一致。Safari侧为用户操作反馈+服务器确认，PC侧为同发布DLL生产App原生UIA。

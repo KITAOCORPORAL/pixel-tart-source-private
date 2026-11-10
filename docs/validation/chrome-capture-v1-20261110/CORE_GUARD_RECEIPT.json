@@ -1,0 +1,97 @@
+{
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "driverBuild": "5e3bd8709dad05ab1edf17dee5e5a851e18c7a79",
+  "results": [
+    {
+      "executionId": "1be57982-de7d-458e-9dc1-f877d0843a0e",
+      "testId": "15df934f-0de7-8b31-adf5-e40ccd7ce129",
+      "testName": "ProductionCoreContainsNoHttpLocalhostOrCredentials",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.0102280",
+      "startTime": "2026-11-10T13:12:14.3117084+08:00",
+      "endTime": "2026-11-10T13:12:14.3410095+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "1be57982-de7d-458e-9dc1-f877d0843a0e"
+    },
+    {
+      "executionId": "2f7a1c00-d1e7-4163-99c7-54c105024873",
+      "testId": "153cbe08-14ee-815b-af84-ad3477fc436b",
+      "testName": "ChangedPayloadOrDestinationCannotReuseCaptureIdentity",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1104466",
+      "startTime": "2026-11-10T13:12:14.3117263+08:00",
+      "endTime": "2026-11-10T13:12:14.4381427+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "2f7a1c00-d1e7-4163-99c7-54c105024873"
+    },
+    {
+      "executionId": "27936b71-715e-4429-a25d-b624f6b1c29d",
+      "testId": "102ee3b4-e5a3-852a-a186-8d686ff644c3",
+      "testName": "OnlyCommittedAssetHasDurableReceiptAndSourceMetadata",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1172679",
+      "startTime": "2026-11-10T13:12:14.3116992+08:00",
+      "endTime": "2026-11-10T13:12:14.4456093+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "27936b71-715e-4429-a25d-b624f6b1c29d"
+    },
+    {
+      "executionId": "d0c04394-0265-43e4-bb20-360c4f4e9b7e",
+      "testId": "12553b1c-ae18-8d11-9db9-9f08b869b181",
+      "testName": "SameCaptureReservationSurvivesRestartWithoutChangingIdentity",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1075120",
+      "startTime": "2026-11-10T13:12:14.3117155+08:00",
+      "endTime": "2026-11-10T13:12:14.4352321+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "d0c04394-0265-43e4-bb20-360c4f4e9b7e"
+    }
+  ],
+  "publishedDllBindings": [
+    {
+      "file": "MetadataExtractor.dll",
+      "sha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "file": "Microsoft.Data.Sqlite.dll",
+      "sha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "sha256": "c5c68cf99426105de7eee333c59e8f0dc5ac20e614ce742371c1f9635d288447"
+    },
+    {
+      "file": "Sdcb.LibRaw.dll",
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "file": "SQLitePCLRaw.batteries_v2.dll",
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "file": "SQLitePCLRaw.core.dll",
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "file": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "sha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "file": "System.Security.Cryptography.ProtectedData.dll",
+      "sha256": "eb535b4eaaed42bd93e1cea9e03e25480d7371f6b1f2452216e9a8aff262ae5f"
+    },
+    {
+      "file": "XmpCore.dll",
+      "sha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ],
+  "exitCode": 0
+}
