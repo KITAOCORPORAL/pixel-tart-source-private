@@ -8,7 +8,7 @@ export function native(request){return new Promise((resolve,reject)=>{
  try{port=chrome.runtime.connectNative(HOST);}catch{reject(new Error("本机桥接尚未安装，请运行配套注册脚本。"));return;}
  const timer=setTimeout(()=>finish(new Error("桌面暂未回执，采集仍在待处理中。")),95000);
  const finish=(error,value)=>{if(done)return;done=true;clearTimeout(timer);try{port.disconnect();}catch{}error?reject(error):resolve(value);};
- port.onMessage.addListener(reply=>finish(null,reply));port.onDisconnect.addListener(()=>{const detail=chrome.runtime.lastError?.message;finish(new Error("本机桥接未连接，采集已保留。请打开光镜配套入口后重试。"+(detail?"":"")));});
+ port.onMessage.addListener(reply=>finish(null,reply));port.onDisconnect.addListener(()=>{const detail=(chrome.runtime.lastError?.message||"").toLowerCase();const message=detail.includes("forbidden")?"Chrome拒绝了本机桥接访问，请核对扩展ID或公司浏览器策略；采集已保留。":detail.includes("not found")?"未找到本机桥接，请导入配套当前用户注册文件；采集已保留。":"本机桥接未连接，采集已保留。请打开光镜配套入口后重试。";finish(new Error(message));});
  port.postMessage(request);
 });}
 function base64(bytes){let text="";for(let i=0;i<bytes.length;i+=32768)text+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(text);}

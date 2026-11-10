@@ -2,6 +2,26 @@ using System.IO.Pipes;
 using System.Text.Json;
 using PixelTart.BrowserCapture.Contracts;
 
+if(args.Length>0 && args[0]=="--prepare")
+{
+    var package=Path.GetFullPath(args.Length>1?args[1]:Path.Combine(AppContext.BaseDirectory,".."));
+    var identity=JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(package,"extension","DEVELOPMENT_ID.json"))).RootElement;
+    var extensionId=identity.GetProperty("extensionId").GetString()!;
+    var runtime=args.Length>2?Path.GetFullPath(args[2]):Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"KitaoDiagnostic","ChromeCaptureV1-"+extensionId);
+    var sid=System.Security.Principal.WindowsIdentity.GetCurrent().User!.Value;
+    var pipe="guangjing.capture."+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(sid+"|"+runtime)))[..24].ToLowerInvariant();
+    var native=Path.Combine(package,"native-host");Directory.CreateDirectory(native);
+    await File.WriteAllTextAsync(Path.Combine(native,"capture-host-config.json"),JsonSerializer.Serialize(new{extensionId,pipeName=pipe,dataRoot=runtime},CaptureWire.Json));
+    var manifest=Path.Combine(native,"com.guangjing.capture.json");
+    await File.WriteAllTextAsync(manifest,JsonSerializer.Serialize(new{name="com.guangjing.capture",description="Guangjing explicit image capture",path=Path.Combine(native,"Guangjing.Capture.NativeHost.exe"),type="stdio",allowed_origins=new[]{"chrome-extension://"+extensionId+"/"}},CaptureWire.Json));
+    var slash=(char)92;var quote=(char)34;
+    var key="HKEY_CURRENT_USER"+slash+string.Join(slash,new[]{"Software","Google","Chrome","NativeMessagingHosts","com.guangjing.capture"});
+    var escaped=quote+manifest.Replace(slash.ToString(),new string(slash,2)).Replace(quote.ToString(),slash.ToString()+quote)+quote;
+    var registration=Path.Combine(package,"Register-Guangjing-NativeHost.reg");
+    await File.WriteAllTextAsync(registration,"Windows Registry Editor Version 5.00\r\n\r\n["+key+"]\r\n@="+escaped+"\r\n",System.Text.Encoding.Unicode);
+    Console.WriteLine("Prepared local files only; no registry settings changed.");Console.WriteLine(registration);Console.WriteLine("Extension ID: "+extensionId);return;
+}
+
 // stdout is exclusively the Chrome Native Messaging binary protocol.
 using var input = Console.OpenStandardInput(); using var output = Console.OpenStandardOutput();
 try
