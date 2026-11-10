@@ -1,0 +1,31 @@
+{
+  "sourceSha": "ca712a3c4daacc9e2fd8990f8fb776440c2b4592",
+  "dirty": [],
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-converged-20261110\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.HttpPhase3RefreshConfirmedResultAndSyncWorkflow",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-converged-20261110\\phone-collect-20261110T033104Z"
+  ],
+  "pid": 24024,
+  "exitCode": 0,
+  "seconds": 7.237717390060425,
+  "expected": 1,
+  "results": [
+    {
+      "executionId": "e0a894c9-88d6-4391-8179-4012b5cb334a",
+      "testId": "1441fdc8-bd5f-8c43-9d8a-c69228ba3aeb",
+      "testName": "HttpPhase3RefreshConfirmedResultAndSyncWorkflow",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:06.1611843",
+      "startTime": "2026-11-10T11:31:05.4939415+08:00",
+      "endTime": "2026-11-10T11:31:11.6702984+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "e0a894c9-88d6-4391-8179-4012b5cb334a"
+    }
+  ]
+}

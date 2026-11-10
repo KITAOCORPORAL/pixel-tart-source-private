@@ -1,0 +1,31 @@
+{
+  "sourceSha": "ca712a3c4daacc9e2fd8990f8fb776440c2b4592",
+  "dirty": [],
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-converged-20261110\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.HttpConvergedReopenReturnsToSameWorkflow",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-converged-20261110\\phone-reopen-workflow-20261110T033104Z"
+  ],
+  "pid": 22564,
+  "exitCode": 0,
+  "seconds": 5.526424407958984,
+  "expected": 1,
+  "results": [
+    {
+      "executionId": "f222e2b9-b24c-4811-b002-65a0d1f36f94",
+      "testId": "1727978c-05ca-844e-b100-031748d78258",
+      "testName": "HttpConvergedReopenReturnsToSameWorkflow",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:04.4637457",
+      "startTime": "2026-11-10T11:31:12.7800102+08:00",
+      "endTime": "2026-11-10T11:31:17.2589273+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "f222e2b9-b24c-4811-b002-65a0d1f36f94"
+    }
+  ]
+}

@@ -1,3 +1,10 @@
+## 2026-11-10 phone01 Safari反馈后最终收口（Europe/Berlin；Asia/Shanghai同日）
+- 用户按指定iPhoneSafari两步操作反馈“已显示成功”；同一phone01服务器保存v1/r4、已选1张、锁定true，项目80d225b5-1644-4842-936e-85abb13172f4、素材5696d77c-7ca8-46d2-ace9-24f064573563核对一致。最终状态PASS_HUMAN_SAFARI_PC_COLLECT_REOPEN，PHONE_FINAL_RECEIPT已签发。
+- 产品源7769b8ee63ad46cd22efb154145766c45b34ba69、操作前交付ca712a3c冻结；本轮src零变更/不重建包。30条发布DLL绑定与ZIP原哈希复核一致。Safari侧为用户操作反馈+服务器确认，PC侧为同发布DLL生产App原生UIA。
+- PC进程2220实际刷新→同步归片；独立重开进程24188在远端刷新前恢复v1/r4关联，并实际进入同一个归片项目d7af43ba-aa40-4a71-a38e-ad1fadf2eae0。schema8反向绑定唯一，选择项只有synthetic-network.png，无第二项目；本轮两阶段PASS，不重跑无关回归。
+- 最终报告docs/validation/online-selection-converged-20261110/FINAL_REPORT.md，最终JSON同目录PHONE_FINAL_RECEIPT.json；原始E:/Kitao-Deliveries/online-selection-converged-20261110/PHONE_FINAL_RECEIPT-20261110T033104Z.json。私链/凭据/运行库不进Git/包。下文手机前待验为历史快照，不代表当前状态。
+- 全模块/策划15/教程退役/诊断标记保持，RAW四项调用0；选择导入/归档/归片导航完成，未执行原图扫描或复制。浏览器扩展本轮未启动；全产品仍诊断状态。最终文档HEAD/REMOTE读回见本地PHONE_FINAL_PUSH_READBACK.json。
+
 ## 2026-11-10 在线选片收敛与Safari待验（Europe/Berlin；Asia/Shanghai同日）
 - 整合分支integration/online-selection-v1-20261110，从8e447075完整桌面基线选择性移植c36e1f38确认回执校验/丢响应恢复，两原分支均保留。最终产品7769b8ee63ad46cd22efb154145766c45b34ba69；c8a2f5cb仅测试支持，后续文档不改src。
 - 客户GET增加持久化confirmation，字段imageId/selectionAssetId明确分工；错误项目HTTP200拒绝、真实提交后丢响应可读回有效确认、有效回执不依赖后续刷新。Core无HTTP/凭据原断言保留并通过。

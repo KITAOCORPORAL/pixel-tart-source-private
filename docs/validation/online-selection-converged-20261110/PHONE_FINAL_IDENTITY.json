@@ -1,0 +1,38 @@
+{
+  "status": "PASS_HUMAN_SAFARI_PC_COLLECT_REOPEN",
+  "productSource": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "prePhoneHandoffCommit": "ca712a3c4daacc9e2fd8990f8fb776440c2b4592",
+  "originalTimestampedReceipt": "PHONE_FINAL_RECEIPT-20261110T033104Z.json",
+  "finalReceiptSha256": "7d98a38ffbdc9a57f03d373ebffcba6936ef6cf09b1a1d1c5e18023ab78969de",
+  "publishedDllBindingsVerified": 30,
+  "zip": {
+    "path": "E:\\Kitao-Deliveries\\online-selection-converged-20261110\\Guangjing-OnlineSelection-Converged-Final-Diagnostic-win-x64.zip",
+    "sha256": "508375e57896bab0f3761c0430fd580e1a15eee826ff7f148eb3f52274f929de",
+    "bytes": 158579526,
+    "fileCount": 851,
+    "perFileReadback": true,
+    "knownCredentialsExcluded": 24,
+    "privatePhoneLinkExcluded": true
+  },
+  "workflowSchemaVersion": 8,
+  "selectionProjectId": "80d225b5-1644-4842-936e-85abb13172f4",
+  "workflowProjectId": "d7af43ba-aa40-4a71-a38e-ad1fadf2eae0",
+  "uniqueReverseBinding": true,
+  "sqliteSelectionInputs": [
+    "synthetic-network.png"
+  ],
+  "pcProcessIds": [
+    2220,
+    24188
+  ],
+  "noProductSourceChange": true,
+  "noPackageRebuild": true,
+  "rawOpen": 0,
+  "rawUnpack": 0,
+  "rawProcess": 0,
+  "rawMemoryImage": 0,
+  "browserExtensionWorkStarted": false,
+  "humanDeviceEvidence": "User success feedback following issued iPhone Safari steps, corroborated by the album server receipt",
+  "pcEvidence": "Published-binary-bound production App/MainWindow in two separate native UIA TestHost processes",
+  "scope": "Single synthetic phone01 album Safari -> stored server receipt -> PC refresh/sync -> independent reopen and same workflow navigation"
+}

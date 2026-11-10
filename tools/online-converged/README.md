@@ -14,4 +14,4 @@ python tools/online-converged/collect_phone_feedback.py E:/Kitao-Deliveries/onli
 
 它先核对部署字节和服务器已保存确认，再通过同版本原生PC入口收回结果、独立进程重开并实际回到唯一对应归片项目。只有全部通过才产生PHONE_FINAL_RECEIPT；随后把脱敏最终回执和报告提交推送。用户只报告打不开或未确认时不得写成功。
 
-当前状态看docs/validation/online-selection-converged-20261110/PRE_PHONE_REPORT.md。家庭旧c36e1f38相册与整合版证据单列。浏览器扩展继续等待整合版首轮人机验收通过。
+2026-11-10已收到用户“已显示成功”反馈，同版PC收回、同步和独立重开进入同一归片项目均PASS；当前状态见docs/validation/online-selection-converged-20261110/FINAL_REPORT.md及PHONE_FINAL_RECEIPT.json。PRE_PHONE_REPORT.md和家庭旧相册记录保留为历史独立证据。本轮没有启动浏览器扩展。

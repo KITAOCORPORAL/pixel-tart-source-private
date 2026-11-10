@@ -17,7 +17,15 @@
   "realBrowserConfirmation": true,
   "publishedDllBindings": 30,
   "rawCalls": 0,
-  "phoneStatus": "WAITING_FOR_USER",
-  "phonePostHumanPcCollect": "NOT_RUN",
-  "browserExtension": "DEFERRED"
+  "phoneStatus": "PASS_HUMAN_SAFARI_PC_COLLECT_REOPEN",
+  "phonePostHumanPcCollect": "PASS",
+  "browserExtension": "NOT_STARTED_ACCEPTANCE_ONLY",
+  "phonePostHumanIndependentReopen": "PASS",
+  "phonePostHumanNativePhases": 2,
+  "phoneFinalReceipt": "PHONE_FINAL_RECEIPT.json",
+  "phoneWorkflowId": "d7af43ba-aa40-4a71-a38e-ad1fadf2eae0",
+  "phoneServerVersion": 1,
+  "phoneServerRevision": 4,
+  "browserExtensionFinalReceiptGate": "SATISFIED",
+  "prePhoneSummaryPreserved": "TEST_SUMMARY_PRE_PHONE.json"
 }

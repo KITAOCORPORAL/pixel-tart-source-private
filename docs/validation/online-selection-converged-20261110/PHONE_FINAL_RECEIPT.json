@@ -1,0 +1,81 @@
+{
+  "status": "PASS_HUMAN_SAFARI_PC_COLLECT_REOPEN",
+  "productSource": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "projectId": "80d225b5-1644-4842-936e-85abb13172f4",
+  "assetId": "5696d77c-7ca8-46d2-ace9-24f064573563",
+  "humanFeedback": {
+    "success": true,
+    "userText": "已显示成功",
+    "deviceBrowser": "iPhone Safari",
+    "deviceBrowserEvidence": "User report following the issued iPhone Safari steps; not agent-controlled device inspection",
+    "receivedAtBerlin": "2026-11-10T04:31:00.798998+01:00",
+    "productSource": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+    "handoffCommit": "ca712a3c4daacc9e2fd8990f8fb776440c2b4592",
+    "source": "Direct user message in this local conversation"
+  },
+  "serverConfirmation": {
+    "projectId": "80d225b5-1644-4842-936e-85abb13172f4",
+    "selectionVersion": 1,
+    "revision": 4,
+    "items": [
+      {
+        "selectionProjectId": "80d225b5-1644-4842-936e-85abb13172f4",
+        "imageId": "5696d77c-7ca8-46d2-ace9-24f064573563",
+        "originalFileName": "synthetic-network.png",
+        "selected": true,
+        "favorite": false,
+        "customerNote": null,
+        "extraSelected": false,
+        "sourceAssetId": null
+      }
+    ],
+    "confirmedAtUtc": "2026-11-10T03:29:17.8348619+00:00",
+    "isLocked": true
+  },
+  "pcCollected": {
+    "processId": 2220,
+    "projectId": "80d225b5-1644-4842-936e-85abb13172f4",
+    "workflowId": "d7af43ba-aa40-4a71-a38e-ad1fadf2eae0",
+    "selectionVersion": 1,
+    "revision": 4,
+    "items": [
+      {
+        "SelectionProjectId": "80d225b5-1644-4842-936e-85abb13172f4",
+        "ImageId": "5696d77c-7ca8-46d2-ace9-24f064573563",
+        "OriginalFileName": "synthetic-network.png",
+        "Selected": true,
+        "Favorite": false,
+        "CustomerNote": null,
+        "ExtraSelected": false
+      }
+    ],
+    "archive": "E:\\Kitao-Deliveries\\online-selection-converged-20261110\\phone01-app-evidence\\archive",
+    "workflowInputs": [
+      "synthetic-network.png"
+    ],
+    "sourceDirectories": [
+      "E:\\Kitao-Deliveries\\online-selection-converged-20261110\\phone01-app-evidence"
+    ]
+  },
+  "pcReopened": {
+    "processId": 24188,
+    "projectId": "80d225b5-1644-4842-936e-85abb13172f4",
+    "workflowId": "d7af43ba-aa40-4a71-a38e-ad1fadf2eae0",
+    "revision": 4,
+    "resultVersion": 1,
+    "linkedRecords": 1,
+    "selected": [
+      "synthetic-network.png"
+    ],
+    "returnedToWorkflow": true,
+    "persistedBeforeRefresh": true
+  },
+  "uniqueWorkflowIdentityVerified": true,
+  "binaryBindings": {
+    "app/KitaoPhotoSelector.dll": "ce40ec0ffea7e7cdd5ca59ae7b2e4edd6fcd429c0b14ad05e9bc7f7c7f379128",
+    "app/RAWSelectionAssistant.Core.dll": "43033456a4ce7f3bf1afa791be92857f758203b122c4da028bd38f10aeb8f545",
+    "selection-service/PixelTart.SelectionApi.Server.dll": "c9f11b61f8815181f1343056a03eae82cbc682fae1f86e2e1e11de9776e5b64f",
+    "selection-service/wwwroot/selection-client.js": "de597fffc3394d88034a7fcbba2261ea665f361edb264ec68bcdcaa7d5419bcf"
+  },
+  "browserExtensionWorkStarted": false
+}
