@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "mode": "confirm-wrong-project",
+  "checks": [
+    "actual HTTP 200 wrong-project receipt rejected",
+    "no false success or lock",
+    "customer can retry"
+  ],
+  "runtime": "v24.15.0",
+  "browser": false,
+  "safari": false,
+  "actualHttp": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/assets/7aee1bb1-5477-4fce-810a-c13b1bebe1dd/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/choices/7aee1bb1-5477-4fce-810a-c13b1bebe1dd",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/choices/7aee1bb1-5477-4fce-810a-c13b1bebe1dd",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/choices/7aee1bb1-5477-4fce-810a-c13b1bebe1dd",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/confirm",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/94dfa9a8f1cc4da6d42cf0ab1026e023517d/assets/7aee1bb1-5477-4fce-810a-c13b1bebe1dd/preview",
+      "status": 200
+    }
+  ]
+}

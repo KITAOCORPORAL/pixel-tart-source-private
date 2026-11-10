@@ -1,3 +1,11 @@
+## 2026-11-10 在线选片收敛与Safari待验（Europe/Berlin；Asia/Shanghai同日）
+- 整合分支integration/online-selection-v1-20261110，从8e447075完整桌面基线选择性移植c36e1f38确认回执校验/丢响应恢复，两原分支均保留。最终产品7769b8ee63ad46cd22efb154145766c45b34ba69；c8a2f5cb仅测试支持，后续文档不改src。
+- 客户GET增加持久化confirmation，字段imageId/selectionAssetId明确分工；错误项目HTTP200拒绝、真实提交后丢响应可读回有效确认、有效回执不依赖后续刷新。Core无HTTP/凭据原断言保留并通过。
+- 实际重开导航暴露原SQLite丢反向选片ID，schema8加法迁移和唯一绑定已修；最终实际PC重开后返回同一归片项目。回归222PASS（Core183/WPF39），加原生6阶段共228所选TRX PASS；四JS真实HTTP故障PASS，最终EXE/CMD启动退出0。旧三项schema断言更新并单独复验，不抹旧失败。
+- 独立HTTPS手机相册80d225b5-1644-4842-936e-85abb13172f4已发布，同版服务/JS字节绑定；页面/授权API/JPEG200，未授权401，交接前0选/未确认/未锁定。私链仅本地PHONE_CONTEXT.private.json和phone01-app-evidence/SHARE_LINK.secret.txt，不进Git/包。待用户iPhoneSafari两步反馈后，collect_phone_feedback.py再同版PC收回、独立重开并出最终回执。当前READY_FOR_IPHONE_SAFARI_AWAITING_USER，手机后PC收回NOT_RUN；浏览器扩展继续等待。
+- 全模块包E:\Kitao-Deliveries\online-selection-converged-20261110\Guangjing-OnlineSelection-Converged-Final-Diagnostic-win-x64.zip；851文件逐项/ZIP读回，SHA256 508375E57896BAB0F3761C0430FD580E1A15EEE826FF7F148EB3F52274F929DE。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全模块/策划15/教程退役，无Setup，RAW调用0/native不换。旧8e/c36及181候选失败保留。
+- 当前报告docs/validation/online-selection-converged-20261110/PRE_PHONE_REPORT.md；本地证据E:/Kitao-Deliveries/online-selection-converged-20261110。最终人机回执未签发，勿将自动化或390px当Safari。家庭旧私链不在本机，单列未复验。
+
 ## 2026-11-10 在线选片 HTTP v1（Europe/Berlin；Asia/Shanghai 同日）
 - 独立分支feature/online-selection-http-v1-20261109，从37ea6c9a/产品02702071接续；首个功能34b72f44，最终产品c44f800a428ba097e024c91e7691dbf3b6a17355；启动验收支持81bc7be9，之后仅工具/交接。旧349bf400固定只读参考，不合旧树、不改其dirty。
 - 正式桌面建项目→生成代理→服务确认上传→带规则发布→复制受保护链接；响应式网页勾选确认锁定；PC新增可见刷新客户结果入口，校验项目/素材/版本/修订后落盘，既有同步入口返回归片项目；独立进程重开保留版本1/修订4和关联。None配置提示保持，HTTP/凭据在桌面基础设施，Core原无传输断言未放宽。

@@ -1,0 +1,31 @@
+{
+  "sourceSha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "dirty": [],
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-converged-20261110\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.HttpPhase1OfflineDraftAndProxyPersist",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-converged-20261110\\final-offline01"
+  ],
+  "pid": 24320,
+  "exitCode": 0,
+  "seconds": 10.981942415237427,
+  "expected": 1,
+  "results": [
+    {
+      "executionId": "b5152203-4fd1-4693-965f-a6d635c44e9f",
+      "testId": "11406898-9f66-8796-8467-05399c7cf095",
+      "testName": "HttpPhase1OfflineDraftAndProxyPersist",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:09.7657151",
+      "startTime": "2026-11-10T10:26:35.6243564+08:00",
+      "endTime": "2026-11-10T10:26:45.4053917+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "b5152203-4fd1-4693-965f-a6d635c44e9f"
+    }
+  ]
+}

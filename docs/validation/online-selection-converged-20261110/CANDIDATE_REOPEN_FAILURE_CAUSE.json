@@ -1,0 +1,22 @@
+{
+  "observedProduct": "181de897",
+  "schema": [
+    "Id",
+    "Name",
+    "ProjectType",
+    "WorkflowState",
+    "RootPath",
+    "CreatedAt",
+    "UpdatedAt",
+    "LastOpenedAt",
+    "IsArchived"
+  ],
+  "workflowRecords": [
+    [
+      "e558d1b0-defb-4761-94cf-8ee1482942df",
+      "HTTP \u5408\u6210\u56fe\u95ed\u73af"
+    ]
+  ],
+  "missingPersistentReverseIdentity": true,
+  "failedNativeReceipt": "actual-reopen-workflow01/results.trx"
+}

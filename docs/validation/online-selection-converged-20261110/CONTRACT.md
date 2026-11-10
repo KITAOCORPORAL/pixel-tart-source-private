@@ -19,3 +19,5 @@ HTTP摄影师界面的已选/收藏只读；None provider的本地编辑保持�
 本地fault_proxy.py只用于测试：实际转发至本次冻结服务；能在服务器提交后丢弃确认响应、注入错误项目HTTP200和阻断后续刷新。它不进入应用包，不是产品重试逻辑。
 
 手机验收必须使用整合版服务及JS和同一整合桌面包。自动HTTP、Node DOM adapter与桌面浏览器证据均不算Safari真机；待用户反馈后才收回手机相册、独立进程重开并提交最终人机闭环回执。另一家庭相册若可访问，独立记录版本，不混用。
+
+最终SQLite身份修复：schema8在Projects增加nullable SourceOnlineSelectionProjectId和唯一索引。Upsert拒绝不同选片覆盖，普通无来源保存保留已知绑定；List读回来源。迁移沿用原备份，旧缺失身份不按名称猜测。最终产品7769b8ee，双向身份及独立重开实际导航已验。

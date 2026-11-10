@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="21acf08b-1250-41da-b4c3-d7d818126923" name="Administrator@PC-20250309WEIZ 2026-11-10 10:30:13" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-10T10:30:13.1423050+08:00" queuing="2026-11-10T10:30:13.1423052+08:00" start="2026-11-10T10:30:09.2984754+08:00" finish="2026-11-10T10:30:13.1466325+08:00" />
+  <TestSettings name="default" id="f75b1c35-feba-4028-847c-0cd6a0fb57fc">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-10_10_30_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0aeec794-fb89-472b-a7f7-63058c4275ad" testId="1249dbda-a8a3-8c09-b933-a5505f6addad" testName="HttpConvergedRejectsWrongProjectReceiptOverHttp" computerName="PC-20250309WEIZ" duration="00:00:03.1881715" startTime="2026-11-10T10:30:09.7853721+08:00" endTime="2026-11-10T10:30:12.9887320+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0aeec794-fb89-472b-a7f7-63058c4275ad" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="HttpConvergedRejectsWrongProjectReceiptOverHttp" storage="e:\kitao-worktrees\online-selection-converged-20261110\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1249dbda-a8a3-8c09-b933-a5505f6addad">
+      <Execution id="0aeec794-fb89-472b-a7f7-63058c4275ad" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\online-selection-converged-20261110\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests" name="HttpConvergedRejectsWrongProjectReceiptOverHttp" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1249dbda-a8a3-8c09-b933-a5505f6addad" executionId="0aeec794-fb89-472b-a7f7-63058c4275ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

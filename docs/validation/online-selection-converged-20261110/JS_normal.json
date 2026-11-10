@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "mode": "normal",
+  "checks": [
+    "validated server receipt locks selected item",
+    "receipt project/version/revision/asset/time contract checked",
+    "reload restores server-persisted confirmation"
+  ],
+  "runtime": "v24.15.0",
+  "browser": false,
+  "safari": false,
+  "actualHttp": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/assets/59bbd2f3-fc78-4678-9645-27c094744d7f/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/choices/59bbd2f3-fc78-4678-9645-27c094744d7f",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/choices/59bbd2f3-fc78-4678-9645-27c094744d7f",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/choices/59bbd2f3-fc78-4678-9645-27c094744d7f",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/confirm",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/7d2b9413c6e1dc12092fbb0af1da39452602/assets/59bbd2f3-fc78-4678-9645-27c094744d7f/preview",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "sourceSha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "dirty": [],
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-converged-20261110\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasFavoriteAppAcceptanceTests.HttpPhase4ReopenPersistsConfirmedResultAndRevoke",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-converged-20261110\\final-reopen01"
+  ],
+  "pid": 22752,
+  "exitCode": 0,
+  "seconds": 4.4030492305755615,
+  "expected": 1,
+  "results": [
+    {
+      "executionId": "0d9abea5-e66e-4c6c-8d44-8ef9d2d65e9b",
+      "testId": "1fdf4220-d0c9-82cb-aec6-ae0963dac541",
+      "testName": "HttpPhase4ReopenPersistsConfirmedResultAndRevoke",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:03.3367402",
+      "startTime": "2026-11-10T10:30:20.0905223+08:00",
+      "endTime": "2026-11-10T10:30:23.4421686+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "0d9abea5-e66e-4c6c-8d44-8ef9d2d65e9b"
+    }
+  ]
+}

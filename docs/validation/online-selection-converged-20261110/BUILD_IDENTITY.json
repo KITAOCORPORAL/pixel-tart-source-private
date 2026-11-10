@@ -1,0 +1,43 @@
+{
+  "productSourceSha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "baselineDelivery": "8e447075301074fd1a3c966b34ec64635dd72eb2",
+  "portedReference": "c36e1f38323bdb11bf4f731421893ff5cabfce00",
+  "WholeAppDiagnosticBuild": true,
+  "PhotographerTrialBuild": false,
+  "workflowSchema": 8,
+  "phoneAcceptance": "WAITING_FOR_USER",
+  "planningSections": 15,
+  "tutorial": "RETIRED",
+  "installer": false,
+  "rawNativeUnchanged": true,
+  "files": {
+    "app/KitaoPhotoSelector.exe": {
+      "sha256": "b05d6976deaec77333cd0f125aabd6dcffb0f89e6acb713b9ec7240412665092",
+      "bytes": 179200
+    },
+    "app/KitaoPhotoSelector.dll": {
+      "sha256": "ce40ec0ffea7e7cdd5ca59ae7b2e4edd6fcd429c0b14ad05e9bc7f7c7f379128",
+      "bytes": 4125184
+    },
+    "app/RAWSelectionAssistant.Core.dll": {
+      "sha256": "43033456a4ce7f3bf1afa791be92857f758203b122c4da028bd38f10aeb8f545",
+      "bytes": 7772672
+    },
+    "app/raw_r.dll": {
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "bytes": 1102848
+    },
+    "selection-service/PixelTart.SelectionApi.Server.exe": {
+      "sha256": "0dc661b9c9ff98f0338e6ba7e195b9f4eff69015e691cf75536c4c7ff65ef677",
+      "bytes": 162304
+    },
+    "selection-service/PixelTart.SelectionApi.Server.dll": {
+      "sha256": "c9f11b61f8815181f1343056a03eae82cbc682fae1f86e2e1e11de9776e5b64f",
+      "bytes": 78848
+    },
+    "selection-service/wwwroot/selection-client.js": {
+      "sha256": "de597fffc3394d88034a7fcbba2261ea665f361edb264ec68bcdcaa7d5419bcf",
+      "bytes": 8958
+    }
+  }
+}

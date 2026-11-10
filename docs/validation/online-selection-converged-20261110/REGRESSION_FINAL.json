@@ -1,0 +1,1556 @@
+[
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+    "testName": "FavoritesPersistWithoutPathsAndKeepLibraryIdentitySeparate",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasFavoriteStoreTests.InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+    "testName": "InvalidStateAndCompetingWriterCannotOverwriteFavorites",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+    "testName": "ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+    "testName": "ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+    "testName": "OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.BrushLayerIsSameUndoModelAndPersistsOneStroke",
+    "testName": "BrushLayerIsSameUndoModelAndPersistsOneStroke",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.HomeMigrationBaselineTests.WorkflowV5ToV8PreservesDataAndDoesNotMigrateTwice",
+    "testName": "WorkflowV5ToV8PreservesDataAndDoesNotMigrateTwice",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.ResolverDistinguishesAvailableChangedOfflineMissingAndAmbiguousWithoutWriting",
+    "testName": "ResolverDistinguishesAvailableChangedOfflineMissingAndAmbiguousWithoutWriting",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.IdentityReturningImportPreservesLegacyDedupAndRefusesAmbiguousHashChoice",
+    "testName": "IdentityReturningImportPreservesLegacyDedupAndRefusesAmbiguousHashChoice",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.VersionSevenMigrationBacksUpV6AndBridgeWritesAreIdempotentAndConflictSafe",
+    "testName": "VersionSevenMigrationBacksUpV6AndBridgeWritesAreIdempotentAndConflictSafe",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.FailedVersionSevenMigrationRollsBackTablesAndSchemaVersion",
+    "testName": "FailedVersionSevenMigrationRollsBackTablesAndSchemaVersion",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.StableTetherHandoffReplaysWithoutCopyAndRejectsChangedContent",
+    "testName": "StableTetherHandoffReplaysWithoutCopyAndRejectsChangedContent",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.IdentityBridgeFoundationTests.AnnotationProductCommitSurvivesLibraryFailureAndRestartRejectsStaleRevision",
+    "testName": "AnnotationProductCommitSurvivesLibraryFailureAndRestartRejectsStaleRevision",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+    "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (False,1,False)",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+    "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (True,1,False)",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+    "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (False,18,False)",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings",
+    "testName": "FirstInstallUpgradeInterruptedAndCompletedNeverActivateAndPreserveSettings (True,22,True)",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+    "testName": "RetiredExampleMethodsNeitherCreateNorDeleteOrOverwriteExistingData",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+    "testName": "RetirementDoesNotNeedWritableSettingsAndDoesNotForgeCompletion",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionProjectPersistenceTests.ReverseIdentitySurvivesRepositoryReopenAndOrdinarySave",
+    "testName": "ReverseIdentitySurvivesRepositoryReopenAndOrdinarySave",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionProjectPersistenceTests.DifferentSelectionCannotOverwriteExistingWorkflowIdentity",
+    "testName": "DifferentSelectionCannotOverwriteExistingWorkflowIdentity",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionProjectPersistenceTests.OneSelectionCannotCreateASecondWorkflowProject",
+    "testName": "OneSelectionCannotCreateASecondWorkflowProject",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionProxySafetyClosureTests.GenerateAsync_PassesPrivateDefaultsFlushesAndPreservesSourceIdentity",
+    "testName": "GenerateAsync_PassesPrivateDefaultsFlushesAndPreservesSourceIdentity",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.DefaultProvider_IsNoneAndNeverPretendsConfigured",
+    "testName": "DefaultProvider_IsNoneAndNeverPretendsConfigured",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.NoneProvider_AllOperationsReturnExplicitNotConfigured",
+    "testName": "NoneProvider_AllOperationsReturnExplicitNotConfigured",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData",
+    "testName": "ProjectFactory_GeneratesOpaquePublicIdWithoutCustomerData",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Closed,\"已关闭\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Published,\"待客户选择\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Ready,\"准备中\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Archived,\"已归档\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (ClientConfirmed,\"已完成\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Draft,\"准备中\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Uploading,\"准备中\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProjectStatus_HasChinesePresentation",
+    "testName": "ProjectStatus_HasChinesePresentation (Selecting,\"客户选择中\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (Queued,\"等待上传\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (Failed,\"上传失败\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (Ready,\"已就绪\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (LocalOnly,\"仅本地\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (DeletedCloudCopy,\"云端副本已删除\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.AssetStatus_HasChinesePresentation",
+    "testName": "AssetStatus_HasChinesePresentation (Uploading,\"上传中\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.PublishGate_RequiresProjectRuleAndReadyAsset",
+    "testName": "PublishGate_RequiresProjectRuleAndReadyAsset",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ClientProjection_HidesPathsCloudIdsAndOperationalState",
+    "testName": "ClientProjection_HidesPathsCloudIdsAndOperationalState",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_OneFailureDoesNotBlockOtherAssets",
+    "testName": "UploadQueue_OneFailureDoesNotBlockOtherAssets",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.UploadQueue_PauseAndResumeHaveExplicitState",
+    "testName": "UploadQueue_PauseAndResumeHaveExplicitState",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.CloudDeleteContract_DoesNotTouchLocalFile",
+    "testName": "CloudDeleteContract_DoesNotTouchLocalFile",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched",
+    "testName": "ProxyJpeg_CreateNewAutoNumbersAndLeavesSourceUntouched",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_UnsupportedNeverCreatesOutput",
+    "testName": "ProxyJpeg_UnsupportedNeverCreatesOutput",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath",
+    "testName": "FinalSelection_MatchesRawByStableBaseNameAndArchivesWithoutRawPath",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions",
+    "testName": "FinalSelection_IgnoresSameNamedJpegAndOnlyMatchesRawExtensions",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete",
+    "testName": "FinalSelection_AmbiguousRawRequiresAttentionWithoutCopyMoveDelete",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory",
+    "testName": "JsonWorkspaceStore_WritesAndReloadsSnapshotInTemporaryDirectory",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults",
+    "testName": "JsonWorkspaceStore_RoundTripsMultipleProjectsAssetsRulesAndFinalResults",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal",
+    "testName": "JsonWorkspaceStore_CorruptSnapshotFailsWithoutReplacingOriginal",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile",
+    "testName": "ProxyJpeg_FailureCleansOnlyOwnedStagingAndPreservesCompetitorFile",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive",
+    "testName": "ResultArchive_CreateNewAutoNumbersFlushesAndNeverOverwritesExistingArchive",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ResultArchive_RequiresExplicitDestinationDirectory",
+    "testName": "ResultArchive_RequiresExplicitDestinationDirectory",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.ProductionCoreContainsNoHttpLocalhostOrCredentials",
+    "testName": "ProductionCoreContainsNoHttpLocalhostOrCredentials",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.OnlineSelectionV1Tests.FakeProvider_IsCompiledOnlyByTestProject",
+    "testName": "FakeProvider_IsCompiledOnlyByTestProject",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+    "testName": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+    "testName": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ForeignProjectDocumentOrShotFailsClosed",
+    "testName": "ForeignProjectDocumentOrShotFailsClosed",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.PlanningReadableSummaryTests.ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+    "testName": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"UndoJournals\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"SchemaInfo\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"Projects\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"OperationItems\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"MediaFiles\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"Tasks\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"ProjectSources\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"TaskSteps\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"QuickTools\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"Notifications\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"SelectionInputs\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"AuditLogs\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesRequiredTable",
+    "testName": "InitialMigration_CreatesRequiredTable (\"MatchDecisions\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_CreatesDatabaseAtRequestedPath",
+    "testName": "InitialMigration_CreatesDatabaseAtRequestedPath",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.InitialMigration_RecordsSchemaVersionOne",
+    "testName": "InitialMigration_RecordsSchemaVersionOne",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.RepeatedMigration_DoesNotRunTwice",
+    "testName": "RepeatedMigration_DoesNotRunTwice",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.MigrationBeforeUpgrade_CreatesBackup",
+    "testName": "MigrationBeforeUpgrade_CreatesBackup",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.FailedMigration_RollsBackAndKeepsOriginal",
+    "testName": "FailedMigration_RollsBackAndKeepsOriginal",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.CorruptedDatabase_IsNotOverwritten",
+    "testName": "CorruptedDatabase_IsNotOverwritten",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.HigherSchema_BlocksWrites",
+    "testName": "HigherSchema_BlocksWrites",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.JsonProjects_AreImportedAndOriginalIsRetained",
+    "testName": "JsonProjects_AreImportedAndOriginalIsRetained",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.JsonMigration_IsIdempotent",
+    "testName": "JsonMigration_IsIdempotent",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.CorruptJson_IsReportedWithoutDeletingFile",
+    "testName": "CorruptJson_IsReportedWithoutDeletingFile",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.QuickToolsJson_IsImportedInOrder",
+    "testName": "QuickToolsJson_IsImportedInOrder",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version210DatabaseTests.MediaIndexRepository_HandlesTenThousandRecords",
+    "testName": "MediaIndexRepository_HandlesTenThousandRecords",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.DefaultMigration_UpgradesToCurrentSchemaVersionFour",
+    "testName": "DefaultMigration_UpgradesToCurrentSchemaVersionFour",
+    "outcome": "Passed",
+    "rechecked": true
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.SchemaTwo_AddsExactlyFourBookingTables",
+    "testName": "SchemaTwo_AddsExactlyFourBookingTables",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.SchemaTwo_DoesNotCreateProjectRelationships",
+    "testName": "SchemaTwo_DoesNotCreateProjectRelationships",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.ProjectRelationshipInterface_HasNoConcreteImplementation",
+    "testName": "ProjectRelationshipInterface_HasNoConcreteImplementation",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.SchemaOneToCurrent_CreatesMigrationBackup",
+    "testName": "SchemaOneToCurrent_CreatesMigrationBackup",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.FailedSchemaTwoMigration_RollsBackEveryCreatedObject",
+    "testName": "FailedSchemaTwoMigration_RollsBackEveryCreatedObject",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.ChildForeignKeys_RestrictParentDeletion",
+    "testName": "ChildForeignKeys_RestrictParentDeletion",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.DatabaseAllowsPaidAmountAboveTotal",
+    "testName": "DatabaseAllowsPaidAmountAboveTotal",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.DatabaseRejectsNegativeMoneyFields",
+    "testName": "DatabaseRejectsNegativeMoneyFields",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.CalendarTablesContainNoBlobColumns",
+    "testName": "CalendarTablesContainNoBlobColumns",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.BookingRepositoryContract_HasNoPermanentDeleteMethod",
+    "testName": "BookingRepositoryContract_HasNoPermanentDeleteMethod",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_CreatesOnlyFourRc3BusinessTables",
+    "testName": "SchemaFour_CreatesOnlyFourRc3BusinessTables",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_RecordsVersionFourAndPassesIntegrityCheck",
+    "testName": "SchemaFour_RecordsVersionFourAndPassesIntegrityCheck",
+    "outcome": "Passed",
+    "rechecked": true
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_IsIdempotent",
+    "testName": "SchemaFour_IsIdempotent",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DefaultCategoriesContainEightIncomeAndFourteenExpense",
+    "testName": "SchemaFour_DefaultCategoriesContainEightIncomeAndFourteenExpense",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_AttachmentsAreReferencesNotBinaryColumns",
+    "testName": "SchemaFour_AttachmentsAreReferencesNotBinaryColumns",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_ForeignKeysRemainEnabled",
+    "testName": "SchemaFour_ForeignKeysRemainEnabled",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_TrimsValuesAndPreservesOnePrimaryContact",
+    "testName": "PeopleService_TrimsValuesAndPreservesOnePrimaryContact",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_ReordersStaffBySubmittedOrder",
+    "testName": "PeopleService_ReordersStaffBySubmittedOrder",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_RejectsEmptyBookingId",
+    "testName": "PeopleService_RejectsEmptyBookingId",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_RejectsBlankContactName",
+    "testName": "PeopleService_RejectsBlankContactName",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_RejectsBlankStaffName",
+    "testName": "PeopleService_RejectsBlankStaffName",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.PeopleService_RejectsMultiplePrimaryContacts",
+    "testName": "PeopleService_RejectsMultiplePrimaryContacts",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_NormalizesCurrencyTextAndAttachmentReferences",
+    "testName": "FinanceService_NormalizesCurrencyTextAndAttachmentReferences",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsZeroAmount",
+    "testName": "FinanceService_RejectsZeroAmount",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsNegativeAmount",
+    "testName": "FinanceService_RejectsNegativeAmount",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsInvalidCurrencyScale",
+    "testName": "FinanceService_RejectsInvalidCurrencyScale",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsBlankCurrency",
+    "testName": "FinanceService_RejectsBlankCurrency",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsDirectoryAttachment",
+    "testName": "FinanceService_RejectsDirectoryAttachment",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsMissingAttachment",
+    "testName": "FinanceService_RejectsMissingAttachment",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsMismatchedCategoryKind",
+    "testName": "FinanceService_RejectsMismatchedCategoryKind",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RejectsDisabledCategory",
+    "testName": "FinanceService_RejectsDisabledCategory",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_RequiresExplicitDeleteConfirmation",
+    "testName": "FinanceService_RequiresExplicitDeleteConfirmation",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceService_SummarySeparatesCashReceivableAndPayable",
+    "testName": "FinanceService_SummarySeparatesCashReceivableAndPayable",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.FinanceCsv_UsesCreateNewChineseLabelsAndNoAttachmentPaths",
+    "testName": "FinanceCsv_UsesCreateNewChineseLabelsAndNoAttachmentPaths",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"场地或道具代收\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"加片费用\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"灯光器材\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"快递打印\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"化妆师\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"拍摄定金\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"餐饮\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"场地费\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"拍摄尾款\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"退款或赔付\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"住宿\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"修图费用\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"其他支出\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"加急费用\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"造型师\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"交通\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"道具服装\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"其他收入\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"摄影助理\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"平台抽成\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"授权费用\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_DeclaresRequiredDefaultCategory",
+    "testName": "SchemaFour_DeclaresRequiredDefaultCategory (\"模特费\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".bat\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".cmd\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".msi\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".jse\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".com\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".lnk\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".dll\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".vbs\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".exe\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".scr\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".msp\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".js\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.DocumentSafety_BlocksExecutableOrScriptExtension",
+    "testName": "DocumentSafety_BlocksExecutableOrScriptExtension (\".ps1\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.DefaultMigration_RecordsCurrentSchemaVersion",
+    "testName": "DefaultMigration_RecordsCurrentSchemaVersion",
+    "outcome": "Passed",
+    "rechecked": true
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaThree_CreatesRequiredTetherTable",
+    "testName": "SchemaThree_CreatesRequiredTetherTable (\"TetherAnnotations\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaThree_CreatesRequiredTetherTable",
+    "testName": "SchemaThree_CreatesRequiredTetherTable (\"TetherSessions\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaThree_CreatesRequiredTetherTable",
+    "testName": "SchemaThree_CreatesRequiredTetherTable (\"TetherAssets\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaThree_AddsExactlyThreeTetherBusinessTables",
+    "testName": "SchemaThree_AddsExactlyThreeTetherBusinessTables",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaThree_PreservesFourCalendarTablesAndNoProjectRelationships",
+    "testName": "SchemaThree_PreservesFourCalendarTablesAndNoProjectRelationships",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.CurrentSchema_UsesIntegrityCheckAndIsIdempotent",
+    "testName": "CurrentSchema_UsesIntegrityCheckAndIsIdempotent",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.FailedSchemaThreeMigration_RollsBackAllTetherObjects",
+    "testName": "FailedSchemaThreeMigration_RollsBackAllTetherObjects",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherTables_ContainNoBinaryPayloadColumns",
+    "testName": "TetherTables_ContainNoBinaryPayloadColumns",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SessionRepository_PersistsCreatedAndLastReconciledTimes",
+    "testName": "SessionRepository_PersistsCreatedAndLastReconciledTimes",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherTables_HaveForeignKeyContracts",
+    "testName": "TetherTables_HaveForeignKeyContracts (\"TetherSessions\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherTables_HaveForeignKeyContracts",
+    "testName": "TetherTables_HaveForeignKeyContracts (\"TetherAssets\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherTables_HaveForeignKeyContracts",
+    "testName": "TetherTables_HaveForeignKeyContracts (\"TetherAnnotations\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"PhotographerNote\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"ClientFavorite\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"IsRejected\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"ClientNote\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"Rating\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData",
+    "testName": "TetherAnnotations_ReservesStageCCompatibleFieldsWithoutIdentityData (\"ColorLabel\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SchemaTwoToThree_CreatesBackupAndPreservesCalendarData",
+    "testName": "SchemaTwoToThree_CreatesBackupAndPreservesCalendarData",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.SessionRepository_PersistsAndStopsWithoutDeletingAssets",
+    "testName": "SessionRepository_PersistsAndStopsWithoutDeletingAssets",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.AssetRepository_DeduplicatesBySessionAndNormalizedPath",
+    "testName": "AssetRepository_DeduplicatesBySessionAndNormalizedPath",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.AnnotationRepository_UpsertsSingleLocalAnnotation",
+    "testName": "AnnotationRepository_UpsertsSingleLocalAnnotation",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.RejectedAnnotation_IsOnlyAMarkerAndKeepsAssetFile",
+    "testName": "RejectedAnnotation_IsOnlyAMarkerAndKeepsAssetFile",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.AnnotationRating_RejectsOutOfRangeValue",
+    "testName": "AnnotationRating_RejectsOutOfRangeValue",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Core",
+    "fqn": "RAWSelectionAssistant.Tests.Version230TetherSchemaTests.ActiveDirectoryUniqueIndex_PreventsTwoRunningSessions",
+    "testName": "ActiveDirectoryUniqueIndex_PreventsTwoRunningSessions",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.IdentityDerivedUsageTracksMultiplicityUndoAndHiddenObjects",
+    "testName": "IdentityDerivedUsageTracksMultiplicityUndoAndHiddenObjects",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasUsageStateTests.SameAssetIdInAnotherLibraryAndNonAssetObjectsDoNotCrossMark",
+    "testName": "SameAssetIdInAnotherLibraryAndNonAssetObjectsDoNotCrossMark",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+    "testName": "PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests.CombinedPaletteKeepsAllSourceReferences",
+    "testName": "CombinedPaletteKeepsAllSourceReferences",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.DocumentTargetCannotOverwriteReferencedSource",
+    "testName": "DocumentTargetCannotOverwriteReferencedSource",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests.EveryOperationLeavesSourceHashUnchanged",
+    "testName": "EveryOperationLeavesSourceHashUnchanged",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasInspirationBoardLinkTests.BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+    "testName": "BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.CanvasProjectLinkTests.OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+    "testName": "OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"lock\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"asset\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"version\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"revision\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"time\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.InvalidRemoteResultDoesNotReplaceSavedConfirmation",
+    "testName": "InvalidRemoteResultDoesNotReplaceSavedConfirmation (\"project\")",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineHttpResultGuardTests.ValidConfirmedKnownIdsPersistAfterValidation",
+    "testName": "ValidConfirmedKnownIdsPersistAfterValidation",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ConcurrentProjectSaves_PreserveEachProjectsAssetsRulesAndFinalResults",
+    "testName": "ConcurrentProjectSaves_PreserveEachProjectsAssetsRulesAndFinalResults",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.ReopenProject_RestoresFinalResultAndAssetChoices",
+    "testName": "ReopenProject_RestoresFinalResultAndAssetChoices",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.AssetThumbnail_PrefersExistingProxyImage",
+    "testName": "AssetThumbnail_PrefersExistingProxyImage",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionPersistenceWpfTests.View_UsesChineseStatusPhotoFirstThumbnailAndAv2Resources",
+    "testName": "View_UsesChineseStatusPhotoFirstThumbnailAndAv2Resources",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged",
+    "testName": "JpegProxy_Is2560SrgbMetadataFreeAndLeavesSourceUnchanged",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults",
+    "testName": "RawProxy_UsesExistingDecoderWithPrivateOnlineDefaults",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart",
+    "testName": "ImportAssets_PersistsReadyAndFailedItemsAndRestoresAfterRestart",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit",
+    "testName": "ImportAssets_PersistsQueuedBeforeRenderingAndReadyAfterCommit",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure",
+    "testName": "OpenProject_ConvertsInterruptedProxyQueueToPersistedRetryableFailure",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch",
+    "testName": "ProxyDirectoryFailure_MarksEveryItemFailedAndContinuesBatch",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog",
+    "testName": "AddAssetsCommand_WithoutParameterUsesSupportedMultiSelectDialog",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft",
+    "testName": "CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionProxyClosureWpfTests.SyncResultsCommand_WithoutParameterChoosesArchiveDirectory",
+    "testName": "SyncResultsCommand_WithoutParameterChoosesArchiveDirectory",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable",
+    "testName": "ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService",
+    "testName": "CreateProject_OpensLocalFourTabWorkspaceWithoutCloudService",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles",
+    "testName": "ImportPhotos_DeduplicatesPathsAndDoesNotModifyFiles",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage",
+    "testName": "ViewDefinesARealFourTabWorkspaceAndNoneProviderMessage",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.OnlineSelectionV1WpfTests.OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts",
+    "testName": "OnlineSelectionFilesDoNotModifyShellCalendarOrBookingContracts",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+    "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+    "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+    "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.FullShellKeepsPrimaryNavigationAndContentTemplates",
+    "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+    "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+    "outcome": "Passed",
+    "rechecked": false
+  },
+  {
+    "kind": "Wpf",
+    "fqn": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+    "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+    "outcome": "Passed",
+    "rechecked": false
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "mode": "block-view-after-confirm",
+  "checks": [
+    "validated server receipt locks selected item",
+    "receipt project/version/revision/asset/time contract checked",
+    "success independent of a subsequent refresh"
+  ],
+  "runtime": "v24.15.0",
+  "browser": false,
+  "safari": false,
+  "actualHttp": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/assets/780079b5-2dfc-4d56-a4c1-3b8ff48eedb9/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/choices/780079b5-2dfc-4d56-a4c1-3b8ff48eedb9",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/choices/780079b5-2dfc-4d56-a4c1-3b8ff48eedb9",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/choices/780079b5-2dfc-4d56-a4c1-3b8ff48eedb9",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/6aa40791384fbf6ae67508c43fb53d11f4a4/confirm",
+      "status": 200
+    }
+  ]
+}

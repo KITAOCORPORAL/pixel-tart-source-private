@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "mode": "confirm-drop-after-commit",
+  "checks": [
+    "validated server receipt locks selected item",
+    "receipt project/version/revision/asset/time contract checked",
+    "HTTP confirmation response lost after actual server commit",
+    "stored receipt recovered by authenticated GET",
+    "reload restores server-persisted confirmation"
+  ],
+  "runtime": "v24.15.0",
+  "browser": false,
+  "safari": false,
+  "actualHttp": true,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets/3f36c6ab-037f-45ae-af64-68ca1427325e/preview",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/choices/3f36c6ab-037f-45ae-af64-68ca1427325e",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/choices/3f36c6ab-037f-45ae-af64-68ca1427325e",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/choices/3f36c6ab-037f-45ae-af64-68ca1427325e",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/confirm",
+      "transportFailure": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets/3f36c6ab-037f-45ae-af64-68ca1427325e/preview",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/51b6d7c67ea32082fa9c7bc34b65e35bc225/assets/3f36c6ab-037f-45ae-af64-68ca1427325e/preview",
+      "status": 200
+    }
+  ]
+}

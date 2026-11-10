@@ -1,0 +1,54 @@
+{
+  "testSupportSha": "c8a2f5cbb3945ea5367445c4f8967639ae543b15",
+  "productSource": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "results": [
+    {
+      "executionId": "f4e72088-2033-4332-988b-01e3ef4211a0",
+      "testId": "15bb0ba0-d446-8d1f-a4e0-48f5a318ae87",
+      "testName": "DefaultMigration_UpgradesToCurrentSchemaVersionFour",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1067140",
+      "startTime": "2026-11-10T10:33:15.5663544+08:00",
+      "endTime": "2026-11-10T10:33:15.6883278+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "f4e72088-2033-4332-988b-01e3ef4211a0"
+    },
+    {
+      "executionId": "925920ae-35ad-4c80-8923-8688fd99d5ac",
+      "testId": "1e384132-8c2b-866d-895b-5d07eeb65c00",
+      "testName": "SchemaFour_RecordsVersionFourAndPassesIntegrityCheck",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1108227",
+      "startTime": "2026-11-10T10:33:15.5663485+08:00",
+      "endTime": "2026-11-10T10:33:15.6918900+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "925920ae-35ad-4c80-8923-8688fd99d5ac"
+    },
+    {
+      "executionId": "a6b1c6ea-277a-4931-acb6-dd9f1d8cd30e",
+      "testId": "1cd79de1-6604-8d26-bece-7260c82c0b4e",
+      "testName": "DefaultMigration_RecordsCurrentSchemaVersion",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:00.1049095",
+      "startTime": "2026-11-10T10:33:15.5663406+08:00",
+      "endTime": "2026-11-10T10:33:15.6883279+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "a6b1c6ea-277a-4931-acb6-dd9f1d8cd30e"
+    }
+  ],
+  "exitCode": 0,
+  "args": [
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "vstest",
+    "E:\\Kitao-Worktrees\\online-selection-converged-20261110\\tests\\RAWSelectionAssistant.Tests\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+    "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.Tests.Version220CalendarSchemaTests.DefaultMigration_UpgradesToCurrentSchemaVersionFour|FullyQualifiedName=RAWSelectionAssistant.Tests.Version230Rc3BusinessCoreTests.SchemaFour_RecordsVersionFourAndPassesIntegrityCheck|FullyQualifiedName=RAWSelectionAssistant.Tests.Version230TetherSchemaTests.DefaultMigration_RecordsCurrentSchemaVersion",
+    "/Logger:trx;LogFileName=results.trx",
+    "/ResultsDirectory:E:\\Kitao-Deliveries\\online-selection-converged-20261110\\schema-recheck01"
+  ]
+}

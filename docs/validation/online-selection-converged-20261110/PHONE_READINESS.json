@@ -1,0 +1,78 @@
+{
+  "status": "READY_AWAITING_IPHONE_SAFARI",
+  "productSource": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+  "projectId": "80d225b5-1644-4842-936e-85abb13172f4",
+  "assetId": "5696d77c-7ca8-46d2-ace9-24f064573563",
+  "selectionVersion": 1,
+  "currentRevision": 2,
+  "selected": 0,
+  "isLocked": false,
+  "confirmation": null,
+  "phoneOperatedByAgent": false,
+  "serverInstanceId": "f7aac78ce7724103ab48363a0b7587ca",
+  "servedJsSha256": "de597fffc3394d88034a7fcbba2261ea665f361edb264ec68bcdcaa7d5419bcf",
+  "protectedLinkSha256": "1bac631c1c9e8e87162f091498507a8ad965fbddb0dac7dd86f4ecd320e9b57e",
+  "jpegDimensions": [
+    96,
+    72
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/s/e78bafc2b2032f9ea629edd4dc6bb43980b0",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/selection-client.js",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/e78bafc2b2032f9ea629edd4dc6bb43980b0",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/e78bafc2b2032f9ea629edd4dc6bb43980b0/assets",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/e78bafc2b2032f9ea629edd4dc6bb43980b0",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/e78bafc2b2032f9ea629edd4dc6bb43980b0/assets/5696d77c-7ca8-46d2-ace9-24f064573563/preview",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/client/selection/e78bafc2b2032f9ea629edd4dc6bb43980b0/assets/5696d77c-7ca8-46d2-ace9-24f064573563/preview",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "method": "GET",
+      "path": "/health/ready",
+      "status": 200,
+      "expected": 200
+    }
+  ],
+  "files": {
+    "app/KitaoPhotoSelector.dll": "ce40ec0ffea7e7cdd5ca59ae7b2e4edd6fcd429c0b14ad05e9bc7f7c7f379128",
+    "app/RAWSelectionAssistant.Core.dll": "43033456a4ce7f3bf1afa791be92857f758203b122c4da028bd38f10aeb8f545",
+    "selection-service/PixelTart.SelectionApi.Server.dll": "c9f11b61f8815181f1343056a03eae82cbc682fae1f86e2e1e11de9776e5b64f",
+    "selection-service/wwwroot/selection-client.js": "de597fffc3394d88034a7fcbba2261ea665f361edb264ec68bcdcaa7d5419bcf"
+  },
+  "physicalSafari": "WAITING_FOR_USER",
+  "pcCollectAfterHuman": "NOT_RUN",
+  "humanFeedback": null
+}
