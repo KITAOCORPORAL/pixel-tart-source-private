@@ -2,6 +2,11 @@ using System.IO.Pipes;
 using System.Text.Json;
 using PixelTart.BrowserCapture.Contracts;
 
+if(args.Length>0 && args[0]=="--serve-fixtures")
+{
+    await CaptureFixtureServer.RunAsync(Path.GetFullPath(args[1]),args.Length>2?int.Parse(args[2]):51292);return;
+}
+
 if(args.Length>0 && args[0]=="--prepare")
 {
     var package=Path.GetFullPath(args.Length>1?args[1]:Path.Combine(AppContext.BaseDirectory,".."));
