@@ -1,3 +1,9 @@
+## 2026-11-10 公司Chrome安装修复完成、原待处理项待发送（Europe/Berlin）
+- 接续feature/chrome-capture-v1-20261110@189178e3，实际包E:/Kitao-Deliveries/11.10/Guangjing-ChromeCaptureV1-Diagnostic-win-x64。旧prepare显式传"%~dp0"造成尾引号进入路径，且pause掩盖Native失败；已改为无包路径--prepare并传播errorlevel。源码模板/打包复制/含空格及失败退出门禁已入仓。
+- 实际Native Host无包路径准备成功，数据根company01及pipe保持；当前命令与Chrome用户SID一致，HKCU专有NativeMessagingHost默认值32/64视图注册并读回，manifest/exe/扩展ID匹配11.10实际路径，旧值本地备份，HKLM未动。配套桌面PID4280，真实桥接Ready返回2库/3项目/1板。
+- Chrome既有页面及待处理ID39cdab10-fcab-4a76-8663-4403125baf48保留，未重载扩展或清存储。扩展页被浏览器URL策略拒绝，只允许HTTP/HTTPS；未用替代面绕过。原窗口仅需“刷新目的地”→选测试库/项目A/板A→“发送原图”；目前桌面未收到该项，真实AssetId未签发。
+- 冻结二进制/扩展产品ed5d15d4保持，启动修复无需重建或重载；11.10 ZIP修补后512文件，SHA256 1B7AB147766ECC67A7D550DB44BCCB7BF310A900A348834F8B63B295F63B89D3，旧ZIP与失败日志备份。报告docs/validation/chrome-capture-install-fix-20261110/INSTALL_FIX_REPORT.md；本地证据E:\Kitao-Deliveries\chrome-capture-v1-20261110\install-fix-20261110T060755Z。用户发送后再核验真实Chrome入库与打开原网页。
+
 ## 2026-11-10 Chrome单图采集开发版待载入（Europe/Berlin；Asia/Shanghai同日）
 - 从在线验收2661f2d3/产品7769b8ee建立feature/chrome-capture-v1-20261110；冻结功能产品ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c。右键“发送到光镜”+库/项目/灵感板+最近目的地、IndexedDB待处理、原图/srcset最高候选、严格实际AssetId回执已实现。批量/侧栏下一轮。
 - Native Messaging当前用户stdio→CurrentUserOnly管道→完整桌面既有身份导入/托管副本/项目及灵感板关联。相同CaptureId稳定指纹重试，同图A→B复用；源网页按钮默认可见并实际打开公司Chrome。Core无HTTP/凭据原断言不改并通过，本轮RAW0/native不换。

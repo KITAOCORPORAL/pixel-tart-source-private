@@ -1,0 +1,30 @@
+{
+  "status": "INSTALLATION_FIXED_BRIDGE_READY",
+  "actualPackage": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64",
+  "currentUserRegistrationVerifiedBothViews": true,
+  "manifestExeExtensionIdsMatch": true,
+  "dataRoot": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "pipeName": "guangjing.capture.917ab73e53799ac6d0516a30",
+  "libraryCount": 2,
+  "projectCount": 3,
+  "boardCount": 1,
+  "existingChromeCaptureId": "39cdab10-fcab-4a76-8663-4403125baf48",
+  "existingCaptureDesktopState": "NOT_SUBMITTED",
+  "fixturePages": [
+    {
+      "port": 51291,
+      "pageStatus": 200
+    },
+    {
+      "port": 51292,
+      "pageStatus": 200
+    }
+  ],
+  "chromeExtensionPageToolPolicy": "Blocked: only http/https allowed; no alternate surface used",
+  "manualChromeActionsRemaining": [
+    "刷新目的地",
+    "发送原图"
+  ],
+  "chromePagesReloaded": false,
+  "browserPendingStorageChanged": false
+}

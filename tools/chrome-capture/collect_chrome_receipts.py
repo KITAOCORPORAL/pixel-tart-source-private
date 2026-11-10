@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,sqlite3,sys,datetime
 root=Path(sys.argv[1] if len(sys.argv)>1 else "E:/Kitao-Deliveries/chrome-capture-v1-20261110")
 context=json.loads((root/"CHROME_CAPTURE_CONTEXT.json").read_text(encoding="utf-8-sig"));seed=json.loads(Path(context["companyDestinations"]).read_text(encoding="utf-8-sig"))
-base=context["testBaseUrl"];allowed={base+"/ordinary.html",base+"/srcset.html",base+"/unavailable.html"};path=Path(seed["runtime"])/"BrowserCapture/captures.sqlite"
+base=context["testBaseUrl"];fixture_bases={base,"http://127.0.0.1:51291"};allowed={origin+"/"+page for origin in fixture_bases for page in ["ordinary.html","srcset.html","unavailable.html"]};path=Path(seed["runtime"])/"BrowserCapture/captures.sqlite"
 if not path.exists():print(json.dumps(dict(status="WAITING_FOR_REAL_CHROME_CAPTURE",records=0)));sys.exit(0)
 with sqlite3.connect("file:"+path.as_posix()+"?mode=ro",uri=True)as connection:
     records=[json.loads(x[0])for x in connection.execute("SELECT RecordJson FROM BrowserCaptures WHERE State='Completed'")]

@@ -1,0 +1,23 @@
+{
+  "scope": "HKCU current Chrome user; dedicated host default value only",
+  "path": "Software\\Google\\Chrome\\NativeMessagingHosts\\com.guangjing.capture",
+  "values": [
+    {
+      "view": "32",
+      "value": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\native-host\\com.guangjing.capture.json",
+      "type": "REG_SZ"
+    },
+    {
+      "view": "64",
+      "value": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\native-host\\com.guangjing.capture.json",
+      "type": "REG_SZ"
+    }
+  ],
+  "manifestName": "com.guangjing.capture",
+  "nativeExe": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\native-host\\Guangjing.Capture.NativeHost.exe",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "allowedOrigins": [
+    "chrome-extension://obgahfdabcpkohkdcnidpmeooceomogk/"
+  ],
+  "machineWideRegistryTouched": false
+}

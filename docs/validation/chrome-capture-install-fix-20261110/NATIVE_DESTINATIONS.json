@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "code": "Ready",
+  "message": "请选择明确目的地。",
+  "destinations": {
+    "libraries": [
+      {
+        "id": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+        "name": "浏览器采集测试库"
+      },
+      {
+        "id": "c8a508bc-a91b-417b-826e-e6b76c12a614",
+        "name": "第二测试库"
+      }
+    ],
+    "projects": [
+      {
+        "id": "cecefe53-6e46-499d-9560-c6eddaf0813b",
+        "name": "待失效测试项目"
+      },
+      {
+        "id": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+        "name": "采集项目 B"
+      },
+      {
+        "id": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+        "name": "采集项目 A"
+      }
+    ],
+    "boards": [
+      {
+        "id": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+        "name": "采集灵感板 A"
+      }
+    ]
+  },
+  "receipt": null,
+  "retryable": false
+}

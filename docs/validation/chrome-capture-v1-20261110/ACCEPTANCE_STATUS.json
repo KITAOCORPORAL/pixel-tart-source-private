@@ -1,5 +1,5 @@
 {
-  "status": "READY_FOR_CHROME_MANUAL_LOAD_PARTIAL_ACCEPTANCE",
+  "status": "INSTALLATION_FIXED_BRIDGE_READY_CHROME_SEND_PENDING",
   "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
   "baseline": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
   "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
@@ -8,11 +8,16 @@
   "nativeDesktopMachineChecks": 9,
   "newPendingImageRecovery": "PASS",
   "publishedFullAppSmoke": "EXE_AND_CMD_PASS",
-  "chromeContextMenuAcceptance": "NOT_RUN_WAITING_USER_EXTENSION_LOAD",
+  "chromeContextMenuAcceptance": "EXISTING_CAPTURE_WINDOW_PENDING_USER_REFRESH_AND_SEND",
   "companyRootInitialAssetCount": 0,
-  "registryWrittenByAgent": false,
+  "registryWrittenByAgent": true,
   "batchSidebar": "DEFERRED_NEXT_ROUND",
   "rawCalls": 0,
   "WholeAppDiagnosticBuild": true,
-  "PhotographerTrialBuild": false
+  "PhotographerTrialBuild": false,
+  "nativeRegistrationScope": "HKCU current Chrome Windows user",
+  "actualPackage": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64",
+  "preparePathRegression": "PASS_WITH_SPACES_AND_FAILURE_EXIT",
+  "pendingChromeCaptureId": "39cdab10-fcab-4a76-8663-4403125baf48",
+  "installationFixReport": "../chrome-capture-install-fix-20261110/INSTALL_FIX_REPORT.md"
 }
