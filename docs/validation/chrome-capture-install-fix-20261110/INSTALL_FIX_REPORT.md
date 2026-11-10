@@ -50,3 +50,5 @@ Chrome主进程14472与配套桌面4280的令牌级别也一致，均为同一�
 实际11.10 ZIP已修补，原ZIP备份保留：`E:\Kitao-Deliveries\chrome-capture-v1-20261110\install-fix-20261110T060755Z\ORIGINAL_DEVELOPER_PACKAGE.zip`。新包 **112,968,483 bytes / 512 files**，SHA256 `1B7AB147766ECC67A7D550DB44BCCB7BF310A900A348834F8B63B295F63B89D3`；逐项读回通过。新包包含固定模板及INSTALL_LAUNCHER_FIX.json；下一个包也必须先执行package_launchers.py和含空格门禁。
 
 本地原始证据：`E:\Kitao-Deliveries\chrome-capture-v1-20261110\install-fix-20261110T060755Z`。最终提交与REMOTE_HEAD分开保存INSTALL_FIX_PUSH_READBACK.json。原开发包、机器证据及最初失败均保留。
+
+公开console日志仅规范化换行和行尾空格以满足Git检查；本地原始GBK/原生输出字节保留，逐文件原始SHA与公开SHA见PUBLIC_LOG_NORMALIZATION.json。失败信息和退出码未改。
