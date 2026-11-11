@@ -9,7 +9,7 @@ public sealed class OnlineSelectionProjectPersistenceTests
     {
         var db = new PixelTartDatabase(temp.Combine("workflow.db"));
         var migration = await new DatabaseMigrator(db, new DatabaseBackupService(db, temp.Combine("backups"))).MigrateAsync();
-        Assert.IsTrue(migration.Success, migration.ErrorMessage); Assert.AreEqual(8, migration.CurrentVersion);
+        Assert.IsTrue(migration.Success, migration.ErrorMessage); Assert.AreEqual(9, migration.CurrentVersion);
         return db;
     }
     [TestMethod]

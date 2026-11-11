@@ -30,6 +30,7 @@
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="刷新档期" Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0" AutomationProperties.Name="刷新手机和电脑档期" />
                 <Button Content="已归档" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleArchivedCommand}" AutomationProperties.Name="查看已归档排期" />
                 <Button Content="新建排期" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" Command="{Binding NewBookingCommand}" AutomationProperties.Name="新建拍摄排期" AutomationProperties.HelpText="快捷键 Ctrl+N" />
             </StackPanel>

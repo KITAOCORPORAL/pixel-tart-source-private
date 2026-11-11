@@ -359,6 +359,13 @@ public partial class App : Application
 
             StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
+            if(e.Args.Contains("--mobile-schedule",StringComparer.Ordinal))
+            {
+                _mainViewModel.NavigateCommand.Execute("WorkCalendar");
+                await calendarViewModel.RefreshAsync();
+                var idArg=e.Args.FirstOrDefault(a=>a.StartsWith("--booking-id=",StringComparison.Ordinal));
+                if(Guid.TryParse(idArg?["--booking-id=".Length..],out var bookingId)) await calendarViewModel.OpenBookingAsync(bookingId);
+            }
             StartupStage("09 Restore Session");
 #if PHOTOGRAPHER_TRIAL
             _mainViewModel.NavigateCommand.Execute("ReferenceColor");

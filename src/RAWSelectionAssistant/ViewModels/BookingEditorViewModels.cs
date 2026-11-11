@@ -464,6 +464,9 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
     private readonly IShootBookingService _service;
     private readonly IProjectRepository _projectRepository;
     private readonly Guid? _bookingId;
+    private long _expectedRevision;
+    private string? _mutationSignature;
+    private string _mutationId=Guid.NewGuid().ToString("N");
     private readonly Guid _stableBookingId;
     private readonly Guid _editorSessionId = Guid.NewGuid();
     private readonly DateTime? _suggestedStart;
@@ -680,6 +683,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
 
         var booking = await _service.GetAsync(_bookingId.Value, includeArchived: true).ConfigureAwait(true);
         if (booking is null) { ValidationText = "排期不存在。"; return; }
+        _expectedRevision=booking.Revision;
         var zone = TimeZoneInfo.FindSystemTimeZoneById(booking.TimeZoneId);
         var startLocal = TimeZoneInfo.ConvertTime(booking.StartAtUtc, zone);
         var endLocal = TimeZoneInfo.ConvertTime(booking.EndAtUtc, zone);
@@ -752,7 +756,8 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            var result = await _service.SaveAsync(draft!, resolution).ConfigureAwait(true);
+            draft=draft! with { MutationRequestHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(draft.MutationRequestHash+"/"+resolution))) };
+            var result = await _service.SaveAsync(draft, resolution).ConfigureAwait(true);
             UpdateMoney(result.Money);
             if (result.Status == BookingSaveStatus.NeedsAttention)
             {
@@ -872,7 +877,7 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
             SelectedTimeZone?.Id ?? string.Empty, IsAllDay.ToString(), Location, SelectedShootingType?.Value ?? string.Empty,
             SelectedStatus?.Value.ToString() ?? string.Empty, ShootingRequirements, PreparationNotes, TotalAmountText,
             DepositAmountText, PaidAmountText, SelectedProject?.Id?.ToString("D") ?? string.Empty, AllowOverlap.ToString(), Notes,
-            requirements, contacts, staff
+            requirements, contacts, staff, PreBufferMinutes.ToString(),PostBufferMinutes.ToString(),HoldExpiresAtText,PaymentState.ToString()
         });
     }
 
@@ -926,9 +931,14 @@ public sealed class ShootBookingEditorViewModel : ObservableObject
         var shootingType = SelectedShootingType?.Value ?? "Other";
         var status = allowPartial ? ShootBookingStatus.Draft : SelectedStatus?.Value ?? ShootBookingStatus.Tentative;
 
+        var signature=BuildEditSignature();
+        if(signature!=_mutationSignature) { _mutationId=Guid.NewGuid().ToString("N"); _mutationSignature=signature; }
         draft = new ShootBookingDraft
         {
             Id = _stableBookingId,
+            ExpectedRevision = _expectedRevision,
+            MutationId = _mutationId,
+            MutationRequestHash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(signature+"/"+_expectedRevision))),
             ProjectId = SelectedProject?.Id,
             Title = title,
             ClientDisplayName = ClientDisplayName,

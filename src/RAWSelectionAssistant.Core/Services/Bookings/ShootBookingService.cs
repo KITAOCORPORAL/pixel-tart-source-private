@@ -13,6 +13,16 @@ public sealed class ShootBookingService(
     public async Task<BookingSaveResult> SaveAsync(ShootBookingDraft draft, BookingConflictResolution conflictResolution = BookingConflictResolution.None, CancellationToken cancellationToken = default)
     {
         var money = BookingMoneyCalculator.Calculate(draft.TotalAmountMinor, draft.DepositAmountMinor, draft.PaidAmountMinor);
+        var hash = draft.MutationRequestHash ?? Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(draft)));
+        if (draft.MutationId is not null && draft.Id is { } operationBooking)
+        {
+            try
+            {
+                var replay = await repository.GetMutationAsync(draft.MutationId, operationBooking, hash, cancellationToken).ConfigureAwait(false);
+                if (replay is not null) return new(BookingSaveStatus.Saved, replay, money, [], []);
+            }
+            catch (BookingOperationConflictException e) { return BookingSaveResult.ValidationFailed(money, [e.Message]); }
+        }
         var validation = Validate(draft).ToList();
         ShootBooking? existing = null;
         if (draft.Id is { } existingId)
@@ -21,6 +31,8 @@ public sealed class ShootBookingService(
             if (existing is null && !draft.CreateIfMissing) return new(BookingSaveStatus.NotFound, null, money, [], ["拍摄排期不存在。"]);
             if (existing?.IsArchived == true) validation.Add("已归档排期必须先恢复后才能编辑。");
         }
+        if (draft.ExpectedRevision is { } expected && expected != (existing?.Revision ?? 0))
+            return new(BookingSaveStatus.VersionConflict, null, money, [], ["预约已由另一端更新，请刷新后重新编辑，未覆盖新内容。"]);
         if (validation.Count > 0) return BookingSaveResult.ValidationFailed(money, validation);
 
         var startUtc = draft.StartAt.ToUniversalTime();
@@ -67,7 +79,10 @@ public sealed class ShootBookingService(
             HoldExpiresAtUtc = draft.HoldExpiresAtUtc,
             PaymentState = draft.PaymentState,
             Revision = (previous?.Revision ?? 0) + 1,
-            DeviceId = previous?.DeviceId ?? "desktop",
+            DeviceId = draft.DeviceId,
+            ExpectedRevision = draft.ExpectedRevision ?? previous?.Revision,
+            MutationId = draft.MutationId,
+            MutationHash = hash,
             DeletedAtUtc = null
         };
         var requirements = draft.Requirements.Select((item, index) => item with
@@ -104,10 +119,17 @@ public sealed class ShootBookingService(
             UpdatedAtUtc = now
         }).ToArray();
 
-        if (draft.ReplacePeople)
-            await repository.SaveAggregateAsync(booking, requirements, contacts, staff, cancellationToken).ConfigureAwait(false);
-        else
-            await repository.SaveAsync(booking, requirements, cancellationToken).ConfigureAwait(false);
+        try
+        {
+            if (draft.ReplacePeople)
+                await repository.SaveAggregateAsync(booking, requirements, contacts, staff, cancellationToken).ConfigureAwait(false);
+            else
+                await repository.SaveAsync(booking, requirements, cancellationToken).ConfigureAwait(false);
+        }
+        catch (BookingVersionConflictException e) { return new(BookingSaveStatus.VersionConflict, null, money, [], [e.Message]); }
+        catch (BookingOperationConflictException e) { return BookingSaveResult.ValidationFailed(money, [e.Message]); }
+        if (draft.MutationId is { } persistedOperation)
+            booking = await repository.GetMutationAsync(persistedOperation, booking.Id, hash, cancellationToken).ConfigureAwait(false) ?? booking;
         if (auditLog is not null)
             await auditLog.WriteAsync("Booking", previous is null ? "Created" : "Updated", "Information", "拍摄排期记录已保存。", projectId: booking.ProjectId, cancellationToken: cancellationToken).ConfigureAwait(false);
         BookingChanged?.Invoke(this, booking.Id);
@@ -167,6 +189,7 @@ public sealed class ShootBookingService(
 
     private static IEnumerable<string> Validate(ShootBookingDraft draft)
     {
+        if (!Enum.IsDefined(draft.Status)) yield return "预约状态无效。";
         if (string.IsNullOrWhiteSpace(draft.Title)) yield return "项目名称不能为空。";
         if (string.IsNullOrWhiteSpace(draft.ShootingType)) yield return "拍摄类型不能为空。";
         if (draft.CurrencyCode.Trim().Length != 3) yield return "货币代码必须为三位字符。";

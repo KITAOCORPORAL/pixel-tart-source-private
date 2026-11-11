@@ -6,6 +6,7 @@ public interface IShootBookingRepository
 {
     Task<ShootBooking?> GetAsync(Guid id, bool includeArchived = false, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<ShootRequirementItem>> GetRequirementsAsync(Guid bookingId, CancellationToken cancellationToken = default);
+    Task<ShootBooking?> GetMutationAsync(string operationId, Guid bookingId, string hash, CancellationToken cancellationToken = default) => Task.FromResult<ShootBooking?>(null);
     Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default);
     Task SaveAggregateAsync(
         ShootBooking booking,
@@ -19,6 +20,7 @@ public interface IShootBookingRepository
     Task<IReadOnlyList<ShootBookingSummary>> FindOverlappingAsync(DateTimeOffset startAtUtc, DateTimeOffset endAtUtc, Guid? excludeBookingId = null, CancellationToken cancellationToken = default);
     Task<bool> CompleteAsync(Guid id, DateTimeOffset completedAtUtc, CancellationToken cancellationToken = default);
     Task<bool> SetStatusAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default) => Task.FromResult(false);
+    Task<bool> SetStatusVersionedAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, long expectedRevision, CancellationToken cancellationToken = default) => SetStatusAsync(id,status,updatedAtUtc,cancellationToken);
     Task<bool> ArchiveAsync(Guid id, DateTimeOffset archivedAtUtc, CancellationToken cancellationToken = default);
     Task<bool> RestoreAsync(Guid id, DateTimeOffset restoredAtUtc, CancellationToken cancellationToken = default);
 }

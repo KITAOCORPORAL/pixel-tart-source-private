@@ -71,7 +71,7 @@ public enum BookingDocumentType { PhotographyPlan, ShootAgreement, ModelRelease,
 public enum BookingDocumentLinkMode { Reference, ManagedCopy }
 public enum BookingSearchScope { CurrentView, AllUnarchived }
 public enum BookingConflictResolution { None, SaveAnyway, MarkAllowOverlap }
-public enum BookingSaveStatus { Saved, NeedsAttention, ValidationFailed, NotFound }
+public enum BookingSaveStatus { Saved, NeedsAttention, ValidationFailed, NotFound, VersionConflict }
 public enum BookingEditorSaveStatus { DraftSaved, Created, NeedsDocumentAttention, ValidationFailed, DatabaseFailed, FileOperationFailed }
 public enum BookingMoneyDisplayKind { Unknown, Receivable, Settled, Overpaid }
 public enum BookingPaymentState { Unknown, Unpaid, DepositPaid, PartiallyPaid, Paid, Refunded }
@@ -112,6 +112,9 @@ public sealed record ShootBooking
     public BookingPaymentState PaymentState { get; init; } = BookingPaymentState.Unknown;
     public long Revision { get; init; } = 1;
     public string DeviceId { get; init; } = "desktop";
+    [System.Text.Json.Serialization.JsonIgnore] public long? ExpectedRevision { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore] public string? MutationId { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore] public string? MutationHash { get; init; }
     public DateTimeOffset? DeletedAtUtc { get; init; }
 }
 
@@ -119,6 +122,10 @@ public sealed record ShootBookingDraft
 {
     public Guid? Id { get; init; }
     public Guid EditorSessionId { get; init; }
+    public long? ExpectedRevision { get; init; }
+    public string? MutationId { get; init; }
+    public string? MutationRequestHash { get; init; }
+    public string DeviceId { get; init; } = "desktop";
     public bool CreateIfMissing { get; init; }
     public bool ReplacePeople { get; init; }
     public Guid? ProjectId { get; init; }

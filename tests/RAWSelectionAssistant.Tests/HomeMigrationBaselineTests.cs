@@ -39,8 +39,8 @@ public sealed class HomeMigrationBaselineTests
         var current = new DatabaseMigrator(database, backup);
         var upgraded = await current.MigrateAsync();
         Assert.IsTrue(upgraded.Success, upgraded.ErrorMessage);
-        Assert.AreEqual(8, upgraded.CurrentVersion);
-        Assert.HasCount(3, upgraded.AppliedMigrations);
+        Assert.AreEqual(9, upgraded.CurrentVersion);
+        Assert.HasCount(4, upgraded.AppliedMigrations);
         Assert.IsTrue(File.Exists(upgraded.BackupPath));
         Assert.HasCount(0, (await current.MigrateAsync()).AppliedMigrations);
         await using (var connection = await database.OpenConnectionAsync())
@@ -56,6 +56,6 @@ public sealed class HomeMigrationBaselineTests
         Assert.HasCount(1, await assets.Repository.ListProjectAssetLinksAsync(assetId: assets.B, projectId: project));
 
         var fresh = new PixelTartDatabase(temp.Combine("fresh.db"));
-        Assert.AreEqual(8, (await new DatabaseMigrator(fresh, new DatabaseBackupService(fresh, temp.Combine("fresh-backups"))).MigrateAsync()).CurrentVersion);
+        Assert.AreEqual(9, (await new DatabaseMigrator(fresh, new DatabaseBackupService(fresh, temp.Combine("fresh-backups"))).MigrateAsync()).CurrentVersion);
     }
 }

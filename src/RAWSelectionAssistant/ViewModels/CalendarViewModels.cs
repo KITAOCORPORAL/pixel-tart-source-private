@@ -376,6 +376,8 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
             }
             _currentWeather = await LoadCachedWeatherAsync(items, cancellationToken).ConfigureAwait(true);
             ApplyCurrentView(items, _currentWeather);
+            if (Details.Booking is { } openBooking && !Details.IsBusy)
+                await Details.LoadAsync(openBooking.Id, openBooking.IsArchived).ConfigureAwait(true);
             _nextCursor = null;
             OnPropertyChanged(nameof(HasMoreGlobalResults));
             StatusText = $"当前视图 {items.Count} 条排期";
@@ -564,7 +566,7 @@ public sealed class WorkCalendarViewModel : ObservableObject, IDisposable
         StatusText = closed ? $"{date:M月d日} 已关闭新拍摄档期；已有任务保持不变。" : $"{date:M月d日} 已重新开放。";
     }
 
-    private async Task OpenBookingAsync(Guid bookingId, bool includeArchived = false)
+    public async Task OpenBookingAsync(Guid bookingId, bool includeArchived = false)
     {
         SelectedBookingId = bookingId;
         await Details.LoadAsync(bookingId, includeArchived).ConfigureAwait(true);

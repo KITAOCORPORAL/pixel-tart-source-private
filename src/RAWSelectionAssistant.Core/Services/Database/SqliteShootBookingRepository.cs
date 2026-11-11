@@ -29,6 +29,22 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         return result;
     }
 
+    public async Task<ShootBooking?> GetMutationAsync(string operationId, Guid bookingId, string hash, CancellationToken cancellationToken = default)
+    {
+        await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken);
+        return await ReadMutation(connection, null, operationId, bookingId, hash, cancellationToken);
+    }
+    private static async Task<ShootBooking?> ReadMutation(SqliteConnection connection, SqliteTransaction? transaction, string operationId, Guid bookingId, string hash, CancellationToken token)
+    {
+        await using var command=connection.CreateCommand(); command.Transaction=transaction;
+        command.CommandText="SELECT BookingId,RequestHash,ResultJson FROM BookingMutationReceipts WHERE OperationId=$op;";
+        command.Parameters.AddWithValue("$op",operationId);
+        await using var reader=await command.ExecuteReaderAsync(token);
+        if(!await reader.ReadAsync(token)) return null;
+        if(reader.GetString(0)!=bookingId.ToString("D") || reader.GetString(1)!=hash) throw new BookingOperationConflictException();
+        return System.Text.Json.JsonSerializer.Deserialize<ShootBooking>(reader.GetString(2));
+    }
+
     public Task SaveAsync(ShootBooking booking, IReadOnlyList<ShootRequirementItem> requirements, CancellationToken cancellationToken = default) =>
         SaveAggregateInternalAsync(booking, requirements, [], [], replacePeople: false, cancellationToken: cancellationToken);
 
@@ -49,7 +65,19 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         CancellationToken cancellationToken)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
-        await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using var transaction = connection.BeginTransaction(deferred: false);
+        if (booking.MutationId is { } operationId)
+        {
+            var replay=await ReadMutation(connection,transaction,operationId,booking.Id,booking.MutationHash!,cancellationToken);
+            if(replay is not null) { await transaction.CommitAsync(cancellationToken); return; }
+        }
+        if (booking.ExpectedRevision is { } expected)
+        {
+            await using var current=connection.CreateCommand(); current.Transaction=transaction;
+            current.CommandText="SELECT Revision FROM ShootBookings WHERE Id=$id;";current.Parameters.AddWithValue("$id",booking.Id.ToString("D"));
+            var value=await current.ExecuteScalarAsync(cancellationToken);
+            if((value is null ? 0 : Convert.ToInt64(value))!=expected) throw new BookingVersionConflictException();
+        }
         await using (var command = connection.CreateCommand())
         {
             command.Transaction = transaction;
@@ -170,6 +198,14 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
             await reminders.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
 
+        if (booking.MutationId is { } mutationId)
+        {
+            await using var receipt=connection.CreateCommand();receipt.Transaction=transaction;
+            receipt.CommandText="INSERT INTO BookingMutationReceipts VALUES($op,$id,$hash,$result,$at);";
+            receipt.Parameters.AddWithValue("$op",mutationId);receipt.Parameters.AddWithValue("$id",booking.Id.ToString("D"));
+            receipt.Parameters.AddWithValue("$hash",booking.MutationHash!);receipt.Parameters.AddWithValue("$result",System.Text.Json.JsonSerializer.Serialize(booking));
+            receipt.Parameters.AddWithValue("$at",Utc(booking.UpdatedAtUtc));await receipt.ExecuteNonQueryAsync(cancellationToken);
+        }
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
     }
 
@@ -242,7 +278,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var booking = connection.CreateCommand();
         booking.Transaction = transaction;
-        booking.CommandText = "UPDATE ShootBookings SET IsArchived=1,ArchivedAtUtc=$at,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0;";
+        booking.CommandText = "UPDATE ShootBookings SET IsArchived=1,ArchivedAtUtc=$at,UpdatedAtUtc=$at,Revision=Revision+1 WHERE Id=$id AND IsArchived=0;";
         booking.Parameters.AddWithValue("$id", id.ToString("D"));
         booking.Parameters.AddWithValue("$at", Utc(archivedAtUtc));
         var changed = await booking.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
@@ -265,7 +301,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var booking = connection.CreateCommand();
         booking.Transaction = transaction;
-        booking.CommandText = "UPDATE ShootBookings SET Status='Completed',UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>'Completed';";
+        booking.CommandText = "UPDATE ShootBookings SET Status='Completed',UpdatedAtUtc=$at,Revision=Revision+1 WHERE Id=$id AND IsArchived=0 AND Status<>'Completed';";
         booking.Parameters.AddWithValue("$id", id.ToString("D"));
         booking.Parameters.AddWithValue("$at", Utc(completedAtUtc));
         var changed = await booking.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
@@ -282,14 +318,21 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
         return changed > 0;
     }
 
-    public async Task<bool> SetStatusAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default)
+    public Task<bool> SetStatusAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, CancellationToken cancellationToken = default) => SetStatusInternalAsync(id,status,updatedAtUtc,null,cancellationToken);
+    public Task<bool> SetStatusVersionedAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, long expectedRevision, CancellationToken cancellationToken = default) => SetStatusInternalAsync(id,status,updatedAtUtc,expectedRevision,cancellationToken);
+    private async Task<bool> SetStatusInternalAsync(Guid id, ShootBookingStatus status, DateTimeOffset updatedAtUtc, long? expectedRevision, CancellationToken cancellationToken)
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var booking = connection.CreateCommand();
         booking.Transaction = transaction;
-        booking.CommandText = "UPDATE ShootBookings SET Status=$status,ShotCompletedAtUtc=CASE WHEN $status='Completed' THEN COALESCE(ShotCompletedAtUtc,$at) WHEN $status='Confirmed' THEN NULL ELSE ShotCompletedAtUtc END,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>$status;";
+        booking.CommandText = "UPDATE ShootBookings SET Revision=Revision+1,Status=$status,ShotCompletedAtUtc=CASE WHEN $status='Completed' THEN COALESCE(ShotCompletedAtUtc,$at) WHEN $status='Confirmed' THEN NULL ELSE ShotCompletedAtUtc END,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=0 AND Status<>$status;";
         booking.Parameters.AddWithValue("$id", id.ToString("D"));
+        if(expectedRevision is { } expected)
+        {
+            booking.CommandText=booking.CommandText.TrimEnd(';')+" AND Revision=$expected;";
+            booking.Parameters.AddWithValue("$expected",expected);
+        }
         booking.Parameters.AddWithValue("$status", status.ToString());
         booking.Parameters.AddWithValue("$at", Utc(updatedAtUtc));
         var changed = await booking.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
@@ -315,7 +358,7 @@ public sealed class SqliteShootBookingRepository(IPixelTartDatabase database) : 
     {
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
-        command.CommandText = "UPDATE ShootBookings SET IsArchived=0,ArchivedAtUtc=NULL,UpdatedAtUtc=$at WHERE Id=$id AND IsArchived=1;";
+        command.CommandText = "UPDATE ShootBookings SET IsArchived=0,ArchivedAtUtc=NULL,UpdatedAtUtc=$at,Revision=Revision+1 WHERE Id=$id AND IsArchived=1;";
         command.Parameters.AddWithValue("$id", id.ToString("D"));
         command.Parameters.AddWithValue("$at", Utc(restoredAtUtc));
         return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) > 0;

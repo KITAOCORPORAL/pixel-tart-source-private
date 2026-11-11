@@ -26,7 +26,7 @@ public sealed class BookingWorkflowService(
             return new(bookingId, BookingWorkflowOperationStatus.AlreadyApplied, previous, previous, booking.UpdatedAtUtc);
 
         var completedAt = DateTimeOffset.UtcNow;
-        var changed = await repository.SetStatusAsync(bookingId, ShootBookingStatus.Completed, completedAt, cancellationToken).ConfigureAwait(false);
+        var changed = await repository.SetStatusVersionedAsync(bookingId, ShootBookingStatus.Completed, completedAt, booking.Revision, cancellationToken).ConfigureAwait(false);
         if (!changed)
         {
             var current = await repository.GetAsync(bookingId, includeArchived: true, cancellationToken).ConfigureAwait(false);
@@ -50,7 +50,7 @@ public sealed class BookingWorkflowService(
         if (previous == CalendarWorkflowState.Scheduled)
             return new(bookingId, BookingWorkflowOperationStatus.AlreadyApplied, previous, previous);
 
-        var changed = await repository.SetStatusAsync(bookingId, ShootBookingStatus.Confirmed, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        var changed = await repository.SetStatusVersionedAsync(bookingId, ShootBookingStatus.Confirmed, DateTimeOffset.UtcNow, booking.Revision, cancellationToken).ConfigureAwait(false);
         if (!changed)
         {
             var current = await repository.GetAsync(bookingId, includeArchived: true, cancellationToken).ConfigureAwait(false);
@@ -77,7 +77,7 @@ public sealed class BookingWorkflowService(
         var target = CalendarPostProductionStageMapper.ToBookingStatus(stage);
         if (booking.Status == target)
             return new(bookingId, BookingWorkflowOperationStatus.AlreadyApplied, previous, CalendarWorkflowState.PostProduction);
-        var changed = await repository.SetStatusAsync(bookingId, target, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        var changed = await repository.SetStatusVersionedAsync(bookingId, target, DateTimeOffset.UtcNow, booking.Revision, cancellationToken).ConfigureAwait(false);
         if (!changed) return Failed(bookingId, previous, "WorkflowWriteFailed", "后期阶段未能保存。");
         await WriteAuditAsync("PostProductionStageChanged", bookingId, cancellationToken).ConfigureAwait(false);
         return new(bookingId, BookingWorkflowOperationStatus.Succeeded, previous, CalendarWorkflowState.PostProduction);
@@ -94,7 +94,7 @@ public sealed class BookingWorkflowService(
             return new(bookingId, BookingWorkflowOperationStatus.AlreadyApplied, previous, previous);
         if (previous != CalendarWorkflowState.PostProduction)
             return Rejected(bookingId, previous, "InvalidWorkflowTransition", "拍摄完成后才能标记最终交付。");
-        var changed = await repository.SetStatusAsync(bookingId, ShootBookingStatus.Delivered, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        var changed = await repository.SetStatusVersionedAsync(bookingId, ShootBookingStatus.Delivered, DateTimeOffset.UtcNow, booking.Revision, cancellationToken).ConfigureAwait(false);
         if (!changed) return Failed(bookingId, previous, "WorkflowWriteFailed", "交付状态未能保存。");
         await WriteAuditAsync("Delivered", bookingId, cancellationToken).ConfigureAwait(false);
         return new(bookingId, BookingWorkflowOperationStatus.Succeeded, previous, CalendarWorkflowState.Delivered);
@@ -109,7 +109,7 @@ public sealed class BookingWorkflowService(
             return new(bookingId, BookingWorkflowOperationStatus.AlreadyApplied, previous, previous);
         if (booking.IsArchived || booking.Status == ShootBookingStatus.Cancelled)
             return Rejected(bookingId, previous, "BookingInactive", "已取消或已归档的拍摄不能重新打开。");
-        var changed = await repository.SetStatusAsync(bookingId, ShootBookingStatus.AwaitingDelivery, DateTimeOffset.UtcNow, cancellationToken).ConfigureAwait(false);
+        var changed = await repository.SetStatusVersionedAsync(bookingId, ShootBookingStatus.AwaitingDelivery, DateTimeOffset.UtcNow, booking.Revision, cancellationToken).ConfigureAwait(false);
         if (!changed) return Failed(bookingId, previous, "WorkflowWriteFailed", "重新打开交付状态未能保存。");
         await WriteAuditAsync("DeliveryReopened", bookingId, cancellationToken).ConfigureAwait(false);
         return new(bookingId, BookingWorkflowOperationStatus.Succeeded, previous, CalendarWorkflowState.PostProduction);
