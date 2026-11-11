@@ -9,32 +9,38 @@
     {
       "path": "content/utils.ts",
       "gitBlob": "cf23023b328bce059a81a2538e8673b5976aa98f",
-      "sha256": "21031ca3f9343ae064cd55d02634790a4d75410537f8f9f85e47d967243307aa"
+      "sha256": "21031ca3f9343ae064cd55d02634790a4d75410537f8f9f85e47d967243307aa",
+      "gitBlobSha256": "e1513c9c55975115d6fbe9b7ac99b9a3e1e84a2a177e822d4761e3cab19c1e1c"
     },
     {
       "path": "content/extract-advanced.ts",
       "gitBlob": "2153a3c4d7cff146c42460eb865e32c552e9b779",
-      "sha256": "06826131c4c18c6054cf3685ad813cbc0c4ea9d37bf021bee056b2db1305bfcf"
+      "sha256": "06826131c4c18c6054cf3685ad813cbc0c4ea9d37bf021bee056b2db1305bfcf",
+      "gitBlobSha256": "6619e58addf476d8f48386dc207a0e52bc69f8521b0efd8ade7befd5fae7efc9"
     },
     {
       "path": "content/batch-sender.ts",
       "gitBlob": "80043f621869cddf21de2e4b2ead072d0113e6c3",
-      "sha256": "b42b15aa39777c66dac787005d22e8b657fd76ad569ed99858e21ac8b1113e48"
+      "sha256": "b42b15aa39777c66dac787005d22e8b657fd76ad569ed99858e21ac8b1113e48",
+      "gitBlobSha256": "da1895c760edd8bfb054faea6a16b0d01ae71a557c5ef9ddc5102bf2b5bdd7da"
     },
     {
       "path": "sidepanel/filter.ts",
       "gitBlob": "6810e1ab0dbaa4c88764f347918bf7a4f039fa1e",
-      "sha256": "a013e3069aece899f89cd904df6d09827f06895b87f1dc0c429f26204a7c76e8"
+      "sha256": "a013e3069aece899f89cd904df6d09827f06895b87f1dc0c429f26204a7c76e8",
+      "gitBlobSha256": "1fa9cbab51770e8b02f3deac2567a920804f2e1e867d8cfb8d09dde29849a8db"
     },
     {
       "path": "shared/export-eagle.ts",
       "gitBlob": "7a5de1fb8bd6ae8eef07ad39faf9923159545a4c",
-      "sha256": "3b6c366dacf51e352ed73aaa168e496dea924a95a056c364599c53f55017e636"
+      "sha256": "3b6c366dacf51e352ed73aaa168e496dea924a95a056c364599c53f55017e636",
+      "gitBlobSha256": "1bbbc8a72ac4ebd538837c36a97b4a77650df8bc0032ec42e48175196beceeb9"
     },
     {
       "path": "LICENSE",
       "gitBlob": "42edfb2a44a84f7f3fe33e4da84d78d99eb42b95",
-      "sha256": "c1fdff23e2801574bdda86b47ae15d70e4347f555e6debc91ac766d43353eb97"
+      "sha256": "c1fdff23e2801574bdda86b47ae15d70e4347f555e6debc91ac766d43353eb97",
+      "gitBlobSha256": "2f9bed2ab5f443897d9c9887e90e5748015c56f3ad7aaa1a384d388f72391186"
     }
   ],
   "runtimeReuse": "Lazy attribute subset and extraction/filter/buffering concepts adapted; own MJS engine preserves actual-asset receipts",
@@ -44,5 +50,6 @@
     "Auto-scroll/deep-site crawling",
     "Eagle HTTP addFromURLs success-by-status inference"
   ],
-  "distributedLicense": "extensions/guangjing-chrome/third-party/ImageHarvest-MIT.txt"
+  "distributedLicense": "extensions/guangjing-chrome/third-party/ImageHarvest-MIT.txt",
+  "sha256Meaning": "sha256 and licenseSha256 measure the Windows CRLF checkout; gitBlobSha256 measures canonical bytes stored in the pinned Git object."
 }

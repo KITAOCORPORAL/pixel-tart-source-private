@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "command": "node tools/chrome-capture/source-tests.mjs",
+  "exitCode": 0,
+  "observedOutput": "Source choice and strict actual-asset receipt guards: 9 PASS",
+  "passed": 9,
+  "scope": "Node source-choice and strict receipt guards; actual Chrome context menu remains pending",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+}

@@ -1,0 +1,34 @@
+{
+  "checkedAtBerlin": "2026-11-11T04:32:46.276051+01:00",
+  "scope": "read-only actual native host saved receipts; no Chrome API or UI",
+  "runtime": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "nativeSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a",
+  "saved": {
+    "ok": true,
+    "code": "Completed",
+    "message": "已读取桌面保存的实际回执。",
+    "destinations": null,
+    "receipt": {
+      "captureId": "287b50b2-74be-4aeb-856a-b5e5ea6a36b4",
+      "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "projectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "boardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "outcome": "Imported",
+      "pageUrl": "http://127.0.0.1:51292/ordinary.html",
+      "capturedAtUtc": "2026-11-10T06:56:34.428+00:00",
+      "importedAtUtc": "2026-11-10T06:56:56.8943558+00:00"
+    },
+    "retryable": false
+  },
+  "missing": {
+    "ok": false,
+    "code": "CaptureNotFound",
+    "message": "桌面没有这项的已保存回执。",
+    "destinations": null,
+    "receipt": null,
+    "retryable": false
+  },
+  "status": "PASS_SAVED_RECEIPT_AND_MISSING_RECEIPT_READBACK"
+}

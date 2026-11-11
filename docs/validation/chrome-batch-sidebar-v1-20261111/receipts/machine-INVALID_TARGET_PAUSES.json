@@ -1,0 +1,59 @@
+{
+  "id": "910877aa-b59b-410d-9e6a-41462b10ec2a",
+  "pageUrl": "http://127.0.0.1:54394/mixed.html",
+  "pageTitle": "光镜 当前页批量采集验收",
+  "tabId": 101,
+  "createdAtUtc": "2026-11-11T02:47:15.597Z",
+  "updatedAtUtc": "2026-11-11T02:47:15.725Z",
+  "status": "paused",
+  "pauseCode": "DestinationInvalid",
+  "error": "目的地已失效，队列已暂停，请明确重选。",
+  "destination": {
+    "libraryId": "0c6fcf40-0877-432a-8698-97601036b8e7",
+    "projectId": "5d03c99c-5558-4265-a1b7-065ecffcae56",
+    "boardId": null
+  },
+  "items": [
+    {
+      "id": "7f8b46d4-f8a9-4cc5-af88-234337316f4a",
+      "imageUrl": "http://127.0.0.1:54394/ordinary-640.jpg",
+      "renderedImageUrl": "http://127.0.0.1:54394/ordinary-640.jpg",
+      "sourceSelection": "direct",
+      "thumbnailDataUrl": "data:image/jpeg;base64,AA==",
+      "alt": "",
+      "knownWidth": 640,
+      "knownHeight": 480,
+      "dimensionSource": "页面已加载图片",
+      "format": "JPEG",
+      "formatSource": "链接格式推断，发送时由桌面验证",
+      "occurrences": 2,
+      "selected": true,
+      "state": "waitingDestination",
+      "error": "原目的地已失效，请重新选择；没有改送其他项目。",
+      "captureId": "e0d453d9-99d6-4af3-a46f-11ca5072abda",
+      "receipt": null
+    },
+    {
+      "id": "6b9a4ae8-45a4-446e-a7a3-e3dc8d17e078",
+      "imageUrl": "http://127.0.0.1:54394/srcset-original-1600.jpg",
+      "renderedImageUrl": "http://127.0.0.1:54394/srcset-thumb-320.jpg",
+      "sourceSelection": "srcset-1600w",
+      "thumbnailDataUrl": "data:image/jpeg;base64,AA==",
+      "alt": "",
+      "knownWidth": 1600,
+      "knownHeight": null,
+      "dimensionSource": "srcset声明宽度，高度未知",
+      "format": "JPEG",
+      "formatSource": "链接格式推断，发送时由桌面验证",
+      "occurrences": 1,
+      "selected": true,
+      "state": "queued",
+      "error": "",
+      "captureId": "670cbf22-8bf1-4e6e-ba01-6e19ff76851f",
+      "receipt": null
+    }
+  ],
+  "truncated": false,
+  "totalDomImages": 9,
+  "cancelRequested": false
+}

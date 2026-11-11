@@ -1,0 +1,100 @@
+{
+  "status": "PASS_ACTUAL_BATCH_DATABASE_AND_ORIGINAL_BYTES",
+  "assetCount": 7,
+  "projectLinkCount": 9,
+  "assets": [
+    [
+      "5d7fa64e-edeb-4886-9673-ea7751cf6615",
+      "denied-original-1800.jpg",
+      "6AD5EEC9672858FE4F60595748D39EA9097720C55431BA3FD0A95DAC04F1580C",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\5d7fa64eedeb48869673ea7751cf6615_denied-original-1800.jpg"
+    ],
+    [
+      "5e3ee578-f0f0-4c76-bd04-4316ec447f67",
+      "ordinary-640.jpg",
+      "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\5e3ee578f0f04c76bd044316ec447f67_ordinary-640.jpg"
+    ],
+    [
+      "5fe61c0d-6918-45f6-be5e-947089428dcc",
+      "srcset-original-1600.jpg",
+      "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\5fe61c0d691845f6be5e947089428dcc_srcset-original-1600.jpg"
+    ],
+    [
+      "844823e7-4085-4e85-9510-3aa06a7a0b9d",
+      "unknown-original-900.jpg",
+      "064ECC58DFA7995E23FDC42B7D9C59DF4F7AE85C7EBEEAAFAA7EED0E8B6AB987",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\844823e740854e8595103aa06a7a0b9d_unknown-original-900.jpg"
+    ],
+    [
+      "c13d55dd-d3a7-4a99-b059-20b0e0d3b752",
+      "slow-original-1000.jpg",
+      "7388ED2DFFD3CC98FCBB2FA879A52574D4A6F435B663E2DBB23C545BB2CAC63B",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\c13d55ddd3a74a99b05920b0e0d3b752_slow-original-1000.jpg"
+    ],
+    [
+      "d494c4ca-984c-4ccc-9b76-526f25d1793f",
+      "mixed-480.png",
+      "118506A50502227AC7C8FB3D110E65C0E639D9967F6E7DBA3AB71CAB6520859E",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\d494c4ca984c4ccc9b76526f25d1793f_mixed-480.png"
+    ],
+    [
+      "f531fa94-27c2-4560-8923-c5f0b4f9621b",
+      "lazy-original-1400.jpg",
+      "325784608D4A825D4A5AE6463CD8D280DC85F57C8CD44D971989A1C247760D35",
+      "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\batch-machine01\\Capture-Test.ptlibrary\\assets\\managed\\f531fa9427c245608923c5f0b4f9621b_lazy-original-1400.jpg"
+    ]
+  ],
+  "projectLinks": [
+    [
+      "8bfbbb65-6a63-4be2-817a-d002fc0eed06",
+      "5e3ee578-f0f0-4c76-bd04-4316ec447f67",
+      "reference"
+    ],
+    [
+      "8bfbbb65-6a63-4be2-817a-d002fc0eed06",
+      "5fe61c0d-6918-45f6-be5e-947089428dcc",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "5d7fa64e-edeb-4886-9673-ea7751cf6615",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "5e3ee578-f0f0-4c76-bd04-4316ec447f67",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "5fe61c0d-6918-45f6-be5e-947089428dcc",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "844823e7-4085-4e85-9510-3aa06a7a0b9d",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "c13d55dd-d3a7-4a99-b059-20b0e0d3b752",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "d494c4ca-984c-4ccc-9b76-526f25d1793f",
+      "reference"
+    ],
+    [
+      "f38a5fd3-92fc-49eb-a14c-7fa33fb864ab",
+      "f531fa94-27c2-4560-8923-c5f0b4f9621b",
+      "reference"
+    ]
+  ],
+  "allManagedHashesMatch": true,
+  "allImagesAreKnownSyntheticFixtures": true,
+  "temporaryProjectLinks": 0,
+  "scope": "Owned batch-machine01 only; not company01 or real Chrome UI"
+}

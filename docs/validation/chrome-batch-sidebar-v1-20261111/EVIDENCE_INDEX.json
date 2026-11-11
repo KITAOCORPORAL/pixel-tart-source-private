@@ -1,0 +1,150 @@
+{
+  "generatedAtBerlin": "2026-11-11T04:42:47.751484+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "baselineSingleAcceptance": "0eda778636a4c2359eefd4611450dcf180f863c1",
+  "nativeMachineEvidenceSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a",
+  "currentState": "PARTIAL_REAL_CHROME_ACCEPTANCE_PENDING",
+  "bytePreservation": "receipts/.gitattributes disables newline conversion; hashes are exact copied JSON bytes",
+  "artifacts": [
+    {
+      "file": "receipts/machine-ACTUAL_BATCH_MACHINE_RECEIPT.json",
+      "sha256": "64f062672d05a3ac7cfb366050d6acea4310db8f24b6dbef78b3ee760a50fe8a",
+      "bytes": 10514,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\ACTUAL_BATCH_MACHINE_RECEIPT.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-CANCEL_STOPS_NEXT_ITEMS.json",
+      "sha256": "de8b2340423197205857f0e0af02ced7af57e7aa87c5907209645a5483b7ec7f",
+      "bytes": 5244,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\CANCEL_STOPS_NEXT_ITEMS.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-DESKTOP_MEMORY_READBACK.json",
+      "sha256": "fd0b53c3fb55302b77688da32e4a5a1a338826990cb71e4dd711f98179ff4af9",
+      "bytes": 102,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\DESKTOP_MEMORY_READBACK.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-DESKTOP_OFF_PAUSE.json",
+      "sha256": "f0a8de9c51a8ba524d39183da4050e73a5e6807e83659cdfcf6c3fd816554e26",
+      "bytes": 5405,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\DESKTOP_OFF_PAUSE.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-EXPLICIT_TARGET_RESELECTION.json",
+      "sha256": "4017fbaf62d0604d7e4a3319ddac9234f64f452b0f975fb8ff72e2be46b304b8",
+      "bytes": 3090,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\EXPLICIT_TARGET_RESELECTION.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-FAILED_SAME_ID_RETRY.json",
+      "sha256": "8b3f27f0115f34fb2875a1ba1fa87081bd206c689e1c730acaf92e2bb429f5b0",
+      "bytes": 10516,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\FAILED_SAME_ID_RETRY.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-FINAL_DATABASE_READBACK.json",
+      "sha256": "cd7ed0b1640914673ca2e2d323b51335066e0eedb354870a8c414c34b0e0deb2",
+      "bytes": 3923,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\FINAL_DATABASE_READBACK.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-INVALID_TARGET_PAUSES.json",
+      "sha256": "300775223a955f8dae306cd0270d75c8991434f006ca7281742979adfe062f39",
+      "bytes": 2099,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\INVALID_TARGET_PAUSES.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-MIXED_PARTIAL_FAILURE.json",
+      "sha256": "121342cf14f358e13acfdaa3e67bb1266033569674a59c384c759beb9f4a217f",
+      "bytes": 10016,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\MIXED_PARTIAL_FAILURE.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/machine-REOPEN_RESUME_SAME_IDENTITIES.json",
+      "sha256": "fd961c2cf631f6255a6c157107339ed030ee96c4487038f0810de6cde3909719",
+      "bytes": 8082,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\actual-batch-machine01\\REOPEN_RESUME_SAME_IDENTITIES.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/unit-filter-resume.json",
+      "sha256": "6533a0a1f5a5419f6fde3711220db94ce8af202c16b983d39cd809d9119d07b2",
+      "bytes": 2133,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\UNIT_TESTS_RESUME_FILTER_20261111.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/single-source-guards.json",
+      "sha256": "24390fb780aa3c88666215aaee6e187a2257de5970304b822cbebdd815865f12",
+      "bytes": 373,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\SINGLE_SOURCE_GUARDS_RESUME.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/build-r2-app.json",
+      "sha256": "5eee1fbc28cc70349e67cb46456b51fcfb2d41fbcc4e0b1a269a75b1cd9f043a",
+      "bytes": 693,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\resume-r2-app01.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/build-r2-native.json",
+      "sha256": "db0a57a5f983ea8efb563695ce270730ae978b4e05215be3b73d10f98d6b7531",
+      "bytes": 625,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\resume-r2-native01.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/prepare-space-path-r2.json",
+      "sha256": "941f66e91e6f58f862ac3d3431534cbcea7cc87376657d960b3b51de64f92513",
+      "bytes": 359,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\prepare-space-path02\\RECEIPT.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/native-replay-guard.json",
+      "sha256": "970100a8478bb8b6f9cba25761389ea1349568a7972467714a867d732c7a6b8f",
+      "bytes": 264,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\NATIVE_REPLAY_GUARD_RESUME.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/native-read-only-resume.json",
+      "sha256": "e7c4a52329becd42dd6ae55b17dbaa62b4f36a392bbf48e6d8b57c14f85fb1a1",
+      "bytes": 1343,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\RESUME_NATIVE_READ_ONLY.json",
+      "subjectSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a"
+    },
+    {
+      "file": "receipts/preservation-and-reference-resume.json",
+      "sha256": "14cc94a12f760b30960eebac0c970abb9eaec4466676630a0f35240356d0aa7b",
+      "bytes": 5446,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\RESUME_PRESERVATION_AND_HASHES.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/product-freeze-r2.json",
+      "sha256": "2a24859e6247badfb968170285f2bda512403050d95fef5017341ab6063e9fcf",
+      "bytes": 3414,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\PRODUCT_FREEZE_R2.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    },
+    {
+      "file": "receipts/handoff-readiness.json",
+      "sha256": "85221682f80fea54330f235970d8250439cd8ae71fb0edc579d23c78a28595d8",
+      "bytes": 2655,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\BATCH_HANDOFF_CONTEXT.json",
+      "subjectSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d"
+    }
+  ]
+}

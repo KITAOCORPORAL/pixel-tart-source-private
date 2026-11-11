@@ -1,0 +1,24 @@
+{
+  "sourceSha": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "dirty": [],
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "-p:Platform=x64",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=1698664d12913aadea64bad6f2a68cb52d9ee38d",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-o",
+    "E:/Kitao-Deliveries/chrome-capture-batch-v1-20261111/Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2/app"
+  ],
+  "pid": 26108,
+  "exitCode": 0,
+  "seconds": 66.96266746520996
+}

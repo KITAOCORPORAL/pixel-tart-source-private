@@ -1,0 +1,64 @@
+{
+  "runtime": "v24.15.0",
+  "scope": "Independent DOM/IndexedDB/engine tests; not actual Chrome acceptance",
+  "results": [
+    {
+      "name": "additive IDB v1->v2 migration preserves legacy capture bytes, receipt and identity",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit DOM snapshot makes no fetch, deduplicates URLs, resolves srcset and data-src placeholders",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown-size filtering stays explicit; width and format filters work without probing images",
+      "status": "PASS"
+    },
+    {
+      "name": "retaining unknown dimensions cannot bypass a known width or height minimum",
+      "status": "PASS"
+    },
+    {
+      "name": "serial pipeline acknowledges each item, isolates 403 and reuses actual content identity",
+      "status": "PASS"
+    },
+    {
+      "name": "failed retry keeps the same capture identity and never resends already successful items",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel does not start later items and confirms the already submitted item",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel after a lost committed response uses read-only receipt lookup and starts no next import",
+      "status": "PASS"
+    },
+    {
+      "name": "read-only reconciliation of an uncommitted cancelled item never starts it",
+      "status": "PASS"
+    },
+    {
+      "name": "worker restart recovers a committed sending item by receipt without creating a replacement",
+      "status": "PASS"
+    },
+    {
+      "name": "destination invalidation pauses before any next item; explicit reselect preserves the item and forks only its attempted operation",
+      "status": "PASS"
+    },
+    {
+      "name": "metadata headers omit original buffers and batch selection is durably assigned before the first read",
+      "status": "PASS"
+    },
+    {
+      "name": "deselecting a paused unstarted item prevents it being sent after continue",
+      "status": "PASS"
+    },
+    {
+      "name": "raw pending-byte budget pauses before downloading another original",
+      "status": "PASS"
+    }
+  ],
+  "passed": 14,
+  "failed": 0
+}

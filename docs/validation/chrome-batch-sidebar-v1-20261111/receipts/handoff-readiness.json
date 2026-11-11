@@ -1,0 +1,56 @@
+{
+  "status": "READY_FOR_EXISTING_EXTENSION_RELOAD_AND_REAL_CHROME_ROUND",
+  "preparedAtBerlin": "2026-11-11T04:40:12.751214+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "package": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2",
+  "extensionDirectory": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "extensionSourceUpdatedSameInstalledDirectory": true,
+  "chromeReloadPerformed": false,
+  "chromeProfileOrIndexedDbReadOrDeleted": false,
+  "nativeHostRegisteredBothViews": true,
+  "runtime": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "pipeName": "guangjing.capture.917ab73e53799ac6d0516a30",
+  "currentlyRunningDesktopSource": "69bcf65a5c8fd4525470d65d57bba372c69b5c5a",
+  "currentDesktopPid": 10540,
+  "updatedDesktopStart": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\Start-Guangjing-Capture.cmd",
+  "fixtureServerPid": 12592,
+  "fixtureRoot": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\test-pages",
+  "mixedPage": "http://127.0.0.1:54394/mixed.html",
+  "cancelPage": "http://127.0.0.1:54394/cancel.html",
+  "singlePage": "http://127.0.0.1:54394/ordinary.html",
+  "retryControls": [
+    {
+      "script": "Allow-403-Retry.cmd",
+      "actualHttp": 200,
+      "expectedHttp": 200,
+      "bodyDownloaded": false
+    },
+    {
+      "script": "Reset-403-Test.cmd",
+      "actualHttp": 403,
+      "expectedHttp": 403,
+      "bodyDownloaded": false
+    }
+  ],
+  "savedNativeReceipt": {
+    "ok": true,
+    "code": "Completed",
+    "message": "已读取桌面保存的实际回执。",
+    "destinations": null,
+    "receipt": {
+      "captureId": "287b50b2-74be-4aeb-856a-b5e5ea6a36b4",
+      "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "projectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "boardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+      "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "outcome": "Imported",
+      "pageUrl": "http://127.0.0.1:51292/ordinary.html",
+      "capturedAtUtc": "2026-11-10T06:56:34.428+00:00",
+      "importedAtUtc": "2026-11-10T06:56:56.8943558+00:00"
+    },
+    "retryable": false
+  },
+  "browserUiBlock": "Computer Use stopped: could not determine the current browser URL with enough confidence to enforce policy."
+}

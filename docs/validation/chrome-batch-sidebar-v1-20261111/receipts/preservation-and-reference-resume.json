@@ -1,0 +1,150 @@
+{
+  "checkedAtBerlin": "2026-11-11T04:35:41.852904+01:00",
+  "scope": "read-only before-upgrade backup versus current company01 rows; independently rehash existing synthetic managed assets",
+  "companyPreservation": [
+    {
+      "db": "workflow",
+      "table": "Projects",
+      "beforeCount": 3,
+      "currentCount": 3,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "captures",
+      "table": "BrowserCaptures",
+      "beforeCount": 5,
+      "currentCount": 5,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "library",
+      "table": "AssetItems",
+      "beforeCount": 3,
+      "currentCount": 3,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "library",
+      "table": "ProjectAssetLinks",
+      "beforeCount": 4,
+      "currentCount": 4,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "tray",
+      "table": "InspirationTrayEntries",
+      "beforeCount": 2,
+      "currentCount": 2,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "tray",
+      "table": "InspirationCollections",
+      "beforeCount": 1,
+      "currentCount": 1,
+      "allColumnsAndRowsEqual": true
+    },
+    {
+      "db": "tray",
+      "table": "InspirationCollectionEntries",
+      "beforeCount": 2,
+      "currentCount": 2,
+      "allColumnsAndRowsEqual": true
+    }
+  ],
+  "actualMachineManagedFiles": [
+    {
+      "assetId": "5d7fa64e-edeb-4886-9673-ea7751cf6615",
+      "fileName": "denied-original-1800.jpg",
+      "sha256": "6AD5EEC9672858FE4F60595748D39EA9097720C55431BA3FD0A95DAC04F1580C",
+      "match": true
+    },
+    {
+      "assetId": "5e3ee578-f0f0-4c76-bd04-4316ec447f67",
+      "fileName": "ordinary-640.jpg",
+      "sha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "match": true
+    },
+    {
+      "assetId": "5fe61c0d-6918-45f6-be5e-947089428dcc",
+      "fileName": "srcset-original-1600.jpg",
+      "sha256": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      "match": true
+    },
+    {
+      "assetId": "844823e7-4085-4e85-9510-3aa06a7a0b9d",
+      "fileName": "unknown-original-900.jpg",
+      "sha256": "064ECC58DFA7995E23FDC42B7D9C59DF4F7AE85C7EBEEAAFAA7EED0E8B6AB987",
+      "match": true
+    },
+    {
+      "assetId": "c13d55dd-d3a7-4a99-b059-20b0e0d3b752",
+      "fileName": "slow-original-1000.jpg",
+      "sha256": "7388ED2DFFD3CC98FCBB2FA879A52574D4A6F435B663E2DBB23C545BB2CAC63B",
+      "match": true
+    },
+    {
+      "assetId": "d494c4ca-984c-4ccc-9b76-526f25d1793f",
+      "fileName": "mixed-480.png",
+      "sha256": "118506A50502227AC7C8FB3D110E65C0E639D9967F6E7DBA3AB71CAB6520859E",
+      "match": true
+    },
+    {
+      "assetId": "f531fa94-27c2-4560-8923-c5f0b4f9621b",
+      "fileName": "lazy-original-1400.jpg",
+      "sha256": "325784608D4A825D4A5AE6463CD8D280DC85F57C8CD44D971989A1C247760D35",
+      "match": true
+    }
+  ],
+  "pinnedPrimaryReference": [
+    {
+      "path": "content/utils.ts",
+      "gitBlob": "cf23023b328bce059a81a2538e8673b5976aa98f",
+      "gitBlobSha256": "e1513c9c55975115d6fbe9b7ac99b9a3e1e84a2a177e822d4761e3cab19c1e1c",
+      "checkoutSha256": "21031ca3f9343ae064cd55d02634790a4d75410537f8f9f85e47d967243307aa",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    },
+    {
+      "path": "content/extract-advanced.ts",
+      "gitBlob": "2153a3c4d7cff146c42460eb865e32c552e9b779",
+      "gitBlobSha256": "6619e58addf476d8f48386dc207a0e52bc69f8521b0efd8ade7befd5fae7efc9",
+      "checkoutSha256": "06826131c4c18c6054cf3685ad813cbc0c4ea9d37bf021bee056b2db1305bfcf",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    },
+    {
+      "path": "content/batch-sender.ts",
+      "gitBlob": "80043f621869cddf21de2e4b2ead072d0113e6c3",
+      "gitBlobSha256": "da1895c760edd8bfb054faea6a16b0d01ae71a557c5ef9ddc5102bf2b5bdd7da",
+      "checkoutSha256": "b42b15aa39777c66dac787005d22e8b657fd76ad569ed99858e21ac8b1113e48",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    },
+    {
+      "path": "sidepanel/filter.ts",
+      "gitBlob": "6810e1ab0dbaa4c88764f347918bf7a4f039fa1e",
+      "gitBlobSha256": "1fa9cbab51770e8b02f3deac2567a920804f2e1e867d8cfb8d09dde29849a8db",
+      "checkoutSha256": "a013e3069aece899f89cd904df6d09827f06895b87f1dc0c429f26204a7c76e8",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    },
+    {
+      "path": "shared/export-eagle.ts",
+      "gitBlob": "7a5de1fb8bd6ae8eef07ad39faf9923159545a4c",
+      "gitBlobSha256": "1bbbc8a72ac4ebd538837c36a97b4a77650df8bc0032ec42e48175196beceeb9",
+      "checkoutSha256": "3b6c366dacf51e352ed73aaa168e496dea924a95a056c364599c53f55017e636",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "42edfb2a44a84f7f3fe33e4da84d78d99eb42b95",
+      "gitBlobSha256": "2f9bed2ab5f443897d9c9887e90e5748015c56f3ad7aaa1a384d388f72391186",
+      "checkoutSha256": "c1fdff23e2801574bdda86b47ae15d70e4347f555e6debc91ac766d43353eb97",
+      "checkoutLineEndings": "CRLF",
+      "matchesPinnedBlobAfterEolNormalization": true
+    }
+  ],
+  "status": "PASS_COMPANY_ROWS_PRESERVED_MANAGED_HASHES_AND_PINNED_REFERENCE"
+}
