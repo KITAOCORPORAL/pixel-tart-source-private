@@ -13,7 +13,7 @@ public partial class PhotoGradePageView:UserControl
  {
   InitializeComponent();
   PhotoViewport.PreferDisplayedDimensions=true;
-  PhotoViewport.State.Changed+=(_,_)=>{DrawGuides();DrawMaskOverlay();};
+  PhotoViewport.State.Changed+=(_,_)=>{DrawGuides();DrawMaskOverlay();RequestVisiblePhotoDetail();};
   AddHandler(Expander.ExpandedEvent,new RoutedEventHandler(SectionExpanded));
   AddHandler(Expander.CollapsedEvent,new RoutedEventHandler(SectionCollapsed));
   InitializePanelLayout();InitializeR53();InitializeR55Tray();
@@ -52,6 +52,14 @@ public partial class PhotoGradePageView:UserControl
  {
   if(ToneRatios is null)return;var z=model?.PreviewHistogram?.Zones;
   ToneRatios.Text=z is null?"暗部 —   阴影 —   中间调 —   亮部 —   高光 —":$"暗部{z.Ratios.Take(2).Sum():P0}  阴影{z.Ratios.Skip(2).Take(2).Sum():P0}  中间调{z.Ratios.Skip(4).Take(3).Sum():P0}  亮部{z.Ratios.Skip(7).Take(2).Sum():P0}  高光{z.Ratios.Skip(9).Sum():P0}";
+ }
+ // The visible photo page owns detail requests; the collapsed legacy page must not supply them.
+ private void RequestVisiblePhotoDetail()
+ {
+  if(model is null||!IsVisible||!IsLoaded||PhotoViewport.ActualWidth<=0||PhotoViewport.ActualHeight<=0)return;
+  var dpi=VisualTreeHelper.GetDpi(PhotoViewport).DpiScaleX;
+  if(model.IsProfessionalRaw)model.RequestProfessionalViewport(PhotoViewport.VisibleSourceRegion(),PhotoViewport.State.Zoom,dpi);
+  else model.Editor.RequestPreviewZoom(PhotoViewport.State.Zoom,dpi);
  }
  private Point? panStart;
  private void FitPhoto(object sender,RoutedEventArgs e)=>PhotoViewport.State.Fit();
