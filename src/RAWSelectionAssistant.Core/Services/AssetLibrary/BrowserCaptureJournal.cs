@@ -44,6 +44,14 @@ public sealed class BrowserCaptureJournal(string databasePath)
         await using var c=await Open(token);await using var command=c.CreateCommand();command.CommandText="UPDATE BrowserCaptures SET AssetId=$asset,State='Completed',RecordJson=$json WHERE CaptureId=$id;";
         command.Parameters.AddWithValue("$asset",record.AssetId.Value.ToString("D"));command.Parameters.AddWithValue("$json",JsonSerializer.Serialize(record));command.Parameters.AddWithValue("$id",record.CaptureId.ToString("D"));if(await command.ExecuteNonQueryAsync(token)!=1)throw new InvalidDataException("Capture reservation is missing.");
     }
+    /// <summary>Read-only acknowledgement lookup; never reserves or imports a missing capture.</summary>
+    public async Task<BrowserCaptureRecord?> FindAsync(Guid captureId, CancellationToken token=default)
+    {
+        await using var c=await Open(token);await using var command=c.CreateCommand();
+        command.CommandText="SELECT RecordJson FROM BrowserCaptures WHERE CaptureId=$id AND State='Completed';";
+        command.Parameters.AddWithValue("$id",captureId.ToString("D"));
+        var value=await command.ExecuteScalarAsync(token);return value is string text?JsonSerializer.Deserialize<BrowserCaptureRecord>(text):null;
+    }
     public async Task<BrowserCaptureRecord?> LatestSourceAsync(Guid libraryId, Guid assetId, CancellationToken token=default)
     {
         await using var c=await Open(token);await using var command=c.CreateCommand();command.CommandText="SELECT RecordJson FROM BrowserCaptures WHERE LibraryId=$library AND AssetId=$asset AND State='Completed' ORDER BY CapturedAtUtc DESC,CaptureId LIMIT 1;";

@@ -6,7 +6,10 @@ public sealed record CaptureDestination(Guid LibraryId, Guid? ProjectId = null, 
 public sealed record CaptureSubmission(Guid CaptureId, CaptureDestination Destination, string PageUrl, string ImageUrl,
     string PageTitle, DateTimeOffset CapturedAtUtc, string FileName, string ContentSha256, string ImageBase64,
     string? RenderedImageUrl = null, string SourceSelection = "direct");
-public sealed record CaptureRequest(string Operation, CaptureSubmission? Capture = null, string? ExtensionOrigin = null);
+public sealed record CaptureRequest(string Operation, CaptureSubmission? Capture = null, string? ExtensionOrigin = null)
+{
+    public Guid? CaptureId { get; init; }
+}
 public sealed record CaptureOption(Guid Id, string Name);
 public sealed record CaptureLibraryOption(Guid Id, string Name);
 public sealed record CaptureDestinations(IReadOnlyList<CaptureLibraryOption> Libraries, IReadOnlyList<CaptureOption> Projects, IReadOnlyList<CaptureOption> Boards);

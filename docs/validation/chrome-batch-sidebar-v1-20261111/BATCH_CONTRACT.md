@@ -1,0 +1,15 @@
+# 批量侧栏v1行为合同
+
+基线单图0eda7786/产品ed5d15d4/安装a3c4a35c。保留manifest稳定公钥和扩展ID，使Chrome原IndexedDB和recentDestination不换命名空间。DB版本2只增captureHeaders/batches/batchHeaders，迁移不删除旧captures、原图buffer或回执；原单图上下文菜单和独立记录窗继续使用同一源选择/发送链路。
+
+扫描上限500 DOM图片、最多200张已加载画布小预览；不请求未加载原图、不自动滚屏。当前只处理img/picture普通/srcset/常见懒加载；HTTP(S)原图，原尺寸未知明确标注，格式是URL推断。数据URI占位可以解析其显式lazy原图，但不会把占位当原图。按原图URL合并DOM重复；异URL同字节由桌面实际内容身份复用。
+
+每轮最多勾选100项；原图读取与Native发送管线并发1，单图16MiB/32MP沿用单图合同，本批量待处理原图持久化预算64MiB。UI只读轻量headers，状态请求不返回原图buffer。全选仅当前筛选结果，取消全部勾选明确清除，发送显示总勾选数及筛选外数量。
+
+CaptureId在启动第一份原图读取前落盘，正常重试/重开保持不变；明确改目的地时条目ID保持，仅已尝试且目的地变化的操作派生新CaptureId，旧记录标retargeted不覆盖。失败重试只处理失败项，成功项不重发。
+
+取消先持久化cancelRequested，不启动后续项；已在发送中的项等真实回执。响应丢失/worker恢复用新增只读receipt查询按CaptureId核对，缺失回执不等于成功，取消态不会因此启动未知导入；桌面离线时保留待核对状态。目的地失效立即暂停队列并要求明确重选，不回落到首个项目。桌面离线暂停，继续后先查询旧回执再同ID重试。取消勾选的暂停项不会被continue重新勾回。
+
+成功只能来自已验证captureId/library/project/board/AssetId/原图SHA256的桌面回执。Imported显示已入库，Reused显示已有素材。原图失败不改取缩略图，后续项可继续。只读receipt接口不写capture保留、不发起导入；Core只增加本机journal读取，原无HTTP/凭据断言保持。
+
+产品/扩展有变化后必须更新全模块诊断包并重新验证单图右键（实际Chrome操作待用户一次简短轮次）；Native/独立DOM/IDB模拟与真实Chrome证据分开。临时路径prepare仍用无额外包路径参数Canonical CMD，并跑含空格集成门禁。所有旧验收、队列和company01数据保留，机器验证另用新根。

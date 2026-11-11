@@ -61,6 +61,15 @@ public partial class App
             await using var tray=new SqliteInspirationTrayService(Path.Combine(AppDataPaths.Root,"InspirationTray","tray.sqlite"));
             var boards=await tray.ListCollectionsAsync(token);
             if(request.Operation=="destinations")return new(true,"Ready","请选择明确目的地。",new(libraries.Select(x=>new CaptureLibraryOption(x.LibraryId,x.DisplayName)).ToArray(),projects.Select(x=>new CaptureOption(x.Id,x.Name)).ToArray(),boards.Select(x=>new CaptureOption(x.CollectionId,x.Name)).ToArray()));
+            if(request.Operation=="receipt")
+            {
+                if(request.CaptureId is not Guid id||id==Guid.Empty)return new(false,"InvalidRequest","缺少待核对采集身份。");
+                var journalQuery=new BrowserCaptureJournal(Path.Combine(AppDataPaths.Root,"BrowserCapture","captures.sqlite"));
+                var committed=await journalQuery.FindAsync(id,token);
+                // This endpoint is intentionally read-only. Cancellation recovery must not start an uncommitted import.
+                return committed is null?new(false,"CaptureNotFound","桌面没有这项的已保存回执。"):
+                    new(true,"Completed","已读取桌面保存的实际回执。",Receipt:Receipt(committed));
+            }
             if(request.Operation!="capture"||request.Capture is not{} capture)return new(false,"InvalidRequest","不支持此采集请求。");
             if(capture.Destination is null||capture.PageUrl is null||capture.ImageUrl is null||capture.PageTitle is null||capture.FileName is null||capture.ContentSha256 is null||capture.ImageBase64 is null)throw new InvalidDataException("采集请求缺少必要字段。");
             var target=capture.Destination;

@@ -23,4 +23,11 @@ public sealed class BrowserCaptureJournalTests
         var done=row with{AssetId=Guid.NewGuid(),Outcome="Imported",ImportedAtUtc=DateTimeOffset.UtcNow};await store.CompleteAsync(done);
         Assert.AreEqual(done,await new BrowserCaptureJournal(path).ReserveAsync(row,"same"));Assert.AreEqual(done,await new BrowserCaptureJournal(path).LatestSourceAsync(done.LibraryId,done.AssetId!.Value));
     }
+    [TestMethod]public async Task ReceiptLookupDoesNotReserveOrImportUnknownItem()
+    {
+        using var temp=new TempDirectory();var path=temp.Combine("captures.sqlite");var store=new BrowserCaptureJournal(path);var row=Record();
+        Assert.IsNull(await store.FindAsync(row.CaptureId));await store.ReserveAsync(row,"same");Assert.IsNull(await store.FindAsync(row.CaptureId));
+        var done=row with{AssetId=Guid.NewGuid(),Outcome="Imported",ImportedAtUtc=DateTimeOffset.UtcNow};await store.CompleteAsync(done);
+        Assert.AreEqual(done,await new BrowserCaptureJournal(path).FindAsync(row.CaptureId));Assert.IsNull(await store.FindAsync(Guid.NewGuid()));
+    }
 }

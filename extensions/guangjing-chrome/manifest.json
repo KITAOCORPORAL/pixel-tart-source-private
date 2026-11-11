@@ -1,15 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "光镜 · 单图采集开发版",
-  "version": "0.1.0",
-  "description": "用户主动右键采集原图，通过本机桥接入库并读取真实回执。",
+  "name": "光镜 · 页面采集开发版",
+  "version": "0.2.0",
+  "description": "主动扫描当前页，筛选勾选原图，经本机真实回执逐张入库。",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1YnMsOYE6wUfdwUibQtSB1sKbtalRMRs8Y1cYkHZB+5S3pkP/S+bMM8rYg+WIIIiTS87scU8dA4uC/VBVy4miVvXOCok5NQ69HJcEZfyd6qyAPRm/NdruQM+tbWgNA9o8e0TN5c1SBl18rxpygIPh6NSjizoCAwn5vnynk4DNRoUvG6oNWTcID8SHV4M4DFJ+l+a1A+p0WABvwVmnwLSw3RaG8YpoZyWnJOxbBANWjTW6XSfnJ5yiQNlD1dJZerV/Dsh988R/xKEog19s2r6BuvVTIR3ZMk0qdz9LZNyKVpTsHFNhIw0FZrAL39lOf6WawFy9hYbpsSW39xaABJ0FQIDAQAB",
   "permissions": [
     "contextMenus",
     "activeTab",
     "scripting",
     "storage",
-    "nativeMessaging"
+    "nativeMessaging",
+    "sidePanel"
   ],
   "optional_host_permissions": [
     "http://*/*",
@@ -20,7 +21,10 @@
     "type": "module"
   },
   "action": {
-    "default_title": "光镜采集待处理",
-    "default_popup": "capture.html"
+    "default_title": "打开光镜页面采集侧栏"
+  },
+  "minimum_chrome_version": "116",
+  "side_panel": {
+    "default_path": "sidebar.html"
   }
 }

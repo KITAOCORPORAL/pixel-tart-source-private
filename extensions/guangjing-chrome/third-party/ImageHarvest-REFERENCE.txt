@@ -1,0 +1,6 @@
+Image Harvest reference and adaptation review
+Repository: https://github.com/zbw-zbw/image-harvest
+Pinned commit: c87e23059ac153c7bf166ad677182b3ac5afb4d0
+MIT, Copyright (c) 2026 kyriewen.
+Reviewed: content/utils.ts parseSrcset/pickBestSrcsetUrl; content/extract-advanced.ts extractLazyLoadImages; sidepanel/filter.ts filterBySize/filterByType; content/batch-sender.ts metadata buffer; shared/export-eagle.ts exportToEagle.
+Guangjing adapts lazy/source/filter/buffering concepts to existing original-byte capture and actual AssetId receipts. No Image Harvest cloud, license, telemetry, account, auto-scroll, format conversion or Eagle HTTP export implementation is included.

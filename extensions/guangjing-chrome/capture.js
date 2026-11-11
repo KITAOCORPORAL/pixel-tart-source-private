@@ -21,7 +21,7 @@ async function loadTargets(){
  }catch(error){targets=null;message(error.message);}update();
 }
 async function render(){
- if(!id){const pending=(await list()).filter(x=>x.status!=="retargeted");$("queue").replaceChildren();if(new URLSearchParams(location.search).has("queueFull"))$("queue").textContent="已有20项待处理，请先完成待处理项后再采集。";else if(!pending.length)$("queue").textContent="没有待处理采集。请在网页图片上右键，选择“发送到光镜”。";
+ if(!id){const pending=(await list()).filter(x=>!x.batchId&&x.status!=="retargeted");$("queue").replaceChildren();if(new URLSearchParams(location.search).has("queueFull"))$("queue").textContent="已有20项待处理，请先完成待处理项后再采集。";else if(!pending.length)$("queue").textContent="没有待处理采集。请在网页图片上右键，选择“发送到光镜”。";
   for(const item of pending){const button=document.createElement("button");button.className="queueItem";button.textContent=(item.status==="completed"?"已入库 · ":"待处理 · ")+(item.pageTitle||item.fileName||"图片");button.onclick=()=>{location.href="capture.html?id="+item.id;};$("queue").append(button);}return;}
  row=await get(id);if(!row){$("queue").textContent="待处理项不存在。";return;}$("queue").hidden=true;$("editor").hidden=false;
  $("source").textContent=(row.pageTitle||"网页图片")+"\n"+row.imageUrl;$("permissionHint").textContent="读取原图只会请求本次图片域名的访问权限："+new URL(row.imageUrl).hostname;

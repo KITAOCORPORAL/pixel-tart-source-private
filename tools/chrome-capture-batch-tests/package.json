@@ -1,0 +1,9 @@
+{
+  "name": "guangjing-batch-test-only",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "fake-indexeddb": "6.2.5",
+    "jsdom": "26.1.0"
+  }
+}

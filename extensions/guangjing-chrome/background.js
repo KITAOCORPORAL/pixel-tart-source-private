@@ -1,7 +1,10 @@
 import{chooseOriginal,httpUrl,MAX_IMAGE_BYTES,validateReceipt}from"./source.mjs";
-import{get,save,saveMany,mutate,list}from"./queue.mjs";
+import{get,save,saveMany,mutate,list,getBatch,listBatches}from"./queue.mjs";
+import{collectPageImages}from"./page-images.mjs";
+import{normalizePageScan}from"./scan.mjs";
+import{BatchEngine}from"./batch-engine.mjs";
 const HOST="com.guangjing.capture";
-const installMenu=()=>chrome.contextMenus.removeAll(()=>chrome.contextMenus.create({id:"send-to-guangjing",title:"发送到光镜",contexts:["image"]}));
+const installMenu=()=>{chrome.contextMenus.removeAll(()=>chrome.contextMenus.create({id:"send-to-guangjing",title:"发送到光镜",contexts:["image"]}));};
 chrome.runtime.onInstalled.addListener(installMenu);chrome.runtime.onStartup.addListener(installMenu);
 export function native(request){return new Promise((resolve,reject)=>{
  let done=false;let port;
@@ -29,7 +32,7 @@ async function readPageImage(tabId,url){
  },args:[url,MAX_IMAGE_BYTES]});
  const value=result[0]?.result;if(!value||value.permission)throw new Error(value?.error||"页面已关闭，请允许读取本次图片域名后重试原图。");if(value.error)throw new Error(value.error);return fromBase64(value.data);
 }
-async function fetchOriginal(row){
+export async function fetchOriginal(row){
  const fetchToken=crypto.randomUUID();
  row=await mutate(row.id,current=>current.attemptedDestination||current.status==="completed"?current:{...current,fetchToken,status:"reading",error:""});
  if(!row||row.fetchToken!==fetchToken)return row;
@@ -46,17 +49,17 @@ async function fetchOriginal(row){
 
 chrome.contextMenus.onClicked.addListener(async(info,tab)=>{
  if(info.menuItemId!=="send-to-guangjing"||!tab?.id)return;
- if((await list()).filter(x=>!["completed","retargeted"].includes(x.status)).length>=20){await chrome.windows.create({url:chrome.runtime.getURL("capture.html?queueFull=1"),type:"popup",width:460,height:710});return;}
+ if((await list()).filter(x=>!x.batchId&&!["completed","retargeted"].includes(x.status)).length>=20){await chrome.windows.create({url:chrome.runtime.getURL("capture.html?queueFull=1"),type:"popup",width:460,height:710});return;}
  const id=crypto.randomUUID();let row={id,tabId:tab.id,pageUrl:info.pageUrl||tab.url,pageTitle:tab.title||"",capturedAtUtc:new Date().toISOString(),status:"reading",imageUrl:info.srcUrl,renderedImageUrl:info.srcUrl};
  try{
-  row.pageUrl=httpUrl(row.pageUrl);const details=await chrome.scripting.executeScript({target:{tabId:tab.id},func:clicked=>Array.from(document.images).filter(img=>img.currentSrc===clicked||img.src===clicked).map(img=>({src:img.src,currentSrc:img.currentSrc,srcset:img.srcset,sources:Array.from(img.parentElement?.tagName==="PICTURE"?img.parentElement.querySelectorAll("source"):[]).map(s=>({srcset:s.srcset,active:!s.media||matchMedia(s.media).matches}))})),args:[info.srcUrl]});
-  Object.assign(row,chooseOriginal({pageUrl:row.pageUrl,clickedUrl:info.srcUrl,images:details[0]?.result||[]}));
+  row.pageUrl=httpUrl(row.pageUrl);const details=await chrome.scripting.executeScript({target:{tabId:tab.id},func:collectPageImages,args:[info.srcUrl,500]});
+  Object.assign(row,chooseOriginal({pageUrl:row.pageUrl,clickedUrl:info.srcUrl,images:details[0]?.result?.images||[]}));
   let name=decodeURIComponent(new URL(row.imageUrl).pathname.split("/").pop()||"capture.jpg").replace(/[<>:"/\\|?*\x00-\x1f]/g,"_");row.fileName=name.slice(0,120)||"capture.jpg";
  }catch(error){row.status="originalUnavailable";row.error=error.message;}
  await save(row);await chrome.windows.create({url:chrome.runtime.getURL("capture.html?id="+id),type:"popup",width:470,height:760});
  if(row.status==="reading")await fetchOriginal(row);
 });
-async function sendCapture(id,destination){
+export async function sendCapture(id,destination){
  let row=await get(id);if(!row)throw new Error("待处理项已不存在。");if(!row.imageBytes)throw new Error(row.error||"原图尚未读取，不能入库。");
  const target={libraryId:destination.libraryId,projectId:destination.projectId||null,boardId:destination.boardId||null};
  if(!target.libraryId)throw new Error("请重新选择明确素材库。");
@@ -67,17 +70,40 @@ async function sendCapture(id,destination){
  row.destination=target;row.attemptedDestination=target;row.status="pending";row.error="";if(superseded)await saveMany([superseded,row]);else await save(row);
  try{
   const reply=await native({operation:"capture",capture:{captureId:row.id,destination:target,pageUrl:row.pageUrl,imageUrl:row.imageUrl,renderedImageUrl:row.renderedImageUrl,sourceSelection:row.sourceSelection,pageTitle:row.pageTitle,capturedAtUtc:row.capturedAtUtc,fileName:row.fileName,contentSha256:row.contentSha256,imageBase64:base64(new Uint8Array(row.imageBytes))}});
-  if(!reply.ok)throw new Error(reply.message||"桌面未确认入库。");
-  row.receipt=validateReceipt(row,reply);row.status="completed";row.imageBytes=null;row.error="";
+  if(!reply.ok){const error=new Error(reply.message||"桌面未确认入库。");error.code=reply.code;error.retryable=!!reply.retryable;throw error;}
+  row.receipt=validateReceipt(row,reply);row.status="completed";row.imageBytes=null;row.error="";row.errorCode=null;row.retryable=false;
   await chrome.storage.local.set({recentDestination:target});
- }catch(error){row.status="pending";row.error=error.message;}
+ }catch(error){row.status="pending";row.error=error.message;row.errorCode=error.code||"BridgeUnavailable";row.retryable=error.retryable??true;}
  return save(row);
+}
+const batchEngine=new BatchEngine({fetch:fetchOriginal,send:sendCapture,receipt:async row=>{
+ const reply=await native({operation:"receipt",captureId:row.id});if(reply.ok)validateReceipt(row,reply);return reply;
+}});
+chrome.action.onClicked.addListener(tab=>{
+ // open() remains directly in the action user gesture; scanning is a separate explicit click.
+ if(tab?.id){chrome.sidePanel.open({tabId:tab.id}).catch(()=>{});chrome.storage.session.set({batchActivePage:{tabId:tab.id,pageUrl:tab.url||"",pageTitle:tab.title||""}});}
+});
+async function scanCurrent(){
+ const tabs=await chrome.tabs.query({active:true,lastFocusedWindow:true});const tab=tabs[0];
+ if(!tab?.id||!tab.url)throw new Error("请切回要采集的网页，点击光镜工具栏按钮后再扫描。");
+ httpUrl(tab.url);
+ const results=await chrome.scripting.executeScript({target:{tabId:tab.id},func:collectPageImages,args:[null,500]});
+ const snapshot=results[0]?.result;if(!snapshot)throw new Error("页面不允许扫描，请重新点击工具栏按钮授权当前页。");
+ const job=await batchEngine.create(normalizePageScan(snapshot),tab.id);await chrome.storage.local.set({lastBatchId:job.id});return job;
 }
 chrome.runtime.onMessage.addListener((message,_sender,respond)=>{
  (async()=>{
   if(message.type==="destinations")return native({operation:"destinations"});
   if(message.type==="fetchOriginal"){const row=await get(message.id);if(!row)throw new Error("待处理项不存在。");return fetchOriginal(row);}
   if(message.type==="send")return sendCapture(message.id,message.destination);
+  if(message.type==="batchScan")return scanCurrent();
+  if(message.type==="batchState"){await batchEngine.wake();return{id:message.id,job:message.id?await getBatch(message.id):null,jobs:await listBatches(),metrics:batchEngine.metrics};}
+  if(message.type==="batchSelect")return batchEngine.select(message.id,message.itemIds,message.selected);
+  if(message.type==="batchStart")return batchEngine.start(message.id,message.destination,message.mode||"selected");
+  if(message.type==="batchContinue")return batchEngine.continue(message.id,message.destination);
+  if(message.type==="batchCancel")return batchEngine.cancel(message.id);
+  if(message.type==="batchReconcile")return batchEngine.verifySubmitted(message.id);
+  if(message.type==="singleHistory"){await chrome.windows.create({url:chrome.runtime.getURL("capture.html"),type:"popup",width:470,height:760});return true;}
   throw new Error("不支持此操作。");
  })().then(value=>respond({ok:true,value}),error=>respond({ok:false,error:error.message}));return true;
 });
