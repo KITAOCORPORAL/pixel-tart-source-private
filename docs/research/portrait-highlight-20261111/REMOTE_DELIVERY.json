@@ -1,0 +1,38 @@
+{
+  "method": "GitHub Git Objects API fallback after two Git HTTPS 443 failures",
+  "branch": "research/portrait-highlight-continuity-20261109",
+  "commits": [
+    {
+      "localCommit": "39e60d3feff52f156a72d16f7820f0b968bd9b5b",
+      "remoteCommit": "39e60d3feff52f156a72d16f7820f0b968bd9b5b",
+      "tree": "9f0075f00524f3ed336786712db6806f0cfcea35",
+      "identicalCommit": true,
+      "blobs": 7
+    },
+    {
+      "localCommit": "b29bff914eed894ac663c1c0a006e18d76672035",
+      "remoteCommit": "b29bff914eed894ac663c1c0a006e18d76672035",
+      "tree": "60ea0defadc91b845a35e2ca558ff92d90a952a8",
+      "identicalCommit": true,
+      "blobs": 39
+    },
+    {
+      "localCommit": "481e89206a044cfca9793161c9c333db5475567e",
+      "remoteCommit": "481e89206a044cfca9793161c9c333db5475567e",
+      "tree": "f1e2f348aa00ce8a88658b779e0f83063d07c25c",
+      "identicalCommit": true,
+      "blobs": 1
+    }
+  ],
+  "readback": {
+    "ref": "refs/heads/research/portrait-highlight-continuity-20261109",
+    "node_id": "REF_kwDOT77IVtoAOnJlZnMvaGVhZHMvcmVzZWFyY2gvcG9ydHJhaXQtaGlnaGxpZ2h0LWNvbnRpbnVpdHktMjAyNjExMDk",
+    "url": "https://api.github.com/repos/KITAOCORPORAL/pixel-tart-source-private/git/refs/heads/research/portrait-highlight-continuity-20261109",
+    "object": {
+      "sha": "481e89206a044cfca9793161c9c333db5475567e",
+      "type": "commit",
+      "url": "https://api.github.com/repos/KITAOCORPORAL/pixel-tart-source-private/git/commits/481e89206a044cfca9793161c9c333db5475567e"
+    }
+  },
+  "headExact": true
+}

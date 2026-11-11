@@ -64,3 +64,5 @@ CLI单边≤512、面积≤512×512，本轮384×384。父进程10ms采样，子
 公司新RAW批次仍PENDING且AuthorizedForHeavyDecode=false。本轮新增RAW解码0，未改草案、STOP或ledger。sensor上游亮部、标定曝光对、跨ICC、完整两应用对照、人审审美及产品接入均未执行/未批准。现有输入的第一轮定位及隔离候选数值验证已完成。
 
 独立新目录复跑已完成：固定输入、579行CSV、生产输出、候选float与产品TIFF16的SHA均相同（REPLAY.json）。篡改参考源码负例在编译前因固定SHA不符拒绝。此处独立指新输出目录/进程，不冒称独立人员评价。
+
+远端交付：常规git push两次因github.com:443连接失败；GitHub API通道可达，通过Git Objects API上传原blob/tree/commit，逐层核对SHA，创建当前分支后回读HEAD=481e89206a044cfca9793161c9c333db5475567e。原39e60d3f、实现b29bff91、清单481e8920均保持原SHA，无rebase/squash/force。REMOTE_DELIVERY.json记录该交付检查点；其后回执提交另经远端引用核验。
