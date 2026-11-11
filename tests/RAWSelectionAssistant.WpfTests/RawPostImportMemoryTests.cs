@@ -34,6 +34,19 @@ public sealed class RawPostImportMemoryTests
   }
   finally{window?.Close();view.DataContext=null;}
  });
+ [TestMethod]public Task VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var path=Path.Combine(Path.GetTempPath(),"no-raw-photo-owner-"+Guid.NewGuid().ToString("N")+".raf");await File.WriteAllTextAsync(path,"Synthetic header, cache-like decoder only.");
+  using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(path),rawDecoder:new SyntheticDecoder());var view=new PhotoGradePageView{DataContext=workspace};var window=new Window{Content=view,Width=1500,Height=900,Left=-4000,Top=0,ShowInTaskbar=false};
+  try
+  {
+   window.Show();await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);await workspace.ChooseTargetCommand.ExecuteAsync(null);await Task.Delay(250);await workspace.Editor.DetailPreviewWork;
+   Assert.IsFalse(workspace.Editor.IsDetailPreviewRequested,"Fit must remain a bounded proxy.");Assert.AreEqual(1600,workspace.Editor.SourceImage!.PixelWidth);
+   var viewport=(ColorStudioImageViewport)view.FindName("PhotoViewport");viewport.State.SetZoom(1);await workspace.Editor.DetailPreviewWork;
+   Assert.IsTrue(workspace.Editor.IsDetailPreviewRequested,"The visible photo page must request its own full-resolution pixels.");Assert.AreEqual(2400,workspace.Editor.SourceImage!.PixelWidth);
+  }
+  finally{view.DataContext=null;window.Close();}
+ });
  [TestMethod]public Task DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels()=>RunSta(()=>
  {
   RawDisplayBitmapAdapter.ToBitmap(new VisualPixelBuffer(1,1,new byte[3]));
