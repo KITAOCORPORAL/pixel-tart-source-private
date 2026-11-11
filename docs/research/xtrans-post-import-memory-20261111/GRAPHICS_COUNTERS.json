@@ -1,0 +1,46 @@
+[
+  {
+    "pid": 36756,
+    "status": "OBSERVED",
+    "phase": "minimized-idle-195s",
+    "capturedUtc": "2026-11-11T05:19:33.8368704Z",
+    "metrics": [
+      {
+        "metric": "dedicated usage",
+        "bytes": 52277248,
+        "status": 0
+      },
+      {
+        "metric": "shared usage",
+        "bytes": 851968,
+        "status": 0
+      },
+      {
+        "metric": "total committed",
+        "bytes": 80891904,
+        "status": 0
+      }
+    ]
+  },
+  {
+    "pid": 39960,
+    "status": "OBSERVED",
+    "metrics": [
+      {
+        "metric": "dedicated usage",
+        "bytes": 52613120,
+        "status": 0
+      },
+      {
+        "metric": "shared usage",
+        "bytes": 851968,
+        "status": 0
+      },
+      {
+        "metric": "total committed",
+        "bytes": 247332864,
+        "status": 0
+      }
+    ]
+  }
+]

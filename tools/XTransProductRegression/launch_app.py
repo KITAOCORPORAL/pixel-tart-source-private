@@ -32,7 +32,13 @@ def main():
     locked=json.loads((root/'SOURCE_AND_RUN_LOCK.json').read_text('utf-8'))
     source=locked['featureProductSourceSha']
     assert manifest['ProductSourceSha']==source and step in manifest['Steps']
-    assert manifest['Version']==1 and manifest['MaximumHeavyDecodes']==locked['maximumHeavyDecodes']==6
+    assert manifest['Version'] in (1,2) and manifest['MaximumHeavyDecodes']==locked['maximumHeavyDecodes']==6
+    if manifest['Version']==2:
+        if not manifest.get('AuthorizedForHeavyDecode',False) or locked.get('authorizedHeavyDecodes',0)!=6:
+            raise SystemExit('Successor batch is pending explicit authorization; no app process launched')
+        approval=json.loads((root/'AUTHORIZATION.json').read_text('utf-8'))
+        assert approval.get('status')=='GRANTED_BY_USER' and approval.get('task')==manifest['Task'], 'Missing new-batch authorization receipt'
+        assert manifest['Task']=='RAW-XTRANS-MEMORYFIX-PRODUCT-REGRESSION-20261111'
     assert manifest['Task']==locked['rawTask'] and manifest['Steps']==locked['steps']
     assert manifest['CandidateNativeSha256']==locked['candidateNativeSha']
     assert manifest['DefaultNativeSha256']==locked['defaultNativeSha']

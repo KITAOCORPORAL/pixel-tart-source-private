@@ -1,0 +1,172 @@
+{
+  "status": "MEMORY_FIX_VERIFIED_CACHE_REPLAY_REAL_BATCH_PENDING_AUTHORIZATION",
+  "base": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+  "initialMemoryFix": "a42cb7cd9633ad065f632172ee137614af151324",
+  "admissionCommit": "22a43a339c87297bafe62302901d074188671695",
+  "productSourceSha": "b86d02455be77e4ed0f44ddd5b9816681979746e",
+  "rawDecodeCalls": 0,
+  "nativeRebuilds": 0,
+  "originalStopPreserved": true,
+  "successorAuthorizedHeavyDecodes": 0,
+  "containsPhotographs": false,
+  "containsRgbBuffers": false,
+  "containsTraceBinaries": false,
+  "containsNativeCandidate": false,
+  "files": [
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/ALLOCATION_EVIDENCE.json",
+      "bytes": 13547,
+      "sha256": "7297b2b1aeb76eba78862bbac0169237524845c5fefed876232c29d7a88045ca"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/CASE_SNAPSHOTS.json",
+      "bytes": 805004,
+      "sha256": "5320d2f45ac16a5747c157a2af95e0dbd1cff97ccd6cf98bee3bae0627f28881"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/COMPARISON.json",
+      "bytes": 4352,
+      "sha256": "9db80b61f15822f92e0e10c0a72d0915bd458962c2f44f76cf6db8042b2cac2e"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/EXISTING_TIMELINE.json",
+      "bytes": 13467,
+      "sha256": "2d1635c1ed710c93a75c910142fec40fe1f33ae37859b94ca620a98916882648"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/GRAPHICS_COUNTERS.json",
+      "bytes": 837,
+      "sha256": "977e984909e37f9a9fc6fb19fc18ee7d44aa75bf908eafdac8bd544aceb25e1e"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/LOCAL_EVIDENCE_INDEX.json",
+      "bytes": 23770,
+      "sha256": "e8abf8aeacba761f4eb8e43a72251153f3e663dc45f4a87ca65a49da0e180eab"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/NEW_BATCH_DRAFT.json",
+      "bytes": 47096,
+      "sha256": "a225cd699ae4f5fccfa468d2088c05d91ff53525e0544ae90158ccaa751a5153"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/NEW_BATCH_RUNBOOK.md",
+      "bytes": 3711,
+      "sha256": "6afe6532c3ca871254882ab2f1d663c2230280e64074378c438cd06da0badaee"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/ORIGINAL_AND_CACHE_BINDING.json",
+      "bytes": 683,
+      "sha256": "cb07476e54ce6c89649beff8f43849a01f32d97d981a1b37884e380d9b25ecbb"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/PENDING_LAUNCH_REJECTION.json",
+      "bytes": 150,
+      "sha256": "925b0ad980228222931ed9d1d07670a55367c782db3dbc99eaa7e6c9fcd14b7c"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/PENDING_WORKER_DENIAL.json",
+      "bytes": 572,
+      "sha256": "b40e7eacc2353cad7a019a6a277840dc1bfa57c3000f1c3aeeb7dc725ef1ef47"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/REPORT.md",
+      "bytes": 10034,
+      "sha256": "dbcd1114fdb68729bb75b496c24fd5f6ab2f267436ef974d5901b5c015bacad9"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/SOURCE_CANDIDATES.json",
+      "bytes": 2886,
+      "sha256": "5c29462c0d0be30f0c502e70a81b7b828e85c8cc688c0934ef485a17622f3881"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/STATUS.json",
+      "bytes": 1272,
+      "sha256": "5007275d234cc5ae7808515e7384abcf7d14e0f3df96a6b8115800b01fe82709"
+    },
+    {
+      "path": "docs/research/xtrans-post-import-memory-20261111/TESTS.json",
+      "bytes": 4835,
+      "sha256": "6e30a50c56a5a517461ac5767b995214da8a0ed50c70362b03aff7c86d3135a0"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/analyze_memory.py",
+      "bytes": 8301,
+      "sha256": "0cf63126f552bfa4e2aeb31107ea8db2c66e2be69c35fbdd8f54e34c70b17f32"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/check_pending_worker.py",
+      "bytes": 2760,
+      "sha256": "abba64d0e2fb790db0ef9e0dd1aac5a0698b56dabcfc39e0dc6cc0015bd04a58"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/plot_memory.py",
+      "bytes": 3112,
+      "sha256": "26159c9f0e41eab40d8a6637db3e77d73bfd3d4baf528ef7468d395ce82e9a0b"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/prepare_successor.py",
+      "bytes": 3371,
+      "sha256": "4364b7f0508fd8a4902571426e880251dc86067456dc52fc6c9f2129556bb311"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/Program.cs",
+      "bytes": 14962,
+      "sha256": "584a9684bb4bfd8d60d0c87d816c85641b086b6625f54c6b3366e48f0aec3b7f"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/README.md",
+      "bytes": 3367,
+      "sha256": "857ac491bc7626cc77776f3c986a5f31ade45c529dae037686e2c188f4a6269f"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/run_guarded.py",
+      "bytes": 4045,
+      "sha256": "66d0ae556e3a5583057dff9fdff0cf79b67da9a9e39d0089226deb063ee3c610"
+    },
+    {
+      "path": "tools/XTransMemoryReplay/XTransMemoryReplay.csproj",
+      "bytes": 636,
+      "sha256": "ac7e024be2234a4c3aa5ae2b2185d72a038361fb7a0377cf1e812a13cbf4ac18"
+    },
+    {
+      "path": "tools/XTransMemoryTrace/.gitattributes",
+      "bytes": 14,
+      "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "tools/XTransMemoryTrace/Program.cs",
+      "bytes": 2051,
+      "sha256": "19c126868d1e0fc24b789cce662c8910e39dd64baf4731ef474d545151e6acb0"
+    },
+    {
+      "path": "tools/XTransMemoryTrace/README.md",
+      "bytes": 339,
+      "sha256": "75cf0a0bae841210581fc85b35f8964ee349c4d3179a50909035192afbc91f61"
+    },
+    {
+      "path": "tools/XTransMemoryTrace/XTransMemoryTrace.csproj",
+      "bytes": 322,
+      "sha256": "c1a0b083a4034c50b0992a8158baa645e3bad36708d5b0ce6b66a51b88b47d21"
+    },
+    {
+      "path": "tools/XTransProductRegression/README.md",
+      "bytes": 2820,
+      "sha256": "232cfa6ed9d43c77bc9af495ea9fc98502853a1821a23df95dcfeedfb81900fe"
+    },
+    {
+      "path": "tools/XTransProductRegression/launch_app.py",
+      "bytes": 7644,
+      "sha256": "2033e7096a9d85adfbe8109760b78bd1b6351cbd6e0129a2b4815c69eb8ba4a6"
+    }
+  ]
+}

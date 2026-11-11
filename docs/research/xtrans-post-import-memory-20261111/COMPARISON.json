@@ -1,0 +1,120 @@
+{
+  "status": "PAIRED_CACHE_REPLAY_PASS",
+  "baseline": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+  "fix": "b86d02455be77e4ed0f44ddd5b9816681979746e",
+  "initialMemoryFix": "a42cb7cd9633ad065f632172ee137614af151324",
+  "rawDecodeCalls": 0,
+  "newNativeBuilds": 0,
+  "guardBytes": 2147483648,
+  "sameReplayHostSha256": "09C4FC122AB8993B95DCD1391EA7349610ECD9DF6073969E05FE6CE6D1F6C081",
+  "automaticHiddenView": {
+    "beforePeakPrivateBytes": 1780862976,
+    "afterPeakPrivateBytes": 1139023872,
+    "peakReductionBytes": 641839104,
+    "peakReductionPercent": 36.0409033513424,
+    "beforeIdlePrivateBytes": 1773244416,
+    "afterIdlePrivateBytes": 1126621184,
+    "beforeSourceWidth": 7752,
+    "afterSourceWidth": 1600
+  },
+  "explicitActualSize": {
+    "rgb24FullFrameHashEqual": true,
+    "result": {
+      "fullDisplayRgb24Sha": "C81DB4E20BAF5E8A6A55CBDD9C844740B717EE5655DC87C7634D39A3CC02D14E",
+      "PixelWidth": 7752,
+      "PixelHeight": 5184,
+      "cacheReadCalls": 1,
+      "rawDecodeCalls": 0
+    },
+    "beforePeakPrivateBytes": 1533984768,
+    "afterPeakPrivateBytes": 1542979584
+  },
+  "soak": {
+    "secondsMinimized": 210,
+    "baseline": {
+      "pid": 39960,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1750597632,
+      "osPeakWorkingSetBytes": 1745506304,
+      "samples": 4454,
+      "elapsedMs": 225278.99769999203,
+      "newRawDecodeLimit": 0
+    },
+    "fixed": {
+      "pid": 36756,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1147609088,
+      "osPeakWorkingSetBytes": 1107738624,
+      "samples": 4440,
+      "elapsedMs": 224601.23609998845,
+      "newRawDecodeLimit": 0
+    },
+    "pairBinding": {
+      "baselineAppSource": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+      "fixedProductSource": "a42cb7cd9633ad065f632172ee137614af151324",
+      "sameHostAndDependencies": true,
+      "onlyDifferentFiles": [
+        "KitaoPhotoSelector.dll"
+      ],
+      "baselineAppSha256": "ebbc154435903b6d5ecd9960d8f06bc72a7bc5701b517d3f4e5ef17c2be478ba",
+      "fixedAppSha256": "3146bcd3920ee121639849db10feb5451e701eae7cd28ecacfef2c1989db4847",
+      "hostSha256": "16f6945c90089919fb3a313d1564655e03ebc196e6f822372729721fba018999"
+    }
+  },
+  "scope": "Diagnostic cached-RGB16 viewmodel/WPF host replay, not a new actual RAW or TIFF product acceptance",
+  "mainWindowContextControl": {
+    "pairBinding": {
+      "onlyDifferentFiles": [
+        "KitaoPhotoSelector.dll"
+      ],
+      "sameHostAndDependencies": true,
+      "baselineAppSha256": "ebbc154435903b6d5ecd9960d8f06bc72a7bc5701b517d3f4e5ef17c2be478ba",
+      "fixedAppSha256": "3146bcd3920ee121639849db10feb5451e701eae7cd28ecacfef2c1989db4847",
+      "hostSha256": "f9bbead1d03768777bf4287e816177b9560114107e336d30ca4f83ceda81c151",
+      "scope": "Actual MainWindow class; injected cached reference workspace and inert other-page context; programmatic memory replay, not user-entry acceptance"
+    },
+    "baseline": {
+      "pid": 7160,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1266925568,
+      "osPeakWorkingSetBytes": 1175396352,
+      "samples": 286,
+      "elapsedMs": 14463.255100010429,
+      "newRawDecodeLimit": 0
+    },
+    "fixed": {
+      "pid": 40588,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1253928960,
+      "osPeakWorkingSetBytes": 1173159936,
+      "samples": 262,
+      "elapsedMs": 13257.119699992472,
+      "newRawDecodeLimit": 0
+    },
+    "limitation": "Inert alternate shell context; both remained at proxy size. This control does not reproduce the original full app or its guard failure."
+  },
+  "successorProductSourceSha": "b86d02455be77e4ed0f44ddd5b9816681979746e",
+  "finalSourceSoak": {
+    "pid": 40616,
+    "exitCode": 0,
+    "stop": null,
+    "peakPrivateBytes50ms": 1150570496,
+    "osPeakWorkingSetBytes": 1109061632,
+    "samples": 4446,
+    "elapsedMs": 225924.16970001068,
+    "newRawDecodeLimit": 0
+  },
+  "finalPairBinding": {
+    "onlyDifferentFiles": [
+      "KitaoPhotoSelector.dll"
+    ],
+    "sameHostAndDependencies": true,
+    "baselineAppSha256": "ebbc154435903b6d5ecd9960d8f06bc72a7bc5701b517d3f4e5ef17c2be478ba",
+    "fixedAppSha256": "8e64eb7397699aa603194f431f12ebd30571b991935a87946823d7b5fd470add",
+    "hostSha256": "09c4fc122ab8993b95dcd1391ea7349610ecd9df6073969e05fe6ce6d1f6c081"
+  }
+}

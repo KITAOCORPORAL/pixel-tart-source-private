@@ -1,0 +1,42 @@
+[
+  {
+    "id": "A",
+    "status": "REPRODUCED_AND_FIXED",
+    "source": "Views/ReferenceColorWorkspaceView.xaml.cs::RequestImageDetail and MainWindow.xaml::736-737",
+    "evidence": "Collapsed legacy page stays subscribed; SourcePixelSize notification synchronously requests full detail using default zoom even without an active viewport.",
+    "observedHolder": "Editor._source / _fullRawDisplay and Workspace._analysisImage retain a full 7752x5184 CachedBitmap.",
+    "fix": "Require visible, loaded and nonzero viewport before requesting detail. The active photo page independently owns explicit detail requests."
+  },
+  {
+    "id": "B",
+    "status": "REPRODUCED_AND_FIXED",
+    "source": "Services/RawDisplayBitmapAdapter.cs::ToBitmap",
+    "evidence": "GCAllocationTick resolved two 120559128-byte System.Byte[] objects: ToVisualRgb24 and the adapter ToArray.",
+    "fix": "Use exact array backing without an additional managed copy; slices still copy. WIC pixel ownership and offset tests pass."
+  },
+  {
+    "id": "C",
+    "status": "LIFECYCLE_FIX_VERIFIED",
+    "source": "ViewModels/TetherReferenceModeViewModel.cs::Dispose; ReferenceColorWorkspaceViewModel.cs::Dispose",
+    "evidence": "Full display and analysis references were not explicitly dropped on disposal. The disposed-editor weak-reference test now passes after dispatcher quiescence.",
+    "fix": "Clear _fullRawDisplay, _analysisImage and derived analysis pixel/color buffers."
+  },
+  {
+    "id": "D",
+    "status": "NECESSARY_INPUT_NOT_A_DUPLICATE_MASTER",
+    "source": "Core/Services/Color/HighBitDepthImageBuffer.cs::ToFloat; RawMatchTiff16ProductPipeline.DecodeMasterAsync",
+    "evidence": "Replay allocation trace shows one 241118232-byte U16 cache array and one 482236440-byte float master. Editor and target share the frozen master. Temporary cache array needs GC; it is not a second retained float master."
+  },
+  {
+    "id": "E",
+    "status": "NOT_ESTABLISHED_AS_ORIGINAL_FAILURE_CAUSE",
+    "source": "Core/Services/Projects/RawMatchTiff16ProductPipeline.cs; ViewModels/TetherReferenceModeViewModel.cs::RenderAsync; ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+    "evidence": "Edited high-precision rendering returns ProcessingPixels alongside display pixels; some display-only callers discard the processing owner. This separate edited-preview ownership path was not active in the empty-stack primary reproduction and was not changed here."
+  },
+  {
+    "id": "F",
+    "status": "ORIGINAL_FINAL_SPIKE_NOT_UNIQUELY_ATTRIBUTED",
+    "source": "Original RESOURCE_SAMPLES.json and new GPU Process Memory observations",
+    "evidence": "Original late steps resemble large pixel buffers, but the old process has no allocation/native heap stack. New process GPU totals correlate with display-size reduction but cannot identify the original final allocation. No causal claim from sizes alone."
+  }
+]

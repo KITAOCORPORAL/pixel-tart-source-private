@@ -1,0 +1,171 @@
+{
+  "passed": 17,
+  "failed": 0,
+  "notExecuted": 0,
+  "suites": [
+    {
+      "file": "tests-memory-final/memory-final.trx",
+      "sha256": "6F072BA45E2E83A6E59146ABB46315157A590072ABB4FAE785B01CF4E807AC76",
+      "counts": {
+        "total": "5",
+        "executed": "5",
+        "passed": "5",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "test": "VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp",
+          "outcome": "Passed"
+        },
+        {
+          "test": "DisplayAdapterHonorsOffsetSlices",
+          "outcome": "Passed"
+        },
+        {
+          "test": "DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels",
+          "outcome": "Passed"
+        },
+        {
+          "test": "DisposedEditorReleasesItsFullDisplayWhileEditorRemainsReachable",
+          "outcome": "Passed"
+        },
+        {
+          "test": "CollapsedLegacyPageDoesNotPromotePhotoPageProxyButVisibleActualSizeStillWorks",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "tests-detail/detail.trx",
+      "sha256": "DD0ED21376AD4F75B26CD25915CC45FDEF059F66F5F76665748517713C7081B9",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "test": "RawActualSizeUsesFullPixelGeometryAndRenderedSamplesWithReusableCache",
+          "outcome": "Passed"
+        },
+        {
+          "test": "StopCancelsPendingActualSizeBeforeItCanStartAnotherRender",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "tests-product/raw-product.trx",
+      "sha256": "CABEE4F29C887ADD62263949A9D5E4E405916FC1A72275C84C9C426C39A3C6C3",
+      "counts": {
+        "total": "3",
+        "executed": "3",
+        "passed": "3",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "test": "FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes",
+          "outcome": "Passed"
+        },
+        {
+          "test": "WorkspaceImportsRawPreviewsAndExportsGenuineTiff16",
+          "outcome": "Passed"
+        },
+        {
+          "test": "UnsupportedRawIsExplainedWithoutCorruptExport",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "tests-admission02/task-admission02.trx",
+      "sha256": "C4294A45794A9E3766EE02A7EC6A4F8E22AE05DE86B8DF77D84A33F68C8E9F63",
+      "counts": {
+        "total": "7",
+        "executed": "7",
+        "passed": "7",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "test": "TaskNamesAndVersionsCannotBeSubstituted (2,\"RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110\")",
+          "outcome": "Passed"
+        },
+        {
+          "test": "TaskNamesAndVersionsCannotBeSubstituted (2,\"unrecognized-task\")",
+          "outcome": "Passed"
+        },
+        {
+          "test": "TaskNamesAndVersionsCannotBeSubstituted (0,\"RAW-XTRANS-MEMORYFIX-PRODUCT-REGRESSION-20261111\")",
+          "outcome": "Passed"
+        },
+        {
+          "test": "TaskNamesAndVersionsCannotBeSubstituted (1,\"RAW-XTRANS-MEMORYFIX-PRODUCT-REGRESSION-20261111\")",
+          "outcome": "Passed"
+        },
+        {
+          "test": "ExplicitAuthorizationPassesSuccessorAdmission",
+          "outcome": "Passed"
+        },
+        {
+          "test": "NewTaskWithoutNewAuthorizationFailsBeforeAnyDecode",
+          "outcome": "Passed"
+        },
+        {
+          "test": "LegacyVersionOneAdmissionRemainsCompatible",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ]
+}

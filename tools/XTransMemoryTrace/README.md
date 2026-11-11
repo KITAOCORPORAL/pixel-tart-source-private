@@ -1,0 +1,1 @@
+TraceEvent 3.1.23 reader for local dotnet-trace gc-verbose data. Build the project, then run XTransMemoryTrace.dll INPUT_NETTRACE NEW_OUTPUT_JSON. Allocation ticks are samples; sampled weights are not a complete allocation census. The original trace stays unchanged; its derived .etlx cache remains local. No native RAW processing occurs.

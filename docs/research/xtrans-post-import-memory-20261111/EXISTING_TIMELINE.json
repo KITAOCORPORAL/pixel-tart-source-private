@@ -1,0 +1,481 @@
+{
+  "topPositivePrivateDeltas": [
+    {
+      "i": 22711,
+      "fromMs": 1157215.1259999955,
+      "toMs": 1157266.2366000004,
+      "privateDelta": 487763968,
+      "workingDelta": 52490240,
+      "before": {
+        "elapsedMs": 1157215.1259999955,
+        "workingSetBytes": 682848256,
+        "osPeakWorkingSetBytes": 682852352,
+        "privateBytes": 666775552
+      },
+      "after": {
+        "elapsedMs": 1157266.2366000004,
+        "workingSetBytes": 735338496,
+        "osPeakWorkingSetBytes": 735342592,
+        "privateBytes": 1154539520
+      }
+    },
+    {
+      "i": 26608,
+      "fromMs": 1355717.3200999969,
+      "toMs": 1355768.3213999844,
+      "privateDelta": 280551424,
+      "workingDelta": 163840,
+      "before": {
+        "elapsedMs": 1355717.3200999969,
+        "workingSetBytes": 1324883968,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1384632320
+      },
+      "after": {
+        "elapsedMs": 1355768.3213999844,
+        "workingSetBytes": 1325047808,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1665183744
+      }
+    },
+    {
+      "i": 26617,
+      "fromMs": 1356176.3162999996,
+      "toMs": 1356227.325499989,
+      "privateDelta": 242651136,
+      "workingDelta": 233349120,
+      "before": {
+        "elapsedMs": 1356176.3162999996,
+        "workingSetBytes": 1448132608,
+        "osPeakWorkingSetBytes": 1448136704,
+        "privateBytes": 1788973056
+      },
+      "after": {
+        "elapsedMs": 1356227.325499989,
+        "workingSetBytes": 1681481728,
+        "osPeakWorkingSetBytes": 1681485824,
+        "privateBytes": 2031624192
+      }
+    },
+    {
+      "i": 22677,
+      "fromMs": 1155488.2603999868,
+      "toMs": 1155539.2675999901,
+      "privateDelta": 239153152,
+      "workingDelta": 53112832,
+      "before": {
+        "elapsedMs": 1155488.2603999868,
+        "workingSetBytes": 446222336,
+        "osPeakWorkingSetBytes": 446238720,
+        "privateBytes": 426774528
+      },
+      "after": {
+        "elapsedMs": 1155539.2675999901,
+        "workingSetBytes": 499335168,
+        "osPeakWorkingSetBytes": 499339264,
+        "privateBytes": 665927680
+      }
+    },
+    {
+      "i": 26625,
+      "fromMs": 1356584.3216000067,
+      "toMs": 1356635.3285000077,
+      "privateDelta": 161136640,
+      "workingDelta": 21774336,
+      "before": {
+        "elapsedMs": 1356584.3216000067,
+        "workingSetBytes": 1678856192,
+        "osPeakWorkingSetBytes": 1690849280,
+        "privateBytes": 2006130688
+      },
+      "after": {
+        "elapsedMs": 1356635.3285000077,
+        "workingSetBytes": 1700630528,
+        "osPeakWorkingSetBytes": 1700634624,
+        "privateBytes": 2167267328
+      }
+    },
+    {
+      "i": 26611,
+      "fromMs": 1355870.313899999,
+      "toMs": 1355921.3214000047,
+      "privateDelta": 121851904,
+      "workingDelta": 13651968,
+      "before": {
+        "elapsedMs": 1355870.313899999,
+        "workingSetBytes": 1325146112,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1665273856
+      },
+      "after": {
+        "elapsedMs": 1355921.3214000047,
+        "workingSetBytes": 1338798080,
+        "osPeakWorkingSetBytes": 1338802176,
+        "privateBytes": 1787125760
+      }
+    },
+    {
+      "i": 22394,
+      "fromMs": 1141083.2460999954,
+      "toMs": 1141134.257400001,
+      "privateDelta": 62746624,
+      "workingDelta": 6303744,
+      "before": {
+        "elapsedMs": 1141083.2460999954,
+        "workingSetBytes": 434520064,
+        "osPeakWorkingSetBytes": 435515392,
+        "privateBytes": 391786496
+      },
+      "after": {
+        "elapsedMs": 1141134.257400001,
+        "workingSetBytes": 440823808,
+        "osPeakWorkingSetBytes": 440954880,
+        "privateBytes": 454533120
+      }
+    },
+    {
+      "i": 22,
+      "fromMs": 1068.381999997655,
+      "toMs": 1119.3863000080455,
+      "privateDelta": 60436480,
+      "workingDelta": 25088000,
+      "before": {
+        "elapsedMs": 1068.381999997655,
+        "workingSetBytes": 170831872,
+        "osPeakWorkingSetBytes": 170835968,
+        "privateBytes": 107282432
+      },
+      "after": {
+        "elapsedMs": 1119.3863000080455,
+        "workingSetBytes": 195919872,
+        "osPeakWorkingSetBytes": 196820992,
+        "privateBytes": 167718912
+      }
+    },
+    {
+      "i": 60,
+      "fromMs": 3006.3875000050757,
+      "toMs": 3057.388799992623,
+      "privateDelta": 37789696,
+      "workingDelta": 2396160,
+      "before": {
+        "elapsedMs": 3006.3875000050757,
+        "workingSetBytes": 297132032,
+        "osPeakWorkingSetBytes": 297140224,
+        "privateBytes": 252727296
+      },
+      "after": {
+        "elapsedMs": 3057.388799992623,
+        "workingSetBytes": 299528192,
+        "osPeakWorkingSetBytes": 299597824,
+        "privateBytes": 290516992
+      }
+    },
+    {
+      "i": 22722,
+      "fromMs": 1157776.1234999925,
+      "toMs": 1157827.1281000052,
+      "privateDelta": 36028416,
+      "workingDelta": 36163584,
+      "before": {
+        "elapsedMs": 1157776.1234999925,
+        "workingSetBytes": 1168674816,
+        "osPeakWorkingSetBytes": 1168678912,
+        "privateBytes": 1158254592
+      },
+      "after": {
+        "elapsedMs": 1157827.1281000052,
+        "workingSetBytes": 1204838400,
+        "osPeakWorkingSetBytes": 1204842496,
+        "privateBytes": 1194283008
+      }
+    },
+    {
+      "i": 21873,
+      "fromMs": 1114571.109099983,
+      "toMs": 1114622.1071000036,
+      "privateDelta": 30162944,
+      "workingDelta": 3350528,
+      "before": {
+        "elapsedMs": 1114571.109099983,
+        "workingSetBytes": 415506432,
+        "osPeakWorkingSetBytes": 415510528,
+        "privateBytes": 392728576
+      },
+      "after": {
+        "elapsedMs": 1114622.1071000036,
+        "workingSetBytes": 418856960,
+        "osPeakWorkingSetBytes": 419115008,
+        "privateBytes": 422891520
+      }
+    },
+    {
+      "i": 22731,
+      "fromMs": 1158235.1303999894,
+      "toMs": 1158286.1319999793,
+      "privateDelta": 25481216,
+      "workingDelta": 19685376,
+      "before": {
+        "elapsedMs": 1158235.1303999894,
+        "workingSetBytes": 1257631744,
+        "osPeakWorkingSetBytes": 1257635840,
+        "privateBytes": 1271054336
+      },
+      "after": {
+        "elapsedMs": 1158286.1319999793,
+        "workingSetBytes": 1277317120,
+        "osPeakWorkingSetBytes": 1277321216,
+        "privateBytes": 1296535552
+      }
+    },
+    {
+      "i": 22734,
+      "fromMs": 1158387.737299985,
+      "toMs": 1158438.7442999869,
+      "privateDelta": 25067520,
+      "workingDelta": 18923520,
+      "before": {
+        "elapsedMs": 1158387.737299985,
+        "workingSetBytes": 1304514560,
+        "osPeakWorkingSetBytes": 1304518656,
+        "privateBytes": 1337143296
+      },
+      "after": {
+        "elapsedMs": 1158438.7442999869,
+        "workingSetBytes": 1323438080,
+        "osPeakWorkingSetBytes": 1323442176,
+        "privateBytes": 1362210816
+      }
+    },
+    {
+      "i": 13,
+      "fromMs": 610.2376999915577,
+      "toMs": 660.5780999816488,
+      "privateDelta": 24862720,
+      "workingDelta": 6746112,
+      "before": {
+        "elapsedMs": 610.2376999915577,
+        "workingSetBytes": 87764992,
+        "osPeakWorkingSetBytes": 87769088,
+        "privateBytes": 41373696
+      },
+      "after": {
+        "elapsedMs": 660.5780999816488,
+        "workingSetBytes": 94511104,
+        "osPeakWorkingSetBytes": 94515200,
+        "privateBytes": 66236416
+      }
+    },
+    {
+      "i": 23,
+      "fromMs": 1119.3863000080455,
+      "toMs": 1170.3860999841709,
+      "privateDelta": 23306240,
+      "workingDelta": 22614016,
+      "before": {
+        "elapsedMs": 1119.3863000080455,
+        "workingSetBytes": 195919872,
+        "osPeakWorkingSetBytes": 196820992,
+        "privateBytes": 167718912
+      },
+      "after": {
+        "elapsedMs": 1170.3860999841709,
+        "workingSetBytes": 218533888,
+        "osPeakWorkingSetBytes": 218537984,
+        "privateBytes": 191025152
+      }
+    },
+    {
+      "i": 14,
+      "fromMs": 660.5780999816488,
+      "toMs": 711.3925000012387,
+      "privateDelta": 22876160,
+      "workingDelta": 26329088,
+      "before": {
+        "elapsedMs": 660.5780999816488,
+        "workingSetBytes": 94511104,
+        "osPeakWorkingSetBytes": 94515200,
+        "privateBytes": 66236416
+      },
+      "after": {
+        "elapsedMs": 711.3925000012387,
+        "workingSetBytes": 120840192,
+        "osPeakWorkingSetBytes": 120844288,
+        "privateBytes": 89112576
+      }
+    },
+    {
+      "i": 3357,
+      "fromMs": 171071.36199998786,
+      "toMs": 171122.36730000586,
+      "privateDelta": 21708800,
+      "workingDelta": -114688,
+      "before": {
+        "elapsedMs": 171071.36199998786,
+        "workingSetBytes": 384503808,
+        "osPeakWorkingSetBytes": 384544768,
+        "privateBytes": 344240128
+      },
+      "after": {
+        "elapsedMs": 171122.36730000586,
+        "workingSetBytes": 384389120,
+        "osPeakWorkingSetBytes": 384675840,
+        "privateBytes": 365948928
+      }
+    },
+    {
+      "i": 22732,
+      "fromMs": 1158286.1319999793,
+      "toMs": 1158337.171799998,
+      "privateDelta": 20488192,
+      "workingDelta": 13668352,
+      "before": {
+        "elapsedMs": 1158286.1319999793,
+        "workingSetBytes": 1277317120,
+        "osPeakWorkingSetBytes": 1277321216,
+        "privateBytes": 1296535552
+      },
+      "after": {
+        "elapsedMs": 1158337.171799998,
+        "workingSetBytes": 1290985472,
+        "osPeakWorkingSetBytes": 1290989568,
+        "privateBytes": 1317023744
+      }
+    }
+  ],
+  "latePositiveDeltasAbove5MiB": [
+    {
+      "i": 25792,
+      "fromMs": 1314116.1087999935,
+      "toMs": 1314167.1136999794,
+      "privateDelta": 14614528,
+      "workingDelta": 663552,
+      "before": {
+        "elapsedMs": 1314116.1087999935,
+        "workingSetBytes": 1323941888,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1368686592
+      },
+      "after": {
+        "elapsedMs": 1314167.1136999794,
+        "workingSetBytes": 1324605440,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1383301120
+      }
+    },
+    {
+      "i": 26608,
+      "fromMs": 1355717.3200999969,
+      "toMs": 1355768.3213999844,
+      "privateDelta": 280551424,
+      "workingDelta": 163840,
+      "before": {
+        "elapsedMs": 1355717.3200999969,
+        "workingSetBytes": 1324883968,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1384632320
+      },
+      "after": {
+        "elapsedMs": 1355768.3213999844,
+        "workingSetBytes": 1325047808,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1665183744
+      }
+    },
+    {
+      "i": 26611,
+      "fromMs": 1355870.313899999,
+      "toMs": 1355921.3214000047,
+      "privateDelta": 121851904,
+      "workingDelta": 13651968,
+      "before": {
+        "elapsedMs": 1355870.313899999,
+        "workingSetBytes": 1325146112,
+        "osPeakWorkingSetBytes": 1338355712,
+        "privateBytes": 1665273856
+      },
+      "after": {
+        "elapsedMs": 1355921.3214000047,
+        "workingSetBytes": 1338798080,
+        "osPeakWorkingSetBytes": 1338802176,
+        "privateBytes": 1787125760
+      }
+    },
+    {
+      "i": 26617,
+      "fromMs": 1356176.3162999996,
+      "toMs": 1356227.325499989,
+      "privateDelta": 242651136,
+      "workingDelta": 233349120,
+      "before": {
+        "elapsedMs": 1356176.3162999996,
+        "workingSetBytes": 1448132608,
+        "osPeakWorkingSetBytes": 1448136704,
+        "privateBytes": 1788973056
+      },
+      "after": {
+        "elapsedMs": 1356227.325499989,
+        "workingSetBytes": 1681481728,
+        "osPeakWorkingSetBytes": 1681485824,
+        "privateBytes": 2031624192
+      }
+    },
+    {
+      "i": 26625,
+      "fromMs": 1356584.3216000067,
+      "toMs": 1356635.3285000077,
+      "privateDelta": 161136640,
+      "workingDelta": 21774336,
+      "before": {
+        "elapsedMs": 1356584.3216000067,
+        "workingSetBytes": 1678856192,
+        "osPeakWorkingSetBytes": 1690849280,
+        "privateBytes": 2006130688
+      },
+      "after": {
+        "elapsedMs": 1356635.3285000077,
+        "workingSetBytes": 1700630528,
+        "osPeakWorkingSetBytes": 1700634624,
+        "privateBytes": 2167267328
+      }
+    }
+  ],
+  "events": [
+    {
+      "kind": "ProductPathBegin",
+      "atUtc": "2026-11-11T02:30:06.7954145+00:00",
+      "approxProcessElapsedMs": 1147933.1438541412
+    },
+    {
+      "kind": "HeaderOnlyProbe",
+      "atUtc": "2026-11-11T02:30:06.9648712+00:00",
+      "approxProcessElapsedMs": 1148102.600812912
+    },
+    {
+      "kind": "CacheMiss",
+      "atUtc": "2026-11-11T02:30:06.972836+00:00",
+      "approxProcessElapsedMs": 1148110.5659008026
+    },
+    {
+      "kind": "DecodeReserved",
+      "atUtc": "2026-11-11T02:30:07.0501522+00:00",
+      "approxProcessElapsedMs": 1148187.8819465637
+    },
+    {
+      "kind": "CandidateWorkerExited",
+      "atUtc": "2026-11-11T02:30:14.0583602+00:00",
+      "approxProcessElapsedMs": 1155196.0899829865
+    },
+    {
+      "kind": "CacheStored",
+      "atUtc": "2026-11-11T02:30:16.1010128+00:00",
+      "approxProcessElapsedMs": 1157238.7418746948
+    },
+    {
+      "kind": "ProductPathEnd",
+      "atUtc": "2026-11-11T02:30:16.7930284+00:00",
+      "approxProcessElapsedMs": 1157930.7579994202
+    }
+  ],
+  "alignment": "UTC launch and monotonic sampler start were not atomic; alignment approximate"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PASS_PENDING_AUTHORIZATION_REJECTED_BEFORE_INPUT",
+  "exitCode": 1,
+  "guardBytes": 2147483648,
+  "peakProcessBytes50ms": 31289344,
+  "newRawDecodes": 0,
+  "nativeProcessingReached": false,
+  "inputAndReservationAbsent": true,
+  "error": "System.IO.InvalidDataException: Memory-fix regression requires explicit new-batch authorization; no RAW decode is admitted.\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.RawDiagnosticTaskAuthorization.Validate(Int32 version, String task, Boolean authorizedForHeavyDecode)\r\n   at Program.Main(String[] a)"
+}

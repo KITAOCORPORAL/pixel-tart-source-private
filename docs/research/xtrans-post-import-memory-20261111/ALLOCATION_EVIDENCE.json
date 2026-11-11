@@ -1,0 +1,296 @@
+{
+  "final-baseline-auto-01": {
+    "missingStacks": 0,
+    "authority": "Sampled GCAllocationTick events; sampled weights are not a complete allocation census",
+    "largeSamples": [
+      {
+        "utc": "2026-11-11T05:59:59.3771930Z",
+        "relativeMs": 4435.193,
+        "ProcessID": 41024,
+        "ThreadID": 41752,
+        "type": "System.UInt16[]",
+        "kind": "Large",
+        "objectSize": 241118240,
+        "sampledAllocationAmount": 241216584,
+        "stack": [
+          "ReplayDecoder+<>c__DisplayClass5_0.<DecodeAsync>b__0()",
+          "System.Threading.Tasks.Task`1[System.__Canon].InnerInvoke()",
+          "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      },
+      {
+        "utc": "2026-11-11T05:59:59.5154252Z",
+        "relativeMs": 4573.4252,
+        "ProcessID": 41024,
+        "ThreadID": 41752,
+        "type": "System.Single[]",
+        "kind": "Large",
+        "objectSize": 482236448,
+        "sampledAllocationAmount": 482236440,
+        "stack": [
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.ToFloat(value class System.ReadOnlyMemory`1<unsigned int16>)",
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer..ctor(int32,int32,value class System.ReadOnlyMemory`1<unsigned int16>,class System.String,class System.String,unsigned int16,class RAWSelectionAssistant.Core.Models.RawImageMetadata)",
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.FromRaw(class RAWSelectionAssistant.Core.Models.RawDecodedImage)",
+          "RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3.MoveNext()",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].ExecutionContextCallback(class System.Object)",
+          "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].MoveNext(class System.Threading.Thread)",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].MoveNext()",
+          "System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(class System.Runtime.CompilerServices.IAsyncStateMachineBox,bool)",
+          "System.Threading.Tasks.Task.RunContinuations(class System.Object)",
+          "System.Threading.Tasks.Task.FinishSlow(bool)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      },
+      {
+        "utc": "2026-11-11T06:00:00.1989233Z",
+        "relativeMs": 5256.9233,
+        "ProcessID": 41024,
+        "ThreadID": 41752,
+        "type": "System.Byte[]",
+        "kind": "Large",
+        "objectSize": 120559136,
+        "sampledAllocationAmount": 120559128,
+        "stack": [
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.ToVisualRgb24(value class System.Threading.CancellationToken)",
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.ToVisualRgb24()",
+          "RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel+<>c__DisplayClass684_0.<SetPreviewZoomAsync>b__0()",
+          "System.Threading.Tasks.Task`1[System.__Canon].InnerInvoke()",
+          "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      },
+      {
+        "utc": "2026-11-11T06:00:00.5463988Z",
+        "relativeMs": 5604.3988,
+        "ProcessID": 41024,
+        "ThreadID": 41752,
+        "type": "System.Byte[]",
+        "kind": "Large",
+        "objectSize": 120559136,
+        "sampledAllocationAmount": 120559128,
+        "stack": [
+          "System.ReadOnlyMemory`1[System.Byte].ToArray()",
+          "RAWSelectionAssistant.Services.RawDisplayBitmapAdapter.ToBitmap(class RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualPixelBuffer)",
+          "RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel+<>c__DisplayClass684_0.<SetPreviewZoomAsync>b__0()",
+          "System.Threading.Tasks.Task`1[System.__Canon].InnerInvoke()",
+          "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      }
+    ],
+    "totals": [
+      {
+        "type": "System.Single[]",
+        "count": 127,
+        "sampledBytes": 529077112,
+        "maxObjectSize": 482236448
+      },
+      {
+        "type": "System.Byte[]",
+        "count": 59,
+        "sampledBytes": 357296400,
+        "maxObjectSize": 120559136
+      },
+      {
+        "type": "System.UInt16[]",
+        "count": 2,
+        "sampledBytes": 241323184,
+        "maxObjectSize": 241118240
+      },
+      {
+        "type": "System.Double[]",
+        "count": 145,
+        "sampledBytes": 55075800,
+        "maxObjectSize": 424376
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.Color.ColorVector3[]",
+        "count": 116,
+        "sampledBytes": 49223904,
+        "maxObjectSize": 424376
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.Projects.OklabColor[]",
+        "count": 2,
+        "sampledBytes": 18948144,
+        "maxObjectSize": 9474104
+      },
+      {
+        "type": "System.String",
+        "count": 103,
+        "sampledBytes": 10971632,
+        "maxObjectSize": 208
+      },
+      {
+        "type": "System.Windows.LocalValueEntry[]",
+        "count": 87,
+        "sampledBytes": 9270968,
+        "maxObjectSize": 648
+      },
+      {
+        "type": "System.Xaml.XamlNode[]",
+        "count": 58,
+        "sampledBytes": 6184632,
+        "maxObjectSize": 20072
+      },
+      {
+        "type": "System.Windows.EffectiveValueEntry[]",
+        "count": 41,
+        "sampledBytes": 4368416,
+        "maxObjectSize": 920
+      },
+      {
+        "type": "System.Char[]",
+        "count": 35,
+        "sampledBytes": 3743208,
+        "maxObjectSize": 65560
+      },
+      {
+        "type": "System.Windows.Threading.DispatcherOperationCallback",
+        "count": 34,
+        "sampledBytes": 3615072,
+        "maxObjectSize": 64
+      }
+    ]
+  },
+  "final-fixed-auto-01": {
+    "missingStacks": 0,
+    "authority": "Sampled GCAllocationTick events; sampled weights are not a complete allocation census",
+    "largeSamples": [
+      {
+        "utc": "2026-11-11T06:00:13.3594273Z",
+        "relativeMs": 3650.4273,
+        "ProcessID": 39476,
+        "ThreadID": 35316,
+        "type": "System.UInt16[]",
+        "kind": "Large",
+        "objectSize": 241118240,
+        "sampledAllocationAmount": 241216584,
+        "stack": [
+          "ReplayDecoder+<>c__DisplayClass5_0.<DecodeAsync>b__0()",
+          "System.Threading.Tasks.Task`1[System.__Canon].InnerInvoke()",
+          "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      },
+      {
+        "utc": "2026-11-11T06:00:13.4831243Z",
+        "relativeMs": 3774.1243,
+        "ProcessID": 39476,
+        "ThreadID": 35316,
+        "type": "System.Single[]",
+        "kind": "Large",
+        "objectSize": 482236448,
+        "sampledAllocationAmount": 482236440,
+        "stack": [
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.ToFloat(value class System.ReadOnlyMemory`1<unsigned int16>)",
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer..ctor(int32,int32,value class System.ReadOnlyMemory`1<unsigned int16>,class System.String,class System.String,unsigned int16,class RAWSelectionAssistant.Core.Models.RawImageMetadata)",
+          "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer.FromRaw(class RAWSelectionAssistant.Core.Models.RawDecodedImage)",
+          "RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3.MoveNext()",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].ExecutionContextCallback(class System.Object)",
+          "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].MoveNext(class System.Threading.Thread)",
+          "System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.__Canon,RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterAsync>d__3].MoveNext()",
+          "System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(class System.Runtime.CompilerServices.IAsyncStateMachineBox,bool)",
+          "System.Threading.Tasks.Task.RunContinuations(class System.Object)",
+          "System.Threading.Tasks.Task.FinishSlow(bool)",
+          "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task&,class System.Threading.Thread)",
+          "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+          "System.Threading.PortableThreadPool+WorkerThread.WorkerThreadStart()",
+          "System.Threading.Thread.StartCallback()"
+        ]
+      }
+    ],
+    "totals": [
+      {
+        "type": "System.Single[]",
+        "count": 75,
+        "sampledBytes": 520222352,
+        "maxObjectSize": 482236448
+      },
+      {
+        "type": "System.UInt16[]",
+        "count": 2,
+        "sampledBytes": 241323184,
+        "maxObjectSize": 241118240
+      },
+      {
+        "type": "System.Byte[]",
+        "count": 29,
+        "sampledBytes": 78064384,
+        "maxObjectSize": 5423648
+      },
+      {
+        "type": "System.Double[]",
+        "count": 90,
+        "sampledBytes": 34167600,
+        "maxObjectSize": 424352
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.Color.ColorVector3[]",
+        "count": 72,
+        "sampledBytes": 30552768,
+        "maxObjectSize": 424352
+      },
+      {
+        "type": "System.String",
+        "count": 102,
+        "sampledBytes": 10848584,
+        "maxObjectSize": 664
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.Projects.OklabColor[]",
+        "count": 1,
+        "sampledBytes": 9474072,
+        "maxObjectSize": 9474080
+      },
+      {
+        "type": "System.Windows.LocalValueEntry[]",
+        "count": 76,
+        "sampledBytes": 8098584,
+        "maxObjectSize": 712
+      },
+      {
+        "type": "System.Xaml.XamlNode[]",
+        "count": 62,
+        "sampledBytes": 6605496,
+        "maxObjectSize": 40120
+      },
+      {
+        "type": "System.Windows.EffectiveValueEntry[]",
+        "count": 47,
+        "sampledBytes": 5003608,
+        "maxObjectSize": 920
+      },
+      {
+        "type": "System.Char[]",
+        "count": 46,
+        "sampledBytes": 4965872,
+        "maxObjectSize": 65560
+      },
+      {
+        "type": "MS.Internal.Xaml.Parser.XamlScannerNode",
+        "count": 26,
+        "sampledBytes": 2768104,
+        "maxObjectSize": 88
+      }
+    ]
+  }
+}

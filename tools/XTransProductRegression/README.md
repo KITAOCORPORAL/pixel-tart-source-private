@@ -11,3 +11,5 @@ Python standard library is sufficient. The launcher requires a usable Windows de
 See ../../docs/research/xtrans-stable-product-regression-20261110/REPORT.md and RUNBOOK.md for exact checkpoint, authority boundaries, and the remaining eight real paths. Existing reservations and failures must always be preserved.
 
 The desktop-02 batch is now STOPPED_RESOURCE_GUARD (one consumed, five numerically unused, zero executable). Do not clear STOP or resume remaining paths. collect_stopped_attempt.py ARTIFACT_ROOT NEW_OUTPUT_DIR reads the stopped scene, verifies frozen identities and the single completed import, compares full worker/cache/research RGB48 bytes, and seals the resource evidence. It performs no RAW decode, test run, app launch, or original-file mutation. See the desktop-02-20261111 report.
+
+Version2 successor plans are supported only after explicit authorization: AuthorizedForHeavyDecode=true, source lock authorizedHeavyDecodes=6, and AUTHORIZATION.json status GRANTED_BY_USER with the same task. Pending drafts are rejected before app launch. The original Version1 stopped batch remains stopped. No plan flag is itself human authorization.
