@@ -9,3 +9,5 @@ The frozen product source is a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77. These Pyt
 Python standard library is sufficient. The launcher requires a usable Windows desktop and Windows process APIs. The local contact sheet was created separately with Pillow; it is a review aid at 100 percent and is not an acceptance screenshot or a TIFF export.
 
 See ../../docs/research/xtrans-stable-product-regression-20261110/REPORT.md and RUNBOOK.md for exact checkpoint, authority boundaries, and the remaining eight real paths. Existing reservations and failures must always be preserved.
+
+The desktop-02 batch is now STOPPED_RESOURCE_GUARD (one consumed, five numerically unused, zero executable). Do not clear STOP or resume remaining paths. collect_stopped_attempt.py ARTIFACT_ROOT NEW_OUTPUT_DIR reads the stopped scene, verifies frozen identities and the single completed import, compares full worker/cache/research RGB48 bytes, and seals the resource evidence. It performs no RAW decode, test run, app launch, or original-file mutation. See the desktop-02-20261111 report.

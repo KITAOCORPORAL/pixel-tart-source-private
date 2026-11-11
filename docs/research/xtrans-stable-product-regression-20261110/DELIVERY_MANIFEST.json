@@ -1,6 +1,10 @@
 {
-  "status": "PARTIAL_ENVIRONMENT_BLOCKED",
+  "status": "STOPPED_RESOURCE_GUARD",
   "featureProductSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "latestAttempt": "desktop-02-20261111/REPORT.md",
+  "consumedHeavyDecodes": 1,
+  "unusedAllowance": 5,
+  "remainingExecutableDecodes": 0,
   "containsNativeBinaries": false,
   "containsRawInputs": false,
   "containsPhotoCrops": false,
@@ -9,6 +13,31 @@
       "path": "docs/research/xtrans-stable-product-regression-20261110/.gitattributes",
       "bytes": 14,
       "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/desktop-02-20261111/ATTEMPT_RESULT.json",
+      "bytes": 3735,
+      "sha256": "fdfeb107e79b511fc2bf2421fb2ac0795071562ab82d9b84204f8920d43e9225"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/desktop-02-20261111/FAILURE_SCENE_MANIFEST.json",
+      "bytes": 4003,
+      "sha256": "e8fb71e249c696db442a26c256bfbb55abca36a8ecd7f5be59ddcd8c45b9b36e"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/desktop-02-20261111/PARENT_MEMORY_MAXIMA_1S.json",
+      "bytes": 148788,
+      "sha256": "08da9b28558c2c430475b7bde9a411407877ed17f8bfb77014904b8069e1f5e1"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/desktop-02-20261111/PRODUCT_PATH_TRACE.json",
+      "bytes": 3412,
+      "sha256": "b503a34c6bf4c0bcda63c9bed528c3545e6ba222fe09a1ab6f7eefcedccd6684"
+    },
+    {
+      "path": "docs/research/xtrans-stable-product-regression-20261110/desktop-02-20261111/REPORT.md",
+      "bytes": 6023,
+      "sha256": "3b2a2f5ba607edc0f343f968ea2d1df33fb6ce8c9cda969edb41d03fc2396ed8"
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/FIXED_CROP_VERIFICATION.json",
@@ -22,23 +51,23 @@
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/PATH_AND_RESOURCE_RECEIPT.json",
-      "bytes": 3953,
-      "sha256": "b3c1a896d11b58a51d49d8a9af51b38ca9c8899023f6de36bf51db4934a429ac"
+      "bytes": 4943,
+      "sha256": "78610b5cb048a4c070a9c87a9e6721cbcabdcdeca4f8e67718b3ed24df0a0ebd"
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/REPORT.md",
-      "bytes": 7669,
-      "sha256": "c3d1bd858b7b03d209564dedd3181a5af51341d0761050666afdb94cc5783a70"
+      "bytes": 8055,
+      "sha256": "57db90720197ac27647401d960560ae20d7c3ee70c6fc64c020825d68becb7c6"
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/RUNBOOK.md",
-      "bytes": 3744,
-      "sha256": "f29f7f1082817f0832eaf351d1d45947c002d195b9751bb961ef25cfd1c94c32"
+      "bytes": 3984,
+      "sha256": "237e18e5a6c85f2f9b40093e43c9c6b8406a7f8bfb3727bc8456ba9f5dcde0b1"
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/STATUS.json",
-      "bytes": 3251,
-      "sha256": "b9555420afa9811f5f2cbfe57b6adb54cd4b628eb1476558756390dedf9ed6aa"
+      "bytes": 4377,
+      "sha256": "38d979c89542ed444ef96d40324bd806e489e14a07924b9e14a1c395bcf8d61f"
     },
     {
       "path": "docs/research/xtrans-stable-product-regression-20261110/STORED_P6_READBACK.json",
@@ -56,9 +85,9 @@
       "sha256": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9"
     },
     {
-      "path": "tools/XTransProductRegression/README.md",
-      "bytes": 1976,
-      "sha256": "2eb500db4d828ce7c216020ae55aafe85a1d8b2ad557bfd83b018d91637c870a"
+      "path": "tools/XTransProductRegression/collect_stopped_attempt.py",
+      "bytes": 10713,
+      "sha256": "bb7524a278313ab6e28518b253e697bfc240894208c425431e1fd66097ad61b7"
     },
     {
       "path": "tools/XTransProductRegression/launch_app.py",
@@ -69,6 +98,11 @@
       "path": "tools/XTransProductRegression/readback_p6.py",
       "bytes": 2118,
       "sha256": "c50ef66511f91ebab11a00ccf8f8e6b8190cf642b453db1452c3e42c69d1d183"
+    },
+    {
+      "path": "tools/XTransProductRegression/README.md",
+      "bytes": 2466,
+      "sha256": "e87a2ccb5e482d259e48a8a6bfe1be4fc8f0abd247552a71b940c073938795ab"
     },
     {
       "path": "tools/XTransProductRegression/verify_evidence.py",

@@ -1,3 +1,5 @@
+> **2026-11-11：本批已因主进程资源守卫停止，禁止继续以下运行步骤或清除 STOP。** 当前事实与后续边界见 [desktop-02 失败报告](desktop-02-20261111/REPORT.md)。以下保留原冻结计划供审计。
+
 # 原冻结批次的续跑步骤
 
 本文件只描述已授权的新批次；当前状态仍是 0/6。ARTIFACT_ROOT 指现有本地 Guangjing-RawReopen001-ProductRegression-20261110 目录，由本地 CHECKPOINT.json 定位。候选 DLL 与照片仅留本地。

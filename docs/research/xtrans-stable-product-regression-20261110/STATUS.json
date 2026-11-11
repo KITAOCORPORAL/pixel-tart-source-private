@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "timezone": "Europe/Helsinki",
-  "status": "PARTIAL_ENVIRONMENT_BLOCKED",
+  "status": "STOPPED_RESOURCE_GUARD",
   "productBaseHead": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
   "productBaseSourceSha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
   "featureProductSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
@@ -15,8 +15,8 @@
   "realRawBatch": {
     "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
     "maximumHeavyDecodes": 6,
-    "consumed": 0,
-    "remaining": 6,
+    "consumed": 1,
+    "remaining": 5,
     "pathEvidenceFiles": 0,
     "steps": {
       "A-cold": 1,
@@ -27,58 +27,64 @@
       "B-rebuild": 1,
       "control-A": 1,
       "control-B": 1
-    }
+    },
+    "remainingExecutable": 0,
+    "stopped": true,
+    "stopReason": "Parent app exceeded 2GiB external resource guard"
   },
   "paths": [
     {
       "step": "A-cold",
-      "status": "BLOCKED_BEFORE_PRODUCT_COMMAND",
+      "status": "IMPORT_COMPLETED_THEN_PARENT_RESOURCE_STOP",
       "observedEntry": "Darkroom -> Import / Export -> Import photos -> source-read-only file dialog",
-      "productPathBegin": false,
-      "heavyDecodeConsumed": 0
+      "productPathBegin": true,
+      "productPathEndCompleted": true,
+      "heavyDecodeConsumed": 1,
+      "workerExitCode": 0,
+      "importElapsedMs": 9992.9774
     },
     {
       "step": "A-cache",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "A-rebuild",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "B-cold",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "B-cache",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "B-rebuild",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "control-A",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     },
     {
       "step": "control-B",
-      "status": "NOT_RUN"
+      "status": "NOT_RUN_BATCH_STOPPED"
     }
   ],
   "environment": {
-    "session": "console Administrator session 1 Active",
-    "captureError": "FrameArrived timed out: timed out waiting on channel",
-    "activationError": "GetCursorPos failed: Access denied (0x80070005)",
-    "ocuObservation": "Visible file dialog and typed filename; click, Return and Alt+O did not submit the dialog",
-    "cleanup": "Verified isolated PID 24024 stopped before any path evidence or RAW reservation",
-    "doesNotProveDesktopLocked": true
+    "importSubmittedBy": "Human user confirmed 已打开; actual trace and single worker result read back",
+    "windowStateDuringFollowup": "Minimized; activation/screenshot recovery did not yield an actual full darkroom image",
+    "skyScreenshotError": "no screenshot targets found",
+    "ocuLateObservation": "Minimized frame 237x39; later appNotFound after resource guard termination",
+    "parentProcessExited": true,
+    "recorderCompleted": true
   },
   "conclusions": {
-    "repeatability": "Existing research pair P6 bit-exact; real product path repeatability NOT_RUN",
-    "photographicAppearance": "Five fixed stored-input crop triplets inspected at 100%; no obvious new continuous seam or broad halo; local pixel differences remain; no general photography acceptance",
-    "compatibility": "Existing synthetic/cache/recipe/formal-off and PV4/5/6 tests read back; 61 passed, 1 not executed; real save-reopen and non-XTrans control NOT_RUN",
-    "resources": "Product cold-open/cache-open/rebuild/export timings and peaks UNAVAILABLE; idle app lifetime is excluded"
+    "repeatability": "One actual product RGB48 decode is byte-identical to its cache and saved research candidate. Repeated actual product paths and TIFF repeatability NOT_RUN.",
+    "photographicAppearance": "Five stored-input crop triplets remain available. User confirmed image opened; no actual darkroom full-image capture before guard stop, so full-image appearance NOT_VERIFIED.",
+    "compatibility": "Existing 61 passed / 1 NotExecuted tests unchanged. One A-cold import completed; save-reopen, fallback and non-XTrans controls NOT_RUN.",
+    "resources": "Import measured at 9992.9774 ms. Parent PrivateBytes later crossed 2GiB, triggering STOP and process termination; overall resource acceptance FAILED."
   },
   "tiff": {
     "realProductExport": "NOT_RUN",
@@ -86,7 +92,17 @@
     "bitDepth": "NOT_MEASURED",
     "icc": "NOT_MEASURED"
   },
-  "newRawDecoderCalls": 0,
+  "newRawDecoderCalls": 1,
   "newNativeBuilds": 0,
-  "formalIntegration": false
+  "formalIntegration": false,
+  "previousDesktopCheckpoint": {
+    "session": "console Administrator session 1 Active",
+    "captureError": "FrameArrived timed out: timed out waiting on channel",
+    "activationError": "GetCursorPos failed: Access denied (0x80070005)",
+    "ocuObservation": "Visible file dialog and typed filename; click, Return and Alt+O did not submit the dialog",
+    "cleanup": "Verified isolated PID 24024 stopped before any path evidence or RAW reservation",
+    "doesNotProveDesktopLocked": true
+  },
+  "lastRunReceipt": "desktop-02-20261111/ATTEMPT_RESULT.json",
+  "nextStep": "Read-only root-cause analysis of parent memory after import; do not resume this stopped batch or clear STOP."
 }

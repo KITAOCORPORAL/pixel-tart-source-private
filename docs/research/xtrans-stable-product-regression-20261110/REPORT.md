@@ -1,3 +1,5 @@
+> **2026-11-11 最新状态：STOPPED_RESOURCE_GUARD。** desktop-02 实际完成一次 Fuji 导入，随后主应用 PrivateBytes 超过 2 GiB，守卫终止进程。已消费 1/6；数字剩余 5 次，本批可执行 0 次。详见 [实际回执与失败报告](desktop-02-20261111/REPORT.md)。下文为 2026-11-10 的未解码历史 checkpoint，不能作为当前账本状态。
+
 # X-Trans stable-input V1 隔离产品回归交接
 
 日期：2026-11-10（Europe/Helsinki）。状态：**PARTIAL_ENVIRONMENT_BLOCKED**。

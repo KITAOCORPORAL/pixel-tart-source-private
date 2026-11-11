@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-11",
+  "status": "STOPPED_RESOURCE_GUARD",
+  "productSourceSha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+  "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+  "attempt": "desktop-02",
+  "step": "A-cold",
+  "pid": 2408,
+  "frozenFilesVerified": 65,
+  "oldLedgersUnchanged": true,
+  "consumedHeavyDecodes": 1,
+  "unusedAllowance": 5,
+  "remainingExecutableDecodes": 0,
+  "stopPreserved": true,
+  "stopReason": "Parent app exceeded 2GiB external resource guard",
+  "nativeWorkerCompleted": true,
+  "importCommandCompleted": true,
+  "importUtc": {
+    "begin": "2026-11-11T02:30:06.7954145+00:00",
+    "end": "2026-11-11T02:30:16.7930284+00:00"
+  },
+  "coldImport": {
+    "name": "DarkroomImport",
+    "completed": true,
+    "elapsedMs": 9992.9774,
+    "pathLocalWorkingSetPeak50ms": 1224409088,
+    "pathLocalPrivatePeak50ms": 1211416576,
+    "samples": 201,
+    "lifetimeOsPeakWorkingSetBytes": 1226874880,
+    "privateBytesAtEnd": 1211994112,
+    "timingScope": "Product command after source/destination dialog; includes decode/render/encode and own metadata"
+  },
+  "workerParentObservation": {
+    "reservation": "ARTIFACT_ROOT\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+    "pid": 30028,
+    "exitCode": 0,
+    "elapsedMs": 6999.7489,
+    "peakWorkingSetBytes": 925487104,
+    "peakPrivateBytes50ms": 900198400,
+    "combinedWorkingSetPeak50ms": 1354985472,
+    "combinedPrivateBytesPeak50ms": 1327030272
+  },
+  "workerSelfObservation": {
+    "ProcessId": 30028,
+    "peakWorkingSetBytes": 925487104,
+    "privateBytesAtExit": 253755392,
+    "debuggerAttached": false,
+    "elapsedMs": 6915.4833
+  },
+  "workerImage": {
+    "width": 7752,
+    "height": 5184,
+    "bytes": 241118208,
+    "pixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+    "nativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+    "bindingSha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+    "decodedOrientation": 1,
+    "declaredColorSpace": "sRGB"
+  },
+  "fullByteComparison": {
+    "productWorkerVersusCache": true,
+    "productWorkerVersusStoredResearchCandidate": true,
+    "authority": "one actual product decode compared with its stored cache and an existing research output; not two product runs"
+  },
+  "parentLifetime": {
+    "pid": 2408,
+    "exitCode": 1,
+    "resourceGuardTriggered": true,
+    "elapsedWallMs": 1357067.303799995,
+    "peakWorkingSetObserved": 1700630528,
+    "peakPrivate50ms": 2167267328,
+    "timingScope": "Whole process lifetime including dialogs and idle; use ProductPathEnd for command timings"
+  },
+  "thresholdBytes": 2147483648,
+  "sampleCount": 26626,
+  "sampleGapMedianMs": 50.99939997307956,
+  "firstThresholdCrossing": {
+    "elapsedMs": 1356635.3285000077,
+    "workingSetBytes": 1700630528,
+    "osPeakWorkingSetBytes": 1700634624,
+    "privateBytes": 2167267328
+  },
+  "previousSample": {
+    "elapsedMs": 1356584.3216000067,
+    "workingSetBytes": 1678856192,
+    "osPeakWorkingSetBytes": 1690849280,
+    "privateBytes": 2006130688
+  },
+  "firstThresholdCrossingMetric": "PrivateBytes",
+  "eventOrdering": "Guard crossing occurred after completed DarkroomImport; exact root cause unobserved",
+  "clockAlignment": "Launch UTC and monotonic sampling start were not atomic; no exact phase time inferred",
+  "tiff": {
+    "exports": 0,
+    "decodedPixelRepeatability": "NOT_RUN",
+    "bitDepth": "NOT_MEASURED",
+    "orientation": "NOT_MEASURED",
+    "icc": "NOT_MEASURED"
+  },
+  "screenshot": "Actual full darkroom screenshot unavailable before process guard termination",
+  "remainingPaths": "NOT_RUN_BATCH_STOPPED",
+  "newNativeBuilds": 0,
+  "defaultProductDecoderChanged": false
+}

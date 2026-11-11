@@ -3,8 +3,8 @@
   "rawBatch": {
     "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
     "maximumHeavyDecodes": 6,
-    "consumed": 0,
-    "remaining": 6,
+    "consumed": 1,
+    "remaining": 5,
     "pathEvidenceFiles": 0,
     "steps": {
       "A-cold": 1,
@@ -15,137 +15,158 @@
       "B-rebuild": 1,
       "control-A": 1,
       "control-B": 1
-    }
+    },
+    "remainingExecutable": 0,
+    "stopped": true,
+    "stopReason": "Parent app exceeded 2GiB external resource guard"
   },
   "paths": [
     {
       "step": "A-cold",
-      "status": "BLOCKED_BEFORE_PRODUCT_COMMAND",
+      "status": "IMPORT_COMPLETED_THEN_PARENT_RESOURCE_STOP",
       "observedEntry": "Darkroom -> Import / Export -> Import photos -> source-read-only file dialog",
-      "productPathBegin": false,
-      "heavyDecodeConsumed": 0,
+      "productPathBegin": true,
+      "productPathEndCompleted": true,
+      "heavyDecodeConsumed": 1,
+      "workerExitCode": 0,
+      "importElapsedMs": 9992.9774,
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": 9992.9774,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": 1224409088,
+      "pathLocalPrivatePeak50ms": 1211416576,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "A-cache",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "A-rebuild",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "B-cold",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "B-cache",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "B-rebuild",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "control-A",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     },
     {
       "step": "control-B",
-      "status": "NOT_RUN",
+      "status": "NOT_RUN_BATCH_STOPPED",
       "timings": {
-        "coldOpenMs": null,
+        "coldImportMs": null,
         "cacheOpenMs": null,
         "rebuildMs": null,
         "exportMs": null
       },
-      "peakWorkingSetBytes": null,
-      "peakPrivateBytes50ms": null,
+      "pathLocalWorkingSetPeak50ms": null,
+      "pathLocalPrivatePeak50ms": null,
       "decodedTiffPixelComparison": "NOT_RUN",
       "tiffBitDepth": null,
+      "tiffOrientation": null,
       "tiffIccSha256": null
     }
   ],
-  "unavailableReason": "Desktop input rejected before the import dialog could be submitted",
+  "unavailableReason": "Only A-cold import completed. Parent 2GiB resource guard then stopped the batch before save/export/reopen/controls.",
   "excludedIdleProcess": {
     "pid": 24024,
     "exitReceipt": "ui-steps/A-cold/EXIT.json",
     "reason": "Lifetime contains dialogs and extended idle; no ProductPathBegin or decode reservation"
+  },
+  "stoppedAttemptReceipt": "desktop-02-20261111/ATTEMPT_RESULT.json",
+  "parentLifetimeOutcome": {
+    "resourceGuardTriggered": true,
+    "exitCode": 1,
+    "peakPrivateBytes50ms": 2167267328,
+    "thresholdBytes": 2147483648
   }
 }

@@ -1,0 +1,98 @@
+[
+  {
+    "atUtc": "2026-11-11T02:30:06.7954145+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "ProductPathBegin",
+    "value": {
+      "name": "DarkroomImport"
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:06.9648712+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "HeaderOnlyProbe",
+    "value": {
+      "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "filters": 9,
+      "colors": 3,
+      "nativeSha": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+      "noUnpack": true
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:06.972836+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "CacheMiss",
+    "value": {
+      "key": "e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7",
+      "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+      "reason": "Absent"
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:07.0501522+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "DecodeReserved",
+    "value": {
+      "path": "ARTIFACT_ROOT\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+      "inputSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F"
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:14.0583602+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "CandidateWorkerExited",
+    "value": {
+      "reservation": "ARTIFACT_ROOT\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+      "pid": 30028,
+      "exitCode": 0,
+      "elapsedMs": 6999.7489,
+      "peakWorkingSetBytes": 925487104,
+      "peakPrivateBytes50ms": 900198400,
+      "combinedWorkingSetPeak50ms": 1354985472,
+      "combinedPrivateBytesPeak50ms": 1327030272
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:16.1010128+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "CacheStored",
+    "value": {
+      "key": "e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7",
+      "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+      "index": "ARTIFACT_ROOT\\cache-A\\e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7.json",
+      "pixelSha": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E"
+    }
+  },
+  {
+    "atUtc": "2026-11-11T02:30:16.7930284+00:00",
+    "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+    "step": "A-cold",
+    "pid": 2408,
+    "kind": "ProductPathEnd",
+    "value": {
+      "name": "DarkroomImport",
+      "completed": true,
+      "elapsedMs": 9992.9774,
+      "pathLocalWorkingSetPeak50ms": 1224409088,
+      "pathLocalPrivatePeak50ms": 1211416576,
+      "samples": 201,
+      "lifetimeOsPeakWorkingSetBytes": 1226874880,
+      "privateBytesAtEnd": 1211994112,
+      "timingScope": "Product command after source/destination dialog; includes decode/render/encode and own metadata"
+    }
+  }
+]
