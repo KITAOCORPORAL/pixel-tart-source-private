@@ -1,0 +1,12 @@
+{
+  "pid": 4280,
+  "readinessProbe": {
+    "ok": false,
+    "code": "DesktopUnavailable",
+    "message": "光镜桌面暂不可用，采集已保留。请打开配套桌面入口后重试。",
+    "destinations": null,
+    "receipt": null,
+    "retryable": true
+  },
+  "probeIsNotChromeCapture": true
+}

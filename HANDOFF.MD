@@ -1,3 +1,10 @@
+## 2026-11-11 公司Chrome单图五项真实验收全部收口（Europe/Berlin）
+- 最终状态PASS_ALL_FIVE_REAL_CHROME_ACCEPTANCE。用户最后队列截图已显示srcset“已入库”，结合唯一完成记录/1600×1200原图hash，证据足够不再要求额外点击；另一同名待处理项保持不动。
+- 五项PASS：srcset1600原图；原图403不采缩略；普通图A重发不增且B复用88490206只加B关联；桌面关闭期间新图18093197同ID重开成功、a48c655b仅1份；临时目的地失效明确重选、无其他项目写入。最终3素材/4项目关联/2板引用。
+- 使用11.10修复包、company01真实数据；机器协议探针/启停控制另列，未拿machine04替代。实际Chrome操作和截图来自用户，受限扩展页未被代理读取/绕过。所有旧记录与队列保留。
+- 冻结产品ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c，本轮src/extensions零变更、未重建包；RAW0，全模块/策划15/教程退役保持。侧栏前置条件已满足，本次只收口最终回执，不夹带侧栏代码。
+- 最终JSON docs/validation/chrome-capture-five-case-20261110/CHROME_FIVE_CASE_FINAL_RECEIPT.json，说明FINAL_REPORT.md；本地CHROME_FIVE_CASE_ROUND.json指向原始回执和用户截图。五项最终提交后远端SHA另存FINAL_FIVE_CASE_PUSH_READBACK.json。用户不用再点验收。
+
 ## 2026-11-10 真实Chrome五项验收准备（Asia/Shanghai）
 - 接续fb37c703，冻结产品ed5d15d4/安装a3c4a35c不变。查到更新srcset真实回执31acf2cd，AssetId486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2；库尺寸和托管JPEG均1600×1200，hash等声明原图且不等320缩略图，实际Chrome页currentSrc仍320候选，已保留不要求重发；只待用户补界面提示。
 - company01基线2素材/2项目关联/2板引用，A/B及未使用临时“待失效测试项目”有效。51292三静态页200、原图1600可读、故意失败最高候选403；步骤4另备51293/pending.html专用未入库960×640新图，用来验证关闭期间IDB保留与同项重试新增仅1份。

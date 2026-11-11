@@ -1,0 +1,23 @@
+{
+  "status": "PASS_REAL_CHROME_INVALID_DESTINATION_RESELECT_NO_REROUTE",
+  "case": "5-invalid-target",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "recordedAtBerlin": "2026-11-11T02:22:24.349460+01:00",
+  "chromeActionEvidence": "User preselected the valid isolated temporary project, waited while agent archived only that project, then sent in the same popup without refreshing and supplied actual extension error screenshot",
+  "uiFeedback": "原目的地已失效，请重新选择；没有改送其他项目。",
+  "oldTargetStillShownInUserScreenshot": true,
+  "temporaryProjectId": "cecefe53-6e46-499d-9560-c6eddaf0813b",
+  "temporaryProjectArchivedNotDeleted": true,
+  "assetCount": 3,
+  "projectLinkCount": 4,
+  "boardLinkCount": 2,
+  "assetAndAllLinksUnchanged": true,
+  "temporaryProjectAssetLinks": 0,
+  "temporaryProjectDesktopCaptureRecords": 0,
+  "projectAandBStillAvailable": true,
+  "otherProjectRerouteDidNotOccur": true,
+  "screenshotFile": "CASE5_USER_INVALID_TARGET_REJECTED.png",
+  "screenshotSha256": "89c77540f9d0965b1b96f793a8840733518e939167dbd95dc90577539d6270d8",
+  "chromeQueueClearedOrReloaded": false,
+  "protocolProbeUsedAsChromeEvidence": false
+}

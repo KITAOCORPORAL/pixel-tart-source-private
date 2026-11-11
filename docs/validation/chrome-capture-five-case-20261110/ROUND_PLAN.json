@@ -1,5 +1,5 @@
 {
-  "status": "PREPARED_WAITING_USER_REAL_CHROME_UI_FEEDBACK",
+  "status": "PASS_ALL_FIVE_REAL_CHROME_ACCEPTANCE",
   "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
   "baselineAssetCount": 2,
   "baselineProjectLinks": 2,
@@ -10,36 +10,55 @@
       "assetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
       "captureId": "31acf2cd-3d8f-4fe2-9b3a-f79c6e4f61ad",
       "visiblePageCandidate": "http://127.0.0.1:51292/srcset-thumb-320.jpg",
-      "ui": "USER_FEEDBACK_PENDING",
-      "repeatRequired": false
+      "ui": "User-provided actual queue screenshot shows 已入库 · 光镜 srcset 原图验收",
+      "repeatRequired": false,
+      "status": "PASS",
+      "receipt": "CASE1_REAL_CHROME_RECEIPT.json"
     },
     "2-original-403": {
-      "status": "WAITING_USER",
-      "expectedAssets": 2,
-      "completedUnavailableRecords": 0
+      "status": "PASS",
+      "ui": "Actual user screenshot: HTTP403, no thumbnail, Send disabled",
+      "desktop": "Asset count2 and project/board relations unchanged; no unavailable-page capture row",
+      "receipt": "CASE2_REAL_CHROME_RECEIPT.json"
     },
     "3-repeat-cross-project": {
-      "status": "WAITING_USER",
+      "status": "PASS",
       "ordinaryAssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
       "expectedAssets": 2,
-      "expectedProjectLinksAfterB": 3
+      "expectedProjectLinksAfterB": 3,
+      "sameProjectA": {
+        "status": "PASS",
+        "captureId": "664434c6-063d-45f3-8a1b-2957aa1df551",
+        "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+        "outcome": "Reused",
+        "ui": "User screenshot shows confirmed actual receipt",
+        "receipt": "CASE3A_REAL_CHROME_RECEIPT.json"
+      },
+      "projectB": {
+        "status": "PASS",
+        "captureId": "075ea7c6-7f9d-4719-a710-607ea4a63cce",
+        "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+        "outcome": "Reused",
+        "ui": "User screenshot shows confirmed receipt to project B with null board",
+        "receipt": "CASE3B_REAL_CHROME_RECEIPT.json"
+      }
     },
     "4-desktop-unavailable": {
-      "status": "WAITING_COORDINATED_DESKTOP_DOWN",
-      "doNotCloseDesktopBeforeCases2And3Feedback": true,
-      "newImage": "http://127.0.0.1:51293/pending.html",
-      "expectedNewSha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
-      "expectedAssetsAfterRecovery": 3,
-      "expectedSameHashCount": 1
+      "status": "PASS",
+      "captureId": "18093197-52d2-40f1-a404-68e44a245713",
+      "assetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+      "ui": "User screenshots prove retained original preview, desktop unavailable and same-item successful receipt",
+      "receipt": "CASE4_REAL_CHROME_RECEIPT.json"
     },
     "5-invalid-target": {
-      "status": "TEMPORARY_PROJECT_READY_NOT_INVALIDATED",
-      "projectId": "cecefe53-6e46-499d-9560-c6eddaf0813b",
-      "invalidateOnlyAfterUserPreselect": true
+      "status": "PASS",
+      "ui": "Actual user screenshot: reselect target; no reroute",
+      "desktop": "Assets/project/board links unchanged, zero temporary links/operations",
+      "receipt": "CASE5_REAL_CHROME_RECEIPT.json"
     }
   },
   "realChromeUiAuthority": "Direct user feedback plus actual Chrome tab metadata and isolated desktop readback",
   "protocolProbes": "Separate, never substitute for actual Chrome actions",
-  "finalReceiptIssued": false,
-  "batchSidebar": "BLOCKED_UNTIL_ALL_FIVE_PASS"
+  "finalReceiptIssued": true,
+  "batchSidebar": "PREREQUISITE_SATISFIED_NOT_STARTED_IN_THIS_CLOSEOUT"
 }

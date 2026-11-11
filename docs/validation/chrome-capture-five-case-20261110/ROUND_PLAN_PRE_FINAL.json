@@ -1,0 +1,45 @@
+{
+  "status": "PREPARED_WAITING_USER_REAL_CHROME_UI_FEEDBACK",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "baselineAssetCount": 2,
+  "baselineProjectLinks": 2,
+  "baselineBoardLinks": 2,
+  "cases": {
+    "1-srcset": {
+      "desktop": "PASS_1600x1200_ORIGINAL_SHA256",
+      "assetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+      "captureId": "31acf2cd-3d8f-4fe2-9b3a-f79c6e4f61ad",
+      "visiblePageCandidate": "http://127.0.0.1:51292/srcset-thumb-320.jpg",
+      "ui": "USER_FEEDBACK_PENDING",
+      "repeatRequired": false
+    },
+    "2-original-403": {
+      "status": "WAITING_USER",
+      "expectedAssets": 2,
+      "completedUnavailableRecords": 0
+    },
+    "3-repeat-cross-project": {
+      "status": "WAITING_USER",
+      "ordinaryAssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "expectedAssets": 2,
+      "expectedProjectLinksAfterB": 3
+    },
+    "4-desktop-unavailable": {
+      "status": "WAITING_COORDINATED_DESKTOP_DOWN",
+      "doNotCloseDesktopBeforeCases2And3Feedback": true,
+      "newImage": "http://127.0.0.1:51293/pending.html",
+      "expectedNewSha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+      "expectedAssetsAfterRecovery": 3,
+      "expectedSameHashCount": 1
+    },
+    "5-invalid-target": {
+      "status": "TEMPORARY_PROJECT_READY_NOT_INVALIDATED",
+      "projectId": "cecefe53-6e46-499d-9560-c6eddaf0813b",
+      "invalidateOnlyAfterUserPreselect": true
+    }
+  },
+  "realChromeUiAuthority": "Direct user feedback plus actual Chrome tab metadata and isolated desktop readback",
+  "protocolProbes": "Separate, never substitute for actual Chrome actions",
+  "finalReceiptIssued": false,
+  "batchSidebar": "BLOCKED_UNTIL_ALL_FIVE_PASS"
+}

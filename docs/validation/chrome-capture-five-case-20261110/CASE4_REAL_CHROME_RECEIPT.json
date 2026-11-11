@@ -1,0 +1,57 @@
+{
+  "status": "PASS_REAL_CHROME_RETAINED_NEW_IMAGE_SAME_ITEM_AFTER_DESKTOP_RESTART",
+  "case": "4-desktop-unavailable-and-retry",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "recordedAtBerlin": "2026-11-10T10:59:59.392230+01:00",
+  "chromeActionEvidence": "User captured the dedicated new image while desktop was stopped, supplied preview and unavailable screenshots, retained the same popup, refreshed destinations after agent reopened desktop, selected project A/no board and supplied actual successful receipt screenshot",
+  "uiFeedback": "光镜已确认入库。实际素材ID见下方回执。",
+  "beforeImagePreviewEvidence": "CASE4A_USER_IMAGE_PREVIEW.png",
+  "beforeUnavailableUiEvidence": "CASE4A_USER_DESKTOP_UNAVAILABLE.png",
+  "afterSuccessUiEvidence": "CASE4B_USER_SAME_PENDING_ITEM_IMPORTED.png",
+  "screenshotSha256": "8db7610fc76cb4b2eba63fc5b52c7e71fca4160f5be2d0cf572f707d2479bb40",
+  "capture": {
+    "CaptureId": "18093197-52d2-40f1-a404-68e44a245713",
+    "LibraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "ProjectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+    "BoardId": null,
+    "PageUrl": "http://127.0.0.1:51293/pending.html",
+    "ImageUrl": "http://127.0.0.1:51293/pending-new-960.jpg",
+    "PageTitle": "光镜 桌面关闭期间新图验收",
+    "CapturedAtUtc": "2026-11-10T09:43:53.907+00:00",
+    "ContentHash": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+    "AssetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+    "Outcome": "Imported",
+    "ImportedAtUtc": "2026-11-10T09:58:56.3790009+00:00"
+  },
+  "sameCaptureIdObservedBeforeRestart": true,
+  "preRestartChromeCaptureIds": [
+    "e9071814-2b9e-4e6c-aa51-8717326149be",
+    "664434c6-063d-45f3-8a1b-2957aa1df551",
+    "075ea7c6-7f9d-4719-a710-607ea4a63cce",
+    "18093197-52d2-40f1-a404-68e44a245713"
+  ],
+  "stoppedDesktopPid": 4280,
+  "reopenedDesktopPid": 20752,
+  "desktopStoppedAtUtc": "2026-11-10T09:34:18.894199+00:00",
+  "desktopReopenedAtUtc": "2026-11-10T09:47:47.868246+00:00",
+  "newImageAbsentBeforeRestart": true,
+  "afterAssetCount": 3,
+  "sameOriginalHashAssetCount": 1,
+  "samePendingPageCaptureCount": 1,
+  "managedFileHashMatchesOriginal": true,
+  "dimensions": [
+    960,
+    640
+  ],
+  "projectLinksForNewAsset": [
+    [
+      "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "a48c655b-25ae-4055-b1ea-00bda4494288",
+      "reference"
+    ]
+  ],
+  "totalProjectLinks": 4,
+  "boardLinkCount": 2,
+  "chromeQueueClearedOrReloaded": false,
+  "protocolProbeUsedAsChromeEvidence": false
+}

@@ -1,0 +1,42 @@
+{
+  "status": "PASS_REAL_CHROME_SAME_IMAGE_PROJECT_B_REUSES_ASSET_ADDS_ONLY_B_LINK",
+  "case": "3B-cross-project",
+  "recordedAtBerlin": "2026-11-10T10:34:14.978831+01:00",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "chromeActionEvidence": "User opened a new image context capture, chose project B and no board, sent, and supplied actual extension receipt screenshot",
+  "uiFeedback": "光镜已确认入库。实际素材ID见下方回执。",
+  "screenshotFile": "CASE3B_USER_CHROME_REUSED_PROJECT_B.png",
+  "screenshotSha256": "9e3c74b282e0a35762684b0e2fb2ddf8d8a7978f544f1251133f5204f0fbe271",
+  "capture": {
+    "CaptureId": "075ea7c6-7f9d-4719-a710-607ea4a63cce",
+    "LibraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "ProjectId": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+    "BoardId": null,
+    "PageUrl": "http://127.0.0.1:51292/ordinary.html",
+    "ImageUrl": "http://127.0.0.1:51292/ordinary-640.jpg",
+    "PageTitle": "光镜 JPEG 右键采集验收",
+    "CapturedAtUtc": "2026-11-10T09:09:29.506+00:00",
+    "ContentHash": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+    "AssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "Outcome": "Reused",
+    "ImportedAtUtc": "2026-11-10T09:33:17.0070629+00:00"
+  },
+  "actualAssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+  "outcome": "Reused",
+  "beforeAssetCount": 2,
+  "afterAssetCount": 2,
+  "sameContentHashAssetCount": 1,
+  "projectALinkCount": 1,
+  "projectBLinkCount": 1,
+  "addedProjectLinks": [
+    [
+      "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+      "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "reference"
+    ]
+  ],
+  "removedProjectLinks": [],
+  "boardLinksUnchanged": true,
+  "protocolProbeUsedAsChromeEvidence": false,
+  "chromeQueueClearedOrReloaded": false
+}

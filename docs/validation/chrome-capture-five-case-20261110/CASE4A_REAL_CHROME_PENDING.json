@@ -1,0 +1,37 @@
+{
+  "status": "REAL_CHROME_PENDING_ITEM_RETAINED_WHILE_DESKTOP_CLOSED_RETRY_PENDING",
+  "case": "4a-desktop-unavailable",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "recordedAtBerlin": "2026-11-10T10:46:17.171864+01:00",
+  "chromeActionEvidence": "User opened the dedicated new-image fixture, right-clicked Send to Guangjing while the agent-closed desktop was offline, and supplied actual extension screenshots",
+  "imagePreviewRetained": true,
+  "uiFeedback": "光镜桌面暂不可用，采集已保留。请打开配套桌面入口后重试。",
+  "sendDisabledUntilDestinationAvailable": true,
+  "successNotDisplayed": true,
+  "libraryAssetCount": 2,
+  "pendingImageHashAssetCount": 0,
+  "pendingPageDesktopRecords": 0,
+  "pendingFixture": {
+    "pageUrl": "http://127.0.0.1:51293/pending.html",
+    "imageUrl": "http://127.0.0.1:51293/pending-new-960.jpg",
+    "sha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+    "width": 960,
+    "height": 640,
+    "bytes": 51779,
+    "serverPid": 1160,
+    "staticOnly": true,
+    "assetExpectedAbsentBeforeCase4": true
+  },
+  "screenshots": [
+    {
+      "file": "CASE4A_USER_IMAGE_PREVIEW.png",
+      "sha256": "008ee4b0dcc27495e28246eafe7c71a3742577a6a897e5d9f82bbd6960075912"
+    },
+    {
+      "file": "CASE4A_USER_DESKTOP_UNAVAILABLE.png",
+      "sha256": "9c74a625826f07d981999388b200b1ca318b532f0d4ec8f5559394e72fa53079"
+    }
+  ],
+  "chromeQueueClearedOrReloaded": false,
+  "sameItemRetryRequired": true
+}

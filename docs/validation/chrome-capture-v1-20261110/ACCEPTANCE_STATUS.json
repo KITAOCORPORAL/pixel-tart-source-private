@@ -1,5 +1,5 @@
 {
-  "status": "PARTIAL_REAL_CHROME_ORDINARY_SINGLE_IMAGE_PASS",
+  "status": "PASS_ALL_FIVE_REAL_CHROME_ACCEPTANCE",
   "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
   "baseline": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
   "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
@@ -8,10 +8,10 @@
   "nativeDesktopMachineChecks": 9,
   "newPendingImageRecovery": "PASS",
   "publishedFullAppSmoke": "EXE_AND_CMD_PASS",
-  "chromeContextMenuAcceptance": "USER_SENT_REAL_FIXTURE_CAPTURE_DESKTOP_IMPORT_AND_SOURCE_OPEN_PASS",
+  "chromeContextMenuAcceptance": "FIVE_SPECIFIED_REAL_CHROME_CASES_PASS",
   "companyRootInitialAssetCount": 0,
   "registryWrittenByAgent": true,
-  "batchSidebar": "DEFERRED_NEXT_ROUND",
+  "batchSidebar": "PREREQUISITE_SATISFIED_NOT_STARTED_IN_THIS_CLOSEOUT",
   "rawCalls": 0,
   "WholeAppDiagnosticBuild": true,
   "PhotographerTrialBuild": false,
@@ -25,12 +25,15 @@
   "acceptedProjectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
   "acceptedBoardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
   "chromeExtensionSuccessUi": "NOT_AGENT_OBSERVED_URL_POLICY",
-  "remainingRealChromeCases": [
-    "srcset highest-original selection",
-    "unavailable original without thumbnail fallback",
-    "repeat send and same image other project",
-    "desktop unavailable pending item / reopen retry",
-    "invalid destination no automatic reroute"
-  ],
-  "singleImageReceipt": "../chrome-capture-real-single-image-20261110/CHROME_SINGLE_IMAGE_RECEIPT.json"
+  "remainingRealChromeCases": [],
+  "singleImageReceipt": "../chrome-capture-real-single-image-20261110/CHROME_SINGLE_IMAGE_RECEIPT.json",
+  "realChromeCaseStatuses": {
+    "1": "PASS",
+    "2": "PASS",
+    "3": "PASS",
+    "4": "PASS",
+    "5": "PASS"
+  },
+  "fiveCaseFinalReceipt": "../chrome-capture-five-case-20261110/CHROME_FIVE_CASE_FINAL_RECEIPT.json",
+  "manualAcceptanceComplete": true
 }

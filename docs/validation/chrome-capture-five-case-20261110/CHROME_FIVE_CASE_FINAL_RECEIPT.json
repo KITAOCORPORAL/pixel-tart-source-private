@@ -1,0 +1,78 @@
+{
+  "status": "PASS_ALL_FIVE_REAL_CHROME_ACCEPTANCE",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "roundPreparedCommit": "3a328d0498e98345d9255676bd17ef7c47f0987b",
+  "installationFix": "a3c4a35cf35d2eaa518bd0dba893a616d551691b",
+  "actualPackage": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64",
+  "scope": "Five specified real company Chrome single-image cases in isolated company01; human Chrome UI evidence corroborated by actual desktop SQLite and image bytes",
+  "cases": [
+    {
+      "case": "1",
+      "name": "srcset highest declared original",
+      "status": "PASS",
+      "receipt": "CASE1_REAL_CHROME_RECEIPT.json",
+      "assetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+      "proof": "1600x1200 and exact original hash; user queue completion label"
+    },
+    {
+      "case": "2",
+      "name": "403 original unavailable",
+      "status": "PASS",
+      "receipt": "CASE2_REAL_CHROME_RECEIPT.json",
+      "proof": "User error screenshot; asset count and all links unchanged"
+    },
+    {
+      "case": "3",
+      "name": "duplicate and cross-project",
+      "status": "PASS",
+      "receipts": [
+        "CASE3A_REAL_CHROME_RECEIPT.json",
+        "CASE3B_REAL_CHROME_RECEIPT.json"
+      ],
+      "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "proof": "Both actual user receipts Reused; only project B link added"
+    },
+    {
+      "case": "4",
+      "name": "desktop offline retention and same-item retry",
+      "status": "PASS",
+      "receipt": "CASE4_REAL_CHROME_RECEIPT.json",
+      "assetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+      "proof": "Preview/unavailable/success screenshots; same pre-restart CaptureId; new original only one asset"
+    },
+    {
+      "case": "5",
+      "name": "invalid destination no reroute",
+      "status": "PASS",
+      "receipt": "CASE5_REAL_CHROME_RECEIPT.json",
+      "proof": "User invalid-target screenshot; no asset/link deltas or temporary target operations"
+    }
+  ],
+  "uiEvidenceAuthority": "Direct user screenshots; extension page not controlled or read through blocked URL tooling",
+  "desktopEvidenceAuthority": "Read-only journal, actual library project/board stores, managed-file SHA256 and image decode",
+  "protocolEvidence": "Kept separately; not used as a substitute for real Chrome actions",
+  "finalCounts": {
+    "assets": 3,
+    "projectLinks": 4,
+    "boardLinks": 2
+  },
+  "finalAssetIds": [
+    "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+    "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "a48c655b-25ae-4055-b1ea-00bda4494288"
+  ],
+  "temporaryTargetArchivedNotDeleted": true,
+  "existingQueueAndCaptureRecordsPreserved": true,
+  "productCodeChanged": false,
+  "fullDiagnosticPackageRebuilt": false,
+  "normalJpegActualReceiptPreserved": true,
+  "rawOpen": 0,
+  "rawUnpack": 0,
+  "rawProcess": 0,
+  "rawMemoryImage": 0,
+  "WholeAppDiagnosticBuild": true,
+  "PhotographerTrialBuild": false,
+  "batchSidebarGate": "SATISFIED",
+  "batchSidebarWorkStarted": false,
+  "recordedAtBerlin": "2026-11-11T02:39:49.266081+01:00"
+}

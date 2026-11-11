@@ -1,0 +1,14 @@
+{
+  "captureIds": [
+    "e9071814-2b9e-4e6c-aa51-8717326149be",
+    "664434c6-063d-45f3-8a1b-2957aa1df551",
+    "075ea7c6-7f9d-4719-a710-607ea4a63cce",
+    "18093197-52d2-40f1-a404-68e44a245713"
+  ],
+  "source": "Chrome tab URL inventory metadata only; extension content not accessed",
+  "pendingImagePreviewEvidence": "CASE4A_USER_IMAGE_PREVIEW.png",
+  "desktopUnavailableEvidence": "CASE4A_USER_DESKTOP_UNAVAILABLE.png",
+  "sameItemAfterRestartMustMatchOneOfTheseIds": true,
+  "postRestartPageUrlMustMatch": "http://127.0.0.1:51293/pending.html",
+  "postRestartHashMustMatch": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E"
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASS_REAL_CHROME_ORIGINAL_403_NO_THUMBNAIL_IMPORT",
+  "case": "2-original-403",
+  "recordedAtBerlin": "2026-11-10T09:33:11.178160+01:00",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "chromeActionEvidence": "User performed image right-click and selected Send to Guangjing, then supplied the actual extension-window screenshot in this conversation",
+  "uiFeedback": "无法取得原图（HTTP 403），未使用缩略图。",
+  "sendButtonDisabled": true,
+  "requestedImageUrl": "http://127.0.0.1:51292/denied-original-2400.jpg",
+  "screenshotFile": "CASE2_USER_CHROME_HTTP403.png",
+  "screenshotSha256": "4bcc96eddcd1e0e3037004e1c577748ead4dba72efa913c882acee5ca3d37deb",
+  "beforeAssetCount": 2,
+  "afterAssetCount": 2,
+  "assetCountUnchanged": true,
+  "projectLinksUnchanged": true,
+  "boardLinksUnchanged": true,
+  "unavailablePageDesktopCaptureRecords": 0,
+  "protocolProbeUsedAsChromeEvidence": false,
+  "extensionPageControlledByAgent": false,
+  "chromeQueueClearedOrReloaded": false
+}

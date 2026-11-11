@@ -1,0 +1,37 @@
+{
+  "status": "PASS_REAL_CHROME_SRCSET_1600_ORIGINAL_NOT_THUMBNAIL",
+  "case": "1-srcset-original",
+  "productSource": "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c",
+  "recordedAtBerlin": "2026-11-11T02:39:49.163958+01:00",
+  "chromeActionEvidence": "Existing real company Chrome srcset capture and HTTP page currentSrc proof; user opened extension history and supplied queue screenshot showing 已入库 · 光镜 srcset 原图验收",
+  "uiFeedback": "已入库 · 光镜 srcset 原图验收",
+  "uiEvidenceScope": "Completed queue label, not an inspected detail-page receipt; correlates with the single completed srcset record in the isolated desktop journal",
+  "capture": {
+    "CaptureId": "31acf2cd-3d8f-4fe2-9b3a-f79c6e4f61ad",
+    "LibraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "ProjectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+    "BoardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+    "PageUrl": "http://127.0.0.1:51292/srcset.html",
+    "ImageUrl": "http://127.0.0.1:51292/srcset-original-1600.jpg",
+    "PageTitle": "光镜 srcset 原图验收",
+    "CapturedAtUtc": "2026-11-10T07:20:51.648+00:00",
+    "ContentHash": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+    "AssetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+    "Outcome": "Imported",
+    "ImportedAtUtc": "2026-11-10T07:20:57.2529904+00:00"
+  },
+  "assetDimensions": [
+    1600,
+    1200
+  ],
+  "managedSha256": "6ed3adb68235721c463d4e0ed1db7e760bdf8d5b4a0d96adf7eeffaa0c7bfe59",
+  "declaredOriginalSha256": "6ed3adb68235721c463d4e0ed1db7e760bdf8d5b4a0d96adf7eeffaa0c7bfe59",
+  "thumbnailSha256": "af1a6fbfd32e369a420fee2578d401ab071c26c759ac21d800a523e07ca74e6a",
+  "notThumbnail": true,
+  "uniqueCompletedSrcsetRecord": true,
+  "repeatSendNotRequired": true,
+  "anotherSameTitlePendingQueueItemPreserved": true,
+  "screenshotFile": "CASE1_USER_QUEUE_SRCSET_ALREADY_IMPORTED.png",
+  "screenshotSha256": "23e00f971d6178cf4177936b6962cbc698b79ef5c51e18a8f238aec02e356d61",
+  "protocolProbeUsedAsChromeEvidence": false
+}
