@@ -41,6 +41,13 @@ test('explicit DOM snapshot makes no fetch, deduplicates URLs, resolves srcset a
 test('unknown-size filtering stays explicit; width and format filters work without probing images',async()=>{
  const unknown={knownWidth:null,knownHeight:null,format:'JPEG'};assert.equal(matchesFilter(unknown,{minWidth:1000,includeUnknown:false}),false);assert.equal(matchesFilter(unknown,{minWidth:1000,includeUnknown:true}),true);assert.equal(matchesFilter({knownWidth:1600,knownHeight:1200,format:'PNG'},{minWidth:1000,minHeight:800,format:'JPEG'}),false);
 });
+test('retaining unknown dimensions cannot bypass a known width or height minimum',async()=>{
+ const filter={minWidth:1000,minHeight:500,includeUnknown:true,format:'ALL'};
+ assert.equal(matchesFilter({...item('narrow'),knownWidth:640,knownHeight:null},filter),false);
+ assert.equal(matchesFilter({...item('short'),knownWidth:null,knownHeight:360},filter),false);
+ assert.equal(matchesFilter({...item('wide'),knownWidth:1600,knownHeight:null},filter),true);
+ assert.equal(matchesFilter({...item('wide'),knownWidth:1600,knownHeight:null},{...filter,includeUnknown:false}),false);
+});
 test('serial pipeline acknowledges each item, isolates 403 and reuses actual content identity',async()=>{
  await reset();const a=adapters(),e=new BatchEngine(a.api);const job=await prepare(e,['duplicate-a','403','duplicate-b']);await e.start(job.id,target);await e.waitIdle();const saved=await store.getBatch(job.id);assert.equal(saved.status,'completedWithFailures');assert.deepEqual(saved.items.map(x=>x.state),['completed','failed','existing']);assert.equal(saved.items[0].receipt.assetId,saved.items[2].receipt.assetId);assert.equal(e.metrics.maxActivePipelines,1);assert.equal(a.stats.maxActive,1);
 });

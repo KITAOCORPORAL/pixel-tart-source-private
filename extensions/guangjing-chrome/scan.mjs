@@ -31,6 +31,8 @@ export function normalizePageScan(snapshot){
 export function matchesFilter(item,filter){
  if(filter.format&&filter.format!=="ALL"&&item.format!==filter.format)return false;
  const minW=Number(filter.minWidth)||0,minH=Number(filter.minHeight)||0;
+ // Unknown dimensions never override a known dimension that fails its minimum.
+ if((minW&&item.knownWidth&&item.knownWidth<minW)||(minH&&item.knownHeight&&item.knownHeight<minH))return false;
  if((minW&&!item.knownWidth)||(minH&&!item.knownHeight))return !!filter.includeUnknown;
- return(!minW||item.knownWidth>=minW)&&(!minH||item.knownHeight>=minH);
+ return true;
 }
