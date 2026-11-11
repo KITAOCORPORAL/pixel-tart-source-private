@@ -1,0 +1,1102 @@
+{
+  "version": "PortraitHighlightBaselineV1",
+  "inputManifestSha256": "3630d89605f497a46b3933d4158ecb1fb9eed37b3cb8bbe41a2ee582c4293de0",
+  "referenceManifestSha256": "a0d3b1044515b6b2b2b0fe2e0120bf70b487da0ff1d5dfdfb5498e39225fb55c",
+  "stageMetrics": {
+    "ramp-dt": {
+      "min": [
+        0.0028124998789280653,
+        0.001960344612598419,
+        0.0002940516860689968
+      ],
+      "max": [
+        26.765243530273438,
+        11.519999504089355,
+        11.519999504089355
+      ],
+      "aboveOne": [
+        200,
+        160,
+        105
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028124998477927874,
+        11.520001974415779
+      ]
+    },
+    "ramp-rt-exposure": {
+      "min": [
+        0.0028124998789280653,
+        0.001960344612598419,
+        0.0002940516860689968
+      ],
+      "max": [
+        26.765243530273438,
+        11.519999504089355,
+        11.519999504089355
+      ],
+      "aboveOne": [
+        200,
+        160,
+        105
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028124998477927874,
+        11.520001974415779
+      ]
+    },
+    "ramp-rt-highlight60": {
+      "min": [
+        0.0028124998789280653,
+        0.001960344612598419,
+        0.0002940516860689968
+      ],
+      "max": [
+        5.345036029815674,
+        1.6035109758377075,
+        1.0523580312728882
+      ],
+      "aboveOne": [
+        120,
+        37,
+        5
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028124998477927874,
+        2.300551732650399
+      ]
+    },
+    "ramp-production-exposure": {
+      "min": [
+        0.0028124998789280653,
+        0.001960344612598419,
+        0.0002940516860689968
+      ],
+      "max": [
+        26.765239715576172,
+        11.519999504089355,
+        11.519999504089355
+      ],
+      "aboveOne": [
+        200,
+        160,
+        105
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028124998477927874,
+        11.520000155448912
+      ]
+    },
+    "ramp-basic-decoded-linear": {
+      "min": [
+        8.789062121650204e-05,
+        6.12607691437006e-05,
+        9.18911518965615e-06
+      ],
+      "max": [
+        0.8364137411117554,
+        0.35999998450279236,
+        0.35999998450279236
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        8.78906202435246e-05,
+        0.3600000048577785
+      ]
+    },
+    "ramp-basic-gamut-oetf": {
+      "min": [
+        0.036238763481378555,
+        0.025258831679821014,
+        0.0037888248916715384
+      ],
+      "max": [
+        1.0,
+        0.9764986634254456,
+        0.9764986634254456
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        110,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.03418761843028478,
+        0.9764986634254454
+      ]
+    },
+    "ramp-basic-tone-linear": {
+      "min": [
+        0.0028048576787114143,
+        0.001955017913132906,
+        0.0002932526986114681
+      ],
+      "max": [
+        2.2010889053344727,
+        0.9473684430122375,
+        0.9473684430122375
+      ],
+      "aboveOne": [
+        110,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028048576787114143,
+        0.9473684430122375
+      ]
+    },
+    "ramp-basic-tone-output": {
+      "min": [
+        0.036238763481378555,
+        0.025258831679821014,
+        0.0037888248916715384
+      ],
+      "max": [
+        1.0,
+        0.9764986634254456,
+        0.9764986634254456
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        110,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.03418761843028478,
+        0.9764986634254454
+      ]
+    },
+    "ramp-candidate": {
+      "min": [
+        0.03633749857544899,
+        0.0253276526927948,
+        0.00379914790391922
+      ],
+      "max": [
+        0.9989532828330994,
+        0.9975027441978455,
+        0.9975027441978455
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.034268827226758,
+        0.9975027441978453
+      ]
+    },
+    "ramp-decoded-display-linear": {
+      "min": [
+        8.789062121650204e-05,
+        6.12607691437006e-05,
+        9.18911518965615e-06
+      ],
+      "max": [
+        0.8364137411117554,
+        0.35999998450279236,
+        0.35999998450279236
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        8.78906202435246e-05,
+        0.3600000048577785
+      ]
+    },
+    "ramp-encoded-preclip": {
+      "min": [
+        0.03633749857544899,
+        0.0253276526927948,
+        0.00379914790391922
+      ],
+      "max": [
+        4.095245361328125,
+        2.8659512996673584,
+        2.8659512996673584
+      ],
+      "aboveOne": [
+        200,
+        160,
+        105
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.034268827226758,
+        2.8659512996673584
+      ]
+    },
+    "ramp-exposed-linear": {
+      "min": [
+        0.0028124998789280653,
+        0.001960344612598419,
+        0.0002940516860689968
+      ],
+      "max": [
+        26.765239715576172,
+        11.519999504089355,
+        11.519999504089355
+      ],
+      "aboveOne": [
+        200,
+        160,
+        105
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0028124998477927874,
+        11.520000155448912
+      ]
+    },
+    "ramp-output-clipped": {
+      "min": [
+        0.03633749857544899,
+        0.0253276526927948,
+        0.00379914790391922
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        200,
+        160,
+        105
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.034268827226758,
+        1.0
+      ]
+    },
+    "ramp-output": {
+      "min": [
+        0.03633749857544899,
+        0.0253276526927948,
+        0.00379914790391922
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        200,
+        160,
+        105
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.034268827226758,
+        1.0
+      ]
+    },
+    "portrait-dt": {
+      "min": [
+        0.0,
+        3.779324106290005e-05,
+        0.0
+      ],
+      "max": [
+        1.0935969352722168,
+        0.8052014708518982,
+        0.854138970375061
+      ],
+      "aboveOne": [
+        45,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.005564480450446717,
+        0.8391513460040092
+      ]
+    },
+    "portrait-rt-exposure": {
+      "min": [
+        0.0,
+        3.779324106290005e-05,
+        0.0
+      ],
+      "max": [
+        1.0935969352722168,
+        0.8052014708518982,
+        0.854138970375061
+      ],
+      "aboveOne": [
+        45,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.005564480450446717,
+        0.8391513460040092
+      ]
+    },
+    "portrait-rt-highlight60": {
+      "min": [
+        0.0,
+        3.779324106290005e-05,
+        0.0
+      ],
+      "max": [
+        0.5841051340103149,
+        0.42850616574287415,
+        0.47276902198791504
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.005564480450446717,
+        0.44536301836371417
+      ]
+    },
+    "portrait-production-exposure": {
+      "min": [
+        0.0,
+        3.779324470087886e-05,
+        0.0
+      ],
+      "max": [
+        1.0935968160629272,
+        0.8052014708518982,
+        0.8541389107704163
+      ],
+      "aboveOne": [
+        45,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.00556448078348767,
+        0.8391513290286063
+      ]
+    },
+    "portrait-basic-decoded-linear": {
+      "min": [
+        0.0,
+        1.1810388969024643e-06,
+        0.0
+      ],
+      "max": [
+        0.034174900501966476,
+        0.02516254596412182,
+        0.026691840961575508
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.00017389002448398968,
+        0.026223479032143948
+      ]
+    },
+    "portrait-basic-gamut-oetf": {
+      "min": [
+        0.0,
+        0.0004834169230889529,
+        0.0
+      ],
+      "max": [
+        0.8067764639854431,
+        0.6972938179969788,
+        0.7361167669296265
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.05492829358428717,
+        0.709854726600647
+      ]
+    },
+    "portrait-basic-tone-linear": {
+      "min": [
+        0.0,
+        3.741617183550261e-05,
+        0.0
+      ],
+      "max": [
+        0.6153769493103027,
+        0.44414424896240234,
+        0.501154363155365
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.005534645618929062,
+        0.4628707857787609
+      ]
+    },
+    "portrait-basic-tone-output": {
+      "min": [
+        0.0,
+        0.0004834169230889529,
+        0.0
+      ],
+      "max": [
+        0.8067764639854431,
+        0.6972938179969788,
+        0.7361167669296265
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.05492829358428717,
+        0.709854726600647
+      ]
+    },
+    "portrait-candidate": {
+      "min": [
+        0.0,
+        0.0004882887005805969,
+        0.0
+      ],
+      "max": [
+        0.9522099494934082,
+        0.8762907385826111,
+        0.9148367643356323
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0551940433472395,
+        0.8844330549001693
+      ]
+    },
+    "portrait-decoded-display-linear": {
+      "min": [
+        0.0,
+        1.1810388969024643e-06,
+        0.0
+      ],
+      "max": [
+        0.034174900501966476,
+        0.02516254596412182,
+        0.026691840961575508
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.00017389002448398968,
+        0.026223479032143948
+      ]
+    },
+    "portrait-encoded-preclip": {
+      "min": [
+        0.0,
+        0.0004882887005805969,
+        0.0
+      ],
+      "max": [
+        1.0400727987289429,
+        0.9089311957359314,
+        0.9329220056533813
+      ],
+      "aboveOne": [
+        45,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0551940433472395,
+        0.9250257675409317
+      ]
+    },
+    "portrait-exposed-linear": {
+      "min": [
+        0.0,
+        3.779324470087886e-05,
+        0.0
+      ],
+      "max": [
+        1.0935968160629272,
+        0.8052014708518982,
+        0.8541389107704163
+      ],
+      "aboveOne": [
+        45,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        0,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.00556448078348767,
+        0.8391513290286063
+      ]
+    },
+    "portrait-output-clipped": {
+      "min": [
+        0.0,
+        0.0004882887005805969,
+        0.0
+      ],
+      "max": [
+        1.0,
+        0.9089311957359314,
+        0.9329220056533813
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        45,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0551940433472395,
+        0.9250257675409317
+      ]
+    },
+    "portrait-output": {
+      "min": [
+        0.0,
+        0.0004882887005805969,
+        0.0
+      ],
+      "max": [
+        1.0,
+        0.9089311957359314,
+        0.9329220056533813
+      ],
+      "aboveOne": [
+        0,
+        0,
+        0
+      ],
+      "belowZero": [
+        0,
+        0,
+        0
+      ],
+      "atOne": [
+        45,
+        0,
+        0
+      ],
+      "nonfinite": 0,
+      "luminanceRange": [
+        0.0551940433472395,
+        0.9250257675409317
+      ]
+    }
+  },
+  "comparisons": {
+    "ramp": {
+      "dtMaxAbsVsProductExposure": 5.7220458984375e-06,
+      "rtMaxAbsVsProductExposure": 5.7220458984375e-06
+    },
+    "portrait": {
+      "dtMaxAbsVsProductExposure": 2.384185791015625e-07,
+      "rtMaxAbsVsProductExposure": 2.384185791015625e-07
+    }
+  },
+  "findings": {
+    "neutral": {
+      "firstClippedEv": 2.5,
+      "firstEntireRgbFlatEv": 2.5,
+      "firstHueErrorAbove1DegreeEv": null,
+      "maxHueErrorDegrees": null,
+      "undefinedHueCount": 193
+    },
+    "skin-approximation": {
+      "firstClippedEv": 1.875,
+      "firstEntireRgbFlatEv": 3.375,
+      "firstHueErrorAbove1DegreeEv": 1.875,
+      "maxHueErrorDegrees": 41.74153099589083,
+      "undefinedHueCount": 43
+    },
+    "warm": {
+      "firstClippedEv": 1.3125,
+      "firstEntireRgbFlatEv": 5.75,
+      "firstHueErrorAbove1DegreeEv": 1.375,
+      "maxHueErrorDegrees": 45.05760630635291,
+      "undefinedHueCount": 5
+    }
+  },
+  "calls": [
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-encoded.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product",
+        "193",
+        "3",
+        "5",
+        "encoded-srgb",
+        "trace"
+      ],
+      "elapsedMs": 121.15759996231645,
+      "sampledPeakPrivateBytes": 7864320,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\portrait-encoded.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product",
+        "384",
+        "384",
+        "5",
+        "encoded-srgb",
+        "trace"
+      ],
+      "elapsedMs": 269.5536999963224,
+      "sampledPeakPrivateBytes": 61292544,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-dt.f32",
+        "5",
+        "579"
+      ],
+      "elapsedMs": 122.73800000548363,
+      "sampledPeakPrivateBytes": 380928,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-rt-exposure.f32",
+        "5",
+        "579",
+        "0"
+      ],
+      "elapsedMs": 122.32829997083172,
+      "sampledPeakPrivateBytes": 389120,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-rt-highlight60.f32",
+        "5",
+        "579",
+        "60"
+      ],
+      "elapsedMs": 14.346000039950013,
+      "sampledPeakPrivateBytes": 385024,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-dt.f32",
+        "5",
+        "147456"
+      ],
+      "elapsedMs": 25.0083000282757,
+      "sampledPeakPrivateBytes": 811008,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-rt-exposure.f32",
+        "5",
+        "147456",
+        "0"
+      ],
+      "elapsedMs": 25.152299960609525,
+      "sampledPeakPrivateBytes": 2805760,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-rt-highlight60.f32",
+        "5",
+        "147456",
+        "60"
+      ],
+      "elapsedMs": 25.324299989733845,
+      "sampledPeakPrivateBytes": 4534272,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-prophoto.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product",
+        "193",
+        "3",
+        "0",
+        "linear-prophoto-d65",
+        "trace"
+      ],
+      "elapsedMs": 120.28079997980967,
+      "sampledPeakPrivateBytes": 7651328,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    }
+  ],
+  "synthetic": {
+    "exposureMin": -6,
+    "exposureMax": 6,
+    "step": 0.0625,
+    "rows": [
+      "neutral",
+      "skin-approximation",
+      "warm"
+    ],
+    "baseLinearRgb": [
+      [
+        0.18,
+        0.18,
+        0.18
+      ],
+      [
+        0.2845660367938893,
+        0.15726017822820199,
+        0.09735153890317266
+      ],
+      [
+        0.41820686835080123,
+        0.12546206050524036,
+        0.018819309075786054
+      ]
+    ],
+    "inputEncoding": "sRGB OETF of target linear /32, float32; actual rendered EV+5",
+    "realSceneHeadroom": false
+  },
+  "firstLoss": "RenderedSrgbExposure.Apply: encoded-preclip -> Math.Clamp per channel. EOTF and exposure preserve >1; darktable exposure and RT zero-compression float stage preserve >1.",
+  "scope": "First-round localization on frozen rendered portrait and synthetic linear vectors. No sensor clipping localization, full-app reference rendering or photographic quality approval."
+}

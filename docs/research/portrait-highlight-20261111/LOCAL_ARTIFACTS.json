@@ -1,0 +1,702 @@
+{
+  "root": "N:\\pixart\\PortraitHighlights-20261111",
+  "scope": "Media and pixel arrays remain local. This file contains hashes and paths only.",
+  "files": [
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\portrait-crop.rgb16.tif",
+      "bytes": 888112,
+      "sha256": "2b519854d00d28a5ef95685c7390246d7ffd8a00f986256892366b8b9e221330",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\portrait-encoded.f32",
+      "bytes": 1769472,
+      "sha256": "335cb4e85b7d5bff6a73ad40c9c5ea655d6fef8ca98d2464303d95866a6a09fc",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\source-srgb.icc",
+      "bytes": 3144,
+      "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\candidate.rgb16.tif",
+      "bytes": 888112,
+      "sha256": "8f3e792c918ca7d293d6c6181805852ff6bd11d199935a9ae61226c3c769df65",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "1fd4ed35360e1fd5dd6a1355ce7077cce6451f775a5f9d38e36091fe48055bd8",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-comparison.png",
+      "bytes": 582027,
+      "sha256": "f67669214ad105cd278054fead73dd188f4064e303909f47d34890fc6f627eb3",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\recipe.json",
+      "bytes": 158,
+      "sha256": "853b70e3b2c59a1dbf8ffdd8d2957f20df4602cdd390441789b852299ccfaf4d",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-dt.f32",
+      "bytes": 1769472,
+      "sha256": "c27653edd5682cb2a4e39f3bc3f42d2d62c46da2e883716d950d7747cb407faf",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-linear.f32",
+      "bytes": 1769472,
+      "sha256": "92c4d1905db2b12bb9ea472010be2e8694da93ef827af2390b21c037afc23fe5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-decoded-linear.f32",
+      "bytes": 1769472,
+      "sha256": "bf2896d8b51fc5ecc532b3207cee9866ec332ed9bedc12b6b745e59ab7f38662",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-gamut-oetf.f32",
+      "bytes": 1769472,
+      "sha256": "0183fd5c7a0dbafcedabf48c41b3a282af2b2eac30bd967f2311b4d07d09eed5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-tone-linear.f32",
+      "bytes": 1769472,
+      "sha256": "21d994e8dfcbb19fb0ddd947112204cb3d3401b3e37dbb552e63a2b0262b18e8",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "0183fd5c7a0dbafcedabf48c41b3a282af2b2eac30bd967f2311b4d07d09eed5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\candidate.f32",
+      "bytes": 1769472,
+      "sha256": "e61609a5a9360b8b7c71834c3f05fd5139a5863c2056c85ffe22f3921ee49515",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\decoded-display-linear.f32",
+      "bytes": 1769472,
+      "sha256": "bf2896d8b51fc5ecc532b3207cee9866ec332ed9bedc12b6b745e59ab7f38662",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\encoded-preclip.f32",
+      "bytes": 1769472,
+      "sha256": "e34fd067f1927c6cbb0449314dd5ac4e0feac2f3aa610ea675da723b53785499",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\exposed-linear.f32",
+      "bytes": 1769472,
+      "sha256": "43afe7a97225476b61cb03ad59ac5bf3a38da99e7ab93a252796ec224962ac9f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\output-clipped.f32",
+      "bytes": 1769472,
+      "sha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\output.f32",
+      "bytes": 1769472,
+      "sha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-rt-exposure.f32",
+      "bytes": 1769472,
+      "sha256": "c27653edd5682cb2a4e39f3bc3f42d2d62c46da2e883716d950d7747cb407faf",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-rt-highlight60.f32",
+      "bytes": 1769472,
+      "sha256": "e9f54bf0b09c30c7ed3d76f1b8b5c2170f42ba48bb16a5bee53cd55915143035",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-dt.f32",
+      "bytes": 6948,
+      "sha256": "56470614aa7302d87a33b2e76740b0044cefb04a0c8f69361bb0c59be6ad9380",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-encoded.f32",
+      "bytes": 6948,
+      "sha256": "6928fc0e2d2d3626af51643fc9b9beca2ae1184e27ea68ed2e37bc012ad9859d",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-linear.f32",
+      "bytes": 6948,
+      "sha256": "9ba7e0c928a51288aeb666e138be129b935e80d686f3a1eddd35d09e4d5fea41",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-decoded-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-gamut-oetf.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-tone-linear.f32",
+      "bytes": 6948,
+      "sha256": "ccd5b29b6e20604108269093ac9522efbea178f8ebc4551c42f78d68d36e4374",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-tone-output.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\candidate.f32",
+      "bytes": 6948,
+      "sha256": "6e87451a3d47a95c93a7842c530b283a1f11051b5a7e40aac6500981657d7e6f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\decoded-display-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\encoded-preclip.f32",
+      "bytes": 6948,
+      "sha256": "c3587592c19762dba20fffa6eda944ffe46763a635f7430b98b82a96d80611bd",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\exposed-linear.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\output-clipped.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\output.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-prophoto.f32",
+      "bytes": 6948,
+      "sha256": "c75035da81c3b92b7d6921b99e37836b6395c24449b2fbd9bc51770a1a68efa5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-rt-exposure.f32",
+      "bytes": 6948,
+      "sha256": "56470614aa7302d87a33b2e76740b0044cefb04a0c8f69361bb0c59be6ad9380",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-rt-highlight60.f32",
+      "bytes": 6948,
+      "sha256": "c5c6c202b86f314df7e2de290507567fb4ddc8f3085fa325654b5c0a90678b5a",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\display-oetf.f32",
+      "bytes": 6948,
+      "sha256": "c142cd00cb61c8f28e33166649b98fb38c5d4c70808b5dee9e3262ad1c9ee9ec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\luminance-shoulder.f32",
+      "bytes": 6948,
+      "sha256": "cfc0d796df8cafa0fce77b7c5e9929583d35812926d2c664f9ead4b687b3e4fb",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\matrix-linear-srgb.f32",
+      "bytes": 6948,
+      "sha256": "0e037f75e935bf816641ca54596459df1be1aa2c1ed6b1159c42c6766ee8d4fb",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\neutral-axis-gamut.f32",
+      "bytes": 6948,
+      "sha256": "703f79f74d90252678abee4b4b9f741e113decc073e4bf0a8d6e61730e6bb53f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\output.f32",
+      "bytes": 6948,
+      "sha256": "c142cd00cb61c8f28e33166649b98fb38c5d4c70808b5dee9e3262ad1c9ee9ec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-decoded-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9d735595a7aeb6e9a7a9862111599f95256edae30e200884e2356d08e1b43256",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-gamut-oetf.f64",
+      "bytes": 3538944,
+      "sha256": "32b3f4c50d6b095b9c64052cf892723c0dd9d84dcc4624a4490207519e77d2b5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\basic-tone-linear.f64",
+      "bytes": 3538944,
+      "sha256": "1c0f0d9eb766f06561bcc5daa45a5eea1d1b87dece8bdd779397515b3a9eb07f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\decoded-display-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9d735595a7aeb6e9a7a9862111599f95256edae30e200884e2356d08e1b43256",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\encoded-preclip.f64",
+      "bytes": 3538944,
+      "sha256": "a37e7e671b0a84b149588045b4dafe8d57fd3111a36183cc7e07b266c1d50f89",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\exposed-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9178c13ea890890eb76ab7d470e0d9a86088e672798a675d84d81d45aa317c3b",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\portrait-product\\output-clipped.f64",
+      "bytes": 3538944,
+      "sha256": "be90aab6158a272d9c999a7c96b91f8f8255228ff30fa6877282ad73ee67c8a3",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-decoded-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-gamut-oetf.f64",
+      "bytes": 13896,
+      "sha256": "6a43d2ada6eeb622bc116d1f35082a83a148dc1a35674f060a9c5a165a485252",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\basic-tone-linear.f64",
+      "bytes": 13896,
+      "sha256": "71720394b5c84e57620d932d257d09df50c01a25b94dc3c7434e45d9ed68fa69",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\decoded-display-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\encoded-preclip.f64",
+      "bytes": 13896,
+      "sha256": "6606cfa05c6aa95feb4e5d862545c1186529296e6ae1a2058ca760f2dd17d3b3",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\exposed-linear.f64",
+      "bytes": 13896,
+      "sha256": "319ee67360cae54d191e11811815acf3e74632b9e11cf302f6f5c1cacba8dde8",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-product\\output-clipped.f64",
+      "bytes": 13896,
+      "sha256": "d0567c25c36ffb5185ff3e0aa7f6efa307ca9f4aedbd0e29ca3a30f2e6b2253c",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\display-oetf.f64",
+      "bytes": 13896,
+      "sha256": "ee31a0f0fd7abf7af532f499b55f02d35030a30d7b4a649374068d19ab53567e",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\luminance-shoulder.f64",
+      "bytes": 13896,
+      "sha256": "0056e7d60d5a07b904039a2711951f27e9216b4b33bc7c3d180517eb42e69e6a",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\matrix-linear-srgb.f64",
+      "bytes": 13896,
+      "sha256": "6f52aa432404d6724f662b6dbb09c976f4825b38ce4466781b46228862286eec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\baseline\\raw-linear-product\\neutral-axis-gamut.f64",
+      "bytes": 13896,
+      "sha256": "895a03549edc909bc9eeebf1f436b050718d2fef308df24ded646fe9be5986c1",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\bad-domain.f32",
+      "bytes": 12,
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\bad-shape.f32",
+      "bytes": 12,
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\dt-negative-headroom.f32",
+      "bytes": 84,
+      "sha256": "b73854ca9b50281ccf6b011807aff37349b70e17b1a0710b3189d7417a0494a9",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\nan.f32",
+      "bytes": 12,
+      "sha256": "6c25aae419b5300847ce9d47bd8cea4ab7f4c53e3764abda54a098cbcec2dc19",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\negative-headroom.f32",
+      "bytes": 84,
+      "sha256": "b73854ca9b50281ccf6b011807aff37349b70e17b1a0710b3189d7417a0494a9",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-dt-same-observed-decode.f32",
+      "bytes": 1769472,
+      "sha256": "43afe7a97225476b61cb03ad59ac5bf3a38da99e7ab93a252796ec224962ac9f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-decoded-linear.f32",
+      "bytes": 1769472,
+      "sha256": "bf2896d8b51fc5ecc532b3207cee9866ec332ed9bedc12b6b745e59ab7f38662",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-gamut-oetf.f32",
+      "bytes": 1769472,
+      "sha256": "0183fd5c7a0dbafcedabf48c41b3a282af2b2eac30bd967f2311b4d07d09eed5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-tone-linear.f32",
+      "bytes": 1769472,
+      "sha256": "21d994e8dfcbb19fb0ddd947112204cb3d3401b3e37dbb552e63a2b0262b18e8",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "0183fd5c7a0dbafcedabf48c41b3a282af2b2eac30bd967f2311b4d07d09eed5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\candidate.f32",
+      "bytes": 1769472,
+      "sha256": "e61609a5a9360b8b7c71834c3f05fd5139a5863c2056c85ffe22f3921ee49515",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\decoded-display-linear.f32",
+      "bytes": 1769472,
+      "sha256": "bf2896d8b51fc5ecc532b3207cee9866ec332ed9bedc12b6b745e59ab7f38662",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\encoded-preclip.f32",
+      "bytes": 1769472,
+      "sha256": "e34fd067f1927c6cbb0449314dd5ac4e0feac2f3aa610ea675da723b53785499",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\exposed-linear.f32",
+      "bytes": 1769472,
+      "sha256": "43afe7a97225476b61cb03ad59ac5bf3a38da99e7ab93a252796ec224962ac9f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\output-clipped.f32",
+      "bytes": 1769472,
+      "sha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\output.f32",
+      "bytes": 1769472,
+      "sha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-reopened\\basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "0183fd5c7a0dbafcedabf48c41b3a282af2b2eac30bd967f2311b4d07d09eed5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-reopened\\candidate.f32",
+      "bytes": 1769472,
+      "sha256": "e61609a5a9360b8b7c71834c3f05fd5139a5863c2056c85ffe22f3921ee49515",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-reopened\\output.f32",
+      "bytes": 1769472,
+      "sha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-rt-same-observed-decode.f32",
+      "bytes": 1769472,
+      "sha256": "43afe7a97225476b61cb03ad59ac5bf3a38da99e7ab93a252796ec224962ac9f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-dt-same-observed-decode.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-decoded-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-gamut-oetf.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-tone-linear.f32",
+      "bytes": 6948,
+      "sha256": "ccd5b29b6e20604108269093ac9522efbea178f8ebc4551c42f78d68d36e4374",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-tone-output.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\candidate.f32",
+      "bytes": 6948,
+      "sha256": "6e87451a3d47a95c93a7842c530b283a1f11051b5a7e40aac6500981657d7e6f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\decoded-display-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\encoded-preclip.f32",
+      "bytes": 6948,
+      "sha256": "c3587592c19762dba20fffa6eda944ffe46763a635f7430b98b82a96d80611bd",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\exposed-linear.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\output-clipped.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\output.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-rt-same-observed-decode.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\display-oetf.f32",
+      "bytes": 6948,
+      "sha256": "c142cd00cb61c8f28e33166649b98fb38c5d4c70808b5dee9e3262ad1c9ee9ec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\luminance-shoulder.f32",
+      "bytes": 6948,
+      "sha256": "cfc0d796df8cafa0fce77b7c5e9929583d35812926d2c664f9ead4b687b3e4fb",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\matrix-linear-srgb.f32",
+      "bytes": 6948,
+      "sha256": "0e037f75e935bf816641ca54596459df1be1aa2c1ed6b1159c42c6766ee8d4fb",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\neutral-axis-gamut.f32",
+      "bytes": 6948,
+      "sha256": "703f79f74d90252678abee4b4b9f741e113decc073e4bf0a8d6e61730e6bb53f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\output.f32",
+      "bytes": 6948,
+      "sha256": "c142cd00cb61c8f28e33166649b98fb38c5d4c70808b5dee9e3262ad1c9ee9ec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\rt-negative-headroom.f32",
+      "bytes": 84,
+      "sha256": "b73854ca9b50281ccf6b011807aff37349b70e17b1a0710b3189d7417a0494a9",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-decoded-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9d735595a7aeb6e9a7a9862111599f95256edae30e200884e2356d08e1b43256",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-gamut-oetf.f64",
+      "bytes": 3538944,
+      "sha256": "32b3f4c50d6b095b9c64052cf892723c0dd9d84dcc4624a4490207519e77d2b5",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\basic-tone-linear.f64",
+      "bytes": 3538944,
+      "sha256": "1c0f0d9eb766f06561bcc5daa45a5eea1d1b87dece8bdd779397515b3a9eb07f",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\decoded-display-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9d735595a7aeb6e9a7a9862111599f95256edae30e200884e2356d08e1b43256",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\encoded-preclip.f64",
+      "bytes": 3538944,
+      "sha256": "a37e7e671b0a84b149588045b4dafe8d57fd3111a36183cc7e07b266c1d50f89",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\exposed-linear.f64",
+      "bytes": 3538944,
+      "sha256": "9178c13ea890890eb76ab7d470e0d9a86088e672798a675d84d81d45aa317c3b",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\output-clipped.f64",
+      "bytes": 3538944,
+      "sha256": "be90aab6158a272d9c999a7c96b91f8f8255228ff30fa6877282ad73ee67c8a3",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-decoded-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-gamut-oetf.f64",
+      "bytes": 13896,
+      "sha256": "6a43d2ada6eeb622bc116d1f35082a83a148dc1a35674f060a9c5a165a485252",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\basic-tone-linear.f64",
+      "bytes": 13896,
+      "sha256": "71720394b5c84e57620d932d257d09df50c01a25b94dc3c7434e45d9ed68fa69",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\decoded-display-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\encoded-preclip.f64",
+      "bytes": 13896,
+      "sha256": "6606cfa05c6aa95feb4e5d862545c1186529296e6ae1a2058ca760f2dd17d3b3",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\exposed-linear.f64",
+      "bytes": 13896,
+      "sha256": "319ee67360cae54d191e11811815acf3e74632b9e11cf302f6f5c1cacba8dde8",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\output-clipped.f64",
+      "bytes": 13896,
+      "sha256": "d0567c25c36ffb5185ff3e0aa7f6efa307ca9f4aedbd0e29ca3a30f2e6b2253c",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\display-oetf.f64",
+      "bytes": 13896,
+      "sha256": "ee31a0f0fd7abf7af532f499b55f02d35030a30d7b4a649374068d19ab53567e",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\luminance-shoulder.f64",
+      "bytes": 13896,
+      "sha256": "0056e7d60d5a07b904039a2711951f27e9216b4b33bc7c3d180517eb42e69e6a",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\matrix-linear-srgb.f64",
+      "bytes": 13896,
+      "sha256": "6f52aa432404d6724f662b6dbb09c976f4825b38ce4466781b46228862286eec",
+      "git": false
+    },
+    {
+      "path": "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product\\neutral-axis-gamut.f64",
+      "bytes": 13896,
+      "sha256": "895a03549edc909bc9eeebf1f436b050718d2fef308df24ded646fe9be5986c1",
+      "git": false
+    }
+  ]
+}

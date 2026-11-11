@@ -7,6 +7,9 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public static class ColorStudioToolProcessor
 {
     public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token = default)
+        => Apply(source,node,token,null);
+
+    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token, Action<int,string,ColorVector3>? observe)
     {
         node = node.Normalize();
         var parameters = ColorStudioToolCatalog.GetParameters(node.Type).ToDictionary(p => p.Key, p => ColorStudioToolCatalog.Value(node, p.Key));
@@ -53,6 +56,7 @@ public static class ColorStudioToolProcessor
             else if (node.Type == ColorStudioNodeType.BasicTone)
             {
                 r = Decode(r); g = Decode(g); b = Decode(b);
+                observe?.Invoke(offset/3,"basic-decoded-linear",new(r,g,b));
                 var y = Luma(r, g, b);
                 // Rational shoulder supplies continuous display-referred headroom. At EV=0 it is identity.
                 var adjusted = y * exposure / (1 + y * Math.Max(0, exposure - 1));
@@ -63,7 +67,9 @@ public static class ColorStudioToolProcessor
                 adjusted = Bend(adjusted, contrast * (adjusted - .5) * 1.5);
                 adjusted = Bend(adjusted, (P("whites") * Smooth(.6, 1, y) + P("blacks") * (1 - Smooth(0, .2, y))) / 100 * .5);
                 if (y > 1e-12) { var ratio = adjusted / y; r *= ratio; g *= ratio; b *= ratio; }
+                observe?.Invoke(offset/3,"basic-tone-linear",new(r,g,b));
                 (r, g, b) = EncodeGamut(r, g, b);
+                observe?.Invoke(offset/3,"basic-gamut-oetf",new(r,g,b));
                 if (P("saturation") != 0 || P("vibrance") != 0)
                 {
                     var lab = OklabColorSpace.FromSrgb((float)r, (float)g, (float)b);

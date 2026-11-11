@@ -87,17 +87,20 @@ public static class ProfessionalRawPipeline
     }
     public static ColorVector3 ApplyExposure(ColorVector3 value,double ev)
     {if(!double.IsFinite(ev)||ev is < -10 or > 10)throw new ArgumentOutOfRangeException(nameof(ev));var gain=Math.Pow(2,ev);return new(value.X*gain,value.Y*gain,value.Z*gain);}
-    public static ColorVector3 Display(ColorVector3 working)
+    public static ColorVector3 Display(ColorVector3 working)=>Display(working,null);
+    public static ColorVector3 Display(ColorVector3 working,Action<string,ColorVector3>? observe)
     {
-        var linear=ToLinearSrgb.Transform(working);
+        var linear=ToLinearSrgb.Transform(working);observe?.Invoke("matrix-linear-srgb",linear);
         // Fixed luminance shoulder preserves ratios before a neutral-axis gamut compression.
         var y=.2126*linear.X+.7152*linear.Y+.0722*linear.Z;
-        if(y<=0)return new(0,0,0);
+        if(y<=0){var black=new ColorVector3(0,0,0);observe?.Invoke("nonpositive-luma-black",black);return black;}
         var mapped=y<=.75?y:.75+.25*(1-Math.Exp(-(y-.75)/.25));var scale=mapped/y;
         Span<double> rgb=stackalloc double[]{linear.X*scale,linear.Y*scale,linear.Z*scale};var chroma=1d;
+        observe?.Invoke("luminance-shoulder",new(rgb[0],rgb[1],rgb[2]));
         foreach(var c in rgb){var delta=c-mapped;if(delta>0)chroma=Math.Min(chroma,(1-mapped)/delta);else if(delta<0)chroma=Math.Min(chroma,-mapped/delta);}
         double Encode(double c){var x=Math.Clamp(mapped+(c-mapped)*chroma,0,1);return x<=.0031308?12.92*x:1.055*Math.Pow(x,1/2.4)-.055;}
-        return new(Encode(rgb[0]),Encode(rgb[1]),Encode(rgb[2]));
+        observe?.Invoke("neutral-axis-gamut",new(Math.Clamp(mapped+(rgb[0]-mapped)*chroma,0,1),Math.Clamp(mapped+(rgb[1]-mapped)*chroma,0,1),Math.Clamp(mapped+(rgb[2]-mapped)*chroma,0,1)));
+        var output=new ColorVector3(Encode(rgb[0]),Encode(rgb[1]),Encode(rgb[2]));observe?.Invoke("display-oetf",output);return output;
     }
     public static HighBitDepthImageBuffer Render(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maximumEdge=0,CancellationToken token=default)
     {

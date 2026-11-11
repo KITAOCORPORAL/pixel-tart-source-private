@@ -1,0 +1,34 @@
+{
+  "version": "PortraitHighlightFrozenInputV1",
+  "authorization": "Previously authorized DSC08015 derivative; original binding retained from instant-v3 review-inputs.json, no new RAW read/decode",
+  "source": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+  "sourceSha256": "5c06a14160c9b57015cfebd9cd1e882620ffc817cfdca061596746cdd82d1ca7",
+  "originalRawSha256": "1fe22be78c66ab0ddccf753d10187f142b980146fff7f5d188533905b7f38b93",
+  "sourceStorageSize": [
+    7028,
+    4688
+  ],
+  "sourceOrientation": 8,
+  "orientedSize": [
+    4688,
+    7028
+  ],
+  "cropXYWH": [
+    2400,
+    3250,
+    384,
+    384
+  ],
+  "cropOrientation": 1,
+  "domain": "Already rendered sRGB16 D65, WB/camera matrix/display shoulder/gamut/OETF already applied; NOT sensor-linear",
+  "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+  "cropFileSha256": "2b519854d00d28a5ef95685c7390246d7ffd8a00f986256892366b8b9e221330",
+  "cropPixelSha256": "d78d0e39ab53723e164906686dba862f3ee34dbcad8e9bef9e630b14033d620d",
+  "encodedFloatSha256": "335cb4e85b7d5bff6a73ad40c9c5ea655d6fef8ca98d2464303d95866a6a09fc",
+  "repeatReadExact": true,
+  "tiffReadbackExact": true,
+  "newRawDecodes": 0,
+  "maxCropBytes": 1769472,
+  "maxFullFrameCloneBytes": 0,
+  "hashReadBlockBytes": 1048576
+}

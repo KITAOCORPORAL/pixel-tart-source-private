@@ -1,0 +1,54 @@
+{
+  "baseCommit": "39e60d3feff52f156a72d16f7820f0b968bd9b5b",
+  "files": [
+    {
+      "path": "tools/PortraitHighlightProbe/Program.cs",
+      "sha256": "fafcdb98aee5702fda08c7684f4e147740498e9d37bf45ac2bbc0661a411d7d8"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/MaxChannelShoulderV1.cs",
+      "sha256": "6683a52dd1c3b8e60e1a486f539dade9f5426a7a192b1c8d1df4cf91805ceddf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/RenderedSrgbExposure.cs",
+      "sha256": "b7588ae65faa0738c8b2c794dbba81b94897a9480e52973029669fecfce090f6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "sha256": "f055c88db44e37396896d7068e3c4fed8762b8542f4cac21f290937e971c62fe"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "sha256": "1429411483898898af33bb904834faca8bc778078ef68dee3f5736b1ae431e92"
+    },
+    {
+      "path": "tools/portrait-highlight/build_references.py",
+      "sha256": "a0d18a0c46df4deb05ff7cacca3fe7229c306e249d3abbed448382e6924a5e52"
+    },
+    {
+      "path": "tools/portrait-highlight/plot_curves.py",
+      "sha256": "2805bdc37c91645627bee479cc2da5b603d04c1fee268fd443f30cf31ee507e3"
+    },
+    {
+      "path": "tools/portrait-highlight/prepare_input.py",
+      "sha256": "5914ca8a2b063ce2e94d07306b1ea9b6e41cb085f4c426c17a4e578d6270f246"
+    },
+    {
+      "path": "tools/portrait-highlight/run_baseline.py",
+      "sha256": "93cb39643c25c64655c1c0dfa8de6c2755b5d6d68c39780665d7525d76e150bf"
+    },
+    {
+      "path": "tools/portrait-highlight/seal.py",
+      "sha256": "07996f3d737e879d08285a235566690011a2b09ac79809cf50b3d059137345d8"
+    },
+    {
+      "path": "tools/portrait-highlight/validate_candidate.py",
+      "sha256": "6a9a5c00fa11483bcec35920b4365de6fa1749ef909a6cd062f2f715908328f1"
+    }
+  ],
+  "runtime": {
+    "probeDllSha256": "4809bcfa507e1095bd755f3ea3e03baeae3735d508daacf859eb06848ef9ec5b",
+    "coreDllSha256": "beb3415f717b517d69213c07d941aa8940322b4a908b8628e0d935a84167f825"
+  },
+  "inputDomain": "Explicit; no sensor data synthesized from RGB16"
+}

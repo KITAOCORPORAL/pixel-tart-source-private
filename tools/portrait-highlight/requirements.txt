@@ -1,0 +1,15 @@
+# Scientific plotting only; keep in a local --target directory.
+matplotlib==3.10.7
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.60.1
+kiwisolver==1.4.9
+packaging==25.0
+pyparsing==3.2.5
+python-dateutil==2.9.0.post0
+six==1.17.0
+# Numerical input/reference runner versions used on this machine:
+numpy==2.5.4
+tifffile==2026.10.15
+psutil==7.2.2
+Pillow==12.3.0

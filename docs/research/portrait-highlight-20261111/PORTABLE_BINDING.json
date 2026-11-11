@@ -1,0 +1,41 @@
+{
+  "note": "Original evidence digests bind local raw bytes; committed UTF-8 copies normalize line endings only.",
+  "files": [
+    {
+      "sourceLocal": "input-manifest.json",
+      "destination": "INPUT_BINDING.json",
+      "sourceByteSha256": "3630d89605f497a46b3933d4158ecb1fb9eed37b3cb8bbe41a2ee582c4293de0",
+      "portableByteSha256": "8adbdddd56809b9b36793efb0e0034f76d3f959bc34398d5532d7770bdbf6305"
+    },
+    {
+      "sourceLocal": "reference-manifest.json",
+      "destination": "REFERENCES.json",
+      "sourceByteSha256": "a0d3b1044515b6b2b2b0fe2e0120bf70b487da0ff1d5dfdfb5498e39225fb55c",
+      "portableByteSha256": "d94fbcb714aa657d781ea13738f2ab9e072261b960969b80bc1537ff9d3703cb"
+    },
+    {
+      "sourceLocal": "baseline-report.json",
+      "destination": "BASELINE.json",
+      "sourceByteSha256": "f5ab6ff1f9fe244633d4494406be2665fc4eff8fd34fabb7bdd28de8a43567c2",
+      "portableByteSha256": "e1f2df014fefbeabfee6c91bf3a76ae41f0f0db9a037bf335f96a79770ed85c0"
+    },
+    {
+      "sourceLocal": "candidate-report.json",
+      "destination": "RESULTS.json",
+      "sourceByteSha256": "d61e935b4a4203bb88dc1732464abd40ef37995e43ed0f6b0eceacb084194b44",
+      "portableByteSha256": "accdc88f037b5f413a9226d182424c9f06fd84404a8c1797e0feeb670a5aaaab"
+    },
+    {
+      "sourceLocal": "candidate-validation/recipe.json",
+      "destination": "CANDIDATE_RECIPE.json",
+      "sourceByteSha256": "853b70e3b2c59a1dbf8ffdd8d2957f20df4602cdd390441789b852299ccfaf4d",
+      "portableByteSha256": "a05443a6d518f10e0aaf9312b7d9916dbcd1e4882b0af6f09edf82b51e3d8892"
+    },
+    {
+      "sourceLocal": "candidate-validation/curves.csv",
+      "destination": "CURVES.csv",
+      "sourceByteSha256": "aa099fcf089df92182fa74d252c797541b277ae44d7db6d3678982e59be2793f",
+      "portableByteSha256": "76250d29e2ead36d6dc823ce5eef573a69d9cda6ae6c4ef88d96d0cb8c04aa16"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": "IndependentFreshDirectoryReplayV1",
+  "files": [
+    {
+      "file": "portrait-encoded.f32",
+      "firstSha256": "335cb4e85b7d5bff6a73ad40c9c5ea655d6fef8ca98d2464303d95866a6a09fc",
+      "replaySha256": "335cb4e85b7d5bff6a73ad40c9c5ea655d6fef8ca98d2464303d95866a6a09fc",
+      "exact": true
+    },
+    {
+      "file": "candidate-validation/curves.csv",
+      "firstSha256": "aa099fcf089df92182fa74d252c797541b277ae44d7db6d3678982e59be2793f",
+      "replaySha256": "aa099fcf089df92182fa74d252c797541b277ae44d7db6d3678982e59be2793f",
+      "exact": true
+    },
+    {
+      "file": "candidate-validation/portrait-product/output.f32",
+      "firstSha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "replaySha256": "be7c9906e76284994e13a6678ba9abd260ed98d79f5b0291938509865feda0b2",
+      "exact": true
+    },
+    {
+      "file": "candidate-validation/portrait-product/candidate.f32",
+      "firstSha256": "e61609a5a9360b8b7c71834c3f05fd5139a5863c2056c85ffe22f3921ee49515",
+      "replaySha256": "e61609a5a9360b8b7c71834c3f05fd5139a5863c2056c85ffe22f3921ee49515",
+      "exact": true
+    },
+    {
+      "file": "candidate-validation/portrait-product/candidate-product-rgb16.tif",
+      "firstSha256": "1fd4ed35360e1fd5dd6a1355ce7077cce6451f775a5f9d38e36091fe48055bd8",
+      "replaySha256": "1fd4ed35360e1fd5dd6a1355ce7077cce6451f775a5f9d38e36091fe48055bd8",
+      "exact": true
+    }
+  ],
+  "pinnedReferenceTamperRefused": {
+    "exitCode": 1,
+    "reason": "Pinned reference SHA mismatch: dt-exposure.c",
+    "beforeNativeCompile": true
+  },
+  "scope": "Same saved input and source tool, fresh outputs/reference compilation and new processes; not independent human evaluation"
+}

@@ -1,0 +1,1908 @@
+{
+  "rawDoubleLinearHue": {
+    "matrix-linear-srgb": {
+      "neutral": {
+        "maxDegrees": 4.130468482799188e-07,
+        "p99Degrees": 4.130468482799188e-07,
+        "definedCount": 13,
+        "undefinedCount": 180
+      },
+      "skin-approximation": {
+        "maxDegrees": 2.842170943040401e-14,
+        "p99Degrees": 2.842170943040401e-14,
+        "definedCount": 193,
+        "undefinedCount": 0
+      },
+      "warm": {
+        "maxDegrees": 0.0,
+        "p99Degrees": 0.0,
+        "definedCount": 193,
+        "undefinedCount": 0
+      }
+    },
+    "luminance-shoulder": {
+      "neutral": {
+        "maxDegrees": null,
+        "p99Degrees": null,
+        "definedCount": 0,
+        "undefinedCount": 193
+      },
+      "skin-approximation": {
+        "maxDegrees": 2.842170943040401e-14,
+        "p99Degrees": 2.842170943040401e-14,
+        "definedCount": 193,
+        "undefinedCount": 0
+      },
+      "warm": {
+        "maxDegrees": 0.0,
+        "p99Degrees": 0.0,
+        "definedCount": 193,
+        "undefinedCount": 0
+      }
+    },
+    "neutral-axis-gamut": {
+      "neutral": {
+        "maxDegrees": null,
+        "p99Degrees": null,
+        "definedCount": 0,
+        "undefinedCount": 193
+      },
+      "skin-approximation": {
+        "maxDegrees": 2.3970585516508436e-09,
+        "p99Degrees": 6.001187102810848e-10,
+        "definedCount": 169,
+        "undefinedCount": 24
+      },
+      "warm": {
+        "maxDegrees": 4.572342504616245e-09,
+        "p99Degrees": 2.338449576200199e-09,
+        "definedCount": 169,
+        "undefinedCount": 24
+      }
+    }
+  },
+  "precision": {
+    "ramp-product": {
+      "basic-decoded-linear": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "basic-gamut-oetf": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "basic-tone-linear": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "decoded-display-linear": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "encoded-preclip": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "exposed-linear": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "output-clipped": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": 2.5
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": 3.375
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": 5.75
+        }
+      }
+    },
+    "raw-double-product": {
+      "display-oetf": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        }
+      },
+      "luminance-shoulder": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "matrix-linear-srgb": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": null
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": null
+        }
+      },
+      "neutral-axis-gamut": {
+        "neutral": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        },
+        "skin-approximation": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        },
+        "warm": {
+          "firstFloat64EntireRgbFlatEv": 5.8125
+        }
+      }
+    }
+  },
+  "version": "PortraitHighlightCandidateValidationV1",
+  "candidateRecipe": {
+    "Version": 1,
+    "ExposureEv": 5,
+    "Knee": 0.75,
+    "Input": "RenderedSrgbD65",
+    "Output": "SrgbD65RationalMaxShoulderV1",
+    "ResearchOnly": true
+  },
+  "metrics": {
+    "ramp-basic-decoded-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          8.789062121650204e-05,
+          6.12607691437006e-05,
+          9.18911518965615e-06
+        ],
+        [
+          0.8364137411117554,
+          0.35999998450279236,
+          0.35999998450279236
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.60043144610844,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          1.4327110448186322
+        ],
+        "min": [
+          8.789062121650204e-05,
+          6.12607691437006e-05,
+          9.18911518965615e-06
+        ],
+        "max": [
+          0.8364137411117554,
+          0.35999998450279236,
+          0.35999998450279236
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          8.78906202435246e-05,
+          0.3600000048577785
+        ]
+      }
+    },
+    "ramp-basic-gamut-oetf": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.036238763481378555,
+          0.025258831679821014,
+          0.0037888248916715384
+        ],
+        [
+          1.0,
+          0.9764986634254456,
+          0.9764986634254456
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.600432657629653,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          1.71292156898447
+        ],
+        "min": [
+          0.002804857911542058,
+          0.001955017913132906,
+          0.0002932526986114681
+        ],
+        "max": [
+          1.0,
+          0.9473685026168823,
+          0.9473685026168823
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          110,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028048575520864686,
+          0.9473685026168822
+        ]
+      }
+    },
+    "ramp-basic-tone-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0028048576787114143,
+          0.001955017913132906,
+          0.0002932526986114681
+        ],
+        [
+          2.2010889053344727,
+          0.9473684430122375,
+          0.9473684430122375
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.600431248849702,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          3.7702925369330056
+        ],
+        "min": [
+          0.0028048576787114143,
+          0.001955017913132906,
+          0.0002932526986114681
+        ],
+        "max": [
+          2.2010889053344727,
+          0.9473684430122375,
+          0.9473684430122375
+        ],
+        "aboveOne": [
+          110,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028048576787114143,
+          0.9473684430122375
+        ]
+      }
+    },
+    "ramp-basic-tone-output": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.036238763481378555,
+          0.025258831679821014,
+          0.0037888248916715384
+        ],
+        [
+          1.0,
+          0.9764986634254456,
+          0.9764986634254456
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.600432657629653,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          1.71292156898447
+        ],
+        "min": [
+          0.002804857911542058,
+          0.001955017913132906,
+          0.0002932526986114681
+        ],
+        "max": [
+          1.0,
+          0.9473685026168823,
+          0.9473685026168823
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          110,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028048575520864686,
+          0.9473685026168822
+        ]
+      }
+    },
+    "ramp-candidate": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.03633749857544899,
+          0.0253276526927948,
+          0.00379914790391922
+        ],
+        [
+          0.9989532828330994,
+          0.9975027441978455,
+          0.9975027441978455
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.60043130183718,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          1.7088457961536958
+        ],
+        "min": [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        "max": [
+          0.9976205825805664,
+          0.9943285584449768,
+          0.9943285584449768
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028124998477927874,
+          0.9943285584449767
+        ]
+      }
+    },
+    "ramp-decoded-display-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          8.789062121650204e-05,
+          6.12607691437006e-05,
+          9.18911518965615e-06
+        ],
+        [
+          0.8364137411117554,
+          0.35999998450279236,
+          0.35999998450279236
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.60043144610844,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          1.4327110448186322
+        ],
+        "min": [
+          8.789062121650204e-05,
+          6.12607691437006e-05,
+          9.18911518965615e-06
+        ],
+        "max": [
+          0.8364137411117554,
+          0.35999998450279236,
+          0.35999998450279236
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          8.78906202435246e-05,
+          0.3600000048577785
+        ]
+      }
+    },
+    "ramp-encoded-preclip": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.03633749857544899,
+          0.0253276526927948,
+          0.00379914790391922
+        ],
+        [
+          4.095245361328125,
+          2.8659512996673584,
+          2.8659512996673584
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.600430778400494,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          45.846761794291965
+        ],
+        "min": [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        "max": [
+          26.76524543762207,
+          11.520002365112305,
+          11.520002365112305
+        ],
+        "aboveOne": [
+          200,
+          160,
+          105
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028124998477927874,
+          11.520003726840018
+        ]
+      }
+    },
+    "ramp-exposed-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        [
+          26.765239715576172,
+          11.519999504089355,
+          11.519999504089355
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 16.60043144610844,
+        "hueUndefinedCount": 193,
+        "opponentChromaRange": [
+          0.0,
+          45.84675343419623
+        ],
+        "min": [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        "max": [
+          26.765239715576172,
+          11.519999504089355,
+          11.519999504089355
+        ],
+        "aboveOne": [
+          200,
+          160,
+          105
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028124998477927874,
+          11.520000155448912
+        ]
+      }
+    },
+    "ramp-output-clipped": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.03633749857544899,
+          0.0253276526927948,
+          0.00379914790391922
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 25.33788086345072,
+        "hueUndefinedCount": 241,
+        "opponentChromaRange": [
+          0.0,
+          1.7045440467675554
+        ],
+        "min": [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        "max": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          200,
+          160,
+          105
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028124998477927874,
+          1.0
+        ]
+      }
+    },
+    "ramp-output": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.03633749857544899,
+          0.0253276526927948,
+          0.00379914790391922
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": 25.33788086345072,
+        "hueUndefinedCount": 241,
+        "opponentChromaRange": [
+          0.0,
+          1.7045440467675554
+        ],
+        "min": [
+          0.0028124998789280653,
+          0.001960344612598419,
+          0.0002940516860689968
+        ],
+        "max": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          200,
+          160,
+          105
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.0028124998477927874,
+          1.0
+        ]
+      }
+    },
+    "ramp-candidate-hue": {
+      "maxDegrees": 2.8457513280955027e-05,
+      "p99Degrees": 2.2869006983228243e-05,
+      "definedCount": 386,
+      "undefinedCount": 193
+    },
+    "ramp-production-hue": {
+      "maxDegrees": 45.057613591980896,
+      "p99Degrees": 45.057609222915204,
+      "definedCount": 338,
+      "undefinedCount": 241
+    },
+    "ramp-dt-same-decode": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-rt-same-decode": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-basic-decoded-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0,
+          1.1810388969024643e-06,
+          0.0
+        ],
+        [
+          0.034174900501966476,
+          0.02516254596412182,
+          0.026691840961575508
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.71190589651413,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.02288241547102932
+        ],
+        "min": [
+          0.0,
+          1.1810388969024643e-06,
+          0.0
+        ],
+        "max": [
+          0.034174900501966476,
+          0.02516254596412182,
+          0.026691840961575508
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00017389002448398968,
+          0.026223479032143948
+        ]
+      }
+    },
+    "portrait-basic-gamut-oetf": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004834169230889529,
+          0.0
+        ],
+        [
+          0.8067764639854431,
+          0.6972938179969788,
+          0.7361167669296265
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.711905834673468,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.49045200994882115
+        ],
+        "min": [
+          0.0,
+          3.741617183550261e-05,
+          0.0
+        ],
+        "max": [
+          0.6153770089149475,
+          0.4441443383693695,
+          0.5011544227600098
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.005534645683004055,
+          0.462870864546299
+        ]
+      }
+    },
+    "portrait-basic-tone-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0,
+          3.741617183550261e-05,
+          0.0
+        ],
+        [
+          0.6153769493103027,
+          0.44414424896240234,
+          0.501154363155365
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.7119058350754,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.49045194606846265
+        ],
+        "min": [
+          0.0,
+          3.741617183550261e-05,
+          0.0
+        ],
+        "max": [
+          0.6153769493103027,
+          0.44414424896240234,
+          0.501154363155365
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.005534645618929062,
+          0.4628707857787609
+        ]
+      }
+    },
+    "portrait-basic-tone-output": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004834169230889529,
+          0.0
+        ],
+        [
+          0.8067764639854431,
+          0.6972938179969788,
+          0.7361167669296265
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.711905834673468,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.49045200994882115
+        ],
+        "min": [
+          0.0,
+          3.741617183550261e-05,
+          0.0
+        ],
+        "max": [
+          0.6153770089149475,
+          0.4441443383693695,
+          0.5011544227600098
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.005534645683004055,
+          0.462870864546299
+        ]
+      }
+    },
+    "portrait-candidate": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004882887005805969,
+          0.0
+        ],
+        [
+          0.9522099494934082,
+          0.8762907385826111,
+          0.9148367643356323
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.711905716542526,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.7180012072771665
+        ],
+        "min": [
+          0.0,
+          3.779324106290005e-05,
+          0.0
+        ],
+        "max": [
+          0.894709587097168,
+          0.7413082122802734,
+          0.8170918822288513
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00556448071624618,
+          0.7576326154708861
+        ]
+      }
+    },
+    "portrait-decoded-display-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0,
+          1.1810388969024643e-06,
+          0.0
+        ],
+        [
+          0.034174900501966476,
+          0.02516254596412182,
+          0.026691840961575508
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.71190589651413,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.02288241547102932
+        ],
+        "min": [
+          0.0,
+          1.1810388969024643e-06,
+          0.0
+        ],
+        "max": [
+          0.034174900501966476,
+          0.02516254596412182,
+          0.026691840961575508
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00017389002448398968,
+          0.026223479032143948
+        ]
+      }
+    },
+    "portrait-encoded-preclip": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004882887005805969,
+          0.0
+        ],
+        [
+          1.0400727987289429,
+          0.9089311957359314,
+          0.9329220056533813
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.711905749242174,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.7322371729718444
+        ],
+        "min": [
+          0.0,
+          3.779324106290005e-05,
+          0.0
+        ],
+        "max": [
+          1.0935968160629272,
+          0.8052015900611877,
+          0.854138970375061
+        ],
+        "aboveOne": [
+          45,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00556448071624618,
+          0.8391514355659485
+        ]
+      }
+    },
+    "portrait-exposed-linear": {
+      "storedDomain": "linear sRGB D65",
+      "storedChannelRange": [
+        [
+          0.0,
+          3.779324470087886e-05,
+          0.0
+        ],
+        [
+          1.0935968160629272,
+          0.8052014708518982,
+          0.8541389107704163
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.71190589651413,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.7322372950729382
+        ],
+        "min": [
+          0.0,
+          3.779324470087886e-05,
+          0.0
+        ],
+        "max": [
+          1.0935968160629272,
+          0.8052014708518982,
+          0.8541389107704163
+        ],
+        "aboveOne": [
+          45,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          0,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00556448078348767,
+          0.8391513290286063
+        ]
+      }
+    },
+    "portrait-output-clipped": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004882887005805969,
+          0.0
+        ],
+        [
+          1.0,
+          0.9089311957359314,
+          0.9329220056533813
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.712105307121055,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.7322371729718444
+        ],
+        "min": [
+          0.0,
+          3.779324106290005e-05,
+          0.0
+        ],
+        "max": [
+          1.0,
+          0.8052015900611877,
+          0.854138970375061
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          45,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00556448071624618,
+          0.8391514355659485
+        ]
+      }
+    },
+    "portrait-output": {
+      "storedDomain": "sRGB encoded",
+      "storedChannelRange": [
+        [
+          0.0,
+          0.0004882887005805969,
+          0.0
+        ],
+        [
+          1.0,
+          0.9089311957359314,
+          0.9329220056533813
+        ]
+      ],
+      "linear": {
+        "hueCircularMeanDegrees": -8.712105307121055,
+        "hueUndefinedCount": 10,
+        "opponentChromaRange": [
+          0.0,
+          0.7322371729718444
+        ],
+        "min": [
+          0.0,
+          3.779324106290005e-05,
+          0.0
+        ],
+        "max": [
+          1.0,
+          0.8052015900611877,
+          0.854138970375061
+        ],
+        "aboveOne": [
+          0,
+          0,
+          0
+        ],
+        "belowZero": [
+          0,
+          0,
+          0
+        ],
+        "atOne": [
+          45,
+          0,
+          0
+        ],
+        "nonfinite": 0,
+        "linearYRange": [
+          0.00556448071624618,
+          0.8391514355659485
+        ]
+      }
+    },
+    "portrait-candidate-hue": {
+      "maxDegrees": 0.003282810946899417,
+      "p99Degrees": 0.00016296222548390878,
+      "definedCount": 147446,
+      "undefinedCount": 10
+    },
+    "portrait-production-hue": {
+      "maxDegrees": 2.862512405897661,
+      "p99Degrees": 0.00016477128922076604,
+      "definedCount": 147446,
+      "undefinedCount": 10
+    },
+    "portrait-dt-same-decode": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-rt-same-decode": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "dt-stress": {
+      "hueCircularMeanDegrees": -60.94817629650376,
+      "hueUndefinedCount": 2,
+      "opponentChromaRange": [
+        0.0,
+        7.274613655620422
+      ],
+      "min": [
+        -0.10000000149011612,
+        0.0,
+        0.0
+      ],
+      "max": [
+        4.0,
+        1.0,
+        1.399999976158142
+      ],
+      "aboveOne": [
+        1,
+        0,
+        1
+      ],
+      "belowZero": [
+        1,
+        0,
+        0
+      ],
+      "atOne": [
+        2,
+        2,
+        2
+      ],
+      "nonfinite": 0,
+      "linearYRange": [
+        0.0,
+        1.3582599915817382
+      ]
+    },
+    "rt-stress": {
+      "hueCircularMeanDegrees": -60.94817629650376,
+      "hueUndefinedCount": 2,
+      "opponentChromaRange": [
+        0.0,
+        7.274613655620422
+      ],
+      "min": [
+        -0.10000000149011612,
+        0.0,
+        0.0
+      ],
+      "max": [
+        4.0,
+        1.0,
+        1.399999976158142
+      ],
+      "aboveOne": [
+        1,
+        0,
+        1
+      ],
+      "belowZero": [
+        1,
+        0,
+        0
+      ],
+      "atOne": [
+        2,
+        2,
+        2
+      ],
+      "nonfinite": 0,
+      "linearYRange": [
+        0.0,
+        1.3582599915817382
+      ]
+    }
+  },
+  "stageTraceParityWithBaseline": {
+    "ramp-basic-decoded-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-basic-gamut-oetf": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-basic-tone-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-basic-tone-output": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-candidate": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-decoded-display-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-encoded-preclip": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-exposed-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-output-clipped": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "ramp-output": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-basic-decoded-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-basic-gamut-oetf": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-basic-tone-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-basic-tone-output": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-candidate": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-decoded-display-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-encoded-preclip": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-exposed-linear": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-output-clipped": {
+      "exact": true,
+      "maxAbs": 0.0
+    },
+    "portrait-output": {
+      "exact": true,
+      "maxAbs": 0.0
+    }
+  },
+  "curves": {
+    "neutral": {
+      "output": {
+        "rgbFlatSteps": 56,
+        "channelFlatSteps": [
+          56,
+          56,
+          56
+        ],
+        "maxChannelAtOne": 57,
+        "undefinedHueCount": 193
+      },
+      "candidate": {
+        "rgbFlatSteps": 0,
+        "channelFlatSteps": [
+          0,
+          0,
+          0
+        ],
+        "maxChannelAtOne": 0,
+        "undefinedHueCount": 193
+      },
+      "basic-tone-output": {
+        "rgbFlatSteps": 0,
+        "channelFlatSteps": [
+          0,
+          0,
+          0
+        ],
+        "maxChannelAtOne": 0,
+        "undefinedHueCount": 193
+      },
+      "candidateHue": {
+        "maxDegrees": null,
+        "p99Degrees": null,
+        "definedCount": 0,
+        "undefinedCount": 193
+      }
+    },
+    "skin-approximation": {
+      "output": {
+        "rgbFlatSteps": 42,
+        "channelFlatSteps": [
+          66,
+          53,
+          42
+        ],
+        "maxChannelAtOne": 67,
+        "undefinedHueCount": 43
+      },
+      "candidate": {
+        "rgbFlatSteps": 0,
+        "channelFlatSteps": [
+          0,
+          0,
+          0
+        ],
+        "maxChannelAtOne": 0,
+        "undefinedHueCount": 0
+      },
+      "basic-tone-output": {
+        "rgbFlatSteps": 12,
+        "channelFlatSteps": [
+          45,
+          24,
+          26
+        ],
+        "maxChannelAtOne": 46,
+        "undefinedHueCount": 0
+      },
+      "candidateHue": {
+        "maxDegrees": 2.1478026610566303e-05,
+        "p99Degrees": 1.7671930834239868e-05,
+        "definedCount": 193,
+        "undefinedCount": 0
+      }
+    },
+    "warm": {
+      "output": {
+        "rgbFlatSteps": 4,
+        "channelFlatSteps": [
+          75,
+          48,
+          4
+        ],
+        "maxChannelAtOne": 76,
+        "undefinedHueCount": 5
+      },
+      "candidate": {
+        "rgbFlatSteps": 0,
+        "channelFlatSteps": [
+          0,
+          0,
+          0
+        ],
+        "maxChannelAtOne": 0,
+        "undefinedHueCount": 0
+      },
+      "basic-tone-output": {
+        "rgbFlatSteps": 26,
+        "channelFlatSteps": [
+          63,
+          47,
+          31
+        ],
+        "maxChannelAtOne": 64,
+        "undefinedHueCount": 0
+      },
+      "candidateHue": {
+        "maxDegrees": 8.528393465212503e-06,
+        "p99Degrees": 7.182100357567827e-06,
+        "definedCount": 193,
+        "undefinedCount": 0
+      }
+    }
+  },
+  "quantizedRgb16FlatSteps": {
+    "neutral": 0,
+    "skin-approximation": 0,
+    "warm": 0
+  },
+  "rawSynthetic": {
+    "neutral": {
+      "display-oetf": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          23,
+          22,
+          21
+        ]
+      },
+      "luminance-shoulder": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          12,
+          17,
+          14
+        ]
+      },
+      "matrix-linear-srgb": {
+        "firstFloat32EntireRgbFlatEv": null,
+        "atOne": [
+          0,
+          0,
+          0
+        ]
+      },
+      "neutral-axis-gamut": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          22,
+          21,
+          20
+        ]
+      },
+      "output": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          23,
+          22,
+          21
+        ]
+      }
+    },
+    "skin-approximation": {
+      "display-oetf": {
+        "firstFloat32EntireRgbFlatEv": 4.75,
+        "atOne": [
+          67,
+          22,
+          21
+        ]
+      },
+      "luminance-shoulder": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          0,
+          0,
+          0
+        ]
+      },
+      "matrix-linear-srgb": {
+        "firstFloat32EntireRgbFlatEv": null,
+        "atOne": [
+          0,
+          0,
+          0
+        ]
+      },
+      "neutral-axis-gamut": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          67,
+          21,
+          20
+        ]
+      },
+      "output": {
+        "firstFloat32EntireRgbFlatEv": 4.75,
+        "atOne": [
+          67,
+          22,
+          21
+        ]
+      }
+    },
+    "warm": {
+      "display-oetf": {
+        "firstFloat32EntireRgbFlatEv": 4.75,
+        "atOne": [
+          76,
+          22,
+          21
+        ]
+      },
+      "luminance-shoulder": {
+        "firstFloat32EntireRgbFlatEv": 4.75,
+        "atOne": [
+          0,
+          0,
+          0
+        ]
+      },
+      "matrix-linear-srgb": {
+        "firstFloat32EntireRgbFlatEv": null,
+        "atOne": [
+          0,
+          0,
+          0
+        ]
+      },
+      "neutral-axis-gamut": {
+        "firstFloat32EntireRgbFlatEv": 4.8125,
+        "atOne": [
+          76,
+          21,
+          20
+        ]
+      },
+      "output": {
+        "firstFloat32EntireRgbFlatEv": 4.75,
+        "atOne": [
+          76,
+          22,
+          21
+        ]
+      }
+    }
+  },
+  "newProcessReopenExact": true,
+  "productTiff16MatchesIndependentQuantizer": true,
+  "embeddedProfileExact": true,
+  "tiff16RoundtripExact": true,
+  "tiff16MaxEncodedError": 7.658924455866689e-06,
+  "negativeRefusals": [
+    {
+      "case": "bad-shape",
+      "exitCode": 3762504530,
+      "refused": true,
+      "error": [
+        "Unhandled exception. System.IO.InvalidDataException: ROI exceeds 512x512 hard bound",
+        "   at Program.<Main>$(String[] args)"
+      ]
+    },
+    {
+      "case": "bad-domain",
+      "exitCode": 3762504530,
+      "refused": true,
+      "error": [
+        "Unhandled exception. System.IO.InvalidDataException: Unknown input domain",
+        "   at Program.<Main>$(String[] args)"
+      ]
+    },
+    {
+      "case": "nan",
+      "exitCode": 3762504530,
+      "refused": true,
+      "error": [
+        "Unhandled exception. System.IO.InvalidDataException: Non-finite input",
+        "   at Program.<Main>$(String[] args)"
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-encoded.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product",
+        "193",
+        "3",
+        "5",
+        "encoded-srgb",
+        "trace",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\recipe.json",
+        "icc=N:\\pixart\\PortraitHighlights-20261111\\source-srgb.icc"
+      ],
+      "elapsedMs": 165.81149998819456,
+      "sampledPeakPrivateBytes": 8179712,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\decoded-display-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-dt-same-observed-decode.f32",
+        "5",
+        "579"
+      ],
+      "elapsedMs": 16.74369996180758,
+      "sampledPeakPrivateBytes": 385024,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-product\\decoded-display-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\ramp-rt-same-observed-decode.f32",
+        "5",
+        "579",
+        "0"
+      ],
+      "elapsedMs": 27.111600036732852,
+      "sampledPeakPrivateBytes": 385024,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\portrait-encoded.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product",
+        "384",
+        "384",
+        "5",
+        "encoded-srgb",
+        "trace",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\recipe.json",
+        "icc=N:\\pixart\\PortraitHighlights-20261111\\source-srgb.icc"
+      ],
+      "elapsedMs": 310.784200031776,
+      "sampledPeakPrivateBytes": 61194240,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\decoded-display-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-dt-same-observed-decode.f32",
+        "5",
+        "147456"
+      ],
+      "elapsedMs": 27.71649998612702,
+      "sampledPeakPrivateBytes": 4268032,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-product\\decoded-display-linear.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-rt-same-observed-decode.f32",
+        "5",
+        "147456",
+        "0"
+      ],
+      "elapsedMs": 27.20810001483187,
+      "sampledPeakPrivateBytes": 4530176,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\portrait-encoded.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\portrait-reopened",
+        "384",
+        "384",
+        "5",
+        "encoded-srgb",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\recipe.json",
+        "icc=N:\\pixart\\PortraitHighlights-20261111\\source-srgb.icc"
+      ],
+      "elapsedMs": 277.2275999886915,
+      "sampledPeakPrivateBytes": 23031808,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\negative-headroom.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\dt-negative-headroom.f32",
+        "0",
+        "7"
+      ],
+      "elapsedMs": 17.916300042998046,
+      "sampledPeakPrivateBytes": 389120,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\negative-headroom.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\rt-negative-headroom.f32",
+        "0",
+        "7",
+        "0"
+      ],
+      "elapsedMs": 14.942299982067198,
+      "sampledPeakPrivateBytes": 385024,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    },
+    {
+      "command": [
+        "dotnet",
+        "N:\\pixart\\guangjing-portrait-highlight-continuity-20261109\\tools\\PortraitHighlightProbe\\bin\\Release\\net10.0\\PortraitHighlightProbe.dll",
+        "N:\\pixart\\PortraitHighlights-20261111\\baseline\\ramp-prophoto.f32",
+        "N:\\pixart\\PortraitHighlights-20261111\\candidate-validation\\raw-double-product",
+        "193",
+        "3",
+        "0",
+        "linear-prophoto-d65",
+        "trace"
+      ],
+      "elapsedMs": 109.75950001738966,
+      "sampledPeakPrivateBytes": 7798784,
+      "exitCode": 0,
+      "scope": "10ms sampled child private bytes; sampling lower bound"
+    }
+  ],
+  "admission": "RESEARCH_ONLY_NOT_PRODUCT_APPROVED",
+  "limits": [
+    "Frozen dark portrait with explicit +5 EV stress, not a calibrated bright RAW capture",
+    "No sensor/headroom reconstruction; no early RAW stages observed",
+    "Constant linear RGB ratios preserve opponent hue, not guaranteed perceptual hue in all viewing conditions",
+    "Candidate changes the shoulder even at EV0 above knee; explicit version and separate recipe required",
+    "Two original CPU reference stages executed, not full application outputs",
+    "No camera/color-chart accuracy, general ICC, human aesthetic or company RAW batch approval"
+  ]
+}

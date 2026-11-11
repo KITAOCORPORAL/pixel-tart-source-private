@@ -1,0 +1,118 @@
+{
+  "frozenVersions": {
+    "darktable": "4.8.1",
+    "RawTherapee": "5.11"
+  },
+  "version": "PortraitHighlightReferencesV1",
+  "scope": "Original isolated scalar CPU stages, NOT complete darktable/RawTherapee applications. Pixel space supplied explicitly; no RAW decode, ICC pipeline, filmic or export reference.",
+  "sources": [
+    {
+      "repository": "darktable-org/darktable",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "path": "src/iop/exposure.c",
+      "sha256": "2b52c149c5dba1a7c47acdb7f2a18f6482710b8861b64971cd766b22f312af28",
+      "bytes": 42911
+    },
+    {
+      "repository": "darktable-org/darktable",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "path": "LICENSE",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/improcfun.cc",
+      "sha256": "adba83f7a2cdc9351e465239b4a2edadfc36f760765df6dc89b584e84c921f6b",
+      "bytes": 243445
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/curves.cc",
+      "sha256": "4a8bc2215d5a1ac62120df52a9eef17842e72ebede890a11cc2d34a8053663bb",
+      "bytes": 116193
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/curves.h",
+      "sha256": "fee25e75d0dc863cb5cf3fbc37dc8649c0fa8c71466ab9f91f7d8176860db83c",
+      "bytes": 54578
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/LUT.h",
+      "sha256": "74d3a4e603f23fcea211145b8e6de0eb2d5f073767b390375f590dc58c27dfe2",
+      "bytes": 20939
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "LICENSE",
+      "sha256": "8c75a9231db8906865e29706ed63aad18fd918c92c15dbefbb13c25fe42850b4",
+      "bytes": 32473
+    }
+  ],
+  "build": [
+    {
+      "name": "dt",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+        "-std=c++17",
+        "-O2",
+        "-ffp-contract=off",
+        "-U__SSE2__",
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.cpp",
+        "-o",
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\dt.exe"
+      ],
+      "sourceSha256": "1d613ca1cd5cbfe91c88fecb71136a5a849dd4002a9d1cb67ed98faa60f3b620",
+      "exeSha256": "1765ef79b542732f6ea566a3aea58d462d26d48efe302c00f4117b98ca20ec3a"
+    },
+    {
+      "name": "rt",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+        "-std=c++17",
+        "-O2",
+        "-ffp-contract=off",
+        "-U__SSE2__",
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.cpp",
+        "-o",
+        "N:\\pixart\\PortraitHighlights-20261111\\reference-build\\rt.exe"
+      ],
+      "sourceSha256": "dcb66dbc23dbefde4319fc5c6f48231d37b45c96901f63c409233cb2305d03d8",
+      "exeSha256": "0a00210e1370ed5f71fa68de5b93ef78ff00eb730beef1abf22a5da742fc2578"
+    }
+  ],
+  "compilerSha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+  "extracted": {
+    "dtProcess": "7ec097f5c1f91be79ff9d4aee7a9af62d42e9521ca610b60d9f92d71ca31d610",
+    "rtHighlightToneCurve": "7cd401e22f0bfe9acafb23e717e7ae0b3fe01c0e8607217bc48e9080d6800757",
+    "rtCurveFactory": "c080f804b2e3e46b6191a2ea2918e7e2618d30b05b6a26846e44ee8f4f057f77"
+  },
+  "config": {
+    "dt": {
+      "black": 0,
+      "deflicker": false,
+      "biasCompensation": false
+    },
+    "rt": {
+      "brightness": 0,
+      "black": 0,
+      "contrast": 0,
+      "hlcompr": [
+        0,
+        60
+      ],
+      "hlcomprthresh": 50,
+      "autoExposure": false,
+      "rawReconstruction": false,
+      "scalar": true,
+      "internalScale": 65535
+    }
+  }
+}
