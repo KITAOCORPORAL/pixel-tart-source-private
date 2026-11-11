@@ -1,0 +1,1633 @@
+{
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "browserWindow": "w-1903572",
+  "tree": {
+    "available_actions": [
+      "Scroll",
+      "ScrollTo",
+      "SetFocus"
+    ],
+    "children": [
+      {
+        "available_actions": [
+          "ScrollTo"
+        ],
+        "children": [
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "光",
+                "role": "statictext",
+                "role_description": "文本",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "当前页采集",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "role": "statictext",
+                "role_description": "紧急",
+                "subrole": "strong"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "光镜 · 原图送到本机素材库",
+                "role": "statictext",
+                "role_description": "文本",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "description": "查看原有单图记录",
+                "name": "单图记录",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "history"
+                },
+                "placeholder": "查看原有单图记录",
+                "ref_id": "@s693w1133ivgr:e94",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "name": "扫描当前页",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "scan"
+                },
+                "ref_id": "@s693w1133ivgr:e95",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "只扫描你主动打开的当前页。扫描不批量下载原图。",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "role": "group",
+            "role_description": "章节标题",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "Expand",
+                  "Collapse",
+                  "SetValue",
+                  "ScrollTo",
+                  "Click",
+                  "SetFocus"
+                ],
+                "name": "持久化采集队列",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "jobs"
+                },
+                "ref_id": "@s693w1133ivgr:e96",
+                "role": "combobox",
+                "role_description": "组合框",
+                "subrole": "combobox",
+                "value": "光镜 当前页批量采集验收 · 6张"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "光镜 当前页批量采集验收 · http://127.0.0.1:54394/cancel.html",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "page"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "role": "group",
+            "role_description": "组",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "最小宽度",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "SetValue",
+                      "ScrollTo",
+                      "SetFocus"
+                    ],
+                    "description": "不限",
+                    "name": "最小宽度",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "minWidth"
+                    },
+                    "ref_id": "@s693w1133ivgr:e97",
+                    "role": "incrementor",
+                    "role_description": "调节按钮",
+                    "subrole": "spinbutton"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "最小高度",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "SetValue",
+                      "ScrollTo",
+                      "SetFocus"
+                    ],
+                    "description": "不限",
+                    "name": "最小高度",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "minHeight"
+                    },
+                    "ref_id": "@s693w1133ivgr:e98",
+                    "role": "incrementor",
+                    "role_description": "调节按钮",
+                    "subrole": "spinbutton"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "格式",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "格式",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "format"
+                    },
+                    "ref_id": "@s693w1133ivgr:e99",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "全部格式"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "Toggle",
+                  "SetValue",
+                  "ScrollTo",
+                  "Click",
+                  "SetFocus"
+                ],
+                "name": "保留尺寸未知的项目",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "includeUnknown"
+                },
+                "ref_id": "@s693w1133ivgr:e100",
+                "role": "checkbox",
+                "role_description": "复选框",
+                "states": [
+                  "checked"
+                ],
+                "subrole": "checkbox"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "name": "全选筛选结果",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "selectAll"
+                },
+                "ref_id": "@s693w1133ivgr:e101",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "name": "取消全部勾选",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "selectNone"
+                },
+                "ref_id": "@s693w1133ivgr:e102",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "6 / 6张 · 已选6",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "counts"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "name": "图片筛选",
+            "role": "group",
+            "role_description": "区域",
+            "subrole": "region"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "Expand",
+                  "Collapse",
+                  "ScrollTo",
+                  "Click",
+                  "SetFocus"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "统一发送目的地",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "name": "统一发送目的地",
+                "ref_id": "@s693w1133ivgr:e103",
+                "role": "menubutton",
+                "role_description": "开合三角标记",
+                "states": [
+                  "expanded"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "素材库",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "素材库",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "library"
+                    },
+                    "ref_id": "@s693w1133ivgr:e104",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "浏览器采集测试库"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "项目",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "项目",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "project"
+                    },
+                    "ref_id": "@s693w1133ivgr:e105",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "采集项目 A"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "灵感板",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "灵感板",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "board"
+                    },
+                    "ref_id": "@s693w1133ivgr:e106",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "采集灵感板 A"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "name": "刷新目的地",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "refreshDestinations"
+                },
+                "ref_id": "@s693w1133ivgr:e107",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              }
+            ],
+            "native_id": {
+              "kind": "automation_id",
+              "value": "destination"
+            },
+            "role": "group",
+            "role_description": "详细信息",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "发送所选 0",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "send"
+                },
+                "ref_id": "@s693w1133ivgr:e108",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "继续未完成",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "continue"
+                },
+                "ref_id": "@s693w1133ivgr:e109",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "重试失败",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "retry"
+                },
+                "ref_id": "@s693w1133ivgr:e110",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "取消后续项",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "cancel"
+                },
+                "ref_id": "@s693w1133ivgr:e111",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "progress"
+                },
+                "role": "progressbar",
+                "role_description": "进度指示器",
+                "states": [
+                  "readonly"
+                ],
+                "subrole": "progressbar",
+                "value": "6"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "成功 6 · 失败 0 · 未完成 0 · 完成",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "progressText"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "role": "group",
+            "role_description": "组",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "继续保存的未完成项。",
+                "role": "statictext",
+                "role_description": "文本",
+                "subrole": "description"
+              }
+            ],
+            "native_id": {
+              "kind": "automation_id",
+              "value": "status"
+            },
+            "role": "status",
+            "role_description": "状态",
+            "subrole": "status"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=0",
+                    "ref_id": "@s693w1133ivgr:e112",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=0",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=0",
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=0",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=0",
+                    "ref_id": "@s693w1133ivgr:e113",
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "subrole": "article"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=1",
+                    "ref_id": "@s693w1133ivgr:e114",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=1",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=1",
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=1",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=1",
+                    "ref_id": "@s693w1133ivgr:e115",
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "subrole": "article"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=2",
+                    "ref_id": "@s693w1133ivgr:e116",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "offscreen",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=2",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=2",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=2",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=2",
+                    "ref_id": "@s693w1133ivgr:e117",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "subrole": "article"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=3",
+                    "ref_id": "@s693w1133ivgr:e118",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "offscreen",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=3",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=3",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=3",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=3",
+                    "ref_id": "@s693w1133ivgr:e119",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "subrole": "article"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=4",
+                    "ref_id": "@s693w1133ivgr:e120",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "offscreen",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=4",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=4",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=4",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=4",
+                    "ref_id": "@s693w1133ivgr:e121",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "states": [
+                  "offscreen"
+                ],
+                "subrole": "article"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "页面已有预览",
+                    "role": "image",
+                    "role_description": "图形",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "img"
+                  },
+                  {
+                    "available_actions": [
+                      "Toggle",
+                      "ScrollTo",
+                      "Click"
+                    ],
+                    "name": "勾选 http://127.0.0.1:54394/slow-original-1000.jpg?item=5",
+                    "ref_id": "@s693w1133ivgr:e122",
+                    "role": "checkbox",
+                    "role_description": "复选框",
+                    "states": [
+                      "disabled",
+                      "offscreen",
+                      "checked",
+                      "readonly"
+                    ],
+                    "subrole": "checkbox"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "已有素材",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "slow-original-1000.jpg",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=5",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=5",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "1000 × 750 · JPEG",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Scroll",
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "网页懒加载尺寸声明 · lazy-attribute",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "http://127.0.0.1:54394/slow-original-1000.jpg?item=5",
+                    "placeholder": "http://127.0.0.1:54394/slow-original-1000.jpg?item=5",
+                    "ref_id": "@s693w1133ivgr:e123",
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "素材ID 804bf24e-6c83-469d-9f1d-65ad943191f3",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "文章",
+                "states": [
+                  "offscreen"
+                ],
+                "subrole": "article"
+              }
+            ],
+            "name": "当前页图片候选",
+            "native_id": {
+              "kind": "automation_id",
+              "value": "grid"
+            },
+            "role": "group",
+            "role_description": "区域",
+            "subrole": "region"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "收到桌面真实回执才标记成功。取消不撤回已提交项，会继续核对该项回执。",
+                "role": "statictext",
+                "role_description": "文本",
+                "states": [
+                  "offscreen"
+                ],
+                "subrole": "description"
+              }
+            ],
+            "role": "group",
+            "role_description": "章节页脚",
+            "states": [
+              "offscreen"
+            ],
+            "subrole": "group"
+          }
+        ],
+        "role": "group",
+        "role_description": "主要",
+        "subrole": "main"
+      }
+    ],
+    "name": "光镜 · 当前页采集",
+    "native_id": {
+      "kind": "automation_id",
+      "value": "RootWebArea"
+    },
+    "ref_id": "@s693w1133ivgr:e93",
+    "role": "document",
+    "role_description": "文档",
+    "states": [
+      "focused",
+      "readonly"
+    ],
+    "subrole": "document",
+    "value": "chrome-extension://obgahfdabcpkohkdcnidpmeooceomogk/sidebar.html"
+  }
+}

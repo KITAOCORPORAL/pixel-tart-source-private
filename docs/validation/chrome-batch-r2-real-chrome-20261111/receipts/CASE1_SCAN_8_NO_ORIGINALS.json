@@ -1,0 +1,45 @@
+{
+  "status": "PASS_USER_CONFIRMED_8_CANDIDATES_NO_ORIGINAL_REQUESTS_OR_IMPORTS",
+  "recordedAtBerlin": "2026-11-11T05:25:48.897201+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "extensionDiskVersion": "0.2.0",
+  "actualLoadedDirectory": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "desktopPid": 9476,
+  "desktopSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "chromeExecutableVersions": [
+    {
+      "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "fileVersion": "156.0.8078.81",
+      "processCount": 23,
+      "inspection": "Executable version resource only; no browser profile or page data"
+    }
+  ],
+  "userEvidence": {
+    "text": "8项",
+    "candidateCount": 8,
+    "context": "After existing extension reload, toolbar side panel and explicit current-page scan"
+  },
+  "requestBaselineFile": "REQUEST_BASELINE_PAGE_LOADED_BEFORE_SCAN.json",
+  "requestsSincePageLoadedBaseline": [],
+  "originalGetCount": 0,
+  "allGetCount": 0,
+  "dataPreserved": [
+    {
+      "table": "BrowserCaptures",
+      "rowCount": 5,
+      "allRowsAndColumnsUnchanged": true
+    },
+    {
+      "table": "AssetItems",
+      "rowCount": 3,
+      "allRowsAndColumnsUnchanged": true
+    },
+    {
+      "table": "ProjectAssetLinks",
+      "rowCount": 4,
+      "allRowsAndColumnsUnchanged": true
+    }
+  ],
+  "scope": "Candidate total confirmed by human actual Chrome operation; HTTP request audit and desktop database readback performed by agent; per-item DOM and queue identities not yet exported"
+}

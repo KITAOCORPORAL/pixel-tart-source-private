@@ -1,0 +1,24 @@
+{
+  "recordedAtBerlin": "2026-11-11T07:10:22.172528+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "source": "User read-only export from installed Chrome extension page",
+  "snapshotFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\CASE2_EXTENSION_IDENTITIES_BEFORE_RETRY.json",
+  "snapshotSha256": "d299bb36693a4f365a6258a8a394247d65be693a3a6ab6e7b8d8426d81cab913",
+  "batchId": "81833876-2788-4d62-9cd7-960f29e43c67",
+  "failedItem": {
+    "id": "c6f14cbd-2bb1-4357-a5bc-e1acd0596e15",
+    "captureId": "8088116f-86de-4fdf-a055-3fe201dd91f9",
+    "imageUrl": "http://127.0.0.1:54394/denied-original-1800.jpg",
+    "state": "failed",
+    "selected": true
+  },
+  "sevenSuccessfulItemsMatchActualNativeRecords": true,
+  "failedNativeReceiptBeforeRetry": {
+    "ok": false,
+    "code": "CaptureNotFound",
+    "message": "桌面没有这项的已保存回执。",
+    "destinations": null,
+    "receipt": null,
+    "retryable": false
+  }
+}

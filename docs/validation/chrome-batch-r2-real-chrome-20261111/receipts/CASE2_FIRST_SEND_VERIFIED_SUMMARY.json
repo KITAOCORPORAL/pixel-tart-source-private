@@ -1,0 +1,28 @@
+{
+  "status": "PASS_REAL_CHROME_INITIATED_BATCH_NATIVE_RECEIPTS_HASHES_DESTINATION_LINKS_AND_403",
+  "recordedAtBerlin": "2026-11-11T06:54:31.607851+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "successfulCaptureCount": 7,
+  "imported": 4,
+  "reused": 3,
+  "uniqueAssetsReferencedByBatch": 6,
+  "libraryAssetCount": 7,
+  "sameByteAliasReusesOrdinaryAsset": {
+    "ordinaryCaptureId": "8b49811f-e2c7-4369-b1ac-f6453df2d37f",
+    "aliasCaptureId": "b5dbb1f4-6c7f-4803-9db5-fb684b5dc204",
+    "sameAssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "aliasOutcome": "Reused"
+  },
+  "allSevenReceiptDestinationsMatch": true,
+  "allSevenManagedHashesMatchOriginals": true,
+  "allAssetsLinkedToProjectA": true,
+  "allAssetsLinkedToBoardA": true,
+  "previousFiveNativeCaptureRowsAllColumnsUnchanged": true,
+  "httpOriginalFailure": {
+    "path": "/denied-original-1800.jpg",
+    "status": 403,
+    "attempts": 1
+  },
+  "extensionUiSummary": "WAITING_USER",
+  "failedCaptureIdBeforeRetry": "NOT_YET_OBSERVED"
+}

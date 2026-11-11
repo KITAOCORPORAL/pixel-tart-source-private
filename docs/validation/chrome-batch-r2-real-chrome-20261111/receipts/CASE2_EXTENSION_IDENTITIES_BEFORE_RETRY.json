@@ -1,0 +1,70 @@
+{
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "version": "0.2.0",
+  "batchId": "81833876-2788-4d62-9cd7-960f29e43c67",
+  "pageUrl": "http://127.0.0.1:54394/mixed.html",
+  "status": "completedWithFailures",
+  "destination": {
+    "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "projectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+    "boardId": "c61da831-a70c-4d2f-aea1-c19c66974d8c"
+  },
+  "items": [
+    {
+      "id": "8924b7b7-0001-4528-ba10-ae533e502d00",
+      "captureId": "8b49811f-e2c7-4369-b1ac-f6453df2d37f",
+      "imageUrl": "http://127.0.0.1:54394/ordinary-640.jpg",
+      "state": "existing",
+      "selected": true
+    },
+    {
+      "id": "64e15f60-385b-40d0-94ce-e0ff2a2b0414",
+      "captureId": "7d5574e2-a6f0-43dc-ba82-cfed377e1a66",
+      "imageUrl": "http://127.0.0.1:54394/srcset-original-1600.jpg",
+      "state": "existing",
+      "selected": true
+    },
+    {
+      "id": "85911fd5-abe2-4fb1-aae6-36b1d87757b8",
+      "captureId": "6c8406bb-b174-4f06-b786-95288114c219",
+      "imageUrl": "http://127.0.0.1:54394/lazy-original-1400.jpg",
+      "state": "completed",
+      "selected": true
+    },
+    {
+      "id": "afcac630-1e8c-4c4f-8311-779909684891",
+      "captureId": "b5dbb1f4-6c7f-4803-9db5-fb684b5dc204",
+      "imageUrl": "http://127.0.0.1:54394/ordinary-alias.jpg",
+      "state": "existing",
+      "selected": true
+    },
+    {
+      "id": "c6f14cbd-2bb1-4357-a5bc-e1acd0596e15",
+      "captureId": "8088116f-86de-4fdf-a055-3fe201dd91f9",
+      "imageUrl": "http://127.0.0.1:54394/denied-original-1800.jpg",
+      "state": "failed",
+      "selected": true
+    },
+    {
+      "id": "250f5133-abeb-46cd-baf6-e916d6b8b144",
+      "captureId": "e9eccab8-4bbe-4674-a304-2a937fd74ee7",
+      "imageUrl": "http://127.0.0.1:54394/unknown-original-900.jpg",
+      "state": "completed",
+      "selected": true
+    },
+    {
+      "id": "908d1b01-0143-4888-adc5-7569461d7df4",
+      "captureId": "14a09e7d-8a62-4a99-95b7-8ec2c53bbd2b",
+      "imageUrl": "http://127.0.0.1:54394/mixed-480.png",
+      "state": "completed",
+      "selected": true
+    },
+    {
+      "id": "5bbd0aaa-de42-45dd-9270-37d035891c47",
+      "captureId": "179d925a-7f18-4a1b-92ec-e8e16656266a",
+      "imageUrl": "http://127.0.0.1:54394/slow-original-1000.jpg",
+      "state": "completed",
+      "selected": true
+    }
+  ]
+}

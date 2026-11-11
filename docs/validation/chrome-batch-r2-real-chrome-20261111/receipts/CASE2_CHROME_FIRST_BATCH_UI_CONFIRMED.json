@@ -1,0 +1,24 @@
+{
+  "status": "PASS_REAL_CHROME_FIRST_BATCH_UI_AND_NATIVE_7_SUCCESS_1_HTTP403",
+  "recordedAtBerlin": "2026-11-11T06:58:00.846434+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "userScreenshot": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\CASE2_CHROME_7_SUCCESS_1_FAILURE_0_PENDING.png",
+  "screenshotSha256": "172f8c9928a2df57542f001973d424163b5326e36c2ad923b43eded205b222af",
+  "visibleSummary": {
+    "success": 7,
+    "failed": 1,
+    "unfinished": 0,
+    "description": "完成，部分失败可重试"
+  },
+  "failedItem": {
+    "fileName": "denied-original-1800.jpg",
+    "displayedOriginalWidth": 1800,
+    "error": "无法取得原图（HTTP 403）。未使用页面缩略图。",
+    "selected": true,
+    "captureId": "PENDING_READONLY_EXTENSION_SNAPSHOT"
+  },
+  "nativeCaptureCountUnchangedSinceReadback": 12,
+  "httpLogUnchangedSinceFirstSend": true,
+  "originalStillUnavailable": true
+}

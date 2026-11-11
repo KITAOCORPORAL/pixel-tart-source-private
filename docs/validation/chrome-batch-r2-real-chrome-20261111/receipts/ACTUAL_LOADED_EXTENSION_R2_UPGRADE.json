@@ -1,0 +1,144 @@
+{
+  "status": "ACTUAL_CHROME_LOADED_DIRECTORY_UPDATED_WAITING_EXISTING_EXTENSION_RELOAD",
+  "recordedAtBerlin": "2026-11-11T05:19:43.779548+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "userScreenshot": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\CASE1_CHROME_DETAILS_CONFIRMS_OLD_SOURCE.png",
+  "screenshotSha256": "6c821926cbc50a12476f04677bbfb84993ac05c44b653f30b20b1fb014e0e582",
+  "sourceConfirmedBy": "User Chrome extension details screenshot shows version 0.1.0 and exact loaded-from path",
+  "previouslyAssumedDirectory": "E:\\Kitao-Deliveries\\11.10\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "actualLoadedDirectory": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "updatedFrom": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\extension",
+  "oldVersion": "0.1.0",
+  "newVersion": "0.2.0",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "manifestPublicKeyUnchanged": true,
+  "backup": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\ACTUAL_LOADED_EXTENSION_BEFORE_R2",
+  "beforeFiles": [
+    {
+      "file": "background.js",
+      "bytes": 8338,
+      "sha256": "0755c69ce2bd329cb2ae58b938b49fc63b96b15b543d35a28da7e92bf9f314c9"
+    },
+    {
+      "file": "capture.css",
+      "bytes": 1232,
+      "sha256": "960de079b7d312fe3335a73586f8bffd53b5b8b70f67f06423876f4689ed1df9"
+    },
+    {
+      "file": "capture.html",
+      "bytes": 1293,
+      "sha256": "ba481fbea8c6c18230d75a095924e44024dcb695bb19e804ddee80e685907e13"
+    },
+    {
+      "file": "capture.js",
+      "bytes": 4713,
+      "sha256": "6fbf819592cb5016d93b64cba19dfc0d8bd848e01393353e6aa98e2024f56139"
+    },
+    {
+      "file": "DEVELOPMENT_ID.json",
+      "bytes": 131,
+      "sha256": "1b536ac2a87ee91fb8c71d965135e612c5e7b4bb6d7d4a43571a74b106f03ead"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 1001,
+      "sha256": "cb6ff6bb73906c2989f8341976e0840a33f69973846d7af1960dd741b1691b66"
+    },
+    {
+      "file": "queue.mjs",
+      "bytes": 1932,
+      "sha256": "ca2a6f771260db10ed0573a6da1ec67ab180c1c6ec9407b3f5d32f77b2ce5e53"
+    },
+    {
+      "file": "source.mjs",
+      "bytes": 3046,
+      "sha256": "df386ea398c28ca861fd8b0d7c22f2d1dae30299cf4e6fb53424866a2229ea24"
+    }
+  ],
+  "afterFiles": [
+    {
+      "file": "background.js",
+      "bytes": 10467,
+      "sha256": "3ff9fc61d5190fd66d753b38493e82efd524bb95cbdbbf232bcfe9f6294778b3"
+    },
+    {
+      "file": "batch-engine.mjs",
+      "bytes": 10680,
+      "sha256": "b3252c00af907775541454182e9a3fb010644c506f3800612780e439976f412b"
+    },
+    {
+      "file": "capture.css",
+      "bytes": 1232,
+      "sha256": "960de079b7d312fe3335a73586f8bffd53b5b8b70f67f06423876f4689ed1df9"
+    },
+    {
+      "file": "capture.html",
+      "bytes": 1293,
+      "sha256": "ba481fbea8c6c18230d75a095924e44024dcb695bb19e804ddee80e685907e13"
+    },
+    {
+      "file": "capture.js",
+      "bytes": 4725,
+      "sha256": "44b16f5137c793c631da15f3450d8ef74f2e0f39b522328221629d5495185b08"
+    },
+    {
+      "file": "DEVELOPMENT_ID.json",
+      "bytes": 131,
+      "sha256": "1b536ac2a87ee91fb8c71d965135e612c5e7b4bb6d7d4a43571a74b106f03ead"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 1087,
+      "sha256": "b8397c8ac5c917b459655a7dc34a7710b1fa573c2f195020395f465426592005"
+    },
+    {
+      "file": "page-images.mjs",
+      "bytes": 2040,
+      "sha256": "bdd0360c743b0849b7a9d04ec5b1f301cafa49d1458b99e63471a6f5bd352dbd"
+    },
+    {
+      "file": "queue.mjs",
+      "bytes": 4216,
+      "sha256": "24a759e152b410dac486ee693f17c98c472f869bdb79c2b17bb446f53b22fd3d"
+    },
+    {
+      "file": "scan.mjs",
+      "bytes": 3618,
+      "sha256": "0151a0d73dfa5232396ed976c1b5155aaf48b4c6b47ebed070e256c00cb901cc"
+    },
+    {
+      "file": "sidebar.css",
+      "bytes": 4098,
+      "sha256": "eaa38c8f52139e744212b25eded5cef86315235cd67fc7c1b4f3ce16dc8bf4a1"
+    },
+    {
+      "file": "sidebar.html",
+      "bytes": 2910,
+      "sha256": "d681740cdb7e0c4f8ea64c7584e2ee0597f1d5ddacfe14fbbd356243759bd6a2"
+    },
+    {
+      "file": "sidebar.js",
+      "bytes": 9886,
+      "sha256": "0a1397e61fe0db9a164377d84db2280ceab584a1f54bfd78d70352a8f1eece08"
+    },
+    {
+      "file": "source.mjs",
+      "bytes": 3087,
+      "sha256": "30581e46f8d3338c9dba3e19f659756b5e5a9545d22d73c200b3643e97ab0392"
+    },
+    {
+      "file": "third-party/ImageHarvest-MIT.txt",
+      "bytes": 1086,
+      "sha256": "c1fdff23e2801574bdda86b47ae15d70e4347f555e6debc91ac766d43353eb97"
+    },
+    {
+      "file": "third-party/ImageHarvest-REFERENCE.txt",
+      "bytes": 681,
+      "sha256": "fdbbc3f9eb5f42823800b85c17dfeea2f13e232af95661b35c6f3a220c42f70d"
+    }
+  ],
+  "allNewSourceFilesMatchFrozenPackage": true,
+  "chromeReloadPerformed": false,
+  "browserProfileOrIndexedDbReadWrittenOrDeleted": false,
+  "nativeCaptureRecordsUnchanged": true
+}

@@ -1,0 +1,60 @@
+{
+  "status": "PASS_REAL_CHROME_NEW_CONTEXT_MENU_SINGLE_ORIGINAL_PROJECT_B",
+  "recordedAtBerlin": "2026-11-11T09:55:08.552181+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "desktopPid": 34644,
+  "captureId": "1fb518ee-7f63-4653-b447-b6ddf3bb2a8d",
+  "contextMenuEvidence": "CASE4_ACTUAL_CONTEXT_MENU_ACTION.json",
+  "nativeCaptureRecord": {
+    "CaptureId": "1fb518ee-7f63-4653-b447-b6ddf3bb2a8d",
+    "LibraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "ProjectId": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+    "BoardId": null,
+    "PageUrl": "http://127.0.0.1:54394/ordinary.html",
+    "ImageUrl": "http://127.0.0.1:54394/ordinary-640.jpg",
+    "PageTitle": "光镜 JPEG 右键采集验收",
+    "CapturedAtUtc": "2026-11-11T08:50:26.712+00:00",
+    "ContentHash": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+    "AssetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+    "Outcome": "Reused",
+    "ImportedAtUtc": "2026-11-11T08:53:12.9816983+00:00"
+  },
+  "savedNativeReply": {
+    "ok": true,
+    "code": "Completed",
+    "message": "已读取桌面保存的实际回执。",
+    "destinations": null,
+    "receipt": {
+      "captureId": "1fb518ee-7f63-4653-b447-b6ddf3bb2a8d",
+      "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "projectId": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+      "boardId": null,
+      "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "outcome": "Reused",
+      "pageUrl": "http://127.0.0.1:54394/ordinary.html",
+      "capturedAtUtc": "2026-11-11T08:50:26.712+00:00",
+      "importedAtUtc": "2026-11-11T08:53:12.9816983+00:00"
+    },
+    "retryable": false
+  },
+  "chromeRenderedReceiptMatchesNative": true,
+  "originalRequestsAfterContextMenu": [
+    {
+      "timeUtc": "2026-11-11T08:50:26.7797948+00:00",
+      "method": "GET",
+      "path": "/ordinary-640.jpg",
+      "status": 200,
+      "bytes": 36966,
+      "delayMs": 0
+    }
+  ],
+  "managedOriginalSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+  "existingAssetReused": "88490206-e6c5-4597-973d-4a1042abbfb7",
+  "projectBAssociationVerified": true,
+  "projectLinkCount": 9,
+  "libraryAssetCount": 21,
+  "previous25CaptureRecordsUnchanged": true,
+  "singleHistoryStillToVerify": true
+}

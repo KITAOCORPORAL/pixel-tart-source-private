@@ -1,0 +1,62 @@
+{
+  "status": "PASS_REAL_CHROME_FORMAT_AND_SIZE_FILTERS_USER_CONFIRMED",
+  "recordedAtBerlin": "2026-11-11T06:30:15.305839+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "actualLoadedDirectory": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "userEvidence": {
+    "rawText": "141",
+    "interpretedOrderedCounts": [
+      1,
+      4,
+      1
+    ],
+    "context": "Reply to the immediately preceding three numbered filter instructions"
+  },
+  "checks": [
+    {
+      "format": "PNG",
+      "minWidth": 0,
+      "minHeight": 0,
+      "includeUnknown": true,
+      "expectedCount": 1,
+      "observedCount": 1
+    },
+    {
+      "format": "JPEG",
+      "minWidth": 1000,
+      "minHeight": 0,
+      "includeUnknown": false,
+      "expectedCount": 4,
+      "observedCount": 4
+    },
+    {
+      "format": "JPEG",
+      "minWidth": 2000,
+      "minHeight": 500,
+      "includeUnknown": true,
+      "expectedCount": 1,
+      "observedCount": 1,
+      "regression": "Known 1600/1800 widths must not pass a 2000 width minimum because height is unknown"
+    }
+  ],
+  "newRequestsDuringFiltering": [],
+  "dataPreservation": [
+    {
+      "table": "BrowserCaptures",
+      "rows": 5,
+      "unchanged": true
+    },
+    {
+      "table": "AssetItems",
+      "rows": 3,
+      "unchanged": true
+    },
+    {
+      "table": "ProjectAssetLinks",
+      "rows": 4,
+      "unchanged": true
+    }
+  ],
+  "scope": "Actual Chrome results supplied by human; independent HTTP audit and database readback by agent"
+}

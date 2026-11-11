@@ -1,0 +1,19 @@
+{
+  "status": "ACTIVE_TEST_INPUT_OVERRIDE_REQUIRES_RESTORATION_AFTER_CANCEL_CASE",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "routeFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\test-pages\\FIXTURE_ROUTES.json",
+  "backupExactBytes": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\FIXTURE_ROUTES_BEFORE_CANCEL_DELAY_OVERRIDE.json",
+  "originalSha256": "1816b43bacf30b3d966ce5101bc1a0b17ef66b52d30a61037ae6722f64361c3d",
+  "overriddenSha256": "c631100234568cefc1da57f7aefbf32c678114ffc3c7aaf47c36f95a683a2962",
+  "route": "/slow-original-1000.jpg",
+  "originalDelayMs": 2500,
+  "temporaryDelayMs": 8000,
+  "verification": {
+    "method": "HEAD",
+    "status": 200,
+    "elapsedSeconds": 8.040869100019336,
+    "bodyDownloaded": false
+  },
+  "productBinariesAndExtensionFrozenHashesUnchanged": true,
+  "restoreRequired": true
+}

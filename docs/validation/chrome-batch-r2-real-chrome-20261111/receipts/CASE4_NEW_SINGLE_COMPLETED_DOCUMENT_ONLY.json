@@ -1,0 +1,394 @@
+{
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "tree": {
+    "available_actions": [
+      "Scroll",
+      "ScrollTo",
+      "SetFocus"
+    ],
+    "children": [
+      {
+        "available_actions": [
+          "ScrollTo"
+        ],
+        "children": [
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "光镜 · 浏览器采集",
+                "role": "statictext",
+                "role_description": "文本",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "发送到光镜",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "name": "发送到光镜",
+                "role": "statictext",
+                "role_description": "标题",
+                "subrole": "heading"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "原图入库，收到桌面回执后才完成。",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "role": "group",
+            "role_description": "章节标题",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "光镜 JPEG 右键采集验收 http://127.0.0.1:54394/ordinary-640.jpg",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "source"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "读取 / 重试原图",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "fetch"
+                },
+                "ref_id": "@s15giw9or1wrwz:e44",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "读取原图只会请求本次图片域名的访问权限：127.0.0.1",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "permissionHint"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "素材库",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "素材库",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "library"
+                    },
+                    "ref_id": "@s15giw9or1wrwz:e45",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "浏览器采集测试库"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "项目",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "项目",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "project"
+                    },
+                    "ref_id": "@s15giw9or1wrwz:e46",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "采集项目 B"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "灵感板",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  },
+                  {
+                    "available_actions": [
+                      "Expand",
+                      "Collapse",
+                      "SetValue",
+                      "ScrollTo",
+                      "Click",
+                      "SetFocus"
+                    ],
+                    "name": "灵感板",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "board"
+                    },
+                    "ref_id": "@s15giw9or1wrwz:e47",
+                    "role": "combobox",
+                    "role_description": "组合框",
+                    "subrole": "combobox",
+                    "value": "不加入灵感板"
+                  }
+                ],
+                "role": "group",
+                "role_description": "组",
+                "subrole": "description"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo",
+                  "SetFocus"
+                ],
+                "name": "刷新目的地",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "reload"
+                },
+                "ref_id": "@s15giw9or1wrwz:e48",
+                "role": "button",
+                "role_description": "按钮",
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "name": "发送原图",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "send"
+                },
+                "ref_id": "@s15giw9or1wrwz:e49",
+                "role": "button",
+                "role_description": "按钮",
+                "states": [
+                  "disabled"
+                ],
+                "subrole": "button"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "光镜已确认入库。实际素材ID见下方回执。",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "status"
+                },
+                "role": "status",
+                "role_description": "状态",
+                "subrole": "status"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "{\n  \"captureId\": \"1fb518ee-7f63-4653-b447-b6ddf3bb2a8d\",\n  \"libraryId\": \"6ebb56f2-831e-48e7-a55c-243daffad92c\",\n  \"projectId\": \"fe5cdef6-00b8-4606-8dcb-25b9ce221c0a\",\n  \"boardId\": null,\n  \"assetId\": \"88490206-e6c5-4597-973d-4a1042abbfb7\",\n  \"contentSha256\": \"831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460\",\n  \"outcome\": \"Reused\",\n  \"pageUrl\": \"http://127.0.0.1:54394/ordinary.html\",\n  \"capturedAtUtc\": \"2026-11-11T08:50:26.712+00:00\",\n  \"importedAtUtc\": \"2026-11-11T08:53:12.9816983+00:00\"\n}",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "receipt"
+                },
+                "role": "group",
+                "role_description": "组",
+                "subrole": "group"
+              }
+            ],
+            "native_id": {
+              "kind": "automation_id",
+              "value": "editor"
+            },
+            "role": "group",
+            "role_description": "组",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "name": "只处理你主动采集的图片。桌面未确认时，待处理项会保留。",
+                "role": "statictext",
+                "role_description": "文本",
+                "states": [
+                  "offscreen"
+                ],
+                "subrole": "description"
+              }
+            ],
+            "role": "group",
+            "role_description": "章节页脚",
+            "states": [
+              "offscreen"
+            ],
+            "subrole": "group"
+          }
+        ],
+        "role": "group",
+        "role_description": "主要",
+        "subrole": "main"
+      }
+    ],
+    "name": "发送到光镜",
+    "native_id": {
+      "kind": "automation_id",
+      "value": "RootWebArea"
+    },
+    "ref_id": "@s15giw9or1wrwz:e43",
+    "role": "document",
+    "role_description": "文档",
+    "states": [
+      "focused",
+      "readonly"
+    ],
+    "subrole": "document",
+    "value": "chrome-extension://obgahfdabcpkohkdcnidpmeooceomogk/capture.html?id=1fb518ee-7f63-4653-b447-b6ddf3bb2a8d"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "status": "PASS_REAL_CHROME_OLD_SINGLE_HISTORY_AND_RECEIPT_PRESERVED",
+  "recordedAtBerlin": "2026-11-11T10:03:11.376919+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "historyPopupWindow": "w-2430262",
+  "visibleOwnCompletedHistoryEntries": 6,
+  "visibleCompletedTitleCounts": {
+    "已入库 · 光镜 JPEG 右键采集验收": 4,
+    "已入库 · 光镜 桌面关闭期间新图验收": 1,
+    "已入库 · 光镜 srcset 原图验收": 1
+  },
+  "fiveHistoricalNativeRecordsUnchanged": true,
+  "legacyCaptureReopened": "18093197-52d2-40f1-a404-68e44a245713",
+  "legacyReceiptRenderedInChrome": {
+    "captureId": "18093197-52d2-40f1-a404-68e44a245713",
+    "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+    "projectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+    "boardId": null,
+    "assetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+    "contentSha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+    "outcome": "Imported",
+    "pageUrl": "http://127.0.0.1:51293/pending.html",
+    "capturedAtUtc": "2026-11-10T09:43:53.907+00:00",
+    "importedAtUtc": "2026-11-10T09:58:56.3790009+00:00"
+  },
+  "legacyReceiptMatchesActualNativeReadback": {
+    "ok": true,
+    "code": "Completed",
+    "message": "已读取桌面保存的实际回执。",
+    "destinations": null,
+    "receipt": {
+      "captureId": "18093197-52d2-40f1-a404-68e44a245713",
+      "libraryId": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+      "projectId": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+      "boardId": null,
+      "assetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+      "contentSha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+      "outcome": "Imported",
+      "pageUrl": "http://127.0.0.1:51293/pending.html",
+      "capturedAtUtc": "2026-11-10T09:43:53.907+00:00",
+      "importedAtUtc": "2026-11-10T09:58:56.3790009+00:00"
+    },
+    "retryable": false
+  },
+  "newSingleCaptureId": "1fb518ee-7f63-4653-b447-b6ddf3bb2a8d",
+  "nativeCaptureCountBeforeAndAfterHistoryRead": 26,
+  "scope": "History list includes the five historical completed entries plus the new single capture. The unique historical pending-desktop case was actually opened and its stored Chrome receipt compared to native. No claim that each same-titled old row was individually clicked."
+}

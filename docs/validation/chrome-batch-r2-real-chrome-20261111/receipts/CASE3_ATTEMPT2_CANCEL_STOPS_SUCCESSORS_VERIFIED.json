@@ -1,0 +1,31 @@
+{
+  "status": "PASS_REAL_CHROME_CANCEL_STOPS_SUBSEQUENT_ITEMS_BEFORE_NATIVE_COMMIT",
+  "attempt": 2,
+  "recordedAtBerlin": "2026-11-11T07:48:09.778850+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "userScreenshot": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\CASE3_ATTEMPT2_CANCELLED_0_SUCCESS_NO_NATIVE_SUBMISSION.png",
+  "screenshotSha256": "8514ed16efaa412ba59482549b0681401cd1324207597adfa6aad7de70a23d46",
+  "visibleSummary": {
+    "success": 0,
+    "failed": 0,
+    "unfinished": 0,
+    "status": "已取消，已提交项已核对"
+  },
+  "visibleFirstCardMessage": "已取消，未向桌面提交此项。",
+  "httpRequestsSinceSend": [
+    {
+      "timeUtc": "2026-11-11T06:45:12.2134778+00:00",
+      "method": "GET",
+      "path": "/slow-original-1000.jpg",
+      "status": 200,
+      "bytes": 44483,
+      "delayMs": 8000
+    }
+  ],
+  "originalReadsStarted": 1,
+  "remainingOriginalReadsNotStarted": 5,
+  "newNativeCaptureCount": 0,
+  "previous19NativeCaptureRecordsUnchanged": true,
+  "scope": "Actual Chrome cancellation UI plus independent HTTP and native journal readback. No submitted capture occurred in this cancellation attempt; lost committed responses are not claimed as exercised here."
+}

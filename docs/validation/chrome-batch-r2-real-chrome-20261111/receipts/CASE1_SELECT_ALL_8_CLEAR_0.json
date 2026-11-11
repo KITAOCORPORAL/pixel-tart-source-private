@@ -1,0 +1,68 @@
+{
+  "status": "PASS_REAL_CHROME_SELECT_ALL_AND_CLEAR_USER_CONFIRMED",
+  "recordedAtBerlin": "2026-11-11T06:46:54.877741+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "userEvidence": {
+    "rawText": "80",
+    "interpretedSelectedCounts": [
+      8,
+      0
+    ],
+    "context": "Reply to restore all 8 candidates, select all filtered results, then clear all selections"
+  },
+  "newRequests": [],
+  "dataPreserved": [
+    {
+      "table": "BrowserCaptures",
+      "rows": 5,
+      "unchanged": true
+    },
+    {
+      "table": "AssetItems",
+      "rows": 3,
+      "unchanged": true
+    },
+    {
+      "table": "ProjectAssetLinks",
+      "rows": 4,
+      "unchanged": true
+    }
+  ],
+  "destinationsReadOnly": {
+    "ok": true,
+    "code": "Ready",
+    "message": "请选择明确目的地。",
+    "destinations": {
+      "libraries": [
+        {
+          "id": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+          "name": "浏览器采集测试库"
+        },
+        {
+          "id": "c8a508bc-a91b-417b-826e-e6b76c12a614",
+          "name": "第二测试库"
+        }
+      ],
+      "projects": [
+        {
+          "id": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+          "name": "采集项目 B"
+        },
+        {
+          "id": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+          "name": "采集项目 A"
+        }
+      ],
+      "boards": [
+        {
+          "id": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+          "name": "采集灵感板 A"
+        }
+      ]
+    },
+    "receipt": null,
+    "retryable": false
+  },
+  "scope": "Actual Chrome visible selection counts supplied by human; independent request audit and database readback by agent"
+}

@@ -1,0 +1,163 @@
+{
+  "status": "PASS_NORMAL_R2_DESKTOP_RESTART_CURRENT_DATA_PRESERVED",
+  "recordedAtBerlin": "2026-11-11T09:18:51.660428+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "desktopPidBeforeRestart": 9476,
+  "desktopPidAfterRestart": 34644,
+  "oldProcessExited": true,
+  "normalCloseUsed": true,
+  "restartMethod": "agent-desktop 1.2.0 launch with explicit same isolated runtime root, pipe and extension environment",
+  "package": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2",
+  "runtime": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "pipeName": "guangjing.capture.917ab73e53799ac6d0516a30",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "nativeDestinations": {
+    "ok": true,
+    "code": "Ready",
+    "message": "请选择明确目的地。",
+    "destinations": {
+      "libraries": [
+        {
+          "id": "6ebb56f2-831e-48e7-a55c-243daffad92c",
+          "name": "浏览器采集测试库"
+        },
+        {
+          "id": "c8a508bc-a91b-417b-826e-e6b76c12a614",
+          "name": "第二测试库"
+        }
+      ],
+      "projects": [
+        {
+          "id": "fe5cdef6-00b8-4606-8dcb-25b9ce221c0a",
+          "name": "采集项目 B"
+        },
+        {
+          "id": "6829e4fa-f338-46ea-88c4-3ff7db86455c",
+          "name": "采集项目 A"
+        }
+      ],
+      "boards": [
+        {
+          "id": "c61da831-a70c-4d2f-aea1-c19c66974d8c",
+          "name": "采集灵感板 A"
+        }
+      ]
+    },
+    "receipt": null,
+    "retryable": false
+  },
+  "sixCancelledNativeReceiptQueriesAfterRestart": [
+    {
+      "captureId": "7f5fcd15-6551-45d1-8f3c-71e888f84eaf",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "captureId": "8c706159-d35d-4a44-88eb-7a1a44fa53b8",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "captureId": "c6992618-5fc5-4621-9992-761b0d3ecc43",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "captureId": "f8a449ef-1120-4d54-b07a-a34654610cf2",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "captureId": "5aa5246a-cdf7-4c51-9022-6b4a29524e8f",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    },
+    {
+      "captureId": "213a77a9-b275-4eec-b7fd-575a84ae110a",
+      "reply": {
+        "ok": false,
+        "code": "CaptureNotFound",
+        "message": "桌面没有这项的已保存回执。",
+        "destinations": null,
+        "receipt": null,
+        "retryable": false
+      }
+    }
+  ],
+  "dataPreservation": [
+    {
+      "database": "workflow",
+      "table": "Projects",
+      "rowCount": 3,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "captures",
+      "table": "BrowserCaptures",
+      "rowCount": 19,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "library",
+      "table": "AssetItems",
+      "rowCount": 21,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "library",
+      "table": "ProjectAssetLinks",
+      "rowCount": 9,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "tray",
+      "table": "InspirationTrayEntries",
+      "rowCount": 7,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "tray",
+      "table": "InspirationCollections",
+      "rowCount": 1,
+      "allRowsAndColumnsEqual": true
+    },
+    {
+      "database": "tray",
+      "table": "InspirationCollectionEntries",
+      "rowCount": 7,
+      "allRowsAndColumnsEqual": true
+    }
+  ],
+  "preservedUnsavedWorkFile": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\real-chrome-r2-round-20261111T040624Z\\before-desktop-restart\\Preserved-ColorStudio-before-R2-restart-20261111.ptstudio.json",
+  "browserSidebarReopenAndContinue": "PENDING"
+}

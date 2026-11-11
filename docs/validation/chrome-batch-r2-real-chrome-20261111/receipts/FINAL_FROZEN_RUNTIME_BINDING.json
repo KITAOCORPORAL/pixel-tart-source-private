@@ -1,0 +1,145 @@
+{
+  "status": "PASS_FROZEN_R2_RUNTIME_AND_ALL_FOUR_REAL_CHROME_CASES",
+  "recordedAtBerlin": "2026-11-11T10:14:07.250953+01:00",
+  "productSource": "1698664d12913aadea64bad6f2a68cb52d9ee38d",
+  "extensionVersion": "0.2.0",
+  "extensionId": "obgahfdabcpkohkdcnidpmeooceomogk",
+  "actualLoadedExtensionDirectory": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\Guangjing-ChromeCaptureV1-Diagnostic-win-x64\\extension",
+  "package": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2",
+  "desktopPid": 34644,
+  "nativeHostRegistration": [
+    {
+      "view": 512,
+      "path": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\native-host\\com.guangjing.capture.json"
+    },
+    {
+      "view": 256,
+      "path": "E:\\Kitao-Deliveries\\chrome-capture-batch-v1-20261111\\Guangjing-ChromeBatchV1-Diagnostic-win-x64-r2\\native-host\\com.guangjing.capture.json"
+    }
+  ],
+  "runtime": "E:\\Kitao-Deliveries\\chrome-capture-v1-20261110\\company01",
+  "pipeName": "guangjing.capture.917ab73e53799ac6d0516a30",
+  "fixtureServerPid": 12592,
+  "chromeExecutableVersions": [
+    {
+      "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "fileVersion": "156.0.8078.81",
+      "processCount": 23,
+      "inspection": "Executable version resource only; no browser profile or page data"
+    }
+  ],
+  "desktopAutomation": "agent-desktop 1.2.0",
+  "frozenKeyFiles": {
+    "app/KitaoPhotoSelector.exe": {
+      "sha256": "829aca23f088caf0389c553239659858eda227d6d685654ef5f095a6caa7fc22",
+      "bytes": 179200
+    },
+    "app/KitaoPhotoSelector.dll": {
+      "sha256": "a13fb4e2583b083539c0a9fb4267d0341fdf0749ab1464145b2d19b9bc831d37",
+      "bytes": 4151808
+    },
+    "app/RAWSelectionAssistant.Core.dll": {
+      "sha256": "cd9eabaa332dfdf14f2995b708e3d48b88c7a5d83b76de393c79a28f47931e5b",
+      "bytes": 7790080
+    },
+    "app/PixelTart.Modules.AssetLibrary.dll": {
+      "sha256": "a039f96b60fe942e841cb49dc9ebc4587ca1361bf482a2841d5c0d3f79b198bc",
+      "bytes": 1253888
+    },
+    "app/PixelTart.BrowserCapture.Contracts.dll": {
+      "sha256": "c47dff9282e8da21fc183da22fa8327879aea8c61736b6628194cfa67622a4ba",
+      "bytes": 26624
+    },
+    "app/raw_r.dll": {
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9",
+      "bytes": 1102848
+    },
+    "native-host/Guangjing.Capture.NativeHost.exe": {
+      "sha256": "e5ca89e895442e35eac8b6ed437646644c4059b639cca51918ae317fe3eec72c",
+      "bytes": 162304
+    },
+    "native-host/Guangjing.Capture.NativeHost.dll": {
+      "sha256": "9ab88d4994b0f979b973ee50089e782668d7612385e04f8a934875fdfbdcc775",
+      "bytes": 31744
+    },
+    "extension/manifest.json": {
+      "sha256": "b8397c8ac5c917b459655a7dc34a7710b1fa573c2f195020395f465426592005",
+      "bytes": 1087
+    },
+    "extension/background.js": {
+      "sha256": "3ff9fc61d5190fd66d753b38493e82efd524bb95cbdbbf232bcfe9f6294778b3",
+      "bytes": 10467
+    },
+    "extension/queue.mjs": {
+      "sha256": "24a759e152b410dac486ee693f17c98c472f869bdb79c2b17bb446f53b22fd3d",
+      "bytes": 4216
+    },
+    "extension/batch-engine.mjs": {
+      "sha256": "b3252c00af907775541454182e9a3fb010644c506f3800612780e439976f412b",
+      "bytes": 10680
+    },
+    "extension/page-images.mjs": {
+      "sha256": "bdd0360c743b0849b7a9d04ec5b1f301cafa49d1458b99e63471a6f5bd352dbd",
+      "bytes": 2040
+    },
+    "extension/sidebar.js": {
+      "sha256": "0a1397e61fe0db9a164377d84db2280ceab584a1f54bfd78d70352a8f1eece08",
+      "bytes": 9886
+    },
+    "extension/scan.mjs": {
+      "sha256": "0151a0d73dfa5232396ed976c1b5155aaf48b4c6b47ebed070e256c00cb901cc",
+      "bytes": 3618
+    }
+  },
+  "extensionFilesMatched": 16,
+  "originalStaticPackageFilesVerified": 555,
+  "currentNativeCaptureCount": 26,
+  "currentLibraryAssetCount": 21,
+  "currentProjectLinkCount": 9,
+  "all21PreRestartAssetIdsContentHashesAndManagedPathsPreserved": true,
+  "ownSyntheticManagedAssetCount": 8,
+  "ownedManagedAssetVerification": [
+    {
+      "assetId": "88490206-e6c5-4597-973d-4a1042abbfb7",
+      "contentSha256": "831578E607FF9681313E18CF86DF17CB391D911BF7A12460B658BAFB3BB2C460",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "486ffaf3-379b-4ad4-9c51-ce7bfbb9e7f2",
+      "contentSha256": "6ED3ADB68235721C463D4E0ED1DB7E760BDF8D5B4A0D96ADF7EEFFAA0C7BFE59",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "a48c655b-25ae-4055-b1ea-00bda4494288",
+      "contentSha256": "1E088AF9898A4D70F7C1F3347E9C994710481A1F6E29F4768A535E6F44ECE65E",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "5cf66478-0e5e-4465-8e2a-44feb9fb904c",
+      "contentSha256": "325784608D4A825D4A5AE6463CD8D280DC85F57C8CD44D971989A1C247760D35",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "0d266929-327d-40f8-a6a9-243cdbc785db",
+      "contentSha256": "064ECC58DFA7995E23FDC42B7D9C59DF4F7AE85C7EBEEAAFAA7EED0E8B6AB987",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "3f09a0c2-6ca6-4912-89b4-40ff38137533",
+      "contentSha256": "118506A50502227AC7C8FB3D110E65C0E639D9967F6E7DBA3AB71CAB6520859E",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "804bf24e-6c83-469d-9f1d-65ad943191f3",
+      "contentSha256": "7388ED2DFFD3CC98FCBB2FA879A52574D4A6F435B663E2DBB23C545BB2CAC63B",
+      "managedBytesMatchAllCaptureRecords": true
+    },
+    {
+      "assetId": "dfa4f598-4056-48c3-afda-e2d56548750d",
+      "contentSha256": "6AD5EEC9672858FE4F60595748D39EA9097720C55431BA3FD0A95DAC04F1580C",
+      "managedBytesMatchAllCaptureRecords": true
+    }
+  ],
+  "directBrowserProfileOrIndexedDbFilesystemAccess": false,
+  "fullAppReleaseStatus": "DIAGNOSTIC_NOT_RELEASED"
+}
