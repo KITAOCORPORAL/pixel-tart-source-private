@@ -1,0 +1,18 @@
+{
+  "status": "WAITING_FOR_USER",
+  "device": "iPhone 13",
+  "browser": "Safari",
+  "userReportedResult": null,
+  "bookingId": "bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+  "currentAgentVerifiedRevision": 7,
+  "currentAgentVerifiedTime": "2026-11-11 10:30–11:30 Asia/Shanghai",
+  "currentAgentVerifiedStatus": "Postponed",
+  "userSteps": [
+    "Safari open prepared protected link through existing Tailscale network",
+    "edit synthetic booking to 11:30–12:30 and Confirmed; save",
+    "report server receipt; then PC adjusts once and user refreshes mobile"
+  ],
+  "preparedLinkFile": "N:\\pixart\\guangjing-mobile-schedule-v1-20261111\\artifacts\\mobile-schedule\\final-runtime\\PHONE_URL.txt",
+  "tokenInVersionControl": false,
+  "automatedMobileScriptIsSafariEvidence": false
+}

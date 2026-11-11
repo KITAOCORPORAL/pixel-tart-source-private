@@ -374,3 +374,11 @@
 - 完整主程序：E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026/Guangjing-UI-Cleanup-Final-Diagnostic-win-x64；隔离Start-Guangjing-Diagnostic.bat。不是Setup。
 - 原生一次点击coordinate input geometry is unavailable，JPEG/画布保存退出新进程/A-B整链均NOT_RUN。内验图片是离屏合成，不是桌面实机证据。
 - 先前静态教程逐字断言4项已改成真实命令/状态绑定，安全导出/不覆盖原件回归保留；源副本错误短态+展开详情/日志，不放宽禁止回退。
+
+
+## 手机档期首版 · 2026-11-11 Asia/Shanghai
+- 产品源码7edd9a65da2a189fadd615c59063283f90037a98，独立分支feature/mobile-schedule-v1-20261111，基线057fe820包含1698664d；已先fetch，保留旧树。统一原SQLite日历，不复制预约数据源。
+- 手机当日/近期/详情、修改时间状态，PC刷新/编辑版本，schema9原子版本+回执、设备到期/撤销已实现。26项HTTP闭环、PC新进程/完整App与服务重开、265Core+307WPF通过。
+- 实际家中全模块包：LocalAppData/Guangjing/Deliveries/MobileScheduleV1-20261111，主入口Start-Guangjing-Diagnostic.cmd；557文件摘要、ZIP校验、启动源码SHA通过。当前服务17662，Tailscale8443；原选片443路由保留。
+- 用户iPhone13 Safari真机待反馈。已给链接和3步：主合成预约bd5abc99-d733-4564-8a7f-e6bba5c5ecdd，从10:30–11:30/延期/v7改成11:30–12:30/已确认，回报服务器回执后再做PC调整和手机刷新。完整链接仅忽略目录artifacts/mobile-schedule/final-runtime/PHONE_URL.txt；不要对该预约再跑自动修改。
+- 权威报告docs/validation/mobile-schedule-v1-20261111/FINAL_REPORT.md；PHONE_REAL_DEVICE.json明确WAITING_FOR_USER。Node/HTTP/PC不是Safari真机。浏览器扩展未改动。

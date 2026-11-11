@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "checks": [
+    "authorization retry payload bound",
+    "wrong booking does not read another identity",
+    "range bound",
+    "revocation enforced",
+    "revocation retry no duplicate"
+  ],
+  "http": [
+    {
+      "method": "POST",
+      "path": "/v1/schedule/devices",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/schedule/devices",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/c692812b-02b4-427e-83d8-4b9935b7dd0d",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings?start=2026-11-11T00:00:00Z&end=2027-01-01T00:00:00Z",
+      "status": 400
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/schedule/devices/6879aba04aeb41e1b120a247a13392bf",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/session",
+      "status": 401
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/schedule/devices/6879aba04aeb41e1b120a247a13392bf",
+      "status": 200
+    }
+  ]
+}

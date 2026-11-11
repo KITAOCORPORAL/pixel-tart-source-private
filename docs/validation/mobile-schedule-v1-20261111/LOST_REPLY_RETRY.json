@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "action": "lost-reply",
+  "browser": false,
+  "safari": false,
+  "checks": [
+    "deployed customer JS equals source",
+    "day/upcoming and details loaded over real HTTPS",
+    "mobile changed time and status using server version",
+    "successful server mutation receipt displayed",
+    "reopen detail restores saved data",
+    "same request retry after lost reply returned original receipt"
+  ],
+  "revision": "当前版本 v6",
+  "http": [
+    {
+      "method": "GET",
+      "path": "/v1/schedule/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+      "status": 200
+    }
+  ]
+}

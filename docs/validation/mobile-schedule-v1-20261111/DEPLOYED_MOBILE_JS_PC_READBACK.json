@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "action": "readback",
+  "browser": false,
+  "safari": false,
+  "checks": [
+    "mobile script refresh reads PC editor adjustment",
+    "time 13:00 and Confirmed status visible",
+    "server version presented"
+  ],
+  "revision": "当前版本 v5",
+  "http": [
+    {
+      "method": "GET",
+      "path": "/v1/schedule/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+      "status": 200
+    }
+  ]
+}

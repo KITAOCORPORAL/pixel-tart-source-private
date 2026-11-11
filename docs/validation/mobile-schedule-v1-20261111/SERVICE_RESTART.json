@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "checks": [
+    "terminated owned service process and started published package in new process",
+    "same calendar database and device authorization restored",
+    "protected HTTPS appointment still readable"
+  ],
+  "booking": {
+    "id": "bd5abc99-d733-4564-8a7f-e6bba5c5ecdd",
+    "title": "合成预约 · 手机档期测试",
+    "clientDisplayName": "合成客户",
+    "startAtUtc": "2026-11-11T02:30:00+00:00",
+    "endAtUtc": "2026-11-11T03:30:00+00:00",
+    "timeZoneId": "China Standard Time",
+    "isAllDay": false,
+    "status": "Postponed",
+    "location": "合成摄影棚",
+    "shootingType": "Portrait",
+    "shootingRequirements": null,
+    "preparationNotes": null,
+    "notes": "仅测试预约，不含真实客户信息。",
+    "revision": 7,
+    "updatedAtUtc": "2026-11-11T14:39:12.7098591+00:00",
+    "timeZoneIana": "Asia/Shanghai"
+  }
+}

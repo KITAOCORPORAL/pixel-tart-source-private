@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "suites": [
+    {
+      "suite": "calendar-core-final",
+      "total": 265,
+      "passed": 265,
+      "failed": 0,
+      "trx_sha256": "949cf7d3473275fda89ad30b47f7dec55c6c820f1267f36b753c5709b93b1384"
+    },
+    {
+      "suite": "calendar-wpf-final",
+      "total": 307,
+      "passed": 307,
+      "failed": 0,
+      "trx_sha256": "b2f25a07046a40387a1f53e63e8042e4965bec0ec295ff0baf92bfe18535b799"
+    }
+  ],
+  "passed": 572,
+  "httpChecks": 26,
+  "independentProcessChecks": 4,
+  "fullAppNativeReadback": "PASS",
+  "iPhone13Safari": "WAITING_FOR_USER"
+}

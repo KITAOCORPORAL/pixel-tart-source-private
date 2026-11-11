@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "pid": 30520,
+  "steps": [
+    {
+      "check": "existing calendar database migrated",
+      "pass": true
+    },
+    {
+      "check": "new PC process restored bidirectional changes from existing SQLite",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 200
+    },
+    {
+      "check": "reopened mobile session reads same persisted revision",
+      "pass": true
+    }
+  ]
+}

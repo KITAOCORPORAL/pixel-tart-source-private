@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "pid": 41932,
+  "steps": [
+    {
+      "check": "existing calendar database migrated",
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/v1/schedule/devices",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/schedule/devices",
+      "status": 200
+    },
+    {
+      "check": "device authorization retry returns same protected link",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 200
+    },
+    {
+      "check": "mobile reads exact existing PC calendar version",
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 200
+    },
+    {
+      "check": "mobile save retry returns same receipt without extra revision",
+      "pass": true
+    },
+    {
+      "check": "PC service reads phone time and status from same calendar",
+      "pass": true
+    },
+    {
+      "check": "stale PC editor prompts refresh instead of overwriting phone update",
+      "pass": true
+    },
+    {
+      "check": "stale PC save preserved phone revision",
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 409
+    },
+    {
+      "check": "actual PC editor save command succeeded",
+      "pass": true
+    },
+    {
+      "check": "PC edit incremented calendar version once",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 200
+    },
+    {
+      "check": "mobile refresh sees PC adjustment",
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/v1/schedule/bookings?start=2026-11-11T00%3A00%3A00.0000000&end=2026-11-25T02%3A00%3A00.0000000%2B00%3A00",
+      "status": 200
+    },
+    {
+      "check": "nearby calendar reads all three synthetic appointments",
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/schedule/bookings/9f765099-3529-412b-80a0-eb27ba7039f6",
+      "status": 409
+    },
+    {
+      "check": "existing conflict detector and prompt reused",
+      "pass": true
+    },
+    {
+      "check": "failed and conflicting requests did not mutate calendar",
+      "pass": true
+    }
+  ]
+}
