@@ -1,0 +1,253 @@
+{
+  "version": "PortraitHighlightDeliveryManifestV1",
+  "implementationCommit": "b29bff914eed894ac663c1c0a006e18d76672035",
+  "baseCommit": "39e60d3feff52f156a72d16f7820f0b968bd9b5b",
+  "branch": "research/portrait-highlight-continuity-20261109",
+  "photosCommitted": false,
+  "rawDecodeCount": 0,
+  "checks": [
+    "syntax",
+    "source SHA",
+    "portable SHA",
+    "579 CSV rows",
+    "client local date",
+    "tracked media boundary"
+  ],
+  "files": [
+    {
+      "path": "docs/research/portrait-highlight-20261111/.gitattributes",
+      "bytes": 54,
+      "gitBlobSha256": "98c86aa6546d97a01e113d0d945549d2e567d219037264ffaf0c0c8c60bde00c",
+      "workingSha256": "98c86aa6546d97a01e113d0d945549d2e567d219037264ffaf0c0c8c60bde00c"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/BASELINE.json",
+      "bytes": 21873,
+      "gitBlobSha256": "e1f2df014fefbeabfee6c91bf3a76ae41f0f0db9a037bf335f96a79770ed85c0",
+      "workingSha256": "e1f2df014fefbeabfee6c91bf3a76ae41f0f0db9a037bf335f96a79770ed85c0"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/CANDIDATE_RECIPE.json",
+      "bytes": 151,
+      "gitBlobSha256": "a05443a6d518f10e0aaf9312b7d9916dbcd1e4882b0af6f09edf82b51e3d8892",
+      "workingSha256": "a05443a6d518f10e0aaf9312b7d9916dbcd1e4882b0af6f09edf82b51e3d8892"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/CURVES.csv",
+      "bytes": 629169,
+      "gitBlobSha256": "76250d29e2ead36d6dc823ce5eef573a69d9cda6ae6c4ef88d96d0cb8c04aa16",
+      "workingSha256": "76250d29e2ead36d6dc823ce5eef573a69d9cda6ae6c4ef88d96d0cb8c04aa16"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/INPUT_BINDING.json",
+      "bytes": 1370,
+      "gitBlobSha256": "8adbdddd56809b9b36793efb0e0034f76d3f959bc34398d5532d7770bdbf6305",
+      "workingSha256": "8adbdddd56809b9b36793efb0e0034f76d3f959bc34398d5532d7770bdbf6305"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/LOCAL_ARTIFACTS.json",
+      "bytes": 28723,
+      "gitBlobSha256": "c82a9e4ebb1806c3aea17d166636fec6cc582cc1eafeba31e9aba31bdd457e2b",
+      "workingSha256": "c82a9e4ebb1806c3aea17d166636fec6cc582cc1eafeba31e9aba31bdd457e2b"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/MEMORY_BOUNDARIES.md",
+      "bytes": 2390,
+      "gitBlobSha256": "8ce0772e87fff470935dc7b0983eac76a204f599dc68c6e09fb5bb8dfe69ae83",
+      "workingSha256": "d1e7dab68d893645a03c2a597cd0fbbdfc57497c8ad30dccfaade629347547b5"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/NODE_COMPARISON.md",
+      "bytes": 4715,
+      "gitBlobSha256": "f630f4dfd6d3bd21a883c724bb8b530faaf4a585ef4605c27bdd8b32396769d3",
+      "workingSha256": "4506a997aa3251e2aa088948ffdb370da9d3e51accd04e812ffcc70b2f23f78c"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/PORTABLE_BINDING.json",
+      "bytes": 1879,
+      "gitBlobSha256": "399214d792f67e21b9d122e4b7190ca3a573e78de4ceccc10f5ae288f375e839",
+      "workingSha256": "399214d792f67e21b9d122e4b7190ca3a573e78de4ceccc10f5ae288f375e839"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/REFERENCES.json",
+      "bytes": 4139,
+      "gitBlobSha256": "d94fbcb714aa657d781ea13738f2ab9e072261b960969b80bc1537ff9d3703cb",
+      "workingSha256": "d94fbcb714aa657d781ea13738f2ab9e072261b960969b80bc1537ff9d3703cb"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/REPLAY.json",
+      "bytes": 1724,
+      "gitBlobSha256": "7f8bd22b23ce58bb61eedb6702203c0c39954426099f6070da8f4580e0b10627",
+      "workingSha256": "7f8bd22b23ce58bb61eedb6702203c0c39954426099f6070da8f4580e0b10627"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/REPORT.md",
+      "bytes": 7340,
+      "gitBlobSha256": "157d0744c5ce6a6da56fa7f0c36d5dbdef6da38882642b1af41c8b3c55f350fa",
+      "workingSha256": "157d0744c5ce6a6da56fa7f0c36d5dbdef6da38882642b1af41c8b3c55f350fa"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/REPRODUCE.md",
+      "bytes": 2641,
+      "gitBlobSha256": "06815b44098a8bd3f7f7fac63f1f7d280910ec5ce3b05a858f480c09fc11787c",
+      "workingSha256": "20bf468e6bcbb8b63b6397a37d14823805fecbfae43cc969ceae915b784a00f4"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/RESULTS.json",
+      "bytes": 43056,
+      "gitBlobSha256": "accdc88f037b5f413a9226d182424c9f06fd84404a8c1797e0feeb670a5aaaab",
+      "workingSha256": "accdc88f037b5f413a9226d182424c9f06fd84404a8c1797e0feeb670a5aaaab"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/SOURCE_BINDING.json",
+      "bytes": 2164,
+      "gitBlobSha256": "454937fc46fb27f07f0d08d8e57fda55ec9625494e97f280d5a960cf51134ca3",
+      "workingSha256": "454937fc46fb27f07f0d08d8e57fda55ec9625494e97f280d5a960cf51134ca3"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/TESTS.json",
+      "bytes": 685,
+      "gitBlobSha256": "dcd810716764bdf82a492167a9360d0d00d20f6cf80b94eaaee3dd2c576b3a38",
+      "workingSha256": "dcd810716764bdf82a492167a9360d0d00d20f6cf80b94eaaee3dd2c576b3a38"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/curves/highlight-curves.pdf",
+      "bytes": 31531,
+      "gitBlobSha256": "0c33a55813b84a8dcc892f0c02df665382332ed723d69bc83660f519534988d7",
+      "workingSha256": "0c33a55813b84a8dcc892f0c02df665382332ed723d69bc83660f519534988d7"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/curves/highlight-curves.png",
+      "bytes": 300919,
+      "gitBlobSha256": "8057090d3517917ee8d2ed8056e26cb2fbb9e855c9660b5c000f593fbac46c2a",
+      "workingSha256": "8057090d3517917ee8d2ed8056e26cb2fbb9e855c9660b5c000f593fbac46c2a"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/curves/raw-stage-increments.pdf",
+      "bytes": 22545,
+      "gitBlobSha256": "e06ca6dc095fdf90569cea156dce2947bd35a92d0465662d4c0db958882fd8a0",
+      "workingSha256": "e06ca6dc095fdf90569cea156dce2947bd35a92d0465662d4c0db958882fd8a0"
+    },
+    {
+      "path": "docs/research/portrait-highlight-20261111/curves/raw-stage-increments.png",
+      "bytes": 140128,
+      "gitBlobSha256": "3d7184c7e89d2f6fc2c2d4f57b2f34d9330fae5053ddc8132ff56739a79467e1",
+      "workingSha256": "3d7184c7e89d2f6fc2c2d4f57b2f34d9330fae5053ddc8132ff56739a79467e1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/RenderedSrgbExposure.cs",
+      "bytes": 1528,
+      "gitBlobSha256": "b7588ae65faa0738c8b2c794dbba81b94897a9480e52973029669fecfce090f6",
+      "workingSha256": "b7588ae65faa0738c8b2c794dbba81b94897a9480e52973029669fecfce090f6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "bytes": 21943,
+      "gitBlobSha256": "1429411483898898af33bb904834faca8bc778078ef68dee3f5736b1ae431e92",
+      "workingSha256": "1429411483898898af33bb904834faca8bc778078ef68dee3f5736b1ae431e92"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "bytes": 26616,
+      "gitBlobSha256": "f055c88db44e37396896d7068e3c4fed8762b8542f4cac21f290937e971c62fe",
+      "workingSha256": "f055c88db44e37396896d7068e3c4fed8762b8542f4cac21f290937e971c62fe"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PortraitHighlightResearchTests.cs",
+      "bytes": 7740,
+      "gitBlobSha256": "226a88bb0ae6abedbfe82fc85c22939289312d29d53894a42c7760d0d32a31e6",
+      "workingSha256": "226a88bb0ae6abedbfe82fc85c22939289312d29d53894a42c7760d0d32a31e6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "bytes": 1333,
+      "gitBlobSha256": "78511d274e016ffedc49d94a2064c6d820d252bccaf671ff7261d5c482261d6c",
+      "workingSha256": "78511d274e016ffedc49d94a2064c6d820d252bccaf671ff7261d5c482261d6c"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/.gitattributes",
+      "bytes": 38,
+      "gitBlobSha256": "e78b64fa0bc0ce1d2bbe09b2e2e0f29d95230d73090269a6142557702c56da19",
+      "workingSha256": "d05ccfea3601e172e9e2239a30aa3acebf657cc614636d53d2f1886980f7c9cc"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/MaxChannelShoulderV1.cs",
+      "bytes": 2699,
+      "gitBlobSha256": "6683a52dd1c3b8e60e1a486f539dade9f5426a7a192b1c8d1df4cf91805ceddf",
+      "workingSha256": "6683a52dd1c3b8e60e1a486f539dade9f5426a7a192b1c8d1df4cf91805ceddf"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/PortraitHighlightProbe.csproj",
+      "bytes": 341,
+      "gitBlobSha256": "c85e800733e50fa877ddf1e8b0e777312435269924f6fb7ae94de3f78ea70a97",
+      "workingSha256": "c85e800733e50fa877ddf1e8b0e777312435269924f6fb7ae94de3f78ea70a97"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/Program.cs",
+      "bytes": 4336,
+      "gitBlobSha256": "fafcdb98aee5702fda08c7684f4e147740498e9d37bf45ac2bbc0661a411d7d8",
+      "workingSha256": "fafcdb98aee5702fda08c7684f4e147740498e9d37bf45ac2bbc0661a411d7d8"
+    },
+    {
+      "path": "tools/PortraitHighlightProbe/README.md",
+      "bytes": 909,
+      "gitBlobSha256": "4cbe07a7ae9a029bf527ce480e5ea9936f06e69471d69cd115b5dbfdc86145a0",
+      "workingSha256": "a25ef85876803266def49f21d600549b718e89568e422c483ff0b6644ee704de"
+    },
+    {
+      "path": "tools/portrait-highlight/.gitattributes",
+      "bytes": 35,
+      "gitBlobSha256": "200a99ab237ee0dd3b2ed6332de7415760fc96caba4ae703ecda8ba53017378e",
+      "workingSha256": "200a99ab237ee0dd3b2ed6332de7415760fc96caba4ae703ecda8ba53017378e"
+    },
+    {
+      "path": "tools/portrait-highlight/.gitignore",
+      "bytes": 19,
+      "gitBlobSha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "workingSha256": "7a2bfc130ed619857740b72e503a6487fc4888e9f16887e6f33f1dcac239ebe0"
+    },
+    {
+      "path": "tools/portrait-highlight/build_references.py",
+      "bytes": 7183,
+      "gitBlobSha256": "a0d18a0c46df4deb05ff7cacca3fe7229c306e249d3abbed448382e6924a5e52",
+      "workingSha256": "a0d18a0c46df4deb05ff7cacca3fe7229c306e249d3abbed448382e6924a5e52"
+    },
+    {
+      "path": "tools/portrait-highlight/plot_curves.py",
+      "bytes": 3475,
+      "gitBlobSha256": "2805bdc37c91645627bee479cc2da5b603d04c1fee268fd443f30cf31ee507e3",
+      "workingSha256": "2805bdc37c91645627bee479cc2da5b603d04c1fee268fd443f30cf31ee507e3"
+    },
+    {
+      "path": "tools/portrait-highlight/prepare_input.py",
+      "bytes": 2862,
+      "gitBlobSha256": "5914ca8a2b063ce2e94d07306b1ea9b6e41cb085f4c426c17a4e578d6270f246",
+      "workingSha256": "5914ca8a2b063ce2e94d07306b1ea9b6e41cb085f4c426c17a4e578d6270f246"
+    },
+    {
+      "path": "tools/portrait-highlight/requirements.txt",
+      "bytes": 354,
+      "gitBlobSha256": "f159c4a42e74d981869cc221580bac72ff5843aa743dedaaa94a7db8523487d3",
+      "workingSha256": "9c85cdf2d76bf39ee8231ed92a322c48d4189408e684cc2c202d77cd76827f04"
+    },
+    {
+      "path": "tools/portrait-highlight/run_baseline.py",
+      "bytes": 7074,
+      "gitBlobSha256": "93cb39643c25c64655c1c0dfa8de6c2755b5d6d68c39780665d7525d76e150bf",
+      "workingSha256": "93cb39643c25c64655c1c0dfa8de6c2755b5d6d68c39780665d7525d76e150bf"
+    },
+    {
+      "path": "tools/portrait-highlight/seal.py",
+      "bytes": 3677,
+      "gitBlobSha256": "07996f3d737e879d08285a235566690011a2b09ac79809cf50b3d059137345d8",
+      "workingSha256": "07996f3d737e879d08285a235566690011a2b09ac79809cf50b3d059137345d8"
+    },
+    {
+      "path": "tools/portrait-highlight/validate_candidate.py",
+      "bytes": 12565,
+      "gitBlobSha256": "6a9a5c00fa11483bcec35920b4365de6fa1749ef909a6cd062f2f715908328f1",
+      "workingSha256": "6a9a5c00fa11483bcec35920b4365de6fa1749ef909a6cd062f2f715908328f1"
+    }
+  ],
+  "selfExcluded": true
+}
