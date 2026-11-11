@@ -1,6 +1,6 @@
 # 手机档期首版交付
 
-2026-11-11，Asia/Shanghai。产品代码 `7edd9a65da2a189fadd615c59063283f90037a98`，分支 `feature/mobile-schedule-v1-20261111` 已推送并回读。本轮后续文档提交不改变产品源码。
+2026-11-11，Europe/Helsinki。产品代码 `7edd9a65da2a189fadd615c59063283f90037a98`，分支 `feature/mobile-schedule-v1-20261111` 已推送并回读。本轮后续文档提交不改变产品源码。
 
 **本机 HTTP 双向修改、PC 原生编辑/读回、App 与服务重开：PASS。iPhone 13 Safari：已准备受保护入口，等待用户操作。**
 

@@ -376,7 +376,7 @@
 - 先前静态教程逐字断言4项已改成真实命令/状态绑定，安全导出/不覆盖原件回归保留；源副本错误短态+展开详情/日志，不放宽禁止回退。
 
 
-## 手机档期首版 · 2026-11-11 Asia/Shanghai
+## 手机档期首版 · 2026-11-11 Europe/Helsinki
 - 产品源码7edd9a65da2a189fadd615c59063283f90037a98，独立分支feature/mobile-schedule-v1-20261111，基线057fe820包含1698664d；已先fetch，保留旧树。统一原SQLite日历，不复制预约数据源。
 - 手机当日/近期/详情、修改时间状态，PC刷新/编辑版本，schema9原子版本+回执、设备到期/撤销已实现。26项HTTP闭环、PC新进程/完整App与服务重开、265Core+307WPF通过。
 - 实际家中全模块包：LocalAppData/Guangjing/Deliveries/MobileScheduleV1-20261111，主入口Start-Guangjing-Diagnostic.cmd；557文件摘要、ZIP校验、启动源码SHA通过。当前服务17662，Tailscale8443；原选片443路由保留。
