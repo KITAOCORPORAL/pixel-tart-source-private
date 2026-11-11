@@ -737,7 +737,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
-        _analysisCancellation?.Cancel(); _analysisCache.Clear();
+        _analysisCancellation?.Cancel(); _analysisCache.Clear(); _analysisImage=null; _colorSpaceSourceBuffer=null; _analysisColors=[];
         _sessionPreparationCancellation?.Cancel();_secondSelectionCancellation?.Cancel();_secondSelectionCancellation?.Dispose();
         _instantCancellation?.Cancel();_instantCancellation?.Dispose();
         _comparisonKey=null;_comparisonImage=null;ClearHqPreview();InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}

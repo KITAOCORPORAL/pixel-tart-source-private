@@ -420,6 +420,9 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void RequestImageDetail()
     {
+        // Collapsed legacy pages stay bound behind the photo page. A zero-sized
+        // viewport keeps its default zoom and must not promote the RAW proxy.
+        if (!IsVisible || !IsLoaded || ImageViewport.ActualWidth <= 0 || ImageViewport.ActualHeight <= 0) return;
         var dpi=VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX;
         if(DataContext is ReferenceColorWorkspaceViewModel workspace && workspace.IsProfessionalRaw)workspace.RequestProfessionalViewport(ImageViewport.VisibleSourceRegion(),_zoomPan.Zoom,dpi);
         else _editor?.RequestPreviewZoom(_zoomPan.Zoom,dpi);
