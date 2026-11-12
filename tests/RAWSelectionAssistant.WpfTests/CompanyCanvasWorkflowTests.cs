@@ -114,6 +114,41 @@ public sealed class CompanyCanvasWorkflowTests
         if(failure is not null)throw new AssertFailedException(failure.ToString(),failure);Assert.IsTrue(complete);
     }
     [TestMethod]
+    public void LinkedBookingContinuePlanningClosesSavedOverlayAndKeepsProjectIdentity() => RunHost(async (window, main) =>
+    {
+        Directory.CreateDirectory(Root);
+        var project = Guid.NewGuid();
+        var database = new PixelTartDatabase(AppDataPaths.DatabaseFile);
+        await new SqliteProjectRepository(database).UpsertAsync(new PhotoProjectRecord { Id=project, Name="Linked booking overlay regression" });
+        main.NavigateCommand.Execute("WorkCalendar");
+        var calendar = main.WorkCalendarPage;
+        await calendar.InitializeAsync();
+        var requested = new TaskCompletionSource<ShootBookingEditorViewModel>();
+        calendar.EditorRequested += (_, args) => requested.TrySetResult(args.Editor);
+        calendar.NewBookingCommand.Execute(null);
+        var editor = await requested.Task.WaitAsync(TimeSpan.FromSeconds(10));
+        editor.Title = "Synthetic linked booking";
+        editor.SelectedProject = editor.ProjectOptions.Single(option => option.Id == project);
+        var bookingId = editor.StableBookingId;
+        var overlay = (FrameworkElement)window.FindName("BookingEditorOverlay");
+        Assert.AreEqual(Visibility.Visible, overlay.Visibility);
+        await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)editor.ContinuePlanningCommand).ExecuteAsync(null);
+        var deadline = DateTime.UtcNow.AddSeconds(20);
+        while ((editor.IsBusy || !main.IsPlanningPage || main.PlanningPage?.ProjectId != project) && DateTime.UtcNow < deadline) await Task.Delay(30);
+        Assert.IsTrue(editor.WasSaved, editor.ValidationText);
+        Assert.IsTrue(main.IsPlanningPage);
+        Assert.AreEqual(project, main.PlanningPage!.ProjectId);
+        Assert.AreEqual(Visibility.Collapsed, overlay.Visibility, "A saved quick editor must not cover the linked planning workspace.");
+        var booking = await new RAWSelectionAssistant.Core.Services.Database.SqliteShootBookingRepository(database).GetAsync(bookingId);
+        Assert.IsNotNull(booking);
+        Assert.AreEqual(project, booking.ProjectId);
+        Assert.AreEqual(bookingId, booking.Id);
+        await main.OpenPlanningAsync(project, bookingId);
+        Assert.AreEqual(Visibility.Collapsed, overlay.Visibility, "Same-page planning navigation must remain unobstructed.");
+        await File.WriteAllTextAsync(Path.Combine(Root,"LINKED_BOOKING_OVERLAY.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=project, bookingId, revision=booking.Revision, overlayCollapsed=true, samePageNavigation=true }, JsonOptions));
+    });
+
+    [TestMethod]
     public void CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot() => RunHost(async (window, main) =>
     {
         Directory.CreateDirectory(Root);

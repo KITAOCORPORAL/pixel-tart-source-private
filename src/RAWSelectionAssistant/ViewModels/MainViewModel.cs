@@ -114,6 +114,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     };
 
     public event EventHandler<PageChangedEventArgs>? PageChanged;
+    public event EventHandler? PlanningNavigationCompleted;
     public event EventHandler<AssetLibraryNavigationRequestEventArgs>? AssetLibraryFilterRequested;
 
     public MainViewModel(
@@ -1135,6 +1136,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         if (PlanningPage is null) return;
         await PlanningPage.OpenProjectSafelyAsync(projectId, bookingId, shotId).ConfigureAwait(true);
         NavigateToSurface("Planning");
+        if (PlanningPage.ProjectId == projectId) PlanningNavigationCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     private async Task ShowPlanningOverviewAsync()

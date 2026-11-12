@@ -271,6 +271,7 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
             _viewModel.PageChanged -= ViewModel_PageChanged;
+            _viewModel.PlanningNavigationCompleted -= ViewModel_PlanningNavigationCompleted;
             _viewModel.AssetLibraryFilterRequested -= ViewModel_AssetLibraryFilterRequested;
             _viewModel.WorkCalendarPage.EditorRequested -= ViewModel_EditorRequested;
         }
@@ -331,6 +332,7 @@ public partial class MainWindow : Window
             _viewModel.TutorialVisualStateChanged += ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested += ViewModel_CloseRequested;
             _viewModel.PageChanged += ViewModel_PageChanged;
+            _viewModel.PlanningNavigationCompleted += ViewModel_PlanningNavigationCompleted;
             _viewModel.AssetLibraryFilterRequested += ViewModel_AssetLibraryFilterRequested;
             _viewModel.WorkCalendarPage.EditorRequested += ViewModel_EditorRequested;
         }
@@ -447,6 +449,12 @@ public partial class MainWindow : Window
         if (BookingEditorPlanningSurface is not null) BookingEditorPlanningSurface.Visibility = Visibility.Collapsed;
         if (BookingEditorDrawerSurface is not null) BookingEditorDrawerSurface.Visibility = Visibility.Collapsed;
         if (BookingEditorOverlay is not null) BookingEditorOverlay.Visibility = Visibility.Collapsed;
+    }
+
+    private void ViewModel_PlanningNavigationCompleted(object? sender, EventArgs e)
+    {
+        // A saved quick editor has handed off to the project workspace, including same-page navigation.
+        if (_activeBookingEditor?.WasSaved == true) CloseBookingEditorVisual();
     }
 
     private void ViewModel_PageChanged(object? sender, PageChangedEventArgs e)
