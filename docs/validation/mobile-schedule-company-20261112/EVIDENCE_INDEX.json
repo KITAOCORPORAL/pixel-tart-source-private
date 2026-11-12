@@ -1,0 +1,119 @@
+{
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "preparedAtBerlin": "2026-11-12T05:28:11.404128+01:00",
+  "scope": "Company local environment and published native/HTTP preflight. No actual Safari success claimed. Configuration-only and observer-only selftests remain explicitly separated.",
+  "artifacts": [
+    {
+      "file": "receipts/PUBLISH_COMPANY.json",
+      "sha256": "fda8c7a21c56c94a9a376b29d6668571498379c729b90d957d00c91ea0784880",
+      "bytes": 519,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\PUBLISH_COMPANY.json"
+    },
+    {
+      "file": "receipts/BINDING_GENERATION_PREFLIGHT.json",
+      "sha256": "6d82acc69470bb27bcee03597199556d7b49fce5fde9d3611157732600c2c919",
+      "bytes": 593,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\BINDING_GENERATION_PREFLIGHT.json"
+    },
+    {
+      "file": "receipts/SYNTHETIC_SEED.json",
+      "sha256": "9d8e5f1ef506a6f45646f93b1f076aa83033c546c9f2c87473f7c5215d69ef88",
+      "bytes": 527,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\runtime\\seed-receipt.json"
+    },
+    {
+      "file": "receipts/COMPANY_HTTP_26_CHECKS.json",
+      "sha256": "b5599059d4039d6848bacb4ec41365510a61e36edd387c5db61dc65929a1dbf5",
+      "bytes": 3159,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\runtime\\roundtrip-receipt.json"
+    },
+    {
+      "file": "receipts/SERVICE_SELF_CONTAINED_FIRST_START.json",
+      "sha256": "e37c9e3c3ff727b76a888566cd5a8979fcde58fa0c4d12e3ea3a4be6ed7ec97e",
+      "bytes": 1344,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\SERVICE_FIRST_START.json"
+    },
+    {
+      "file": "receipts/NATIVE_PC_TO_HTTP.json",
+      "sha256": "9905f0e68f6f588b3d4778b545104c9b5d92b7a16397200adeb2fa5c676e3931",
+      "bytes": 2553,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_NATIVE_PC_TO_HTTP.json"
+    },
+    {
+      "file": "receipts/SERVICE_RESTART.json",
+      "sha256": "3deb4fbd0bbc5de23a21c16f45c15c817418ffd6dc13261922b44916923a9d63",
+      "bytes": 2082,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_SERVICE_RESTART.json"
+    },
+    {
+      "file": "receipts/APP_NORMAL_REOPEN.json",
+      "sha256": "ed24c2425c4e43c2711ffc4360098651d366eadb26dd6b4ab6983e1856c83753",
+      "bytes": 1139,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_APP_REOPEN.json"
+    },
+    {
+      "file": "receipts/NATIVE_REOPEN_READBACK.json",
+      "sha256": "d49c687e2b17ca59a01eccb86853d76c6923efb99fb57b975af4bc877f69b3d5",
+      "bytes": 672,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_NATIVE_CALENDAR_REOPEN_READBACK.json"
+    },
+    {
+      "file": "receipts/PHONE_CREDENTIAL_PERSISTENCE.json",
+      "sha256": "a0a50fe78dc035cde51397becf0cc6bf7ba5b5dd7505d56cbc257ae21f5a9f0d",
+      "bytes": 1881,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_PHONE_CREDENTIAL_RESTART.json"
+    },
+    {
+      "file": "receipts/PHONE_DEVICE_AUTHORIZATION.json",
+      "sha256": "c21590e843f20e886285e7a5d9e2674c936172a58ac189524b5ebf079f3b0610",
+      "bytes": 655,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\PHONE_DEVICE_ISSUED_SANITIZED.json"
+    },
+    {
+      "file": "receipts/MUTATING_PROBES_PAUSED.json",
+      "sha256": "7382073aa636b0bc5d2c43173dbf1e46d0e196bc74a6ae0f91e4916b0fbf9225",
+      "bytes": 592,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\MUTATING_PROBES_PAUSED.json"
+    },
+    {
+      "file": "receipts/BROWSER_TIMEZONE_OBSERVER_SELFTEST_NOT_IPHONE.json",
+      "sha256": "6820b14740bc4c9925be31fcdf9ad456b33b8e46a2000fb8f7038b4053120dc7",
+      "bytes": 321,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\OBSERVER_LOCAL_SELFTEST.json"
+    },
+    {
+      "file": "receipts/PACKAGE_ARCHIVE_LOCAL_READY.json",
+      "sha256": "7fe0d05c4e3e60c57c7a936a8b5b715f96934603a703c81245777cef92ba27c4",
+      "bytes": 579,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\COMPANY_PACKAGE_ARCHIVE.json"
+    },
+    {
+      "file": "receipts/PRIVATE_NETWORK_CLIENT_INSTALLATION.json",
+      "sha256": "4340d20301d6d06e41bb2a0f1053b7546173f6889fd89afb1b0e4166455a3c2f",
+      "bytes": 536,
+      "originalLocalFile": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\network-prerequisites\\INSTALL_RECEIPT.json"
+    },
+    {
+      "file": "receipts/PRIVATE_HTTPS_PREREQUISITE.json",
+      "sha256": "50d03107b4bc5352f96dc8df8d1c5fd800e9dc09ae7d357a3175ec847476aa0e",
+      "bytes": 441
+    },
+    {
+      "file": "COMPANY_PC_REOPEN_CALENDAR.png",
+      "sha256": "ea46b73c7a37c675a03982fa0e23058546de2b70daf0ea96108e3d13cc19342d",
+      "bytes": 174259
+    },
+    {
+      "file": "receipts/WORKTREE_AND_SOURCE_PRESERVATION.json",
+      "sha256": "010b29c101356db391cdf1228f20084444cbaec4eed33d18d8825f000f4acf22",
+      "bytes": 593
+    }
+  ],
+  "excluded": [
+    "owner key",
+    "phone bearer token/full link",
+    "Tailscale account authorization URL",
+    "runtime SQLite databases",
+    "client browser profile data"
+  ]
+}

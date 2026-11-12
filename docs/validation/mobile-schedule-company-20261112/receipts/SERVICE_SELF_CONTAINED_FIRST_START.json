@@ -1,0 +1,34 @@
+{
+  "status": "PASS_PUBLISHED_SELF_CONTAINED_SERVICE_STARTS_WITH_SYSTEM_NET8",
+  "pid": 8356,
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "executable": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\Guangjing-MobileScheduleV1-Diagnostic-win-x64\\ScheduleService\\Guangjing.Schedule.Server.exe",
+  "database": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\runtime\\Data\\pixel-tart.db",
+  "root": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\runtime",
+  "health": {
+    "ready": true,
+    "mode": "MobileScheduleV1",
+    "source": "existing calendar SQLite"
+  },
+  "runtimeOptions": {
+    "tfm": "net10.0",
+    "includedFrameworks": [
+      {
+        "name": "Microsoft.NETCore.App",
+        "version": "10.0.10"
+      },
+      {
+        "name": "Microsoft.AspNetCore.App",
+        "version": "10.0.10"
+      }
+    ],
+    "configProperties": {
+      "System.GC.Server": true,
+      "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+      "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+    }
+  },
+  "dotnetRootPassedToService": false,
+  "systemGlobalRuntime": "NETCore and WindowsDesktop 8.0.11; no ASP.NET 10 installed",
+  "ownerKeySha256": "53b43036674ce5ea48654ae1bc78b186ccf05d773c801beafe2da3a9506a7200"
+}

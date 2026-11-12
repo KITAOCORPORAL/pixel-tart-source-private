@@ -1,0 +1,8 @@
+{
+  "status": "PASS_BROWSER_TIMEZONE_OBSERVER_LOCAL_SELFTEST_ONLY",
+  "scope": "Separate diagnostic callback test; not Safari and not phone acceptance",
+  "appointmentAndBrowserZonesSeparate": true,
+  "sameOriginNonceRoute": true,
+  "usesNoBookingApiOrDatabase": true,
+  "testUserAgentNotCountedAsIPhone": true
+}

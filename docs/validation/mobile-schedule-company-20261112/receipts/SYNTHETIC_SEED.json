@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "pid": 37840,
+  "steps": [
+    {
+      "check": "existing calendar database migrated",
+      "pass": true
+    },
+    {
+      "check": "PC created synthetic booking through existing service",
+      "pass": true
+    },
+    {
+      "check": "create retry did not create or execute twice",
+      "pass": true
+    },
+    {
+      "check": "synthetic conflict fixture prepared",
+      "pass": true
+    },
+    {
+      "check": "upcoming fixture prepared",
+      "pass": true
+    }
+  ]
+}

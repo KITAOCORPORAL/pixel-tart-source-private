@@ -19,7 +19,10 @@ internal static class Program
     private static readonly List<object> Steps=[];
     [STAThread]public static int Main(string[] args)
     {
-        Root=Path.GetFullPath(args[1]);Directory.CreateDirectory(Root);
+        Root=Path.GetFullPath(args[1]);
+        if(File.Exists(Path.Combine(Root,"PHONE_HANDOFF_ACTIVE.json")) && args[0] is "seed" or "roundtrip" or "pc-adjust")
+        { Console.Error.WriteLine("Phone handoff active: mutating acceptance probes are paused for this runtime. Use a separate synthetic root."); return 2; }
+        Directory.CreateDirectory(Root);
         Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME","1");Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT",Root);
         var dispatcher=Dispatcher.CurrentDispatcher;SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(dispatcher));int exit=1;
         dispatcher.InvokeAsync(async()=>{try{Client=new HttpClient{BaseAddress=new Uri(args.Length>2?args[2]:"http://127.0.0.1:17661"),Timeout=TimeSpan.FromSeconds(20)};

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_COMPANY_APP_NORMAL_REOPEN_WITH_SHARED_CALENDAR_PERSISTED",
+  "recordedAtBerlin": "2026-11-12T04:49:58.049417+01:00",
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "oldAppPid": 35996,
+  "newAppPid": 3516,
+  "oldAppExitedNormally": true,
+  "servicePid": 26296,
+  "sameDatabasePath": "E:\\Kitao-Deliveries\\mobile-schedule-company-20261112\\runtime\\Data\\pixel-tart.db",
+  "bookingAfterReopenHttp": {
+    "id": "a08ae657-84ce-43e5-948c-a5f39aae32e9",
+    "title": "合成预约 · 手机档期测试",
+    "clientDisplayName": "合成客户",
+    "startAtUtc": "2026-11-12T02:30:00+00:00",
+    "endAtUtc": "2026-11-12T03:30:00+00:00",
+    "timeZoneId": "China Standard Time",
+    "isAllDay": false,
+    "status": "Postponed",
+    "location": "合成摄影棚",
+    "shootingType": "Portrait",
+    "shootingRequirements": null,
+    "preparationNotes": null,
+    "notes": "仅测试预约，不含真实客户信息。",
+    "revision": 4,
+    "updatedAtUtc": "2026-11-12T03:41:24.1196251+00:00",
+    "timeZoneIana": "Asia/Shanghai"
+  },
+  "phoneRealDevice": "NOT_YET_RUN"
+}

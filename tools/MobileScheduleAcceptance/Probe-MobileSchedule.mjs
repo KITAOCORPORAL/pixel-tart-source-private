@@ -1,8 +1,10 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 const [urlFile,scriptFile,identityFile,receiptFile,action='modify']=process.argv.slice(2);
+if(action!=='readback'&&fs.existsSync(path.join(path.dirname(path.resolve(identityFile)),'PHONE_HANDOFF_ACTIVE.json')))throw new Error('Phone handoff active: mutating mobile probes are paused; use a separate synthetic runtime.');
 const issued=new URL(fs.readFileSync(urlFile,'utf8').trim()),identity=JSON.parse(fs.readFileSync(identityFile,'utf8'));
 const source=fs.readFileSync(scriptFile,'utf8');assert.equal(await (await fetch(new URL('/calendar-client.js',issued))).text(),source);
 const nodes=new Map(),requests=[];let lostReply=action==='lost-reply';
