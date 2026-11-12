@@ -524,6 +524,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
             if (string.Equals(previousPage, "Tether", StringComparison.Ordinal)) TetherPage?.OnDeactivated();
             if (IsTetherPage) TetherPage?.OnActivated();
             if (IsFinancePage && FinancePage is not null) _ = FinancePage.RefreshAsync();
+            if (_initialized && IsHistoryPage) _ = ReloadProjectHistoryAsync();
             if (IsOnlineSelectionPage) _ = OnlineSelectionPage.RefreshAsync();
             if (IsPlanningPage && PlanningPage is not null) _ = PlanningPage.EnterWorkspaceAsync(Settings.LastPlanningProjectId, Settings.LastPlanningShotId);
             if (IsWorkbenchPage && WorkbenchSchedule is not null) _ = WorkbenchSchedule.RefreshAsync();
@@ -2552,8 +2553,9 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
 
     private async Task ReloadProjectHistoryAsync()
     {
+        var projects = await _projectHistoryService.LoadVisibleAsync();
         ProjectHistory.Clear();
-        foreach (var project in await _projectHistoryService.LoadVisibleAsync()) ProjectHistory.Add(project);
+        foreach (var project in projects) ProjectHistory.Add(project);
         ContinueProjectCommand.RaiseCanExecuteChanged();
         RunBatchCommand.RaiseCanExecuteChanged();
     }

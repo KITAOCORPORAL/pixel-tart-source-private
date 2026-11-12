@@ -145,7 +145,11 @@ public sealed class CompanyCanvasWorkflowTests
         Assert.AreEqual(bookingId, booking.Id);
         await main.OpenPlanningAsync(project, bookingId);
         Assert.AreEqual(Visibility.Collapsed, overlay.Visibility, "Same-page planning navigation must remain unobstructed.");
-        await File.WriteAllTextAsync(Path.Combine(Root,"LINKED_BOOKING_OVERLAY.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=project, bookingId, revision=booking.Revision, overlayCollapsed=true, samePageNavigation=true }, JsonOptions));
+        main.NavigateCommand.Execute("History");
+        deadline = DateTime.UtcNow.AddSeconds(10);
+        while (!main.ProjectHistory.Any(item => item.Id == project) && DateTime.UtcNow < deadline) await Task.Delay(30);
+        Assert.IsTrue(main.ProjectHistory.Any(item => item.Id == project), "Entering history must discover a project created through planning during this App session.");
+        await File.WriteAllTextAsync(Path.Combine(Root,"LINKED_BOOKING_OVERLAY.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=project, bookingId, revision=booking.Revision, overlayCollapsed=true, samePageNavigation=true, historyDiscoveredSameProject=true }, JsonOptions));
     });
 
     [TestMethod]
