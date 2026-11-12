@@ -1,0 +1,68 @@
+{
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "scope": "Per-step evidence and gap map, not an assertion that this new project traversed every step",
+  "steps": [
+    {
+      "step": "建项目",
+      "status": "已实际跑通",
+      "evidence": "WORKFLOW_STEP01_PROJECT_AND_PLANNING.json",
+      "boundary": "正常EXE创建项目与策划；同一ProjectId已落库"
+    },
+    {
+      "step": "排档期",
+      "status": "已实际跑通",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "boundary": "正常R2 EXE保存同一预约；SQLite与策划JSON的ProjectId/BookingId一致；原生跳转遮挡修复并复验"
+    },
+    {
+      "step": "关联策划",
+      "status": "已实际跑通",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "boundary": "正常R2 EXE保存同一预约；SQLite与策划JSON的ProjectId/BookingId一致；原生跳转遮挡修复并复验"
+    },
+    {
+      "step": "导入/联机入片",
+      "status": "存在阻塞",
+      "evidence": "receipts/native/r2-add-synthetic-source-dialog.json",
+      "boundary": "同一原项目已打开归片；Windows目录选择器路径框仅暴露pane，尚未选入来源并建立索引；监视文件夹与相机分别按既有范围"
+    },
+    {
+      "step": "筛选",
+      "status": "仅自动检查",
+      "evidence": "additional-business-auto/canvas-safety-links/results.trx",
+      "boundary": "素材引用/标记域检查；新主线真实筛选操作未补"
+    },
+    {
+      "step": "编辑",
+      "status": "仅自动检查",
+      "evidence": "darkroom-film-auto-isolated/RUN_RECEIPT.json",
+      "boundary": "合成TIFF/P3现有工具/版本/发布/独立重开"
+    },
+    {
+      "step": "客户选片",
+      "status": "已实际跑通",
+      "evidence": "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json",
+      "boundary": "复用旧真实Safari单相册范围；本新项目没有假冒客户确认"
+    },
+    {
+      "step": "收回结果",
+      "status": "已实际跑通",
+      "evidence": "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json",
+      "boundary": "复用旧PC产控UIA刷新、同步归片与唯一反向身份"
+    },
+    {
+      "step": "导出",
+      "status": "仅自动检查",
+      "evidence": "wpf-automatic-checks/RUN_RECEIPT.json;additional-business-auto/film-jpeg-product/results.trx",
+      "boundary": "当前自动PNG/JPEG和文档流程；不当作新客户交付"
+    },
+    {
+      "step": "重开项目",
+      "status": "已实际跑通",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "boundary": "仅原项目/预约/策划元数据及历史入口的独立进程重开；客户选片、编辑和导出后的完整新主线仍未完成"
+    }
+  ],
+  "updatedAtBerlin": "2026-11-12T11:57:47.612074+01:00",
+  "entireNewProjectWorkflowCompleted": false
+}

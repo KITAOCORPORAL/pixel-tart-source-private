@@ -1,0 +1,65 @@
+{
+  "updatedAtBerlin": "2026-11-12T11:57:47.612074+01:00",
+  "status": "PARTIAL",
+  "items": [
+    {
+      "priority": 1,
+      "id": "PHONE-TAILNET",
+      "status": "存在阻塞",
+      "kind": "本人授权",
+      "condition": "公司Tailscale仍NeedsLogin。需本人用原账号确认PC-20250309WEIZ入网。",
+      "next": "Running后执行Continue-CompanyMobile.py --apply，核验证书、服务、同一设备凭据，再给手机两步操作。",
+      "evidence": "receipts/TAILSCALE_CURRENT.json"
+    },
+    {
+      "priority": 2,
+      "id": "NATIVE-SOURCE-PICKER",
+      "status": "存在阻塞",
+      "kind": "交互环境",
+      "condition": "WPF原生按钮通道已恢复，预约/策划/历史修复已复验；当前Windows目录选择器的路径框只暴露pane，点击和Alt+D未得到可编辑焦点。",
+      "next": "在当前选择器选择synthetic-inputs/source-jpegs后，从同一项目建立索引并继续后续主线。",
+      "evidence": "receipts/native/r2-add-synthetic-source-dialog.json"
+    },
+    {
+      "priority": 3,
+      "id": "PHONE-ROUNDTRIP",
+      "status": "存在阻塞",
+      "kind": "真实手机验收",
+      "condition": "未发生本轮iPhone Safari改→PC刷新→PC再改→Safari刷新及最终重启闭环。",
+      "next": "先HTTPS，后真人手机保存；保存后固定revision与设备mutation，再重开App/服务复核同一预约。",
+      "evidence": "receipts/MOBILE_READONLY_CURRENT.json"
+    },
+    {
+      "priority": 4,
+      "id": "CAMERA-HARDWARE",
+      "status": "存在阻塞",
+      "kind": "设备条件",
+      "condition": "最新Windows发现1个WPD SD_Card存储设备，Camera/Image类为0，无可验证真实机身连接。文件夹模式仍需相机和外部联机软件写入完成文件。",
+      "next": "提供机身型号/固件、线或网络、厂商联机软件和明确监视目录，验到片、配对、源哈希、断线重连。",
+      "evidence": "TETHER_SUPPORT_AND_REAL_DEVICE_GAPS.json"
+    },
+    {
+      "priority": 5,
+      "id": "CAMERA-SDK",
+      "status": "尚未实现",
+      "kind": "产品能力",
+      "condition": "厂商SDK、机身自动发现、实时取景、快门、对焦、曝光、电量/存储未集成；不能仅以缺相机解释。",
+      "next": "先确定厂商SDK及许可/分发范围，再实现并用实机验收。",
+      "evidence": "TETHER_SUPPORT_AND_REAL_DEVICE_GAPS.json"
+    },
+    {
+      "priority": 6,
+      "id": "RAW-RELEASE-BOUNDARY",
+      "status": "存在阻塞",
+      "kind": "版本和科学门禁",
+      "condition": "既有RAW/ICC/数值未通过边界保留；新fetch的de0b04ff内存分支及其独立包尚未在本源码集成和复验。",
+      "next": "后续单独集成并复验受影响的暗室/联机视口，不把旁支或合成图结果扩为全RAW发行通过。",
+      "evidence": "receipts/FETCHED_MEMORY_BRANCH_BOUNDARY.json"
+    }
+  ],
+  "implementationGapsAlsoListedInFunctionStatus": [
+    "手机新建预约",
+    "完整Word/WPS",
+    "公网多租户及未交付选片扩展"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "OS_DEVICE_ENUMERATION_COMPLETE",
+  "observedAtUtc": "2026-11-12T10:42:30.825945+00:00",
+  "deviceCount": 1,
+  "devices": [
+    {
+      "Status": "OK",
+      "Class": "WPD",
+      "FriendlyName": "SD_Card"
+    }
+  ],
+  "currentProductProvider": "WatchFolder",
+  "vendorSdkCaptureImplemented": false,
+  "physicalCaptureAttempted": false,
+  "realCameraConnectionVerified": false,
+  "feedback": "Device presence only; current product has no vendor SDK or verified camera model support.",
+  "scope": "Windows present-device metadata without serial numbers; device presence is not a connected capture session."
+}

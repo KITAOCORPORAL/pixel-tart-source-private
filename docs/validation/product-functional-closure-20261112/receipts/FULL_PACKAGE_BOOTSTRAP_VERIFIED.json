@@ -1,0 +1,16 @@
+{
+  "status": "PASS_R2_COLD_START_AND_TWO_SHELL_REUSE",
+  "observedAtBerlin": "2026-11-12T11:46:21.922169+01:00",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "package": "E:/Kitao-Deliveries/product-functional-closure-20261112/Guangjing-FunctionalClosure-R2-FullModule-Diagnostic-win-x64",
+  "entry": "Start-FullProduct-LocalTest.cmd",
+  "servicePid": 32444,
+  "appPid": 20788,
+  "endpoint": "http://127.0.0.1:10741/",
+  "serviceInstanceMatchesOwnedRoot": true,
+  "runtimeRoot": "E:/Kitao-Deliveries/product-functional-closure-20261112/full-product-localtest-r2",
+  "selfContainedAppAndBothBackends": true,
+  "phoneRuntimeTouched": false,
+  "credentialsPackaged": false,
+  "scope": "R2 cold bootstrap and two-shell reuse; scratch root is separate from the preserved native project runtime."
+}

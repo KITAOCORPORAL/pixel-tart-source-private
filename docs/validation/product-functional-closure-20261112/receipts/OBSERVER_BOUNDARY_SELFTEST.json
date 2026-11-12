@@ -1,0 +1,16 @@
+{
+  "status": "PASS_SYNTHETIC_OBSERVER_SELFTEST_NOT_IPHONE",
+  "observedAtUtc": "2026-11-12T10:40:16.486590+00:00",
+  "checks": {
+    "healthBindsSameRoundAndOrigin": true,
+    "startPageAndCsp": true,
+    "syntheticObservationAccepted": true,
+    "wrongOriginRejected": true,
+    "invalidObservationRejected": true,
+    "wrongNonceRejected": true,
+    "notRecordedAsIphoneSafari": true
+  },
+  "phoneRealDeviceEvidence": false,
+  "bookingMutations": false,
+  "scope": "Real local HTTP sidecar with synthetic user agent. Browser metadata alone never grants real-device acceptance."
+}

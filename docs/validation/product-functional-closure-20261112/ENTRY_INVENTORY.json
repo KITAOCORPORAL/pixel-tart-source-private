@@ -1,0 +1,231 @@
+{
+  "observedAtBerlin": "2026-11-12T11:57:47.612074+01:00",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "primaryNavigation": [
+    {
+      "name": "工作台",
+      "automationId": "PrimaryNavigationWorkbench",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 237,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "素材库",
+      "automationId": "AssetLibraryNavigationButton",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 240,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "归片工作区",
+      "automationId": "PrimaryNavigationWorkflow",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 243,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "工作日历",
+      "automationId": "PrimaryNavigationWorkCalendar",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 246,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "策划中心",
+      "automationId": "PrimaryNavigationPlanning",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 249,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "联机拍摄",
+      "automationId": "PrimaryNavigationTether",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 252,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "暗室",
+      "automationId": "PrimaryNavigationReferenceColor",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 255,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "在线选片",
+      "automationId": "PrimaryNavigationOnlineSelection",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 258,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "摄影收支",
+      "automationId": "PrimaryNavigationFinance",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 261,
+      "observedInCurrentNormalApp": true
+    },
+    {
+      "name": "项目历史",
+      "automationId": "PrimaryNavigationHistory",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "line": 264,
+      "observedInCurrentNormalApp": true
+    }
+  ],
+  "planningSections": [
+    {
+      "name": "项目概览",
+      "route": "策划中心→项目概览",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "文字",
+      "route": "策划中心→文字",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "镜头清单",
+      "route": "策划中心→镜头清单",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "参考图",
+      "route": "策划中心→参考图",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "情绪板",
+      "route": "策划中心→情绪板",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "灯位图",
+      "route": "策划中心→灯位图",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "服化道与道具",
+      "route": "策划中心→服化道与道具",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "设备",
+      "route": "策划中心→设备",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "人员",
+      "route": "策划中心→人员",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "场地",
+      "route": "策划中心→场地",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "档期",
+      "route": "策划中心→档期",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "当天时间表",
+      "route": "策划中心→当天时间表",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "预算",
+      "route": "策划中心→预算",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "文件",
+      "route": "策划中心→文件",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    },
+    {
+      "name": "文档内容",
+      "route": "策划中心→文档内容",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "line": 91,
+      "entryObservedEarlierInNormalApp": true,
+      "businessFlowStatus": "仅自动检查"
+    }
+  ],
+  "subentriesAndExternalBrowser": [
+    {
+      "name": "自由画布",
+      "route": "素材库→自由画布；素材右键→用于创作→放到自由画布；项目板→在自由画布中打开",
+      "sourcePath": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+      "lines": [
+        30,
+        135,
+        1146
+      ],
+      "authority": "Source entry plus automatic production-control receipts; no new physical pointer acceptance"
+    },
+    {
+      "name": "即时胶片",
+      "route": "暗室→即时胶片/纸面参数",
+      "sourcePath": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "lines": [
+        85,
+        86,
+        126
+      ],
+      "authority": "Existing XAML entry, JPEG/export/reopen automatic receipts; camera animation is virtual"
+    },
+    {
+      "name": "浏览器采集",
+      "route": "Chrome图片右键；扩展侧栏→批量采集",
+      "sourcePath": "extensions/guangjing-chrome/manifest.json",
+      "authority": "Reused real Chrome R2 receipt; corresponding extension/bridge feature code unchanged"
+    }
+  ],
+  "rule": "Visible entries, source-only subentries and automatic business results remain separate. Public methods, Hidden tools and Preview tools are not counted as shipped entry points.",
+  "latestNativeEvidence": "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+  "primaryNavigationSourceUnchanged": true
+}

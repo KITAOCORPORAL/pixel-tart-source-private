@@ -1,0 +1,96 @@
+{
+  "status": "NO_VERIFIED_PHYSICAL_CAMERA_CONNECTION",
+  "observedPnPDevices": {
+    "status": "OS_DEVICE_ENUMERATION_COMPLETE",
+    "observedAtUtc": "2026-11-12T10:42:30.825945+00:00",
+    "deviceCount": 1,
+    "devices": [
+      {
+        "Status": "OK",
+        "Class": "WPD",
+        "FriendlyName": "SD_Card"
+      }
+    ],
+    "currentProductProvider": "WatchFolder",
+    "vendorSdkCaptureImplemented": false,
+    "physicalCaptureAttempted": false,
+    "realCameraConnectionVerified": false,
+    "feedback": "Device presence only; current product has no vendor SDK or verified camera model support.",
+    "scope": "Windows present-device metadata without serial numbers; device presence is not a connected capture session."
+  },
+  "implementedProvider": "WatchFolderCameraAdapter",
+  "productCameraDiscovery": "DefaultCameraDiscoveryService returns fixed None and WatchFolder, not hardware discovery",
+  "supportedHardwareModelsVerified": [],
+  "vendorSdkSupport": {
+    "Canon": "NOT_IMPLEMENTED_OR_INTEGRATED",
+    "Nikon": "NOT_IMPLEMENTED_OR_INTEGRATED",
+    "Sony": "NOT_IMPLEMENTED_OR_INTEGRATED",
+    "Fujifilm": "NOT_IMPLEMENTED_OR_INTEGRATED",
+    "Panasonic": "NOT_IMPLEMENTED_OR_INTEGRATED",
+    "Olympus/OM": "NOT_IMPLEMENTED_OR_INTEGRATED"
+  },
+  "capabilities": {
+    "fileTransferViaWatchedFolder": true,
+    "nativeUsbTether": false,
+    "liveView": false,
+    "remoteShutter": false,
+    "autofocus": false,
+    "exposureSettings": false,
+    "battery": false,
+    "cameraStorage": false
+  },
+  "recognizedPreviewExtensions": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".tif",
+    ".tiff"
+  ],
+  "recognizedRawExtensions": [
+    ".arw",
+    ".cr2",
+    ".cr3",
+    ".dng",
+    ".nef",
+    ".nrw",
+    ".orf",
+    ".pef",
+    ".raf",
+    ".rw2",
+    ".srw"
+  ],
+  "extensionRecognitionIsNotModelDecodeApproval": true,
+  "realConnectionEvidenceSearchScope": [
+    "versioned tether implementation reports",
+    "current source provider implementations",
+    "authorized isolated runtime receipts"
+  ],
+  "existingEvidenceBoundary": "Versioned reports explicitly simulated/watch-folder only; no vendor SDK handshake record verified",
+  "missingConditionsForRealFolderTether": [
+    "available camera and compatible USB/network connection",
+    "camera/tether mode and permissions",
+    "vendor/third-party tether software writing completed supported files into the explicit folder",
+    "same project/asset identity and source/hash validation on actual received files"
+  ],
+  "missingConditionsForNativeCameraControl": [
+    "vendor SDK implementation and license/distribution evaluation",
+    "supported model/firmware contract",
+    "physical hardware integration and reconnect/cancellation acceptance"
+  ],
+  "source": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs;WatchFolderServices.cs",
+  "scope": "No image was read from or captured on a physical camera.",
+  "previousPnPObservation": {
+    "status": "OS_DEVICE_ENUMERATION_COMPLETE",
+    "observedAtUtc": "2026-11-12T08:02:32.447070+00:00",
+    "deviceCount": 0,
+    "devices": [],
+    "currentProductProvider": "WatchFolder",
+    "vendorSdkCaptureImplemented": false,
+    "physicalCaptureAttempted": false,
+    "realCameraConnectionVerified": false,
+    "feedback": "No present camera/image/WPD device found. The product can still monitor an explicit folder.",
+    "scope": "Windows present-device metadata without serial numbers; device presence is not a connected capture session."
+  },
+  "cameraImageClassCount": 0,
+  "portableStorageDevicesDoNotProveTetheredCamera": true
+}

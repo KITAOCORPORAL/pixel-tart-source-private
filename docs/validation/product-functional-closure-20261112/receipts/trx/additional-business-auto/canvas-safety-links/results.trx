@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="04ab9313-be0b-4d48-bea1-3ec8d4a1bf20" name="Administrator@PC-20250309WEIZ 2026-11-12 15:55:12" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-12T15:55:12.2075373+08:00" queuing="2026-11-12T15:55:12.2075375+08:00" start="2026-11-12T15:55:10.9791034+08:00" finish="2026-11-12T15:55:12.2120694+08:00" />
+  <TestSettings name="default" id="9c975943-7e7e-4d93-9011-edf092cabe07">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-12_15_55_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2090f1a5-c5c0-4aff-8b52-0d64236a0f83" testId="1c38c2cd-ef6d-8f03-8af3-13873cc49658" testName="PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile" computerName="PC-20250309WEIZ" duration="00:00:00.0862548" startTime="2026-11-12T15:55:11.4869321+08:00" endTime="2026-11-12T15:55:11.5883464+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2090f1a5-c5c0-4aff-8b52-0d64236a0f83" />
+    <UnitTestResult executionId="c6f17e2b-f7d1-4a81-b8bd-ed340d8b4a1c" testId="1b1ea8bc-73c1-8bf9-919b-b0a041bff634" testName="OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable" computerName="PC-20250309WEIZ" duration="00:00:00.0179961" startTime="2026-11-12T15:55:12.0859179+08:00" endTime="2026-11-12T15:55:12.1045568+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c6f17e2b-f7d1-4a81-b8bd-ed340d8b4a1c" />
+    <UnitTestResult executionId="1a930ad7-b354-43fa-81be-75563121fe18" testId="1ebf68e3-31df-8df2-b3a1-def38a515cc6" testName="BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries" computerName="PC-20250309WEIZ" duration="00:00:00.3704722" startTime="2026-11-12T15:55:11.7153228+08:00" endTime="2026-11-12T15:55:12.0858830+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a930ad7-b354-43fa-81be-75563121fe18" />
+    <UnitTestResult executionId="ab8926e6-9ad6-4e5a-bea9-bc646d4067a6" testId="18ce8580-e406-8bb5-8241-efc50a587573" testName="EveryOperationLeavesSourceHashUnchanged" computerName="PC-20250309WEIZ" duration="00:00:00.0182360" startTime="2026-11-12T15:55:11.6025387+08:00" endTime="2026-11-12T15:55:11.6208278+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab8926e6-9ad6-4e5a-bea9-bc646d4067a6" />
+    <UnitTestResult executionId="34b54982-e323-4615-b9dc-d36b1af62a61" testId="14c97b55-35c0-869a-94ed-b77b856d1e7b" testName="DocumentTargetCannotOverwriteReferencedSource" computerName="PC-20250309WEIZ" duration="00:00:00.0073159" startTime="2026-11-12T15:55:11.5950944+08:00" endTime="2026-11-12T15:55:11.6025056+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34b54982-e323-4615-b9dc-d36b1af62a61" />
+    <UnitTestResult executionId="49dc4b3d-b7a4-42f1-8fa4-8bd52eaa14e8" testId="142606b0-6a34-8f1c-b21a-e37084be7eb6" testName="CanvasPurposeReadsPersistentHighQualityPreviewAfterSourceGoesOffline" computerName="PC-20250309WEIZ" duration="00:00:00.0943237" startTime="2026-11-12T15:55:11.6208669+08:00" endTime="2026-11-12T15:55:11.7152876+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49dc4b3d-b7a4-42f1-8fa4-8bd52eaa14e8" />
+    <UnitTestResult executionId="e24ced94-0163-4f7b-be1c-0691a290334a" testId="14e35727-9ced-8bad-be63-7a068683094d" testName="CombinedPaletteKeepsAllSourceReferences" computerName="PC-20250309WEIZ" duration="00:00:00.0023941" startTime="2026-11-12T15:55:11.5917113+08:00" endTime="2026-11-12T15:55:11.5948465+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e24ced94-0163-4f7b-be1c-0691a290334a" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="DocumentTargetCannotOverwriteReferencedSource" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14c97b55-35c0-869a-94ed-b77b856d1e7b">
+      <Execution id="34b54982-e323-4615-b9dc-d36b1af62a61" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests" name="DocumentTargetCannotOverwriteReferencedSource" />
+    </UnitTest>
+    <UnitTest name="CombinedPaletteKeepsAllSourceReferences" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14e35727-9ced-8bad-be63-7a068683094d">
+      <Execution id="e24ced94-0163-4f7b-be1c-0691a290334a" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests" name="CombinedPaletteKeepsAllSourceReferences" />
+    </UnitTest>
+    <UnitTest name="OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b1ea8bc-73c1-8bf9-919b-b0a041bff634">
+      <Execution id="c6f17e2b-f7d1-4a81-b8bd-ed340d8b4a1c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasProjectLinkTests" name="OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable" />
+    </UnitTest>
+    <UnitTest name="PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c38c2cd-ef6d-8f03-8af3-13873cc49658">
+      <Execution id="2090f1a5-c5c0-4aff-8b52-0d64236a0f83" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PaletteCanvasObjectTests" name="PaletteObjectPersistsAsEditableDataAndNeverCreatesAnImageFile" />
+    </UnitTest>
+    <UnitTest name="CanvasPurposeReadsPersistentHighQualityPreviewAfterSourceGoesOffline" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="142606b0-6a34-8f1c-b21a-e37084be7eb6">
+      <Execution id="49dc4b3d-b7a4-42f1-8fa4-8bd52eaa14e8" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasOfflinePreviewTests" name="CanvasPurposeReadsPersistentHighQualityPreviewAfterSourceGoesOffline" />
+    </UnitTest>
+    <UnitTest name="EveryOperationLeavesSourceHashUnchanged" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18ce8580-e406-8bb5-8241-efc50a587573">
+      <Execution id="ab8926e6-9ad6-4e5a-bea9-bc646d4067a6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasSourceSafetyTests" name="EveryOperationLeavesSourceHashUnchanged" />
+    </UnitTest>
+    <UnitTest name="BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ebf68e3-31df-8df2-b3a1-def38a515cc6">
+      <Execution id="1a930ad7-b354-43fa-81be-75563121fe18" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasInspirationBoardLinkTests" name="BoardRoundTripKeepsStableReferencesAndDeduplicatesExistingTrayEntries" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1c38c2cd-ef6d-8f03-8af3-13873cc49658" executionId="2090f1a5-c5c0-4aff-8b52-0d64236a0f83" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b1ea8bc-73c1-8bf9-919b-b0a041bff634" executionId="c6f17e2b-f7d1-4a81-b8bd-ed340d8b4a1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ebf68e3-31df-8df2-b3a1-def38a515cc6" executionId="1a930ad7-b354-43fa-81be-75563121fe18" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18ce8580-e406-8bb5-8241-efc50a587573" executionId="ab8926e6-9ad6-4e5a-bea9-bc646d4067a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14c97b55-35c0-869a-94ed-b77b856d1e7b" executionId="34b54982-e323-4615-b9dc-d36b1af62a61" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="142606b0-6a34-8f1c-b21a-e37084be7eb6" executionId="49dc4b3d-b7a4-42f1-8fa4-8bd52eaa14e8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14e35727-9ced-8bad-be63-7a068683094d" executionId="e24ced94-0163-4f7b-be1c-0691a290334a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="7" executed="7" passed="7" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,36 @@
+{
+  "status": "PASS_LOCAL_READONLY",
+  "observedAtUtc": "2026-11-12T10:42:27.562566+00:00",
+  "checks": {
+    "healthReady": true,
+    "unauthenticatedSessionRejected": true,
+    "existingPhoneCredentialAccepted": true,
+    "samePhoneDevice": true,
+    "existingBookingReadable": true,
+    "httpRevisionEqualsSqlite": true,
+    "handedOffRevisionUnchanged": true,
+    "mutatingProbeGuardPresent": true,
+    "credentialNotExpired": true
+  },
+  "booking": {
+    "id": "a08ae657-84ce-43e5-948c-a5f39aae32e9",
+    "title": "合成预约 · 手机档期测试",
+    "clientDisplayName": "合成客户",
+    "startAtUtc": "2026-11-12T02:30:00+00:00",
+    "endAtUtc": "2026-11-12T03:30:00+00:00",
+    "timeZoneId": "China Standard Time",
+    "isAllDay": false,
+    "status": "Postponed",
+    "location": "合成摄影棚",
+    "shootingType": "Portrait",
+    "shootingRequirements": null,
+    "preparationNotes": null,
+    "notes": "仅测试预约，不含真实客户信息。",
+    "revision": 4,
+    "updatedAtUtc": "2026-11-12T03:41:24.1196251+00:00",
+    "timeZoneIana": "Asia/Shanghai"
+  },
+  "credentialExpiresAtUtc": "2026-11-14T04:06:19.9374276+00:00",
+  "requestsWereGetOnly": true,
+  "scope": "Current loopback server and persisted company credential only. No iPhone or HTTPS success inferred."
+}

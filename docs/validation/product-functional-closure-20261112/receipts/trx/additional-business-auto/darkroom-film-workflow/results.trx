@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="baa5f690-4551-4c9b-acd1-e51597fd33e7" name="Administrator@PC-20250309WEIZ 2026-11-12 15:55:35" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-12T15:55:35.1673926+08:00" queuing="2026-11-12T15:55:35.1673928+08:00" start="2026-11-12T15:55:34.4400586+08:00" finish="2026-11-12T15:55:35.1716722+08:00" />
+  <TestSettings name="default" id="6eec9486-85b4-4290-aaa7-e819c80ba9db">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-12_15_55_35" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ea8986fa-e5f1-4912-be57-2aab0313b64c" testId="16b31eaa-cb3a-8ceb-8781-d3e4657662dd" testName="WideToolsMaskUndoVariantResourceDraftFilmAndPublishing" computerName="PC-20250309WEIZ" duration="00:00:00.1353498" startTime="2026-11-12T15:55:34.9133569+08:00" endTime="2026-11-12T15:55:35.0640552+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea8986fa-e5f1-4912-be57-2aab0313b64c">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests。WideToolsMaskUndoVariantResourceDraftFilmAndPublishing 引发了异常: &#xD;
+System.InvalidOperationException: Explicit evidence root required</Message>
+          <StackTrace>   at RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests.get_Root()&#xD;
+   at RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests.&lt;&gt;c.&lt;&lt;WideToolsMaskUndoVariantResourceDraftFilmAndPublishing&gt;b__4_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d73ff84a-98fa-42cf-b883-4adda0b80825" testId="120d78bd-2d88-876b-80d8-088773d2c39a" testName="IndependentProcessWideToolsAndFilmReopen" computerName="PC-20250309WEIZ" duration="00:00:00.0025012" startTime="2026-11-12T15:55:35.0674473+08:00" endTime="2026-11-12T15:55:35.0709865+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d73ff84a-98fa-42cf-b883-4adda0b80825">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive 失败。Explicit prior process session required</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27&#xD;
+   at RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests.&lt;&gt;c.&lt;&lt;IndependentProcessWideToolsAndFilmReopen&gt;b__5_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="WideToolsMaskUndoVariantResourceDraftFilmAndPublishing" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16b31eaa-cb3a-8ceb-8781-d3e4657662dd">
+      <Execution id="ea8986fa-e5f1-4912-be57-2aab0313b64c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests" name="WideToolsMaskUndoVariantResourceDraftFilmAndPublishing" />
+    </UnitTest>
+    <UnitTest name="IndependentProcessWideToolsAndFilmReopen" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="120d78bd-2d88-876b-80d8-088773d2c39a">
+      <Execution id="d73ff84a-98fa-42cf-b883-4adda0b80825" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorToolsFilmWorkflowTests" name="IndependentProcessWideToolsAndFilmReopen" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16b31eaa-cb3a-8ceb-8781-d3e4657662dd" executionId="ea8986fa-e5f1-4912-be57-2aab0313b64c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="120d78bd-2d88-876b-80d8-088773d2c39a" executionId="d73ff84a-98fa-42cf-b883-4adda0b80825" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>在测试运行中跳过测试“IndependentProcessWideToolsAndFilmReopen”。&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

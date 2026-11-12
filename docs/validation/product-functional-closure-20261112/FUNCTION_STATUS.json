@@ -1,0 +1,611 @@
+{
+  "baseProductSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "categories": [
+    "已实际跑通",
+    "仅自动检查",
+    "存在阻塞",
+    "尚未实现"
+  ],
+  "rows": [
+    {
+      "id": "WB-01",
+      "module": "工作台",
+      "entry": "主侧栏工作台",
+      "status": "已实际跑通",
+      "verifiedBoundary": "正常EXE冷启动工作台及10个主导航可见",
+      "sourcePath": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_INITIAL_WORKBENCH.json",
+      "remaining": "不代表全部任务业务完成",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_INITIAL_WORKBENCH.json"
+      ]
+    },
+    {
+      "id": "CAL-01",
+      "module": "日历",
+      "entry": "工作日历快速编辑/保存/刷新",
+      "status": "已实际跑通",
+      "verifiedBoundary": "正常R2 EXE保存原项目预约、关联策划及独立进程重开；原有手机服务本机HTTP/SQLite、凭据保持回执按原范围沿用",
+      "sourcePath": "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml",
+      "evidence": "docs/validation/mobile-schedule-company-20261112/receipts/NATIVE_PC_TO_HTTP.json;docs/validation/product-functional-closure-20261112/receipts/MOBILE_READONLY_CURRENT.json;docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/mobile-schedule-company-20261112/receipts/NATIVE_PC_TO_HTTP.json",
+        "docs/validation/product-functional-closure-20261112/receipts/MOBILE_READONLY_CURRENT.json",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json"
+      ]
+    },
+    {
+      "id": "CAL-02",
+      "module": "手机档期",
+      "entry": "Safari→PC→Safari真机往返",
+      "status": "存在阻塞",
+      "verifiedBoundary": "PC/HTTP26项不当Safari真机",
+      "sourcePath": "src/Guangjing.Schedule.Server/Program.cs",
+      "evidence": "docs/validation/mobile-schedule-company-20261112/COMPANY_READINESS.json;docs/validation/product-functional-closure-20261112/receipts/TAILSCALE_CURRENT.json;docs/validation/product-functional-closure-20261112/receipts/PRIVATE_HTTPS_CONTINUATION_PREFLIGHT.json",
+      "remaining": "Tailscale NeedsLogin；本人入网和真实手机保存/刷新待做",
+      "evidenceFiles": [
+        "docs/validation/mobile-schedule-company-20261112/COMPANY_READINESS.json",
+        "docs/validation/product-functional-closure-20261112/receipts/TAILSCALE_CURRENT.json",
+        "docs/validation/product-functional-closure-20261112/receipts/PRIVATE_HTTPS_CONTINUATION_PREFLIGHT.json"
+      ]
+    },
+    {
+      "id": "CAL-03",
+      "module": "手机档期",
+      "entry": "手机新增预约",
+      "status": "尚未实现",
+      "verifiedBoundary": "当前手机只编辑已有预约",
+      "sourcePath": "src/Guangjing.Schedule.Server/wwwroot/calendar.html",
+      "evidence": "src/Guangjing.Schedule.Server/wwwroot/calendar.html",
+      "remaining": "",
+      "evidenceFiles": [
+        "src/Guangjing.Schedule.Server/wwwroot/calendar.html"
+      ]
+    },
+    {
+      "id": "LIB-01",
+      "module": "素材库",
+      "entry": "原图入库/复用/项目板关联",
+      "status": "已实际跑通",
+      "verifiedBoundary": "沿用057fe820真实ChromeR2和实际素材回执",
+      "sourcePath": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.BrowserCapture.cs",
+      "evidence": "docs/validation/chrome-batch-r2-real-chrome-20261111/FINAL_RECEIPT.json",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/chrome-batch-r2-real-chrome-20261111/FINAL_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "LIB-02",
+      "module": "素材库",
+      "entry": "筛选/标注/项目引用",
+      "status": "仅自动检查",
+      "verifiedBoundary": "域、源安全、链接定向检查",
+      "sourcePath": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/canvas-safety-links/results.trx",
+      "remaining": "未补全部实际鼠标业务",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/canvas-safety-links/results.trx"
+      ]
+    },
+    {
+      "id": "WF-01",
+      "module": "素材归片",
+      "entry": "选片结果回收/同步归片/重开",
+      "status": "已实际跑通",
+      "verifiedBoundary": "旧Safari服务器确认和产控UIA回收/独立重开；不是原图扫描复制",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/MainViewModel.OnlineSelection.cs",
+      "evidence": "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json",
+      "remaining": "按旧回执范围复用",
+      "evidenceFiles": [
+        "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "WF-02",
+      "module": "素材归片",
+      "entry": "新项目来源匹配/复制导出/重开全主线",
+      "status": "存在阻塞",
+      "verifiedBoundary": "原项目建项、预约、策划关联和基础重开已实测；当前在来源目录选择处待补",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PENDING_BOOKING_DRAFT.json;docs/validation/product-functional-closure-20261112/receipts/DESKTOP_INPUT_STATE.json;docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_CURRENT_READONLY.json;docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_CURRENT_ACCESSIBILITY.json;docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "remaining": "Windows原生目录选择器路径框不可由现有通道编辑，未建立照片索引；后续筛选/客户/导出不冒称已过",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PENDING_BOOKING_DRAFT.json",
+        "docs/validation/product-functional-closure-20261112/receipts/DESKTOP_INPUT_STATE.json",
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_CURRENT_READONLY.json",
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_CURRENT_ACCESSIBILITY.json",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json"
+      ]
+    },
+    {
+      "id": "PLAN-00",
+      "module": "策划中心",
+      "entry": "新建策划/创建关联项目",
+      "status": "已实际跑通",
+      "verifiedBoundary": "原项目创建已实测；R2原生预约与策划JSON关联同一项目及预约，保存跳转不再被旧弹窗遮挡",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_STEP01_PROJECT_AND_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_STEP01_PROJECT_AND_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json"
+      ]
+    },
+    {
+      "id": "PLAN-WORD",
+      "module": "策划文档",
+      "entry": "完整Word/WPS能力目标",
+      "status": "尚未实现",
+      "verifiedBoundary": "已有基础编辑/DOCX不能称完整Word",
+      "sourcePath": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+      "evidence": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+      "remaining": "",
+      "evidenceFiles": [
+        "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs"
+      ]
+    },
+    {
+      "id": "TETH-01",
+      "module": "联机拍摄",
+      "entry": "目录→启动看守→监看/安全复制",
+      "status": "仅自动检查",
+      "verifiedBoundary": "48域/模拟与5偏好生命周期，非厂商连接",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx;docs/validation/product-functional-closure-20261112/receipts/trx/wpf-automatic-checks/06-TetherStartupPreferenceTests/results.trx;docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json",
+      "remaining": "真实鼠标/实机路径待补",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/wpf-automatic-checks/06-TetherStartupPreferenceTests/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json"
+      ]
+    },
+    {
+      "id": "TETH-02",
+      "module": "设备发现",
+      "entry": "Windows当前设备枚举",
+      "status": "已实际跑通",
+      "verifiedBoundary": "最新Windows枚举发现WPD SD_Card存储设备，未验证真实机身会话",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY.json;docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY_CURRENT.json",
+      "remaining": "不证明机身连接",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY.json",
+        "docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY_CURRENT.json"
+      ]
+    },
+    {
+      "id": "TETH-03",
+      "module": "设备发现",
+      "entry": "产品内USB机身自动发现",
+      "status": "尚未实现",
+      "verifiedBoundary": "DefaultCameraDiscovery只固定None/WatchFolder",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "evidence": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "remaining": "",
+      "evidenceFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs"
+      ]
+    },
+    {
+      "id": "TETH-04",
+      "module": "真实相机",
+      "entry": "真实到片/断线重连",
+      "status": "存在阻塞",
+      "verifiedBoundary": "公司无相机，旧报告无真实设备证明",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY.json;docs/implementation-reports/STAGE_IV_COLOR_TETHER_CLOSURE.md",
+      "remaining": "文件夹模式需机身、连接线/网络、外部联机软件输出；SDK模式另缺产品集成",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/CAMERA_OS_DISCOVERY.json",
+        "docs/implementation-reports/STAGE_IV_COLOR_TETHER_CLOSURE.md"
+      ]
+    },
+    {
+      "id": "TETH-05",
+      "module": "机身遥控",
+      "entry": "厂商SDK/快门/对焦/设置/电量/存储",
+      "status": "尚未实现",
+      "verifiedBoundary": "没有已集成提供器或已验证机型清单",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "evidence": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "remaining": "不能把接口/枚举当支持范围",
+      "evidenceFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs"
+      ]
+    },
+    {
+      "id": "TETH-06",
+      "module": "联机错误反馈",
+      "entry": "无效目标/复制冲突/备份及关联失败",
+      "status": "仅自动检查",
+      "verifiedBoundary": "对应错误、源安全、任务终态用例已通过",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Services/Tethering/TetherSafeCopyService.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx;docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/tether-auto-checks/tether-core.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json"
+      ]
+    },
+    {
+      "id": "DARK-01",
+      "module": "暗室",
+      "entry": "编辑/蒙版/版本/发布/独立重开",
+      "status": "仅自动检查",
+      "verifiedBoundary": "合成TIFF/P3既有管线两阶段通过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/runs/darkroom-film-auto-isolated/RUN_RECEIPT.json",
+      "remaining": "非真实RAW机型或物理UI",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/runs/darkroom-film-auto-isolated/RUN_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "DARK-02",
+      "module": "暗室/RAW",
+      "entry": "实际RAW与完整科学门禁",
+      "status": "存在阻塞",
+      "verifiedBoundary": "未将旁支诊断或历史数值失败升级为通过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "evidence": "docs/validation/home-r55-v3-numerical-20261101/FINAL_REPORT.md;docs/validation/product-functional-closure-20261112/receipts/FETCHED_MEMORY_BRANCH_BOUNDARY.json",
+      "remaining": "保留旧JPEG/ICC数值未过及未运行边界；fetch发现de0b04ff RAW内存/视口分支及独立诊断包，本包尚未集成，不能借用其通过范围",
+      "evidenceFiles": [
+        "docs/validation/home-r55-v3-numerical-20261101/FINAL_REPORT.md",
+        "docs/validation/product-functional-closure-20261112/receipts/FETCHED_MEMORY_BRANCH_BOUNDARY.json"
+      ]
+    },
+    {
+      "id": "CANVAS-01",
+      "module": "自由画布",
+      "entry": "素材库画布/策划固定快照/保存重开",
+      "status": "仅自动检查",
+      "verifiedBoundary": "完整产控自动混合图层，3进程重开和占用库；另7项源安全链接",
+      "sourcePath": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/runs/wpf-automatic-checks/RUN_RECEIPT.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/canvas-safety-links/results.trx",
+      "remaining": "离屏不作鼠标/多DPI证据",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/runs/wpf-automatic-checks/RUN_RECEIPT.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/canvas-safety-links/results.trx"
+      ]
+    },
+    {
+      "id": "FILM-01",
+      "module": "即时胶片",
+      "entry": "暗室即时胶片/显影/导出",
+      "status": "仅自动检查",
+      "verifiedBoundary": "JPEG产品8项与独立重开；虚拟相机动画不是硬件",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/film-jpeg-product/results.trx;docs/validation/product-functional-closure-20261112/receipts/runs/darkroom-film-auto-isolated/RUN_RECEIPT.json",
+      "remaining": "1项测量opt-in未运行",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/film-jpeg-product/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/runs/darkroom-film-auto-isolated/RUN_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "ONLINE-01",
+      "module": "在线选片",
+      "entry": "创建上传发布/客户确认/PC收回/归片",
+      "status": "已实际跑通",
+      "verifiedBoundary": "沿用7769b8ee的真实Safari反馈、服务器确认和产控重开",
+      "sourcePath": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "evidence": "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json",
+      "remaining": "对应实现无代码差异",
+      "evidenceFiles": [
+        "docs/validation/online-selection-converged-20261110/PHONE_FINAL_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "ONLINE-02",
+      "module": "在线选片部署",
+      "entry": "完整包服务与隔离启动入口",
+      "status": "已实际跑通",
+      "verifiedBoundary": "R2完整App和自包含选片服务实际冷启动；PS7与Windows PowerShell重复复用实例",
+      "sourcePath": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/FULL_PACKAGE_BOOTSTRAP_VERIFIED.json;docs/validation/product-functional-closure-20261112/receipts/LAUNCHER_POWERSHELL_REUSE.json",
+      "remaining": "修复时间字符串误判、早退误报及空public-base环境值；此项只证明部署启动",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/FULL_PACKAGE_BOOTSTRAP_VERIFIED.json",
+        "docs/validation/product-functional-closure-20261112/receipts/LAUNCHER_POWERSHELL_REUSE.json"
+      ]
+    },
+    {
+      "id": "ONLINE-03",
+      "module": "在线选片扩展目标",
+      "entry": "公网多租户/收费/PIN/水印/客户备注/原图下载",
+      "status": "尚未实现",
+      "verifiedBoundary": "当前单摄影师LocalDev/私网；请求明确拒绝相应未交付项",
+      "sourcePath": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "evidence": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "remaining": "",
+      "evidenceFiles": [
+        "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml"
+      ]
+    },
+    {
+      "id": "CAP-01",
+      "module": "浏览器采集",
+      "entry": "Chrome批量侧栏与图片右键",
+      "status": "已实际跑通",
+      "verifiedBoundary": "沿用057fe820四段，代码未变",
+      "sourcePath": "extensions/guangjing-chrome/sidebar.html",
+      "evidence": "docs/validation/chrome-batch-r2-real-chrome-20261111/FINAL_RECEIPT.json",
+      "remaining": "本轮不重复写旧队列",
+      "evidenceFiles": [
+        "docs/validation/chrome-batch-r2-real-chrome-20261111/FINAL_RECEIPT.json"
+      ]
+    },
+    {
+      "id": "FIN-01",
+      "module": "收支",
+      "entry": "主侧栏摄影收支/预约收支",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮收支/策划Core62项含金额币种分类附件校验",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/FinanceViewModel.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "真实UI增删导出/重开未补；非完整财会",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "HIST-01",
+      "module": "项目历史",
+      "entry": "继续/重开项目",
+      "status": "已实际跑通",
+      "verifiedBoundary": "R2正常EXE显示原项目历史并打开归片；原项目/预约/策划独立重开身份保持",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_STEP01_PROJECT_AND_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/runs/wpf-automatic-checks/RUN_RECEIPT.json;docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "remaining": "仅基础项目元数据重开；完整客户选片/编辑/导出后的新主线尚未完成",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_STEP01_PROJECT_AND_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/runs/wpf-automatic-checks/RUN_RECEIPT.json",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json"
+      ]
+    },
+    {
+      "id": "TOOL-01",
+      "module": "工具箱/任务中心",
+      "entry": "工具箱/次级任务入口",
+      "status": "仅自动检查",
+      "verifiedBoundary": "生产工具策略与导航/任务终态检查",
+      "sourcePath": "src/RAWSelectionAssistant.Core/Models/ProductToolboxPolicy.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/trx/wpf-automatic-checks/07-NavigationWorkbenchClosureTests/results.trx;docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json",
+      "remaining": "Hidden/Preview不能机械变正式入口",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/trx/wpf-automatic-checks/07-NavigationWorkbenchClosureTests/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/R2_FROZEN_AUTOMATIC_CHECKS.json"
+      ]
+    },
+    {
+      "id": "PLAN-01",
+      "module": "策划中心15区",
+      "entry": "策划中心→项目概览",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-02",
+      "module": "策划中心15区",
+      "entry": "策划中心→文字",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-03",
+      "module": "策划中心15区",
+      "entry": "策划中心→镜头清单",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-04",
+      "module": "策划中心15区",
+      "entry": "策划中心→参考图",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-05",
+      "module": "策划中心15区",
+      "entry": "策划中心→情绪板",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-06",
+      "module": "策划中心15区",
+      "entry": "策划中心→灯位图",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-07",
+      "module": "策划中心15区",
+      "entry": "策划中心→服化道与道具",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-08",
+      "module": "策划中心15区",
+      "entry": "策划中心→设备",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-09",
+      "module": "策划中心15区",
+      "entry": "策划中心→人员",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-10",
+      "module": "策划中心15区",
+      "entry": "策划中心→场地",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-11",
+      "module": "策划中心15区",
+      "entry": "策划中心→档期",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-12",
+      "module": "策划中心15区",
+      "entry": "策划中心→当天时间表",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-13",
+      "module": "策划中心15区",
+      "entry": "策划中心→预算",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-14",
+      "module": "策划中心15区",
+      "entry": "策划中心→文件",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    },
+    {
+      "id": "PLAN-15",
+      "module": "策划中心15区",
+      "entry": "策划中心→文档内容",
+      "status": "仅自动检查",
+      "verifiedBoundary": "本轮15区结构/模式及资源业务检查；入口实际可见不等于每区实际业务全过",
+      "sourcePath": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "evidence": "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx;docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "remaining": "",
+      "evidenceFiles": [
+        "docs/validation/product-functional-closure-20261112/receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/planning-15/results.trx",
+        "docs/validation/product-functional-closure-20261112/receipts/trx/additional-business-auto/core-finance-planning/results.trx"
+      ]
+    }
+  ],
+  "observedAtBerlin": "2026-11-12T11:57:47.612074+01:00",
+  "inheritedProductSource": "7edd9a65da2a189fadd615c59063283f90037a98"
+}

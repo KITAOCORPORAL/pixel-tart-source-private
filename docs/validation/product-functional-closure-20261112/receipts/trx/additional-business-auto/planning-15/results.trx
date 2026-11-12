@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0a4dc1b4-acde-45e5-9e4c-37f3c1b10366" name="Administrator@PC-20250309WEIZ 2026-11-12 15:55:14" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-12T15:55:14.7149064+08:00" queuing="2026-11-12T15:55:14.7149067+08:00" start="2026-11-12T15:55:12.8811271+08:00" finish="2026-11-12T15:55:16.2834747+08:00" />
+  <TestSettings name="default" id="fa7cdf40-ba9e-4007-b028-27d2cf89c273">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-12_15_55_14" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="45f389b6-83f2-4dff-9350-4b54fd118ed6" testId="1515a484-9ef3-831e-bd39-51d1e324dd59" testName="EditableRowsCancelAndRoundTripReorderCopyArchiveAndColumns" computerName="PC-20250309WEIZ" duration="00:00:00.9493995" startTime="2026-11-12T15:55:13.3566674+08:00" endTime="2026-11-12T15:55:14.3215763+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45f389b6-83f2-4dff-9350-4b54fd118ed6" />
+    <UnitTestResult executionId="9dadab0c-c153-4460-b8ec-214b3fdcca7d" testId="13728109-4d15-85f1-aef2-dfbf6b079204" testName="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" computerName="PC-20250309WEIZ" duration="00:00:01.0209108" startTime="2026-11-12T15:55:15.1182843+08:00" endTime="2026-11-12T15:55:16.1403478+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9dadab0c-c153-4460-b8ec-214b3fdcca7d" />
+    <UnitTestResult executionId="27d34ac1-5c98-406a-8fad-b0b17a6e251f" testId="193a23b7-7d74-83ba-b7e9-e9799a6732d6" testName="InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace" computerName="PC-20250309WEIZ" duration="00:00:00.1237765" startTime="2026-11-12T15:55:14.3251680+08:00" endTime="2026-11-12T15:55:14.4492251+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27d34ac1-5c98-406a-8fad-b0b17a6e251f" />
+    <UnitTestResult executionId="f0187800-86d9-42e7-9f86-d9b963841db0" testId="125dfbfe-c57d-8b5c-beda-0b27f10cb9b6" testName="ShellFlushCapturesUncommittedRowAndInvalidTextRemainsRecoverable" computerName="PC-20250309WEIZ" duration="00:00:00.0562406" startTime="2026-11-12T15:55:14.4496091+08:00" endTime="2026-11-12T15:55:14.5059160+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f0187800-86d9-42e7-9f86-d9b963841db0" />
+    <UnitTestResult executionId="298523c7-8187-4734-8744-424222ca6589" testId="197cfdb9-e6a0-88c2-aec6-e427bb874a6f" testName="ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate" computerName="PC-20250309WEIZ" duration="00:00:00.1102297" startTime="2026-11-12T15:55:14.6832610+08:00" endTime="2026-11-12T15:55:14.7935522+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="298523c7-8187-4734-8744-424222ca6589" />
+    <UnitTestResult executionId="dd98cbb0-3fc5-4c53-a399-6a3e3b2ce09c" testId="15c24d21-f84f-8cf1-8579-ad02c9a1c744" testName="NestedListDocxUsesRealLevelsAndPreservesHierarchy" computerName="PC-20250309WEIZ" duration="00:00:00.0484124" startTime="2026-11-12T15:55:15.0697776+08:00" endTime="2026-11-12T15:55:15.1182500+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd98cbb0-3fc5-4c53-a399-6a3e3b2ce09c" />
+    <UnitTestResult executionId="b93525ad-9d5b-466d-bb61-43e8c75b3add" testId="158d3377-b311-8d0a-ae7c-8585f3d5701f" testName="ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger" computerName="PC-20250309WEIZ" duration="00:00:00.1616118" startTime="2026-11-12T15:55:14.5059513+08:00" endTime="2026-11-12T15:55:14.6676263+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b93525ad-9d5b-466d-bb61-43e8c75b3add" />
+    <UnitTestResult executionId="79266ae1-2d8c-43c8-9f20-f972a4ce0426" testId="1cdedab0-0006-85c8-b8fd-5498f68ad208" testName="DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal" computerName="PC-20250309WEIZ" duration="00:00:00.2760941" startTime="2026-11-12T15:55:14.7935908+08:00" endTime="2026-11-12T15:55:15.0697414+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="79266ae1-2d8c-43c8-9f20-f972a4ce0426" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="NestedListDocxUsesRealLevelsAndPreservesHierarchy" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15c24d21-f84f-8cf1-8579-ad02c9a1c744">
+      <Execution id="dd98cbb0-3fc5-4c53-a399-6a3e3b2ce09c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="NestedListDocxUsesRealLevelsAndPreservesHierarchy" />
+    </UnitTest>
+    <UnitTest name="InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="193a23b7-7d74-83ba-b7e9-e9799a6732d6">
+      <Execution id="27d34ac1-5c98-406a-8fad-b0b17a6e251f" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace" />
+    </UnitTest>
+    <UnitTest name="DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1cdedab0-0006-85c8-b8fd-5498f68ad208">
+      <Execution id="79266ae1-2d8c-43c8-9f20-f972a4ce0426" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal" />
+    </UnitTest>
+    <UnitTest name="ShellFlushCapturesUncommittedRowAndInvalidTextRemainsRecoverable" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="125dfbfe-c57d-8b5c-beda-0b27f10cb9b6">
+      <Execution id="f0187800-86d9-42e7-9f86-d9b963841db0" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="ShellFlushCapturesUncommittedRowAndInvalidTextRemainsRecoverable" />
+    </UnitTest>
+    <UnitTest name="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13728109-4d15-85f1-aef2-dfbf6b079204">
+      <Execution id="9dadab0c-c153-4460-b8ec-214b3fdcca7d" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop" />
+    </UnitTest>
+    <UnitTest name="ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="158d3377-b311-8d0a-ae7c-8585f3d5701f">
+      <Execution id="b93525ad-9d5b-466d-bb61-43e8c75b3add" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger" />
+    </UnitTest>
+    <UnitTest name="ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="197cfdb9-e6a0-88c2-aec6-e427bb874a6f">
+      <Execution id="298523c7-8187-4734-8744-424222ca6589" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate" />
+    </UnitTest>
+    <UnitTest name="EditableRowsCancelAndRoundTripReorderCopyArchiveAndColumns" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1515a484-9ef3-831e-bd39-51d1e324dd59">
+      <Execution id="45f389b6-83f2-4dff-9350-4b54fd118ed6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests" name="EditableRowsCancelAndRoundTripReorderCopyArchiveAndColumns" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1515a484-9ef3-831e-bd39-51d1e324dd59" executionId="45f389b6-83f2-4dff-9350-4b54fd118ed6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13728109-4d15-85f1-aef2-dfbf6b079204" executionId="9dadab0c-c153-4460-b8ec-214b3fdcca7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="193a23b7-7d74-83ba-b7e9-e9799a6732d6" executionId="27d34ac1-5c98-406a-8fad-b0b17a6e251f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="125dfbfe-c57d-8b5c-beda-0b27f10cb9b6" executionId="f0187800-86d9-42e7-9f86-d9b963841db0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="197cfdb9-e6a0-88c2-aec6-e427bb874a6f" executionId="298523c7-8187-4734-8744-424222ca6589" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15c24d21-f84f-8cf1-8579-ad02c9a1c744" executionId="dd98cbb0-3fc5-4c53-a399-6a3e3b2ce09c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="158d3377-b311-8d0a-ae7c-8585f3d5701f" executionId="b93525ad-9d5b-466d-bb61-43e8c75b3add" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cdedab0-0006-85c8-b8fd-5498f68ad208" executionId="79266ae1-2d8c-43c8-9f20-f972a4ce0426" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

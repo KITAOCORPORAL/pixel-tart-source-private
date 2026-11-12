@@ -1,0 +1,20 @@
+{
+  "status": "FAILURES_RETAINED_WITH_LATER_VERIFICATION",
+  "observedAtBerlin": "2026-11-12T11:46:21.922169+01:00",
+  "items": [
+    {
+      "issue": "Initial full-App harness queried a visible control before layout was ready",
+      "receipt": "receipts/attempts/initial-overlay-harness/results.trx",
+      "resolution": "Final full-App host runs the existing command and checks overlay, identities and history."
+    },
+    {
+      "issue": "PS7 cold service inherited an empty public-base value",
+      "error": "Invalid explicit public test base URL",
+      "resolution": "Explicit loopback endpoint; cold service/App and both shell reuse checks passed."
+    },
+    {
+      "issue": "Earlier darkroom run lacked its isolated root",
+      "resolution": "Original failed/NotExecuted TRX retained with later isolated two-process passes."
+    }
+  ]
+}

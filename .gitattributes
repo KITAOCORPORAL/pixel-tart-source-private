@@ -9,3 +9,9 @@ docs/evidence/integrated-workflow-color-docs/batch-12/** -text whitespace=cr-at-
 
 # Preserve WPF closure evidence manifest hashes across checkout platforms.
 docs/evidence/batch12-wpf-native-closure/** -text whitespace=cr-at-eol
+
+# Functional diagnostic manifests bind exact evidence and helper bytes across checkouts.
+docs/validation/product-functional-closure-20261112/** -text whitespace=cr-at-eol,-blank-at-eof
+tools/FunctionalClosureAcceptance/** -text whitespace=cr-at-eol,-blank-at-eof
+tools/MobileScheduleAcceptance/BrowserTimeZoneObserver.py text eol=lf
+tools/online-http-v1/Start-LocalTest.ps1 text eol=lf

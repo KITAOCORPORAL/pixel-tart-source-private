@@ -24,7 +24,7 @@ class Handler(BaseHTTPRequestHandler):
   self.end_headers();self.wfile.write(payload)
  def do_GET(self):
   path=self.normalized()
-  if path=='/health/ready':return self.reply(200,{'ready':True,'mode':'BrowserTimeZoneObserverOnly','bookingWrites':False})
+  if path=='/health/ready':return self.reply(200,{'ready':True,'mode':'BrowserTimeZoneObserverOnly','roundId':config['roundId'],'publicBaseUrl':public,'bookingWrites':False})
   if path!='/start/'+nonce:return self.reply(404,{'code':'NotFound'})
   script_nonce=secrets.token_urlsafe(18)
   template="""<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>光镜 · 真机验收连接</title><body><h1>连接公司合成档期</h1><p id="state">正在记录浏览器时区，随后打开预约。</p><script nonce="SCRIPT_NONCE">

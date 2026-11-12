@@ -1,0 +1,73 @@
+{
+  "status": "PARTIAL_FUNCTIONAL_DIAGNOSTIC_EXTERNAL_PREREQUISITES_PENDING",
+  "recordedAtBerlin": "2026-11-12T11:57:47.612074+01:00",
+  "sourceBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "branch": "integration/product-functional-closure-20261112",
+  "uiRedesignWithdrawn": true,
+  "approvedGeneratedDrafts": 0,
+  "srcOrXamlChangesThisTask": true,
+  "functionStatusRows": 42,
+  "classificationCounts": {
+    "已实际跑通": 10,
+    "存在阻塞": 4,
+    "尚未实现": 5,
+    "仅自动检查": 23
+  },
+  "automaticUniqueOutcomes": {
+    "Passed": 215,
+    "NotExecuted": 1
+  },
+  "normalNativeWorkflowProjectCreated": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+  "newNativeBookingCreated": true,
+  "cameraDevicesPresent": 0,
+  "verifiedRealCameraModels": 0,
+  "phoneRealDevice": "NOT_RUN_NEEDS_COMPANY_TAILNET_SIGNIN",
+  "interactiveDesktop": "NATIVE_WPF_ACTIONS_RECOVERED_WINDOWS_SOURCE_PICKER_PENDING",
+  "updatedPackage": "E:/Kitao-Deliveries/product-functional-closure-20261112/Guangjing-FunctionalClosure-R2-FullModule-Diagnostic-win-x64",
+  "fullPackageBootstrap": "PASS_R2_COLD_START_TWO_SHELL_REUSE",
+  "remainingTopPriority": [
+    "本人确认公司机加入原Tailscale网络",
+    "Windows目录选择器选入合成来源后补原项目第4步起主线",
+    "真实iPhone双向改/刷新与最终App服务重开",
+    "真实相机条件及尚未集成SDK边界"
+  ],
+  "productScopeNotImplemented": [
+    "厂商SDK/机身自动发现/遥控",
+    "手机新建预约",
+    "完整Word/WPS目标",
+    "公网多租户及未交付在线发布扩展"
+  ],
+  "batchCaptureInherited": "057fe82085183df723b4542fbff2e09fc8bc896b",
+  "newAutomaticChecksPassed": 71,
+  "launcherBugFixed": "DateTime JSON coercion and early desktop exit misreported as ready",
+  "fetchedMemoryIntegrationSha": "de0b04fffd953b46d3f48400b32f646f3b65bf9f",
+  "memoryBranchIntegratedInThisPackage": false,
+  "privateHttpsContinuationScript": "tools/FunctionalClosureAcceptance/Continue-CompanyMobile.py",
+  "latestPhoneChecks": "PASS_READONLY_EXISTING_DEVICE_REVISION4_NO_MUTATION",
+  "nativeWorkflowCompleted": false,
+  "sourceChangesThisTask": [
+    "diagnostic tools",
+    "bootstrap launcher",
+    "timezone observer health binding",
+    "documentation and receipts"
+  ],
+  "currentPnPDeviceCount": 1,
+  "cameraImageClassDevices": 0,
+  "portableStoragePresenceIsNotCameraConnection": true,
+  "archiveFileName": "Guangjing-FullModule-Functional-Diagnostic-R2-win-x64-20261112.zip",
+  "baseProductSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "r2FrozenChecksPassed": 71,
+  "normalNativeBookingId": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+  "normalNativeBookingRevision": 2,
+  "changedProductFiles": [
+    "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+    "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"
+  ],
+  "xamlOrStylesChanged": false,
+  "pixelAlgorithmsChanged": false,
+  "productRepairCommits": [
+    "64c87a88c3cbcb4a71915ddb2ef1686f0fbcbe06",
+    "ea5b421b03329535a8834545ac3196dc5e4295e4"
+  ]
+}

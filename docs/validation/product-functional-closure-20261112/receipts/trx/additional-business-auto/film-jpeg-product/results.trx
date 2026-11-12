@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e306aa02-ffa1-4162-8876-e30a76a66396" name="Administrator@PC-20250309WEIZ 2026-11-12 15:55:18" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-12T15:55:18.8110660+08:00" queuing="2026-11-12T15:55:18.8110662+08:00" start="2026-11-12T15:55:16.9742334+08:00" finish="2026-11-12T15:55:33.7659028+08:00" />
+  <TestSettings name="default" id="206ff344-afe4-493c-8606-7edda63e624d">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-12_15_55_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e5ed4a80-9399-4800-9bae-45ed693e1447" testId="12fb2c92-682a-8a11-a406-815aa87a4e04" testName="FilmCancellationAndInvalidInputKeepExistingDestinationAndReleaseGlobalWork" computerName="PC-20250309WEIZ" duration="00:00:00.0083073" startTime="2026-11-12T15:55:25.4388698+08:00" endTime="2026-11-12T15:55:25.4472576+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e5ed4a80-9399-4800-9bae-45ed693e1447" />
+    <UnitTestResult executionId="b3eb6b14-8566-4aba-86d7-e458baa21f05" testId="14221e7d-16bc-8bae-95eb-9b2226fce047" testName="BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy" computerName="PC-20250309WEIZ" duration="00:00:00.4893321" startTime="2026-11-12T15:55:30.9411427+08:00" endTime="2026-11-12T15:55:31.4305715+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b3eb6b14-8566-4aba-86d7-e458baa21f05" />
+    <UnitTestResult executionId="f9664ac4-74e8-4611-970e-cd55661eb49c" testId="13a40b94-10b7-84dc-a22b-9930d0c0eb5e" testName="CameraPathEjectsFullyBeforeFourSecondDevelopmentAndLifecycleKeepsOldVersion" computerName="PC-20250309WEIZ" duration="00:00:05.4935412" startTime="2026-11-12T15:55:25.4472969+08:00" endTime="2026-11-12T15:55:30.9409088+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9664ac4-74e8-4611-970e-cd55661eb49c" />
+    <UnitTestResult executionId="2db2ea43-cdb0-4d64-904e-d5c8c65a3dbf" testId="10cddb56-10f8-86dd-85cc-309bf4e2ad17" testName="BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately" computerName="PC-20250309WEIZ" duration="00:00:00.0072587" startTime="2026-11-12T15:55:33.3072972+08:00" endTime="2026-11-12T15:55:33.3146375+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2db2ea43-cdb0-4d64-904e-d5c8c65a3dbf">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive 失败。Measurement opt-in required.</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27&#xD;
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="46e4d004-8e7e-4bc1-a83a-09f616e20b68" testId="19dfcd3a-860f-8f96-9ff8-d6d572167611" testName="BatchNineV2PaperFormatsRoundTripAllExifAndBothFits" computerName="PC-20250309WEIZ" duration="00:00:00.3124241" startTime="2026-11-12T15:55:33.3147011+08:00" endTime="2026-11-12T15:55:33.6282224+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46e4d004-8e7e-4bc1-a83a-09f616e20b68" />
+    <UnitTestResult executionId="3a47db9d-0829-4f66-8b79-8d29deed7f22" testId="105ffee7-fd26-8953-bb56-da79b76a8148" testName="MultiTileViewportCoversPanDpiAndStaleRequestsNeverWin" computerName="PC-20250309WEIZ" duration="00:00:02.5964928" startTime="2026-11-12T15:55:22.8419921+08:00" endTime="2026-11-12T15:55:25.4385852+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a47db9d-0829-4f66-8b79-8d29deed7f22" />
+    <UnitTestResult executionId="42dbcfac-9c3d-43e9-938a-d2fd27cb2d58" testId="18ab080a-85d8-8376-92af-2c566d0b5823" testName="FilmQuickFormatsAndPublishingUseSameFrozenFullResolutionDefinition" computerName="PC-20250309WEIZ" duration="00:00:00.3984277" startTime="2026-11-12T15:55:17.4501853+08:00" endTime="2026-11-12T15:55:17.8644501+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42dbcfac-9c3d-43e9-938a-d2fd27cb2d58" />
+    <UnitTestResult executionId="fef703d5-9526-4310-a2c8-8f4442c530ae" testId="1f27f7f8-3337-85a0-b285-c5e406d3b559" testName="FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport" computerName="PC-20250309WEIZ" duration="00:00:04.9725067" startTime="2026-11-12T15:55:17.8680238+08:00" endTime="2026-11-12T15:55:22.8408503+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fef703d5-9526-4310-a2c8-8f4442c530ae" />
+    <UnitTestResult executionId="7d0c30e5-df20-4662-a5c8-8ea6e4988f3b" testId="10849670-4638-828e-b089-45206d233489" testName="BatchNineMultipleWorkspacesPressureCancellationAndBudgetRelease" computerName="PC-20250309WEIZ" duration="00:00:01.8765161" startTime="2026-11-12T15:55:31.4306196+08:00" endTime="2026-11-12T15:55:33.3072519+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d0c30e5-df20-4662-a5c8-8ea6e4988f3b" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="BatchNineMultipleWorkspacesPressureCancellationAndBudgetRelease" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10849670-4638-828e-b089-45206d233489">
+      <Execution id="7d0c30e5-df20-4662-a5c8-8ea6e4988f3b" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="BatchNineMultipleWorkspacesPressureCancellationAndBudgetRelease" />
+    </UnitTest>
+    <UnitTest name="MultiTileViewportCoversPanDpiAndStaleRequestsNeverWin" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="105ffee7-fd26-8953-bb56-da79b76a8148">
+      <Execution id="3a47db9d-0829-4f66-8b79-8d29deed7f22" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="MultiTileViewportCoversPanDpiAndStaleRequestsNeverWin" />
+    </UnitTest>
+    <UnitTest name="FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f27f7f8-3337-85a0-b285-c5e406d3b559">
+      <Execution id="fef703d5-9526-4310-a2c8-8f4442c530ae" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport" />
+    </UnitTest>
+    <UnitTest name="BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14221e7d-16bc-8bae-95eb-9b2226fce047">
+      <Execution id="b3eb6b14-8566-4aba-86d7-e458baa21f05" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy" />
+    </UnitTest>
+    <UnitTest name="BatchNineV2PaperFormatsRoundTripAllExifAndBothFits" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19dfcd3a-860f-8f96-9ff8-d6d572167611">
+      <Execution id="46e4d004-8e7e-4bc1-a83a-09f616e20b68" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="BatchNineV2PaperFormatsRoundTripAllExifAndBothFits" />
+    </UnitTest>
+    <UnitTest name="FilmQuickFormatsAndPublishingUseSameFrozenFullResolutionDefinition" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18ab080a-85d8-8376-92af-2c566d0b5823">
+      <Execution id="42dbcfac-9c3d-43e9-938a-d2fd27cb2d58" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="FilmQuickFormatsAndPublishingUseSameFrozenFullResolutionDefinition" />
+    </UnitTest>
+    <UnitTest name="CameraPathEjectsFullyBeforeFourSecondDevelopmentAndLifecycleKeepsOldVersion" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13a40b94-10b7-84dc-a22b-9930d0c0eb5e">
+      <Execution id="f9664ac4-74e8-4611-970e-cd55661eb49c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="CameraPathEjectsFullyBeforeFourSecondDevelopmentAndLifecycleKeepsOldVersion" />
+    </UnitTest>
+    <UnitTest name="BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10cddb56-10f8-86dd-85cc-309bf4e2ad17">
+      <Execution id="2db2ea43-cdb0-4d64-904e-d5c8c65a3dbf" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately" />
+    </UnitTest>
+    <UnitTest name="FilmCancellationAndInvalidInputKeepExistingDestinationAndReleaseGlobalWork" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12fb2c92-682a-8a11-a406-815aa87a4e04">
+      <Execution id="e5ed4a80-9399-4800-9bae-45ed693e1447" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests" name="FilmCancellationAndInvalidInputKeepExistingDestinationAndReleaseGlobalWork" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="12fb2c92-682a-8a11-a406-815aa87a4e04" executionId="e5ed4a80-9399-4800-9bae-45ed693e1447" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14221e7d-16bc-8bae-95eb-9b2226fce047" executionId="b3eb6b14-8566-4aba-86d7-e458baa21f05" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13a40b94-10b7-84dc-a22b-9930d0c0eb5e" executionId="f9664ac4-74e8-4611-970e-cd55661eb49c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10cddb56-10f8-86dd-85cc-309bf4e2ad17" executionId="2db2ea43-cdb0-4d64-904e-d5c8c65a3dbf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19dfcd3a-860f-8f96-9ff8-d6d572167611" executionId="46e4d004-8e7e-4bc1-a83a-09f616e20b68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="105ffee7-fd26-8953-bb56-da79b76a8148" executionId="3a47db9d-0829-4f66-8b79-8d29deed7f22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18ab080a-85d8-8376-92af-2c566d0b5823" executionId="42dbcfac-9c3d-43e9-938a-d2fd27cb2d58" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f27f7f8-3337-85a0-b285-c5e406d3b559" executionId="fef703d5-9526-4310-a2c8-8f4442c530ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10849670-4638-828e-b089-45206d233489" executionId="7d0c30e5-df20-4662-a5c8-8ea6e4988f3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="9" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>在测试运行中跳过测试“BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately”。&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

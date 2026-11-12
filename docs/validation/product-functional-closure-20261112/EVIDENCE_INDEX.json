@@ -1,0 +1,390 @@
+{
+  "sourceBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "scope": "Read-only current state, scoped real old receipts, and explicit automatic checks. No full new-project or phone acceptance inferred.",
+  "artifacts": [
+    {
+      "file": "CURRENT_RECEIPT.json",
+      "bytes": 3161,
+      "sha256": "9e377b52af3244328bd59c0ce35b37469466b27d90330f976f6546bf3ab355db"
+    },
+    {
+      "file": "CURRENT_REPORT.md",
+      "bytes": 5165,
+      "sha256": "e9c97949d73d83c05f7d32938b58768960db87ca845d10d24aac2bfcda2ebac0"
+    },
+    {
+      "file": "DIAGNOSTIC_TOOL_IDENTITY.json",
+      "bytes": 2662,
+      "sha256": "3a4c6d9b2a89499695603ea36b359e7c67c296faa676256f262ab1b4552fc5e8"
+    },
+    {
+      "file": "ENTRY_INVENTORY.json",
+      "bytes": 8443,
+      "sha256": "4a48da6d4ee97f08ed933386e6968af55afdccff30ed46c65e5008f0875f7956"
+    },
+    {
+      "file": "FUNCTION_STATUS.csv",
+      "bytes": 19745,
+      "sha256": "8fd3a2db12354607d2eb8259e87e9f44c70f4e24f6eac38380250fb89f850205"
+    },
+    {
+      "file": "FUNCTION_STATUS.json",
+      "bytes": 40125,
+      "sha256": "5e45c1f262fa9e27b78594e9d1675e56b0dcddc6ccb808668f3da049f616f6d7"
+    },
+    {
+      "file": "FUNCTION_STATUS.md",
+      "bytes": 8010,
+      "sha256": "a67a7ffdf76c53b86cb06b3d689990ea4989671dc6902abd2175f5e21ac59567"
+    },
+    {
+      "file": "MAIN_WORKFLOW_BREAKPOINTS.json",
+      "bytes": 3193,
+      "sha256": "b3bfff8da2d1402e4db0af61950166148fb9ecb6cbcd8e7cd9828440ec22947d"
+    },
+    {
+      "file": "receipts/attempts/initial-overlay-harness/results.trx",
+      "bytes": 3938,
+      "sha256": "dc7ff627f77345c71008647f45fa779f449886edcefde5cad1132632bbde84db"
+    },
+    {
+      "file": "receipts/AUTOMATIC_CHECK_SUMMARY.json",
+      "bytes": 8570,
+      "sha256": "a015b75435fd209ac0452507fce9fa006e1218e1abc3199fe37d4a75d107b9c7"
+    },
+    {
+      "file": "receipts/baseline-before-r2/FULL_PACKAGE_BOOTSTRAP_VERIFIED.json",
+      "bytes": 988,
+      "sha256": "205dea5901ffe7a90329ed43d604fa8746b008e11b181d0b2e6b958da1022ac8"
+    },
+    {
+      "file": "receipts/baseline-before-r2/LAUNCHER_POWERSHELL_REUSE.json",
+      "bytes": 1006,
+      "sha256": "587e7d0147251e04c1c9e6b742e0cc95f37da94d51c9c2661c6412f0c256d2f7"
+    },
+    {
+      "file": "receipts/baseline-before-r2/OBSERVER_BOUNDARY_SELFTEST.json",
+      "bytes": 599,
+      "sha256": "994c10644e702153791a37e598ad41fa672f582c443d0efb1c74f03c510478e6"
+    },
+    {
+      "file": "receipts/CAMERA_OS_DISCOVERY.json",
+      "bytes": 545,
+      "sha256": "89d770bb381dc98120d30ff76b509c035248437648e511550a15732f3c7d3252"
+    },
+    {
+      "file": "receipts/CAMERA_OS_DISCOVERY_CURRENT.json",
+      "bytes": 640,
+      "sha256": "fdf780bc7a3ddda95776617b069648f869f49e39497dd6d4c04132cf44fc828f"
+    },
+    {
+      "file": "receipts/DESKTOP_INPUT_STATE.json",
+      "bytes": 710,
+      "sha256": "92189a8c23335073891515e264d6e88145f15ecf71f001988547e8168de815f6"
+    },
+    {
+      "file": "receipts/FETCHED_MEMORY_BRANCH_BOUNDARY.json",
+      "bytes": 2630,
+      "sha256": "ca7066e870e958a0eb5fa50ea419f19bfba5d7d1171038f6684745f5071ff407"
+    },
+    {
+      "file": "receipts/FINAL_PACKAGE_ARCHIVE.json",
+      "bytes": 587,
+      "sha256": "2db0ba28c4e481f7b79ca08ea6aaf4be65e40c97f045b2d82d4ab21d2e4e6345"
+    },
+    {
+      "file": "receipts/FULL_PACKAGE_BOOTSTRAP_VERIFIED.json",
+      "bytes": 829,
+      "sha256": "e638f64ab4c2be5e4373569952a3b0ad6e2f6526684eb5376e15d5da16dc3e0c"
+    },
+    {
+      "file": "receipts/LAUNCHER_POWERSHELL_REUSE.json",
+      "bytes": 1006,
+      "sha256": "4a3026621a9b36542ba5f53fb0695a53100ba111dbdd28965f2f8df6f84131ef"
+    },
+    {
+      "file": "receipts/MOBILE_READONLY_CURRENT.json",
+      "bytes": 1338,
+      "sha256": "4f4042e5c9aed3e8bff8158bccc71378210226f508c97502fdcd9748344f693e"
+    },
+    {
+      "file": "receipts/native/booking-saved-planning-linked.json",
+      "bytes": 23559,
+      "sha256": "82630a511a73d6693583b7f54e43c4c609e43b66e347931991f81b3bd861d0d3"
+    },
+    {
+      "file": "receipts/native/old-saved-overlay-manual-close.json",
+      "bytes": 20521,
+      "sha256": "bf72e1cec9a1bc5d1eeda1cd6ed254c9a4e88b91ba3dafdb3f185f34ab3d6402"
+    },
+    {
+      "file": "receipts/native/r2-add-synthetic-source-dialog.json",
+      "bytes": 14374,
+      "sha256": "ebc9dc3d798bc5fe36e638f52dd87b5ea527f447c0a8e8f428fbcdd1409f4e47"
+    },
+    {
+      "file": "receipts/native/r2-folder-address-focus.json",
+      "bytes": 14387,
+      "sha256": "69ba70184aa89fe71fd179e23ee40d1160ca36e7fb80fc67e69e115132bd1f68"
+    },
+    {
+      "file": "receipts/native/r2-linked-planning-overlay-fixed.json",
+      "bytes": 20379,
+      "sha256": "de6cbb29cdf12a933445ae53ffc47e1f8cccf31a98066cd00ac5be916b6351ed"
+    },
+    {
+      "file": "receipts/native/r2-original-booking-reopen.json",
+      "bytes": 33400,
+      "sha256": "03e792e515aa78d3016117069498fa768d5f74ceb668f936203add4a17f6f3cc"
+    },
+    {
+      "file": "receipts/native/r2-project-history-refreshed.json",
+      "bytes": 10887,
+      "sha256": "5eceebdb967e642916f5053eebf14a14a8fa1aceacaea238735758417c4ffb11"
+    },
+    {
+      "file": "receipts/native/r2-reopen-same-project-workflow.json",
+      "bytes": 11086,
+      "sha256": "52884ccd2cd4f86401335007e146fdb4f799c4645b2491c3cd21f1ee04537e81"
+    },
+    {
+      "file": "receipts/native/r2-same-booking-edit.json",
+      "bytes": 36646,
+      "sha256": "44ae5fab08eb4ff04076864e2f752317d585b93ef50230a76121198caef906ff"
+    },
+    {
+      "file": "receipts/native/same-project-history-entry.json",
+      "bytes": 9019,
+      "sha256": "da88e19728248ef92602506eb7949900eadefa6cdb2b9ddee6dc4bb968fdcea1"
+    },
+    {
+      "file": "receipts/OBSERVER_BOUNDARY_SELFTEST.json",
+      "bytes": 599,
+      "sha256": "cc365f37bb06a8fac097835e58ae97290186fd88767b2cb129b2bb4b213fc5c2"
+    },
+    {
+      "file": "receipts/PACKAGE_CURRENT_INTEGRITY.json",
+      "bytes": 720,
+      "sha256": "940a71349df6693122b844b5d94c5954f0c90484e22f651790e9641a2f4f7a59"
+    },
+    {
+      "file": "receipts/PRIVATE_HTTPS_CONTINUATION_PREFLIGHT.json",
+      "bytes": 440,
+      "sha256": "3561b75bc88c503decfa385b17933b1b0d3fa9254dde5bbe37d200793bfe7c34"
+    },
+    {
+      "file": "receipts/PUBLISH_SELECTION_SERVICE.json",
+      "bytes": 411,
+      "sha256": "46466debdb8e4ad3c1d54b10da6916bc6dcc4bbc8b32f3cdd365ae4dc8a877d4"
+    },
+    {
+      "file": "receipts/R2_COMPLETE_APP_REGRESSION.json",
+      "bytes": 257,
+      "sha256": "c571449d11104f2ee2750064c007711297d05398a7340ca63d265f29795b698c"
+    },
+    {
+      "file": "receipts/R2_FROZEN_AUTOMATIC_CHECKS.json",
+      "bytes": 1320,
+      "sha256": "b470270cce5ba84ea2637e093a0836025ff3511696418ac4bc4445924a7e7774"
+    },
+    {
+      "file": "receipts/R2_NATIVE_PROJECT_BOOKING_AND_REOPEN.json",
+      "bytes": 1713,
+      "sha256": "5e208a435341f2238c2ae3ee8a06229ade7f1df41fbb7a250a166072659956f6"
+    },
+    {
+      "file": "receipts/REPAIR_ATTEMPT_HISTORY.json",
+      "bytes": 871,
+      "sha256": "ae2e669ef07b7b626097e2692cc4c7a74df70b168d891b49fdca16f72be41425"
+    },
+    {
+      "file": "receipts/RESUME_AUTOMATIC_CHECKS.json",
+      "bytes": 3890,
+      "sha256": "f80d63544b52cf26ab67de565c436d7663c9eb5a88def05e64e668da1f177cec"
+    },
+    {
+      "file": "receipts/RESUME_SOURCE_AND_FETCH.json",
+      "bytes": 55434,
+      "sha256": "3de4c733245d131bb872111ce7acf52ad5fbd8631f556a4e50f2d8db967c8d14"
+    },
+    {
+      "file": "receipts/REUSED_EVIDENCE_RECHECK.json",
+      "bytes": 328,
+      "sha256": "d767b2cc3e7f7cfc389e1b7e45739c5852de69d71af9fa107289d6286e79bfeb"
+    },
+    {
+      "file": "receipts/REUSED_EVIDENCE_SOURCE_BINDINGS.json",
+      "bytes": 2068,
+      "sha256": "fe36484d9b55a6a0638f3cb0e4641d6756505be58f7bbd428fbd4f8d9a415cc0"
+    },
+    {
+      "file": "receipts/runs/darkroom-film-auto-isolated/RUN_RECEIPT.json",
+      "bytes": 1676,
+      "sha256": "cd7deff77fc20a25f0fb80f99d86ffc057170a2913e534966ba3264057ef1894"
+    },
+    {
+      "file": "receipts/runs/wpf-automatic-checks/RUN_RECEIPT.json",
+      "bytes": 1918,
+      "sha256": "77de06eef39773dcfcd0a0acabbeba653414a2dc15777115413b014f2348c120"
+    },
+    {
+      "file": "receipts/TAILSCALE_CURRENT.json",
+      "bytes": 451,
+      "sha256": "442eb3abd5bd606a284f3ef6aa9ae86d0f79b885b2d8061ed7c2350f79c5c317"
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/canvas-safety-links/results.trx",
+      "bytes": 11376,
+      "sha256": "05c58927173ac1ea28bb7baa1d27615401c9fa8ef58ade3b9bdb5f573d265d6a"
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "bytes": 87318,
+      "sha256": "21f1773dcaad0f0e343a80f468f237f48c73bfbf7eac5c55f293de4f455e0a97"
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/darkroom-film-workflow/results.trx",
+      "bytes": 6069,
+      "sha256": "ca0918ff29b66ff836ccf98eb90371785637bf6a1a4df5b44c5cd5fffd55c8d3"
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/film-jpeg-product/results.trx",
+      "bytes": 15525,
+      "sha256": "31b9244545c78cb14d008b463785240bd0cf92ae45a8fcc809dcd05562bc1520"
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/planning-15/results.trx",
+      "bytes": 12911,
+      "sha256": "e4d630264b2a1cad96574965a12498f23924a11953528b3b587588e302f60ccc"
+    },
+    {
+      "file": "receipts/trx/darkroom-film-auto-isolated/build-edit-export/results.trx",
+      "bytes": 2705,
+      "sha256": "2a32dbcf131ea4f70d27008e9fe57e8ae67b0e33aa59c8bb55582830e4fbf571"
+    },
+    {
+      "file": "receipts/trx/darkroom-film-auto-isolated/independent-reopen/results.trx",
+      "bytes": 2663,
+      "sha256": "5c909f4746bb3e962f4024dfef4c2a75867b3512bf17497f916d7fbb1a16ab62"
+    },
+    {
+      "file": "receipts/trx/r2-booking-tether-auto/results.trx",
+      "bytes": 91425,
+      "sha256": "400c6359e8faaeb21de4903fa5247092969cf08408b232b77a43a19088c2c563"
+    },
+    {
+      "file": "receipts/trx/r2-navigation-auto/results.trx",
+      "bytes": 14388,
+      "sha256": "e2685353d0d6b10064a80832bd4a02a09af0ab505646b0ec0c5e17724856c1bf"
+    },
+    {
+      "file": "receipts/trx/r2-overlay-history-auto/results.trx",
+      "bytes": 2752,
+      "sha256": "e77720ff365fe677622699a27d13180df94501c7290d046283da9f81fd245d61"
+    },
+    {
+      "file": "receipts/trx/resume-booking-tether-auto/results.trx",
+      "bytes": 91425,
+      "sha256": "b7e7fb9411b1de82e143b2b2107e8b8182b7c4cb2e0e415e23cdb53452995c2e"
+    },
+    {
+      "file": "receipts/trx/tether-auto-checks/tether-core.trx",
+      "bytes": 68369,
+      "sha256": "a733e414dde8b29e0438b89c4734af1e81c574c3f4a8a1bf5d886e67890c9e8d"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/01-CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot/results.trx",
+      "bytes": 3216,
+      "sha256": "18078e2d57e2130ca5a6dea4e00b659d0ec904fe0dd72779390d50778fd23f64"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/02-CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot/results.trx",
+      "bytes": 3314,
+      "sha256": "e57a1e776bb4b611f372a719d52ebdc0424764cd17862151ad5c1fbaf142b4f2"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/03-CompanyCanvasWorkflowTests.ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates/results.trx",
+      "bytes": 3316,
+      "sha256": "d0cfcfa3610e89a64c3a05effaf2cd53aa0448202a3cc2cd2269810f7f91c736"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/04-CompanyCanvasWorkflowTests.BusyLibraryReportsInlineAndPreservesCurrentCanvas/results.trx",
+      "bytes": 3274,
+      "sha256": "c2164b8366a91bcb45ae4b8d0f3305840c5e5cd677a82812362caf6e6cf20c49"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/05-CanvasWorkflowAcceptanceTests/results.trx",
+      "bytes": 1618,
+      "sha256": "99f73a42f5dfd26f617f1880ed4ebf35af6fedc3b1b2b412c1c97de2ee7ef91e"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/06-TetherStartupPreferenceTests/results.trx",
+      "bytes": 9508,
+      "sha256": "81a8edcbdbe0b49243393c2933f832c0e17b040cedba3aee97c3279afaa00343"
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/07-NavigationWorkbenchClosureTests/results.trx",
+      "bytes": 14388,
+      "sha256": "d00fe2dbc02cebcb0fa126498e52fe3268d4a6011feed4c3dc92d834db8aaba1"
+    },
+    {
+      "file": "receipts/WORKFLOW_BOOKING_READY_TO_SAVE.json",
+      "bytes": 126912,
+      "sha256": "80a9168bcb28114e3b0615c6e319352fbba9bf9fa027c95ac26bfd41d71d118d"
+    },
+    {
+      "file": "receipts/WORKFLOW_CURRENT_ACCESSIBILITY.json",
+      "bytes": 16591,
+      "sha256": "ed1f5094854b253729956436fefd18fcfd82c6be263368c1bce19866a8abea8f"
+    },
+    {
+      "file": "receipts/WORKFLOW_CURRENT_READONLY.json",
+      "bytes": 990,
+      "sha256": "cdafdc308bb0ff9675a3dfad3b58159c7ff5ea28bd5df848ddc04cf43490eb93"
+    },
+    {
+      "file": "receipts/WORKFLOW_INITIAL_WORKBENCH.json",
+      "bytes": 55097,
+      "sha256": "b0414402b16716bb8ec429db4d619303e12f7d4ea4def6cd3e9ebdc72eb03d25"
+    },
+    {
+      "file": "receipts/WORKFLOW_PENDING_BOOKING_DRAFT.json",
+      "bytes": 446,
+      "sha256": "7fd62caa290e764cc9b46b7b7b04735da8dfd4c8e78b069ee29e0e1c26b99fe6"
+    },
+    {
+      "file": "receipts/WORKFLOW_PROJECT_CREATED_PLANNING.json",
+      "bytes": 86480,
+      "sha256": "82abd1513f20cda4b056ea3ea43830840eab03410c492133305d0818eb660584"
+    },
+    {
+      "file": "receipts/WORKFLOW_STEP01_PROJECT_AND_PLANNING.json",
+      "bytes": 623,
+      "sha256": "a0932241dd6c2cf3fb05dd787c30156804e3515667fe6321b827b00a0a049f13"
+    },
+    {
+      "file": "REMAINING_BLOCKERS.json",
+      "bytes": 3158,
+      "sha256": "59e0be0f4c6863ab0c1912199d7318589d060482fe700d22ae07381cfb65c4e1"
+    },
+    {
+      "file": "TETHER_SUPPORT_AND_REAL_DEVICE_GAPS.json",
+      "bytes": 3679,
+      "sha256": "3b7705129a04e9b7cf88c24d180334296890b02ba0a8c25b51472d59dc372c50"
+    },
+    {
+      "file": "UI_SCOPE_LOCK.json",
+      "bytes": 329,
+      "sha256": "6679037a5edef6eda3ab92e0387ea1c9fa6a859f1031d1dcafdc70e2568aba7e"
+    }
+  ],
+  "excluded": [
+    "runtime SQLite",
+    "owner keys",
+    "device tokens",
+    "Tailscale login links",
+    "unapproved UI drafts",
+    "post-seal package and push readback receipts"
+  ]
+}
