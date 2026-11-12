@@ -1,0 +1,20 @@
+{
+  "status": "PASS_DELIVERY_PUSH_AND_REMOTE_READBACK",
+  "recordedAtUtc": "2026-11-12T11:02:47.982Z",
+  "clientTimeZone": "Europe/Berlin",
+  "branch": "integration/product-functional-closure-20261112",
+  "deliveryCommit": "6523972ff09beb933af2b75944662a63d7b3b7ad",
+  "verifiedRemoteDeliverySha": "6523972ff09beb933af2b75944662a63d7b3b7ad",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "sourceRepairCommits": [
+    "64c87a88c3cbcb4a71915ddb2ef1686f0fbcbe06",
+    "ea5b421b03329535a8834545ac3196dc5e4295e4"
+  ],
+  "archiveSha256": "c28256848a18b5c593641f559f9fbf37981fd06d2665586dcac9fec3ea90c4cb",
+  "bundleChecksPassed": 28,
+  "stagedHashBoundFiles": 88,
+  "releaseReady": false,
+  "phoneRealDeviceRoundtrip": "NOT_RUN",
+  "fullNewProjectWorkflow": "SOURCE_PICKER_PENDING",
+  "receiptScope": "This receipt attests the delivery commit above; the subsequent receipt-commit ref is read back separately and recorded locally and in the final reply."
+}
