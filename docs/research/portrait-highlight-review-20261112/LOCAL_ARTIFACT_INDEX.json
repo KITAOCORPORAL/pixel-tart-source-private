@@ -1,0 +1,1546 @@
+{
+  "photosRemainLocal": true,
+  "gplSourcesAndBinariesRemainLocal": true,
+  "files": [
+    {
+      "path": "references/dt-exposure.c",
+      "bytes": 42911,
+      "sha256": "2b52c149c5dba1a7c47acdb7f2a18f6482710b8861b64971cd766b22f312af28"
+    },
+    {
+      "path": "references/dt-LICENSE",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "references/rt-curves.cc",
+      "bytes": 116193,
+      "sha256": "4a8bc2215d5a1ac62120df52a9eef17842e72ebede890a11cc2d34a8053663bb"
+    },
+    {
+      "path": "references/rt-curves.h",
+      "bytes": 54578,
+      "sha256": "fee25e75d0dc863cb5cf3fbc37dc8649c0fa8c71466ab9f91f7d8176860db83c"
+    },
+    {
+      "path": "references/rt-improcfun.cc",
+      "bytes": 243445,
+      "sha256": "adba83f7a2cdc9351e465239b4a2edadfc36f760765df6dc89b584e84c921f6b"
+    },
+    {
+      "path": "references/rt-LICENSE",
+      "bytes": 32473,
+      "sha256": "8c75a9231db8906865e29706ed63aad18fd918c92c15dbefbb13c25fe42850b4"
+    },
+    {
+      "path": "references/rt-LUT.h",
+      "bytes": 20939,
+      "sha256": "74d3a4e603f23fcea211145b8e6de0eb2d5f073767b390375f590dc58c27dfe2"
+    },
+    {
+      "path": "reference-build/dt-compile.txt",
+      "bytes": 8,
+      "sha256": "3a6fd22bb5c8c38fcee6fd3ce310f54b4545f1170dd8ed9a31dbc79b2e8a73a2"
+    },
+    {
+      "path": "reference-build/dt.cpp",
+      "bytes": 1942,
+      "sha256": "1d613ca1cd5cbfe91c88fecb71136a5a849dd4002a9d1cb67ed98faa60f3b620"
+    },
+    {
+      "path": "reference-build/dt.exe",
+      "bytes": 244736,
+      "sha256": "c6f2aa4959e34a0a90437561088e2a97a2a6c701aebcd3ed8f29eb14c70f0df5"
+    },
+    {
+      "path": "reference-build/dt.obj",
+      "bytes": 292436,
+      "sha256": "d777d7294bcfd6614aa46c73e7db7f46c4cdc4c03d5114b20c18239e49c16b83"
+    },
+    {
+      "path": "reference-build/rt-compile.txt",
+      "bytes": 8,
+      "sha256": "b4f302871fce4fe5262f56d06e0455bdc0e9a37de5a933d0bc67607deaf4693a"
+    },
+    {
+      "path": "reference-build/rt.cpp",
+      "bytes": 8646,
+      "sha256": "dcb66dbc23dbefde4319fc5c6f48231d37b45c96901f63c409233cb2305d03d8"
+    },
+    {
+      "path": "reference-build/rt.exe",
+      "bytes": 263168,
+      "sha256": "b43f907add01cb6185597fa98d9de618249f4490b503aa28f1c3200b263420bc"
+    },
+    {
+      "path": "reference-build/rt.obj",
+      "bytes": 309297,
+      "sha256": "b49fe60f48f69581aa78c3f8efd3e0a743d93eec62fbfb72dab664bf16df6e75"
+    },
+    {
+      "path": "synthetic-review/dt-console.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "synthetic-review/dt.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/basic-tone-output.f32",
+      "bytes": 36900,
+      "sha256": "75a28ed218c2951e3c194a8ce96fb743535646596702759bbb7164946b4ace45"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/candidate-product-rgb16.tif",
+      "bytes": 18670,
+      "sha256": "fcb314e5f889f333ff53f81d3d7003c6b7649769c4048d6eceff0f840cd23314"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/candidate.f32",
+      "bytes": 36900,
+      "sha256": "0a89343b6d1c8b1429b564bbab0d3c2b59f80a326cb6b1bda452a07a8eea2ebf"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/decoded-display-linear.f32",
+      "bytes": 36900,
+      "sha256": "f874226acfb934d95d757aef7d5517106644c81a0c87c2032cba3db9a5bf7bb3"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/decoded-display-linear.f64",
+      "bytes": 73800,
+      "sha256": "ddf6f4a58cf241802ae1fc6f794132a5a4e454212e19e9e350e3d9fae260633e"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/encoded-preclip.f32",
+      "bytes": 36900,
+      "sha256": "75a28ed218c2951e3c194a8ce96fb743535646596702759bbb7164946b4ace45"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/encoded-preclip.f64",
+      "bytes": 73800,
+      "sha256": "e8a95645628dc072a09540177c1b99ff71028614bbe37298d12ec74c4e515fe1"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/exposed-linear.f32",
+      "bytes": 36900,
+      "sha256": "f874226acfb934d95d757aef7d5517106644c81a0c87c2032cba3db9a5bf7bb3"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/exposed-linear.f64",
+      "bytes": 73800,
+      "sha256": "ddf6f4a58cf241802ae1fc6f794132a5a4e454212e19e9e350e3d9fae260633e"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/output-clipped.f32",
+      "bytes": 36900,
+      "sha256": "75a28ed218c2951e3c194a8ce96fb743535646596702759bbb7164946b4ace45"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/output-clipped.f64",
+      "bytes": 73800,
+      "sha256": "e8a95645628dc072a09540177c1b99ff71028614bbe37298d12ec74c4e515fe1"
+    },
+    {
+      "path": "synthetic-review/ev0-dense/output.f32",
+      "bytes": 36900,
+      "sha256": "75a28ed218c2951e3c194a8ce96fb743535646596702759bbb7164946b4ace45"
+    },
+    {
+      "path": "synthetic-review/ev0-dense-console.txt",
+      "bytes": 240,
+      "sha256": "91c55b5cd061822091ed370d81e25e836327ec7276a743148b1f9e0ed5ef31ff"
+    },
+    {
+      "path": "synthetic-review/ev0-dense.f32",
+      "bytes": 36900,
+      "sha256": "75a28ed218c2951e3c194a8ce96fb743535646596702759bbb7164946b4ace45"
+    },
+    {
+      "path": "synthetic-review/EV0_CURVES.csv",
+      "bytes": 646667,
+      "sha256": "1189d649d9a79f9ad0470556ab3319da67a86e90e9fd91ac80ac7247d81bdfae"
+    },
+    {
+      "path": "synthetic-review/historical-579.f32",
+      "bytes": 6948,
+      "sha256": "6928fc0e2d2d3626af51643fc9b9beca2ae1184e27ea68ed2e37bc012ad9859d"
+    },
+    {
+      "path": "synthetic-review/historical-observed-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918"
+    },
+    {
+      "path": "synthetic-review/historical-quiet/basic-tone-output.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829"
+    },
+    {
+      "path": "synthetic-review/historical-quiet/candidate-product-rgb16.tif",
+      "bytes": 3694,
+      "sha256": "1e0f9bda2afda38d9aa0c3505606eafd676e59d261ba6dfa2a9f81b6b1a47a29"
+    },
+    {
+      "path": "synthetic-review/historical-quiet/candidate.f32",
+      "bytes": 6948,
+      "sha256": "6e87451a3d47a95c93a7842c530b283a1f11051b5a7e40aac6500981657d7e6f"
+    },
+    {
+      "path": "synthetic-review/historical-quiet/output.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1"
+    },
+    {
+      "path": "synthetic-review/historical-quiet-console.txt",
+      "bytes": 164,
+      "sha256": "b4ae8c03c0d5d9b7d3c484c43f369492895b04069d3ff37af1ceae8195469368"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-decoded-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-decoded-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-gamut-oetf.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-gamut-oetf.f64",
+      "bytes": 13896,
+      "sha256": "2d124af8aae002f44c10f32cb916847d87f6c6249be6d8c03a435b5c899d5c0f"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-tone-linear.f32",
+      "bytes": 6948,
+      "sha256": "ccd5b29b6e20604108269093ac9522efbea178f8ebc4551c42f78d68d36e4374"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-tone-linear.f64",
+      "bytes": 13896,
+      "sha256": "71720394b5c84e57620d932d257d09df50c01a25b94dc3c7434e45d9ed68fa69"
+    },
+    {
+      "path": "synthetic-review/historical-traced/basic-tone-output.f32",
+      "bytes": 6948,
+      "sha256": "2bcee72b51ad2426d729add46c7adceb73b7fcbef46bd087e0223f9128cde829"
+    },
+    {
+      "path": "synthetic-review/historical-traced/candidate-product-rgb16.tif",
+      "bytes": 3694,
+      "sha256": "1e0f9bda2afda38d9aa0c3505606eafd676e59d261ba6dfa2a9f81b6b1a47a29"
+    },
+    {
+      "path": "synthetic-review/historical-traced/candidate.f32",
+      "bytes": 6948,
+      "sha256": "6e87451a3d47a95c93a7842c530b283a1f11051b5a7e40aac6500981657d7e6f"
+    },
+    {
+      "path": "synthetic-review/historical-traced/decoded-display-linear.f32",
+      "bytes": 6948,
+      "sha256": "915983cbfab4726a9c53ea9673bcecaf5538174f45b8262ff043d2b20220d918"
+    },
+    {
+      "path": "synthetic-review/historical-traced/decoded-display-linear.f64",
+      "bytes": 13896,
+      "sha256": "28c10d901412ff5a6760c318f7e83c9667b0c18e0ce7e68cd9e3f3998085bb61"
+    },
+    {
+      "path": "synthetic-review/historical-traced/encoded-preclip.f32",
+      "bytes": 6948,
+      "sha256": "c3587592c19762dba20fffa6eda944ffe46763a635f7430b98b82a96d80611bd"
+    },
+    {
+      "path": "synthetic-review/historical-traced/encoded-preclip.f64",
+      "bytes": 13896,
+      "sha256": "8388d3ed3e1b5fddd7e981edf9a3ad2829a04b10149536410c83abb8246e514e"
+    },
+    {
+      "path": "synthetic-review/historical-traced/exposed-linear.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04"
+    },
+    {
+      "path": "synthetic-review/historical-traced/exposed-linear.f64",
+      "bytes": 13896,
+      "sha256": "319ee67360cae54d191e11811815acf3e74632b9e11cf302f6f5c1cacba8dde8"
+    },
+    {
+      "path": "synthetic-review/historical-traced/output-clipped.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1"
+    },
+    {
+      "path": "synthetic-review/historical-traced/output-clipped.f64",
+      "bytes": 13896,
+      "sha256": "342e8c6a75a764e0cdce7d87d615e12ae01c16e716cf1b48a7f29a026311bccc"
+    },
+    {
+      "path": "synthetic-review/historical-traced/output.f32",
+      "bytes": 6948,
+      "sha256": "e76e9f11db253ecd5504baf095205c859da119022d50b2b6e2a58ed88d8525a1"
+    },
+    {
+      "path": "synthetic-review/historical-traced-console.txt",
+      "bytes": 301,
+      "sha256": "3884ddf54b1e4ed7150fec96651a9b7874d593e15e80519f0b11d79cf8452f69"
+    },
+    {
+      "path": "synthetic-review/rt-console.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "synthetic-review/rt-highlight60-console.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "synthetic-review/rt-highlight60.f32",
+      "bytes": 6948,
+      "sha256": "bb80c844741e02dfa050197701d819b8d48e4ebf5b5d75e846001d444d1a030f"
+    },
+    {
+      "path": "synthetic-review/rt.f32",
+      "bytes": 6948,
+      "sha256": "f5fd42d6553a5c1dfceb4d1757c742c837a58c8adffa6e5d080de1f6ea365b04"
+    },
+    {
+      "path": "synthetic-review/SYNTHETIC_RESULTS.json",
+      "bytes": 2231,
+      "sha256": "49d10a001d021b52b9f278a14c6a1f92de98dbc409f004c9e8ffa8f5e11303ca"
+    },
+    {
+      "path": "fixed-inputs/company-02-midtone.f32",
+      "bytes": 1769472,
+      "sha256": "c5066e02b90a293aa4a5c30888268e417b583770f0deae913d3cc3dd52154141"
+    },
+    {
+      "path": "fixed-inputs/company-02.icc",
+      "bytes": 3144,
+      "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e"
+    },
+    {
+      "path": "fixed-inputs/company-05-midtone.f32",
+      "bytes": 1769472,
+      "sha256": "814fd7b8578ac0c045f42bea9e3284d197c72419739b6141e64865e1d0e63051"
+    },
+    {
+      "path": "fixed-inputs/company-05.icc",
+      "bytes": 3144,
+      "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e"
+    },
+    {
+      "path": "fixed-inputs/skin-hair-edge.f32",
+      "bytes": 1769472,
+      "sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b"
+    },
+    {
+      "path": "fixed-inputs/skin-shoulder.f32",
+      "bytes": 1769472,
+      "sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f"
+    },
+    {
+      "path": "fixed-inputs/sunset-gradient.f32",
+      "bytes": 1769472,
+      "sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972"
+    },
+    {
+      "path": "fixed-inputs/synthetic-coloured-specular-midtone.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "fixed-inputs/synthetic-coloured-specular.f32",
+      "bytes": 1769472,
+      "sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2"
+    },
+    {
+      "path": "fixed-inputs/synthetic-neutral-texture-midtone.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "fixed-inputs/synthetic-neutral-texture.f32",
+      "bytes": 1769472,
+      "sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b"
+    },
+    {
+      "path": "fixed-inputs/warm-lit-texture.f32",
+      "bytes": 1769472,
+      "sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E0/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "c5066e02b90a293aa4a5c30888268e417b583770f0deae913d3cc3dd52154141"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E0/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "6cb986ae728fce7e2fa67862c02dcfccd592e8c6d327c4840eeda97f2f50ba0e"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E0/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "98d6230161f149458aa147ec3a3ae85ba40995881ef231fca4534e754a73cb12"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E0/output.f32",
+      "bytes": 1769472,
+      "sha256": "c5066e02b90a293aa4a5c30888268e417b583770f0deae913d3cc3dd52154141"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E0-console.txt",
+      "bytes": 166,
+      "sha256": "b902e4292e965d65696b07c04a51511eca5292bcaef16d2a7bf3938f67c8844a"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E1/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "34a4d4d57e94d68acb8670b340a97900729f8ddf3d0011b081db600e15919fb7"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E1/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "7dc584bcefe65be713537d2aa9aaa16f30b5f91bd9bb107b37c487d6579f87bd"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E1/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "8751f3fbe99c52858c5cb27a8b140e00b4d3591cc62a8bd2146dbc9c92a17477"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E1/output.f32",
+      "bytes": 1769472,
+      "sha256": "1a3a241cafcc45072b8dcba97b8eddbfb555f3b98e2e912490fac19896b36a68"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E1-console.txt",
+      "bytes": 183,
+      "sha256": "584e79216d16578711a2284b964fba8661a17a4b740b5463aacd9726c1acf832"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E2/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "741c9327968be761853c90fb678e6f4266c11e3a4c11d7c1624fedec211fc77e"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E2/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "66b663d0a9d035424fe495f581d2b48173919fdaa6df07337a735a96bc1496a2"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E2/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "b85a16ee4223e6ef7d0ec10ce8934919303b4d302becc87eda2ea45ed9ae6f5a"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E2/output.f32",
+      "bytes": 1769472,
+      "sha256": "4a42787cbd814b6284756506c50067f5e1f9405ee8a207a1f202cff33a071e9d"
+    },
+    {
+      "path": "roi-comparison02/company-02-anchor-E2-console.txt",
+      "bytes": 183,
+      "sha256": "7198822d6421947c18f5583fb7278e526fed521119d014beb6d1fb941a34fbc0"
+    },
+    {
+      "path": "roi-comparison02/E1_FIXED_COMPARISONS.png",
+      "bytes": 2712273,
+      "sha256": "6f3a92fef55fd40d79850b779a163b1111e2724e031a9d3eab7ab8bbd1891a00"
+    },
+    {
+      "path": "roi-comparison02/ROI_RESULTS.json",
+      "bytes": 62230,
+      "sha256": "34ac94e60b772181707c36f74c9baf61e6c8d5b326bb2fa35d2e02184c270b96"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-comparison.png",
+      "bytes": 363371,
+      "sha256": "920496c000ec37d90eefd6f3cac3716c2c20e7523e70bf328a9b4168383df5d6"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "a8d25b0f9d28e481c4a9e6276eaad593930bf108b07269118eebf7e14415734a"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "d9ed577928cd8572906df46f4c57f6d66c13d0b412a67da2e08c101697d3797b"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "f020db11367440064e10b5d642f334e753b303d57273d1dd430e05f2c331968d"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-comparison.png",
+      "bytes": 636136,
+      "sha256": "b910f2d35c9afba9e9e4767cba588dba77e0d9fb36365e0a81e62068c08d5a17"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "4e81df37fad2724e6500c9311fef7c8aa898dc07dcb792e1078c9f2ef17518b9"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "909b3ef9e0d801ec5098c71bde38bbbe373a8272a36bc4bf75470e4052f1b41a"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "da85aa88a7230b2b9e45a8d637d1b833927c5e8d80d7ff57358d0b297c8cba1c"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "cb3c71ad9605e017ce63800a2fc1f2fc76a0e207f9e30a6dfd3e7f3b0d8caeb7"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "89b83a47d2721ed502733f19e4f20d5eaac2f673e0fc2821022d23d6ee731f6b"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "43ac4768316d5015e810eef39b81d3b32479c51f8b762b021c2564c953d729b7"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "c6c80b1c53c175af2d5d506c85d522f25c226873d6bbfe84907b95f36609b073"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "3deac89d9fd2b8fe145b83c6a7967b98a4cb9ee96028bb9c9d4dcd87b4328e5a"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "1530538a192729a3d753ec2c6cfe67970cc5206074e74d67a4a245774fd93e1e"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "33bd173b0a25fcf5132ece837bbf2bd3122f4987ad0e83341f791f2c31dabbb7"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-comparison.png",
+      "bytes": 665700,
+      "sha256": "bbd9b91c7a68fae4e660d2b60aad24a1790bb09c3ceda139e93a0eb6e2f85671"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "ebb5bd586e84322424cad0ace24d549c8caaa8e253f26bfe2ad7be4d70957f43"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "a04cd35e26efbb5ad3a0c78f649f83440874dcde86ab3dc1038def5f69317db7"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "503e8672998203495ae636999ac46dcd94182749736534fab2448ef2014e554d"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "a512e8bc410c9da2ba593aff1e206b162a266b3e941c1aacae241796e4c09778"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "ecce18868c316eb9b06b104dddb2c5f051425425893fb005bc985f474ba58217"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "24525122dce16c598493337a33aadbd7feb85a6a8c21fba3e08d3795b416eb39"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "a75db1cb6c67c28b74284c796986232ae8f488b19841a41f953abdcd8eb86c14"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "e11fe8cc056f4d4f522b55b0f200eb5099fa1733c7e60bc24072e98868a87b43"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "7b43ea738691297c9ea4f3f1cc56dc81f10048db90c40f4912c626bbae69f576"
+    },
+    {
+      "path": "roi-comparison02/skin-hair-edge-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "18cdbe1877804e881b897d5cc3f2cf6dafa5365e0bf03e34dd9f9cbf2c697909"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-comparison.png",
+      "bytes": 382447,
+      "sha256": "1955e7b1375c53277560773bbad11c0594850087b4fa637c22e8f70391b016c6"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "81625e74de335fb121e46ef1e73275775a82a39b63529718d00d361355895d3e"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "98e95bd0dac5548b31fe1aecfe916799a2622295f543d26c8fbf3949b6442461"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "b7fc8510792561b74eed421e5ccf4fd86715a9e1ea3ed7c793a9b6ca97dc9ee5"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-comparison.png",
+      "bytes": 684461,
+      "sha256": "a7a9ffd190dffeca09061ae5dcf0908fc536d3c5725e08ff0e79086eee7fc540"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "dc8950b38d124f1aa131697241cd53570c36f6b15688585aa99dcd6aac779672"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "d9300c1588f4c761677eed4efe70284833f45f2807e6a364d34e707954466be4"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "4f8c8c7846eb59e63240e61a6a875ceadb833eb0eef7f95d4c87a7dc08b2a74b"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "d7822490995f3a1b7c59ec4b1ba02e36edb0cdf1b929781f66aea50eed8c7443"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "a82f44873f8c19ebffb747fbf726ff3a68657b4b76b9c3c31a2e9e30f1833681"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "7027f183976a27498e7b7f5732774b0e15d0ceae3732cd8bf965f4830b56ad73"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "368bf70918d98a870838ce526a1991404d3a97a7f850ea79c3d05f8ac1cf569f"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "3a0d4770762673fa6588d3d396edc3c9b3d2cddb8370b620f1fe9f1dcbe80977"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "4769ba3458e8eddb6af3da0da48901ab34f981e04a22d2fa96e673ec0aab5d6d"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "01516ed77c1a71fd0dd088158e8bd5aac6cb46acf5fbcf7b3d505cb49a046c2c"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-comparison.png",
+      "bytes": 627238,
+      "sha256": "5cf47acf059d3a618d17f1b6ded4b8f40e2d353bb47eea133f98989e2418b9d6"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "3a3053709e29f81e21302fd9184729e99b9254c5173080d99665df84beeca2a9"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "30baec688ffc3218e588b25bb0324ace0a642da40878e9dc9f37fdb3e07ba312"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "02d0c2e822937369c370a72335c2f561ce29f23ee39d139a6df2e9a13c8ce3f6"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "82d87925ef3e580c3eaaeac14f42b7063185c06334d4b1545ea3de400b47de1e"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "4ac0de75a4644ddad37f75aae96cfcaa3bad1727fb2a85910483a7b9f6f8704a"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "8b1e76d92dab0db0659a2728980ee9f6bd7fb5107b4962c576c28526f0af0909"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "ef5b29f6d82fe10dd93fc2c6c5f0f221788b94106970b299d013c9f8968fac66"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "09f62b0db32969c1e129aba8c972f5151131ecfe098c908b4b16f8f9e4345110"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "68e9fa744ba6febfe4452b835a16f429dd2009420d316cad8ed39dd8ed94dca8"
+    },
+    {
+      "path": "roi-comparison02/skin-shoulder-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "e6bb43b24fcd4e0010e32e6c2e79614ef72d87ff9083ca130ee95822c3dd0dc1"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-comparison.png",
+      "bytes": 531571,
+      "sha256": "9f9582efead1424e7883428adee49e8785228f150043a566989922e85e8fb027"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "35855632f8947aec04be0b6aebe7765e96308603798baa8a27c3049048a2a087"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "611bcaacb6dc29da3bbc54f9583b16fe780be529d9b50d76152fc4e3fcee85dc"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "4ca9d6cc950b897591fbf176135c59aac4e21c4de6f35fb6d0c483b29db5e47f"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-comparison.png",
+      "bytes": 467622,
+      "sha256": "7c3421b97c1041e89e5e4332291a6ce87e68df82f9e2117b200153608dada841"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "42772f5cf421fc78f28e3bdf3fa7e13d253e754548263cca5f1e78dcfff2f403"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "9165c3d3a8fdf22f97ff8c2064ee5ddd07f8ad455a30139bd447cf8c9202e4d3"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "e2fa02f22c3711ef317b0d00f01abfcdf1af09c0a24d5daf05f667e86cf67861"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "ff3ce6eb0cdb2e6ca0bb9206f93169cc6931d263ad119d8d397db9b368ad8911"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "e6ed15d9c52476a26117cb9284b24ad14de78c3fb583c262e81bb9200cdd80bf"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-comparison.png",
+      "bytes": 370734,
+      "sha256": "102d4153d22d30b98732ae5d97ff727bd943dea298db4244f55bfcc71fac2137"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "12e66d893016ab4c63884013a272786ab1456abf5d2e5881c9be5ed9560f81da"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "a236adc2c1f13e7ce7157374b41ec42dfc89e3c893b306087a7dbc816d409e36"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "4001fab302f4111e98a4d3a621d411042911f19685268fff24f46c0331677089"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "9b4138222d82401b9e84e11e5e091248954d063d454e7f2b92a602e35b788c7c"
+    },
+    {
+      "path": "roi-comparison02/sunset-gradient-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "14634d0df614862cf85ef4135776b432eaef45464568c498c1cd3d6e89a1b3b6"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E0/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E0/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "e5c8fb700001839388b340d62b0b3c016dca590c931dba62e365bf56bc763f20"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E0/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E0/output.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E0-console.txt",
+      "bytes": 166,
+      "sha256": "7f277ff13d0bab29bee2b52b5634f2c2ac8dfe98ea341dbb785d539a2b185b6d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E1/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "337a54ab7bd25961a9defd99b3625fbe9dbea1d48faf8884579631d40cea342d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E1/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "fbbd3c54223183fb25d7b7d98ea60190c8892f2272317f0add035fb42a52da6c"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E1/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "cac25060f1fb343076060312c0bfc84d191c5ac12893566d0a48551cdc043081"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E1/output.f32",
+      "bytes": 1769472,
+      "sha256": "cac25060f1fb343076060312c0bfc84d191c5ac12893566d0a48551cdc043081"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E1-console.txt",
+      "bytes": 166,
+      "sha256": "3a7cfa315f3cb6391f32337adf607724d8822ac4406ac1cbe5379ae3454a170a"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E2/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "697da1b815fb4d312e3be6b9322508eb53ba0393ca73492781549b7c09a6119d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E2/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "60a7af4513f3af4069808bb7521330121b2481b7135d053513268072d225edb4"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E2/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "0700e3bd10adac11f9e37a79d1fb6d1bc180aaed74205c0de3f16ecc73eab893"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E2/output.f32",
+      "bytes": 1769472,
+      "sha256": "0700e3bd10adac11f9e37a79d1fb6d1bc180aaed74205c0de3f16ecc73eab893"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-anchor-E2-console.txt",
+      "bytes": 166,
+      "sha256": "77dc4d278d40f190e0d8ce17d76c1e0865893d5067cbdbe612b5e2fad55d6a90"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-comparison.png",
+      "bytes": 51279,
+      "sha256": "5ed26b1cbbfbafba26f160d5964d0f4341b26a15f0c075c355529fbc2935bf49"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "f536155c1f2133c3acca2b2970400ad13d139b59ed3dfbd4621f4fbe76ed87f6"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "711949b4913b9383ab7218177dbb00981905faec02297ecacd859e5c0898b1f0"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "93c37c2019e69bc9435208321c6036f296ae53192c215cba73440a5bdfb6083a"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-comparison.png",
+      "bytes": 59442,
+      "sha256": "790b510f932d0ee41b33e047d8555f63d69966e40ef6f787f50717b8a3871ea0"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "25a0b04181a38779f99518fd8c6c3f4cc1353ed716f48e275129bba006de9d10"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "13d3e3715407aaa1474e11854d857bdece2054313c04537ac9f3c01bbe138142"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "4d4c359e9fd061a77371a239ae6446cc715e908d2023944850a23bbf770c50be"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "0ac96ec481b827b328b9592f14ababf166f25d9466e269413804d6f5f44bc128"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "b67c369e5ac66dc09ce7ca854fb27c7e80ff9976cb469d47a12971720fbe91d0"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-comparison.png",
+      "bytes": 56899,
+      "sha256": "d81f905f23a57e684385770fee7afea778ef0d0b28f4a0320f2408236327a58e"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "ad659854223c08f72325ff3d9a209ce7edb2d6515d21a0d342d2122614a9ea7d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "d73c4f0f625e618b5f086a85fe7387e9ee423448858e339b7faabdde52fe1713"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "77ce28ef87b0e117cab5ba66e80cfe4ae362f12e0a150c397c11231d28608d99"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "808fac68cf756be1d34e1b698540a996a7baea5b6ce55989b0e645305586ea08"
+    },
+    {
+      "path": "roi-comparison02/synthetic-coloured-specular-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "717d3c1e6928f8080ac41a10fc6f7ed22e0ec2e8b18698c8a45f02aa8c32ecb0"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E0/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E0/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "e5c8fb700001839388b340d62b0b3c016dca590c931dba62e365bf56bc763f20"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E0/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E0/output.f32",
+      "bytes": 1769472,
+      "sha256": "05edf41f730f460531fc47add4f18c90f4cc9c3d83947c07b0cd43617979aa1d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E0-console.txt",
+      "bytes": 166,
+      "sha256": "7f277ff13d0bab29bee2b52b5634f2c2ac8dfe98ea341dbb785d539a2b185b6d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E1/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "337a54ab7bd25961a9defd99b3625fbe9dbea1d48faf8884579631d40cea342d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E1/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "fbbd3c54223183fb25d7b7d98ea60190c8892f2272317f0add035fb42a52da6c"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E1/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "cac25060f1fb343076060312c0bfc84d191c5ac12893566d0a48551cdc043081"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E1/output.f32",
+      "bytes": 1769472,
+      "sha256": "cac25060f1fb343076060312c0bfc84d191c5ac12893566d0a48551cdc043081"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E1-console.txt",
+      "bytes": 166,
+      "sha256": "3a7cfa315f3cb6391f32337adf607724d8822ac4406ac1cbe5379ae3454a170a"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E2/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "697da1b815fb4d312e3be6b9322508eb53ba0393ca73492781549b7c09a6119d"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E2/candidate-product-rgb16.tif",
+      "bytes": 884956,
+      "sha256": "60a7af4513f3af4069808bb7521330121b2481b7135d053513268072d225edb4"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E2/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "0700e3bd10adac11f9e37a79d1fb6d1bc180aaed74205c0de3f16ecc73eab893"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E2/output.f32",
+      "bytes": 1769472,
+      "sha256": "0700e3bd10adac11f9e37a79d1fb6d1bc180aaed74205c0de3f16ecc73eab893"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-anchor-E2-console.txt",
+      "bytes": 166,
+      "sha256": "77dc4d278d40f190e0d8ce17d76c1e0865893d5067cbdbe612b5e2fad55d6a90"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-comparison.png",
+      "bytes": 60216,
+      "sha256": "ec30d2315943ebc6f149a8c502b8f0d044adad1b563a5124378f0469878c8569"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "f89e5594b0b16443c694b5ecaaffd751fda8f04ad24bc31eb441d6b659539de2"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "da87158abe715f2032f6b2a18589342abd5fa98f4cb89f1ed9276381cb2f60d0"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "94bd241625949e9c7cfda7266ed03807d120cb169ec467718a0533b27891a010"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-comparison.png",
+      "bytes": 31954,
+      "sha256": "7cbda12ff26286e146cdec663d9816e499faf6bb5e2f7d6222235abcce636b02"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "899cad69e4485d48b17b9ffafa8a20bc0c29cdaeb5f2fb1eaee90d9979343a89"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "579dfeaa2fe50f30e8645e6fa0a224417c67394c47531da13caba13dbb57718f"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "b168a4011ddd0ffe6b61f1a3f8d2d27270f98ab037ba05cb4db96e9eb4920421"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "1e14a2b267630e767f6684e0a03f46a3dc8ee5b3af435c8bb574744058d1ac23"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "18c2f28d6a447f112b91c0bed08813dc99c1ac9a0ab3a858e465b8159ea14e85"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-comparison.png",
+      "bytes": 20565,
+      "sha256": "70cfbb85deb1d4b75933ac872a8416149f22cc076a016cda9173d10a577078e9"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "f4bebc214aafb7d1459cb9b51674c8750dc7024b425c3778ed868347eb50e9ce"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "d8dd05843499191fe21b68776a011f638ba94258414b912c47f547147c516320"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "526d2a2e2b60f40aa4ca88c3ea87b9efbc1df99741a229c4ccb4cc14f3604462"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "8192f74a0f2801902e84fe255d232f12b6d13a0de5694754609036a429f0c5fc"
+    },
+    {
+      "path": "roi-comparison02/synthetic-neutral-texture-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "930767d6d4e5086a6a80a13db081e7f06efbb616fcb676511f5a21e54106ed6b"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-comparison.png",
+      "bytes": 564228,
+      "sha256": "589000f5b577bb4d33cd30d789a6863c81949e5c57f4fe0f3042de7c09d73011"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "4a46a1c91370184a72d430e883e7b04a49053650acfda314405f875fcf233205"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "9e5f6c0078553eaac3d84f3108c69339f5c807839780fb589097870c0b3d0044"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E0-same-console.txt",
+      "bytes": 166,
+      "sha256": "c9722e3b78d666e86899868d20ac4266e288256503b8d47f19349f07ef0bde3e"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-comparison.png",
+      "bytes": 845886,
+      "sha256": "cad098bb1f2ae22b68d06589c6fbf02e8d52ea29e0f13560f9d5131f8f031e10"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "dfafffbcc6bf2c316c666f3a420604dc200fca3b10a5c5bc085c3dbf6dc41ef4"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "d61ad577b6bc2b8577daec1cfc19e071aad305ce526ecab866af900570718c29"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "491f9a9837baaf17acc2dfd5196f5d1ea08bd1a572f4d3a15b1adfb05d8e68f9"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "a54439c880bc0247f745b6348b20232cbb4de4002a9136d67e0c284c2f01225a"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "df5c27c570dacb458a6044d2960b8426f84ab0e382e35176b828b04b38e93286"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "1b752f0824918915b27c322d215bf1cda6cdcdfd8d598b2748a948e0cb0dd06f"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "20dbfa7f5e25316eca0f19ad584b32088005d4e18737661c92db49bb2032d5c8"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "7d89f6b6937b845d1d2b92f6a6698ea7603407712fc79d9b61d352f757c58ba2"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "49c5291bf0bf5c222e54c5467308466ffc8f601f3d1940376f43bbd2c86a3736"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E1-same-console.txt",
+      "bytes": 166,
+      "sha256": "7e76d9f93dbc60c18cf01f880e9d8c254648aeee05aa1c0732ede836228494ca"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-comparison.png",
+      "bytes": 685760,
+      "sha256": "6bb325d678de8dc7f6bc9085342ffe2e2349b6bf08700e7c9dbabff6cf90cca9"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-midmatched/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "f5ce38d50327c1b655656a27f175d80288be4ba04ef7403db5e5cbd4689e04d9"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-midmatched/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "50852646aa5850b5823b0983291c498d580585c7d2203fa4efb8d5026b3e5291"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-midmatched/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "77a1a865afcbaedc3df5832df8a143bc82d01bee6e5d1a7f123b341caf722a5d"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-midmatched/output.f32",
+      "bytes": 1769472,
+      "sha256": "405bf35ac61e0eead0bb5bba1920ab67993b982b8344b08f8d547ab5bafd4772"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-midmatched-console.txt",
+      "bytes": 183,
+      "sha256": "f3c64be8cd7437dd638fca02d8ce1e2a74047442bc6018f28ca9aca822b33d05"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-same/basic-tone-output.f32",
+      "bytes": 1769472,
+      "sha256": "3105ca0a0e5db6b54e5a8f98ed15b99193a0ccf2a14a076a06a4e5a0204e9fb6"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-same/candidate-product-rgb16.tif",
+      "bytes": 888112,
+      "sha256": "6ffd013a08458ac54fdb5a9218ee11e3e4fad16d9f43ab601143a1f96b7e2337"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-same/candidate.f32",
+      "bytes": 1769472,
+      "sha256": "c472ffa945bd8f83902717894dfb74d473d454b4743e897d3c97e85beb5ec6a4"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-same/output.f32",
+      "bytes": 1769472,
+      "sha256": "358cdb9443bf5c97535f0321efbe9c242e21bc522e8a7e9fff0d0572ffe360a8"
+    },
+    {
+      "path": "roi-comparison02/warm-lit-texture-E2-same-console.txt",
+      "bytes": 166,
+      "sha256": "e0dd5f2d8dc978ec7ae5e69601892a2a3e4c2c49ab513538978286e5c7b0759d"
+    },
+    {
+      "path": "review-figures/EV0_CURVES_AND_ROI_EFFECTS.png",
+      "bytes": 156533,
+      "sha256": "16d8a9088e96e4996556f696cc587656e5916aba13aa1ab702e7739272512e0a"
+    },
+    {
+      "path": "review-figures/FIXED_REVIEW_SELECTION.png",
+      "bytes": 1281516,
+      "sha256": "b4bd09cc01777e8b271b3628139f0c8bae3474cae65eb2008fd16a69f3e03b40"
+    },
+    {
+      "path": "probe/MetadataExtractor.dll",
+      "bytes": 803840,
+      "sha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "path": "probe/Microsoft.Data.Sqlite.dll",
+      "bytes": 177464,
+      "sha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "path": "probe/PortraitHighlightProbe.deps.json",
+      "bytes": 12408,
+      "sha256": "b51b63ea55111d1e673be804314dfbac830005b207588851aac8a0ae6a518723"
+    },
+    {
+      "path": "probe/PortraitHighlightProbe.dll",
+      "bytes": 19456,
+      "sha256": "44143ef1bcc07bb4c546fde3eadcf1e6a4ed9c20cb303ea014e9d2a0953c5514"
+    },
+    {
+      "path": "probe/PortraitHighlightProbe.exe",
+      "bytes": 162304,
+      "sha256": "8f5900e4aa10fe995ce1c0fee321d3fbd749ee29a809f702aebd2df92b24d2e7"
+    },
+    {
+      "path": "probe/PortraitHighlightProbe.runtimeconfig.json",
+      "bytes": 342,
+      "sha256": "c230a317a54dd960bcbeb5f347f52e18dc665a26f7efda2159fced9a5ac7e097"
+    },
+    {
+      "path": "probe/RAWSelectionAssistant.Core.deps.json",
+      "bytes": 11977,
+      "sha256": "e9e131efe5cbd3a221b683beebdd1f71b0088995e06c11235b510320b38329f4"
+    },
+    {
+      "path": "probe/RAWSelectionAssistant.Core.dll",
+      "bytes": 7710720,
+      "sha256": "b34bbcd764c7f0cf15569fbff2230a673c41fec7d559459749bb4cc52c1d5027"
+    },
+    {
+      "path": "probe/runtimes/browser-wasm/nativeassets/net9.0/e_sqlite3.a",
+      "bytes": 1308854,
+      "sha256": "c64ae8d44dc3e1aa03aca4e79ccc501cbc3a3c490e8e2ea9e369367f68cf0f21"
+    },
+    {
+      "path": "probe/runtimes/linux-arm/native/libe_sqlite3.so",
+      "bytes": 982224,
+      "sha256": "43556c2f5075857bf57be1136d556733bdc27195884fbdde127cd976d1c25ad5"
+    },
+    {
+      "path": "probe/runtimes/linux-arm64/native/libe_sqlite3.so",
+      "bytes": 1534296,
+      "sha256": "707fff6b18c1f083158e7a543c8d2545d5485f547ffd96db29679a95f52878d5"
+    },
+    {
+      "path": "probe/runtimes/linux-armel/native/libe_sqlite3.so",
+      "bytes": 1375344,
+      "sha256": "3f4d9b9ca49bb3f100882e78ba85807398cee19b481bfd4c301a8f5f58d48540"
+    },
+    {
+      "path": "probe/runtimes/linux-mips64/native/libe_sqlite3.so",
+      "bytes": 1756544,
+      "sha256": "985884523e512414f3e50aa359f08dad3ce635e99405e7823de9b26a7db38d09"
+    },
+    {
+      "path": "probe/runtimes/linux-musl-arm/native/libe_sqlite3.so",
+      "bytes": 1322584,
+      "sha256": "7fec7057d16e8b5ae54fed0c42a0e6b85e40df0d57092ef20cd647a4e1c1e0ed"
+    },
+    {
+      "path": "probe/runtimes/linux-musl-arm64/native/libe_sqlite3.so",
+      "bytes": 1450704,
+      "sha256": "530e2f74f259fe04faa4b595336e671fab5eedbb6f4e94dad59494efb7b00c2a"
+    },
+    {
+      "path": "probe/runtimes/linux-musl-riscv64/native/libe_sqlite3.so",
+      "bytes": 1015888,
+      "sha256": "d8e54eb7dc52ea0a7df9b78ac6feb85af429e7264613099df478825dea5805d4"
+    },
+    {
+      "path": "probe/runtimes/linux-musl-s390x/native/libe_sqlite3.so",
+      "bytes": 1685752,
+      "sha256": "64260c0460ad6efa7dce9263bff7a4b64ad66172ccc580cb09181c845e1a3407"
+    },
+    {
+      "path": "probe/runtimes/linux-musl-x64/native/libe_sqlite3.so",
+      "bytes": 1445336,
+      "sha256": "647b7b5886526691aed58e0fcbb56dc1e6dea8b1f9f5390782f0c95269250db1"
+    },
+    {
+      "path": "probe/runtimes/linux-ppc64le/native/libe_sqlite3.so",
+      "bytes": 1937408,
+      "sha256": "1ef00b5e3ac63e491f59ecf587680fc52ad844cea62e0a879a1315ef6bd10fc6"
+    },
+    {
+      "path": "probe/runtimes/linux-riscv64/native/libe_sqlite3.so",
+      "bytes": 1291896,
+      "sha256": "6b390eecbc6f55c44d9ab8a774f1fe4283dfb33a72e6f29f4e0b173065e7e105"
+    },
+    {
+      "path": "probe/runtimes/linux-s390x/native/libe_sqlite3.so",
+      "bytes": 1655776,
+      "sha256": "dfd5ab35f6d61155a3c629d0bceff4d6e0f0f190983f3fb8f681fb34ec08c67e"
+    },
+    {
+      "path": "probe/runtimes/linux-x64/native/libe_sqlite3.so",
+      "bytes": 1470784,
+      "sha256": "b0f5c48026fedcf9f05cf31c6fadf9e1e001ca59cd85aa68b8b6814e52c18a07"
+    },
+    {
+      "path": "probe/runtimes/linux-x86/native/libe_sqlite3.so",
+      "bytes": 1547984,
+      "sha256": "fe8229e5baeaf21e721cf65626a6b07ec22d9b17d07bd624e7a77927174277f1"
+    },
+    {
+      "path": "probe/runtimes/maccatalyst-arm64/native/libe_sqlite3.dylib",
+      "bytes": 1695264,
+      "sha256": "8d63d80bc6caa754679d6fc89fd741a32c156f136c34759cc8fff8cd51468a93"
+    },
+    {
+      "path": "probe/runtimes/maccatalyst-x64/native/libe_sqlite3.dylib",
+      "bytes": 1724352,
+      "sha256": "43d27adbc5ba40850bac42a12aea08314a22a43d3ce77cdc7a6cc47ecffb5746"
+    },
+    {
+      "path": "probe/runtimes/osx-arm64/native/libe_sqlite3.dylib",
+      "bytes": 1696624,
+      "sha256": "09fe20a6c050912a7944b2f2f2981debe31679f7919f523c87251ae8cf0f2daa"
+    },
+    {
+      "path": "probe/runtimes/osx-x64/native/libe_sqlite3.dylib",
+      "bytes": 1724472,
+      "sha256": "02344e1d0bcb5ed447ad9b79ed19e37a590fb1ece3eba1e63efbc35e36e47bdf"
+    },
+    {
+      "path": "probe/runtimes/win-arm64/native/e_sqlite3.dll",
+      "bytes": 1814528,
+      "sha256": "4177542756bd94f75b55fb74367e0cf34e66a88ffaf95755489af14c6ca2f792"
+    },
+    {
+      "path": "probe/runtimes/win-x64/native/e_sqlite3.dll",
+      "bytes": 1978880,
+      "sha256": "b7385d722c83fb52142a00477a726723745916d22a555711ee89834c1111fb2e"
+    },
+    {
+      "path": "probe/runtimes/win-x64/native/jpeg8.dll",
+      "bytes": 621056,
+      "sha256": "3854cebc61fd5892cb60491719834922030097f7848d29cccbfca3e88d7ed1e5"
+    },
+    {
+      "path": "probe/runtimes/win-x64/native/lcms2.dll",
+      "bytes": 346112,
+      "sha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb"
+    },
+    {
+      "path": "probe/runtimes/win-x64/native/raw_r.dll",
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+    },
+    {
+      "path": "probe/runtimes/win-x64/native/zlib1.dll",
+      "bytes": 87040,
+      "sha256": "4a0bd02c2985974f90da4a7065acac1b72f21a4fe58c5391e14b3e6fe566bc12"
+    },
+    {
+      "path": "probe/runtimes/win-x86/native/e_sqlite3.dll",
+      "bytes": 1533952,
+      "sha256": "d13eb819d1353d98c684c88672868bbfcc6a52eb5987bdf2557ec02fabce4ea7"
+    },
+    {
+      "path": "probe/Sdcb.LibRaw.dll",
+      "bytes": 75776,
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "path": "probe/SQLitePCLRaw.batteries_v2.dll",
+      "bytes": 5120,
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "path": "probe/SQLitePCLRaw.core.dll",
+      "bytes": 51200,
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "path": "probe/SQLitePCLRaw.provider.e_sqlite3.dll",
+      "bytes": 36864,
+      "sha256": "df996bcae63c2cabcfe8d4b9c5110eb39a2a4706178b07d875665391c6eb3995"
+    },
+    {
+      "path": "probe/System.Security.Cryptography.ProtectedData.dll",
+      "bytes": 40208,
+      "sha256": "7ccc461b061d8e45acf41219809c8773028274037906180c77495571a305734b"
+    },
+    {
+      "path": "probe/XmpCore.dll",
+      "bytes": 144896,
+      "sha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    },
+    {
+      "path": "SOURCE_PREFLIGHT.json",
+      "bytes": 642,
+      "sha256": "b3f9044d6d8fc2045e9d2e8fcd6207bfb18b6ab000d06db1d5563da91b849c7b"
+    },
+    {
+      "path": "COMPANY_INPUTS.json",
+      "bytes": 1289,
+      "sha256": "c7c0d540149b6bb85fc872f455a963d22270474e8629508da6c864d11faaf3fa"
+    },
+    {
+      "path": "FIXED_ROIS.json",
+      "bytes": 11128,
+      "sha256": "9f1c50fa7d1cc8dfc1abc9f5a8972725cb7fc4af748421fc02f471f9e49aa272"
+    },
+    {
+      "path": "reference-manifest.json",
+      "bytes": 5462,
+      "sha256": "76d37f24e165cd05c9c4ae9ae27bc65822ebc1c74e1ede252368a90483e872ce"
+    },
+    {
+      "path": "PINNED_REFERENCE_SOURCE_READBACK.json",
+      "bytes": 2389,
+      "sha256": "9799748f13c6e5d44ba41116d630530e592748ff9487b9c077248d79bc0e02e8"
+    },
+    {
+      "path": "tests/portrait-review.trx",
+      "bytes": 9928,
+      "sha256": "13ae66500fc0c4d7b115b5e36fb2bde003db5a8c7160902529a31cb2ffc97868"
+    }
+  ]
+}

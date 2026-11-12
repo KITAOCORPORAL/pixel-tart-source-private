@@ -1,0 +1,311 @@
+{
+  "version": "PortraitReviewFixedRoisV1",
+  "inputs": [
+    {
+      "id": "skin-shoulder",
+      "source": "company-02",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "subject": "skin shoulder highlight",
+      "kind": "authorized-stored-photo",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "originalRawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "inputIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "file": "skin-shoulder.f32",
+      "width": 384,
+      "height": 384,
+      "pixelU16Sha256": "72bc63a2f3d702401084d3d226243641da4ac3416d411a66cdc008b2b20245a5",
+      "encodedF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "anchor": "company-02",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "parameters": {
+        "phase": "default",
+        "sha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+        "Width": 7752,
+        "Height": 5184,
+        "BitsPerSample": 16,
+        "ProcessingVersion": 1,
+        "EditVersionId": "e06a7c92-1f43-0521-69f9-8a8c5d01137d",
+        "stack": "{\"Nodes\":[],\"Version\":2,\"WorkingSpace\":\"OKLabD65\",\"ProcessingVersion\":1}",
+        "adjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "boundary": {
+          "zeroChannelSamples": 8009942,
+          "maximumChannelSamples": 514205,
+          "newLowRelativeToDecodedInput": 0,
+          "newHighRelativeToDecodedInput": 0,
+          "note": "Output encoding boundary relative to same decoded master, not newly clipped sensor sites"
+        },
+        "parity": {
+          "maximum8BitDifference": 0,
+          "mean8BitDifference": 0,
+          "comparedChannels": 5136000
+        },
+        "displayEdge": 1200,
+        "decodeReduced": false
+      }
+    },
+    {
+      "id": "skin-hair-edge",
+      "source": "company-02",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "subject": "skin / hair highlight boundary",
+      "kind": "authorized-stored-photo",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "originalRawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "inputIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "file": "skin-hair-edge.f32",
+      "width": 384,
+      "height": 384,
+      "pixelU16Sha256": "f6b7a5259f301669c521cb42657eb32afa087fb600ab3687f5aec1a2adcdcb91",
+      "encodedF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "anchor": "company-02",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "parameters": {
+        "phase": "default",
+        "sha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+        "Width": 7752,
+        "Height": 5184,
+        "BitsPerSample": 16,
+        "ProcessingVersion": 1,
+        "EditVersionId": "e06a7c92-1f43-0521-69f9-8a8c5d01137d",
+        "stack": "{\"Nodes\":[],\"Version\":2,\"WorkingSpace\":\"OKLabD65\",\"ProcessingVersion\":1}",
+        "adjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "boundary": {
+          "zeroChannelSamples": 8009942,
+          "maximumChannelSamples": 514205,
+          "newLowRelativeToDecodedInput": 0,
+          "newHighRelativeToDecodedInput": 0,
+          "note": "Output encoding boundary relative to same decoded master, not newly clipped sensor sites"
+        },
+        "parity": {
+          "maximum8BitDifference": 0,
+          "mean8BitDifference": 0,
+          "comparedChannels": 5136000
+        },
+        "displayEdge": 1200,
+        "decodeReduced": false
+      }
+    },
+    {
+      "id": "warm-lit-texture",
+      "source": "company-02",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "subject": "warm illuminated textured background; lamp spectrum not measured",
+      "kind": "authorized-stored-photo",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "originalRawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "inputIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "file": "warm-lit-texture.f32",
+      "width": 384,
+      "height": 384,
+      "pixelU16Sha256": "08111957744087728fdb9fc1e8747d36f5061e7080a852a5a0a17fc23abc8a73",
+      "encodedF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "anchor": "company-02",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "parameters": {
+        "phase": "default",
+        "sha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+        "Width": 7752,
+        "Height": 5184,
+        "BitsPerSample": 16,
+        "ProcessingVersion": 1,
+        "EditVersionId": "e06a7c92-1f43-0521-69f9-8a8c5d01137d",
+        "stack": "{\"Nodes\":[],\"Version\":2,\"WorkingSpace\":\"OKLabD65\",\"ProcessingVersion\":1}",
+        "adjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "boundary": {
+          "zeroChannelSamples": 8009942,
+          "maximumChannelSamples": 514205,
+          "newLowRelativeToDecodedInput": 0,
+          "newHighRelativeToDecodedInput": 0,
+          "note": "Output encoding boundary relative to same decoded master, not newly clipped sensor sites"
+        },
+        "parity": {
+          "maximum8BitDifference": 0,
+          "mean8BitDifference": 0,
+          "comparedChannels": 5136000
+        },
+        "displayEdge": 1200,
+        "decodeReduced": false
+      }
+    },
+    {
+      "id": "sunset-gradient",
+      "source": "company-05",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "subject": "warm sunset gradient control, not a warm lamp or metal reference",
+      "kind": "authorized-stored-photo",
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "originalRawSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "inputIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "file": "sunset-gradient.f32",
+      "width": 384,
+      "height": 384,
+      "pixelU16Sha256": "accae5943970eff5073d82a95a326a3ad699107c568f8ae3dcc1076e2870d896",
+      "encodedF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "anchor": "company-05",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "parameters": {
+        "phase": "default",
+        "sha256": "30D6E7828FCC8431057465226167D001A6FB1A5D19B972864185C4ED813D8FE8",
+        "Width": 5496,
+        "Height": 3670,
+        "BitsPerSample": 16,
+        "ProcessingVersion": 1,
+        "EditVersionId": "3f37c943-5fcc-73f6-5dec-e4eae0362ef2",
+        "stack": "{\"Nodes\":[],\"Version\":2,\"WorkingSpace\":\"OKLabD65\",\"ProcessingVersion\":1}",
+        "adjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "boundary": {
+          "zeroChannelSamples": 3653396,
+          "maximumChannelSamples": 205818,
+          "newLowRelativeToDecodedInput": 0,
+          "newHighRelativeToDecodedInput": 0,
+          "note": "Output encoding boundary relative to same decoded master, not newly clipped sensor sites"
+        },
+        "parity": {
+          "maximum8BitDifference": 0,
+          "mean8BitDifference": 0,
+          "comparedChannels": 5126400
+        },
+        "displayEdge": 1200,
+        "decodeReduced": false
+      }
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "source": "synthetic-neutral-texture",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "subject": "synthetic neutral bright texture; no real white garment",
+      "kind": "synthetic-not-photographic-acceptance",
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "file": "synthetic-neutral-texture.f32",
+      "width": 384,
+      "height": 384,
+      "encodedF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "anchor": "synthetic-neutral-texture",
+      "domain": "Generated display-linear sRGB then encoded; floating-point input, not camera calibration",
+      "parameters": {
+        "generator": "NeutralTextureOrColouredSpecularV1",
+        "width": 384,
+        "height": 384
+      }
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "source": "synthetic-coloured-specular",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "subject": "synthetic coloured specular-like mixture; no verified metal material",
+      "kind": "synthetic-not-photographic-acceptance",
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "file": "synthetic-coloured-specular.f32",
+      "width": 384,
+      "height": 384,
+      "encodedF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "anchor": "synthetic-coloured-specular",
+      "domain": "Generated display-linear sRGB then encoded; floating-point input, not camera calibration",
+      "parameters": {
+        "generator": "NeutralTextureOrColouredSpecularV1",
+        "width": 384,
+        "height": 384
+      }
+    }
+  ],
+  "anchors": {
+    "company-02": {
+      "roi": [
+        3300,
+        2500,
+        384,
+        384
+      ],
+      "file": "company-02-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Fixed input luminance mask 0.03 <= Y <= 0.35, minimum16 pixels; mean output linear Y matched by candidate EV only"
+    },
+    "company-05": {
+      "roi": [
+        900,
+        900,
+        384,
+        384
+      ],
+      "file": "company-05-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Fixed input luminance mask 0.03 <= Y <= 0.35, minimum16 pixels; mean output linear Y matched by candidate EV only"
+    },
+    "synthetic-neutral-texture": {
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "file": "synthetic-neutral-texture-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Independent neutral 18% linear sRGB anchor"
+    },
+    "synthetic-coloured-specular": {
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "file": "synthetic-coloured-specular-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Independent neutral 18% linear sRGB anchor"
+    }
+  },
+  "newRawDecodes": 0,
+  "selection": "Fixed from input-only previews before candidate comparison; no ROI resampling",
+  "missing": {
+    "homeDSC08015": true,
+    "realWhiteGarmentHighlights": true,
+    "verifiedMetalSpecularHighlights": true,
+    "calibratedWarmLampSpectrum": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "status": "PASS_FROZEN_HISTORICAL_AND_EV0_REPLAY",
+  "historicalRows": 579,
+  "observerMaterializedOutputExact": true,
+  "historicalMaterialized": {
+    "output": {
+      "bitExact": true,
+      "maxAbs": 0
+    },
+    "candidate": {
+      "bitExact": true,
+      "maxAbs": 0
+    },
+    "basic-tone-output": {
+      "bitExact": true,
+      "maxAbs": 0
+    }
+  },
+  "references": {
+    "dt": {
+      "maxAbsVsProductExposure": 0,
+      "aboveOneChannels": 465,
+      "call": {
+        "exitCode": 0,
+        "elapsedMs": 14.843600045423955,
+        "sampledPeakPrivateBytes": 401408,
+        "guardBytes": 536870912
+      }
+    },
+    "rt": {
+      "maxAbsVsProductExposure": 0,
+      "aboveOneChannels": 465,
+      "call": {
+        "exitCode": 0,
+        "elapsedMs": 14.609400008339435,
+        "sampledPeakPrivateBytes": 409600,
+        "guardBytes": 536870912
+      }
+    },
+    "rt-highlight60": {
+      "maxAbsVsProductExposure": 21.420204162597656,
+      "aboveOneChannels": 162,
+      "call": {
+        "exitCode": 0,
+        "elapsedMs": 13.576500001363456,
+        "sampledPeakPrivateBytes": 405504,
+        "guardBytes": 536870912
+      },
+      "maxAbsVsFrozenCompiler": 0.000001430511474609375,
+      "sameFrozenCompilerPixels": false
+    }
+  },
+  "referenceCompiler": "MSVC alternative; frozen source/function hashes identical",
+  "calls": [
+    {
+      "exitCode": 0,
+      "elapsedMs": 273.78590003354475,
+      "sampledPeakPrivateBytes": 7045120,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 139.22080001793802,
+      "sampledPeakPrivateBytes": 6893568,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 113.32209996180609,
+      "sampledPeakPrivateBytes": 7634944,
+      "guardBytes": 536870912
+    }
+  ],
+  "ev0": {
+    "kneeLinearMax": 0.75,
+    "kneeEncoded": 0.8808250210902997,
+    "whiteInputY": 1,
+    "whiteOutputY": 0.8750000107134338,
+    "whiteLuminanceRatio": 0.8750000107134338,
+    "whiteDeltaStops": -0.19264506027814707,
+    "whiteEncodedOutput": 0.9429048895835876,
+    "whiteLocalSlope": 0.2504497534778988,
+    "contract": "EV0 is not identity above knee; mid-grey remains unchanged"
+  },
+  "newRawDecodes": 0
+}

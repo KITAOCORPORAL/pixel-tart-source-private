@@ -1,0 +1,18 @@
+{
+  "base": "618ba10233d9b0f182074847c0000d1bd5ae3fc3",
+  "implementation": "b29bff914eed894ac663c1c0a006e18d76672035",
+  "verifiedGitBlobs": 38,
+  "implementationDiffToDelivery": [],
+  "newRawDecodes": 0,
+  "totalManifestEntries": 39,
+  "manifestMismatches": [
+    {
+      "path": "docs/research/portrait-highlight-20261111/REPORT.md",
+      "bytes": 7756,
+      "sha256": "b1b514ab2f0f5a10f05faa646eb17773b305ec127e0f31470578a1731caf7fd2",
+      "expectedBytes": 7340,
+      "expectedSha256": "157d0744c5ce6a6da56fa7f0c36d5dbdef6da38882642b1af41c8b3c55f350fa"
+    }
+  ],
+  "status": "IMPLEMENTATION_VERIFIED_DOCUMENTATION_MANIFEST_DRIFT"
+}

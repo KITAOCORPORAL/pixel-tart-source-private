@@ -1,0 +1,129 @@
+{
+  "frozenVersions": {
+    "darktable": "4.8.1",
+    "RawTherapee": "5.11"
+  },
+  "version": "PortraitHighlightReferencesV1",
+  "scope": "Original isolated scalar CPU stages, NOT complete darktable/RawTherapee applications. Pixel space supplied explicitly; no RAW decode, ICC pipeline, filmic or export reference.",
+  "sources": [
+    {
+      "repository": "darktable-org/darktable",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "path": "src/iop/exposure.c",
+      "sha256": "2b52c149c5dba1a7c47acdb7f2a18f6482710b8861b64971cd766b22f312af28",
+      "bytes": 42911
+    },
+    {
+      "repository": "darktable-org/darktable",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "path": "LICENSE",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/improcfun.cc",
+      "sha256": "adba83f7a2cdc9351e465239b4a2edadfc36f760765df6dc89b584e84c921f6b",
+      "bytes": 243445
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/curves.cc",
+      "sha256": "4a8bc2215d5a1ac62120df52a9eef17842e72ebede890a11cc2d34a8053663bb",
+      "bytes": 116193
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/curves.h",
+      "sha256": "fee25e75d0dc863cb5cf3fbc37dc8649c0fa8c71466ab9f91f7d8176860db83c",
+      "bytes": 54578
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/LUT.h",
+      "sha256": "74d3a4e603f23fcea211145b8e6de0eb2d5f073767b390375f590dc58c27dfe2",
+      "bytes": 20939
+    },
+    {
+      "repository": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "LICENSE",
+      "sha256": "8c75a9231db8906865e29706ed63aad18fd918c92c15dbefbb13c25fe42850b4",
+      "bytes": 32473
+    }
+  ],
+  "build": [
+    {
+      "name": "dt",
+      "command": [
+        "LOCAL_VS_TOOLCHAIN\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+        "/nologo",
+        "/std:c++17",
+        "/O2",
+        "/fp:strict",
+        "/U__SSE2__",
+        "/EHsc",
+        "/Zc:nrvo",
+        "/FIstring",
+        "ARTIFACT_ROOT\\reference-build\\dt.cpp",
+        "/Fe:ARTIFACT_ROOT\\reference-build\\dt.exe",
+        "/Fo:ARTIFACT_ROOT\\reference-build\\dt.obj"
+      ],
+      "sourceSha256": "1d613ca1cd5cbfe91c88fecb71136a5a849dd4002a9d1cb67ed98faa60f3b620",
+      "exeSha256": "c6f2aa4959e34a0a90437561088e2a97a2a6c701aebcd3ed8f29eb14c70f0df5"
+    },
+    {
+      "name": "rt",
+      "command": [
+        "LOCAL_VS_TOOLCHAIN\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+        "/nologo",
+        "/std:c++17",
+        "/O2",
+        "/fp:strict",
+        "/U__SSE2__",
+        "/EHsc",
+        "/Zc:nrvo",
+        "/FIstring",
+        "ARTIFACT_ROOT\\reference-build\\rt.cpp",
+        "/Fe:ARTIFACT_ROOT\\reference-build\\rt.exe",
+        "/Fo:ARTIFACT_ROOT\\reference-build\\rt.obj"
+      ],
+      "sourceSha256": "dcb66dbc23dbefde4319fc5c6f48231d37b45c96901f63c409233cb2305d03d8",
+      "exeSha256": "b43f907add01cb6185597fa98d9de618249f4490b503aa28f1c3200b263420bc"
+    }
+  ],
+  "compilerSha256": "fe251ef50a1545b1b0835ee17b1e785459712b38d79e45b5c1d3d28970a36619",
+  "extracted": {
+    "dtProcess": "7ec097f5c1f91be79ff9d4aee7a9af62d42e9521ca610b60d9f92d71ca31d610",
+    "rtHighlightToneCurve": "7cd401e22f0bfe9acafb23e717e7ae0b3fe01c0e8607217bc48e9080d6800757",
+    "rtCurveFactory": "c080f804b2e3e46b6191a2ea2918e7e2618d30b05b6a26846e44ee8f4f057f77"
+  },
+  "config": {
+    "dt": {
+      "black": 0,
+      "deflicker": false,
+      "biasCompensation": false
+    },
+    "rt": {
+      "brightness": 0,
+      "black": 0,
+      "contrast": 0,
+      "hlcompr": [
+        0,
+        60
+      ],
+      "hlcomprthresh": 50,
+      "autoExposure": false,
+      "rawReconstruction": false,
+      "scalar": true,
+      "internalScale": 65535
+    }
+  },
+  "compilerChangedFromFrozenBuild": true,
+  "compiler": "MSVC 14.44.35207, /fp:strict, /O2, scalar",
+  "binaryIdentityScope": "New local reference binary; not the historical LLVM-MinGW EXE identity"
+}

@@ -1,0 +1,1927 @@
+{
+  "status": "PASS_BOUNDED_ROI_COMPARISONS",
+  "recipe": "Frozen MaxChannelShoulderV1, Knee=.75",
+  "exposureCases": [
+    0,
+    1,
+    2
+  ],
+  "comparisons": [
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": 0,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.47427578665185766,
+        "YPercentiles": [
+          0.01394827159041948,
+          0.11097799429470732,
+          0.4313848961619421,
+          0.961783533256022,
+          1
+        ],
+        "highMaskPixels": 66998,
+        "highMeanY": 0.7299450067700731,
+        "highLinearSaturation": 0.6209848927223633,
+        "highEncodedSaturation": 0.37380456924438477,
+        "highLocalRms": 0.03132868957464984,
+        "highRelativeLocalRms": 0.0429192463597715,
+        "channelsAtOne": 64971,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0,
+        "hueMaxDegrees": 0,
+        "hueUndefined": 2725
+      },
+      "candidateSame": {
+        "meanY": 0.4380091859833294,
+        "YPercentiles": [
+          0.01394827159041948,
+          0.11097799429470732,
+          0.4313532385282782,
+          0.8415605989578809,
+          0.8750000107134338
+        ],
+        "highMaskPixels": 66998,
+        "highMeanY": 0.6501257902534828,
+        "highLinearSaturation": 0.6209848959719481,
+        "highEncodedSaturation": 0.3747127652168274,
+        "highLocalRms": 0.024989990917729646,
+        "highRelativeLocalRms": 0.03843870108273369,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000006217684346188089,
+        "hueMaxDegrees": 0.000012036397679111773,
+        "hueUndefined": 2725
+      },
+      "candidateMidMatched": {
+        "meanY": 0.4380091859833294,
+        "YPercentiles": [
+          0.01394827159041948,
+          0.11097799429470732,
+          0.4313532385282782,
+          0.8415605989578809,
+          0.8750000107134338
+        ],
+        "highMaskPixels": 66998,
+        "highMeanY": 0.6501257902534828,
+        "highLinearSaturation": 0.6209848959719481,
+        "highEncodedSaturation": 0.3747127652168274,
+        "highLocalRms": 0.024989990917729646,
+        "highRelativeLocalRms": 0.03843870108273369,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000006217684346188089,
+        "hueMaxDegrees": 0.000012036397679111773,
+        "hueUndefined": 2725
+      }
+    },
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": 1.0755444381892687,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.7116178414900581,
+        "YPercentiles": [
+          0.027896543058311223,
+          0.2219559904009571,
+          0.7912797657365366,
+          0.9966781121440309,
+          1
+        ],
+        "highMaskPixels": 118514,
+        "highMeanY": 0.8290876111918982,
+        "highLinearSaturation": 0.5165459244776125,
+        "highEncodedSaturation": 0.29981258511543274,
+        "highLocalRms": 0.07945821370148248,
+        "highRelativeLocalRms": 0.09583813897213248,
+        "channelsAtOne": 162731,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 37.73153214842829,
+        "hueMaxDegrees": 43.1969774286351,
+        "hueUndefined": 13751
+      },
+      "candidateSame": {
+        "meanY": 0.5690506137391976,
+        "YPercentiles": [
+          0.027896543058311223,
+          0.2219559904009571,
+          0.5833559013540899,
+          0.9217092030866384,
+          0.9583333151982418
+        ],
+        "highMaskPixels": 118514,
+        "highMeanY": 0.6517044063787042,
+        "highLinearSaturation": 0.6733989321228752,
+        "highEncodedSaturation": 0.41164910793304443,
+        "highLocalRms": 0.04333700747036063,
+        "highRelativeLocalRms": 0.06649795067547476,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000007522314183000347,
+        "hueMaxDegrees": 0.00001672133520902401,
+        "hueUndefined": 2725
+      },
+      "candidateMidMatched": {
+        "meanY": 0.5754046267293241,
+        "YPercentiles": [
+          0.0293962243257707,
+          0.23388804802852464,
+          0.5876038759987432,
+          0.9243895772802405,
+          0.9611201948062947
+        ],
+        "highMaskPixels": 118514,
+        "highMeanY": 0.6566156560903598,
+        "highLinearSaturation": 0.673398938864159,
+        "highEncodedSaturation": 0.4115578532218933,
+        "highLocalRms": 0.04195663940122583,
+        "highRelativeLocalRms": 0.06389832318505057,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000007638041883806731,
+        "hueMaxDegrees": 0.000014166270930216414,
+        "hueUndefined": 2725
+      }
+    },
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": 2.8850957381671094,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.867261084134729,
+        "YPercentiles": [
+          0.05579308566405938,
+          0.443912000212627,
+          0.9763111763445323,
+          1,
+          1
+        ],
+        "highMaskPixels": 132930,
+        "highMeanY": 0.9459720980410049,
+        "highLinearSaturation": 0.2832504807187128,
+        "highEncodedSaturation": 0.15423902869224548,
+        "highLocalRms": 0.06819592882480856,
+        "highRelativeLocalRms": 0.07209084598376017,
+        "channelsAtOne": 279849,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 41.92823014388775,
+        "hueMaxDegrees": 53.56197784941245,
+        "hueUndefined": 42064
+      },
+      "candidateSame": {
+        "meanY": 0.6208421583385227,
+        "YPercentiles": [
+          0.05579308566405938,
+          0.43402990685250986,
+          0.6188856198312914,
+          0.9446087778082618,
+          0.9821428047957683
+        ],
+        "highMaskPixels": 132930,
+        "highMeanY": 0.6726256064875153,
+        "highLinearSaturation": 0.6800950010071783,
+        "highEncodedSaturation": 0.41609761118888855,
+        "highLocalRms": 0.04398699036667667,
+        "highRelativeLocalRms": 0.0653959497563272,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000008454722084630268,
+        "hueMaxDegrees": 0.000021305507932184363,
+        "hueUndefined": 2725
+      },
+      "candidateMidMatched": {
+        "meanY": 0.6427458709592531,
+        "YPercentiles": [
+          0.10304353344914394,
+          0.5067101285767377,
+          0.6308253330810867,
+          0.9530559965932336,
+          0.9909256727708258
+        ],
+        "highMaskPixels": 132930,
+        "highMeanY": 0.685009994478752,
+        "highLinearSaturation": 0.680095010734684,
+        "highEncodedSaturation": 0.4158951938152313,
+        "highLocalRms": 0.04272644731833933,
+        "highRelativeLocalRms": 0.06237346558841287,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 64971,
+        "hueP99Degrees": 0.000007186565304427673,
+        "hueMaxDegrees": 0.000014795732573447611,
+        "hueUndefined": 2725
+      }
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": 0,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.37029599223245696,
+        "YPercentiles": [
+          0.0095615952558414,
+          0.029404798638255042,
+          0.22404677418909885,
+          0.9728213963334358,
+          1
+        ],
+        "highMaskPixels": 48759,
+        "highMeanY": 0.8228657903480031,
+        "highLinearSaturation": 0.49079120193254683,
+        "highEncodedSaturation": 0.2831018269062042,
+        "highLocalRms": 0.0454337403767783,
+        "highRelativeLocalRms": 0.05521403479121868,
+        "channelsAtOne": 65784,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0,
+        "hueMaxDegrees": 0,
+        "hueUndefined": 4798
+      },
+      "candidateSame": {
+        "meanY": 0.33868375901497433,
+        "YPercentiles": [
+          0.0095615952558414,
+          0.029404798638255042,
+          0.22404677418909885,
+          0.8512187337259007,
+          0.8750000107134338
+        ],
+        "highMaskPixels": 48759,
+        "highMeanY": 0.7272647021116342,
+        "highLinearSaturation": 0.4907912062153302,
+        "highEncodedSaturation": 0.28383585810661316,
+        "highLocalRms": 0.03565657004881687,
+        "highRelativeLocalRms": 0.04902832482490486,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000006307363599563196,
+        "hueMaxDegrees": 0.000012007730881767868,
+        "hueUndefined": 4798
+      },
+      "candidateMidMatched": {
+        "meanY": 0.33868375901497433,
+        "YPercentiles": [
+          0.0095615952558414,
+          0.029404798638255042,
+          0.22404677418909885,
+          0.8512187337259007,
+          0.8750000107134338
+        ],
+        "highMaskPixels": 48759,
+        "highMeanY": 0.7272647021116342,
+        "highLinearSaturation": 0.4907912062153302,
+        "highEncodedSaturation": 0.28383585810661316,
+        "highLocalRms": 0.03565657004881687,
+        "highRelativeLocalRms": 0.04902832482490486,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000006307363599563196,
+        "hueMaxDegrees": 0.000012007730881767868,
+        "hueUndefined": 4798
+      }
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": 1.0755444381892687,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.5148134367717164,
+        "YPercentiles": [
+          0.019123190143169776,
+          0.058809594694905154,
+          0.44809353019333664,
+          1,
+          1
+        ],
+        "highMaskPixels": 71111,
+        "highMeanY": 0.875857501598666,
+        "highLinearSaturation": 0.3725068930725833,
+        "highEncodedSaturation": 0.21310999989509583,
+        "highLocalRms": 0.05556951798936831,
+        "highRelativeLocalRms": 0.06344584351671316,
+        "channelsAtOne": 124043,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 37.025082688603476,
+        "hueMaxDegrees": 43.30850853005263,
+        "hueUndefined": 19403
+      },
+      "candidateSame": {
+        "meanY": 0.442583517819993,
+        "YPercentiles": [
+          0.019123190143169776,
+          0.058809594694905154,
+          0.44490801592013424,
+          0.9322871510519374,
+          0.9583333151982418
+        ],
+        "highMaskPixels": 71111,
+        "highMeanY": 0.7260813076350695,
+        "highLinearSaturation": 0.5665210848485177,
+        "highEncodedSaturation": 0.3363064229488373,
+        "highLocalRms": 0.03909416373315769,
+        "highRelativeLocalRms": 0.053842680319772844,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000008986583590319853,
+        "hueMaxDegrees": 0.00005553019845387022,
+        "hueUndefined": 4798
+      },
+      "candidateMidMatched": {
+        "meanY": 0.4496519647020101,
+        "YPercentiles": [
+          0.020151227053003963,
+          0.06197111891015614,
+          0.464602823451858,
+          0.9349982923051855,
+          0.9611201948062947
+        ],
+        "highMaskPixels": 71111,
+        "highMeanY": 0.7304671487812504,
+        "highLinearSaturation": 0.5665210968481103,
+        "highEncodedSaturation": 0.3362366259098053,
+        "highLocalRms": 0.03856047993337386,
+        "highRelativeLocalRms": 0.05278879412675872,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000008994264665497801,
+        "hueMaxDegrees": 0.00004429186077187703,
+        "hueUndefined": 4798
+      }
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": 2.8850957381671094,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.6534033106586796,
+        "YPercentiles": [
+          0.038246379583417194,
+          0.11761919775463806,
+          0.8101004926939517,
+          1,
+          1
+        ],
+        "highMaskPixels": 94044,
+        "highMeanY": 0.9056246043825953,
+        "highLinearSaturation": 0.28675651455298445,
+        "highEncodedSaturation": 0.1650937795639038,
+        "highLocalRms": 0.060113732796906634,
+        "highRelativeLocalRms": 0.0663782018575885,
+        "channelsAtOne": 191981,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 41.28241928470261,
+        "hueMaxDegrees": 50.425617752292396,
+        "hueUndefined": 40985
+      },
+      "candidateSame": {
+        "meanY": 0.5287627170016227,
+        "YPercentiles": [
+          0.038246379583417194,
+          0.11761919775463806,
+          0.5760041051316456,
+          0.9554495359292894,
+          0.9821428047957683
+        ],
+        "highMaskPixels": 94044,
+        "highMeanY": 0.7101947696425271,
+        "highLinearSaturation": 0.6068043950317478,
+        "highEncodedSaturation": 0.36491894721984863,
+        "highLocalRms": 0.04179368934751185,
+        "highRelativeLocalRms": 0.058848207750880066,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000009654246760312363,
+        "hueMaxDegrees": 0.00003906547774998911,
+        "hueUndefined": 4798
+      },
+      "candidateMidMatched": {
+        "meanY": 0.592407120008024,
+        "YPercentiles": [
+          0.0706367517644591,
+          0.21722937992406066,
+          0.6092313007342226,
+          0.9639936977062697,
+          0.9909256727708258
+        ],
+        "highMaskPixels": 94044,
+        "highMeanY": 0.7296789967707688,
+        "highLinearSaturation": 0.6068044082929238,
+        "highEncodedSaturation": 0.3645973801612854,
+        "highLocalRms": 0.0406207538087329,
+        "highRelativeLocalRms": 0.055669347738528996,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 65784,
+        "hueP99Degrees": 0.000008481161793211765,
+        "hueMaxDegrees": 0.00006245869811108713,
+        "hueUndefined": 4798
+      }
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": 0,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.5891255508096421,
+        "YPercentiles": [
+          0.2955411823169571,
+          0.3726223335558367,
+          0.5706282565956504,
+          0.8370185961487115,
+          0.9688564784448556
+        ],
+        "highMaskPixels": 86731,
+        "highMeanY": 0.6904779509664007,
+        "highLinearSaturation": 0.6569210746753427,
+        "highEncodedSaturation": 0.39238205552101135,
+        "highLocalRms": 0.1644803395613883,
+        "highRelativeLocalRms": 0.23821229820761078,
+        "channelsAtOne": 42935,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0,
+        "hueMaxDegrees": 0,
+        "hueUndefined": 21
+      },
+      "candidateSame": {
+        "meanY": 0.5526442956665135,
+        "YPercentiles": [
+          0.2955411823169571,
+          0.37256774201813037,
+          0.5414509651159379,
+          0.7484023665868866,
+          0.8477494316612942
+        ],
+        "highMaskPixels": 86731,
+        "highMeanY": 0.6284542229062472,
+        "highLinearSaturation": 0.6569210766586904,
+        "highEncodedSaturation": 0.39321115612983704,
+        "highLocalRms": 0.1328923144078139,
+        "highRelativeLocalRms": 0.2114590205047262,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000010210624617597622,
+        "hueMaxDegrees": 0.00003730807556818723,
+        "hueUndefined": 21
+      },
+      "candidateMidMatched": {
+        "meanY": 0.5526442956665135,
+        "YPercentiles": [
+          0.2955411823169571,
+          0.37256774201813037,
+          0.5414509651159379,
+          0.7484023665868866,
+          0.8477494316612942
+        ],
+        "highMaskPixels": 86731,
+        "highMeanY": 0.6284542229062472,
+        "highLinearSaturation": 0.6569210766586904,
+        "highEncodedSaturation": 0.39321115612983704,
+        "highLocalRms": 0.1328923144078139,
+        "highRelativeLocalRms": 0.2114590205047262,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000010210624617597622,
+        "hueMaxDegrees": 0.00003730807556818723,
+        "hueUndefined": 21
+      }
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": 1.0755444381892687,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.8897023185445094,
+        "YPercentiles": [
+          0.5830223508975766,
+          0.7016714958791834,
+          0.9584947188145874,
+          0.9912865019308064,
+          1
+        ],
+        "highMaskPixels": 146906,
+        "highMeanY": 0.8908597110377655,
+        "highLinearSaturation": 0.4382083456463797,
+        "highEncodedSaturation": 0.24124972522258759,
+        "highLocalRms": 0.13489378065907978,
+        "highRelativeLocalRms": 0.15141977910522136,
+        "channelsAtOne": 225379,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 41.46718269258526,
+        "hueMaxDegrees": 54.976553852465216,
+        "hueUndefined": 7369
+      },
+      "candidateSame": {
+        "meanY": 0.6913276521653202,
+        "YPercentiles": [
+          0.47158248352974386,
+          0.5305017671684317,
+          0.6876870297370561,
+          0.8629741578480823,
+          0.9286865380937206
+        ],
+        "highMaskPixels": 146906,
+        "highMeanY": 0.6917423515996912,
+        "highLinearSaturation": 0.637573421272735,
+        "highEncodedSaturation": 0.3770099878311157,
+        "highLocalRms": 0.1405753524390518,
+        "highRelativeLocalRms": 0.20321923634423103,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000012728872216229991,
+        "hueMaxDegrees": 0.00005125619197291325,
+        "hueUndefined": 21
+      },
+      "candidateMidMatched": {
+        "meanY": 0.6955291883221396,
+        "YPercentiles": [
+          0.4739346013399422,
+          0.5337870052202738,
+          0.6923213653090272,
+          0.8676333066090436,
+          0.9313958072496692
+        ],
+        "highMaskPixels": 146906,
+        "highMeanY": 0.6958462131051443,
+        "highLinearSaturation": 0.6375734255106066,
+        "highEncodedSaturation": 0.37695828080177307,
+        "highLocalRms": 0.14096321922051377,
+        "highRelativeLocalRms": 0.20257812224267124,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000012708063385319851,
+        "hueMaxDegrees": 0.00006265591784399757,
+        "hueUndefined": 21
+      }
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": 2.8850957381671094,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.9911095330445359,
+        "YPercentiles": [
+          0.9420371916226846,
+          0.971770876405118,
+          1,
+          1,
+          1
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9911095330445359,
+        "highLinearSaturation": 0.11822716428077497,
+        "highEncodedSaturation": 0.06106196343898773,
+        "highLocalRms": 0.016982068110854856,
+        "highRelativeLocalRms": 0.017134400936179635,
+        "channelsAtOne": 374587,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 50.61608362296086,
+        "hueMaxDegrees": 57.64483537343298,
+        "hueUndefined": 80803
+      },
+      "candidateSame": {
+        "meanY": 0.7229363244827712,
+        "YPercentiles": [
+          0.48928927368930636,
+          0.5535298077093131,
+          0.7219405837260996,
+          0.9022660944820768,
+          0.9519799578926774
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.7229363244827712,
+        "highLinearSaturation": 0.6371660384420337,
+        "highEncodedSaturation": 0.376359760761261,
+        "highLocalRms": 0.14532343501583042,
+        "highRelativeLocalRms": 0.2010183056160622,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000012884926603415855,
+        "hueMaxDegrees": 0.00005032093040383425,
+        "hueUndefined": 21
+      },
+      "candidateMidMatched": {
+        "meanY": 0.7327194683887986,
+        "YPercentiles": [
+          0.4947913639750664,
+          0.5604331596700084,
+          0.7320989455908415,
+          0.9155236769603605,
+          0.9611109409575058
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.7327194683887986,
+        "highLinearSaturation": 0.6371660455548446,
+        "highEncodedSaturation": 0.37624576687812805,
+        "highLocalRms": 0.1473463240821716,
+        "highRelativeLocalRms": 0.20109514000791648,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 42935,
+        "hueP99Degrees": 0.000012319739570444911,
+        "hueMaxDegrees": 0.00004331561169995126,
+        "hueUndefined": 21
+      }
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": null,
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.5443689211619481,
+        "YPercentiles": [
+          0.0008012862463987535,
+          0.4679398213961704,
+          0.5972861715677997,
+          0.6573802708796508,
+          0.6959374975728146
+        ],
+        "highMaskPixels": 132861,
+        "highMeanY": 0.5980026992423118,
+        "highLinearSaturation": 0.7110862927228884,
+        "highEncodedSaturation": 0.4298476278781891,
+        "highLocalRms": 0.03284396738937114,
+        "highRelativeLocalRms": 0.05492277448075984,
+        "channelsAtOne": 48287,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 0,
+        "hueMaxDegrees": 0,
+        "hueUndefined": 101
+      },
+      "candidateSame": {
+        "meanY": 0.49266252764761664,
+        "YPercentiles": [
+          0.0008012862463987535,
+          0.449833718540078,
+          0.5371504193572427,
+          0.5856237356411975,
+          0.6204407205697268
+        ],
+        "highMaskPixels": 132861,
+        "highMeanY": 0.5406162731123769,
+        "highLinearSaturation": 0.7110862942575897,
+        "highEncodedSaturation": 0.4308597147464752,
+        "highLocalRms": 0.024233594797456903,
+        "highRelativeLocalRms": 0.044825870035213516,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 0.000007398123650084178,
+        "hueMaxDegrees": 0.000013107159096174413,
+        "hueUndefined": 101
+      },
+      "candidateMidMatched": null
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": null,
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.86448051274672,
+        "YPercentiles": [
+          0.0016025724764294584,
+          0.7929020344373426,
+          0.9638514200033813,
+          0.9779046064675607,
+          0.9871859039674965
+        ],
+        "highMaskPixels": 134443,
+        "highMeanY": 0.9457632031609625,
+        "highLinearSaturation": 0.45259941034823464,
+        "highEncodedSaturation": 0.23930723965168,
+        "highLocalRms": 0.028863557030926613,
+        "highRelativeLocalRms": 0.03051879892816493,
+        "channelsAtOne": 224503,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 47.025327530442404,
+        "hueMaxDegrees": 59.34930370959197,
+        "hueUndefined": 118
+      },
+      "candidateSame": {
+        "meanY": 0.5507370308030084,
+        "YPercentiles": [
+          0.0016025724764294584,
+          0.5111050337596927,
+          0.596926342550456,
+          0.6509299970978827,
+          0.7015624866079343
+        ],
+        "highMaskPixels": 134443,
+        "highMeanY": 0.6016518781124889,
+        "highLinearSaturation": 0.7111741664357434,
+        "highEncodedSaturation": 0.42984211444854736,
+        "highLocalRms": 0.028969486847686382,
+        "highRelativeLocalRms": 0.0481499150947054,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 0.0000073828643787133434,
+        "hueMaxDegrees": 0.00010966478528906546,
+        "hueUndefined": 101
+      },
+      "candidateMidMatched": null
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": null,
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.9120629159746491,
+        "YPercentiles": [
+          0.0032051449910991694,
+          0.9702090708778914,
+          1,
+          1,
+          1
+        ],
+        "highMaskPixels": 134920,
+        "highMeanY": 0.9944765090592568,
+        "highLinearSaturation": 0.05947294456155708,
+        "highEncodedSaturation": 0.028746437281370163,
+        "highLocalRms": 0.0108422686549642,
+        "highRelativeLocalRms": 0.010902488451155715,
+        "channelsAtOne": 354991,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 46.57437993012905,
+        "hueMaxDegrees": 55.1938007547879,
+        "hueUndefined": 86130
+      },
+      "candidateSame": {
+        "meanY": 0.5676154978243704,
+        "YPercentiles": [
+          0.0032051449910991694,
+          0.5287369710864307,
+          0.6131669254181219,
+          0.668867743154387,
+          0.723603060608599
+        ],
+        "highMaskPixels": 134920,
+        "highMeanY": 0.6180249934146713,
+        "highLinearSaturation": 0.7112107483726358,
+        "highEncodedSaturation": 0.4296157956123352,
+        "highLocalRms": 0.030471942709843523,
+        "highRelativeLocalRms": 0.04930535663530683,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 48287,
+        "hueP99Degrees": 0.000007872191268668008,
+        "hueMaxDegrees": 0.0001931733351410418,
+        "hueUndefined": 101
+      },
+      "candidateMidMatched": null
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": 0,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.18000000311405964,
+        "actualMeanY": 0.18000000311405964,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.7249999999069062,
+        "YPercentiles": [
+          0.4919402854514285,
+          0.544479800378791,
+          0.7250000084484578,
+          0.9055201728689286,
+          0.9580597469109778
+        ],
+        "highMaskPixels": 65568,
+        "highMeanY": 0.8510534665080015,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.0033725645871299395,
+        "highRelativeLocalRms": 0.0039628116444529295,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateSame": {
+        "meanY": 0.7097139074396055,
+        "YPercentiles": [
+          0.4919402854514285,
+          0.544479800378791,
+          0.7250000084484578,
+          0.8458770055207775,
+          0.8635549271040823
+        ],
+        "highMaskPixels": 65568,
+        "highMeanY": 0.8166765440632374,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.001959188802331436,
+        "highRelativeLocalRms": 0.0023989776816459303,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateMidMatched": {
+        "meanY": 0.7097139074396055,
+        "YPercentiles": [
+          0.4919402854514285,
+          0.544479800378791,
+          0.7250000084484578,
+          0.8458770055207775,
+          0.8635549271040823
+        ],
+        "highMaskPixels": 65568,
+        "highMeanY": 0.8166765440632374,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.001959188802331436,
+        "highRelativeLocalRms": 0.0023989776816459303,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      }
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": 1,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.36000000622811934,
+        "actualMeanY": 0.3599999829889952,
+        "absoluteError": 2.3239124125051802e-8,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.9996338320333211,
+        "YPercentiles": [
+          0.9838805792761638,
+          1,
+          1,
+          1,
+          1
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9996338320333211,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.0007995574231577169,
+        "highRelativeLocalRms": 0.0007998503027167102,
+        "channelsAtOne": 434337,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateSame": {
+        "meanY": 0.9283117858479272,
+        "YPercentiles": [
+          0.8708358879080179,
+          0.8938807073223209,
+          0.9342104973181025,
+          0.9523279562991387,
+          0.9558652927399646
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9283117858479272,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.0007192349531428652,
+        "highRelativeLocalRms": 0.0007747773583267722,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateMidMatched": {
+        "meanY": 0.9283117858479272,
+        "YPercentiles": [
+          0.8708358879080179,
+          0.8938807073223209,
+          0.9342104973181025,
+          0.9523279562991387,
+          0.9558652927399646
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9283117858479272,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.0007192349531428652,
+        "highRelativeLocalRms": 0.0007747773583267722,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      }
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": 2,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.7200000124562386,
+        "actualMeanY": 0.7200000057464813,
+        "absoluteError": 6.709757305323194e-9,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 1,
+        "YPercentiles": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 1,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0,
+        "highRelativeLocalRms": 0,
+        "channelsAtOne": 442368,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateSame": {
+        "meanY": 0.9725847444521771,
+        "YPercentiles": [
+          0.9574181191320765,
+          0.9627515253260914,
+          0.9739583396797074,
+          0.9799812805145589,
+          0.9812438592704175
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9725847444521771,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.00018944701645497402,
+        "highRelativeLocalRms": 0.00019478715611736527,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      },
+      "candidateMidMatched": {
+        "meanY": 0.9725847444521771,
+        "YPercentiles": [
+          0.9574181191320765,
+          0.9627515253260914,
+          0.9739583396797074,
+          0.9799812805145589,
+          0.9812438592704175
+        ],
+        "highMaskPixels": 147456,
+        "highMeanY": 0.9725847444521771,
+        "highLinearSaturation": 0,
+        "highEncodedSaturation": 0,
+        "highLocalRms": 0.00018944701645497402,
+        "highRelativeLocalRms": 0.00019478715611736527,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 0,
+        "hueP99Degrees": null,
+        "hueMaxDegrees": null,
+        "hueUndefined": 147456
+      }
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "baselineEv": 0,
+      "candidateSameEv": 0,
+      "candidateMidMatchedEv": 0,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.18000000311405964,
+        "actualMeanY": 0.18000000311405964,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.23104983556979905,
+        "YPercentiles": [
+          0.09002533796826576,
+          0.1065749517869276,
+          0.21050590901621724,
+          0.3502443213925679,
+          0.9319950421527824
+        ],
+        "highMaskPixels": 6697,
+        "highMeanY": 0.8068636268411675,
+        "highLinearSaturation": 0.3424875207534186,
+        "highEncodedSaturation": 0.17127050459384918,
+        "highLocalRms": 0.009222654985083498,
+        "highRelativeLocalRms": 0.011430252496558496,
+        "channelsAtOne": 3665,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0,
+        "hueMaxDegrees": 0,
+        "hueUndefined": 0
+      },
+      "candidateSame": {
+        "meanY": 0.22783143891955998,
+        "YPercentiles": [
+          0.09002533796826576,
+          0.1065749517869276,
+          0.21050590901621724,
+          0.3502443213925679,
+          0.8154956462452652
+        ],
+        "highMaskPixels": 6697,
+        "highMeanY": 0.736000270643222,
+        "highLinearSaturation": 0.3424875241047208,
+        "highEncodedSaturation": 0.1715754270553589,
+        "highLocalRms": 0.00606064542054186,
+        "highRelativeLocalRms": 0.008234569554227477,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.00000986765909683825,
+        "hueMaxDegrees": 0.00002136355269889895,
+        "hueUndefined": 0
+      },
+      "candidateMidMatched": {
+        "meanY": 0.22783143891955998,
+        "YPercentiles": [
+          0.09002533796826576,
+          0.1065749517869276,
+          0.21050590901621724,
+          0.3502443213925679,
+          0.8154956462452652
+        ],
+        "highMaskPixels": 6697,
+        "highMeanY": 0.736000270643222,
+        "highLinearSaturation": 0.3424875241047208,
+        "highEncodedSaturation": 0.1715754270553589,
+        "highLocalRms": 0.00606064542054186,
+        "highRelativeLocalRms": 0.008234569554227477,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.00000986765909683825,
+        "hueMaxDegrees": 0.00002136355269889895,
+        "hueUndefined": 0
+      }
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "baselineEv": 1,
+      "candidateSameEv": 1,
+      "candidateMidMatchedEv": 1,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.36000000622811934,
+        "actualMeanY": 0.3599999829889952,
+        "absoluteError": 2.3239124125051802e-8,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.4312861883696186,
+        "YPercentiles": [
+          0.18005068235247862,
+          0.21314989964165829,
+          0.42101182114951274,
+          0.7004886609583018,
+          1
+        ],
+        "highMaskPixels": 58266,
+        "highMeanY": 0.6192295426325878,
+        "highLinearSaturation": 0.6488462541990219,
+        "highEncodedSaturation": 0.41282933950424194,
+        "highLocalRms": 0.005188117473320122,
+        "highRelativeLocalRms": 0.008378342950601804,
+        "channelsAtOne": 27377,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 31.362240603449866,
+        "hueMaxDegrees": 31.848850303028424,
+        "hueUndefined": 5062
+      },
+      "candidateSame": {
+        "meanY": 0.41098495354383263,
+        "YPercentiles": [
+          0.18005068235247862,
+          0.21314989964165829,
+          0.42101182114951274,
+          0.6303279688468122,
+          0.8931619019024919
+        ],
+        "highMaskPixels": 58266,
+        "highMeanY": 0.5678524293508955,
+        "highLinearSaturation": 0.6994729469131028,
+        "highEncodedSaturation": 0.4397743344306946,
+        "highLocalRms": 0.002960164553434915,
+        "highRelativeLocalRms": 0.0052129116658330395,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.000010514763397748624,
+        "hueMaxDegrees": 0.000022095858646421642,
+        "hueUndefined": 0
+      },
+      "candidateMidMatched": {
+        "meanY": 0.41098495354383263,
+        "YPercentiles": [
+          0.18005068235247862,
+          0.21314989964165829,
+          0.42101182114951274,
+          0.6303279688468122,
+          0.8931619019024919
+        ],
+        "highMaskPixels": 58266,
+        "highMeanY": 0.5678524293508955,
+        "highLinearSaturation": 0.6994729469131028,
+        "highEncodedSaturation": 0.4397743344306946,
+        "highLocalRms": 0.002960164553434915,
+        "highRelativeLocalRms": 0.0052129116658330395,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.000010514763397748624,
+        "hueMaxDegrees": 0.000022095858646421642,
+        "hueUndefined": 0
+      }
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "baselineEv": 2,
+      "candidateSameEv": 2,
+      "candidateMidMatchedEv": 2,
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.7200000124562386,
+        "actualMeanY": 0.7200000057464813,
+        "absoluteError": 6.709757305323194e-9,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "numpyVsActualCandidateMaxAbs": 0,
+      "productCandidateTiff16PixelsExact": true,
+      "tiffOrientation": 1,
+      "tiffIccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "original": {
+        "meanY": 0.7192601999577013,
+        "YPercentiles": [
+          0.36010133869727295,
+          0.4262997844484738,
+          0.7691925919465479,
+          0.9851781022999149,
+          1
+        ],
+        "highMaskPixels": 124032,
+        "highMeanY": 0.7774446084988087,
+        "highLinearSaturation": 0.6280688324810144,
+        "highEncodedSaturation": 0.3822919726371765,
+        "highLocalRms": 0.0025922751488651596,
+        "highRelativeLocalRms": 0.003334353496734207,
+        "channelsAtOne": 128637,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 33.26019431155357,
+        "hueMaxDegrees": 33.41935649983298,
+        "hueUndefined": 12111
+      },
+      "candidateSame": {
+        "meanY": 0.5656074861516794,
+        "YPercentiles": [
+          0.36010133869727295,
+          0.4262997844484738,
+          0.5754915404875289,
+          0.6994732704388376,
+          0.9153522903751456
+        ],
+        "highMaskPixels": 124032,
+        "highMeanY": 0.5947738899182751,
+        "highLinearSaturation": 0.7429493328369972,
+        "highEncodedSaturation": 0.4699317216873169,
+        "highLocalRms": 0.0016613934380124715,
+        "highRelativeLocalRms": 0.0027933193877101017,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.000011163579351055231,
+        "hueMaxDegrees": 0.000028727031095573363,
+        "hueUndefined": 0
+      },
+      "candidateMidMatched": {
+        "meanY": 0.5656074861516794,
+        "YPercentiles": [
+          0.36010133869727295,
+          0.4262997844484738,
+          0.5754915404875289,
+          0.6994732704388376,
+          0.9153522903751456
+        ],
+        "highMaskPixels": 124032,
+        "highMeanY": 0.5947738899182751,
+        "highLinearSaturation": 0.7429493328369972,
+        "highEncodedSaturation": 0.4699317216873169,
+        "highLocalRms": 0.0016613934380124715,
+        "highRelativeLocalRms": 0.0027933193877101017,
+        "channelsAtOne": 0,
+        "inputChannelsAtOne": 3665,
+        "hueP99Degrees": 0.000011163579351055231,
+        "hueMaxDegrees": 0.000028727031095573363,
+        "hueUndefined": 0
+      }
+    }
+  ],
+  "anchorComparisons": [
+    {
+      "status": "MATCHED",
+      "baselineEv": 0,
+      "candidateEv": 0,
+      "offsetEv": 0,
+      "pixels": 975,
+      "targetMeanY": 0.13459408204741258,
+      "actualMeanY": 0.13459408204741258,
+      "absoluteError": 0,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 1,
+      "candidateEv": 1.0755444381892687,
+      "offsetEv": 0.0755444381892687,
+      "pixels": 975,
+      "targetMeanY": 0.26794632128838375,
+      "actualMeanY": 0.267946320888677,
+      "absoluteError": 3.9970676768419366e-10,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 2,
+      "candidateEv": 2.8850957381671094,
+      "offsetEv": 0.8850957381671094,
+      "pixels": 975,
+      "targetMeanY": 0.48395582918798646,
+      "actualMeanY": 0.4839558288586338,
+      "absoluteError": 3.293526562586635e-10,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "NO_MIDTONE_ANCHOR",
+      "pixels": 0
+    },
+    {
+      "status": "NO_MIDTONE_ANCHOR",
+      "pixels": 0
+    },
+    {
+      "status": "NO_MIDTONE_ANCHOR",
+      "pixels": 0
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 0,
+      "candidateEv": 0,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.18000000311405964,
+      "actualMeanY": 0.18000000311405964,
+      "absoluteError": 0,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 1,
+      "candidateEv": 1,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.36000000622811934,
+      "actualMeanY": 0.3599999829889952,
+      "absoluteError": 2.3239124125051802e-8,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 2,
+      "candidateEv": 2,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.7200000124562386,
+      "actualMeanY": 0.7200000057464813,
+      "absoluteError": 6.709757305323194e-9,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 0,
+      "candidateEv": 0,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.18000000311405964,
+      "actualMeanY": 0.18000000311405964,
+      "absoluteError": 0,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 1,
+      "candidateEv": 1,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.36000000622811934,
+      "actualMeanY": 0.3599999829889952,
+      "absoluteError": 2.3239124125051802e-8,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    },
+    {
+      "status": "MATCHED",
+      "baselineEv": 2,
+      "candidateEv": 2,
+      "offsetEv": 0,
+      "pixels": 9216,
+      "targetMeanY": 0.7200000124562386,
+      "actualMeanY": 0.7200000057464813,
+      "absoluteError": 6.709757305323194e-9,
+      "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+    }
+  ],
+  "calls": [
+    {
+      "exitCode": 0,
+      "elapsedMs": 204.4717000098899,
+      "sampledPeakPrivateBytes": 22437888,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 178.9674999890849,
+      "sampledPeakPrivateBytes": 22294528,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 257.4119999771938,
+      "sampledPeakPrivateBytes": 22491136,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 255.9569000150077,
+      "sampledPeakPrivateBytes": 22384640,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 256.91009999718517,
+      "sampledPeakPrivateBytes": 22401024,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 272.2656999831088,
+      "sampledPeakPrivateBytes": 22245376,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 255.20909996703267,
+      "sampledPeakPrivateBytes": 22323200,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 271.4949999935925,
+      "sampledPeakPrivateBytes": 22257664,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 191.82639999780804,
+      "sampledPeakPrivateBytes": 22392832,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 260.41310001164675,
+      "sampledPeakPrivateBytes": 22466560,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 257.9451000201516,
+      "sampledPeakPrivateBytes": 22351872,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 272.5184999871999,
+      "sampledPeakPrivateBytes": 22339584,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 270.0984999537468,
+      "sampledPeakPrivateBytes": 22253568,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 189.77620004443452,
+      "sampledPeakPrivateBytes": 22368256,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 256.3015000196174,
+      "sampledPeakPrivateBytes": 22388736,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 265.75680001406,
+      "sampledPeakPrivateBytes": 22355968,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 274.9383000191301,
+      "sampledPeakPrivateBytes": 22343680,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 275.63319995533675,
+      "sampledPeakPrivateBytes": 22528000,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 200.19890001276508,
+      "sampledPeakPrivateBytes": 22347776,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 259.96589998248965,
+      "sampledPeakPrivateBytes": 22700032,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 256.42220000736415,
+      "sampledPeakPrivateBytes": 22745088,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 190.14549994608387,
+      "sampledPeakPrivateBytes": 22343680,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 190.02099998760968,
+      "sampledPeakPrivateBytes": 22560768,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 256.3137999968603,
+      "sampledPeakPrivateBytes": 22331392,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 260.1703000254929,
+      "sampledPeakPrivateBytes": 22216704,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 270.7755000446923,
+      "sampledPeakPrivateBytes": 22278144,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 255.93480002135038,
+      "sampledPeakPrivateBytes": 22323200,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 194.27539996104315,
+      "sampledPeakPrivateBytes": 22282240,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 194.7035000193864,
+      "sampledPeakPrivateBytes": 22462464,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 254.71879995893687,
+      "sampledPeakPrivateBytes": 22355968,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 259.4050000188872,
+      "sampledPeakPrivateBytes": 22654976,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 266.9177000061609,
+      "sampledPeakPrivateBytes": 22429696,
+      "guardBytes": 536870912
+    },
+    {
+      "exitCode": 0,
+      "elapsedMs": 255.82950003445148,
+      "sampledPeakPrivateBytes": 22265856,
+      "guardBytes": 536870912
+    }
+  ],
+  "newRawDecodes": 0,
+  "realPhotoRois": 4,
+  "syntheticSupplements": 2,
+  "midMatching": "Candidate EV solved before the shoulder, baseline EV fixed; fixed anchor and input mask, no output rescale",
+  "missing": {
+    "homeDSC08015": true,
+    "realWhiteGarmentHighlights": true,
+    "verifiedMetalSpecularHighlights": true,
+    "calibratedWarmLampSpectrum": true
+  }
+}

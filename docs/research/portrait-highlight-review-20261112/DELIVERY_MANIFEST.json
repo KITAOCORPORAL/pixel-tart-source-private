@@ -1,0 +1,148 @@
+{
+  "status": "REVIEW_COMPLETE_AVAILABLE_INPUTS_PRODUCT_NOT_ADMITTED",
+  "base": "618ba10233d9b0f182074847c0000d1bd5ae3fc3",
+  "implementation": "b29bff914eed894ac663c1c0a006e18d76672035",
+  "candidateModified": false,
+  "productionCodeModified": false,
+  "newRawDecodes": 0,
+  "containsPhotographs": false,
+  "containsGplSources": false,
+  "containsReferenceExecutables": false,
+  "files": [
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/.gitattributes",
+      "bytes": 81,
+      "sha256": "e06ae75e089186de2eb094cfdfaf96c3372fe42dd76f1069277b536efea003c1"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/EV0_CURVES.csv",
+      "bytes": 643591,
+      "sha256": "6de421682de75761486e1dd487504e4bc8a5da66e39f07bac07bc720eccec5e8"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/FIXED_ROIS.json",
+      "bytes": 11128,
+      "sha256": "9f1c50fa7d1cc8dfc1abc9f5a8972725cb7fc4af748421fc02f471f9e49aa272"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/LOCAL_ARTIFACT_INDEX.json",
+      "bytes": 58503,
+      "sha256": "2dd7f4b2a3bf517e36b99488a5c88794b15cb41034c7c1a52ba62b4512409806"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/LOCAL_REFERENCE_BUILD.json",
+      "bytes": 4402,
+      "sha256": "c0ed0ba6e8cb13e6ee2599440b186363e7a98a34542d75b31df4a83ce4a7e302"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/MEMORY_COMPANY_CHECK.json",
+      "bytes": 13464,
+      "sha256": "95c399dc0a500870cf869e756905361e95a973abac78ca4b405c8eb3f6192f92"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/MISSING_ITEMS.json",
+      "bytes": 1496,
+      "sha256": "c35cd77c127dca55bbb5668dd72b7fed42562c85192c1c97a3c5dc4ef0ae7fcd"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/REFERENCE_SOURCE_READBACK.json",
+      "bytes": 2389,
+      "sha256": "9799748f13c6e5d44ba41116d630530e592748ff9487b9c077248d79bc0e02e8"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/REPORT.md",
+      "bytes": 10008,
+      "sha256": "a1649e976059a193459b04d717a96fe21075397a19ae0f42eb481358bc9faf65"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/ROI_RESULTS.json",
+      "bytes": 62039,
+      "sha256": "27190a59e39d9c7e7cd5cb4cec85449abe50924257e289829262f5985801e37e"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/RUNTIME.json",
+      "bytes": 360,
+      "sha256": "37d6b8ab612507af23e18fae04b718679ae16f105ea00f1b3862434caee3c0e9"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/SOURCE_PREFLIGHT.json",
+      "bytes": 642,
+      "sha256": "b3f9044d6d8fc2045e9d2e8fcd6207bfb18b6ab000d06db1d5563da91b849c7b"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/STATUS.json",
+      "bytes": 1327,
+      "sha256": "ff73ac96409055417b433d6cd80f2e8f3b45b97f5d61e34a7f61f1add4d6604f"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/SYNTHETIC_RESULTS.json",
+      "bytes": 2223,
+      "sha256": "3f7c561b8826a5a6765fabd5aa286d5cbe2e7e2625a3428fd6b253905e9d4db1"
+    },
+    {
+      "path": "docs/research/portrait-highlight-review-20261112/TESTS.json",
+      "bytes": 1214,
+      "sha256": "c790dd9b0dee18cd7a1348d6d9945bbed0dec44b3ed47fa81468505f69fc527e"
+    },
+    {
+      "path": "tools/portrait-highlight-review/.gitattributes",
+      "bytes": 84,
+      "sha256": "f4ca7c43f8347dfc10b2a107df887766d2771c20d5012fbad09067a55c74b317"
+    },
+    {
+      "path": "tools/portrait-highlight-review/.gitignore",
+      "bytes": 13,
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "tools/portrait-highlight-review/compare_rois.py",
+      "bytes": 7800,
+      "sha256": "b19578408f1592d704a287aad495cb74512f464c75981336fd4bfb36737ac763"
+    },
+    {
+      "path": "tools/portrait-highlight-review/fetch_references.py",
+      "bytes": 1499,
+      "sha256": "a57757ba8242f55c35b1207b3524742dc511cceb216ac03a41455b061a0d8cfc"
+    },
+    {
+      "path": "tools/portrait-highlight-review/freeze_rois.py",
+      "bytes": 4279,
+      "sha256": "ca8f7e958e74f6a8bee415354a7741e37f57efe06439ba36f50e4ad5968a8b64"
+    },
+    {
+      "path": "tools/portrait-highlight-review/inspect_inputs.py",
+      "bytes": 2058,
+      "sha256": "dd90d429a554b585fcd2f125d7ff821845da7658d76aa1215e5e7ab662fb08f4"
+    },
+    {
+      "path": "tools/portrait-highlight-review/plot_review.py",
+      "bytes": 3593,
+      "sha256": "c96d55d660a5a23f9d6da3e1133b37e2f08074ed3548428ef0689cd4103ad008"
+    },
+    {
+      "path": "tools/portrait-highlight-review/probe_runner.py",
+      "bytes": 1390,
+      "sha256": "4c4297d161bd962f6198b45bcbc1f75f5e463ec0ff42541a465434509aa50767"
+    },
+    {
+      "path": "tools/portrait-highlight-review/README.md",
+      "bytes": 2566,
+      "sha256": "2924b072370671ddb47cfe68c6df3ed1bbda1ad1b1c9254bf87bc3c708bf3fe7"
+    },
+    {
+      "path": "tools/portrait-highlight-review/rebuild_refs_msvc.py",
+      "bytes": 2890,
+      "sha256": "4bf2356854a4f15b21e9127ff14f86cd0a26d735f753faabaa32e4bfc3da3890"
+    },
+    {
+      "path": "tools/portrait-highlight-review/replay_synthetic.py",
+      "bytes": 4803,
+      "sha256": "4674f416c3cdda4014d92dd60fb40797de03136ef5414a856449cda335a64c17"
+    },
+    {
+      "path": "tools/portrait-highlight-review/rgb16_io.py",
+      "bytes": 2375,
+      "sha256": "2326b0f82b7e74c382bae3cc4601041e1e138ca8e51c793bef4a0aaa36ebf970"
+    }
+  ]
+}

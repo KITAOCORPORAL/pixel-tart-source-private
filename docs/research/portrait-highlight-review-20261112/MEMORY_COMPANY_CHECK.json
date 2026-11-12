@@ -1,0 +1,357 @@
+{
+  "memorySourceHead": "6e57eb268e7640f69b755d7d8380cd7d74d09604",
+  "productSource": "b86d02455be77e4ed0f44ddd5b9816681979746e",
+  "sourceDiffSinceFreeze": [],
+  "runtimeBinding": {
+    "onlyDifferentFiles": [
+      "KitaoPhotoSelector.dll"
+    ],
+    "sameHostAndDependencies": true,
+    "baselineAppSha256": "ebbc154435903b6d5ecd9960d8f06bc72a7bc5701b517d3f4e5ef17c2be478ba",
+    "fixedAppSha256": "8e64eb7397699aa603194f431f12ebd30571b991935a87946823d7b5fd470add",
+    "hostSha256": "09c4fc122ab8993b95dcd1391ea7349610ecd9df6073969e05fe6ce6d1f6c081"
+  },
+  "remoteRefs": [
+    {
+      "ref": "refs/remotes/source-private/research/portrait-highlight-continuity-20261109",
+      "head": "618ba10233d9b0f182074847c0000d1bd5ae3fc3",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "ff591beb84d07e91924230a94053348d4d5271d715c30b2fd11e07356ee3d7fb"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "25d7691929e4f4c9697c59751eeed3c205564bd3087ef31a27723437d57e1817"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "24e91887f09085006ec4f03f31a6f3d61ef016e11f514e40ade519a283a4b8ab"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/feature/mobile-schedule-v1-20261111",
+      "head": "c666b1f4035de50cbdf5f8c2b44e297287e1a34d",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/feature/chrome-batch-sidebar-v1-20261111",
+      "head": "057fe82085183df723b4542fbff2e09fc8bc896b",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/diagnostic/xtrans-post-import-memory-20261111",
+      "head": "6e57eb268e7640f69b755d7d8380cd7d74d09604",
+      "containsMemoryDelivery": true,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": true,
+          "gitFileSha256": "64020598b4c8b398ba29c52691c93230ae8199666a797aac5a48f26fd156e01d"
+        },
+        "arrayBacking": {
+          "present": true,
+          "gitFileSha256": "ebe9fddf147e5fac51ff8db5e3c72c6d04d88a90778f9081a987aaf7193a10b7"
+        },
+        "fullRelease": {
+          "present": true,
+          "gitFileSha256": "908c210e3f30613c9ce13de7a3a58a92f4b5c2f40ef7f653f88ea77454321420"
+        },
+        "analysisRelease": {
+          "present": true,
+          "gitFileSha256": "140a732fd957c39ace5522bafc093a9b9ad8f2777e7ee9c716d4ab5b8fca60b6"
+        },
+        "photoOwner": {
+          "present": true,
+          "gitFileSha256": "7796a0f1954def14cc71c80c1ed7dcf1c28619d486c8f5a5aea7744b4aeb3a0c"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/diagnostic/xtrans-stable-product-regression-20261110",
+      "head": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "82d90bba32f30dd70f5ad162469f06c56d9a970145e7341c7b90e04c4ffc0da5"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/feature/chrome-capture-v1-20261110",
+      "head": "0eda778636a4c2359eefd4611450dcf180f863c1",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/research/raw-xtrans-stable-timerfix-20261110",
+      "head": "53e2355d0bad80b364504145780778e165763d94",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "ff591beb84d07e91924230a94053348d4d5271d715c30b2fd11e07356ee3d7fb"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "25d7691929e4f4c9697c59751eeed3c205564bd3087ef31a27723437d57e1817"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "24e91887f09085006ec4f03f31a6f3d61ef016e11f514e40ade519a283a4b8ab"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/integration/online-selection-v1-20261110",
+      "head": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/research/raw-xtrans-stable-company-20261110",
+      "head": "3ea52612ea39915cb3e8c0d9a2e33f27b0cb1026",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "ff591beb84d07e91924230a94053348d4d5271d715c30b2fd11e07356ee3d7fb"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "25d7691929e4f4c9697c59751eeed3c205564bd3087ef31a27723437d57e1817"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "24e91887f09085006ec4f03f31a6f3d61ef016e11f514e40ade519a283a4b8ab"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/feature/online-selection-http-v1-20261109",
+      "head": "8e447075301074fd1a3c966b34ec64635dd72eb2",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/feature/online-selection-http-20261109",
+      "head": "c36e1f38323bdb11bf4f731421893ff5cabfce00",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "dc531732b5ecab4dfe83fa391803358b0429a3fd5f7bd4e70dee8ca36f6e6d96"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "6469eaaf5cccfdd618b1c87d2ccb4e6d22116b3a50076ec6d604d65d4ec8addc"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "6f52a2fdc630428d4b9277233669c98fb2ab70d9c6f24487b06817b4ef5dec1f"
+        }
+      }
+    },
+    {
+      "ref": "refs/remotes/source-private/research/raw-xtrans-stable-input-v1-20261109",
+      "head": "ea081ecb0930600fce9ee2e714c741fcd3c12b7e",
+      "containsMemoryDelivery": false,
+      "sourceSignatures": {
+        "hiddenViewport": {
+          "present": false,
+          "gitFileSha256": "18a79404905797caa061cb1948c4b76809bfb8b2762744f9b053ac2c33d69df4"
+        },
+        "arrayBacking": {
+          "present": false,
+          "gitFileSha256": "c34b2541234f3607aaf4636fdb0b8121a0ba276e9d23199b816afbaaac82f77f"
+        },
+        "fullRelease": {
+          "present": false,
+          "gitFileSha256": "ff591beb84d07e91924230a94053348d4d5271d715c30b2fd11e07356ee3d7fb"
+        },
+        "analysisRelease": {
+          "present": false,
+          "gitFileSha256": "25d7691929e4f4c9697c59751eeed3c205564bd3087ef31a27723437d57e1817"
+        },
+        "photoOwner": {
+          "present": false,
+          "gitFileSha256": "24e91887f09085006ec4f03f31a6f3d61ef016e11f514e40ade519a283a4b8ab"
+        }
+      }
+    }
+  ],
+  "newRawDecodes": 0,
+  "cacheReplay": {
+    "pid": 34412,
+    "exitCode": 0,
+    "stop": null,
+    "peakPrivateBytes50ms": 1132281856,
+    "osPeakWorkingSetBytes": 1112174592,
+    "samples": 223,
+    "elapsedMs": 11370.593600033317,
+    "newRawDecodeLimit": 0
+  },
+  "originalFailureFilesUnchanged": true,
+  "oldConsumed": 1,
+  "oldExecutable": 0,
+  "proposedNewBatch": 6,
+  "authorizedNewBatch": 0,
+  "integrationScope": "Source signatures and ancestry are separate checks; unrelated company product lines were not merged by this task."
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-12",
+  "timezone": "Europe/Helsinki",
+  "status": "REVIEW_COMPLETE_AVAILABLE_INPUTS_PRODUCT_NOT_ADMITTED",
+  "base": "618ba10233d9b0f182074847c0000d1bd5ae3fc3",
+  "implementation": "b29bff914eed894ac663c1c0a006e18d76672035",
+  "sourceAndCandidateModified": false,
+  "historicalRows579Exact": true,
+  "observerOutputExact": true,
+  "pinnedReferenceSourceHashesVerified": 7,
+  "compilerChanged": true,
+  "realPhotoSources": 2,
+  "realPhotoRois": 4,
+  "syntheticSupplements": 2,
+  "exposureConditions": [
+    0,
+    1,
+    2
+  ],
+  "comparisons": 18,
+  "candidateEV0IdentityAboveKnee": false,
+  "missing": {
+    "homeDSC08015": true,
+    "realWhiteGarmentHighlights": true,
+    "verifiedMetalSpecularHighlights": true,
+    "calibratedWarmLampSpectrum": true
+  },
+  "recommendation": "Continue review as an independent explicit highlight compression tool; no default exposure replacement. Any optional exposure mode must be versioned and default-off, with a pre-clip implementation contract.",
+  "newRawDecodes": 0,
+  "productIntegration": false,
+  "memorySourceHead": "6e57eb268e7640f69b755d7d8380cd7d74d09604",
+  "memoryCacheReplayPassed": true,
+  "memoryCachePeakPrivateBytes": 1132281856,
+  "oldRawBatchConsumed": 1,
+  "oldRawBatchExecutable": 0,
+  "newRawBatchProposed": 6,
+  "newRawBatchAuthorized": 0
+}
