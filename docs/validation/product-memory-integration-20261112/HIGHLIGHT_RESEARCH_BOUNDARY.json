@@ -1,0 +1,19 @@
+{
+  "sourceReview": "1bfdfbe9fa62dee4276a0f5d0dd68190388759ee",
+  "implementation": "b29bff914eed894ac663c1c0a006e18d76672035",
+  "state": "RESEARCH_ONLY_NOT_INTEGRATED",
+  "EV0": {
+    "linearKnee": 0.75,
+    "whiteY": 0.8750000107134338,
+    "whiteDeltaStops": -0.19264506027814707,
+    "skinHighlightMeanYDropPercent": 10.93,
+    "warmTextureHighlightMeanYDropPercent": 8.98,
+    "syntheticNeutralRelativeContrastDropPercent": 39.46
+  },
+  "recommendation": "Explicit highlight compression tool for future review; never silently replace legacy exposure or claim recovered clipped detail",
+  "missing": [
+    "real white garment highlights",
+    "verified metal specular photographs",
+    "calibrated warm-light spectrum"
+  ]
+}

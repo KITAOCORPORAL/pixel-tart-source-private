@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-12",
+  "timezone": "Europe/Helsinki",
+  "status": "INTEGRATED_NO_RAW_AUTOMATED_PASS_PHYSICAL_ENTRY_PARTIAL",
+  "productBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+  "integrationSource": "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a",
+  "testsPassed": 10,
+  "newRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "oldStopUnchanged": true,
+  "oldRawConsumed": 1,
+  "oldRawExecutable": 0,
+  "successorRawProposed": 6,
+  "successorRawAuthorized": 0,
+  "highlightCandidate": "RESEARCH_ONLY_NOT_IMPORTED",
+  "actualUiBlocker": "Foreground focus failed; menuitem identity resolution timed out with delivery=not_delivered",
+  "actualUiVerified": [
+    "normal published EXE startup",
+    "all-module sidebar",
+    "darkroom navigation",
+    "import menu surface"
+  ],
+  "actualUiNotRun": [
+    "TIFF input confirmation",
+    "fit/100%/zoom by physical UI",
+    "physical close/reopen",
+    "actual export"
+  ],
+  "runtimePid": 432
+}

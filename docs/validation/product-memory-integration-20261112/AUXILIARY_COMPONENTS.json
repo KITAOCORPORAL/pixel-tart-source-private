@@ -1,0 +1,24 @@
+{
+  "components": [
+    {
+      "component": "ScheduleService",
+      "sourceProductBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+      "files": 359,
+      "unchangedBytes": true
+    },
+    {
+      "component": "extension",
+      "sourceProductBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+      "files": 16,
+      "unchangedBytes": true
+    },
+    {
+      "component": "native-host",
+      "sourceProductBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+      "files": 192,
+      "unchangedBytes": true
+    }
+  ],
+  "registeredOrStarted": false,
+  "scope": "Preserved auxiliary binaries, not mobile/browser reacceptance; existing installed registrations and active service remain unchanged"
+}

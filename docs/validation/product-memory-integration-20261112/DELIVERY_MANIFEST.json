@@ -1,0 +1,103 @@
+{
+  "status": "INTEGRATED_NO_RAW_AUTOMATED_PASS_PHYSICAL_ENTRY_PARTIAL",
+  "base": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+  "sourceSha": "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a",
+  "rawDecodes": 0,
+  "highlightsIntegrated": false,
+  "candidateDecoderIntegrated": false,
+  "rawDraftAuthorized": 0,
+  "privateRuntimeBundled": false,
+  "photosAndSensitiveDesktopScreenshotsPublished": false,
+  "files": [
+    {
+      "path": "docs/validation/product-memory-integration-20261112/.gitattributes",
+      "bytes": 63,
+      "sha256": "26dd06e77fcb17d46a63e564d86784214b961073f9b6398c654915f2b6ff9602"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/AUXILIARY_COMPONENTS.json",
+      "bytes": 705,
+      "sha256": "b952a007e4c3045c4d7b5fddbc6211a1c610c154ddc03a5be1cf9b0365c6a9c3"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/HIGHLIGHT_RESEARCH_BOUNDARY.json",
+      "bytes": 730,
+      "sha256": "e846ceed537669305ce6c7117c977319d0131a8390d3700cd6cda94a0d06fc41"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/LOCAL_EVIDENCE_INDEX.json",
+      "bytes": 5049,
+      "sha256": "125063bfbffff1d4c535ed5b0d432ccff827f648f115ae44f2d78b8e62c35289"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/NATIVE_ENTRY_RECEIPT.json",
+      "bytes": 1303,
+      "sha256": "9170f391e04653ce593ba1c8de3bf3daeb7183b3c67169ed87655fa0f37ef49a"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/PACKAGE_RECEIPT.json",
+      "bytes": 315,
+      "sha256": "b92bc129575adead42c4ce6fb3d24878dc5a250252695b919c3282ea6f5e4a0d"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/PRESERVED_WORKTREES.json",
+      "bytes": 253,
+      "sha256": "63ae27298422ede49b7d2a8af523911c98f2886f9bdad58d3b7e661effe9b25a"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/PUBLISHED_UI_BINDING.json",
+      "bytes": 426,
+      "sha256": "31e23e04448f266fdd3067af3f729659c86dcdefc608ea7aafd0fe84f7c4562d"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/REPORT.md",
+      "bytes": 7160,
+      "sha256": "3468efbe4d390d032a0f751f68729f010e08690ae9134d7344fa23179d9da8f3"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/RESULTS.json",
+      "bytes": 187164,
+      "sha256": "ee17e66aabcb512194401c91279e940e167a0eed44f4ea19b924ed5d957b627f"
+    },
+    {
+      "path": "docs/validation/product-memory-integration-20261112/STATUS.json",
+      "bytes": 944,
+      "sha256": "ddd8d5e3bef5755367449def5e9380768fe6401e603f17318c355d5d5f9ccbbc"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/.gitattributes",
+      "bytes": 122,
+      "sha256": "9ade3eb3c1da522bc26cc585574d342657b0f3339c4563668f809a83eed72134"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/.gitignore",
+      "bytes": 23,
+      "sha256": "fc08a64d494e6bd86fcae168dc6ced37f71271e7fa60fa390f94809c66fbfb8a"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/launch_product.py",
+      "bytes": 3143,
+      "sha256": "7efe2563fa11e56d545810df29fe7aac1bfc570e86f873d8fbc144894edd2c8e"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/ProductMemoryIntegrationReplay.csproj",
+      "bytes": 636,
+      "sha256": "ac7e024be2234a4c3aa5ae2b2185d72a038361fb7a0377cf1e812a13cbf4ac18"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/Program.cs",
+      "bytes": 17794,
+      "sha256": "512bdaa625724f2e05d68ea5017e2436718be70d66c49304d25f72645d7df578"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/README.md",
+      "bytes": 2072,
+      "sha256": "997779536d38c8722fccf953eb02c40fb099dcdecc7da11f1a9560cfc7f4a17b"
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/run_guarded.py",
+      "bytes": 4151,
+      "sha256": "84e5d78f0b1bf47d3b3dc798767f33bcc997e8c55d10d1ee383e13abcec583a5"
+    }
+  ]
+}

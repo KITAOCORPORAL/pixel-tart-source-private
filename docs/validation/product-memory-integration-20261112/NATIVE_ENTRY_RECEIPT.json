@@ -1,0 +1,38 @@
+{
+  "process": "GuangjingMemoryAcceptance",
+  "pid": 432,
+  "sourceSha": "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a",
+  "verified": [
+    "Published self-contained EXE startup",
+    "workbench and complete module sidebar",
+    "Darkroom via visible navigation",
+    "Import/export menu with five items"
+  ],
+  "notRun": [
+    "TIFF import confirmation",
+    "physical fit and100% switches",
+    "physical close/reopen",
+    "actual GUI export"
+  ],
+  "blockers": [
+    {
+      "provider": "Sky/ComputerUse",
+      "result": "FrameArrived screenshot timed out / coordinate input geometry unavailable"
+    },
+    {
+      "provider": "agent-desktop1.2.0 focus-window",
+      "result": "Target window did not become foreground before headed delivery",
+      "delivery": "not_delivered"
+    },
+    {
+      "provider": "agent-desktop1.2.0 import menuitem",
+      "result": "Strict resolution could not determine candidate identity from live accessibility evidence",
+      "delivery": "not_delivered",
+      "attempts": 2
+    }
+  ],
+  "nextManualAction": "Activate the new diagnostic app, click 导入照片… and select the already-rendered company TIFF; do not select RAW.",
+  "recorder": "product-ui-02/RESOURCE_SAMPLES.jsonl",
+  "rawInputsAuthorized": 0,
+  "sensitiveDesktopScreenshotsRemainLocal": true
+}

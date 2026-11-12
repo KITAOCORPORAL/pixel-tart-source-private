@@ -1,0 +1,5386 @@
+{
+  "status": "INTEGRATED_NO_RAW_AUTOMATED_PASS_PHYSICAL_ENTRY_PARTIAL",
+  "source": {
+    "base": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+    "sourceSha": "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a",
+    "ancestorChrome": "057fe82085183df723b4542fbff2e09fc8bc896b",
+    "originalCommits": [
+      "a42cb7cd9633ad065f632172ee137614af151324",
+      "b86d02455be77e4ed0f44ddd5b9816681979746e"
+    ],
+    "integratedCommits": [
+      "18d27c083719813fef06e4557bac3874a558232d",
+      "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a"
+    ],
+    "changedPaths": [
+      "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+      "tests/RAWSelectionAssistant.WpfTests/RawPostImportMemoryTests.cs"
+    ],
+    "highlightsImported": false,
+    "candidateDecoderImported": false,
+    "rawAuthorizationChangesImported": false
+  },
+  "tests": {
+    "passed": 10,
+    "failed": 0,
+    "suites": [
+      {
+        "path": "tests-memory/memory.trx",
+        "counts": {
+          "total": "5",
+          "executed": "5",
+          "passed": "5",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "results": [
+          {
+            "name": "DisplayAdapterHonorsOffsetSlices",
+            "outcome": "Passed"
+          },
+          {
+            "name": "CollapsedLegacyPageDoesNotPromotePhotoPageProxyButVisibleActualSizeStillWorks",
+            "outcome": "Passed"
+          },
+          {
+            "name": "VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp",
+            "outcome": "Passed"
+          },
+          {
+            "name": "DisposedEditorReleasesItsFullDisplayWhileEditorRemainsReachable",
+            "outcome": "Passed"
+          },
+          {
+            "name": "DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels",
+            "outcome": "Passed"
+          }
+        ]
+      },
+      {
+        "path": "tests-detail/detail.trx",
+        "counts": {
+          "total": "2",
+          "executed": "2",
+          "passed": "2",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "results": [
+          {
+            "name": "StopCancelsPendingActualSizeBeforeItCanStartAnotherRender",
+            "outcome": "Passed"
+          },
+          {
+            "name": "RawActualSizeUsesFullPixelGeometryAndRenderedSamplesWithReusableCache",
+            "outcome": "Passed"
+          }
+        ]
+      },
+      {
+        "path": "tests-product/product.trx",
+        "counts": {
+          "total": "3",
+          "executed": "3",
+          "passed": "3",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "results": [
+          {
+            "name": "WorkspaceImportsRawPreviewsAndExportsGenuineTiff16",
+            "outcome": "Passed"
+          },
+          {
+            "name": "UnsupportedRawIsExplainedWithoutCorruptExport",
+            "outcome": "Passed"
+          },
+          {
+            "name": "FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes",
+            "outcome": "Passed"
+          }
+        ]
+      }
+    ]
+  },
+  "replays": {
+    "cache-lifecycle-02": {
+      "exit": {
+        "pid": 27820,
+        "exitCode": 0,
+        "stop": null,
+        "peakPrivateBytes50ms": 1817464832,
+        "osPeakWorkingSetBytes": 1596043264,
+        "samples": 473,
+        "elapsedMs": 24046.45280004479,
+        "newRawDecodeLimit": 0
+      },
+      "snapshots": [
+        {
+          "atUtc": "2026-11-12T06:25:25.1044859+00:00",
+          "elapsedMs": 165.8802,
+          "phase": "startup",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "startup",
+            "pid": 27820,
+            "workingSetBytes": 40574976,
+            "privateBytes": 11997184,
+            "osPeakWorkingSetBytes": 40579072,
+            "managedEstimatedLiveBytes": 274360,
+            "totalAllocatedBytes": 269632,
+            "gcLastHeapSizeBytes": 0,
+            "gcCommittedBytes": 0,
+            "gcFragmentedBytes": 0,
+            "gcIndex": 0,
+            "gc0": 0,
+            "gc1": 0,
+            "gc2": 0,
+            "handles": 237,
+            "gdiObjects": 0,
+            "userObjects": 5,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 5517312,
+              "mappedCommittedVirtualBytes": 143712256,
+              "imageCommittedVirtualBytes": 117477376,
+              "regions": 677,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 0,
+            "weakOwnerIdentities": [],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:27.8993041+00:00",
+          "elapsedMs": 2960.6932,
+          "phase": "import-replay",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "after-import",
+            "pid": 27820,
+            "workingSetBytes": 1005854720,
+            "privateBytes": 988835840,
+            "osPeakWorkingSetBytes": 1005858816,
+            "managedEstimatedLiveBytes": 799295088,
+            "totalAllocatedBytes": 892141872,
+            "gcLastHeapSizeBytes": 781850288,
+            "gcCommittedBytes": 792080384,
+            "gcFragmentedBytes": 4546496,
+            "gcIndex": 14,
+            "gc0": 14,
+            "gc1": 6,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 961298432,
+              "mappedCommittedVirtualBytes": 336961536,
+              "imageCommittedVirtualBytes": 344145920,
+              "regions": 2075,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:29.4404702+00:00",
+          "elapsedMs": 4501.8594,
+          "phase": "import-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "import-idle",
+            "pid": 27820,
+            "workingSetBytes": 1099927552,
+            "privateBytes": 1125244928,
+            "osPeakWorkingSetBytes": 1099931648,
+            "managedEstimatedLiveBytes": 927687976,
+            "totalAllocatedBytes": 1029240544,
+            "gcLastHeapSizeBytes": 919905672,
+            "gcCommittedBytes": 929591296,
+            "gcFragmentedBytes": 4562392,
+            "gcIndex": 15,
+            "gc0": 15,
+            "gc1": 6,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1096474624,
+              "mappedCommittedVirtualBytes": 321994752,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2175,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:29.46347+00:00",
+          "elapsedMs": 4524.8593,
+          "phase": "detail-zoom",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "before-detail",
+            "pid": 27820,
+            "workingSetBytes": 1099943936,
+            "privateBytes": 1125244928,
+            "osPeakWorkingSetBytes": 1099948032,
+            "managedEstimatedLiveBytes": 927770216,
+            "totalAllocatedBytes": 1029320392,
+            "gcLastHeapSizeBytes": 919905672,
+            "gcCommittedBytes": 929591296,
+            "gcFragmentedBytes": 4562392,
+            "gcIndex": 15,
+            "gc0": 15,
+            "gc1": 6,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1096474624,
+              "mappedCommittedVirtualBytes": 321994752,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2175,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:29.9741013+00:00",
+          "elapsedMs": 5035.4907,
+          "phase": "detail-zoom",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "after-detail",
+            "pid": 27820,
+            "workingSetBytes": 1341620224,
+            "privateBytes": 1377632256,
+            "osPeakWorkingSetBytes": 1341624320,
+            "managedEstimatedLiveBytes": 1049393592,
+            "totalAllocatedBytes": 1150942584,
+            "gcLastHeapSizeBytes": 919905672,
+            "gcCommittedBytes": 929591296,
+            "gcFragmentedBytes": 4562392,
+            "gcIndex": 15,
+            "gc0": 15,
+            "gc1": 6,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1348378624,
+              "mappedCommittedVirtualBytes": 322232320,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2178,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:31.7590297+00:00",
+          "elapsedMs": 6820.4196,
+          "phase": "detail-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "detail-idle",
+            "pid": 27820,
+            "workingSetBytes": 1577451520,
+            "privateBytes": 1764696064,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 640255496,
+            "totalAllocatedBytes": 1307387360,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1734701056,
+              "mappedCommittedVirtualBytes": 325021696,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2217,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:32.5508818+00:00",
+          "elapsedMs": 7612.2712,
+          "phase": "zoom-switch-2",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "zoom-switch-2",
+            "pid": 27820,
+            "workingSetBytes": 1578430464,
+            "privateBytes": 1765502976,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 640354184,
+            "totalAllocatedBytes": 1307486800,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1735462912,
+              "mappedCommittedVirtualBytes": 325586944,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2225,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:33.4651899+00:00",
+          "elapsedMs": 8526.5793,
+          "phase": "zoom-switch-0.1",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "zoom-switch-0.1",
+            "pid": 27820,
+            "workingSetBytes": 1578909696,
+            "privateBytes": 1765490688,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 640989336,
+            "totalAllocatedBytes": 1308121832,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1735446528,
+              "mappedCommittedVirtualBytes": 326017024,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2225,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:34.3881249+00:00",
+          "elapsedMs": 9449.5145,
+          "phase": "zoom-switch-1",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "zoom-switch-1",
+            "pid": 27820,
+            "workingSetBytes": 1579286528,
+            "privateBytes": 1765490688,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 641598976,
+            "totalAllocatedBytes": 1308717840,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1735446528,
+              "mappedCommittedVirtualBytes": 326287360,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2226,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:35.1797738+00:00",
+          "elapsedMs": 10241.1633,
+          "phase": "zoom-switch-0.15",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "zoom-switch-0.15",
+            "pid": 27820,
+            "workingSetBytes": 1579298816,
+            "privateBytes": 1765490688,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 641689440,
+            "totalAllocatedBytes": 1308815696,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1735446528,
+              "mappedCommittedVirtualBytes": 326299648,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2226,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:35.9564186+00:00",
+          "elapsedMs": 11017.8081,
+          "phase": "zoom-switch-1",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "zoom-switch-1",
+            "pid": 27820,
+            "workingSetBytes": 1579315200,
+            "privateBytes": 1737408512,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 641788128,
+            "totalAllocatedBytes": 1308915168,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1707397120,
+              "mappedCommittedVirtualBytes": 326311936,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2230,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:36.164271+00:00",
+          "elapsedMs": 11225.6604,
+          "phase": "save-project",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "after-project-save",
+            "pid": 27820,
+            "workingSetBytes": 1583353856,
+            "privateBytes": 1738665984,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 647589752,
+            "totalAllocatedBytes": 1314688008,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1708613632,
+              "mappedCommittedVirtualBytes": 328802304,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2282,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:38.4227103+00:00",
+          "elapsedMs": 13484.0996,
+          "phase": "proxy-return",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "proxy-return",
+            "pid": 27820,
+            "workingSetBytes": 1586581504,
+            "privateBytes": 1739984896,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 648490680,
+            "totalAllocatedBytes": 1315581616,
+            "gcLastHeapSizeBytes": 826332016,
+            "gcCommittedBytes": 938000384,
+            "gcFragmentedBytes": 196595280,
+            "gcIndex": 17,
+            "gc0": 17,
+            "gc1": 7,
+            "gc2": 3,
+            "handles": 1004,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1709924352,
+              "mappedCommittedVirtualBytes": 330424320,
+              "imageCommittedVirtualBytes": 345522176,
+              "regions": 2300,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 28690478,
+                "width": 7752,
+                "height": 5184,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 120559104
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:41.0936517+00:00",
+          "elapsedMs": 16155.0408,
+          "phase": "closed-natural-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "closed-natural-idle",
+            "pid": 27820,
+            "workingSetBytes": 1544224768,
+            "privateBytes": 1694359552,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 654177480,
+            "totalAllocatedBytes": 1334612568,
+            "gcLastHeapSizeBytes": 828067064,
+            "gcCommittedBytes": 941342720,
+            "gcFragmentedBytes": 182769464,
+            "gcIndex": 19,
+            "gc0": 19,
+            "gc1": 8,
+            "gc2": 3,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1664258048,
+              "mappedCommittedVirtualBytes": 333635584,
+              "imageCommittedVirtualBytes": 345636864,
+              "regions": 2349,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 6,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              },
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 28690478
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:41.2007365+00:00",
+          "elapsedMs": 16262.1258,
+          "phase": "closed-natural-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "closed-diagnostic-gc",
+            "pid": 27820,
+            "workingSetBytes": 1215430656,
+            "privateBytes": 1363685376,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 18950976,
+            "totalAllocatedBytes": 1334710576,
+            "gcLastHeapSizeBytes": 26787008,
+            "gcCommittedBytes": 164630528,
+            "gcFragmentedBytes": 7852480,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 10,
+            "gc2": 5,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 91,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1334276096,
+              "mappedCommittedVirtualBytes": 300388352,
+              "imageCommittedVirtualBytes": 345636864,
+              "regions": 2359,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 0,
+            "weakOwnerIdentities": [],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:44.9323266+00:00",
+          "elapsedMs": 19993.7163,
+          "phase": "reopened-natural-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "reopened-natural-idle",
+            "pid": 27820,
+            "workingSetBytes": 1178370048,
+            "privateBytes": 1320005632,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 955355168,
+            "totalAllocatedBytes": 2293338784,
+            "gcLastHeapSizeBytes": 827221248,
+            "gcCommittedBytes": 958619648,
+            "gcFragmentedBytes": 515592,
+            "gcIndex": 25,
+            "gc0": 25,
+            "gc1": 11,
+            "gc2": 6,
+            "handles": 1013,
+            "gdiObjects": 114,
+            "userObjects": 89,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1290510336,
+              "mappedCommittedVirtualBytes": 356818944,
+              "imageCommittedVirtualBytes": 345636864,
+              "regions": 2382,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 62155960,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 2721114,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 35374487,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 57215158,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 5599560,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 5599560,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 62155960,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "null"
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 62155960
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 2721114
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 35374487
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 57215158
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 5685420
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:46.9699541+00:00",
+          "elapsedMs": 22031.3433,
+          "phase": "release-before-diagnostic-gc",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "release-before-diagnostic-gc",
+            "pid": 27820,
+            "workingSetBytes": 1180205056,
+            "privateBytes": 1149956096,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 954832776,
+            "totalAllocatedBytes": 2309479432,
+            "gcLastHeapSizeBytes": 952092432,
+            "gcCommittedBytes": 996757504,
+            "gcFragmentedBytes": 238736,
+            "gcIndex": 27,
+            "gc0": 27,
+            "gc1": 12,
+            "gc2": 6,
+            "handles": 993,
+            "gdiObjects": 114,
+            "userObjects": 83,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1120825344,
+              "mappedCommittedVirtualBytes": 337399808,
+              "imageCommittedVirtualBytes": 345636864,
+              "regions": 2383,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 62155960
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 2721114
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 35374487
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 57215158
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 5685420
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T06:25:48.5655691+00:00",
+          "elapsedMs": 23626.9583,
+          "phase": "release-after-diagnostic-gc",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "release-after-diagnostic-gc",
+            "pid": 27820,
+            "workingSetBytes": 1114968064,
+            "privateBytes": 1078534144,
+            "osPeakWorkingSetBytes": 1596043264,
+            "managedEstimatedLiveBytes": 18886984,
+            "totalAllocatedBytes": 2309598912,
+            "gcLastHeapSizeBytes": 29075576,
+            "gcCommittedBytes": 160219136,
+            "gcFragmentedBytes": 10221488,
+            "gcIndex": 29,
+            "gc0": 29,
+            "gc1": 14,
+            "gc2": 8,
+            "handles": 992,
+            "gdiObjects": 114,
+            "userObjects": 83,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1049526272,
+              "mappedCommittedVirtualBytes": 337424384,
+              "imageCommittedVirtualBytes": 345636864,
+              "regions": 2394,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 0,
+            "weakOwnerIdentities": [],
+            "nativeRawLoaded": false
+          }
+        }
+      ],
+      "scope": "Injected saved-cache post-processing and WPF view replay; not a physical UI entry test"
+    },
+    "cache-natural-idle-01": {
+      "exit": {
+        "pid": 38264,
+        "exitCode": 0,
+        "stop": null,
+        "peakPrivateBytes50ms": 1154113536,
+        "osPeakWorkingSetBytes": 1126531072,
+        "samples": 4484,
+        "elapsedMs": 227490.3507999843,
+        "newRawDecodeLimit": 0
+      },
+      "snapshots": [
+        {
+          "atUtc": "2026-11-12T07:21:32.5159287+00:00",
+          "elapsedMs": 719.1546,
+          "phase": "startup",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "startup",
+            "pid": 38264,
+            "workingSetBytes": 40517632,
+            "privateBytes": 11972608,
+            "osPeakWorkingSetBytes": 40521728,
+            "managedEstimatedLiveBytes": 274360,
+            "totalAllocatedBytes": 269664,
+            "gcLastHeapSizeBytes": 0,
+            "gcCommittedBytes": 0,
+            "gcFragmentedBytes": 0,
+            "gcIndex": 0,
+            "gc0": 0,
+            "gc1": 0,
+            "gc2": 0,
+            "handles": 231,
+            "gdiObjects": 0,
+            "userObjects": 5,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 5537792,
+              "mappedCommittedVirtualBytes": 147988480,
+              "imageCommittedVirtualBytes": 116871168,
+              "regions": 664,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 0,
+            "weakOwnerIdentities": [],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:21:36.3845193+00:00",
+          "elapsedMs": 4587.74,
+          "phase": "import-replay",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "after-import",
+            "pid": 38264,
+            "workingSetBytes": 1015218176,
+            "privateBytes": 987680768,
+            "osPeakWorkingSetBytes": 1015222272,
+            "managedEstimatedLiveBytes": 800144072,
+            "totalAllocatedBytes": 893113680,
+            "gcLastHeapSizeBytes": 776588072,
+            "gcCommittedBytes": 786944000,
+            "gcFragmentedBytes": 4543168,
+            "gcIndex": 14,
+            "gc0": 14,
+            "gc1": 6,
+            "gc2": 2,
+            "handles": 1017,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 959426560,
+              "mappedCommittedVirtualBytes": 341209088,
+              "imageCommittedVirtualBytes": 344059904,
+              "regions": 2047,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:21:37.93133+00:00",
+          "elapsedMs": 6134.5507,
+          "phase": "import-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "import-idle",
+            "pid": 38264,
+            "workingSetBytes": 1109237760,
+            "privateBytes": 1127854080,
+            "osPeakWorkingSetBytes": 1109241856,
+            "managedEstimatedLiveBytes": 934220568,
+            "totalAllocatedBytes": 1045704816,
+            "gcLastHeapSizeBytes": 927736920,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217056,
+            "gcIndex": 16,
+            "gc0": 16,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1018,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1099268096,
+              "mappedCommittedVirtualBytes": 323559424,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2130,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:21:37.968882+00:00",
+          "elapsedMs": 6172.1026,
+          "phase": "minimize",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "window-minimized",
+            "pid": 38264,
+            "workingSetBytes": 1109495808,
+            "privateBytes": 1128521728,
+            "osPeakWorkingSetBytes": 1109499904,
+            "managedEstimatedLiveBytes": 934327376,
+            "totalAllocatedBytes": 1045823304,
+            "gcLastHeapSizeBytes": 927736920,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217056,
+            "gcIndex": 16,
+            "gc0": 16,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1021,
+            "gdiObjects": 114,
+            "userObjects": 93,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1099993088,
+              "mappedCommittedVirtualBytes": 290381824,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2129,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:21:52.9939915+00:00",
+          "elapsedMs": 21197.2123,
+          "phase": "minimized-idle-15s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-15s",
+            "pid": 38264,
+            "workingSetBytes": 1117126656,
+            "privateBytes": 1128226816,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 930653152,
+            "totalAllocatedBytes": 1089047704,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1017,
+            "gdiObjects": 114,
+            "userObjects": 88,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1099603968,
+              "mappedCommittedVirtualBytes": 295559168,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2213,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:22:08.0270376+00:00",
+          "elapsedMs": 36230.2583,
+          "phase": "minimized-idle-30s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-30s",
+            "pid": 38264,
+            "workingSetBytes": 1113219072,
+            "privateBytes": 1125879808,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 930743552,
+            "totalAllocatedBytes": 1089138528,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1012,
+            "gdiObjects": 114,
+            "userObjects": 88,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1097273344,
+              "mappedCommittedVirtualBytes": 295526400,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2206,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:22:23.0609997+00:00",
+          "elapsedMs": 51264.2203,
+          "phase": "minimized-idle-45s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-45s",
+            "pid": 38264,
+            "workingSetBytes": 1115103232,
+            "privateBytes": 1127063552,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 930834016,
+            "totalAllocatedBytes": 1089227152,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1012,
+            "gdiObjects": 114,
+            "userObjects": 88,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1098457088,
+              "mappedCommittedVirtualBytes": 295600128,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2191,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:22:38.0942608+00:00",
+          "elapsedMs": 66297.4817,
+          "phase": "minimized-idle-60s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-60s",
+            "pid": 38264,
+            "workingSetBytes": 1113108480,
+            "privateBytes": 1123827712,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 930924480,
+            "totalAllocatedBytes": 1089315400,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1095245824,
+              "mappedCommittedVirtualBytes": 295641088,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2190,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:22:53.11956+00:00",
+          "elapsedMs": 81322.7807,
+          "phase": "minimized-idle-75s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-75s",
+            "pid": 38264,
+            "workingSetBytes": 1111875584,
+            "privateBytes": 1122385920,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931006720,
+            "totalAllocatedBytes": 1089403648,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1008,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093804032,
+              "mappedCommittedVirtualBytes": 295657472,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2192,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:23:08.1418215+00:00",
+          "elapsedMs": 96345.0422,
+          "phase": "minimized-idle-90s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-90s",
+            "pid": 38264,
+            "workingSetBytes": 1112227840,
+            "privateBytes": 1122684928,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931097184,
+            "totalAllocatedBytes": 1089491896,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1008,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1094103040,
+              "mappedCommittedVirtualBytes": 295665664,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2185,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:23:23.1680239+00:00",
+          "elapsedMs": 111371.2445,
+          "phase": "minimized-idle-105s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-105s",
+            "pid": 38264,
+            "workingSetBytes": 1112195072,
+            "privateBytes": 1124384768,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931187648,
+            "totalAllocatedBytes": 1089580080,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1005,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1095843840,
+              "mappedCommittedVirtualBytes": 295665664,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2181,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:23:38.1975517+00:00",
+          "elapsedMs": 126400.7723,
+          "phase": "minimized-idle-120s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-120s",
+            "pid": 38264,
+            "workingSetBytes": 1112961024,
+            "privateBytes": 1125277696,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931269888,
+            "totalAllocatedBytes": 1089668344,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1008,
+            "gdiObjects": 114,
+            "userObjects": 87,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1096695808,
+              "mappedCommittedVirtualBytes": 295690240,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2178,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:23:53.2300852+00:00",
+          "elapsedMs": 141433.3064,
+          "phase": "minimized-idle-135s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-135s",
+            "pid": 38264,
+            "workingSetBytes": 1111146496,
+            "privateBytes": 1121599488,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931360352,
+            "totalAllocatedBytes": 1089756416,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093033984,
+              "mappedCommittedVirtualBytes": 295690240,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2182,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:24:08.2673982+00:00",
+          "elapsedMs": 156470.6189,
+          "phase": "minimized-idle-150s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-150s",
+            "pid": 38264,
+            "workingSetBytes": 1111932928,
+            "privateBytes": 1122471936,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931450816,
+            "totalAllocatedBytes": 1089845016,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093906432,
+              "mappedCommittedVirtualBytes": 295702528,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2171,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:24:23.2992108+00:00",
+          "elapsedMs": 171502.4316,
+          "phase": "minimized-idle-165s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-165s",
+            "pid": 38264,
+            "workingSetBytes": 1111969792,
+            "privateBytes": 1122521088,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931541280,
+            "totalAllocatedBytes": 1089933152,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093947392,
+              "mappedCommittedVirtualBytes": 295710720,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2175,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:24:38.3388797+00:00",
+          "elapsedMs": 186542.1006,
+          "phase": "minimized-idle-180s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-180s",
+            "pid": 38264,
+            "workingSetBytes": 1112064000,
+            "privateBytes": 1122471936,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 931639896,
+            "totalAllocatedBytes": 1090022696,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1006,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093906432,
+              "mappedCommittedVirtualBytes": 295739392,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2172,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:24:53.4955015+00:00",
+          "elapsedMs": 201698.7224,
+          "phase": "minimized-idle-195s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-195s",
+            "pid": 38264,
+            "workingSetBytes": 1112150016,
+            "privateBytes": 1122435072,
+            "osPeakWorkingSetBytes": 1118461952,
+            "managedEstimatedLiveBytes": 933120216,
+            "totalAllocatedBytes": 1091500104,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1002,
+            "gdiObjects": 114,
+            "userObjects": 86,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1093877760,
+              "mappedCommittedVirtualBytes": 295682048,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2167,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:08.6165056+00:00",
+          "elapsedMs": 216819.7264,
+          "phase": "minimized-idle-210s",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "minimized-idle-210s",
+            "pid": 38264,
+            "workingSetBytes": 1119756288,
+            "privateBytes": 1129189376,
+            "osPeakWorkingSetBytes": 1119760384,
+            "managedEstimatedLiveBytes": 933210680,
+            "totalAllocatedBytes": 1091588088,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1004,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1100632064,
+              "mappedCommittedVirtualBytes": 296517632,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2157,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:11.6610828+00:00",
+          "elapsedMs": 219864.3034,
+          "phase": "window-restored",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "window-restored",
+            "pid": 38264,
+            "workingSetBytes": 1121169408,
+            "privateBytes": 1151737856,
+            "osPeakWorkingSetBytes": 1121173504,
+            "managedEstimatedLiveBytes": 933796144,
+            "totalAllocatedBytes": 1092175400,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1123143680,
+              "mappedCommittedVirtualBytes": 296644608,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2159,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:11.6832064+00:00",
+          "elapsedMs": 219886.4272,
+          "phase": "detail-zoom",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "before-detail",
+            "pid": 38264,
+            "workingSetBytes": 1121202176,
+            "privateBytes": 1151746048,
+            "osPeakWorkingSetBytes": 1121206272,
+            "managedEstimatedLiveBytes": 933878384,
+            "totalAllocatedBytes": 1092253640,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1123151872,
+              "mappedCommittedVirtualBytes": 296665088,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2159,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:11.705984+00:00",
+          "elapsedMs": 219909.2047,
+          "phase": "detail-zoom",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "after-detail",
+            "pid": 38264,
+            "workingSetBytes": 1121202176,
+            "privateBytes": 1151746048,
+            "osPeakWorkingSetBytes": 1121206272,
+            "managedEstimatedLiveBytes": 933952400,
+            "totalAllocatedBytes": 1092331368,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1123151872,
+              "mappedCommittedVirtualBytes": 296665088,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2159,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:13.2364412+00:00",
+          "elapsedMs": 221439.662,
+          "phase": "detail-idle",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "detail-idle",
+            "pid": 38264,
+            "workingSetBytes": 1116807168,
+            "privateBytes": 1149374464,
+            "osPeakWorkingSetBytes": 1121251328,
+            "managedEstimatedLiveBytes": 934034640,
+            "totalAllocatedBytes": 1092410744,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1116307456,
+              "mappedCommittedVirtualBytes": 296706048,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2198,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:15.2046027+00:00",
+          "elapsedMs": 223407.8234,
+          "phase": "proxy-return",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "proxy-return",
+            "pid": 38264,
+            "workingSetBytes": 1115828224,
+            "privateBytes": 1146122240,
+            "osPeakWorkingSetBytes": 1121251328,
+            "managedEstimatedLiveBytes": 934229232,
+            "totalAllocatedBytes": 1092606536,
+            "gcLastHeapSizeBytes": 927770432,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1217800,
+            "gcIndex": 21,
+            "gc0": 21,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 1003,
+            "gdiObjects": 114,
+            "userObjects": 85,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1117528064,
+              "mappedCommittedVirtualBytes": 296845312,
+              "imageCommittedVirtualBytes": 345456640,
+              "regions": 2190,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {
+              "Editor._source": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor._interactiveSource": {
+                "type": "TransformedBitmap",
+                "id": 3361951,
+                "width": 800,
+                "height": 535,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 1284000
+              },
+              "Editor._matchedImage": {
+                "type": "null"
+              },
+              "Editor._rawPreviewMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 43705366,
+                "width": 1600,
+                "height": 1070,
+                "floatBytes": 20544000
+              },
+              "Editor._interactiveRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 31298852,
+                "width": 800,
+                "height": 535,
+                "floatBytes": 5136000
+              },
+              "Editor._frozenRawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Editor._fullRawDisplay": {
+                "type": "null"
+              },
+              "Target.RawMaster": {
+                "type": "HighBitDepthImageBuffer",
+                "id": 4231893,
+                "width": 7752,
+                "height": 5184,
+                "floatBytes": 482236416
+              },
+              "Workspace.analysisImage": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Editor.Enabled": true,
+              "Editor.StackNodes": [],
+              "Editor.previewCache": [],
+              "Viewport.Original": {
+                "type": "CachedBitmap",
+                "id": 3529216,
+                "width": 1600,
+                "height": 1070,
+                "bits": 24,
+                "frozen": true,
+                "minimumPixelBytes": 5136000
+              },
+              "Viewport.Matched": {
+                "type": "null"
+              },
+              "Viewport.DisplayColorEnabled": false
+            },
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:16.8925388+00:00",
+          "elapsedMs": 225095.7595,
+          "phase": "release-before-diagnostic-gc",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "release-before-diagnostic-gc",
+            "pid": 38264,
+            "workingSetBytes": 1126440960,
+            "privateBytes": 1154113536,
+            "osPeakWorkingSetBytes": 1126445056,
+            "managedEstimatedLiveBytes": 934330248,
+            "totalAllocatedBytes": 1108945232,
+            "gcLastHeapSizeBytes": 930356160,
+            "gcCommittedBytes": 945479680,
+            "gcFragmentedBytes": 1262992,
+            "gcIndex": 23,
+            "gc0": 23,
+            "gc1": 7,
+            "gc2": 2,
+            "handles": 994,
+            "gdiObjects": 114,
+            "userObjects": 80,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1125437440,
+              "mappedCommittedVirtualBytes": 299589632,
+              "imageCommittedVirtualBytes": 345571328,
+              "regions": 2196,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 5,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              },
+              {
+                "type": "System.Windows.Media.Imaging.TransformedBitmap",
+                "id": 3361951
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 43705366
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+                "id": 31298852
+              },
+              {
+                "type": "RAWSelectionAssistant.Core.Services.Projects.FrozenRawMaster",
+                "id": 55014614
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        },
+        {
+          "atUtc": "2026-11-12T07:25:18.481934+00:00",
+          "elapsedMs": 226685.1551,
+          "phase": "release-after-diagnostic-gc",
+          "kind": "MemorySnapshot",
+          "value": {
+            "name": "release-after-diagnostic-gc",
+            "pid": 38264,
+            "workingSetBytes": 1073860608,
+            "privateBytes": 1093951488,
+            "osPeakWorkingSetBytes": 1126531072,
+            "managedEstimatedLiveBytes": 16112680,
+            "totalAllocatedBytes": 1109069896,
+            "gcLastHeapSizeBytes": 265768080,
+            "gcCommittedBytes": 381939712,
+            "gcFragmentedBytes": 249688240,
+            "gcIndex": 25,
+            "gc0": 25,
+            "gc1": 9,
+            "gc2": 4,
+            "handles": 988,
+            "gdiObjects": 114,
+            "userObjects": 80,
+            "virtualMemory": {
+              "privateCommittedVirtualBytes": 1065369600,
+              "mappedCommittedVirtualBytes": 300376064,
+              "imageCommittedVirtualBytes": 345571328,
+              "regions": 2220,
+              "note": "VirtualQuery classifications include GC and native allocations; they are not a native-heap attribution."
+            },
+            "holders": {},
+            "weakOwnersAlive": 1,
+            "weakOwnerIdentities": [
+              {
+                "type": "System.Windows.Media.Imaging.CachedBitmap",
+                "id": 3529216
+              }
+            ],
+            "nativeRawLoaded": false
+          }
+        }
+      ],
+      "scope": "Injected saved-cache post-processing and WPF view replay; not a physical UI entry test"
+    }
+  },
+  "exportInputBefore": {
+    "pixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+    "rawDecodeCalls": 0
+  },
+  "exportInputReopen": {
+    "pixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+    "rawDecodeCalls": 0
+  },
+  "reopen": {
+    "status": "completed",
+    "cacheReads": 2,
+    "rawDecodeCalls": 0,
+    "source": {
+      "type": "CachedBitmap",
+      "id": 62155960,
+      "width": 1600,
+      "height": 1070,
+      "bits": 24,
+      "frozen": true,
+      "minimumPixelBytes": 5136000
+    },
+    "projectSchema": 1
+  },
+  "preview": {
+    "fullDisplayRgb24Sha": "C81DB4E20BAF5E8A6A55CBDD9C844740B717EE5655DC87C7634D39A3CC02D14E",
+    "PixelWidth": 7752,
+    "PixelHeight": 5184,
+    "cacheReadCalls": 1,
+    "rawDecodeCalls": 0
+  },
+  "rawDecodes": 0,
+  "originalFailureFilesUnchanged": true,
+  "oldConsumed": 1,
+  "oldExecutable": 0,
+  "successorAuthorized": 0,
+  "physicalUi": {
+    "normalLaunch": "VERIFIED_ACCESSIBILITY",
+    "darkroomNavigation": "VERIFIED_NATIVE_SEMANTIC_ACTION",
+    "importMenu": "VERIFIED_MENU_SURFACE",
+    "tiffFileSelection": "BLOCKED_BEFORE_DELIVERY",
+    "fitActualSizeCloseReopen": "NOT_RUN_PHYSICAL_UI",
+    "reason": "Foreground focus fails; import menuitem identity resolution timed out without delivery. Replay/test coverage is recorded separately."
+  }
+}
