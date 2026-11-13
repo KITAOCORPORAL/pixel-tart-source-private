@@ -1,0 +1,6 @@
+case,privateMiB,osPeakWorkingMiB,durationSeconds,stop,exitCode,newRawDecodes
+缓存完整周期,1692.43,1487.08,23.71,,0,0
+缓存最小化210秒,1099.21,1064.7,224.84,,0,0
+真实TIFF非视觉导出,911.64,958.75,24.14,,0,0
+真实TIFF独立重开导出,1152.59,1199.19,25.59,,0,0
+真实TIFF视口导出失败,2052.7,1721.63,11.48,2GiB resource guard,1,0

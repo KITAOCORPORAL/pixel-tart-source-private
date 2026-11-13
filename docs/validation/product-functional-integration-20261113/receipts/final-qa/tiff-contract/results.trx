@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6cd2ed63-cc48-4f92-af6a-17b175adbcbf" name="Administrator@PC-20250309WEIZ 2026-11-13 13:03:31" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-13T13:03:31.3896053+08:00" queuing="2026-11-13T13:03:31.3896056+08:00" start="2026-11-13T13:03:30.0822393+08:00" finish="2026-11-13T13:03:31.3951881+08:00" />
+  <TestSettings name="default" id="75fe3360-a6a4-4356-a335-791693625e5e">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-13_13_03_31" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="668bafbe-d549-4f12-a6da-780d195b5cb7" testId="15c7ec97-3a7a-8a26-a475-badb146f428c" testName="WorkspaceImportsRawPreviewsAndExportsGenuineTiff16" computerName="PC-20250309WEIZ" duration="00:00:00.4616157" startTime="2026-11-13T13:03:30.6176573+08:00" endTime="2026-11-13T13:03:31.0965694+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="668bafbe-d549-4f12-a6da-780d195b5cb7" />
+    <UnitTestResult executionId="925b2ec1-289b-47f0-8347-7799cd217fe8" testId="1414e233-6483-880e-a524-de1453c9e2c8" testName="UnsupportedRawIsExplainedWithoutCorruptExport" computerName="PC-20250309WEIZ" duration="00:00:00.0048030" startTime="2026-11-13T13:03:31.1795905+08:00" endTime="2026-11-13T13:03:31.1854864+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="925b2ec1-289b-47f0-8347-7799cd217fe8" />
+    <UnitTestResult executionId="c9e99cfc-ad16-488c-bb0b-d900412fa1f6" testId="1a5d7040-7d31-838b-a1b8-20a925acaf72" testName="FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes" computerName="PC-20250309WEIZ" duration="00:00:00.0779491" startTime="2026-11-13T13:03:31.1008889+08:00" endTime="2026-11-13T13:03:31.1791905+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c9e99cfc-ad16-488c-bb0b-d900412fa1f6" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1a5d7040-7d31-838b-a1b8-20a925acaf72">
+      <Execution id="c9e99cfc-ad16-488c-bb0b-d900412fa1f6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawMatchTiff16ProductWpfTests" name="FrozenRawEngineDoesNotFollowActiveEditorOrSilentlyIgnoreExtraNodes" />
+    </UnitTest>
+    <UnitTest name="WorkspaceImportsRawPreviewsAndExportsGenuineTiff16" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="15c7ec97-3a7a-8a26-a475-badb146f428c">
+      <Execution id="668bafbe-d549-4f12-a6da-780d195b5cb7" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawMatchTiff16ProductWpfTests" name="WorkspaceImportsRawPreviewsAndExportsGenuineTiff16" />
+    </UnitTest>
+    <UnitTest name="UnsupportedRawIsExplainedWithoutCorruptExport" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1414e233-6483-880e-a524-de1453c9e2c8">
+      <Execution id="925b2ec1-289b-47f0-8347-7799cd217fe8" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawMatchTiff16ProductWpfTests" name="UnsupportedRawIsExplainedWithoutCorruptExport" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="15c7ec97-3a7a-8a26-a475-badb146f428c" executionId="668bafbe-d549-4f12-a6da-780d195b5cb7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1414e233-6483-880e-a524-de1453c9e2c8" executionId="925b2ec1-289b-47f0-8347-7799cd217fe8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a5d7040-7d31-838b-a1b8-20a925acaf72" executionId="c9e99cfc-ad16-488c-bb0b-d900412fa1f6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

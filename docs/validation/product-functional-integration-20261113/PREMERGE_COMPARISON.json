@@ -1,0 +1,31 @@
+{
+  "status": "INTEGRATED_EXACT_REVIEWED_PATCHES",
+  "recordedAtBerlin": "2026-11-13T02:37:19.155730+01:00",
+  "functionalHead": "43781bfe17605beadaffb572acb2866c452a788c",
+  "functionalProduct": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "memorySource": "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a",
+  "originalMemoryCommits": [
+    "18d27c083719813fef06e4557bac3874a558232d",
+    "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a"
+  ],
+  "mergeBase": "1e6bcf3019e3972667d3cda0b8be5c0c3c56bf6f",
+  "functionalProductionPaths": [
+    "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+    "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"
+  ],
+  "memoryProductionPaths": [
+    "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+    "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+    "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs"
+  ],
+  "overlap": [],
+  "noPixelFormulaOrNewRawScopeApproved": true,
+  "coordinationThread": "01a1c4e4-698c-7be1-b838-4215ce046dc4",
+  "sourceWorktreePreserved": "",
+  "integratedSource": "2d20b3274f9b84c93d891742a2c5887e46b87b6a",
+  "functionalFixesByteEquivalent": true,
+  "memoryPathsByteEquivalentToVerifiedSource": true,
+  "mergeMode": "fast-forward"
+}

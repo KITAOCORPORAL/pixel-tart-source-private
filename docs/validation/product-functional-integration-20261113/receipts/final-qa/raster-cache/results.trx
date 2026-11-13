@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a5f617eb-c6fd-40d4-bfec-0f9517fccbae" name="Administrator@PC-20250309WEIZ 2026-11-13 13:03:32" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-13T13:03:32.9550291+08:00" queuing="2026-11-13T13:03:32.9550294+08:00" start="2026-11-13T13:03:31.7523246+08:00" finish="2026-11-13T13:03:32.9601862+08:00" />
+  <TestSettings name="default" id="a47b1a90-0839-4af6-b11a-05a116de138f">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-13_13_03_32" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ac3337c0-0f9e-44d2-bc0a-d16677ad8b96" testId="1c1a7eab-21c8-8e0c-bb71-c9607c4d2db8" testName="NativePreviewCacheIsFrozenAndIndependentOfDecoderThreadAndFile" computerName="PC-20250309WEIZ" duration="00:00:00.0065965" startTime="2026-11-13T13:03:32.3901961+08:00" endTime="2026-11-13T13:03:32.3971428+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac3337c0-0f9e-44d2-bc0a-d16677ad8b96" />
+    <UnitTestResult executionId="05ae72a3-8d42-441e-b3c9-70f46fc016bc" testId="1e3161db-2da7-826f-91cd-68ab9b0bc95c" testName="NativePreviewCachePreservesPrecisionAlphaOrientationAndDpi" computerName="PC-20250309WEIZ" duration="00:00:00.0840573" startTime="2026-11-13T13:03:32.2838637+08:00" endTime="2026-11-13T13:03:32.3858523+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05ae72a3-8d42-441e-b3c9-70f46fc016bc" />
+    <UnitTestResult executionId="f08bad6f-771c-41ae-803c-943e6fa8c8c8" testId="1392e08d-e1b7-838d-979a-bb7db0d19809" testName="NativePreviewCacheAvoidsFullManagedStagingArray" computerName="PC-20250309WEIZ" duration="00:00:00.0593257" startTime="2026-11-13T13:03:32.3975606+08:00" endTime="2026-11-13T13:03:32.4569709+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f08bad6f-771c-41ae-803c-943e6fa8c8c8" />
+    <UnitTestResult executionId="9f688114-bda3-41b0-b2a1-205710f33809" testId="17d1b7b3-5cbe-840a-a5b6-3698cb67c52b" testName="FrozenExportUsesTheValidatedSourceInsteadOfActiveEditor" computerName="PC-20250309WEIZ" duration="00:00:00.1573997" startTime="2026-11-13T13:03:32.4570139+08:00" endTime="2026-11-13T13:03:32.6144825+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f688114-bda3-41b0-b2a1-205710f33809" />
+    <UnitTestResult executionId="27234e4d-7d6d-4d26-9d03-14ae44a1aa65" testId="1188ef21-a942-8d71-9c66-bc409f69db75" testName="SourceCacheMatchesContentIdentityAndRejectsChangedBytesWithSameStamp" computerName="PC-20250309WEIZ" duration="00:00:00.2294924" startTime="2026-11-13T13:03:32.6145285+08:00" endTime="2026-11-13T13:03:32.8451471+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27234e4d-7d6d-4d26-9d03-14ae44a1aa65" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="NativePreviewCacheAvoidsFullManagedStagingArray" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1392e08d-e1b7-838d-979a-bb7db0d19809">
+      <Execution id="f08bad6f-771c-41ae-803c-943e6fa8c8c8" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RasterPreviewNativeCacheTests" name="NativePreviewCacheAvoidsFullManagedStagingArray" />
+    </UnitTest>
+    <UnitTest name="NativePreviewCacheIsFrozenAndIndependentOfDecoderThreadAndFile" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1c1a7eab-21c8-8e0c-bb71-c9607c4d2db8">
+      <Execution id="ac3337c0-0f9e-44d2-bc0a-d16677ad8b96" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RasterPreviewNativeCacheTests" name="NativePreviewCacheIsFrozenAndIndependentOfDecoderThreadAndFile" />
+    </UnitTest>
+    <UnitTest name="FrozenExportUsesTheValidatedSourceInsteadOfActiveEditor" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="17d1b7b3-5cbe-840a-a5b6-3698cb67c52b">
+      <Execution id="9f688114-bda3-41b0-b2a1-205710f33809" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RasterPreviewNativeCacheTests" name="FrozenExportUsesTheValidatedSourceInsteadOfActiveEditor" />
+    </UnitTest>
+    <UnitTest name="SourceCacheMatchesContentIdentityAndRejectsChangedBytesWithSameStamp" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1188ef21-a942-8d71-9c66-bc409f69db75">
+      <Execution id="27234e4d-7d6d-4d26-9d03-14ae44a1aa65" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RasterPreviewNativeCacheTests" name="SourceCacheMatchesContentIdentityAndRejectsChangedBytesWithSameStamp" />
+    </UnitTest>
+    <UnitTest name="NativePreviewCachePreservesPrecisionAlphaOrientationAndDpi" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1e3161db-2da7-826f-91cd-68ab9b0bc95c">
+      <Execution id="05ae72a3-8d42-441e-b3c9-70f46fc016bc" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RasterPreviewNativeCacheTests" name="NativePreviewCachePreservesPrecisionAlphaOrientationAndDpi" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1c1a7eab-21c8-8e0c-bb71-c9607c4d2db8" executionId="ac3337c0-0f9e-44d2-bc0a-d16677ad8b96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e3161db-2da7-826f-91cd-68ab9b0bc95c" executionId="05ae72a3-8d42-441e-b3c9-70f46fc016bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1392e08d-e1b7-838d-979a-bb7db0d19809" executionId="f08bad6f-771c-41ae-803c-943e6fa8c8c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17d1b7b3-5cbe-840a-a5b6-3698cb67c52b" executionId="9f688114-bda3-41b0-b2a1-205710f33809" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1188ef21-a942-8d71-9c66-bc409f69db75" executionId="27234e4d-7d6d-4d26-9d03-14ae44a1aa65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

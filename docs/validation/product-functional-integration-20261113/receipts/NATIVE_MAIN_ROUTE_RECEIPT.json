@@ -1,0 +1,19 @@
+{
+  "status": "PASS_CURRENT_NORMAL_EXE_HISTORY_PLANNING_CALENDAR_RETURN",
+  "productSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "pid": 45496,
+  "projectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+  "bookingId": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+  "revision": 2,
+  "snapshots": [
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-history.json",
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-planning.json",
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-linked-calendar-actual.json",
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-calendar-to-same-planning.json",
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-original-project-loaded.json",
+    "docs\\validation\\product-functional-integration-20261113\\receipts\\native\\939-source-picker-prepared.json"
+  ],
+  "sourcePickerPrepared": true,
+  "mainWorkflowAfterIndex": "NOT_RUN",
+  "authority": "Normal published EXE with supported native UIA actions; physical pointer not claimed"
+}

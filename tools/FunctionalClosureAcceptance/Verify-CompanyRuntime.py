@@ -3,7 +3,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 import argparse, json, shutil, subprocess, sys, time, urllib.request, urllib.error, uuid
 p=argparse.ArgumentParser();p.add_argument('--context',required=True);a=p.parse_args()
-c=json.loads(Path(a.context).read_text(encoding='utf-8-sig'));r=Path(c['worktree']);b=Path(c['deliveryRoot']);d=r/'docs/validation/product-functional-closure-20261112/receipts'
+c=json.loads(Path(a.context).read_text(encoding='utf-8-sig'));r=Path(c['worktree']);b=Path(c['deliveryRoot']);d=r/c.get('evidenceDirectory','docs/validation/product-functional-closure-20261112')/'receipts'
+d.mkdir(parents=True,exist_ok=True)
 def save(name,value):(d/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 full_root=Path(c.get('fullProductLocalTestRoot',str(b/'full-product-localtest')))
 connection=full_root/'PRIVATE_CONNECTION.json'

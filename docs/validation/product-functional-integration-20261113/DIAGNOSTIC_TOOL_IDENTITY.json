@@ -1,0 +1,120 @@
+{
+  "productSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "tools": [
+    {
+      "file": "tools/FunctionalClosureAcceptance/Assemble-FunctionalDocumentation.py",
+      "bytes": 15389,
+      "sha256": "82792852ff886cc1b23ebe8d0290a2ecedaff38ff3854abd38fd55248932a07e"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Build-IntegratedDiagnostic.py",
+      "bytes": 20056,
+      "sha256": "5d5b3dd453bb389ba6b0d923bb5523099a37121b40cac1aeb4b3b5c5e5c2fde4"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Continue-CompanyMobile.py",
+      "bytes": 8789,
+      "sha256": "9401bd712ca5a9504a1521af5d0e35319858c5304fd01e9ce569652525e3a21b"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Finalize-FullProductDiagnostic.py",
+      "bytes": 3541,
+      "sha256": "7c80b5640a169e6ec3e078edf30ed4cb50fb2b97dfce6ca4bc5c564707368545"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Inspect-CameraEnvironment.py",
+      "bytes": 1522,
+      "sha256": "e2ee398476f97d40de892673bccf395d4839880f08ad4b9fb34b13ce0dbf7065"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Native-UiStep.ps1",
+      "bytes": 3537,
+      "sha256": "08d4fee7894fdb2c43c2a24f63b9290f2a13cb85008bc9d54306000592a5b6db"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/README.md",
+      "bytes": 1500,
+      "sha256": "361cdfd7cc816e1177459170660ab41ce990e3fc6e21255fc5ab32145f2b551e"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Refresh-FullProductDiagnostic.py",
+      "bytes": 13074,
+      "sha256": "84b1332f31763d91443555bc14b24264e790a33fa1931577bfbcf2c5baf3db6c"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Run-FinalTiffComparison.py",
+      "bytes": 3451,
+      "sha256": "b3a29d2fc80c0b36f4356a5e7196d5145251c96de25dbc06a3e51c6078579584"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Seal-FunctionalDiagnostic.py",
+      "bytes": 6271,
+      "sha256": "792a4b0d67005e34c463caf2f3cd84257cb5f8543061e77854977a18d6acba9c"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Update-R2Evidence.py",
+      "bytes": 8482,
+      "sha256": "f0ae76ed137666cb441a8fe7b68109d89e5810767d5e74b3fe5ce12ed18387dc"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Verify-CompanyRuntime.py",
+      "bytes": 5282,
+      "sha256": "038aa24e91f235b6f4e371e693995c7e68a97c98a68d855fb552d681be1c80e7"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Verify-FunctionalDiagnostic.py",
+      "bytes": 7432,
+      "sha256": "8f0636882f9da266678279f055e3040358ec6911b589d04406c4120e369be821"
+    },
+    {
+      "file": "tools/FunctionalClosureAcceptance/Verify-IntegratedDiagnostic.py",
+      "bytes": 6796,
+      "sha256": "7ab17b70af2919a9c0bc954e3a70bd029d2c9917e4bf6602497f3510940ebb17"
+    },
+    {
+      "file": "tools/MobileScheduleAcceptance/BrowserTimeZoneObserver.py",
+      "bytes": 5657,
+      "sha256": "d8d8f8ea2672950df74747bc735fe7bf91ff81154df828c187857b11234928e1"
+    },
+    {
+      "file": "tools/online-http-v1/Start-LocalTest.ps1",
+      "bytes": 6089,
+      "sha256": "804d3420b8fd8eeeb88ac55c39ba8cae66eeba1440683d4b9a6796fa2f4d891d"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/.gitattributes",
+      "bytes": 122,
+      "sha256": "9ade3eb3c1da522bc26cc585574d342657b0f3339c4563668f809a83eed72134"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/.gitignore",
+      "bytes": 23,
+      "sha256": "fc08a64d494e6bd86fcae168dc6ced37f71271e7fa60fa390f94809c66fbfb8a"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/launch_product.py",
+      "bytes": 3143,
+      "sha256": "7efe2563fa11e56d545810df29fe7aac1bfc570e86f873d8fbc144894edd2c8e"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/ProductMemoryIntegrationReplay.csproj",
+      "bytes": 636,
+      "sha256": "ac7e024be2234a4c3aa5ae2b2185d72a038361fb7a0377cf1e812a13cbf4ac18"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/Program.cs",
+      "bytes": 25678,
+      "sha256": "9ca1a9798590e29fbf22084a1f8ef62bf353f51b7ff0416ce2edd15890de17de"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/README.md",
+      "bytes": 1134,
+      "sha256": "d61511612bb7af6e3a3bcda6fb546beb881e8c54b0cfdfd09e157cde67740a10"
+    },
+    {
+      "file": "tools/ProductMemoryIntegrationReplay/run_guarded.py",
+      "bytes": 4441,
+      "sha256": "7de77df11b864e293d7b409f7aa8b750c5c364a8ed0a1d3fc4e3de9c1ed6c07f"
+    }
+  ]
+}

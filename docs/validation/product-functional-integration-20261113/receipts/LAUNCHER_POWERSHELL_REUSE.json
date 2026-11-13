@@ -1,0 +1,29 @@
+{
+  "status": "PASS_BOTH_SHELLS_SAME_RUNNING_APP_AND_SERVICE",
+  "observedAtUtc": "2026-11-13T05:09:42.293011+00:00",
+  "identity": {
+    "pid": 3148,
+    "desktopPid": 41368,
+    "startedUtc": "2026-11-13T05:09:38.8976029Z",
+    "desktopStartedUtc": "2026-11-13T05:09:39.6251365Z",
+    "instanceId": "59d075e14c404c6c8422d47f5ffde73c"
+  },
+  "runs": [
+    {
+      "shell": "pwsh.exe",
+      "exitCode": 0,
+      "sameServiceAndAppIdentity": true,
+      "reusedExistingDesktopMessage": true
+    },
+    {
+      "shell": "powershell.exe",
+      "exitCode": 0,
+      "sameServiceAndAppIdentity": true,
+      "reusedExistingDesktopMessage": true
+    }
+  ],
+  "fixed": "Compare process start instants rather than serialized date strings; do not overwrite desktop receipt when a new process exits before readiness.",
+  "recoveredOriginalOwnedAppIdentity": true,
+  "runtimeDataPreserved": true,
+  "scope": "Launcher/service readiness only; no business-flow UI completion claimed."
+}

@@ -1,0 +1,48 @@
+{
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "scope": "Automatic WPF tests in a fresh root and separate processes; never the phone runtime",
+  "results": [
+    {
+      "filter": "CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot",
+      "exitCode": 0,
+      "seconds": 9.883341550827026,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot",
+      "exitCode": 0,
+      "seconds": 8.042479038238525,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "CompanyCanvasWorkflowTests.ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates",
+      "exitCode": 0,
+      "seconds": 6.502847671508789,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "CompanyCanvasWorkflowTests.BusyLibraryReportsInlineAndPreservesCurrentCanvas",
+      "exitCode": 0,
+      "seconds": 5.347027778625488,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "CanvasWorkflowAcceptanceTests",
+      "exitCode": 0,
+      "seconds": 1.209047794342041,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "TetherStartupPreferenceTests",
+      "exitCode": 0,
+      "seconds": 2.8432931900024414,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    },
+    {
+      "filter": "NavigationWorkbenchClosureTests",
+      "exitCode": 0,
+      "seconds": 1.290071725845337,
+      "scope": "Automatic WPF controls/model host, not physical desktop/camera acceptance"
+    }
+  ]
+}

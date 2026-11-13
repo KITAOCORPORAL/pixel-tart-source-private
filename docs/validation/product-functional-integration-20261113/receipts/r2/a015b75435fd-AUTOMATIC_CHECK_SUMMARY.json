@@ -1,0 +1,302 @@
+{
+  "status": "AUTOMATIC_CHECKS_COMPLETE_WITH_EXPLICIT_MEASUREMENT_NOT_RUN",
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "scope": "Synthetic/domain/production-control automatic checks only. No physical desktop, device or new customer roundtrip inference.",
+  "latestControlledUniqueResultCounts": {
+    "Passed": 153,
+    "NotExecuted": 1
+  },
+  "runs": [
+    {
+      "file": "tether-auto-checks\\tether-core.trx",
+      "counters": {
+        "total": "48",
+        "executed": "48",
+        "passed": "48",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 48
+    },
+    {
+      "file": "wpf-automatic-checks\\01-CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    },
+    {
+      "file": "wpf-automatic-checks\\02-CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    },
+    {
+      "file": "wpf-automatic-checks\\03-CompanyCanvasWorkflowTests.ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    },
+    {
+      "file": "wpf-automatic-checks\\04-CompanyCanvasWorkflowTests.BusyLibraryReportsInlineAndPreservesCurrentCanvas\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    },
+    {
+      "file": "wpf-automatic-checks\\06-TetherStartupPreferenceTests\\results.trx",
+      "counters": {
+        "total": "5",
+        "executed": "5",
+        "passed": "5",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 5
+    },
+    {
+      "file": "wpf-automatic-checks\\07-NavigationWorkbenchClosureTests\\results.trx",
+      "counters": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 9
+    },
+    {
+      "file": "additional-business-auto\\canvas-safety-links\\results.trx",
+      "counters": {
+        "total": "7",
+        "executed": "7",
+        "passed": "7",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 7
+    },
+    {
+      "file": "additional-business-auto\\core-finance-planning\\results.trx",
+      "counters": {
+        "total": "62",
+        "executed": "62",
+        "passed": "62",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 62
+    },
+    {
+      "file": "additional-business-auto\\film-jpeg-product\\results.trx",
+      "counters": {
+        "total": "9",
+        "executed": "8",
+        "passed": "8",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 9
+    },
+    {
+      "file": "additional-business-auto\\planning-15\\results.trx",
+      "counters": {
+        "total": "8",
+        "executed": "8",
+        "passed": "8",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 8
+    },
+    {
+      "file": "darkroom-film-auto-isolated\\build-edit-export\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    },
+    {
+      "file": "darkroom-film-auto-isolated\\independent-reopen\\results.trx",
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "resultCount": 1
+    }
+  ],
+  "initialConfigurationFailurePreserved": "additional-business-auto/darkroom-film-workflow/results.trx",
+  "correctedIsolatedDarkroomRuns": "darkroom-film-auto-isolated/RUN_RECEIPT.json",
+  "zeroSelectionNotCountedAsPass": "wpf-automatic-checks/05-CanvasWorkflowAcceptanceTests/results.trx",
+  "optInMeasurementNotRun": "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+  "failedProductAssertionsInSelectedFinalRuns": 0
+}

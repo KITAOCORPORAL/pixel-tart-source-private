@@ -1,0 +1,54 @@
+{
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "initialSetupFailurePreserved": "additional-business-auto/darkroom-film-workflow/results.trx",
+  "runs": [
+    {
+      "method": "WideToolsMaskUndoVariantResourceDraftFilmAndPublishing",
+      "exitCode": 0,
+      "seconds": 7.672055244445801,
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "scope": "Isolated synthetic TIFF/P3 profile, existing production pipeline and independent WPF test process; not physical UI or camera"
+    },
+    {
+      "method": "IndependentProcessWideToolsAndFilmReopen",
+      "exitCode": 0,
+      "seconds": 2.4883384704589844,
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "scope": "Isolated synthetic TIFF/P3 profile, existing production pipeline and independent WPF test process; not physical UI or camera"
+    }
+  ]
+}

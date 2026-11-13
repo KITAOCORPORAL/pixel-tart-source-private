@@ -1,0 +1,53 @@
+{
+  "productSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "frozenCurrentPasses": 86,
+  "runs": [
+    {
+      "name": "booking",
+      "passed": 61,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/booking/results.trx",
+      "sha256": "cf82cfcd735ffb47cd7b65827a3ff52ae9ba8c5530ce195033a61a0b0d5d37e4"
+    },
+    {
+      "name": "navigation",
+      "passed": 9,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/navigation/results.trx",
+      "sha256": "baf77e9176a9ae6e84d14e92199203cff7eabdfa86dd8248916aed814fd5b3f8"
+    },
+    {
+      "name": "memory",
+      "passed": 5,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/memory/results.trx",
+      "sha256": "3420fb2d7ca5dd894eae22c90a5cbe048139104d6d16f7a68e6474cdf0ddfb71"
+    },
+    {
+      "name": "detail",
+      "passed": 2,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/detail/results.trx",
+      "sha256": "85953596ac5c0e7185295d32c989f57ae8b63b5174ae04ac28c684ff5be70d62"
+    },
+    {
+      "name": "tiff-contract",
+      "passed": 3,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/tiff-contract/results.trx",
+      "sha256": "4d7f8ed0ca89318d44fd747ae077304d5c23cef1c97e30bdb6832fb7c8f4056b"
+    },
+    {
+      "name": "raster-cache",
+      "passed": 5,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/raster-cache/results.trx",
+      "sha256": "348471bdf28b8c35a4dc06b4497ef9ceb1c882277add9cccd5eeb1034e7c268f"
+    },
+    {
+      "name": "overlay-history",
+      "passed": 1,
+      "file": "docs/validation/product-functional-integration-20261113/receipts/final-qa/overlay-history/results.trx",
+      "sha256": "d5e7ca9d449accbb8d4e652daecb5154e1cf5c8fae4116107d3e472a8b9f311f"
+    }
+  ],
+  "latestUniqueOutcomes": {
+    "Passed": 230,
+    "NotExecuted": 1
+  },
+  "scope": "Automatic/controlled checks; original native main project and real phone remain separately scoped."
+}

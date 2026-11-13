@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 import argparse,hashlib,json,shutil,subprocess,zipfile
 p=argparse.ArgumentParser();p.add_argument('--context',required=True);a=p.parse_args()
-cp=Path(a.context);c=json.loads(cp.read_text(encoding='utf-8-sig'));r=Path(c['worktree']);b=Path(c['deliveryRoot']);d=r/'docs/validation/product-functional-closure-20261112';package=Path(c['package'])
+cp=Path(a.context);c=json.loads(cp.read_text(encoding='utf-8-sig'));r=Path(c['worktree']);b=Path(c['deliveryRoot']);d=r/c.get('evidenceDirectory','docs/validation/product-functional-closure-20261112');package=Path(c['package'])
 def save(p,v):Path(p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def sha(p):
  h=hashlib.sha256()
@@ -13,9 +13,11 @@ def sha(p):
 changed=subprocess.check_output(['git','-C',str(r),'diff','--name-only',c['currentProductSource'],'--','src','extensions'],text=True)
 if changed.strip():raise RuntimeError('Product changed: rebuild and retest before sealing')
 # The old archive remains available; updated package receipts get a different archive name.
-archive=b/'Guangjing-FullModule-Functional-Diagnostic-R2-win-x64-20261112.zip'
+archive=b/c.get('archiveName','Guangjing-FullModule-Functional-Diagnostic-R2-win-x64-20261112.zip')
 receipt=json.loads((d/'CURRENT_RECEIPT.json').read_text('utf-8-sig'));receipt['archiveFileName']=archive.name;save(d/'CURRENT_RECEIPT.json',receipt)
 tools=[f for f in (r/'tools/FunctionalClosureAcceptance').iterdir() if f.is_file()]
+memory_dir=r/'tools/ProductMemoryIntegrationReplay'
+if memory_dir.is_dir():tools += [f for f in memory_dir.iterdir() if f.is_file()]
 tools += [r/'tools/MobileScheduleAcceptance/BrowserTimeZoneObserver.py',r/'tools/online-http-v1/Start-LocalTest.ps1']
 save(d/'DIAGNOSTIC_TOOL_IDENTITY.json',{'productSource':c['currentProductSource'],'tools':[{'file':f.relative_to(r).as_posix(),'bytes':f.stat().st_size,'sha256':sha(f)} for f in sorted(tools)]})
 post_seal={'EVIDENCE_INDEX.json','PACKAGE_DELIVERY.json','BUNDLE_VALIDATION.json','PUSH_READBACK.json'}
@@ -26,13 +28,27 @@ for f in sorted(d.rglob('*')):
  if f.is_file() and f.name not in post_seal and f.name!='.gitattributes':
   index['artifacts'].append({'file':f.relative_to(d).as_posix(),'bytes':f.stat().st_size,'sha256':sha(f)})
 save(d/'EVIDENCE_INDEX.json',index)
-reportdir=package/'diagnostics-reports/product-functional-closure-20261112';reportdir.mkdir(parents=True,exist_ok=True)
+reportdir=package/'diagnostics-reports'/d.name;reportdir.mkdir(parents=True,exist_ok=True)
+obsolete=reportdir/'receipts/reused-r2'
+if obsolete.exists() and d.name!='product-functional-closure-20261112':
+ if not obsolete.resolve().is_relative_to(package.resolve()):raise RuntimeError('Unexpected generated report root')
+ prior_receipts=r/'docs/validation/product-functional-closure-20261112/receipts'
+ for f in obsolete.rglob('*'):
+  if f.is_file():
+   original=prior_receipts/f.relative_to(obsolete)
+   if not original.is_file() or sha(f)!=sha(original):raise RuntimeError('Preserve changed package evidence: '+str(f))
+ for f in obsolete.rglob('*'):
+  if f.is_file():f.unlink()
+ for folder in sorted((f for f in obsolete.rglob('*') if f.is_dir()),key=lambda p:len(p.parts),reverse=True):folder.rmdir()
+ obsolete.rmdir()
 for f in d.rglob('*'):
  if f.is_file() and f.name not in {'PACKAGE_DELIVERY.json','BUNDLE_VALIDATION.json','PUSH_READBACK.json','.gitattributes'}:
   dest=reportdir/f.relative_to(d);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,dest)
 tooldir=package/'diagnostics/functional-closure';tooldir.mkdir(parents=True,exist_ok=True)
 for f in tools:
  if 'FunctionalClosureAcceptance' in f.parts:shutil.copyfile(f,tooldir/f.name)
+ elif 'ProductMemoryIntegrationReplay' in f.parts:
+  dest=package/'diagnostics/memory-replay'/f.name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,dest)
 shutil.copyfile(r/'tools/MobileScheduleAcceptance/BrowserTimeZoneObserver.py',package/'diagnostics/BrowserTimeZoneObserver.py')
 build=json.loads((package/'BUILD_IDENTITY.json').read_text('utf-8-sig'));build.update(launcherCrossShellIdentityFix=True,observerHealthBindsRoundAndOrigin=True,diagnosticBuilderBase=c['startingSource']);save(package/'BUILD_IDENTITY.json',build)
 entries=[]

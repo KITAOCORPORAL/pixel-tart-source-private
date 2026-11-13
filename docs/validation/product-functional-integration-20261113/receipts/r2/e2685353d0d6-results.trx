@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d168daae-12cc-4996-84b6-3112e4bd770c" name="Administrator@PC-20250309WEIZ 2026-11-12 18:32:46" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-12T18:32:46.7447358+08:00" queuing="2026-11-12T18:32:46.7447360+08:00" start="2026-11-12T18:32:46.1310711+08:00" finish="2026-11-12T18:32:46.7493109+08:00" />
+  <TestSettings name="default" id="17a7a192-8442-4034-92bf-31a39ef77447">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-12_18_32_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3d634060-c252-4de8-83fa-8281f9460233" testId="157de70e-1809-87a9-81ab-193fbd3cb660" testName="Workbench_HasFourQuickActionSlotsWithIndependentToolbox" computerName="PC-20250309WEIZ" duration="00:00:00.0004876" startTime="2026-11-12T18:32:46.6369343+08:00" endTime="2026-11-12T18:32:46.6374573+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d634060-c252-4de8-83fa-8281f9460233" />
+    <UnitTestResult executionId="ceb0fea4-b57d-4512-8b78-33aab92e2ea1" testId="191978cc-6d4b-88ca-9ee2-7e89ba915233" testName="AssetLibraryCtrlFUsesTheVisibleEmbeddedSearchInsteadOfTheRawWorkspaceSearch" computerName="PC-20250309WEIZ" duration="00:00:00.0005274" startTime="2026-11-12T18:32:46.6444016+08:00" endTime="2026-11-12T18:32:46.6449582+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ceb0fea4-b57d-4512-8b78-33aab92e2ea1" />
+    <UnitTestResult executionId="0e33b39e-d76b-46ee-948b-0aa1520f18e7" testId="1ba33363-89a8-876d-aab3-16ce55502bce" testName="NavigationAndCalendarMarkupRemainWellFormed" computerName="PC-20250309WEIZ" duration="00:00:00.0031923" startTime="2026-11-12T18:32:46.6452818+08:00" endTime="2026-11-12T18:32:46.6485003+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e33b39e-d76b-46ee-948b-0aa1520f18e7" />
+    <UnitTestResult executionId="d88eb3ee-f12a-406b-b62b-c047b9c33abe" testId="160a3d7f-2a24-8cb7-82b7-e236516d648e" testName="OnlineSelection_KeepsRouteAndViewHostWithPrimarySidebarEntry" computerName="PC-20250309WEIZ" duration="00:00:00.0033729" startTime="2026-11-12T18:32:46.6409791+08:00" endTime="2026-11-12T18:32:46.6443810+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d88eb3ee-f12a-406b-b62b-c047b9c33abe" />
+    <UnitTestResult executionId="8daabdca-3b31-4c26-9cc8-79770ccf89b6" testId="11cfee23-c35b-86d1-b5df-7b21611c0060" testName="AssetPrimaryNavigationHasIconSelectionFocusHoverAndDirectionalKeyboardContracts" computerName="PC-20250309WEIZ" duration="00:00:00.0012908" startTime="2026-11-12T18:32:46.6350939+08:00" endTime="2026-11-12T18:32:46.6366421+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8daabdca-3b31-4c26-9cc8-79770ccf89b6" />
+    <UnitTestResult executionId="0c88fa27-a84c-4cbc-b725-995e99d67a5f" testId="1052e438-0e61-8af4-9f21-ee09caa2dc49" testName="WorkCalendar_UsesSixtyFortyCalendarAndDetailsColumns" computerName="PC-20250309WEIZ" duration="00:00:00.0002618" startTime="2026-11-12T18:32:46.6449783+08:00" endTime="2026-11-12T18:32:46.6452658+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c88fa27-a84c-4cbc-b725-995e99d67a5f" />
+    <UnitTestResult executionId="42369ab5-dbba-4849-9d40-d987abc15a10" testId="1e192c9d-bb0e-8c41-b9d4-d3875fb79bc2" testName="CalendarTaskCardsAndQuickDrawerUseFocusedResponsiveLayout" computerName="PC-20250309WEIZ" duration="00:00:00.0004740" startTime="2026-11-12T18:32:46.6485185+08:00" endTime="2026-11-12T18:32:46.6500362+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42369ab5-dbba-4849-9d40-d987abc15a10" />
+    <UnitTestResult executionId="10fb0ce7-ab49-4ced-83d4-d662f4e62a17" testId="1dc97ae7-f189-8a06-b64f-75644439a755" testName="ToolboxSidebar_IsFirstClassWorkspaceNavigation" computerName="PC-20250309WEIZ" duration="00:00:00.0034531" startTime="2026-11-12T18:32:46.6374763+08:00" endTime="2026-11-12T18:32:46.6409586+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="10fb0ce7-ab49-4ced-83d4-d662f4e62a17" />
+    <UnitTestResult executionId="2feed238-ef00-4135-ac22-82bfdb95ee3f" testId="1e15d69f-07fd-830d-ba93-1c2535798592" testName="Sidebar_HasTheExactTenPrimaryPagesInProductOrder" computerName="PC-20250309WEIZ" duration="00:00:00.0106361" startTime="2026-11-12T18:32:46.6066395+08:00" endTime="2026-11-12T18:32:46.6316214+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2feed238-ef00-4135-ac22-82bfdb95ee3f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Sidebar_HasTheExactTenPrimaryPagesInProductOrder" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1e15d69f-07fd-830d-ba93-1c2535798592">
+      <Execution id="2feed238-ef00-4135-ac22-82bfdb95ee3f" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="Sidebar_HasTheExactTenPrimaryPagesInProductOrder" />
+    </UnitTest>
+    <UnitTest name="CalendarTaskCardsAndQuickDrawerUseFocusedResponsiveLayout" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1e192c9d-bb0e-8c41-b9d4-d3875fb79bc2">
+      <Execution id="42369ab5-dbba-4849-9d40-d987abc15a10" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="CalendarTaskCardsAndQuickDrawerUseFocusedResponsiveLayout" />
+    </UnitTest>
+    <UnitTest name="NavigationAndCalendarMarkupRemainWellFormed" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1ba33363-89a8-876d-aab3-16ce55502bce">
+      <Execution id="0e33b39e-d76b-46ee-948b-0aa1520f18e7" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="NavigationAndCalendarMarkupRemainWellFormed" />
+    </UnitTest>
+    <UnitTest name="Workbench_HasFourQuickActionSlotsWithIndependentToolbox" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="157de70e-1809-87a9-81ab-193fbd3cb660">
+      <Execution id="3d634060-c252-4de8-83fa-8281f9460233" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="Workbench_HasFourQuickActionSlotsWithIndependentToolbox" />
+    </UnitTest>
+    <UnitTest name="OnlineSelection_KeepsRouteAndViewHostWithPrimarySidebarEntry" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="160a3d7f-2a24-8cb7-82b7-e236516d648e">
+      <Execution id="d88eb3ee-f12a-406b-b62b-c047b9c33abe" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="OnlineSelection_KeepsRouteAndViewHostWithPrimarySidebarEntry" />
+    </UnitTest>
+    <UnitTest name="ToolboxSidebar_IsFirstClassWorkspaceNavigation" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1dc97ae7-f189-8a06-b64f-75644439a755">
+      <Execution id="10fb0ce7-ab49-4ced-83d4-d662f4e62a17" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="ToolboxSidebar_IsFirstClassWorkspaceNavigation" />
+    </UnitTest>
+    <UnitTest name="WorkCalendar_UsesSixtyFortyCalendarAndDetailsColumns" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1052e438-0e61-8af4-9f21-ee09caa2dc49">
+      <Execution id="0c88fa27-a84c-4cbc-b725-995e99d67a5f" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="WorkCalendar_UsesSixtyFortyCalendarAndDetailsColumns" />
+    </UnitTest>
+    <UnitTest name="AssetPrimaryNavigationHasIconSelectionFocusHoverAndDirectionalKeyboardContracts" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="11cfee23-c35b-86d1-b5df-7b21611c0060">
+      <Execution id="8daabdca-3b31-4c26-9cc8-79770ccf89b6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="AssetPrimaryNavigationHasIconSelectionFocusHoverAndDirectionalKeyboardContracts" />
+    </UnitTest>
+    <UnitTest name="AssetLibraryCtrlFUsesTheVisibleEmbeddedSearchInsteadOfTheRawWorkspaceSearch" storage="e:\kitao-worktrees\product-functional-closure-20261112\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="191978cc-6d4b-88ca-9ee2-7e89ba915233">
+      <Execution id="ceb0fea4-b57d-4512-8b78-33aab92e2ea1" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-functional-closure-20261112\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests" name="AssetLibraryCtrlFUsesTheVisibleEmbeddedSearchInsteadOfTheRawWorkspaceSearch" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="157de70e-1809-87a9-81ab-193fbd3cb660" executionId="3d634060-c252-4de8-83fa-8281f9460233" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="191978cc-6d4b-88ca-9ee2-7e89ba915233" executionId="ceb0fea4-b57d-4512-8b78-33aab92e2ea1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ba33363-89a8-876d-aab3-16ce55502bce" executionId="0e33b39e-d76b-46ee-948b-0aa1520f18e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="160a3d7f-2a24-8cb7-82b7-e236516d648e" executionId="d88eb3ee-f12a-406b-b62b-c047b9c33abe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11cfee23-c35b-86d1-b5df-7b21611c0060" executionId="8daabdca-3b31-4c26-9cc8-79770ccf89b6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1052e438-0e61-8af4-9f21-ee09caa2dc49" executionId="0c88fa27-a84c-4cbc-b725-995e99d67a5f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e192c9d-bb0e-8c41-b9d4-d3875fb79bc2" executionId="42369ab5-dbba-4849-9d40-d987abc15a10" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dc97ae7-f189-8a06-b64f-75644439a755" executionId="10fb0ce7-ab49-4ced-83d4-d662f4e62a17" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e15d69f-07fd-830d-ba93-1c2535798592" executionId="2feed238-ef00-4135-ac22-82bfdb95ee3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="9" executed="9" passed="9" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

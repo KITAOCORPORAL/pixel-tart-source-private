@@ -1,0 +1,137 @@
+{
+  "observedAtUtc": "2026-11-12T10:42:27.562566+00:00",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "freshRun": {
+    "file": "receipts/trx/resume-booking-tether-auto/results.trx",
+    "results": 61,
+    "counts": {
+      "Passed": 61
+    }
+  },
+  "allRetainedUniqueTestNames": {
+    "Passed": 214,
+    "NotExecuted": 1
+  },
+  "allRetainedRuns": [
+    {
+      "file": "receipts/trx/additional-business-auto/canvas-safety-links/results.trx",
+      "results": 7,
+      "counts": {
+        "Passed": 7
+      }
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/core-finance-planning/results.trx",
+      "results": 62,
+      "counts": {
+        "Passed": 62
+      }
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/darkroom-film-workflow/results.trx",
+      "results": 2,
+      "counts": {
+        "Failed": 1,
+        "NotExecuted": 1
+      }
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/film-jpeg-product/results.trx",
+      "results": 9,
+      "counts": {
+        "Passed": 8,
+        "NotExecuted": 1
+      }
+    },
+    {
+      "file": "receipts/trx/additional-business-auto/planning-15/results.trx",
+      "results": 8,
+      "counts": {
+        "Passed": 8
+      }
+    },
+    {
+      "file": "receipts/trx/darkroom-film-auto-isolated/build-edit-export/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/darkroom-film-auto-isolated/independent-reopen/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/resume-booking-tether-auto/results.trx",
+      "results": 61,
+      "counts": {
+        "Passed": 61
+      }
+    },
+    {
+      "file": "receipts/trx/tether-auto-checks/tether-core.trx",
+      "results": 48,
+      "counts": {
+        "Passed": 48
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/01-CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/02-CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/03-CompanyCanvasWorkflowTests.ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/04-CompanyCanvasWorkflowTests.BusyLibraryReportsInlineAndPreservesCurrentCanvas/results.trx",
+      "results": 1,
+      "counts": {
+        "Passed": 1
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/05-CanvasWorkflowAcceptanceTests/results.trx",
+      "results": 0,
+      "counts": {}
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/06-TetherStartupPreferenceTests/results.trx",
+      "results": 5,
+      "counts": {
+        "Passed": 5
+      }
+    },
+    {
+      "file": "receipts/trx/wpf-automatic-checks/07-NavigationWorkbenchClosureTests/results.trx",
+      "results": 9,
+      "counts": {
+        "Passed": 9
+      }
+    }
+  ],
+  "allHistoricalOutcomeCounts": {
+    "Passed": 214,
+    "Failed": 1,
+    "NotExecuted": 2
+  },
+  "latestSelectionRule": "Latest result endTime per testName, not directory enumeration order; historical configuration failure is retained.",
+  "freshIsNativeInputEvidence": false,
+  "scope": "Booking save/retry/continue-planning, tether UI source contracts and runtime error handling; isolated runtime. Existing measurement opt-in skip remains explicit."
+}

@@ -1,0 +1,51 @@
+{
+  "guardBytes": 2147483648,
+  "rows": [
+    {
+      "case": "缓存完整周期",
+      "privateMiB": 1692.43,
+      "osPeakWorkingMiB": 1487.08,
+      "durationSeconds": 23.71,
+      "stop": null,
+      "exitCode": 0,
+      "newRawDecodes": 0
+    },
+    {
+      "case": "缓存最小化210秒",
+      "privateMiB": 1099.21,
+      "osPeakWorkingMiB": 1064.7,
+      "durationSeconds": 224.84,
+      "stop": null,
+      "exitCode": 0,
+      "newRawDecodes": 0
+    },
+    {
+      "case": "真实TIFF非视觉导出",
+      "privateMiB": 911.64,
+      "osPeakWorkingMiB": 958.75,
+      "durationSeconds": 24.14,
+      "stop": null,
+      "exitCode": 0,
+      "newRawDecodes": 0
+    },
+    {
+      "case": "真实TIFF独立重开导出",
+      "privateMiB": 1152.59,
+      "osPeakWorkingMiB": 1199.19,
+      "durationSeconds": 25.59,
+      "stop": null,
+      "exitCode": 0,
+      "newRawDecodes": 0
+    },
+    {
+      "case": "真实TIFF视口导出失败",
+      "privateMiB": 2052.7,
+      "osPeakWorkingMiB": 1721.63,
+      "durationSeconds": 11.48,
+      "stop": "2GiB resource guard",
+      "exitCode": 1,
+      "newRawDecodes": 0
+    }
+  ],
+  "authority": "Whole-process50ms samples; cache replay and nonvisual real-TIFF are not native/visual entry acceptance."
+}

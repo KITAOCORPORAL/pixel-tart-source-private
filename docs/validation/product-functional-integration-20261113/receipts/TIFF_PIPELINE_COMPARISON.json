@@ -1,0 +1,73 @@
+{
+  "status": "PASS_CONTROLLED_REAL_TIFF_EXPORT_AND_INDEPENDENT_REOPEN",
+  "productSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "authority": "Nonvisual production ViewModel with fixed dialogs; no native chooser or visual-window memory acceptance",
+  "checks": {
+    "width": true,
+    "height": true,
+    "bitsPerPixel": true,
+    "storedPixelFormat": true,
+    "rgb48PixelSha256": true,
+    "iccProfiles": true,
+    "independentProcess": true,
+    "rawRequestsZero": true,
+    "sourceFileUnchanged": true
+  },
+  "probes": {
+    "input": {
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgb48",
+      "bitsPerPixel": 48,
+      "rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "before": {
+      "path": "E:\\Kitao-Deliveries\\product-functional-integration-20261113\\final-tiff-model-before\\export\\DSCF0347_仿色_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "reopen": {
+      "path": "E:\\Kitao-Deliveries\\product-functional-integration-20261113\\final-tiff-model-reopen\\export\\DSCF0347_仿色_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    }
+  },
+  "visualWindowGuardPassed": false,
+  "sourceFileUnchanged": true,
+  "inputChannelBitDepth": 16,
+  "outputChannelBitDepth": 16,
+  "outputBitDepthPreservedFromInput": true,
+  "inputToOutputRgb48PixelMatch": true,
+  "channelLayoutNote": "RGB48 input,RGBA64 output; both16 bits/channel and opaque alpha added"
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS_NORMAL_EXE_LINKED_BOOKING_PLANNING_HISTORY_AND_REOPEN",
+  "observedAtBerlin": "2026-11-12T11:46:21.922169+01:00",
+  "productSource": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+  "appPid": 20444,
+  "projectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+  "booking": {
+    "Id": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+    "ProjectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "Title": "合成排期 · 主流程核验",
+    "StartAtUtc": "2026-11-12T08:00:00.0000000+00:00",
+    "EndAtUtc": "2026-11-12T09:00:00.0000000+00:00",
+    "Revision": 2
+  },
+  "planningProjectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+  "planningBookingId": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+  "checks": {
+    "sameBookingReopened": true,
+    "samePlanningProject": true,
+    "savedOverlayNoLongerPresent": true,
+    "historyShowsOriginalProject": true,
+    "originalProjectOpenedIntoWorkflow": true,
+    "onePersistedBooking": true,
+    "planningJsonLinksSameBooking": true
+  },
+  "latestStartup": "2026-11-12 18:06:30.614 [INFO] STARTUP_OK BuildId=2.3.0-dev.ea5b421 ProductSourceSha=ea5b421b03329535a8834545ac3196dc5e4295e4 Windows=Microsoft Windows NT 10.0.19045.0 DataRoot=AppData-or-explicit-override LibraryRoot=user-managed LastWorkspace=WorkCalendar",
+  "workflowDatabaseSources": 0,
+  "nativeImportComplete": false,
+  "fullNewProjectWorkflowComplete": false,
+  "nextNativeStep": "Choose the owned synthetic directory in the open Windows picker; do not substitute another project or inject source rows.",
+  "scope": "Normal published App via supported native UIA, independent SQLite/planning JSON and process reopen. No physical mouse, real camera or phone claim."
+}

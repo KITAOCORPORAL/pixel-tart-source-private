@@ -1,0 +1,19 @@
+{
+  "status": "PASS_UPDATED_FULL_PACKAGE_REAL_SERVICE_AND_DESKTOP_BOOTSTRAP",
+  "recordedAtBerlin": "2026-11-12T09:11:25.215380+01:00",
+  "productSource": "7edd9a65da2a189fadd615c59063283f90037a98",
+  "package": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\Guangjing-FunctionalClosure-FullModule-Diagnostic-win-x64",
+  "entry": "Start-FullProduct-LocalTest.cmd",
+  "selectionServiceIncluded": true,
+  "scheduleServiceIncluded": true,
+  "selfContainedRuntime": true,
+  "loopbackEndpoint": "http://127.0.0.1:4291/",
+  "servicePid": 34696,
+  "appPid": 39996,
+  "serviceInstanceMatchesOwnedState": true,
+  "secondLaunchReusesSameServiceAndAppPids": true,
+  "runtimeDataRoot": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\full-product-localtest",
+  "credentialsInsidePackage": false,
+  "phoneAppointmentTouched": false,
+  "scope": "Real package bootstrap and readiness only; not customer confirmation or complete business-flow UI acceptance"
+}

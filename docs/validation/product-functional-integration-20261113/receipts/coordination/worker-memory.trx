@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b45b2e17-47ef-4c8f-bc22-10bbb7967ba9" name="Administrator@PC-20250309WEIZ 2026-11-13 09:34:11" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-13T09:34:11.3095192+08:00" queuing="2026-11-13T09:34:11.3095195+08:00" start="2026-11-13T09:34:07.8647909+08:00" finish="2026-11-13T09:34:13.2984955+08:00" />
+  <TestSettings name="default" id="e21cdb74-ce17-40c1-af7d-8d908e68f048">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-13_09_34_11" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e151fea2-d6c7-469c-9ae8-8ac27ffbc3eb" testId="156b6b6a-dac9-89b9-8e4a-d6ed66a7e3d5" testName="DisposedEditorReleasesItsFullDisplayWhileEditorRemainsReachable" computerName="PC-20250309WEIZ" duration="00:00:00.1878321" startTime="2026-11-13T09:34:12.9669187+08:00" endTime="2026-11-13T09:34:13.1563525+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e151fea2-d6c7-469c-9ae8-8ac27ffbc3eb" />
+    <UnitTestResult executionId="c9cdd264-36a9-4e8f-8de0-7bf9c5746cc7" testId="1bed5bfd-321b-8b18-ad29-8af2944c5940" testName="VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp" computerName="PC-20250309WEIZ" duration="00:00:02.1496587" startTime="2026-11-13T09:34:10.7371967+08:00" endTime="2026-11-13T09:34:12.8872224+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c9cdd264-36a9-4e8f-8de0-7bf9c5746cc7" />
+    <UnitTestResult executionId="4a4a5db7-ac52-417b-a130-13bdcd2c4829" testId="185fb0a7-311c-8423-973b-924f6964ec4d" testName="CollapsedLegacyPageDoesNotPromotePhotoPageProxyButVisibleActualSizeStillWorks" computerName="PC-20250309WEIZ" duration="00:00:02.0507300" startTime="2026-11-13T09:34:08.6598812+08:00" endTime="2026-11-13T09:34:10.7327753+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a4a5db7-ac52-417b-a130-13bdcd2c4829" />
+    <UnitTestResult executionId="53a1f882-b96b-4751-b368-e38be35ec6cc" testId="1ad7a2cf-a46c-827b-8c83-09dbf891fc7c" testName="DisplayAdapterHonorsOffsetSlices" computerName="PC-20250309WEIZ" duration="00:00:00.0076824" startTime="2026-11-13T09:34:12.9589996+08:00" endTime="2026-11-13T09:34:12.9667726+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53a1f882-b96b-4751-b368-e38be35ec6cc" />
+    <UnitTestResult executionId="336b74b9-6151-4693-9213-118efbb75ebb" testId="1d1138a3-d5f3-8ea1-b533-47269e5a9e0f" testName="DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels" computerName="PC-20250309WEIZ" duration="00:00:00.0704000" startTime="2026-11-13T09:34:12.8884158+08:00" endTime="2026-11-13T09:34:12.9589385+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="336b74b9-6151-4693-9213-118efbb75ebb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CollapsedLegacyPageDoesNotPromotePhotoPageProxyButVisibleActualSizeStillWorks" storage="e:\kitao-worktrees\product-memory-closure-20261113\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="185fb0a7-311c-8423-973b-924f6964ec4d">
+      <Execution id="4a4a5db7-ac52-417b-a130-13bdcd2c4829" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-memory-closure-20261113\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawPostImportMemoryTests" name="CollapsedLegacyPageDoesNotPromotePhotoPageProxyButVisibleActualSizeStillWorks" />
+    </UnitTest>
+    <UnitTest name="DisposedEditorReleasesItsFullDisplayWhileEditorRemainsReachable" storage="e:\kitao-worktrees\product-memory-closure-20261113\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="156b6b6a-dac9-89b9-8e4a-d6ed66a7e3d5">
+      <Execution id="e151fea2-d6c7-469c-9ae8-8ac27ffbc3eb" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-memory-closure-20261113\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawPostImportMemoryTests" name="DisposedEditorReleasesItsFullDisplayWhileEditorRemainsReachable" />
+    </UnitTest>
+    <UnitTest name="DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels" storage="e:\kitao-worktrees\product-memory-closure-20261113\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d1138a3-d5f3-8ea1-b533-47269e5a9e0f">
+      <Execution id="336b74b9-6151-4693-9213-118efbb75ebb" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-memory-closure-20261113\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawPostImportMemoryTests" name="DisplayAdapterAvoidsManagedFrameDuplicateAndOwnsItsBitmapPixels" />
+    </UnitTest>
+    <UnitTest name="VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp" storage="e:\kitao-worktrees\product-memory-closure-20261113\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1bed5bfd-321b-8b18-ad29-8af2944c5940">
+      <Execution id="c9cdd264-36a9-4e8f-8de0-7bf9c5746cc7" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-memory-closure-20261113\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawPostImportMemoryTests" name="VisiblePhotoPageOwnsActualSizeRequestsWithoutHiddenLegacyHelp" />
+    </UnitTest>
+    <UnitTest name="DisplayAdapterHonorsOffsetSlices" storage="e:\kitao-worktrees\product-memory-closure-20261113\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ad7a2cf-a46c-827b-8c83-09dbf891fc7c">
+      <Execution id="53a1f882-b96b-4751-b368-e38be35ec6cc" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\product-memory-closure-20261113\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.RawPostImportMemoryTests" name="DisplayAdapterHonorsOffsetSlices" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="156b6b6a-dac9-89b9-8e4a-d6ed66a7e3d5" executionId="e151fea2-d6c7-469c-9ae8-8ac27ffbc3eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bed5bfd-321b-8b18-ad29-8af2944c5940" executionId="c9cdd264-36a9-4e8f-8de0-7bf9c5746cc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="185fb0a7-311c-8423-973b-924f6964ec4d" executionId="4a4a5db7-ac52-417b-a130-13bdcd2c4829" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ad7a2cf-a46c-827b-8c83-09dbf891fc7c" executionId="53a1f882-b96b-4751-b368-e38be35ec6cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d1138a3-d5f3-8ea1-b533-47269e5a9e0f" executionId="336b74b9-6151-4693-9213-118efbb75ebb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

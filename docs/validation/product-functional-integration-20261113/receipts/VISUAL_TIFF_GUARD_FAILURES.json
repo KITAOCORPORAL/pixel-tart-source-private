@@ -1,0 +1,51 @@
+{
+  "status": "BLOCKED_2GIB_DURING_VISUAL_TIFF_EXPORT",
+  "runs": [
+    {
+      "run": "rendered-tiff-before",
+      "pid": 42740,
+      "exitCode": 1,
+      "stop": "2GiB resource guard",
+      "peakPrivateBytes50ms": 2151243776,
+      "osPeakWorkingSetBytes": 1971146752,
+      "samples": 128,
+      "elapsedMs": 7064.636399969459,
+      "newRawDecodeLimit": 0
+    },
+    {
+      "run": "rendered-tiff-fixed-before",
+      "pid": 18320,
+      "exitCode": 1,
+      "stop": "2GiB resource guard",
+      "peakPrivateBytes50ms": 2270941184,
+      "osPeakWorkingSetBytes": 1712336896,
+      "samples": 128,
+      "elapsedMs": 6833.207899995614,
+      "newRawDecodeLimit": 0
+    },
+    {
+      "run": "rendered-tiff-deferred-before",
+      "pid": 31884,
+      "exitCode": 1,
+      "stop": "2GiB resource guard",
+      "peakPrivateBytes50ms": 2326032384,
+      "osPeakWorkingSetBytes": 1823830016,
+      "samples": 206,
+      "elapsedMs": 10828.608700016048,
+      "newRawDecodeLimit": 0
+    },
+    {
+      "run": "rendered-tiff-export-reuse-before",
+      "pid": 29340,
+      "exitCode": 1,
+      "stop": "2GiB resource guard",
+      "peakPrivateBytes50ms": 2152407040,
+      "osPeakWorkingSetBytes": 1805258752,
+      "samples": 219,
+      "elapsedMs": 11483.629299968015,
+      "newRawDecodeLimit": 0
+    }
+  ],
+  "limitBytes": 2147483648,
+  "notPromotedByNonvisualPass": true
+}
