@@ -15,7 +15,7 @@ public sealed class RasterPreviewNativeCacheTests
    var path=Fixture(31,17,bits,orientation);
    try
    {
-    var previous=StudioQuickExport.Load(path);var preview=StudioQuickExport.LoadPreviewSource(path);
+    var previous=OnLoadBaseline(path,orientation);var preview=StudioQuickExport.LoadPreviewSource(path);
     Assert.AreEqual(previous.PixelWidth,preview.PixelWidth);Assert.AreEqual(previous.PixelHeight,preview.PixelHeight);
     Assert.AreEqual(previous.Format,preview.Format);Assert.AreEqual(previous.DpiX,preview.DpiX);Assert.AreEqual(previous.DpiY,preview.DpiY);
     CollectionAssert.AreEqual(Pixels(previous),Pixels(preview),"Native detachment must retain exactly the existing normalized samples.");
@@ -51,6 +51,12 @@ public sealed class RasterPreviewNativeCacheTests
   finally{File.Delete(path);}
   return Task.CompletedTask;
  });
+ static BitmapSource OnLoadBaseline(string path,ushort orientation)
+ {
+  using var file=File.OpenRead(path);var source=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
+  var normalized=StudioQuickExport.ApplyOrientation(source,orientation);var bytes=Pixels(normalized);var stride=(normalized.PixelWidth*normalized.Format.BitsPerPixel+7)/8;
+  var bitmap=BitmapSource.Create(normalized.PixelWidth,normalized.PixelHeight,normalized.DpiX,normalized.DpiY,normalized.Format,normalized.Palette,bytes,stride);bitmap.Freeze();return bitmap;
+ }
  static byte[] Pixels(BitmapSource bitmap){var stride=(bitmap.PixelWidth*bitmap.Format.BitsPerPixel+7)/8;var result=new byte[stride*bitmap.PixelHeight];bitmap.CopyPixels(result,stride,0);return result;}
  static string Fixture(int width,int height,int bits,ushort orientation)
  {

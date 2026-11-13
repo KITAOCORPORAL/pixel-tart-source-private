@@ -42,7 +42,8 @@ public static class StudioQuickExport
     private static BitmapSource LoadCore(string path, int? maximumPixelEdge, bool nativePreviewCache)
     {
         using var file=File.OpenRead(path);
-        var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
+        // Decode on demand while the stream is open; detachment below materializes the final raster.
+        var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.None).Frames[0];
         var orientation=ReadOrientation(frame);
         BitmapSource result=frame;
         if(frame.ColorContexts is {Count:>0})
