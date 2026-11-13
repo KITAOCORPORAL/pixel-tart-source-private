@@ -719,7 +719,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         var image = await Task.Run(() =>
         {
             token.ThrowIfCancellationRequested();
-            var decoded = StudioQuickExport.Load(path);
+            var decoded = StudioQuickExport.LoadPreviewSource(path);
             token.ThrowIfCancellationRequested(); return decoded;
         }, token);
         _sourceCache.AddFirst((path, stamp, image));

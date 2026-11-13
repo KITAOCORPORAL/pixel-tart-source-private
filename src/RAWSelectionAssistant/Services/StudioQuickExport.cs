@@ -35,7 +35,11 @@ public static class StudioQuickExport
         };
         var transformed=new TransformedBitmap(image,new MatrixTransform(matrix));transformed.Freeze();return transformed;
     }
-    public static BitmapSource Load(string path, int? maximumPixelEdge = null)
+    public static BitmapSource Load(string path, int? maximumPixelEdge = null) => LoadCore(path, maximumPixelEdge, false);
+
+    public static BitmapSource LoadPreviewSource(string path) => LoadCore(path, null, true);
+
+    private static BitmapSource LoadCore(string path, int? maximumPixelEdge, bool nativePreviewCache)
     {
         using var file=File.OpenRead(path);
         var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
@@ -76,6 +80,14 @@ public static class StudioQuickExport
         // A frozen BitmapFrame can still retain a decoder owned by the decoding
         // thread. Later FormatConvertedBitmap.Freeze walks that decoder and fails
         // on the preview worker. Publish detached pixels, including palette/alpha.
+        if (nativePreviewCache)
+        {
+            // Materialize the same normalized pixels into an independent native cache.
+            // OnLoad avoids retaining the thread-affine decoder without a full managed staging array.
+            var cached = new CachedBitmap(result, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+            cached.Freeze();
+            return cached;
+        }
         var stride = checked((result.PixelWidth * result.Format.BitsPerPixel + 7) / 8);
         var pixels = new byte[checked(stride * result.PixelHeight)];
         result.CopyPixels(pixels, stride, 0);
