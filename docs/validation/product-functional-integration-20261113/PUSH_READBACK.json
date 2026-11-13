@@ -1,0 +1,21 @@
+{
+  "status": "PASS_UNIFIED_DELIVERY_REMOTE_READBACK",
+  "recordedAtUtc": "2026-11-13T05:29:48.188Z",
+  "clientTimeZone": "Europe/Berlin",
+  "branch": "integration/product-functional-closure-20261112",
+  "deliveryCommit": "1b6845fe389836e765fa2559ee72f3c3531f02f7",
+  "verifiedRemoteDeliverySha": "1b6845fe389836e765fa2559ee72f3c3531f02f7",
+  "productSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "memoryMergeSource": "2d20b3274f9b84c93d891742a2c5887e46b87b6a",
+  "archiveSha256": "40bd7dcacbe29dccd2d04eab9ecb11d43a1161059ced629b5faf04dc841ee1ea",
+  "frozenAutomaticPasses": 86,
+  "latestUniqueAutomaticPasses": 230,
+  "explicitNotExecuted": 1,
+  "metadataChecks": 27,
+  "stagedHashBoundFiles": 173,
+  "functionalStatus": "PARTIAL",
+  "fullMainWorkflowCompleted": false,
+  "phoneTrueDeviceRoundtrip": "NOT_RUN",
+  "visualTiff2GiB": "BLOCKED",
+  "note": "Attests the delivery commit; the subsequent receipt commit ref is verified separately."
+}
