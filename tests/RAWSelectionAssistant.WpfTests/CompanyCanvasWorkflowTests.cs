@@ -145,11 +145,26 @@ public sealed class CompanyCanvasWorkflowTests
         Assert.AreEqual(bookingId, booking.Id);
         await main.OpenPlanningAsync(project, bookingId);
         Assert.AreEqual(Visibility.Collapsed, overlay.Visibility, "Same-page planning navigation must remain unobstructed.");
+        await Task.Delay(100);window.UpdateLayout();
+        var planningCandidates=Find<PlanningCenterView>((DependencyObject)window.Content).ToArray();
+        Assert.AreEqual(1,planningCandidates.Length,"Expected the actual hosted planning view.");
+        var planningView=planningCandidates[0];planningView.Render();
+        var inspector=(Panel)planningView.FindName("PlanningInspectorContent");
+        var group=inspector.Children.OfType<Expander>().Single(item=>Equals(item.Tag,"关联"));
+        var linkedCandidates=((Panel)group.Content).Children.OfType<Button>().Where(item=>Equals(item.Content,"查看关联档期")).ToArray();
+        Assert.AreEqual(1,linkedCandidates.Length,"Linked action missing. CanExecute="+main.PlanningPage!.OpenCalendarCommand.CanExecute(null)+"; buttons="+string.Join(" / ",Find<Button>(planningView).Select(item=>item.Content)));
+        var linkedCalendar=linkedCandidates[0];
+        linkedCalendar.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        deadline=DateTime.UtcNow.AddSeconds(10);
+        while((!main.IsWorkCalendarPage||calendar.Details.Booking?.Id!=bookingId)&&DateTime.UtcNow<deadline)await Task.Delay(30);
+        Assert.IsTrue(main.IsWorkCalendarPage,"The visible linked-booking action must navigate to the calendar, not reopen the association picker.");
+        Assert.AreEqual(bookingId,calendar.Details.Booking!.Id);
+        await main.OpenPlanningAsync(project,bookingId);
         main.NavigateCommand.Execute("History");
         deadline = DateTime.UtcNow.AddSeconds(10);
         while (!main.ProjectHistory.Any(item => item.Id == project) && DateTime.UtcNow < deadline) await Task.Delay(30);
         Assert.IsTrue(main.ProjectHistory.Any(item => item.Id == project), "Entering history must discover a project created through planning during this App session.");
-        await File.WriteAllTextAsync(Path.Combine(Root,"LINKED_BOOKING_OVERLAY.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=project, bookingId, revision=booking.Revision, overlayCollapsed=true, samePageNavigation=true, historyDiscoveredSameProject=true }, JsonOptions));
+        await File.WriteAllTextAsync(Path.Combine(Root,"LINKED_BOOKING_OVERLAY.json"), JsonSerializer.Serialize(new { processId=Environment.ProcessId, projectId=project, bookingId, revision=booking.Revision, overlayCollapsed=true, samePageNavigation=true, historyDiscoveredSameProject=true, linkedCalendarButtonNavigated=true }, JsonOptions));
     });
 
     [TestMethod]

@@ -222,7 +222,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     private bool FilterReference(object value)=>value is ProjectShotReference reference&&(_referenceFilter is null||reference.Kind==_referenceFilter);
     private void ReplaceShot(ProjectShot shot){var index=Shots.ToList().FindIndex(item=>item.ShotId==shot.ShotId);if(index>=0)Shots[index]=shot;_selectedShot=shot;OnPropertyChanged(nameof(SelectedShot));RefreshReferences();NotifyAll();}
     private void RefreshReferences(){References.Clear();if(SelectedShot is not null)foreach(var reference in SelectedShot.References)References.Add(reference);SelectedReference=References.FirstOrDefault();}
-    private void NotifyAll(){foreach(var name in new[]{nameof(ProjectId),nameof(ProjectName),nameof(BookingDate),nameof(Location),nameof(ProgressText),nameof(EstimatedTimeText),nameof(CapturedAssetText),nameof(HasProject),nameof(HasShots),nameof(ShotHeading),nameof(InspectorHeading)})OnPropertyChanged(name);ShotsView.Refresh();}
+    private void NotifyAll(){foreach(var name in new[]{nameof(ProjectId),nameof(ProjectName),nameof(BookingDate),nameof(Location),nameof(ProgressText),nameof(EstimatedTimeText),nameof(CapturedAssetText),nameof(HasProject),nameof(HasShots),nameof(ShotHeading),nameof(InspectorHeading)})OnPropertyChanged(name);ShotsView.Refresh();OpenCalendarCommand?.RaiseCanExecuteChanged();}
 }
 
 public sealed record ProjectPaletteColorItem(string Hex,double Weight);

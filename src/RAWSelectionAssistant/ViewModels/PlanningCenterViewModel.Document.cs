@@ -169,7 +169,7 @@ public sealed partial class PlanningCenterViewModel
             await AddAttachmentsAsync(files, owned);
         });
         OpenColorSchemeCommand = new RelayCommand(_ => { if (ProjectId is Guid id) ColorSchemeRequested?.Invoke(this, id); });
-        OpenCalendarCommand = new RelayCommand(_ => { if (_state?.BookingId is Guid id) CalendarRequested?.Invoke(this, id); });
+        OpenCalendarCommand = new RelayCommand(_ => { if (_state?.BookingId is Guid id) CalendarRequested?.Invoke(this, id); }, _ => _state?.BookingId is Guid);
         CancelPlanningModalCommand = new RelayCommand(_ => { IsCreateOpen = false; IsBookingOpen = false; });
     }
 
