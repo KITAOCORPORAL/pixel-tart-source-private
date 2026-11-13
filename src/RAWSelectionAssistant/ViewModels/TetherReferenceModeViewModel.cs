@@ -184,13 +184,11 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (render) _ = DebouncedRenderAsync();
     }
     internal Guid? EditTargetIdentity => _historyTarget;
-    public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null)
+    public async Task<BitmapSource> ProcessForExportAsync(string path, ReferenceLook? snapshot, PixelTartFilmSettings? film, CancellationToken token, ColorAdjustmentStack? stack = null, BitmapSource? frozenSource = null)
     {
+        if (frozenSource is not null && !frozenSource.IsFrozen) throw new InvalidOperationException("An export source snapshot must be immutable.");
         stack = ColorStudioEffectiveState.Resolve(snapshot, stack, film);
-        var source = await Task.Run(() =>
-        {
-            return StudioQuickExport.Load(path);
-        }, token);
+        var source = frozenSource ?? await Task.Run(() => StudioQuickExport.Load(path), token);
         // Batch export is driven by each target's frozen snapshot, never by the
         // currently active editor (which may belong to a different target).
         if (stack is not null) return await Task.Run(() => ColorStudioBitmapRenderer.Render(source, stack, snapshot, token), token);

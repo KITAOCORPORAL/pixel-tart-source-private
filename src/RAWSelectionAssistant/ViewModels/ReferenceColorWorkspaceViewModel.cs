@@ -26,7 +26,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     private ReferenceTargetItem? _activeTarget;
     private long _activationRevision;
     private CancellationTokenSource? _activationCancellation;
-    private readonly LinkedList<(string Path, long Stamp, BitmapSource Image)> _sourceCache = new();
+    private readonly LinkedList<(string Path, long Stamp, string? SourceHash, BitmapSource Image)> _sourceCache = new();
     private int _loadingActivations;
     private CancellationTokenSource? _exportCancellation;
     private int _exportCompleted;
@@ -123,7 +123,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
-        var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,Look:main.Look,Stack:main.Stack?.DeepClone(),Film:main.Film,Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
+        var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,SourceHash:item.SourceHash,Look:main.Look,Stack:main.Stack?.DeepClone(),Film:main.Film,Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
         var publishingLease=new PublishingIntermediateLease();
         var directory=publishingLease.DirectoryPath;var handedOff=false;
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
@@ -150,7 +150,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     else
                     {
                         if (item.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
-                        var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack);
+                        var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack, FrozenRasterExportSource(item.Item.Path, item.SourceHash));
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
                     await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.LastProfessionalOutput?.Width??item.Item.PixelWidth,item.Item.LastProfessionalOutput?.Height??item.Item.PixelHeight,null,null,"None",item.RawDefinition?.ColorState?.Output.Label??"sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput,OutputValidation:System.Text.Json.JsonSerializer.Serialize(item.Item.LastProfessionalOutput))),_exportCancellation.Token);
@@ -681,7 +681,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
             var rawMaster = isRaw ? target.RawMaster ??= await DecodeStudioRawAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
-            var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, token);
+            var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, target.SourceHash ?? target.ObservedSourceHash, token);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.SourceHash ??= target.ObservedSourceHash;
             await LoadPersistentVersionsAsync(target,token);
@@ -711,10 +711,18 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; StopProcessingCommand.RaiseCanExecuteChanged(); }
     }
 
-    private async Task<BitmapSource> LoadSourcePreviewAsync(string path, CancellationToken token)
+    private BitmapSource? FrozenRasterExportSource(string path, string? sourceHash)
+    {
+        if (string.IsNullOrWhiteSpace(sourceHash)) return null;
+        var stamp = File.GetLastWriteTimeUtc(path).Ticks;
+        return _sourceCache.FirstOrDefault(item => item.Path == path && item.Stamp == stamp &&
+            item.Image.IsFrozen && string.Equals(item.SourceHash, sourceHash, StringComparison.OrdinalIgnoreCase)).Image;
+    }
+
+    private async Task<BitmapSource> LoadSourcePreviewAsync(string path, string? sourceHash, CancellationToken token)
     {
         var stamp = File.GetLastWriteTimeUtc(path).Ticks;
-        var cached = _sourceCache.FirstOrDefault(item => item.Path == path && item.Stamp == stamp);
+        var cached = _sourceCache.FirstOrDefault(item => item.Path == path && item.Stamp == stamp && string.Equals(item.SourceHash, sourceHash, StringComparison.OrdinalIgnoreCase));
         if (cached.Image is not null) return cached.Image;
         var image = await Task.Run(() =>
         {
@@ -722,7 +730,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             var decoded = StudioQuickExport.LoadPreviewSource(path);
             token.ThrowIfCancellationRequested(); return decoded;
         }, token);
-        _sourceCache.AddFirst((path, stamp, image));
+        _sourceCache.AddFirst((path, stamp, sourceHash, image));
         // Bound cached decoded sources. Exports continue to use frozen target inputs.
         while (_sourceCache.Count > 3 || (_sourceCache.Count > 1 && _sourceCache.Sum(item => (long)item.Image.PixelWidth * item.Image.PixelHeight * 4) > 128L * 1024 * 1024))
             _sourceCache.RemoveLast();
@@ -840,7 +848,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     else
                     {
                         if (frozenItem.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
-                        var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
+                        var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack, FrozenRasterExportSource(item.Path, frozenItem.SourceHash));
                         Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RasterExportEncode",_exportCancellation.Token);
                         await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
                         Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RasterExportEncoded",_exportCancellation.Token);

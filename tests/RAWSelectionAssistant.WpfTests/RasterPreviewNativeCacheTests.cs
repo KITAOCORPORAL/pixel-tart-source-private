@@ -51,6 +51,56 @@ public sealed class RasterPreviewNativeCacheTests
   finally{File.Delete(path);}
   return Task.CompletedTask;
  });
+ [TestMethod]public Task FrozenExportUsesTheValidatedSourceInsteadOfActiveEditor()=>RunSta(async()=>
+ {
+  var path=Fixture(19,13,48,1);
+  try
+  {
+   using var editor=new RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel(allowReferenceManagement:true);
+   var unrelated=BitmapSource.Create(1,1,96,96,PixelFormats.Bgra32,null,new byte[]{1,2,3,255},4);unrelated.Freeze();
+   await editor.SetSourceAsync(null,unrelated,render:false);
+   var snapshot=StudioQuickExport.LoadPreviewSource(path);
+   var expected=await editor.ProcessForExportAsync(path,null,null,CancellationToken.None);
+   var actual=await editor.ProcessForExportAsync(path,null,null,CancellationToken.None,frozenSource:snapshot);
+   Assert.AreEqual(expected.PixelWidth,actual.PixelWidth);Assert.AreEqual(expected.PixelHeight,actual.PixelHeight);Assert.AreEqual(expected.Format,actual.Format);
+   CollectionAssert.AreEqual(Pixels(expected),Pixels(actual));
+   var mutable=new WriteableBitmap(1,1,96,96,PixelFormats.Bgra32,null);
+   try{await editor.ProcessForExportAsync(path,null,null,CancellationToken.None,frozenSource:mutable);Assert.Fail("Mutable source snapshot was accepted");}catch(InvalidOperationException){}
+  }
+  finally{File.Delete(path);}
+ });
+ [TestMethod]public Task SourceCacheMatchesContentIdentityAndRejectsChangedBytesWithSameStamp()=>RunSta(async()=>
+ {
+  var path=Fixture(17,9,48,1);var replacement=Fixture(17,9,32,1);var root=Path.Combine(Path.GetTempPath(),"kitao-cache-export-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+  try
+  {
+   using var workspace=new RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel(new ExportDialogs(path,root));
+   await workspace.ChooseTargetCommand.ExecuteAsync(null);await workspace.AnalysisWork;
+   var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();
+   var resolver=typeof(RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel).GetMethod("FrozenRasterExportSource",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)!;
+   Assert.IsNotNull(resolver.Invoke(workspace,[path,hash]));Assert.IsNull(resolver.Invoke(workspace,[path,"wrong-content-hash"]));
+   var stamp=File.GetLastWriteTimeUtc(path);File.Copy(replacement,path,true);File.SetLastWriteTimeUtc(path,stamp);
+   await workspace.ExportSelectedCommand.ExecuteAsync(null);
+   Assert.AreEqual(RAWSelectionAssistant.ViewModels.ReferenceExportStatus.Failed,workspace.Targets.Single().ExportStatus);
+   Assert.IsFalse(Directory.EnumerateFiles(root,"*.tif").Any(),"A stale cached frame must never become a successful export.");
+  }
+  finally
+  {
+   File.Delete(path);File.Delete(replacement);
+   var parent=Directory.GetParent(Path.GetFullPath(root))!.FullName;var expected=Path.GetFullPath(Path.GetTempPath()).TrimEnd(Path.DirectorySeparatorChar);
+   if(!string.Equals(parent,expected,StringComparison.OrdinalIgnoreCase)||!Path.GetFileName(root).StartsWith("kitao-cache-export-"))throw new IOException("Unexpected cleanup root");
+   Directory.Delete(root,true);
+  }
+ });
+ sealed class ExportDialogs(string source,string output):RAWSelectionAssistant.Services.IDialogService
+ {
+  public string? ChooseFolder(string title,string? initialDirectory=null)=>output;public IReadOnlyList<string> ChooseFiles(string title,string filter,bool multiselect=true)=>[source];
+  public string? ChooseSaveFile(string title,string filter,string extension,string? suggestedFileName=null)=>null;public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> ids)=>null;
+  public void ShowInfo(string text){}public void ShowError(string text)=>throw new IOException(text);public bool Confirm(string text,string title)=>true;
+  public RAWSelectionAssistant.Services.HelpAction ShowHelp()=>RAWSelectionAssistant.Services.HelpAction.None;public void ShowFeedback(){}
+  public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> candidates)=>null;
+  public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem item,bool advanced)=>false;public void RevealFile(string path){}
+ }
  static BitmapSource OnLoadBaseline(string path,ushort orientation)
  {
   using var file=File.OpenRead(path);var source=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
