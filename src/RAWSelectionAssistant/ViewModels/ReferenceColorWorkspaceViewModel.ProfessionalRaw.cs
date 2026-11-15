@@ -30,7 +30,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         using var source=System.IO.File.OpenRead(path);
         var sourceHash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(source,token));
         using var reservation=StudioGlobalResources.ReserveWork(StudioGlobalResources.MasterLimit);
-        var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack);
+        var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack,FrozenRasterExportSource(path,sourceHash));
         token.ThrowIfCancellationRequested();
         return InstantFilmJpegInput.FromRendered(rendered,sourceHash,definition);
     }

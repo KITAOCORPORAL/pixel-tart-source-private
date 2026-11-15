@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -38,6 +38,17 @@ public static class StudioQuickExport
     public static BitmapSource Load(string path, int? maximumPixelEdge = null) => LoadCore(path, maximumPixelEdge, false);
 
     public static BitmapSource LoadPreviewSource(string path) => LoadCore(path, null, true);
+
+    // Export receipts only need the encoded header. Re-decoding and detaching a
+    // full frame here overlaps the still-visible source and the encoder buffers.
+    public static (int PixelWidth, int PixelHeight, int BitsPerPixel) ReadEncodedInfo(string path)
+    {
+        using var file = File.OpenRead(path);
+        var frame = BitmapDecoder.Create(file, BitmapCreateOptions.PreservePixelFormat | BitmapCreateOptions.DelayCreation,
+            BitmapCacheOption.None).Frames[0];
+        return (frame.PixelWidth, frame.PixelHeight, frame.Format.BitsPerPixel);
+    }
+
 
     private static BitmapSource LoadCore(string path, int? maximumPixelEdge, bool nativePreviewCache)
     {
