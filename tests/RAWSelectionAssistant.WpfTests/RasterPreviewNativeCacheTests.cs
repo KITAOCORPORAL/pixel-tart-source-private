@@ -127,6 +127,26 @@ public sealed class RasterPreviewNativeCacheTests
   finally{File.Delete(path);}
   return Task.CompletedTask;
  });
+ [TestMethod]public Task SessionTransferKeepsContentBoundRasterAndRollsBackCacheOnFailure()=>RunSta(async()=>
+ {
+  var path=Fixture(31,17,48,1);var root=Path.Combine(Path.GetTempPath(),"kitao-session-cache-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
+  try
+  {
+   var session=Path.Combine(root,"saved.ptstudio.json");
+   using(var initial=new RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel(new ExportDialogs(path,root)))
+   {await initial.ChooseTargetCommand.ExecuteAsync(null);await initial.SaveSessionAsync(session);}
+   using var reopened=new RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel(new ExportDialogs(path,root));
+   await reopened.LoadSessionAsync(session);
+   var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)));
+   var resolver=typeof(RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel).GetMethod("FrozenRasterExportSource",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)!;
+   var transferred=resolver.Invoke(reopened,[path,hash]);Assert.IsNotNull(transferred);Assert.AreSame(reopened.Editor.SourceImage,transferred);
+   using var failure=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(stage=>{if(stage=="SessionTransfer")throw new IOException("Injected transfer failure");});
+   try{await reopened.LoadSessionAsync(session);Assert.Fail("Expected transfer failure");}catch(IOException error){Assert.AreEqual("Injected transfer failure",error.Message);}
+   Assert.AreSame(transferred,resolver.Invoke(reopened,[path,hash]),"Failed transfer must restore the prior cache ownership.");
+   Assert.AreSame(transferred,reopened.Editor.SourceImage);
+  }
+  finally{File.Delete(path);Directory.Delete(root,true);}
+ });
  static BitmapSource OnLoadBaseline(string path,ushort orientation)
  {
   using var file=File.OpenRead(path);var source=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
