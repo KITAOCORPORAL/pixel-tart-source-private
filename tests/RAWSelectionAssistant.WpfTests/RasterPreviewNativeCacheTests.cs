@@ -101,6 +101,32 @@ public sealed class RasterPreviewNativeCacheTests
   public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> candidates)=>null;
   public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem item,bool advanced)=>false;public void RevealFile(string path){}
  }
+ [TestMethod]public Task EncodedReceiptReadsStoredHeaderAndReleasesFile()=>RunSta(()=>
+ {
+  var path=Fixture(31,17,48,6);
+  try
+  {
+   var header=StudioQuickExport.ReadEncodedInfo(path);
+   Assert.AreEqual(31,header.PixelWidth);Assert.AreEqual(17,header.PixelHeight);Assert.AreEqual(48,header.BitsPerPixel);
+   using var exclusive=new FileStream(path,FileMode.Open,FileAccess.ReadWrite,FileShare.None);
+  }
+  finally{File.Delete(path);}
+  return Task.CompletedTask;
+ });
+ [TestMethod]public Task EncodedReceiptAvoidsFullManagedRasterStaging()=>RunSta(()=>
+ {
+  var path=Fixture(512,512,48,1);
+  try
+  {
+   StudioQuickExport.ReadEncodedInfo(path);
+   var start=GC.GetAllocatedBytesForCurrentThread();var header=StudioQuickExport.ReadEncodedInfo(path);
+   var allocated=GC.GetAllocatedBytesForCurrentThread()-start;
+   Assert.AreEqual(48,header.BitsPerPixel);
+   Assert.IsLessThan(128L*1024,allocated,"Receipt header read allocated a full raster.");
+  }
+  finally{File.Delete(path);}
+  return Task.CompletedTask;
+ });
  static BitmapSource OnLoadBaseline(string path,ushort orientation)
  {
   using var file=File.OpenRead(path);var source=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
