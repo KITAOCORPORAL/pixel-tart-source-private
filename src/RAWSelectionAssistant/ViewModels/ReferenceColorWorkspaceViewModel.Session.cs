@@ -128,7 +128,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         }).ToArray();
         if(staged is null)for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].VariantsExpanded=document.Targets[i].VariantsExpanded;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);
-        var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();
+        var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldSourceCache=_sourceCache.ToArray();
         var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;
         var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;
         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
@@ -161,6 +161,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 Editor.RawLocalEditing=staged.Editor.RawLocalEditing;
                 Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.RawDefinition?.LocalEdits?.Stack??active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
                 Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);Editor.LinearDocumentEditing=active.RawDefinition?.ColorState?.Version==2;
+                // Transfer the content-bound input with its prepared editor. Otherwise
+                // the new workspace reloads the same full raster for preview/export.
+                _sourceCache.Clear();foreach(var cached in staged._sourceCache)_sourceCache.AddLast(cached);
                 Editor.RestoreSessionHistory(staged.Editor.CaptureSessionHistory());
                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
                 RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;
@@ -184,7 +187,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(staged is not null)
         {
             // Ownership of these exact target instances is now held only by this workspace.
-            staged.Targets.Clear();staged.ActiveTarget=null;
+            staged.Targets.Clear();staged.ActiveTarget=null;staged._sourceCache.Clear();
             _comparisonKey=staged._comparisonKey;_comparisonImage=staged._comparisonImage;
             _windowUndo.Clear();_windowRedo.Clear();
             foreach(var old in oldTargets){old.LinearRawMaster=null;old.RawMaster=null;}
@@ -198,6 +201,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 foreach(var item in oldTargets.Concat(restored)){item.LinearRawMaster=null;item.RawMaster=null;}
                 throw;
             }
+            _sourceCache.Clear();foreach(var cached in oldSourceCache)_sourceCache.AddLast(cached);
             Targets.Clear();foreach(var item in oldTargets)Targets.Add(item);
             FailedTarget=oldFailed;Editor.RestoreTargetEngine(oldEngine,oldMode);
             FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;
