@@ -1,0 +1,365 @@
+{
+  "status": "PASS_CONTROLLED_VISIBLE_TIFF_CYCLE",
+  "authority": "Actual WPF visible PhotoGradePageView plus collapsed legacy view, production commands and real TIFF files; fixed dialogs, offscreen window; no manual desktop/file-picker acceptance.",
+  "inputDifference": "Company DSCF0347 unavailable. Synthetic RGB16 uses identical 7752x5184 storage dimensions, deterministic channel ramps and the existing authorized home TIFF sRGB ICC. Scene content, compression and camera history differ.",
+  "checks": {
+    "width": true,
+    "height": true,
+    "bitsPerPixel": true,
+    "storedPixelFormat": true,
+    "storedPixelSha256": true,
+    "rgb48PixelSha256": true,
+    "iccProfiles": true,
+    "orientation": true,
+    "inputNormalizedPixelsMatch": true,
+    "inputNormalizedSizeMatch": true,
+    "outputOrientationNormalized": true,
+    "channelBitDepth16": true,
+    "iccMatchesInput": true,
+    "independentProcess": true,
+    "newRawDecodesZero": true,
+    "sourceUnchanged": true,
+    "firstGuardPassed": true,
+    "firstViewportVisible": true,
+    "firstActualSizeZoom": true,
+    "firstFitZoom": true,
+    "firstSavedClosed": true,
+    "reopenGuardPassed": true,
+    "reopenViewportVisible": true,
+    "reopenActualSizeZoom": true,
+    "reopenFitZoom": true,
+    "reopenSavedClosed": true
+  },
+  "probes": {
+    "input": {
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+      "orientation": 1,
+      "storedPixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "normalizedWidth": 7752,
+      "normalizedHeight": 5184,
+      "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgb48",
+      "bitsPerPixel": 48,
+      "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "first": {
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+      "orientation": 1,
+      "storedPixelSha256": "2F43E0D4BBEE3E4A8F37C9AC29FC12937089B2D8FB835802003C26EBDD4DD1A0",
+      "normalizedWidth": 7752,
+      "normalizedHeight": 5184,
+      "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "reopen": {
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\reopen\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+      "orientation": 1,
+      "storedPixelSha256": "2F43E0D4BBEE3E4A8F37C9AC29FC12937089B2D8FB835802003C26EBDD4DD1A0",
+      "normalizedWidth": 7752,
+      "normalizedHeight": 5184,
+      "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "width": 7752,
+      "height": 5184,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    }
+  },
+  "first": {
+    "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+    "processId": 46224,
+    "productVersion": "2.3.0+e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+    "input": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+    "output": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+    "session": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\rendered.ptstudio.json",
+    "reopenedInIndependentProcess": false,
+    "visualHost": true,
+    "completeViewportFlow": true,
+    "rawDecoderRequests": 0,
+    "rawDecodeCalls": 0,
+    "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+    "source": {
+      "type": "CachedBitmap",
+      "id": 44624228,
+      "width": 7752,
+      "height": 5184,
+      "bits": 48,
+      "frozen": true,
+      "minimumPixelBytes": 241118208
+    }
+  },
+  "reopen": {
+    "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+    "processId": 28352,
+    "productVersion": "2.3.0+e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+    "input": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+    "output": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\reopen\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+    "session": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\rendered.ptstudio.json",
+    "reopenedInIndependentProcess": true,
+    "visualHost": true,
+    "completeViewportFlow": true,
+    "rawDecoderRequests": 0,
+    "rawDecodeCalls": 0,
+    "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+    "source": {
+      "type": "CachedBitmap",
+      "id": 45905863,
+      "width": 7752,
+      "height": 5184,
+      "bits": 48,
+      "frozen": true,
+      "minimumPixelBytes": 241118208
+    }
+  },
+  "guardBytes": 2147483648,
+  "guardResults": {
+    "first": {
+      "pid": 46224,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1289494528,
+      "osPeakWorkingSetBytes": 1146630144,
+      "samples": 532,
+      "elapsedMs": 26907.00000000652,
+      "newRawDecodeLimit": 0
+    },
+    "reopen": {
+      "pid": 28352,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1299693568,
+      "osPeakWorkingSetBytes": 1149943808,
+      "samples": 562,
+      "elapsedMs": 28438.00000002375,
+      "newRawDecodeLimit": 0
+    }
+  },
+  "stagePeaks50ms": {
+    "first": {
+      "startup": {
+        "peakPrivateBytes": 129191936,
+        "peakWorkingSetBytes": 157630464,
+        "samples": 31
+      },
+      "rendered-tiff-import": {
+        "peakPrivateBytes": 755134464,
+        "peakWorkingSetBytes": 610471936,
+        "samples": 28
+      },
+      "rendered-fit-idle": {
+        "peakPrivateBytes": 1269960704,
+        "peakWorkingSetBytes": 1131167744,
+        "samples": 31
+      },
+      "rendered-100-idle": {
+        "peakPrivateBytes": 1283854336,
+        "peakWorkingSetBytes": 1140301824,
+        "samples": 30
+      },
+      "rendered-20-idle": {
+        "peakPrivateBytes": 1283788800,
+        "peakWorkingSetBytes": 1140502528,
+        "samples": 31
+      },
+      "rendered-100-return-idle": {
+        "peakPrivateBytes": 1283788800,
+        "peakWorkingSetBytes": 1140584448,
+        "samples": 30
+      },
+      "rendered-real-export": {
+        "peakPrivateBytes": 1289494528,
+        "peakWorkingSetBytes": 1146630144,
+        "samples": 135
+      },
+      "rendered-session-save": {
+        "peakPrivateBytes": 1264160768,
+        "peakWorkingSetBytes": 1122598912,
+        "samples": 1
+      },
+      "rendered-export-idle": {
+        "peakPrivateBytes": 1265893376,
+        "peakWorkingSetBytes": 1126211584,
+        "samples": 30
+      },
+      "rendered-minimized-idle": {
+        "peakPrivateBytes": 1264775168,
+        "peakWorkingSetBytes": 1125126144,
+        "samples": 101
+      },
+      "rendered-restored-idle": {
+        "peakPrivateBytes": 1283432448,
+        "peakWorkingSetBytes": 1121673216,
+        "samples": 30
+      },
+      "rendered-close": {
+        "peakPrivateBytes": 1283358720,
+        "peakWorkingSetBytes": 1121644544,
+        "samples": 1
+      },
+      "rendered-close-natural-idle": {
+        "peakPrivateBytes": 1285025792,
+        "peakWorkingSetBytes": 1124200448,
+        "samples": 53
+      }
+    },
+    "reopen": {
+      "startup": {
+        "peakPrivateBytes": 133500928,
+        "peakWorkingSetBytes": 159588352,
+        "samples": 30
+      },
+      "rendered-session-open": {
+        "peakPrivateBytes": 778690560,
+        "peakWorkingSetBytes": 637714432,
+        "samples": 61
+      },
+      "rendered-fit-idle": {
+        "peakPrivateBytes": 1277464576,
+        "peakWorkingSetBytes": 1136361472,
+        "samples": 30
+      },
+      "rendered-100-idle": {
+        "peakPrivateBytes": 1294499840,
+        "peakWorkingSetBytes": 1149300736,
+        "samples": 30
+      },
+      "rendered-20-idle": {
+        "peakPrivateBytes": 1293463552,
+        "peakWorkingSetBytes": 1148727296,
+        "samples": 30
+      },
+      "rendered-100-return-idle": {
+        "peakPrivateBytes": 1293266944,
+        "peakWorkingSetBytes": 1148809216,
+        "samples": 31
+      },
+      "rendered-real-export": {
+        "peakPrivateBytes": 1287020544,
+        "peakWorkingSetBytes": 1143697408,
+        "samples": 136
+      },
+      "rendered-export-idle": {
+        "peakPrivateBytes": 1275293696,
+        "peakWorkingSetBytes": 1134211072,
+        "samples": 31
+      },
+      "rendered-minimized-idle": {
+        "peakPrivateBytes": 1275293696,
+        "peakWorkingSetBytes": 1134235648,
+        "samples": 100
+      },
+      "rendered-restored-idle": {
+        "peakPrivateBytes": 1294864384,
+        "peakWorkingSetBytes": 1131155456,
+        "samples": 31
+      },
+      "rendered-close-natural-idle": {
+        "peakPrivateBytes": 1299693568,
+        "peakWorkingSetBytes": 1137049600,
+        "samples": 52
+      }
+    }
+  },
+  "viewports": {
+    "first": {
+      "rendered-fit-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.12246302029583762,
+        "windowVisible": true
+      },
+      "rendered-100-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      },
+      "rendered-20-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.2,
+        "windowVisible": true
+      },
+      "rendered-100-return-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      }
+    },
+    "reopen": {
+      "rendered-fit-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.12246302029583762,
+        "windowVisible": true
+      },
+      "rendered-100-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      },
+      "rendered-20-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.2,
+        "windowVisible": true
+      },
+      "rendered-100-return-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      }
+    }
+  },
+  "newRawDecodes": 0,
+  "highlightResearchChanged": false
+}

@@ -1,0 +1,125 @@
+{
+  "parsedTrace": {
+    "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\baseline-traced-seven-guard\\allocations.nettrace",
+    "bytes": 16128930,
+    "sha256": "E510A7ADCDB43D558DAEF17DCF9032E23928BFC0FDA48E44E1489F52F28695E3",
+    "durationSeconds": 7,
+    "parserPackage": "TraceEvent 4.0.0"
+  },
+  "localArtifactRoot": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115",
+  "actualOutputs": [
+    {
+      "case": "final02-synthetic",
+      "run": "first",
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+      "bytes": 238769998,
+      "fileSha256": "A1D9C0312ECA21B500D8B7C4D6CC250BB1625583B52407A0532FE309607D2F5E",
+      "probe": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "2F43E0D4BBEE3E4A8F37C9AC29FC12937089B2D8FB835802003C26EBDD4DD1A0",
+        "normalizedWidth": 7752,
+        "normalizedHeight": 5184,
+        "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "width": 7752,
+        "height": 5184,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      }
+    },
+    {
+      "case": "final02-synthetic",
+      "run": "reopen",
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\reopen\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+      "bytes": 238769998,
+      "fileSha256": "A1D9C0312ECA21B500D8B7C4D6CC250BB1625583B52407A0532FE309607D2F5E",
+      "probe": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\reopen\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "2F43E0D4BBEE3E4A8F37C9AC29FC12937089B2D8FB835802003C26EBDD4DD1A0",
+        "normalizedWidth": 7752,
+        "normalizedHeight": 5184,
+        "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "width": 7752,
+        "height": 5184,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      }
+    },
+    {
+      "case": "final02-home-sony",
+      "run": "first",
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+      "bytes": 190856112,
+      "fileSha256": "49396938B9471C87C4FA3EE3EAAEA1552EA15B978C81C58A7772440CABC38B32",
+      "probe": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "55EDA952066E9D09E7C511BE38E40F3F36694FEB0C773739E7F88D10608531F4",
+        "normalizedWidth": 4688,
+        "normalizedHeight": 7028,
+        "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "width": 4688,
+        "height": 7028,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      }
+    },
+    {
+      "case": "final02-home-sony",
+      "run": "reopen",
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\reopen\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+      "bytes": 190856112,
+      "fileSha256": "49396938B9471C87C4FA3EE3EAAEA1552EA15B978C81C58A7772440CABC38B32",
+      "probe": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\reopen\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "55EDA952066E9D09E7C511BE38E40F3F36694FEB0C773739E7F88D10608531F4",
+        "normalizedWidth": 4688,
+        "normalizedHeight": 7028,
+        "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "width": 4688,
+        "height": 7028,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      }
+    }
+  ],
+  "note": "Full photos, generated TIFFs, raw nettraces, build binaries and prior failures remain local. Only receipts and the sampled allocation report are versioned."
+}

@@ -1,0 +1,22 @@
+{
+  "task": "HOME_SYNTHETIC_RGB16_R3_SIZE",
+  "inputKind": "already-rendered-tiff",
+  "inputPath": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+  "fileSha256": "5D3AEE67B02348F670E47EB94BBB44A16BAC3480311D38300F9C8D690DB49A0E",
+  "maximumNewRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "width": 7752,
+  "height": 5184,
+  "bitsPerChannel": 16,
+  "orientation": 1,
+  "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+  "inputDifference": "Company DSCF0347 unavailable. Synthetic RGB16 uses identical 7752x5184 storage dimensions, deterministic channel ramps and the existing authorized home TIFF sRGB ICC. Scene content, compression and camera history differ.",
+  "authorizedHomeTiff": {
+    "path": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+    "size": [
+      4688,
+      7028
+    ],
+    "orientation": 8
+  }
+}

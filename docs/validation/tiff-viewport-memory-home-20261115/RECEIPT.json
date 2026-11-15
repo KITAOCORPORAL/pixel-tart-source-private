@@ -1,0 +1,475 @@
+{
+  "status": "PASS_CONTROLLED_VISIBLE_TIFF_MEMORY_AND_OUTPUT_CONTRACT",
+  "recordedAt": "2026-11-15T16:03:15.850527+01:00",
+  "timezone": "Europe/Berlin",
+  "productSource": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+  "productCommits": [
+    "edd6d25e",
+    "e28074f1"
+  ],
+  "base": "bdc913c9463573247b9b6460f9a1102e40e74a31",
+  "unifiedSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "guardBytes": 2147483648,
+  "resourceSamplingMilliseconds": 50,
+  "newRawDecodes": 0,
+  "forcedGcInMeasuredTiffCycle": false,
+  "pixelFormulaChanges": false,
+  "iccPolicyChanges": false,
+  "highlightCandidate": "1bfdfbe9 remains unmerged research; no promotion or new RAW admission",
+  "cases": {
+    "final02-synthetic": {
+      "status": "PASS_CONTROLLED_VISIBLE_TIFF_CYCLE",
+      "checks": {
+        "width": true,
+        "height": true,
+        "bitsPerPixel": true,
+        "storedPixelFormat": true,
+        "storedPixelSha256": true,
+        "rgb48PixelSha256": true,
+        "iccProfiles": true,
+        "orientation": true,
+        "inputNormalizedPixelsMatch": true,
+        "inputNormalizedSizeMatch": true,
+        "outputOrientationNormalized": true,
+        "channelBitDepth16": true,
+        "iccMatchesInput": true,
+        "independentProcess": true,
+        "newRawDecodesZero": true,
+        "sourceUnchanged": true,
+        "firstGuardPassed": true,
+        "firstViewportVisible": true,
+        "firstActualSizeZoom": true,
+        "firstFitZoom": true,
+        "firstSavedClosed": true,
+        "reopenGuardPassed": true,
+        "reopenViewportVisible": true,
+        "reopenActualSizeZoom": true,
+        "reopenFitZoom": true,
+        "reopenSavedClosed": true
+      },
+      "peakMiB": {
+        "first": 1229.76,
+        "reopen": 1239.48
+      },
+      "stagePeaks50ms": {
+        "first": {
+          "startup": {
+            "peakPrivateBytes": 129191936,
+            "peakWorkingSetBytes": 157630464,
+            "samples": 31
+          },
+          "rendered-tiff-import": {
+            "peakPrivateBytes": 755134464,
+            "peakWorkingSetBytes": 610471936,
+            "samples": 28
+          },
+          "rendered-fit-idle": {
+            "peakPrivateBytes": 1269960704,
+            "peakWorkingSetBytes": 1131167744,
+            "samples": 31
+          },
+          "rendered-100-idle": {
+            "peakPrivateBytes": 1283854336,
+            "peakWorkingSetBytes": 1140301824,
+            "samples": 30
+          },
+          "rendered-20-idle": {
+            "peakPrivateBytes": 1283788800,
+            "peakWorkingSetBytes": 1140502528,
+            "samples": 31
+          },
+          "rendered-100-return-idle": {
+            "peakPrivateBytes": 1283788800,
+            "peakWorkingSetBytes": 1140584448,
+            "samples": 30
+          },
+          "rendered-real-export": {
+            "peakPrivateBytes": 1289494528,
+            "peakWorkingSetBytes": 1146630144,
+            "samples": 135
+          },
+          "rendered-session-save": {
+            "peakPrivateBytes": 1264160768,
+            "peakWorkingSetBytes": 1122598912,
+            "samples": 1
+          },
+          "rendered-export-idle": {
+            "peakPrivateBytes": 1265893376,
+            "peakWorkingSetBytes": 1126211584,
+            "samples": 30
+          },
+          "rendered-minimized-idle": {
+            "peakPrivateBytes": 1264775168,
+            "peakWorkingSetBytes": 1125126144,
+            "samples": 101
+          },
+          "rendered-restored-idle": {
+            "peakPrivateBytes": 1283432448,
+            "peakWorkingSetBytes": 1121673216,
+            "samples": 30
+          },
+          "rendered-close": {
+            "peakPrivateBytes": 1283358720,
+            "peakWorkingSetBytes": 1121644544,
+            "samples": 1
+          },
+          "rendered-close-natural-idle": {
+            "peakPrivateBytes": 1285025792,
+            "peakWorkingSetBytes": 1124200448,
+            "samples": 53
+          }
+        },
+        "reopen": {
+          "startup": {
+            "peakPrivateBytes": 133500928,
+            "peakWorkingSetBytes": 159588352,
+            "samples": 30
+          },
+          "rendered-session-open": {
+            "peakPrivateBytes": 778690560,
+            "peakWorkingSetBytes": 637714432,
+            "samples": 61
+          },
+          "rendered-fit-idle": {
+            "peakPrivateBytes": 1277464576,
+            "peakWorkingSetBytes": 1136361472,
+            "samples": 30
+          },
+          "rendered-100-idle": {
+            "peakPrivateBytes": 1294499840,
+            "peakWorkingSetBytes": 1149300736,
+            "samples": 30
+          },
+          "rendered-20-idle": {
+            "peakPrivateBytes": 1293463552,
+            "peakWorkingSetBytes": 1148727296,
+            "samples": 30
+          },
+          "rendered-100-return-idle": {
+            "peakPrivateBytes": 1293266944,
+            "peakWorkingSetBytes": 1148809216,
+            "samples": 31
+          },
+          "rendered-real-export": {
+            "peakPrivateBytes": 1287020544,
+            "peakWorkingSetBytes": 1143697408,
+            "samples": 136
+          },
+          "rendered-export-idle": {
+            "peakPrivateBytes": 1275293696,
+            "peakWorkingSetBytes": 1134211072,
+            "samples": 31
+          },
+          "rendered-minimized-idle": {
+            "peakPrivateBytes": 1275293696,
+            "peakWorkingSetBytes": 1134235648,
+            "samples": 100
+          },
+          "rendered-restored-idle": {
+            "peakPrivateBytes": 1294864384,
+            "peakWorkingSetBytes": 1131155456,
+            "samples": 31
+          },
+          "rendered-close-natural-idle": {
+            "peakPrivateBytes": 1299693568,
+            "peakWorkingSetBytes": 1137049600,
+            "samples": 52
+          }
+        }
+      },
+      "input": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+        "orientation": 1,
+        "storedPixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "normalizedWidth": 7752,
+        "normalizedHeight": 5184,
+        "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "width": 7752,
+        "height": 5184,
+        "storedPixelFormat": "Rgb48",
+        "bitsPerPixel": 48,
+        "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      },
+      "output": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-synthetic\\first\\export\\synthetic-rgb16-7752x5184_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "2F43E0D4BBEE3E4A8F37C9AC29FC12937089B2D8FB835802003C26EBDD4DD1A0",
+        "normalizedWidth": 7752,
+        "normalizedHeight": 5184,
+        "normalizedRgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "width": 7752,
+        "height": 5184,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      },
+      "inputDifference": "Company DSCF0347 unavailable. Synthetic RGB16 uses identical 7752x5184 storage dimensions, deterministic channel ramps and the existing authorized home TIFF sRGB ICC. Scene content, compression and camera history differ.",
+      "allExportSourcesContentBound": true,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    "final02-home-sony": {
+      "status": "PASS_CONTROLLED_VISIBLE_TIFF_CYCLE",
+      "checks": {
+        "width": true,
+        "height": true,
+        "bitsPerPixel": true,
+        "storedPixelFormat": true,
+        "storedPixelSha256": true,
+        "rgb48PixelSha256": true,
+        "iccProfiles": true,
+        "orientation": true,
+        "inputNormalizedPixelsMatch": true,
+        "inputNormalizedSizeMatch": true,
+        "outputOrientationNormalized": true,
+        "channelBitDepth16": true,
+        "iccMatchesInput": true,
+        "independentProcess": true,
+        "newRawDecodesZero": true,
+        "sourceUnchanged": true,
+        "firstGuardPassed": true,
+        "firstViewportVisible": true,
+        "firstActualSizeZoom": true,
+        "firstFitZoom": true,
+        "firstSavedClosed": true,
+        "reopenGuardPassed": true,
+        "reopenViewportVisible": true,
+        "reopenActualSizeZoom": true,
+        "reopenFitZoom": true,
+        "reopenSavedClosed": true
+      },
+      "peakMiB": {
+        "first": 1231.16,
+        "reopen": 1244.32
+      },
+      "stagePeaks50ms": {
+        "first": {
+          "startup": {
+            "peakPrivateBytes": 128217088,
+            "peakWorkingSetBytes": 154677248,
+            "samples": 30
+          },
+          "rendered-tiff-import": {
+            "peakPrivateBytes": 857264128,
+            "peakWorkingSetBytes": 739753984,
+            "samples": 28
+          },
+          "rendered-fit-idle": {
+            "peakPrivateBytes": 1285459968,
+            "peakWorkingSetBytes": 1170403328,
+            "samples": 30
+          },
+          "rendered-100-idle": {
+            "peakPrivateBytes": 1284796416,
+            "peakWorkingSetBytes": 1173405696,
+            "samples": 31
+          },
+          "rendered-20-idle": {
+            "peakPrivateBytes": 1284730880,
+            "peakWorkingSetBytes": 1173643264,
+            "samples": 30
+          },
+          "rendered-100-return-idle": {
+            "peakPrivateBytes": 1284808704,
+            "peakWorkingSetBytes": 1173782528,
+            "samples": 30
+          },
+          "rendered-real-export": {
+            "peakPrivateBytes": 1290969088,
+            "peakWorkingSetBytes": 1180467200,
+            "samples": 163
+          },
+          "rendered-session-save": {
+            "peakPrivateBytes": 1257377792,
+            "peakWorkingSetBytes": 1146556416,
+            "samples": 1
+          },
+          "rendered-export-idle": {
+            "peakPrivateBytes": 1261957120,
+            "peakWorkingSetBytes": 1154674688,
+            "samples": 30
+          },
+          "rendered-minimized-idle": {
+            "peakPrivateBytes": 1261846528,
+            "peakWorkingSetBytes": 1154723840,
+            "samples": 101
+          },
+          "rendered-restored-idle": {
+            "peakPrivateBytes": 1280606208,
+            "peakWorkingSetBytes": 1150627840,
+            "samples": 30
+          },
+          "rendered-close": {
+            "peakPrivateBytes": 1280831488,
+            "peakWorkingSetBytes": 1150738432,
+            "samples": 1
+          },
+          "rendered-close-natural-idle": {
+            "peakPrivateBytes": 1283248128,
+            "peakWorkingSetBytes": 1154265088,
+            "samples": 52
+          }
+        },
+        "reopen": {
+          "startup": {
+            "peakPrivateBytes": 132571136,
+            "peakWorkingSetBytes": 159838208,
+            "samples": 31
+          },
+          "rendered-session-open": {
+            "peakPrivateBytes": 877948928,
+            "peakWorkingSetBytes": 763719680,
+            "samples": 55
+          },
+          "rendered-fit-idle": {
+            "peakPrivateBytes": 1294598144,
+            "peakWorkingSetBytes": 1178628096,
+            "samples": 31
+          },
+          "rendered-100-idle": {
+            "peakPrivateBytes": 1295327232,
+            "peakWorkingSetBytes": 1185193984,
+            "samples": 30
+          },
+          "rendered-20-idle": {
+            "peakPrivateBytes": 1295327232,
+            "peakWorkingSetBytes": 1185329152,
+            "samples": 30
+          },
+          "rendered-100-return-idle": {
+            "peakPrivateBytes": 1295265792,
+            "peakWorkingSetBytes": 1185423360,
+            "samples": 31
+          },
+          "rendered-real-export": {
+            "peakPrivateBytes": 1287286784,
+            "peakWorkingSetBytes": 1178345472,
+            "samples": 161
+          },
+          "rendered-export-idle": {
+            "peakPrivateBytes": 1281548288,
+            "peakWorkingSetBytes": 1174683648,
+            "samples": 30
+          },
+          "rendered-minimized-idle": {
+            "peakPrivateBytes": 1281548288,
+            "peakWorkingSetBytes": 1174704128,
+            "samples": 100
+          },
+          "rendered-restored-idle": {
+            "peakPrivateBytes": 1302118400,
+            "peakWorkingSetBytes": 1172570112,
+            "samples": 31
+          },
+          "rendered-close": {
+            "peakPrivateBytes": 1302388736,
+            "peakWorkingSetBytes": 1172639744,
+            "samples": 1
+          },
+          "rendered-close-natural-idle": {
+            "peakPrivateBytes": 1304768512,
+            "peakWorkingSetBytes": 1176244224,
+            "samples": 51
+          }
+        }
+      },
+      "input": {
+        "path": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+        "orientation": 8,
+        "storedPixelSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+        "normalizedWidth": 4688,
+        "normalizedHeight": 7028,
+        "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "width": 7028,
+        "height": 4688,
+        "storedPixelFormat": "Rgb48",
+        "bitsPerPixel": 48,
+        "rgb48PixelSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      },
+      "output": {
+        "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+        "orientation": 1,
+        "storedPixelSha256": "55EDA952066E9D09E7C511BE38E40F3F36694FEB0C773739E7F88D10608531F4",
+        "normalizedWidth": 4688,
+        "normalizedHeight": 7028,
+        "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "width": 4688,
+        "height": 7028,
+        "storedPixelFormat": "Rgba64",
+        "bitsPerPixel": 64,
+        "rgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "iccProfiles": [
+          {
+            "bytes": 3144,
+            "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+          }
+        ],
+        "rawDecodeCalls": 0,
+        "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+      },
+      "inputDifference": "Actual authorized home Sony derivative; company Fuji DSCF0347 is unavailable. Storage dimensions 7028x4688, orientation 8; use synthetic 7752x5184 input separately for exact company-size stress. Already rendered sRGB16, not sensor-linear.",
+      "allExportSourcesContentBound": true,
+      "nativeRawLoadedAtSnapshots": false
+    }
+  },
+  "targetedTests": {
+    "total": 15,
+    "passed": 15,
+    "failed": []
+  },
+  "expandedTests": {
+    "total": 33,
+    "passed": 32,
+    "failed": [
+      {
+        "name": "SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘vm.ActiveTarget!.RawDefinition’。 sRGB 曝光未提交，保留此前版本：专业RAW局部层当前支持白平衡、影调、色阶、曲线、色彩平衡、肤色和基础预设；不支持参考匹配或空间细节层。"
+      }
+    ]
+  },
+  "unmodifiedBaselineKnownFailure": {
+    "total": 1,
+    "passed": 0,
+    "failed": [
+      {
+        "name": "SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘vm.ActiveTarget!.RawDefinition’。 sRGB 曝光未提交，保留此前版本：专业RAW局部层当前支持白平衡、影调、色阶、曲线、色彩平衡、肤色和基础预设；不支持参考匹配或空间细节层。"
+      }
+    ]
+  },
+  "patch": {
+    "file": "TIFF_MEMORY_MINIMAL.patch",
+    "sha256": "CAEF4EAAD8CE1D5BD1C8B67D00BC69B870487CBA2479C9B91333594EAF0544CE",
+    "applyCheckOnUnmodifiedBaseline": true
+  },
+  "authority": "Controlled actual WPF visible photo-page classes and production commands, real TIFF exports and independent process reopen; offscreen visible window and fixed dialogs, not manual desktop/file-picker acceptance.",
+  "remainingBoundaries": [
+    "Company DSCF0347 photo was unavailable; exact dimensions covered by synthetic RGB16 and existing authorized Sony TIFF tested separately.",
+    "Baseline sRGB exposure test remains failing with an identical error on unmodified bdc913c9. This work does not promote that path or the highlight candidate.",
+    "Process private committed memory remains elevated after natural close; no forced GC or long-running multi-project leak claim.",
+    "2 GiB is the existing 50 ms observer guard, not an OS job-object hard allocation limit."
+  ]
+}

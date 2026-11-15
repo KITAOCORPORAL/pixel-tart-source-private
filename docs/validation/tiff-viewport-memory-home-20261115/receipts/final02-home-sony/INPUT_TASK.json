@@ -1,0 +1,10 @@
+{
+  "task": "AUTHORIZED_HOME_SONY_RGB16",
+  "inputKind": "already-rendered-tiff",
+  "inputPath": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+  "fileSha256": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+  "maximumNewRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "authorization": "Existing frozen DSC08015 derivative, SHA exactly matches PortraitHighlights-20261111/input-manifest.json",
+  "inputDifference": "Actual authorized home Sony derivative; company Fuji DSCF0347 is unavailable. Storage dimensions 7028x4688, orientation 8; use synthetic 7752x5184 input separately for exact company-size stress. Already rendered sRGB16, not sensor-linear."
+}

@@ -1,0 +1,2973 @@
+{
+  "source": "allocations.nettrace",
+  "profile": "gc-verbose",
+  "traceEventPackage": "4.0.0",
+  "authority": "Sampled GCAllocationTick events; sampled weights are not a complete allocation census",
+  "missingStacks": 0,
+  "totals": [
+    {
+      "type": "System.Single[]",
+      "count": 93,
+      "sampledBytes": 536811976,
+      "maxObjectSize": 482236440
+    },
+    {
+      "type": "System.Byte[]",
+      "count": 34,
+      "sampledBytes": 312871064,
+      "maxObjectSize": 241118232
+    },
+    {
+      "type": "System.Double[]",
+      "count": 236,
+      "sampledBytes": 109396824,
+      "maxObjectSize": 1198136
+    },
+    {
+      "type": "RAWSelectionAssistant.Core.Services.Color.ColorVector3[]",
+      "count": 215,
+      "sampledBytes": 91233768,
+      "maxObjectSize": 424376
+    },
+    {
+      "type": "RAWSelectionAssistant.Core.Services.Projects.OklabColor[]",
+      "count": 1,
+      "sampledBytes": 9474072,
+      "maxObjectSize": 9474080
+    },
+    {
+      "type": "System.Windows.LocalValueEntry[]",
+      "count": 83,
+      "sampledBytes": 8838728,
+      "maxObjectSize": 568
+    },
+    {
+      "type": "System.String",
+      "count": 69,
+      "sampledBytes": 7349408,
+      "maxObjectSize": 192
+    },
+    {
+      "type": "System.Xaml.XamlNode[]",
+      "count": 56,
+      "sampledBytes": 5970408,
+      "maxObjectSize": 20072
+    },
+    {
+      "type": "System.Windows.EffectiveValueEntry[]",
+      "count": 51,
+      "sampledBytes": 5422512,
+      "maxObjectSize": 920
+    },
+    {
+      "type": "System.Char[]",
+      "count": 33,
+      "sampledBytes": 3573104,
+      "maxObjectSize": 65560
+    },
+    {
+      "type": "System.Windows.InheritablePropertyChangeInfo[]",
+      "count": 25,
+      "sampledBytes": 2656600,
+      "maxObjectSize": 696
+    },
+    {
+      "type": "System.WeakReference",
+      "count": 24,
+      "sampledBytes": 2554608,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Object[]",
+      "count": 22,
+      "sampledBytes": 2353832,
+      "maxObjectSize": 65280
+    },
+    {
+      "type": "System.Windows.ResourceReferenceExpression[]",
+      "count": 19,
+      "sampledBytes": 2024768,
+      "maxObjectSize": 184
+    },
+    {
+      "type": "System.Reflection.Metadata.TypeName",
+      "count": 16,
+      "sampledBytes": 1709480,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Int32[]",
+      "count": 15,
+      "sampledBytes": 1626032,
+      "maxObjectSize": 49200
+    },
+    {
+      "type": "System.Action",
+      "count": 15,
+      "sampledBytes": 1590960,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlScannerNode",
+      "count": 14,
+      "sampledBytes": 1492544,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Windows.Documents.TextPointer",
+      "count": 14,
+      "sampledBytes": 1489136,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Windows.ModifiedValue",
+      "count": 14,
+      "sampledBytes": 1487480,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Xaml.LineInfo",
+      "count": 12,
+      "sampledBytes": 1278080,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "MS.Internal.Xaml.Context.ObjectWriterFrame",
+      "count": 11,
+      "sampledBytes": 1173928,
+      "maxObjectSize": 128
+    },
+    {
+      "type": "System.Windows.ResourcesChangedEventArgs",
+      "count": 11,
+      "sampledBytes": 1171320,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "Entry",
+      "count": 9,
+      "sampledBytes": 956624,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "MS.Utility.FrugalObjectList\u00601[System.Windows.DependencyProperty][]",
+      "count": 9,
+      "sampledBytes": 952616,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "System.Windows.DeferredAppResourceReference",
+      "count": 9,
+      "sampledBytes": 950312,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Text.StringBuilder",
+      "count": 8,
+      "sampledBytes": 853176,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Windows.Data.BindingExpression",
+      "count": 8,
+      "sampledBytes": 851264,
+      "maxObjectSize": 144
+    },
+    {
+      "type": "Entry[System.Object,System.Object][]",
+      "count": 8,
+      "sampledBytes": 849464,
+      "maxObjectSize": 16408
+    },
+    {
+      "type": "System.EventHandler\u00601[System.ComponentModel.PropertyChangedEventArgs]",
+      "count": 8,
+      "sampledBytes": 847000,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "EventKey",
+      "count": 7,
+      "sampledBytes": 745960,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Double",
+      "count": 7,
+      "sampledBytes": 745432,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Xaml.XamlObjectWriterSettings",
+      "count": 6,
+      "sampledBytes": 640864,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Collections.Generic.Stack\u00601[MS.Utility.FrugalObjectList\u00601[System.Windows.DependencyProperty]]",
+      "count": 6,
+      "sampledBytes": 639112,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "Entry[MS.Utility.ItemStructList\u00601[System.Windows.ChildValueLookup]][]",
+      "count": 6,
+      "sampledBytes": 638616,
+      "maxObjectSize": 792
+    },
+    {
+      "type": "\u003C\u003Ec__DisplayClass47_0",
+      "count": 6,
+      "sampledBytes": 638320,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Controls.TextBlock",
+      "count": 6,
+      "sampledBytes": 637792,
+      "maxObjectSize": 464
+    },
+    {
+      "type": "System.Collections.ArrayList",
+      "count": 5,
+      "sampledBytes": 539576,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Reflection.ParameterInfo[]",
+      "count": 5,
+      "sampledBytes": 535888,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "MS.Internal.Data.PropertyPathWorker",
+      "count": 5,
+      "sampledBytes": 535464,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Windows.PropertyPath",
+      "count": 5,
+      "sampledBytes": 534208,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "\u003CLogicStream_Attribute\u003Ed__31",
+      "count": 5,
+      "sampledBytes": 532832,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Internal.Xaml.Context.XamlParserFrame",
+      "count": 5,
+      "sampledBytes": 532320,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "MS.Internal.Xaml.Context.ObjectWriterContext",
+      "count": 5,
+      "sampledBytes": 532280,
+      "maxObjectSize": 128
+    },
+    {
+      "type": "MS.Internal.Data.SourceValueInfo[]",
+      "count": 5,
+      "sampledBytes": 529304,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.EventHandler",
+      "count": 5,
+      "sampledBytes": 528928,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Utility.FrugalObjectList\u00601[System.Windows.DependencyProperty]",
+      "count": 5,
+      "sampledBytes": 528856,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "Entry[System.Xaml.XamlMember][]",
+      "count": 4,
+      "sampledBytes": 428864,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[System.Windows.RoutedEventHandlerInfo]",
+      "count": 4,
+      "sampledBytes": 428016,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "Enumerator[System.Windows.Controls.ItemsControl\u002BItemInfo]",
+      "count": 4,
+      "sampledBytes": 426400,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "RAWSelectionAssistant.Views.StudioNumericEditor",
+      "count": 4,
+      "sampledBytes": 426160,
+      "maxObjectSize": 464
+    },
+    {
+      "type": "MS.Internal.Data.WeakDependencySource[]",
+      "count": 4,
+      "sampledBytes": 426144,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlAttribute[]",
+      "count": 4,
+      "sampledBytes": 425952,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "Frame",
+      "count": 4,
+      "sampledBytes": 425936,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Windows.ChildValueLookup[]",
+      "count": 4,
+      "sampledBytes": 425896,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "\u003CP_ElementContent\u003Ed__19",
+      "count": 4,
+      "sampledBytes": 425848,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "System.Reflection.CustomAttributeRecord[]",
+      "count": 4,
+      "sampledBytes": 424424,
+      "maxObjectSize": 504
+    },
+    {
+      "type": "System.Reflection.RuntimeMethodInfo",
+      "count": 4,
+      "sampledBytes": 424208,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "MS.Utility.SixItemList\u00601[System.Windows.DependencyProperty]",
+      "count": 4,
+      "sampledBytes": 423872,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "MS.Internal.Data.ClrBindingWorker",
+      "count": 4,
+      "sampledBytes": 422576,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Reflection.Emit.DynamicILGenerator",
+      "count": 4,
+      "sampledBytes": 419816,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "System.Signature",
+      "count": 4,
+      "sampledBytes": 417336,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "Entry[System.String,System.String][]",
+      "count": 3,
+      "sampledBytes": 344800,
+      "maxObjectSize": 22080
+    },
+    {
+      "type": "System.EventHandler\u00601[System.Collections.Specialized.NotifyCollectionChangedEventArgs]",
+      "count": 3,
+      "sampledBytes": 322688,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "Listener[]",
+      "count": 3,
+      "sampledBytes": 322592,
+      "maxObjectSize": 22280
+    },
+    {
+      "type": "IEnumerableWhereIterator\u00601[RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources\u002BEntry]",
+      "count": 3,
+      "sampledBytes": 322104,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.DescendentsWalker\u00601[System.Windows.InheritablePropertyChangeInfo]",
+      "count": 3,
+      "sampledBytes": 321736,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Windows.Markup.WpfXamlFrame",
+      "count": 3,
+      "sampledBytes": 319848,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "MS.Utility.SixObjectMap",
+      "count": 3,
+      "sampledBytes": 319816,
+      "maxObjectSize": 120
+    },
+    {
+      "type": "System.Windows.Thickness",
+      "count": 3,
+      "sampledBytes": 319816,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Windows.Style",
+      "count": 3,
+      "sampledBytes": 319800,
+      "maxObjectSize": 184
+    },
+    {
+      "type": "System.Collections.Specialized.NotifyCollectionChangedEventHandler",
+      "count": 3,
+      "sampledBytes": 319800,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Controls.TextChangedEventArgs",
+      "count": 3,
+      "sampledBytes": 319800,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.PropertyValue[]",
+      "count": 3,
+      "sampledBytes": 319576,
+      "maxObjectSize": 664
+    },
+    {
+      "type": "\u003CLogicStream_CheckForStartGetCollectionFromMember\u003Ed__50",
+      "count": 3,
+      "sampledBytes": 319336,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlText",
+      "count": 3,
+      "sampledBytes": 319328,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "MS.Utility.FrugalMap",
+      "count": 3,
+      "sampledBytes": 319312,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Windows.DependencySource",
+      "count": 3,
+      "sampledBytes": 319288,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "GridChildrenCollectionEnumeratorSimple",
+      "count": 3,
+      "sampledBytes": 319288,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "ItemBlock",
+      "count": 3,
+      "sampledBytes": 319208,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Setter",
+      "count": 3,
+      "sampledBytes": 319048,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlQualifiedName",
+      "count": 3,
+      "sampledBytes": 318800,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.SZGenericArrayEnumerator\u00601[System.Xaml.XamlType]",
+      "count": 3,
+      "sampledBytes": 318784,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Controls.ColumnDefinition",
+      "count": 3,
+      "sampledBytes": 318776,
+      "maxObjectSize": 168
+    },
+    {
+      "type": "System.Reflection.RuntimePropertyInfo",
+      "count": 3,
+      "sampledBytes": 318048,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "System.Windows.Controls.Grid",
+      "count": 3,
+      "sampledBytes": 315944,
+      "maxObjectSize": 392
+    },
+    {
+      "type": "RAWSelectionAssistant.Core.Services.Projects.ColorSpacePoint[]",
+      "count": 1,
+      "sampledBytes": 260592,
+      "maxObjectSize": 162272
+    },
+    {
+      "type": "System.Reflection.RuntimeConstructorInfo[]",
+      "count": 2,
+      "sampledBytes": 219920,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "System.IntPtr[]",
+      "count": 2,
+      "sampledBytes": 216904,
+      "maxObjectSize": 1456
+    },
+    {
+      "type": "Node[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo],System.Text.Json.Serialization.Metadata.ReflectionEmitCachingMemberAccessor\u002BCache\u00601\u002BCacheEntry[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo]]]",
+      "count": 2,
+      "sampledBytes": 216456,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Controls.RowDefinition",
+      "count": 2,
+      "sampledBytes": 214904,
+      "maxObjectSize": 168
+    },
+    {
+      "type": "System.Func\u00602[RAWSelectionAssistant.Core.Services.Projects.ColorAdjustmentStackNode,System.Boolean]",
+      "count": 2,
+      "sampledBytes": 213360,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlScannerFrame",
+      "count": 2,
+      "sampledBytes": 213256,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Xaml.MS.Impl.XmlNsInfo[]",
+      "count": 2,
+      "sampledBytes": 213256,
+      "maxObjectSize": 520
+    },
+    {
+      "type": "System.Xaml.XamlXmlReader",
+      "count": 2,
+      "sampledBytes": 213248,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "\u003CP_Element\u003Ed__12",
+      "count": 2,
+      "sampledBytes": 213240,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Collections.Generic.HashSet\u00601[System.Xaml.XamlMember]",
+      "count": 2,
+      "sampledBytes": 213232,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Controls.Slider",
+      "count": 2,
+      "sampledBytes": 213216,
+      "maxObjectSize": 376
+    },
+    {
+      "type": "MS.Internal.Data.WeakDependencySource",
+      "count": 2,
+      "sampledBytes": 213216,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.DependencyProperty[]",
+      "count": 2,
+      "sampledBytes": 213208,
+      "maxObjectSize": 144
+    },
+    {
+      "type": "ReadOnlyArrayList",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Data.Binding",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Dependent",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.EventHandler\u00601[System.Xaml.XamlObjectEventArgs]",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Internal.Text.TextInterface.Font",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Windows.Controls.Border",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 336
+    },
+    {
+      "type": "MS.Utility.ThreeObjectMap",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "Entry[System.Windows.Controls.ItemsControl\u002BItemInfo,System.Windows.Controls.ItemsControl\u002BItemInfo][]",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "ItemInfo",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Collections.Generic.SortedList\u00602[System.Int32,System.Windows.Controls.TextChange]",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.RoutedPropertyChangedEventArgs\u00601[System.Double]",
+      "count": 2,
+      "sampledBytes": 213200,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "ServiceProviderWrapper",
+      "count": 2,
+      "sampledBytes": 212976,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.TriggerCollection",
+      "count": 2,
+      "sampledBytes": 212976,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "NamespaceDeclaration[]",
+      "count": 2,
+      "sampledBytes": 212968,
+      "maxObjectSize": 216
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlPropertyName",
+      "count": 2,
+      "sampledBytes": 212968,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Xaml.MS.Impl.PositionalParameterDescriptor[]",
+      "count": 2,
+      "sampledBytes": 212960,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.IndexerParameterInfo[]",
+      "count": 2,
+      "sampledBytes": 212944,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "\u003C\u003Ec__DisplayClass29_0",
+      "count": 2,
+      "sampledBytes": 212912,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "EventKey[]",
+      "count": 2,
+      "sampledBytes": 212792,
+      "maxObjectSize": 19392
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlAttribute",
+      "count": 2,
+      "sampledBytes": 212712,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.XamlScannerNode[]",
+      "count": 2,
+      "sampledBytes": 212696,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "MS.Internal.TokenizerHelper",
+      "count": 2,
+      "sampledBytes": 212688,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[System.Windows.DependencyProperty]",
+      "count": 2,
+      "sampledBytes": 212688,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Int32[][]",
+      "count": 2,
+      "sampledBytes": 212688,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "MS.Internal.Data.ObjectRefArgs",
+      "count": 2,
+      "sampledBytes": 212672,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "\u003CP_PositionalArgs\u003Ed__12",
+      "count": 2,
+      "sampledBytes": 212456,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Xaml.HandleAttributeCallback",
+      "count": 2,
+      "sampledBytes": 212200,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Collections.Generic.List\u00601[System.Xaml.AmbientPropertyValue]",
+      "count": 2,
+      "sampledBytes": 212176,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.DependencySource[]",
+      "count": 2,
+      "sampledBytes": 211720,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Media.AncestorChangedEventArgs",
+      "count": 2,
+      "sampledBytes": 211216,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "RuntimeTypeCache",
+      "count": 2,
+      "sampledBytes": 210952,
+      "maxObjectSize": 168
+    },
+    {
+      "type": "Container[System.Object,System.Object]",
+      "count": 2,
+      "sampledBytes": 209360,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Reflection.Emit.DynamicResolver",
+      "count": 2,
+      "sampledBytes": 205576,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "Bucket[]",
+      "count": 1,
+      "sampledBytes": 121616,
+      "maxObjectSize": 56016
+    },
+    {
+      "type": "Entry[System.Windows.DependencyProperty\u002BFromNameKey,System.Windows.DependencyProperty][]",
+      "count": 1,
+      "sampledBytes": 115152,
+      "maxObjectSize": 17264
+    },
+    {
+      "type": "VolatileNode[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo],System.Text.Json.Serialization.Metadata.ReflectionEmitCachingMemberAccessor\u002BCache\u00601\u002BCacheEntry[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo]]][]",
+      "count": 1,
+      "sampledBytes": 111608,
+      "maxObjectSize": 32416
+    },
+    {
+      "type": "System.RuntimeMethodInfoStub",
+      "count": 1,
+      "sampledBytes": 110584,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Windows.Media.SafeProfileHandle",
+      "count": 1,
+      "sampledBytes": 110240,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Baml2006.WpfKnownType",
+      "count": 1,
+      "sampledBytes": 110120,
+      "maxObjectSize": 192
+    },
+    {
+      "type": "MS.Internal.Controls.ContentModelTreeEnumerator",
+      "count": 1,
+      "sampledBytes": 110048,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.SourceItem[]",
+      "count": 1,
+      "sampledBytes": 109776,
+      "maxObjectSize": 680
+    },
+    {
+      "type": "System.Reflection.Emit.DynamicScope",
+      "count": 1,
+      "sampledBytes": 109160,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Diagnostics.Tracing.EventParameterInfo[]",
+      "count": 1,
+      "sampledBytes": 108768,
+      "maxObjectSize": 312
+    },
+    {
+      "type": "System.Windows.Controls.Primitives.DragCompletedEventHandler",
+      "count": 1,
+      "sampledBytes": 108768,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Reflection.RuntimePropertyInfo[]",
+      "count": 1,
+      "sampledBytes": 107000,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "ContingentProperties",
+      "count": 1,
+      "sampledBytes": 106776,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Xaml.XamlMember[]",
+      "count": 1,
+      "sampledBytes": 106640,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Func\u00602[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo],System.Func\u00602[System.Object[],Kitao.InstantFilm.Research.CandidateProvenance]]",
+      "count": 1,
+      "sampledBytes": 106632,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "NodeData[]",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "System.Func\u00602[System.String,System.String]",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "Entry[]",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 536
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.MeScanner",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "Entry[System.String,System.Object][]",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 192
+    },
+    {
+      "type": "System.Windows.Controls.ControlTemplate",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 256
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[System.Windows.ChildPropertyDependent]",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "\u003CP_ElementBody\u003Ed__15",
+      "count": 1,
+      "sampledBytes": 106624,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "Entry[System.Windows.TriggerSourceRecord][]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "StackOfFrames",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Xaml.NameScope",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "Enumerator[RAWSelectionAssistant.Core.Services.Projects.ColorStudioToolParameter]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Controls.CheckBox",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 336
+    },
+    {
+      "type": "SourceValueState[]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Xaml.ReaderMultiIndexDelegate",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "System.Collections.Generic.List\u00601[MS.Internal.Xaml.Parser.XamlAttribute]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Trigger",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 176
+    },
+    {
+      "type": "System.Windows.SetterBaseCollection",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Xaml.Schema.XamlTypeName",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "Entry[System.Int32,System.Type][]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 192
+    },
+    {
+      "type": "System.Xaml.XamlObjectEventArgs",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.BindingValueCache",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Shapes.Path",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 336
+    },
+    {
+      "type": "System.Windows.RoutedEventHandler",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Xaml.XamlType[]",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.EventHandlersStore",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Xaml.XamlNodeAddDelegate",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Controls.UIElementCollection",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.TemplateContent",
+      "count": 1,
+      "sampledBytes": 106616,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "System.Windows.Baml2006.DeferredBinaryDeserializerExtension",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.ComponentModel.ReflectPropertyDescriptor",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 248
+    },
+    {
+      "type": "MS.Internal.Data.ExplicitObjectRef",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Windows.Documents.TextTreeTextNode",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "OfTypeIterator\u00601[System.Windows.Controls.TextBlock]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Xml.XmlTextReaderImpl",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 552
+    },
+    {
+      "type": "UriInfo",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Windows.DependencyPropertyChangedEventHandler",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.EventHandler\u00601[System.Windows.RoutedEventArgs]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Media.VisualCollection",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "TypeConverterContext",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "Enumerator[MS.Internal.DpiUtil\u002BHwndDpiInfo,MS.Win32.HwndWrapper]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Reflection.MemberInfo[]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Threading.Tasks.TaskCompletionSource\u00601[System.Object]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "Entry[System.String][]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 616
+    },
+    {
+      "type": "System.Threading.ContextCallback",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Documents.TextContainerChangedEventHandler",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "RAWSelectionAssistant.Views.StudioColorBalanceWheel",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 352
+    },
+    {
+      "type": "System.Windows.Controls.DockPanel",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 352
+    },
+    {
+      "type": "FullTextLine",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 240
+    },
+    {
+      "type": "System.Windows.SizeChangedInfo",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Runtime.InteropServices.GCHandle[]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "PathParameterCollection",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "MS.Internal.TextFormatting.LSRun[]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Collections.Generic.List\u00601[System.Object]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Media.Typeface",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.Media.GlyphRun",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "System.Windows.Media.VisualDrawingContext",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "Entry[MS.Internal.Data.AccessorTable\u002BAccessorTableKey,MS.Internal.Data.AccessorInfo][]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 3584
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[System.Windows.Dependent]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Reflection.RuntimeMethodInfo[]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 536
+    },
+    {
+      "type": "System.ComponentModel.PropertyChangedEventArgs",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Windows.Documents.TextTreeRootTextBlock",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.EventHandler\u00601[System.ComponentModel.CurrentChangingEventArgs]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Threading.DispatcherOperationCallback",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[MS.Internal.Data.IndexerParamInfo]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Collections.Generic.List\u00601[System.Windows.Controls.ItemsControl\u002BItemInfo]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.EventHandler\u00601[MS.Internal.Data.BindingValueChangedEventArgs]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "BatchRemoveHelper",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Func\u00602[System.Windows.Controls.Expander,System.Boolean]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Documents.TextTreeFixupNode",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Threading.Tasks.Task\u00601[System.Object]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "System.Data.DataTablePropertyDescriptor",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "MS.Utility.FrugalObjectList\u00601[MS.Internal.Data.IndexerParamInfo]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "ItemInfo[]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "\u003C\u003Ec__DisplayClass26_0",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Func\u00602[Kitao.InstantFilm.Research.CandidateProfile,System.Boolean]",
+      "count": 1,
+      "sampledBytes": 106600,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Func\u00602[RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources\u002BEntry,System.Boolean]",
+      "count": 1,
+      "sampledBytes": 106528,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "\u003CP_StartElement\u003Ed__14",
+      "count": 1,
+      "sampledBytes": 106368,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Xaml.AmbientPropertyValue[]",
+      "count": 1,
+      "sampledBytes": 106360,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "\u003CP_Arguments\u003Ed__11",
+      "count": 1,
+      "sampledBytes": 106360,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "MemberInfoCache\u00601[System.RuntimeType]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Xaml.ReaderDelegate",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "DictionaryNode",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "Task",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "MS.Utility.SixItemList\u00601[System.Windows.ContainerDependent]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 120
+    },
+    {
+      "type": "ListenerList\u00601[System.Collections.Specialized.NotifyCollectionChangedEventArgs]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "IEnumerableWhereIterator\u00601[RAWSelectionAssistant.Core.Services.Projects.ColorStudioToolParameter]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Reflection.MemberInfo[][]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "NodeData",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 128
+    },
+    {
+      "type": "MS.Utility.SingleItemList\u00601[System.Windows.WeakEventManager\u002BListener]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Documents.TextSegment[]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Markup.XamlSetTypeConverterEventArgs",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Windows.Media.Stretch",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "MS.Internal.Xaml.Runtime.PartialTrustTolerantRuntime",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.Media.RenderData",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "System.Collections.Generic.Dictionary\u00602[System.String,System.Xaml.XamlType]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Windows.Threading.PriorityItem\u00601[System.Windows.Threading.DispatcherOperation]",
+      "count": 1,
+      "sampledBytes": 106344,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Documents.TextContainer",
+      "count": 1,
+      "sampledBytes": 106328,
+      "maxObjectSize": 112
+    },
+    {
+      "type": "System.Xaml.MS.Impl.AssemblyNamespacePair[]",
+      "count": 1,
+      "sampledBytes": 106320,
+      "maxObjectSize": 312
+    },
+    {
+      "type": "System.Reflection.RuntimeAssembly[]",
+      "count": 1,
+      "sampledBytes": 106232,
+      "maxObjectSize": 368
+    },
+    {
+      "type": "System.Windows.RoutedEventHandlerInfo[]",
+      "count": 1,
+      "sampledBytes": 106200,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Markup.ParserContext",
+      "count": 1,
+      "sampledBytes": 106112,
+      "maxObjectSize": 176
+    },
+    {
+      "type": "System.Reflection.RuntimeMethodBody",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Baml2006.Baml2006ReaderContext",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "MS.Internal.AppModel.ResourcePart",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Windows.Baml2006.KeyRecord[]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 152
+    },
+    {
+      "type": "MS.Internal.Xaml.Context.XamlContextStack\u00601[MS.Internal.Xaml.Context.ObjectWriterFrame]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Boolean",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Windows.Controls.ScrollBarVisibility",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Func\u00601[System.Object]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "Entry[System.String,System.Xaml.XamlMember][]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Xaml.XamlNodeList",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Media.Visual[]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Reflection.ConstructorInfo[]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "System.Windows.Baml2006.WpfXamlType",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "Entry[System.Type,System.Xaml.XamlType][]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.RuntimeMethodHandle",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "MS.Internal.Data.AccessorInfo",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Collections.Generic.Stack\u00601[System.Char]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Xaml.AmbientPropertyValue",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "MS.Internal.Xaml.Parser.BracketModeParseParameters",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "MS.Internal.Text.TextInterface.TextAnalyzer",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "MS.Internal.TextFormatting.TextRunInfo",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Windows.Controls.Dock",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "Enumerator",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "\u003CP_PropertyContent\u003Ed__20",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 96
+    },
+    {
+      "type": "System.Windows.Threading.DispatcherOperation",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 112
+    },
+    {
+      "type": "System.UInt16[]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "\u003CP_EmptyElement\u003Ed__13",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.DependentList",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 24
+    },
+    {
+      "type": "System.Windows.Markup.XamlSetValueEventArgs",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "MS.Internal.TextFormatting.SimpleRun",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "MS.Internal.UnsafeStringCharacterBuffer",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Controls.TextChange[]",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "MS.Internal.TextFormatting.TextStore",
+      "count": 1,
+      "sampledBytes": 106088,
+      "maxObjectSize": 112
+    },
+    {
+      "type": "System.Xaml.MS.Impl.PositionalParameterDescriptor",
+      "count": 1,
+      "sampledBytes": 106080,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "Range[]",
+      "count": 1,
+      "sampledBytes": 106080,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Windows.Media.StreamGeometry",
+      "count": 1,
+      "sampledBytes": 106072,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "System.Func\u00601[RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel]",
+      "count": 1,
+      "sampledBytes": 106072,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.Documents.TextEditor",
+      "count": 1,
+      "sampledBytes": 106072,
+      "maxObjectSize": 176
+    },
+    {
+      "type": "SeenCtorDirectiveFlags[]",
+      "count": 1,
+      "sampledBytes": 106072,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Windows.TemplateBindingExtension",
+      "count": 1,
+      "sampledBytes": 106064,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "MS.Internal.Span[]",
+      "count": 1,
+      "sampledBytes": 106000,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "Entry[System.String,System.ValueTuple\u00602[System.Text.Json.Serialization.Metadata.JsonPropertyInfo,System.Int32]][]",
+      "count": 1,
+      "sampledBytes": 105944,
+      "maxObjectSize": 2872
+    },
+    {
+      "type": "System.Collections.Generic.List\u00601[System.Windows.SetterBase]",
+      "count": 1,
+      "sampledBytes": 105720,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Text.Json.Serialization.Metadata.JsonParameterInfo\u00601[System.Double]",
+      "count": 1,
+      "sampledBytes": 105696,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Windows.DeferredThemeResourceReference",
+      "count": 1,
+      "sampledBytes": 105504,
+      "maxObjectSize": 56
+    },
+    {
+      "type": "System.Reflection.RtFieldInfo",
+      "count": 1,
+      "sampledBytes": 105136,
+      "maxObjectSize": 72
+    },
+    {
+      "type": "ListenerList\u00601[System.ComponentModel.PropertyChangedEventArgs]",
+      "count": 1,
+      "sampledBytes": 105032,
+      "maxObjectSize": 40
+    },
+    {
+      "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+      "count": 1,
+      "sampledBytes": 104032,
+      "maxObjectSize": 88
+    },
+    {
+      "type": "RAWSelectionAssistant.ViewModels.PhotographerPaper[]",
+      "count": 1,
+      "sampledBytes": 103960,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Reflection.Emit.SignatureHelper",
+      "count": 1,
+      "sampledBytes": 103928,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Reflection.CustomAttributeNamedParameter",
+      "count": 1,
+      "sampledBytes": 103776,
+      "maxObjectSize": 48
+    },
+    {
+      "type": "System.Reflection.RuntimeConstructorInfo",
+      "count": 1,
+      "sampledBytes": 103520,
+      "maxObjectSize": 104
+    },
+    {
+      "type": "\u003C\u003Ec__DisplayClass75_0",
+      "count": 1,
+      "sampledBytes": 103360,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Windows.Controls.TextBox",
+      "count": 1,
+      "sampledBytes": 103272,
+      "maxObjectSize": 400
+    },
+    {
+      "type": "System.Func\u00602[System.Object,RAWSelectionAssistant.Core.Services.Projects.StudioNodeGraph]",
+      "count": 1,
+      "sampledBytes": 103264,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Windows.SizeChangedEventArgs",
+      "count": 1,
+      "sampledBytes": 102936,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "System.Func\u00602[System.ValueTuple\u00603[System.String,System.Type,System.Reflection.MemberInfo],System.Func\u00602[System.Object,System.Double]]",
+      "count": 1,
+      "sampledBytes": 102920,
+      "maxObjectSize": 64
+    },
+    {
+      "type": "System.Collections.Generic.Dictionary\u00602[System.Reflection.MemberInfo,System.Reflection.NullabilityState]",
+      "count": 1,
+      "sampledBytes": 102560,
+      "maxObjectSize": 80
+    },
+    {
+      "type": "Entry[System.String,System.Collections.Generic.List\u00601[System.Reflection.RuntimePropertyInfo]][]",
+      "count": 1,
+      "sampledBytes": 102560,
+      "maxObjectSize": 432
+    },
+    {
+      "type": "MS.Internal.SpanVector",
+      "count": 1,
+      "sampledBytes": 102520,
+      "maxObjectSize": 32
+    },
+    {
+      "type": "System.Type[]",
+      "count": 1,
+      "sampledBytes": 102416,
+      "maxObjectSize": 32
+    }
+  ],
+  "largeAllocations": [
+    {
+      "utc": "2026-11-15T14:07:03.3354102Z",
+      "relativeMs": 3606.4102,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 1579040,
+      "sampledAllocationAmount": 1579032,
+      "stack": [
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.ToVisualBuffer(class System.Windows.Media.Imaging.BitmapSource)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass47_1.\u003CRefreshPreviewAnalysisAsync\u003Eb__1()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.4048364Z",
+      "relativeMs": 3675.8364,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 1184288,
+      "sampledAllocationAmount": 1184280,
+      "stack": [
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.ToVisualBuffer(class System.Windows.Media.Imaging.BitmapSource)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass47_1.\u003CRefreshPreviewAnalysisAsync\u003Eb__1()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.4297481Z",
+      "relativeMs": 3700.7481,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "RAWSelectionAssistant.Core.Services.Projects.OklabColor[]",
+      "kind": "Large",
+      "objectSize": 9474080,
+      "sampledAllocationAmount": 9474072,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.ColorSpaceSurface.BuildColorIndex(class RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualPixelBuffer,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass47_1.\u003CRefreshPreviewAnalysisAsync\u003Eb__1()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.6513748Z",
+      "relativeMs": 3922.3748,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423648,
+      "sampledAllocationAmount": 5423640,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.6667763Z",
+      "relativeMs": 3937.7763,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423648,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.6828222Z",
+      "relativeMs": 3953.8222,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423648,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.6996428Z",
+      "relativeMs": 3970.6428,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7148274Z",
+      "relativeMs": 3985.8274,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7304089Z",
+      "relativeMs": 4001.4089,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7447211Z",
+      "relativeMs": 4015.7211,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423648,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7620236Z",
+      "relativeMs": 4033.0236,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7757758Z",
+      "relativeMs": 4046.7758,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423648,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.7924130Z",
+      "relativeMs": 4063.413,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.8060917Z",
+      "relativeMs": 4077.0917,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423640,
+      "sampledAllocationAmount": 5522016,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:03.8218434Z",
+      "relativeMs": 4092.8434,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 5423672,
+      "sampledAllocationAmount": 5522064,
+      "stack": [
+        "RAWSelectionAssistant.Core.Services.Projects.OriginalFrameLibrary.Load(class RAWSelectionAssistant.Core.Services.Projects.InstantFrameArtwork)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.PrepareFrame()",
+        "Kitao.InstantFilm.Research.CandidateRenderSession..ctor(class Kitao.InstantFilm.Research.CandidateImageLease,class Kitao.InstantFilm.Research.CandidateRecipe)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.Threading.Tasks.VoidTaskResult,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass566_0\u002B\u003C\u003CQueueFramePhotoPreviews\u003Eg__Build|0\u003Ed].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.2857953Z",
+      "relativeMs": 4556.7953,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Byte[]",
+      "kind": "Large",
+      "objectSize": 241118232,
+      "sampledAllocationAmount": 241216632,
+      "stack": [
+        "RAWSelectionAssistant.Services.StudioQuickExport.LoadCore(class System.String,value class System.Nullable\u00601\u003Cint32\u003E,bool)",
+        "RAWSelectionAssistant.Services.StudioQuickExport.Load(class System.String,value class System.Nullable\u00601\u003Cint32\u003E)",
+        "RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel\u002B\u003C\u003Ec__DisplayClass159_0.\u003CProcessForExportAsync\u003Eb__0()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.4349211Z",
+      "relativeMs": 4705.9211,
+      "ProcessID": 38608,
+      "ThreadID": 42524,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 482236440,
+      "sampledAllocationAmount": 482236416,
+      "stack": [
+        "RAWSelectionAssistant.Services.InstantFilmJpegInput.FromRendered(class System.Windows.Media.Imaging.BitmapSource,class System.String,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003CDecodeProfessionalInputAsync\u003Ed__1201.MoveNext()",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.__Canon,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003CDecodeProfessionalInputAsync\u003Ed__1201].ExecutionContextCallback(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.__Canon,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003CDecodeProfessionalInputAsync\u003Ed__1201].MoveNext(class System.Threading.Thread)",
+        "System.Runtime.CompilerServices.AsyncTaskMethodBuilder\u00601\u002BAsyncStateMachineBox\u00601[System.__Canon,RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003CDecodeProfessionalInputAsync\u003Ed__1201].MoveNext()",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.DispatcherOperation.InvokeImpl()",
+        "MS.Internal.CulturePreservingExecutionContext.CallbackWrapper(class System.Object)",
+        "System.Threading.ExecutionContext.RunInternal(class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "MS.Internal.CulturePreservingExecutionContext.Run(class MS.Internal.CulturePreservingExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Windows.Threading.DispatcherOperation.Invoke()",
+        "System.Windows.Threading.Dispatcher.ProcessQueue()",
+        "System.Windows.Threading.Dispatcher.WndProcHook(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndWrapper.WndProc(int,int32,int,int,bool\u0026)",
+        "MS.Win32.HwndSubclass.DispatcherCallbackOperation(class System.Object)",
+        "System.Windows.Threading.ExceptionWrapper.InternalRealCall(class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.ExceptionWrapper.TryCatchWhen(class System.Object,class System.Delegate,class System.Object,int32,class System.Delegate)",
+        "System.Windows.Threading.Dispatcher.LegacyInvokeImpl(value class System.Windows.Threading.DispatcherPriority,value class System.TimeSpan,class System.Delegate,class System.Object,int32)",
+        "System.Windows.Threading.Dispatcher.Invoke(value class System.Windows.Threading.DispatcherPriority,class System.Delegate,class System.Object)",
+        "MS.Win32.HwndSubclass.SubclassWndProc(int,int32,int,int)",
+        "  \u003CCodeAddress Address=\u00220x7ffe96db52e6\u0022 CodeAddressIndex=\u002298\u0022/\u003E",
+        "System.Windows.Threading.Dispatcher.PushFrameImpl(class System.Windows.Threading.DispatcherFrame)",
+        "System.Windows.Application.RunDispatcher(class System.Object)",
+        "System.Windows.Application.RunInternal(class System.Windows.Window)",
+        "Program.Main(class System.String[])"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.7037450Z",
+      "relativeMs": 4974.745,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Double[]",
+      "kind": "Large",
+      "objectSize": 1198136,
+      "sampledAllocationAmount": 1198104,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.7037708Z",
+      "relativeMs": 4974.7708,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.7761444Z",
+      "relativeMs": 5047.1444,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.8481428Z",
+      "relativeMs": 5119.1428,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.9166530Z",
+      "relativeMs": 5187.653,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:04.9939964Z",
+      "relativeMs": 5264.9964,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.0730725Z",
+      "relativeMs": 5344.0725,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.1406240Z",
+      "relativeMs": 5411.624,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.2069806Z",
+      "relativeMs": 5477.9806,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.2747366Z",
+      "relativeMs": 5545.7366,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.3442415Z",
+      "relativeMs": 5615.2415,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.4127928Z",
+      "relativeMs": 5683.7928,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.4771718Z",
+      "relativeMs": 5748.1718,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.5408916Z",
+      "relativeMs": 5811.8916,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.7059652Z",
+      "relativeMs": 5976.9652,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:05.8967610Z",
+      "relativeMs": 6167.761,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:06.0804362Z",
+      "relativeMs": 6351.4362,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:06.2600407Z",
+      "relativeMs": 6531.0407,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:06.4393269Z",
+      "relativeMs": 6710.3269,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    },
+    {
+      "utc": "2026-11-15T14:07:06.6221090Z",
+      "relativeMs": 6893.109,
+      "ProcessID": 38608,
+      "ThreadID": 40304,
+      "type": "System.Single[]",
+      "kind": "Large",
+      "objectSize": 2289440,
+      "sampledAllocationAmount": 2289432,
+      "stack": [
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderRegion(int32,int32,int32,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.StreamStrips(class System.Action\u00602\u003Cint32,class RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer\u003E,int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.CandidateRenderSession.RenderPreview(int32,value class System.Threading.CancellationToken)",
+        "Kitao.InstantFilm.Research.InstantV3ProductPipeline.Preview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster,class RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition,int32,value class System.Threading.CancellationToken)",
+        "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel\u002B\u003C\u003Ec__DisplayClass1153_2.\u003CInitializePhotographerCommands\u003Eb__4()",
+        "System.Threading.Tasks.Task\u00601[System.__Canon].InnerInvoke()",
+        "System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(class System.Threading.Thread,class System.Threading.ExecutionContext,class System.Threading.ContextCallback,class System.Object)",
+        "System.Threading.Tasks.Task.ExecuteWithThreadLocal(class System.Threading.Tasks.Task\u0026,class System.Threading.Thread)",
+        "System.Threading.ThreadPoolWorkQueue.Dispatch()",
+        "System.Threading.PortableThreadPool\u002BWorkerThread.WorkerThreadStart()",
+        "System.Threading.Thread.StartCallback()"
+      ]
+    }
+  ]
+}

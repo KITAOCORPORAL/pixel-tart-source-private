@@ -1,0 +1,155 @@
+diff --git a/src/RAWSelectionAssistant/Services/StudioQuickExport.cs b/src/RAWSelectionAssistant/Services/StudioQuickExport.cs
+index fce40673..f3278ce2 100644
+--- a/src/RAWSelectionAssistant/Services/StudioQuickExport.cs
++++ b/src/RAWSelectionAssistant/Services/StudioQuickExport.cs
+@@ -1,4 +1,4 @@
+-﻿using System.Collections.ObjectModel;
++using System.Collections.ObjectModel;
+ using System.IO;
+ using System.Windows.Media;
+ using System.Windows.Media.Imaging;
+@@ -39,6 +39,17 @@ public static class StudioQuickExport
+ 
+     public static BitmapSource LoadPreviewSource(string path) => LoadCore(path, null, true);
+ 
++    // Export receipts only need the encoded header. Re-decoding and detaching a
++    // full frame here overlaps the still-visible source and the encoder buffers.
++    public static (int PixelWidth, int PixelHeight, int BitsPerPixel) ReadEncodedInfo(string path)
++    {
++        using var file = File.OpenRead(path);
++        var frame = BitmapDecoder.Create(file, BitmapCreateOptions.PreservePixelFormat | BitmapCreateOptions.DelayCreation,
++            BitmapCacheOption.None).Frames[0];
++        return (frame.PixelWidth, frame.PixelHeight, frame.Format.BitsPerPixel);
++    }
++
++
+     private static BitmapSource LoadCore(string path, int? maximumPixelEdge, bool nativePreviewCache)
+     {
+         using var file=File.OpenRead(path);
+diff --git a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs
+index cdf87118..f87af32b 100644
+--- a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs
++++ b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs
+@@ -30,7 +30,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
+         using var source=System.IO.File.OpenRead(path);
+         var sourceHash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(source,token));
+         using var reservation=StudioGlobalResources.ReserveWork(StudioGlobalResources.MasterLimit);
+-        var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack);
++        var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack,FrozenRasterExportSource(path,sourceHash));
+         token.ThrowIfCancellationRequested();
+         return InstantFilmJpegInput.FromRendered(rendered,sourceHash,definition);
+     }
+diff --git a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs
+index 27196b26..8c0fbcd0 100644
+--- a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs
++++ b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs
+@@ -128,7 +128,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
+         }).ToArray();
+         if(staged is null)for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].VariantsExpanded=document.Targets[i].VariantsExpanded;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
+         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);
+-        var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();
++        var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldSourceCache=_sourceCache.ToArray();
+         var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;
+         var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;
+         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
+@@ -161,6 +161,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
+                 Editor.RawLocalEditing=staged.Editor.RawLocalEditing;
+                 Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.RawDefinition?.LocalEdits?.Stack??active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
+                 Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);Editor.LinearDocumentEditing=active.RawDefinition?.ColorState?.Version==2;
++                // Transfer the content-bound input with its prepared editor. Otherwise
++                // the new workspace reloads the same full raster for preview/export.
++                _sourceCache.Clear();foreach(var cached in staged._sourceCache)_sourceCache.AddLast(cached);
+                 Editor.RestoreSessionHistory(staged.Editor.CaptureSessionHistory());
+                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
+                 RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;
+@@ -184,7 +187,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
+         if(staged is not null)
+         {
+             // Ownership of these exact target instances is now held only by this workspace.
+-            staged.Targets.Clear();staged.ActiveTarget=null;
++            staged.Targets.Clear();staged.ActiveTarget=null;staged._sourceCache.Clear();
+             _comparisonKey=staged._comparisonKey;_comparisonImage=staged._comparisonImage;
+             _windowUndo.Clear();_windowRedo.Clear();
+             foreach(var old in oldTargets){old.LinearRawMaster=null;old.RawMaster=null;}
+@@ -198,6 +201,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
+                 foreach(var item in oldTargets.Concat(restored)){item.LinearRawMaster=null;item.RawMaster=null;}
+                 throw;
+             }
++            _sourceCache.Clear();foreach(var cached in oldSourceCache)_sourceCache.AddLast(cached);
+             Targets.Clear();foreach(var item in oldTargets)Targets.Add(item);
+             FailedTarget=oldFailed;Editor.RestoreTargetEngine(oldEngine,oldMode);
+             FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;
+diff --git a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs
+index 6373432e..961e7f4b 100644
+--- a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs
++++ b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs
+@@ -854,10 +854,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
+                         Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RasterExportEncoded",_exportCancellation.Token);
+ 
+                     }
+-                    var encoded=frozenItem.RawDefinition is null ? StudioQuickExport.Load(temp) : null;
++                    var encoded=frozenItem.RawDefinition is null ? StudioQuickExport.ReadEncodedInfo(temp) : ((int PixelWidth,int PixelHeight,int BitsPerPixel)?)null;
+                     var actual=frozenItem.RawDefinition is null?null:item.LastProfessionalOutput;
+                     var versionId = frozenItem.VersionId;
+-                    await StudioExportReceiptStore.CommitOutputAsync(temp,output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.RawDefinition?.ProcessingVersion ?? frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow, new ExportRecipeSnapshot(1,Path.GetExtension(output),actual?.BitDepth ?? (encoded!.Format.BitsPerPixel>32?16:8),"Original",actual?.Width ?? encoded!.PixelWidth,actual?.Height ?? encoded!.PixelHeight,null,Path.GetExtension(output)==".jpg"?95:null,Path.GetExtension(output)==".tif"?(isRaw?"None":"Zip"):actual is not null && Path.GetExtension(output)==".jpg"?"JPEG 4:4:4":"Codec default",frozenItem.RawDefinition?.ColorState?.Output.Label??"sRGB",(isRaw && Path.GetExtension(output)==".tif" ? "TIFF source orientation preserved; other metadata discarded" : "Orientation normalized; source metadata discarded"),"Not applied",AdjustmentFingerprint:ProcessingFingerprint(frozenItem.Look,frozenItem.Stack,frozenItem.Film,frozenItem.RawDefinition),RawDefinition:frozenItem.RawDefinition,RawInput:frozenItem.RawInput,OutputValidation:actual is null?null:System.Text.Json.JsonSerializer.Serialize(actual))),_exportCancellation.Token);
++                    await StudioExportReceiptStore.CommitOutputAsync(temp,output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.RawDefinition?.ProcessingVersion ?? frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow, new ExportRecipeSnapshot(1,Path.GetExtension(output),actual?.BitDepth ?? (encoded!.Value.BitsPerPixel>32?16:8),"Original",actual?.Width ?? encoded!.Value.PixelWidth,actual?.Height ?? encoded!.Value.PixelHeight,null,Path.GetExtension(output)==".jpg"?95:null,Path.GetExtension(output)==".tif"?(isRaw?"None":"Zip"):actual is not null && Path.GetExtension(output)==".jpg"?"JPEG 4:4:4":"Codec default",frozenItem.RawDefinition?.ColorState?.Output.Label??"sRGB",(isRaw && Path.GetExtension(output)==".tif" ? "TIFF source orientation preserved; other metadata discarded" : "Orientation normalized; source metadata discarded"),"Not applied",AdjustmentFingerprint:ProcessingFingerprint(frozenItem.Look,frozenItem.Stack,frozenItem.Film,frozenItem.RawDefinition),RawDefinition:frozenItem.RawDefinition,RawInput:frozenItem.RawInput,OutputValidation:actual is null?null:System.Text.Json.JsonSerializer.Serialize(actual))),_exportCancellation.Token);
+                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
+                 }
+                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
+diff --git a/tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs b/tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs
+index 53891edb..e4afbc9f 100644
+--- a/tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs
++++ b/tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs
+@@ -101,6 +101,52 @@ public sealed class RasterPreviewNativeCacheTests
+   public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> candidates)=>null;
+   public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem item,bool advanced)=>false;public void RevealFile(string path){}
+  }
++ [TestMethod]public Task EncodedReceiptReadsStoredHeaderAndReleasesFile()=>RunSta(()=>
++ {
++  var path=Fixture(31,17,48,6);
++  try
++  {
++   var header=StudioQuickExport.ReadEncodedInfo(path);
++   Assert.AreEqual(31,header.PixelWidth);Assert.AreEqual(17,header.PixelHeight);Assert.AreEqual(48,header.BitsPerPixel);
++   using var exclusive=new FileStream(path,FileMode.Open,FileAccess.ReadWrite,FileShare.None);
++  }
++  finally{File.Delete(path);}
++  return Task.CompletedTask;
++ });
++ [TestMethod]public Task EncodedReceiptAvoidsFullManagedRasterStaging()=>RunSta(()=>
++ {
++  var path=Fixture(512,512,48,1);
++  try
++  {
++   StudioQuickExport.ReadEncodedInfo(path);
++   var start=GC.GetAllocatedBytesForCurrentThread();var header=StudioQuickExport.ReadEncodedInfo(path);
++   var allocated=GC.GetAllocatedBytesForCurrentThread()-start;
++   Assert.AreEqual(48,header.BitsPerPixel);
++   Assert.IsLessThan(128L*1024,allocated,"Receipt header read allocated a full raster.");
++  }
++  finally{File.Delete(path);}
++  return Task.CompletedTask;
++ });
++ [TestMethod]public Task SessionTransferKeepsContentBoundRasterAndRollsBackCacheOnFailure()=>RunSta(async()=>
++ {
++  var path=Fixture(31,17,48,1);var root=Path.Combine(Path.GetTempPath(),"kitao-session-cache-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
++  try
++  {
++   var session=Path.Combine(root,"saved.ptstudio.json");
++   using(var initial=new RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel(new ExportDialogs(path,root)))
++   {await initial.ChooseTargetCommand.ExecuteAsync(null);await initial.SaveSessionAsync(session);}
++   using var reopened=new RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel(new ExportDialogs(path,root));
++   await reopened.LoadSessionAsync(session);
++   var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)));
++   var resolver=typeof(RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel).GetMethod("FrozenRasterExportSource",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)!;
++   var transferred=resolver.Invoke(reopened,[path,hash]);Assert.IsNotNull(transferred);Assert.AreSame(reopened.Editor.SourceImage,transferred);
++   using var failure=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(stage=>{if(stage=="SessionTransfer")throw new IOException("Injected transfer failure");});
++   try{await reopened.LoadSessionAsync(session);Assert.Fail("Expected transfer failure");}catch(IOException error){Assert.AreEqual("Injected transfer failure",error.Message);}
++   Assert.AreSame(transferred,resolver.Invoke(reopened,[path,hash]),"Failed transfer must restore the prior cache ownership.");
++   Assert.AreSame(transferred,reopened.Editor.SourceImage);
++  }
++  finally{File.Delete(path);Directory.Delete(root,true);}
++ });
+  static BitmapSource OnLoadBaseline(string path,ushort orientation)
+  {
+   using var file=File.OpenRead(path);var source=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];

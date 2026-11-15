@@ -1,7 +1,7 @@
 """Run one no-RAW memory replay under a 2 GiB process guard. Never edits old ledgers."""
 from pathlib import Path
 import argparse,ctypes as C,ctypes.wintypes as W,hashlib,json,os,subprocess,time
-parser=argparse.ArgumentParser();parser.add_argument('app',type=Path);parser.add_argument('cache',type=Path);parser.add_argument('output',type=Path);parser.add_argument('mode');parser.add_argument('--trace',action='store_true');parser.add_argument('--input-task',type=Path);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('app',type=Path);parser.add_argument('cache',type=Path);parser.add_argument('output',type=Path);parser.add_argument('mode');parser.add_argument('--trace',action='store_true');parser.add_argument('--trace-seconds',type=int,default=120);parser.add_argument('--input-task',type=Path);args=parser.parse_args()
 root=args.cache.resolve().parent;task=json.loads((args.input_task or root/'MEMORY_TASK.json').read_text('utf-8-sig'))
 assert task['maximumNewRawDecodes']==0 and task['guardBytes']==2**31
 if args.input_task:
@@ -16,7 +16,7 @@ process=subprocess.Popen([str(args.app.resolve()),str(args.cache.resolve()),str(
 trace_process=None;trace_out=None
 if args.trace:
  trace_out=(guard_root/'trace.log').open('w')
- trace_process=subprocess.Popen([str(root/'profilers/dotnet-trace.exe'),'collect','--process-id',str(process.pid),'--profile','gc-verbose','--buffersize','32','--output',str(guard_root/'allocations.nettrace'),'--duration','00:00:02:00'],env=env,stdout=trace_out,stderr=subprocess.STDOUT,creationflags=0x08000000)
+ trace_process=subprocess.Popen([str(root/'profilers/dotnet-trace.exe'),'collect','--process-id',str(process.pid),'--profile','gc-verbose','--buffersize','32','--output',str(guard_root/'allocations.nettrace'),'--duration',f'00:{args.trace_seconds//3600:02d}:{args.trace_seconds//60%60:02d}:{args.trace_seconds%60:02d}'],env=env,stdout=trace_out,stderr=subprocess.STDOUT,creationflags=0x08000000)
 k=C.WinDLL('kernel32',use_last_error=True);k.OpenProcess.argtypes=[W.DWORD,W.BOOL,W.DWORD];k.OpenProcess.restype=W.HANDLE;k.K32GetProcessMemoryInfo.argtypes=[W.HANDLE,C.c_void_p,W.DWORD];k.K32GetProcessMemoryInfo.restype=W.BOOL;k.CloseHandle.argtypes=[W.HANDLE]
 handle=k.OpenProcess(0x410,False,process.pid);assert handle
 start=time.monotonic();count=0;peak_private=peak_working=0;reason=None
@@ -28,6 +28,8 @@ with (guard_root/'RESOURCE_SAMPLES.jsonl').open('w',encoding='utf-8',newline='\n
    import struct
    os_peak,working=struct.unpack_from('<QQ',buffer.raw,8);private=struct.unpack_from('<Q',buffer.raw,72)[0]
    sample=dict(elapsedMs=(time.monotonic()-start)*1000,workingSetBytes=working,osPeakWorkingSetBytes=os_peak,privateBytes=private)
+   try: sample['phase']=(args.output/'phase.txt').read_text('utf-8').strip() or 'transition'
+   except OSError: sample['phase']='startup'
    journal.write(json.dumps(sample)+'\n');journal.flush();count+=1;peak_private=max(private,peak_private);peak_working=max(os_peak,peak_working)
    if os_peak>2**31 or private>2**31:reason='2GiB resource guard'
   if time.monotonic()-start>(360 if 'soak' in args.mode else 180):reason='Replay watchdog'

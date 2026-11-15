@@ -20,7 +20,8 @@ using RAWSelectionAssistant.Views;
 
 static class Program
 {
-    static string output="",phase="startup";static readonly Stopwatch clock=Stopwatch.StartNew();static ReferenceColorWorkspaceViewModel? workspace;static ReplayDecoder? decoder;static Window? window;static ColorStudioImageViewport? viewport;static FrameworkElement? pageHost;static readonly List<WeakReference> owners=[];
+    static string output="",currentPhase="startup";
+    static string phase { get=>currentPhase; set { currentPhase=value;if(Directory.Exists(output))File.WriteAllText(Path.Combine(output,"phase.txt"),value); } }static readonly Stopwatch clock=Stopwatch.StartNew();static ReferenceColorWorkspaceViewModel? workspace;static ReplayDecoder? decoder;static Window? window;static ColorStudioImageViewport? viewport;static FrameworkElement? pageHost;static readonly List<WeakReference> owners=[];
     static readonly JsonSerializerOptions json=new(){WriteIndented=true};
     [DllImport("user32.dll")]static extern uint GetGuiResources(IntPtr process,uint flags);
     [DllImport("kernel32.dll")]static extern nuint VirtualQuery(IntPtr address,out MemoryInfo info,nuint size);
@@ -41,10 +42,10 @@ static class Program
         var found=new Dictionary<string,object>();if(workspace is not{} vm)return found;
         foreach(var f in new[]{"_source","_interactiveSource","_matchedImage","_rawPreviewMaster","_interactiveRawMaster","_frozenRawMaster","_fullRawDisplay"})
         {var value=Field(vm.Editor,f);found["Editor."+f]=Describe(value);if(value is not null&&!owners.Any(w=>ReferenceEquals(w.Target,value)))owners.Add(new(value));}
-        found["Target.RawMaster"]=Describe(vm.ActiveTarget?.RawMaster);found["Workspace.analysisImage"]=Describe(Field(vm,"_analysisImage"));found["Editor.Enabled"]=vm.Editor.Enabled;found["Editor.StackNodes"]=vm.Editor.AdjustmentStack.Nodes.Select(n=>new{n.Name,n.Type,n.Enabled}).ToArray();
+        found["Target.LinearRawMaster"]=Describe(vm.ActiveTarget?.LinearRawMaster?.Image);found["Workspace.lightPrintDraft"]=Describe(Field(vm,"_lightPrintBeforeDraft"));found["Target.RawMaster"]=Describe(vm.ActiveTarget?.RawMaster);found["Workspace.analysisImage"]=Describe(Field(vm,"_analysisImage"));found["Editor.Enabled"]=vm.Editor.Enabled;found["Editor.StackNodes"]=vm.Editor.AdjustmentStack.Nodes.Select(n=>new{n.Name,n.Type,n.Enabled}).ToArray();
         var cache=Field(vm.Editor,"_previewCache") as System.Collections.IEnumerable;
         if(cache is not null){var entries=new List<object>();foreach(var entry in cache){var type=entry!.GetType();entries.Add(new{source=Describe(type.GetField("Item1")?.GetValue(entry)),result=Describe(type.GetField("Item3")?.GetValue(entry))});}found["Editor.previewCache"]=entries;}
-        if(viewport is not null){found["Viewport.Original"]=Describe(viewport.Original);found["Viewport.Matched"]=Describe(viewport.Matched);found["Viewport.DisplayColorEnabled"]=viewport.DisplayColorEnabled;}
+        if(viewport is not null){found["Viewport.Original"]=Describe(viewport.Original);found["Viewport.Matched"]=Describe(viewport.Matched);found["Viewport.DisplayColorEnabled"]=viewport.DisplayColorEnabled;found["Viewport.Layout"]=new{visible=viewport.IsVisible,loaded=viewport.IsLoaded,width=viewport.ActualWidth,height=viewport.ActualHeight,zoom=viewport.State.Zoom,windowVisible=window?.IsVisible};}
         return found;
     }
     static object VirtualMemory()
@@ -85,7 +86,24 @@ static class Program
         for(int y=0;y<pixels.PixelHeight;y++){pixels.CopyPixels(new Int32Rect(0,y,pixels.PixelWidth,1),row,stride,0);hash.AppendData(row);}
         var profiles=new List<object>();
         if(frame.ColorContexts is {} contexts)foreach(var context in contexts){using var profile=context.OpenProfileStream();if(profile is not null){using var bytes=new MemoryStream();profile.CopyTo(bytes);var raw=bytes.ToArray();profiles.Add(new{bytes=raw.Length,sha256=Convert.ToHexString(SHA256.HashData(raw))});}}
-        Write("TIFF_PROBE",new{path,width=frame.PixelWidth,height=frame.PixelHeight,storedPixelFormat=frame.Format.ToString(),bitsPerPixel=frame.Format.BitsPerPixel,rgb48PixelSha256=Convert.ToHexString(hash.GetHashAndReset()),iccProfiles=profiles,rawDecodeCalls=0,scope="WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"});
+        int orientation=1;
+        if(frame.Metadata is BitmapMetadata metadata)foreach(var query in new[]{"/ifd/{ushort=274}","/app1/ifd/{ushort=274}"})
+        {
+            try { var value=metadata.GetQuery(query);if(value is ushort o && o is >=1 and <=8){orientation=o;break;} }
+            catch(Exception error)when(error is NotSupportedException or ArgumentException or InvalidOperationException or COMException){}
+        }
+        var storedHash=Convert.ToHexString(hash.GetHashAndReset());
+        var nativeStride=checked((frame.PixelWidth*frame.Format.BitsPerPixel+7)/8);var nativeRow=new byte[nativeStride];
+        for(int y=0;y<frame.PixelHeight;y++){frame.CopyPixels(new Int32Rect(0,y,frame.PixelWidth,1),nativeRow,nativeStride,0);hash.AppendData(nativeRow);}
+        var storedPixelSha256=Convert.ToHexString(hash.GetHashAndReset());
+        var normalized=StudioQuickExport.ApplyOrientation(pixels,orientation);var normalizedHash=storedHash;
+        if(orientation!=1)
+        {
+            var normalizedRow=new byte[normalized.PixelWidth*6];
+            for(int y=0;y<normalized.PixelHeight;y++){normalized.CopyPixels(new Int32Rect(0,y,normalized.PixelWidth,1),normalizedRow,normalizedRow.Length,0);hash.AppendData(normalizedRow);}
+            normalizedHash=Convert.ToHexString(hash.GetHashAndReset());
+        }
+        Write("TIFF_PROBE",new{path,orientation,storedPixelSha256,normalizedWidth=normalized.PixelWidth,normalizedHeight=normalized.PixelHeight,normalizedRgb48PixelSha256=normalizedHash,width=frame.PixelWidth,height=frame.PixelHeight,storedPixelFormat=frame.Format.ToString(),bitsPerPixel=frame.Format.BitsPerPixel,rgb48PixelSha256=storedHash,iccProfiles=profiles,rawDecodeCalls=0,scope="WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"});
     }
     static async Task RenderedTiff(string input,string mode)
     {
@@ -93,6 +111,7 @@ static class Program
         var modelOnly=mode.Contains("model");var reopening=mode.Contains("reopen");var session=Environment.GetEnvironmentVariable("KITAO_TIFF_REOPEN_SESSION");
         var dialogs=new RenderedDialogs(input,output,session);decoder=new ReplayDecoder(input,Event);
         workspace=new(dialogs,rawDecoder:decoder);
+        using var processing=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(stage=>Snapshot("processing-"+stage));
         if(!modelOnly)
         {
         var resources=XDocument.Load(Path.Combine(AppContext.BaseDirectory,"ProductAppResources.xaml"));
@@ -116,14 +135,14 @@ static class Program
         workspace.QuickExportFormat=StudioExportFormat.Tiff;dialogs.ExportDirectory=Path.Combine(output,"export");Directory.CreateDirectory(dialogs.ExportDirectory);
         var cacheResolver=typeof(ReferenceColorWorkspaceViewModel).GetMethod("FrozenRasterExportSource",BindingFlags.Instance|BindingFlags.NonPublic);
         Event("RasterExportSourceBinding",new{bound=cacheResolver?.Invoke(workspace,[workspace.ActiveTarget.Path,workspace.ActiveTarget.SourceHash]) is BitmapSource});
-        phase="rendered-real-export";await workspace.ExportSelectedCommand.ExecuteAsync(null);
+        phase="rendered-real-export";Snapshot("export-start");await workspace.ExportSelectedCommand.ExecuteAsync(null);
         var target=workspace.ActiveTarget;
         if(target.ExportStatus!=ReferenceExportStatus.Succeeded||target.OutputPath is null||!File.Exists(target.OutputPath))throw new IOException("Production TIFF export failed: "+target.Error+" / "+workspace.ExportFailureSummary);
         var exported=target.OutputPath;
         if(!reopening){phase="rendered-session-save";await workspace.SaveSessionCommand.ExecuteAsync(null);if(!File.Exists(dialogs.SessionFile))throw new IOException("Production session was not saved");}
         await Idle("rendered-export-idle");if(window is not null){window.WindowState=WindowState.Minimized;await Idle("rendered-minimized-idle",5000);window.WindowState=WindowState.Normal;await Idle("rendered-restored-idle");}
         Write("RENDERED_TIFF_RESULT",new{status="PASS_CONTROLLED_REAL_TIFF_IO",processId=Environment.ProcessId,productVersion=typeof(ReferenceColorWorkspaceViewModel).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,input,output=exported,session=reopening?session:dialogs.SessionFile,reopenedInIndependentProcess=reopening,visualHost=!modelOnly,completeViewportFlow=!modelOnly,rawDecoderRequests=decoder.CacheReads,rawDecodeCalls=0,authority="Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",source=Describe(workspace.Editor.SourceImage)});
-        phase="rendered-close";workspace.Dispose();workspace=null;if(window is not null){window.Content=null;window.Close();}await Idle("rendered-close-natural-idle",2500);
+        phase="rendered-close";workspace.Dispose();workspace=null;if(window is not null){window.Content=null;window.Close();}pageHost=null;viewport=null;window=null;await Idle("rendered-close-natural-idle",2500);
     }
 
     static async Task Run(string input,string mode)

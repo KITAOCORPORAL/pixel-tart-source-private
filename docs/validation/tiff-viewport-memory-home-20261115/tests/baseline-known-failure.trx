@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0b986eac-9a69-4eb1-9cc6-e1fb79a5e963" name="Admin@DESKTOP-HO0JJEQ 2026-11-15 22:55:23" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-15T22:55:23.8298043+08:00" queuing="2026-11-15T22:55:23.8298045+08:00" start="2026-11-15T22:55:21.5243054+08:00" finish="2026-11-15T22:55:23.8346909+08:00" />
+  <TestSettings name="default" id="8ce7c3a9-a4e3-4baf-9c9d-39c1c1803692">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-11-15_22_55_23" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f6da242a-52da-4a60-a072-88f038d9067d" testId="1284007e-e326-8cdd-8494-f50670bad0d1" testName="SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.9167361" startTime="2026-11-15T22:55:22.7970259+08:00" endTime="2026-11-15T22:55:23.7293516+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6da242a-52da-4a60-a072-88f038d9067d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsNotNull 失败。‘value’表达式:‘vm.ActiveTarget!.RawDefinition’。 sRGB 曝光未提交，保留此前版本：专业RAW局部层当前支持白平衡、影调、色阶、曲线、色彩平衡、肤色和基础预设；不支持参考匹配或空间细节层。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194&#xD;
+   at RAWSelectionAssistant.WpfTests.PreparedPreviewTransactionTests.&lt;&gt;c.&lt;&lt;SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels&gt;b__1_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels" storage="n:\pixart\guangjing-tiff-viewport-baseline-20261115\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1284007e-e326-8cdd-8494-f50670bad0d1">
+      <Execution id="f6da242a-52da-4a60-a072-88f038d9067d" />
+      <TestMethod codeBase="N:\pixart\guangjing-tiff-viewport-baseline-20261115\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PreparedPreviewTransactionTests" name="SrgbUsesOriginalFileNotCurrentEditsAndUndoRestoresPixels" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1284007e-e326-8cdd-8494-f50670bad0d1" executionId="f6da242a-52da-4a60-a072-88f038d9067d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

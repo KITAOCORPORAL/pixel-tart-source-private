@@ -1,0 +1,32 @@
+{
+  "productSource": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+  "base": "bdc913c9463573247b9b6460f9a1102e40e74a31",
+  "unifiedSource": "939d540cab110d5966a536b104fac36e8673800d",
+  "sourceAndTestsIdenticalBeforePatch": true,
+  "binaries": [
+    {
+      "file": "ProductMemoryIntegrationReplay.exe",
+      "sha256": "4E53BDF9A8BF813E79555C2A30D91D8DC564366585F90D9E9071B6B24D6A309D"
+    },
+    {
+      "file": "ProductMemoryIntegrationReplay.dll",
+      "sha256": "1CFB203B0C9878C074F5825C4A6B8313D0548E213EBED91E2BCC06901CE4B9A3"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "sha256": "0D3BD0620023A2EE0A758FD89D97351F044E5E7394DA39D2CDA4E7C800CCE58F"
+    }
+  ],
+  "harnessSources": [
+    {
+      "path": "tools\\ProductMemoryIntegrationReplay\\Program.cs",
+      "sha256AtCapture": "16B1537E1011222CECADF34EA597BA515CCB83E5D7ED6A4657373C31FDA4E9AA",
+      "normalizedLfSha256": "11C75B81412273B028FF680B0A316888F2F5E1C2EC0A642D3586033CC2E6B6D8"
+    },
+    {
+      "path": "tools\\ProductMemoryIntegrationReplay\\run_guarded.py",
+      "sha256AtCapture": "78A2E5E6EA73B72D9BA49F6DD254F5E7118C0DA8B1347E32ADCD180239966037",
+      "normalizedLfSha256": "19A5CD28AF1758B340717D0DDA5A2C7F6E658040A3268012FD1783FA45AF0EF0"
+    }
+  ]
+}

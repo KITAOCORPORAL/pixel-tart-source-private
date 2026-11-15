@@ -1,0 +1,75 @@
+{
+  "fourStopsVerified": true,
+  "limitBytes": 2147483648,
+  "runs": [
+    {
+      "run": "rendered-tiff-before",
+      "checks": {
+        "pid": true,
+        "exitCode": true,
+        "stop": true,
+        "peakPrivateBytes50ms": true,
+        "osPeakWorkingSetBytes": true,
+        "newRawDecodeLimit": true,
+        "stopReason": true,
+        "exceededOriginalLimit": true
+      },
+      "privateMiB": 2051.5859375
+    },
+    {
+      "run": "rendered-tiff-fixed-before",
+      "checks": {
+        "pid": true,
+        "exitCode": true,
+        "stop": true,
+        "peakPrivateBytes50ms": true,
+        "osPeakWorkingSetBytes": true,
+        "newRawDecodeLimit": true,
+        "stopReason": true,
+        "exceededOriginalLimit": true
+      },
+      "privateMiB": 2165.73828125
+    },
+    {
+      "run": "rendered-tiff-deferred-before",
+      "checks": {
+        "pid": true,
+        "exitCode": true,
+        "stop": true,
+        "peakPrivateBytes50ms": true,
+        "osPeakWorkingSetBytes": true,
+        "newRawDecodeLimit": true,
+        "stopReason": true,
+        "exceededOriginalLimit": true
+      },
+      "privateMiB": 2218.27734375
+    },
+    {
+      "run": "rendered-tiff-export-reuse-before",
+      "checks": {
+        "pid": true,
+        "exitCode": true,
+        "stop": true,
+        "peakPrivateBytes50ms": true,
+        "osPeakWorkingSetBytes": true,
+        "newRawDecodeLimit": true,
+        "stopReason": true,
+        "exceededOriginalLimit": true
+      },
+      "privateMiB": 2052.6953125
+    }
+  ],
+  "nonvisualStatus": "PASS_CONTROLLED_REAL_TIFF_EXPORT_AND_INDEPENDENT_REOPEN",
+  "nonvisualChecks": {
+    "width": true,
+    "height": true,
+    "bitsPerPixel": true,
+    "storedPixelFormat": true,
+    "rgb48PixelSha256": true,
+    "iccProfiles": true,
+    "independentProcess": true,
+    "rawRequestsZero": true,
+    "sourceFileUnchanged": true
+  },
+  "nonvisualDoesNotPromoteVisual": true
+}

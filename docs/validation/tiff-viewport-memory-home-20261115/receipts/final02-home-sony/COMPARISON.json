@@ -1,0 +1,370 @@
+{
+  "status": "PASS_CONTROLLED_VISIBLE_TIFF_CYCLE",
+  "authority": "Actual WPF visible PhotoGradePageView plus collapsed legacy view, production commands and real TIFF files; fixed dialogs, offscreen window; no manual desktop/file-picker acceptance.",
+  "inputDifference": "Actual authorized home Sony derivative; company Fuji DSCF0347 is unavailable. Storage dimensions 7028x4688, orientation 8; use synthetic 7752x5184 input separately for exact company-size stress. Already rendered sRGB16, not sensor-linear.",
+  "checks": {
+    "width": true,
+    "height": true,
+    "bitsPerPixel": true,
+    "storedPixelFormat": true,
+    "storedPixelSha256": true,
+    "rgb48PixelSha256": true,
+    "iccProfiles": true,
+    "orientation": true,
+    "inputNormalizedPixelsMatch": true,
+    "inputNormalizedSizeMatch": true,
+    "outputOrientationNormalized": true,
+    "channelBitDepth16": true,
+    "iccMatchesInput": true,
+    "independentProcess": true,
+    "newRawDecodesZero": true,
+    "sourceUnchanged": true,
+    "firstGuardPassed": true,
+    "firstViewportVisible": true,
+    "firstActualSizeZoom": true,
+    "firstFitZoom": true,
+    "firstSavedClosed": true,
+    "reopenGuardPassed": true,
+    "reopenViewportVisible": true,
+    "reopenActualSizeZoom": true,
+    "reopenFitZoom": true,
+    "reopenSavedClosed": true
+  },
+  "probes": {
+    "input": {
+      "path": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+      "orientation": 8,
+      "storedPixelSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+      "normalizedWidth": 4688,
+      "normalizedHeight": 7028,
+      "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "width": 7028,
+      "height": 4688,
+      "storedPixelFormat": "Rgb48",
+      "bitsPerPixel": 48,
+      "rgb48PixelSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "first": {
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+      "orientation": 1,
+      "storedPixelSha256": "55EDA952066E9D09E7C511BE38E40F3F36694FEB0C773739E7F88D10608531F4",
+      "normalizedWidth": 4688,
+      "normalizedHeight": 7028,
+      "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "width": 4688,
+      "height": 7028,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    },
+    "reopen": {
+      "path": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\reopen\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+      "orientation": 1,
+      "storedPixelSha256": "55EDA952066E9D09E7C511BE38E40F3F36694FEB0C773739E7F88D10608531F4",
+      "normalizedWidth": 4688,
+      "normalizedHeight": 7028,
+      "normalizedRgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "width": 4688,
+      "height": 7028,
+      "storedPixelFormat": "Rgba64",
+      "bitsPerPixel": 64,
+      "rgb48PixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "iccProfiles": [
+        {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ],
+      "rawDecodeCalls": 0,
+      "scope": "WIC stored-sample readback normalized only to RGB48 channel layout; no camera RAW decoder"
+    }
+  },
+  "first": {
+    "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+    "processId": 10532,
+    "productVersion": "2.3.0+e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+    "input": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+    "output": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+    "session": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\rendered.ptstudio.json",
+    "reopenedInIndependentProcess": false,
+    "visualHost": true,
+    "completeViewportFlow": true,
+    "rawDecoderRequests": 0,
+    "rawDecodeCalls": 0,
+    "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+    "source": {
+      "type": "CachedBitmap",
+      "id": 3038911,
+      "width": 4688,
+      "height": 7028,
+      "bits": 48,
+      "frozen": true,
+      "minimumPixelBytes": 197683584
+    }
+  },
+  "reopen": {
+    "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+    "processId": 12696,
+    "productVersion": "2.3.0+e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+    "input": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+    "output": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\reopen\\export\\sony-dsc08015-isolated-frozen_仿色.tif",
+    "session": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\final02-home-sony\\first\\rendered.ptstudio.json",
+    "reopenedInIndependentProcess": true,
+    "visualHost": true,
+    "completeViewportFlow": true,
+    "rawDecoderRequests": 0,
+    "rawDecodeCalls": 0,
+    "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+    "source": {
+      "type": "CachedBitmap",
+      "id": 24180101,
+      "width": 4688,
+      "height": 7028,
+      "bits": 48,
+      "frozen": true,
+      "minimumPixelBytes": 197683584
+    }
+  },
+  "guardBytes": 2147483648,
+  "guardResults": {
+    "first": {
+      "pid": 10532,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1290969088,
+      "osPeakWorkingSetBytes": 1180467200,
+      "samples": 557,
+      "elapsedMs": 28217.99999999348,
+      "newRawDecodeLimit": 0
+    },
+    "reopen": {
+      "pid": 12696,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1304768512,
+      "osPeakWorkingSetBytes": 1186447360,
+      "samples": 582,
+      "elapsedMs": 29469.00000004098,
+      "newRawDecodeLimit": 0
+    }
+  },
+  "stagePeaks50ms": {
+    "first": {
+      "startup": {
+        "peakPrivateBytes": 128217088,
+        "peakWorkingSetBytes": 154677248,
+        "samples": 30
+      },
+      "rendered-tiff-import": {
+        "peakPrivateBytes": 857264128,
+        "peakWorkingSetBytes": 739753984,
+        "samples": 28
+      },
+      "rendered-fit-idle": {
+        "peakPrivateBytes": 1285459968,
+        "peakWorkingSetBytes": 1170403328,
+        "samples": 30
+      },
+      "rendered-100-idle": {
+        "peakPrivateBytes": 1284796416,
+        "peakWorkingSetBytes": 1173405696,
+        "samples": 31
+      },
+      "rendered-20-idle": {
+        "peakPrivateBytes": 1284730880,
+        "peakWorkingSetBytes": 1173643264,
+        "samples": 30
+      },
+      "rendered-100-return-idle": {
+        "peakPrivateBytes": 1284808704,
+        "peakWorkingSetBytes": 1173782528,
+        "samples": 30
+      },
+      "rendered-real-export": {
+        "peakPrivateBytes": 1290969088,
+        "peakWorkingSetBytes": 1180467200,
+        "samples": 163
+      },
+      "rendered-session-save": {
+        "peakPrivateBytes": 1257377792,
+        "peakWorkingSetBytes": 1146556416,
+        "samples": 1
+      },
+      "rendered-export-idle": {
+        "peakPrivateBytes": 1261957120,
+        "peakWorkingSetBytes": 1154674688,
+        "samples": 30
+      },
+      "rendered-minimized-idle": {
+        "peakPrivateBytes": 1261846528,
+        "peakWorkingSetBytes": 1154723840,
+        "samples": 101
+      },
+      "rendered-restored-idle": {
+        "peakPrivateBytes": 1280606208,
+        "peakWorkingSetBytes": 1150627840,
+        "samples": 30
+      },
+      "rendered-close": {
+        "peakPrivateBytes": 1280831488,
+        "peakWorkingSetBytes": 1150738432,
+        "samples": 1
+      },
+      "rendered-close-natural-idle": {
+        "peakPrivateBytes": 1283248128,
+        "peakWorkingSetBytes": 1154265088,
+        "samples": 52
+      }
+    },
+    "reopen": {
+      "startup": {
+        "peakPrivateBytes": 132571136,
+        "peakWorkingSetBytes": 159838208,
+        "samples": 31
+      },
+      "rendered-session-open": {
+        "peakPrivateBytes": 877948928,
+        "peakWorkingSetBytes": 763719680,
+        "samples": 55
+      },
+      "rendered-fit-idle": {
+        "peakPrivateBytes": 1294598144,
+        "peakWorkingSetBytes": 1178628096,
+        "samples": 31
+      },
+      "rendered-100-idle": {
+        "peakPrivateBytes": 1295327232,
+        "peakWorkingSetBytes": 1185193984,
+        "samples": 30
+      },
+      "rendered-20-idle": {
+        "peakPrivateBytes": 1295327232,
+        "peakWorkingSetBytes": 1185329152,
+        "samples": 30
+      },
+      "rendered-100-return-idle": {
+        "peakPrivateBytes": 1295265792,
+        "peakWorkingSetBytes": 1185423360,
+        "samples": 31
+      },
+      "rendered-real-export": {
+        "peakPrivateBytes": 1287286784,
+        "peakWorkingSetBytes": 1178345472,
+        "samples": 161
+      },
+      "rendered-export-idle": {
+        "peakPrivateBytes": 1281548288,
+        "peakWorkingSetBytes": 1174683648,
+        "samples": 30
+      },
+      "rendered-minimized-idle": {
+        "peakPrivateBytes": 1281548288,
+        "peakWorkingSetBytes": 1174704128,
+        "samples": 100
+      },
+      "rendered-restored-idle": {
+        "peakPrivateBytes": 1302118400,
+        "peakWorkingSetBytes": 1172570112,
+        "samples": 31
+      },
+      "rendered-close": {
+        "peakPrivateBytes": 1302388736,
+        "peakWorkingSetBytes": 1172639744,
+        "samples": 1
+      },
+      "rendered-close-natural-idle": {
+        "peakPrivateBytes": 1304768512,
+        "peakWorkingSetBytes": 1176244224,
+        "samples": 51
+      }
+    }
+  },
+  "viewports": {
+    "first": {
+      "rendered-fit-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.09741984443179662,
+        "windowVisible": true
+      },
+      "rendered-100-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      },
+      "rendered-20-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.2,
+        "windowVisible": true
+      },
+      "rendered-100-return-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      }
+    },
+    "reopen": {
+      "rendered-fit-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.09741984443179662,
+        "windowVisible": true
+      },
+      "rendered-100-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      },
+      "rendered-20-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 0.2,
+        "windowVisible": true
+      },
+      "rendered-100-return-idle": {
+        "visible": true,
+        "loaded": true,
+        "width": 949.3333333333333,
+        "height": 684.6666666666666,
+        "zoom": 1,
+        "windowVisible": true
+      }
+    }
+  },
+  "newRawDecodes": 0,
+  "highlightResearchChanged": false
+}

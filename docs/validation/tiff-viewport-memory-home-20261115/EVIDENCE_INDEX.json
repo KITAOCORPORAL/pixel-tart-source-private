@@ -1,0 +1,359 @@
+{
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 53,
+      "sha256": "7CBF74D793DA3DA0056C7AD4E7A19EAF6F5C67BC8B444C8E48A620F3DDE5F269"
+    },
+    {
+      "path": "ALLOCATION_EVIDENCE.json",
+      "bytes": 150092,
+      "sha256": "A937CF075FD6A1ED0AF90609E14407828AC7098D41182BBA799CABA0E79BBDF4"
+    },
+    {
+      "path": "BINARY_IDENTITY.json",
+      "bytes": 1247,
+      "sha256": "9440E7627A12EFE4CAB3D4DE9A589FF5766987455FDBA63363DEF7858E7A4B14"
+    },
+    {
+      "path": "failures/baseline-traced/events.jsonl",
+      "bytes": 5840,
+      "sha256": "910F73BEB13B467F3FF0D6343A3EC7D71524644BD01AC9A2E2E7D71F4616A76E"
+    },
+    {
+      "path": "failures/baseline-traced/EXIT.json",
+      "bytes": 224,
+      "sha256": "1142F1D93CDA2655FD33B96547A18103D3F9900FF798A985A159E76304571368"
+    },
+    {
+      "path": "failures/baseline-traced/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "828684AFC6E6FE89B24B56DEE35E437DEDA6DAE5F2F240FC227C8DE84A273984"
+    },
+    {
+      "path": "failures/baseline-traced/RESOURCE_SAMPLES.jsonl",
+      "bytes": 21130,
+      "sha256": "12529041BDFBD85A4542ED98754AA849FA9922DE660094905C8875FFB41D6BBF"
+    },
+    {
+      "path": "failures/baseline-traced/STOP.json",
+      "bytes": 199,
+      "sha256": "02E53C026292133D9CE2165A6A89F5FFD14A8DE83E39D670BFE4015336CA6919"
+    },
+    {
+      "path": "failures/baseline-traced-seven/events.jsonl",
+      "bytes": 5839,
+      "sha256": "48D56E7E29062AB90BCAACD39CA4E2B0C5F07A4D4F66A0D821A65BBD1D6743C4"
+    },
+    {
+      "path": "failures/baseline-traced-seven/EXIT.json",
+      "bytes": 224,
+      "sha256": "79B1B22DA28D295BE93CE15F4DCB65B4F93C1F550D4533D5683D253EDFD37874"
+    },
+    {
+      "path": "failures/baseline-traced-seven/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "667302942C6F33E7B1224857137F7BEA4F1C730BFFD351BBAEE7646B10706434"
+    },
+    {
+      "path": "failures/baseline-traced-seven/RESOURCE_SAMPLES.jsonl",
+      "bytes": 23541,
+      "sha256": "77EDEFEE37388020142DFEAC6FF8A6E1B0465663103559EA478F7D9D13C70EBD"
+    },
+    {
+      "path": "failures/baseline-traced-seven/STOP.json",
+      "bytes": 199,
+      "sha256": "E15DB9F573FE656160349268B3CE731477801B9AD3235B2BE369942D11E245C6"
+    },
+    {
+      "path": "failures/baseline-traced-short/events.jsonl",
+      "bytes": 7967,
+      "sha256": "0F35510D10F2331FDC992C754F6E0AAD6F43B65A7453BD85D200F55EBEFB6039"
+    },
+    {
+      "path": "failures/baseline-traced-short/EXIT.json",
+      "bytes": 224,
+      "sha256": "23C4E2E81DBB53C6CD42D20AB47A4B0291AD9C00B45A203BA7C808F3D98FEDB8"
+    },
+    {
+      "path": "failures/baseline-traced-short/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "6839A1418A0601346EE3A341379DEF3A0A5E8C4CA392A2607E83117A25EDBD0D"
+    },
+    {
+      "path": "failures/baseline-traced-short/RESOURCE_SAMPLES.jsonl",
+      "bytes": 32071,
+      "sha256": "76A8818A4FD04E951DF9DCE1EE3BB05C12FFF1164D0F30211E71EB663738FF38"
+    },
+    {
+      "path": "failures/baseline-traced-short/STOP.json",
+      "bytes": 200,
+      "sha256": "C01607ABBD2CE979F45D00B51538D66C2C0CC79F74B2C1C7CB0019816B237AF4"
+    },
+    {
+      "path": "failures/baseline-visual/events.jsonl",
+      "bytes": 5845,
+      "sha256": "EE434DCABA07E3E0C3F586B5D1B117B1B9C21B4441F69018937E845B87E1CB56"
+    },
+    {
+      "path": "failures/baseline-visual/EXIT.json",
+      "bytes": 224,
+      "sha256": "6BAE5B37FF29B5ED66E5E406EAE3241A25B28D4947816E3E195480A85F8510BA"
+    },
+    {
+      "path": "failures/baseline-visual/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "1E56FE7712E748728C52D3129569C446D0C86BE4A8B2E116C55922A44400F721"
+    },
+    {
+      "path": "failures/baseline-visual/RESOURCE_SAMPLES.jsonl",
+      "bytes": 20696,
+      "sha256": "1372016948E7474DA835E1A2032A8B20FF50F3621F1F4A16BB5F3A63E869221D"
+    },
+    {
+      "path": "failures/baseline-visual/STOP.json",
+      "bytes": 199,
+      "sha256": "1F31586813AE08E763C7BB21F95398F0BE14ED5EEF6948B79D4F9A911B5C69E9"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/first/events.jsonl",
+      "bytes": 22896,
+      "sha256": "41CE5793B6B86C646D59ADF1C89896130B81AE1387A277256D6E704857621396"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/first/EXIT.json",
+      "bytes": 208,
+      "sha256": "091DC0CD22F694B2FECD155C02538A2EBD03EAAB724DD01D02EBC60548820F86"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/first/LAUNCH.json",
+      "bytes": 359,
+      "sha256": "756594FEAB2DC83971485841FA187BCEFA3983649485E307279FB862D60A6A76"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/first/RESOURCE_SAMPLES.jsonl",
+      "bytes": 85497,
+      "sha256": "B69FDD0FB9D67077BE71A403D4E0DF4D1DFEFB528EAF1E9A077388BA965CC528"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/reopen/events.jsonl",
+      "bytes": 18518,
+      "sha256": "31863F919F15C8FCF9E689D0EDD00108222B370D955DCEF69AF6D010ECC4B11D"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/reopen/EXIT.json",
+      "bytes": 224,
+      "sha256": "818C4F211D67A156017BEF6836739D567425A9B51F9C0AF9419EA85F78DFD504"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/reopen/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "8778A6C2AA98A4BCA912DA22AD9BDAB52CD56924A428924C9D9AB6BB4D841604"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/reopen/RESOURCE_SAMPLES.jsonl",
+      "bytes": 34942,
+      "sha256": "E3D2601D38612374023A184415740973F3D2AE9F2D6ACCF392D8D968F2117815"
+    },
+    {
+      "path": "failures/edd6d25e-independent-reopen/reopen/STOP.json",
+      "bytes": 237,
+      "sha256": "25E120D7584D331B527CF3526FA453991F3C11F86BDE0C8E8B69C57899049EB0"
+    },
+    {
+      "path": "LOCAL_ARTIFACTS.json",
+      "bytes": 6192,
+      "sha256": "8B085DE095CBB9022B698A161E1B21851EF0E8A480F760E244F16C63C2AC19A0"
+    },
+    {
+      "path": "logs/baseline-srgb-test.log.txt",
+      "bytes": 183443,
+      "sha256": "B4257A6C9EBFA0CB724117708872E3F75B141F9B5E4CC783443617D4211E2A85"
+    },
+    {
+      "path": "logs/final02-build.log.txt",
+      "bytes": 8245,
+      "sha256": "A473098D28A4CD5B75314D1A97D9F2ECA0EB8A58F1CDEFBE82BD2B14230BBB03"
+    },
+    {
+      "path": "logs/profiler-install.log.txt",
+      "bytes": 116,
+      "sha256": "EE79E5DCA06B50ECE8C0115CC53886D5B0F10739782A410A0E5CD4ED14275C58"
+    },
+    {
+      "path": "logs/tests-final.log.txt",
+      "bytes": 178920,
+      "sha256": "6BA4B69D84EEBF0DDBEE456B8147B2DA4081FB7A1196E1804E8871F4EA4B8633"
+    },
+    {
+      "path": "logs/tests-targeted-final.log.txt",
+      "bytes": 528,
+      "sha256": "2D01F102E880B6A5C2C89A659C68CF26755050993CBC423B2880FCC59846F716"
+    },
+    {
+      "path": "PRESERVATION.json",
+      "bytes": 1664,
+      "sha256": "31A8C03791AE8534A488FEAFF60B5CC7A4CFBB888E39580901E7206CB757EAE7"
+    },
+    {
+      "path": "PRODUCT_COMMITS.mbox",
+      "bytes": 16299,
+      "sha256": "4F71E70D15C456CF025F2656D168A6503EC1C57CC6322CB2E02330FEA33CEDF7"
+    },
+    {
+      "path": "R3_VERIFICATION.json",
+      "bytes": 1927,
+      "sha256": "1745D5DD24DA63B4DDA18DF947B94F7CF8694409AEEEF9AE6C9F6F4E16DB6B6A"
+    },
+    {
+      "path": "RECEIPT.json",
+      "bytes": 17881,
+      "sha256": "B88520AF22E4BB970F685B9F0D08FF1D725E13F851577DA530D5BE225FB7D8E8"
+    },
+    {
+      "path": "receipts/final02-home-sony/COMPARISON.json",
+      "bytes": 12614,
+      "sha256": "B401A4841CC0DF34F277C418678AF904567DED785B51351D83FA292B6A344B7F"
+    },
+    {
+      "path": "receipts/final02-home-sony/first/events.jsonl",
+      "bytes": 22841,
+      "sha256": "C01E3BFE8C3CF79E34302C591674FBA2682D9E0C6C5F548D3100719602532B76"
+    },
+    {
+      "path": "receipts/final02-home-sony/first/EXIT.json",
+      "bytes": 207,
+      "sha256": "9640130CCF1B4F9420A4AAE51AC7AF1FF8BD05B210E9776101EE3753502CA33D"
+    },
+    {
+      "path": "receipts/final02-home-sony/first/LAUNCH.json",
+      "bytes": 358,
+      "sha256": "1154B3B8F5719909C5844151880C31D465C164A66CDDCEA02BD4F62FBA3BE18C"
+    },
+    {
+      "path": "receipts/final02-home-sony/first/RENDERED_TIFF_RESULT.json",
+      "bytes": 1076,
+      "sha256": "2D066C9199571CE31B55588851FDB319F65DE48CCF97AC58D1C310A72EE8A005"
+    },
+    {
+      "path": "receipts/final02-home-sony/first/RESOURCE_SAMPLES.jsonl",
+      "bytes": 89456,
+      "sha256": "E6748370A0ACF3B4F8B8D58D84171F79BB4A4356559B8FCAAE16C20E4D77417B"
+    },
+    {
+      "path": "receipts/final02-home-sony/INPUT_TASK.json",
+      "bytes": 765,
+      "sha256": "9553DCE05B0FCC8A952B0AE802D94495910507399E6A95A820CEBB9B041112F2"
+    },
+    {
+      "path": "receipts/final02-home-sony/reopen/events.jsonl",
+      "bytes": 28221,
+      "sha256": "C3ED0CC7667BF45D1E0A2C84EEE31806D07237196BC971B45ABA48A1C6137B21"
+    },
+    {
+      "path": "receipts/final02-home-sony/reopen/EXIT.json",
+      "bytes": 207,
+      "sha256": "BF6877E0910B5B45849DEE8A965BF114C65C51CBE726B1DC694008ADDFD5E81B"
+    },
+    {
+      "path": "receipts/final02-home-sony/reopen/LAUNCH.json",
+      "bytes": 358,
+      "sha256": "3E3C896A180BD8EDD3F3754B4FF35F5FAED4B47BA664F3A471C4F276B1AD7836"
+    },
+    {
+      "path": "receipts/final02-home-sony/reopen/RENDERED_TIFF_RESULT.json",
+      "bytes": 1077,
+      "sha256": "C84E3DFA82F7E4DF574B7823A39D99A79BF3220A4712BB347BFB27F7F36CBDE6"
+    },
+    {
+      "path": "receipts/final02-home-sony/reopen/RESOURCE_SAMPLES.jsonl",
+      "bytes": 93473,
+      "sha256": "6FAAC61A83483192B5D35CD3C3EFE264358A17AA3369F9B3745A8BF0BB4B71A4"
+    },
+    {
+      "path": "receipts/final02-synthetic/COMPARISON.json",
+      "bytes": 12391,
+      "sha256": "A45A707E8295EBF762E103F224DD6901F93AA2FA6B44B6989581F64CFE9F8CF8"
+    },
+    {
+      "path": "receipts/final02-synthetic/first/events.jsonl",
+      "bytes": 22890,
+      "sha256": "C5A85FEABD80323320A060E8AD4DF9CC7688AF2E6AB10F9A2596F28E086C6440"
+    },
+    {
+      "path": "receipts/final02-synthetic/first/EXIT.json",
+      "bytes": 207,
+      "sha256": "A8A1A44476712650E81F36F65FB3CD0933D6CC9012DF182208AECB537A34AB3F"
+    },
+    {
+      "path": "receipts/final02-synthetic/first/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "CD857C82B875E18A29F893558BBCAE5A3C81FD10D6708C2DC52E33B3F967CF40"
+    },
+    {
+      "path": "receipts/final02-synthetic/first/RENDERED_TIFF_RESULT.json",
+      "bytes": 1056,
+      "sha256": "D541B1D4E0441DDF603FFAA9FE9F3583AFFEF8E947A34D7C1C78B28D04F7D909"
+    },
+    {
+      "path": "receipts/final02-synthetic/first/RESOURCE_SAMPLES.jsonl",
+      "bytes": 85335,
+      "sha256": "1A0FBAAA1D1AF959B3F8F99A5C929A38F4867A429B69B016D0E510F512E66B06"
+    },
+    {
+      "path": "receipts/final02-synthetic/INPUT_TASK.json",
+      "bytes": 1011,
+      "sha256": "893B45C3370D634AB2F43F4F21D173D3674FBE40207D154D652ED98B4B398D76"
+    },
+    {
+      "path": "receipts/final02-synthetic/reopen/events.jsonl",
+      "bytes": 28213,
+      "sha256": "9415D13EE8234D839945D5AC565E213BFE71E8E158B01A180A985CE8A894F74F"
+    },
+    {
+      "path": "receipts/final02-synthetic/reopen/EXIT.json",
+      "bytes": 207,
+      "sha256": "BDC59BF7C971A8866DC4F8AF5481ABC239370132A4335032314FB785BE4BA39C"
+    },
+    {
+      "path": "receipts/final02-synthetic/reopen/LAUNCH.json",
+      "bytes": 360,
+      "sha256": "E1ABE58812E55B3C425569AE46FCE8D0AD9558490D07B6450CBACDB63B562147"
+    },
+    {
+      "path": "receipts/final02-synthetic/reopen/RENDERED_TIFF_RESULT.json",
+      "bytes": 1056,
+      "sha256": "8BBF677097894CF96ABEF78E135E1D56CF09596D2F5949A9E7F7F040277EAC0D"
+    },
+    {
+      "path": "receipts/final02-synthetic/reopen/RESOURCE_SAMPLES.jsonl",
+      "bytes": 90138,
+      "sha256": "53DE73B844F74D0F28A9F03643EC6758C8FE7413958CDC11A2C265F94F029D88"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5165,
+      "sha256": "8A4AC30EA1BE447E36B21EB09A7BFD9CD9193E258851DE267589A9AC76E548E7"
+    },
+    {
+      "path": "tests/baseline-known-failure.trx",
+      "bytes": 3957,
+      "sha256": "F7145792ED855EAB04682CB6DFF7A80D27217476CEDAA7C066F71F38E9BCDBAE"
+    },
+    {
+      "path": "tests/expanded.trx",
+      "bytes": 49648,
+      "sha256": "A825C9D647FC7BAF74A3775FD213B7067C5D25135A3AA1BBAB5022E0A9D4E681"
+    },
+    {
+      "path": "tests/targeted.trx",
+      "bytes": 22638,
+      "sha256": "11346C6AE2C75248AE2FFF911B1AD50B4186AFDA1760E8D43A747FB5FF1D6A20"
+    },
+    {
+      "path": "TIFF_MEMORY_MINIMAL.patch",
+      "bytes": 14556,
+      "sha256": "CAEF4EAAD8CE1D5BD1C8B67D00BC69B870487CBA2479C9B91333594EAF0544CE"
+    }
+  ]
+}
