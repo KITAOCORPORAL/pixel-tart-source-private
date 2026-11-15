@@ -60,7 +60,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput){VariantsExpanded=item.VariantsExpanded}).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
-            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true};
+            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true,WorkflowProjectId=WorkflowProjectId};
         path=Path.GetFullPath(path);
         if(Targets.Any(t=>string.Equals(Path.GetFullPath(t.Path),path,StringComparison.OrdinalIgnoreCase)))throw new IOException("不能将工作文件保存到源照片路径。");
         // Session embeds its versions as one portable snapshot. Repository persistence is an
@@ -130,7 +130,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);
         var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();
         var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;
-        var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;
+        var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldWorkflow=WorkflowProjectId;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;
         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
         try
         {
@@ -178,7 +178,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??"项目激活失败");
         }
         else { TargetImage = null; TargetName = "尚未选择待调色照片"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }
-        NotifyR53Variants(); RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));OnPropertyChanged(nameof(ExplicitSdrDisplayColor));OnPropertyChanged(nameof(ManualMonitorProfile));NotifyColorState();
+        WorkflowProjectId=document.WorkflowProjectId; NotifyR53Variants(); RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));OnPropertyChanged(nameof(ExplicitSdrDisplayColor));OnPropertyChanged(nameof(ManualMonitorProfile));NotifyColorState();
         _batchUndo.Clear();_batchRedo.Clear();RaiseBatchHistory();
         SetStatus("SessionRestored", restored.Length, missing);
         if(staged is not null)
@@ -200,7 +200,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             }
             Targets.Clear();foreach(var item in oldTargets)Targets.Add(item);
             FailedTarget=oldFailed;Editor.RestoreTargetEngine(oldEngine,oldMode);
-            FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;
+            FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;WorkflowProjectId=oldWorkflow;
             _applyingActiveSnapshot=true;
             if(oldActive is not null)
             {

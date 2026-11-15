@@ -1,0 +1,153 @@
+{
+  "sourceLocalReceipt": "uploaded.json",
+  "sourceSha256": "fb1d90ed3f7e4d475259e742f2561f826a5955a03c5a2adf5f1e1b7ecab25305",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-90048796",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionProjectListItemViewModel",
+      "role": "option"
+    },
+    {
+      "name": "3 张照片 · 已选 0 张",
+      "role": "statictext"
+    },
+    {
+      "name": "已选 0/3",
+      "role": "statictext"
+    },
+    {
+      "name": "本地代理 3 张 · 服务确认 3 张",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineUploadSummary"
+      }
+    },
+    {
+      "name": "服务已确认上传，可按当前规则发布。",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineOperationStatus"
+      }
+    },
+    {
+      "name": "尚未收到有效的服务器确认回执。",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineConfirmationReceipt"
+      }
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "选片项目已创建并导入 3 张照片，代理 JPG 已就绪。",
+      "role": "statictext"
+    }
+  ]
+}

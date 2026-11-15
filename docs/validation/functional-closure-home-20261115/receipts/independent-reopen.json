@@ -1,0 +1,176 @@
+{
+  "sourceLocalReceipt": "independent-reopen.json",
+  "sourceSha256": "a53c56115973b03143bfdc530bef6dcb6c5efe9239279c3f9b136d519bcf924a",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-9178974",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "已保存",
+      "role": "statictext"
+    },
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "新 RAW 处理版本",
+      "role": "button"
+    },
+    {
+      "name": "新 RAW 处理版本",
+      "role": "statictext"
+    },
+    {
+      "name": "线性亮度 Y   0 ───── 0.5 ───── 1",
+      "role": "statictext"
+    },
+    {
+      "name": "基础曝光",
+      "role": "statictext"
+    },
+    {
+      "name": "曝光",
+      "role": "textfield",
+      "value": "0.5"
+    },
+    {
+      "name": "曝光 · EV",
+      "role": "statictext"
+    },
+    {
+      "name": "曝光",
+      "role": "slider"
+    },
+    {
+      "name": "3 / 3 张 · 已选 3 · 隐藏已选 0（不参与）",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.ReferenceTargetItem",
+      "role": "option",
+      "states": [
+        "selected"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.ReferenceTargetItem",
+      "role": "option",
+      "states": [
+        "selected"
+      ]
+    },
+    {
+      "name": "已保存",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.ReferenceTargetItem",
+      "role": "option"
+    },
+    {
+      "name": "HOME_0001.jpg",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.ReferenceTargetItem",
+      "role": "option"
+    },
+    {
+      "name": "HOME_0002.jpg",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.ReferenceTargetItem",
+      "role": "option",
+      "states": [
+        "selected"
+      ]
+    },
+    {
+      "name": "HOME_0003.jpg",
+      "role": "statictext"
+    },
+    {
+      "name": "ColorAdjustmentStackNode { Id = 2b2755f3-bf72-4f1b-b23e-0b28a7f26de2, Type = BasicTone, Name = 基础与 HDR 影调, Enabled = True, FilmSettings = , CompositeVersion = 0, GraphLabel = 0, Opacity = 1, Blend = Normal, LocalMask = , WideToolVersion = 0, UserLocked = False, SystemLocked = False, IsLocked = False, NumericParameters = System.Collections.Generic.Dictionary`2[System.String,System.Double], Samples = RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualRgb24[], NegativeSamples = RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualRgb24[] }",
+      "role": "option",
+      "states": [
+        "selected"
+      ]
+    },
+    {
+      "name": "⌄ 曝光",
+      "role": "group",
+      "states": [
+        "expanded"
+      ]
+    },
+    {
+      "name": "⌄ 曝光",
+      "role": "switch",
+      "states": [
+        "checked"
+      ]
+    },
+    {
+      "name": "⌄ 曝光",
+      "role": "statictext"
+    },
+    {
+      "name": "曝光",
+      "role": "statictext"
+    },
+    {
+      "name": "曝光",
+      "role": "slider",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "CompactStudioSlider-BasicTone-exposure"
+      }
+    },
+    {
+      "name": "曝光",
+      "role": "textfield",
+      "value": "0.5",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "CompactStudioValue-BasicTone-exposure"
+      }
+    },
+    {
+      "name": "RAW 基础白平衡",
+      "role": "group",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAW 基础白平衡",
+      "role": "switch",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAW 基础白平衡",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "已保存",
+      "role": "button"
+    },
+    {
+      "name": "已保存",
+      "role": "statictext"
+    }
+  ]
+}

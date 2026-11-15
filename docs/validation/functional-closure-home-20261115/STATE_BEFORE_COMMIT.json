@@ -1,0 +1,210 @@
+{
+  "headAtAudit": "bdc913c9463573247b9b6460f9a1102e40e74a31",
+  "runtime": "N:\\pixart\\guangjing-product-functional-home-20261115\\artifacts\\home-20261115\\workflow-runtime",
+  "batch": "HOME-SYNTHETIC-20261115",
+  "sourceDirectoryExists": true,
+  "projects": [
+    {
+      "id": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "name": "未命名项目",
+      "selectionId": "31167290-4b07-4744-8a3a-b98327b17cc0"
+    }
+  ],
+  "sources": [
+    {
+      "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "path": "N:\\pixart\\guangjing-product-functional-home-20261115\\artifacts\\home-20261115\\synthetic-inputs\\source-jpegs"
+    },
+    {
+      "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "path": "N:\\pixart\\guangjing-product-functional-home-20261115\\artifacts\\home-20261115\\workflow-runtime\\OnlineSelection\\Prepared\\136bc56f51104c66b0f8f46204497fd0\\f2b06694b4b64e5b9a5b47a276b481db"
+    }
+  ],
+  "selectionInputs": [
+    {
+      "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "input": "HOME_0001.png"
+    },
+    {
+      "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "input": "HOME_0002.png"
+    },
+    {
+      "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "input": "HOME_0003.png"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "41c744b1-d21a-462d-a865-4630519ed83a",
+      "projectId": null,
+      "title": "HOME-SYNTHETIC-20261115 档期",
+      "start": "2026-11-15T02:00:00.0000000+00:00",
+      "end": "2026-11-15T03:00:00.0000000+00:00",
+      "status": "Tentative",
+      "revision": 2
+    }
+  ],
+  "integrity": "ok",
+  "onlineProjects": [
+    {
+      "Id": "31167290-4b07-4744-8a3a-b98327b17cc0",
+      "WorkflowProjectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+      "Status": 5,
+      "Name": "未命名项目"
+    }
+  ],
+  "serverResults": [
+    {
+      "projectId": "31167290-4b07-4744-8a3a-b98327b17cc0",
+      "version": 1,
+      "revision": 8,
+      "selected": 3,
+      "items": [
+        "d39cf019-ba15-4b06-b7ea-23ad40687e87",
+        "d598a4e4-f9f7-4592-914a-513ab76b012a",
+        "84aec5f3-29b9-4bd2-b376-3f439b4a46d9"
+      ]
+    }
+  ],
+  "studioSession": {
+    "projectId": "136bc56f-5110-4c66-b0f8-f46204497fd0",
+    "targets": 3,
+    "selected": 3,
+    "activeTargetId": "0be14e92-cb88-418b-83c4-d070c294933c"
+  },
+  "indexFiles": [],
+  "outputs": [
+    {
+      "file": "HOME_0001_仿色.jpg",
+      "bytes": 44277,
+      "sha256": "28fde16c294b91de8b8b978b183b9bb889797d9d6c24ccc8ee15f57fc96a79ad"
+    },
+    {
+      "file": "HOME_0001_仿色.jpg.kitao-export.json",
+      "bytes": 1636,
+      "sha256": "c5d3929c8b3edecbfd42d1f978cdd440a2db40e2c998a8a1e819f87f78d424cf"
+    },
+    {
+      "file": "HOME_0002_仿色.jpg",
+      "bytes": 43948,
+      "sha256": "88fc0553eae96a16af6c015855a02d4a0479564c4f600018b19408b96964b31b"
+    },
+    {
+      "file": "HOME_0002_仿色.jpg.kitao-export.json",
+      "bytes": 1636,
+      "sha256": "d911f2f8dcd00732a2821de9836d2ebfc2fe677ce027d8c5b5e502f14ae57947"
+    },
+    {
+      "file": "HOME_0003_仿色.jpg",
+      "bytes": 44038,
+      "sha256": "afe57bd0ca808a0075ed07abf5ebd152c4f828af21cf57626606b5eef864addc"
+    },
+    {
+      "file": "HOME_0003_仿色.jpg.kitao-export.json",
+      "bytes": 1636,
+      "sha256": "c3c3fd1a1e54f90ba5613ec2b372019b2aa5269f5506022b49421165f12e28cb"
+    }
+  ],
+  "tests": [
+    {
+      "file": "home-core.trx",
+      "total": "8",
+      "executed": "8",
+      "passed": "8",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    {
+      "file": "home-wpf-final.trx",
+      "total": "19",
+      "executed": "19",
+      "passed": "19",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    {
+      "file": "home-wpf.trx",
+      "total": "19",
+      "executed": "19",
+      "passed": "19",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  ],
+  "latestNativeReceipts": [
+    {
+      "file": "save-linked-phone-booking.json",
+      "modified": 1794752577.5846715
+    },
+    {
+      "file": "correct-phone-booking-full-editor.json",
+      "modified": 1794752630.987938
+    },
+    {
+      "file": "full-booking-steps.json",
+      "modified": 1794752636.0533004
+    },
+    {
+      "file": "full-booking-details.json",
+      "modified": 1794752673.0894783
+    },
+    {
+      "file": "booking-step-time.json",
+      "modified": 1794752702.5420537
+    },
+    {
+      "file": "booking-time-fields.json",
+      "modified": 1794752709.2022376
+    },
+    {
+      "file": "booking-end-date-corrected.json",
+      "modified": 1794752773.899072
+    },
+    {
+      "file": "booking-next-documents.json",
+      "modified": 1794752788.5391202
+    },
+    {
+      "file": "booking-next-final.json",
+      "modified": 1794752803.768113
+    },
+    {
+      "file": "save-corrected-synthetic-booking.json",
+      "modified": 1794752819.491855
+    }
+  ]
+}

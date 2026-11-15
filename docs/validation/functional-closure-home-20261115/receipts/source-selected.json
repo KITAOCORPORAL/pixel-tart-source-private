@@ -1,0 +1,55 @@
+{
+  "sourceLocalReceipt": "source-selected.json",
+  "sourceSha256": "fef6ef114c0943a9e6bbe5a101eaf72968ef6d596b122660df6854beb0a39a5a",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-617416130",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "当前工作区 · 归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "归片",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.Models.SourceDirectoryEntry",
+      "role": "option"
+    },
+    {
+      "name": "N:\\pixart\\guangjing-product-functional-home-20261115\\artifacts\\home-20261115\\synthetic-inputs\\source-jpegs  [JPG + RAW 混合目录]",
+      "role": "statictext"
+    },
+    {
+      "name": "归片类别",
+      "role": "statictext"
+    },
+    {
+      "name": "来源 JPG 未找到时",
+      "role": "statictext"
+    },
+    {
+      "name": "JPG / RAW",
+      "role": "statictext"
+    },
+    {
+      "name": "输入：  ·  JPG：  ·  RAW：  ·  备注：",
+      "role": "statictext"
+    }
+  ]
+}

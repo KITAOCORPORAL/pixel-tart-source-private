@@ -675,7 +675,9 @@ public sealed class OnlineSelectionViewModel : ObservableObject
         return false;
     }
 
-    public async Task CreateProjectAsync(IEnumerable<string> initialPaths, CancellationToken cancellationToken = default)
+    public Task CreateProjectAsync(IEnumerable<string> initialPaths, CancellationToken cancellationToken = default) => CreateProjectCoreAsync(initialPaths,null,cancellationToken);
+    public Task CreateForWorkflowAsync(IEnumerable<string> paths,Guid workflowProjectId,CancellationToken cancellationToken=default) => CreateProjectCoreAsync(paths,workflowProjectId,cancellationToken);
+    private async Task CreateProjectCoreAsync(IEnumerable<string> initialPaths, Guid? workflowProjectId,CancellationToken cancellationToken)
     {
         var selectedPaths = (initialPaths ?? []).Where(path => !string.IsNullOrWhiteSpace(path)).ToArray();
         if (!int.TryParse(TargetCountText, out var targetCount) || targetCount <= 0)
@@ -683,7 +685,7 @@ public sealed class OnlineSelectionViewModel : ObservableObject
             StatusText = "目标数量必须是大于零的数字。";
             return;
         }
-        var project = SelectionProjectFactory.CreateDraft(ProjectName, ClientName, targetCount, Deadline?.ToUniversalTime());
+        var project = SelectionProjectFactory.CreateDraft(ProjectName, ClientName, targetCount, Deadline?.ToUniversalTime()) with { WorkflowProjectId=workflowProjectId };
         var validation = SelectionProjectValidator.ValidateDraft(project);
         if (!validation.IsValid) { StatusText = validation.Message; return; }
         IsBusy = true;

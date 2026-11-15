@@ -1,0 +1,21 @@
+{
+  "status": "PARTIAL_BEFORE_REPEATABILITY_FIX",
+  "items": [
+    {
+      "id": "DERIVED_SOURCE_FREE_LIMIT",
+      "action": "Preserve original source directory only on same-project handoff; re-scan after result return; no license bypass."
+    },
+    {
+      "id": "MEMORY_INTEGRATION",
+      "action": "Coordinate common bdc913c9 baseline and explicitly integrate the two approved minimal product commits."
+    },
+    {
+      "id": "FINAL_SOURCE_PACKAGE_BINDING",
+      "action": "Publish complete package after source commit, verify source SHA and repeat independent reopen."
+    },
+    {
+      "id": "IPHONE_ROUNDTRIP",
+      "action": "Prepared synthetic booking and protected private URL; actual iPhone feedback still missing."
+    }
+  ]
+}

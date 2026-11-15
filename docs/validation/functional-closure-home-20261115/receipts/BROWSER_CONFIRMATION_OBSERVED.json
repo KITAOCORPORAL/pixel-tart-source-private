@@ -1,0 +1,620 @@
+{
+  "authority": "System Chrome real document accessibility plus server HTTP audit",
+  "actor": "Not attributed: confirmation occurred after browser opened, before agent issued checkbox actions",
+  "sourceSha256": "eb5b14ad78e551f16d0c7420d3b6a5ba894bccbdd216b5c7d51d20bba248191d",
+  "document": {
+    "available_actions": [
+      "Scroll",
+      "ScrollTo",
+      "SetFocus"
+    ],
+    "children": [
+      {
+        "available_actions": [
+          "Click",
+          "ScrollTo"
+        ],
+        "children": [
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "光镜 · 客户选片",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "未命名项目",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "name": "未命名项目",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "title"
+                    },
+                    "role": "statictext",
+                    "role_description": "标题",
+                    "subrole": "heading"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "目标 3 张，最多 3 张；确认后锁定。",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "rule"
+                    },
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "章节标题",
+                "subrole": "group"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "服务器已确认并锁定，摄影师可读取结果。",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "status"
+                },
+                "role": "status",
+                "role_description": "状态",
+                "subrole": "status"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "服务器确认回执：v1 / r8 · 2026/11/15 22:07:20",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "subrole": "description"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "receipt"
+                },
+                "role": "status",
+                "role_description": "状态",
+                "subrole": "status"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "选片预览",
+                        "role": "image",
+                        "role_description": "图形",
+                        "subrole": "img"
+                      },
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "children": [
+                          {
+                            "available_actions": [
+                              "Toggle",
+                              "ScrollTo",
+                              "Click"
+                            ],
+                            "name": "选择 HOME_0001.png",
+                            "ref_id": "@s1ragcj5rflwm:e89",
+                            "role": "checkbox",
+                            "role_description": "复选框",
+                            "states": [
+                              "disabled",
+                              "checked",
+                              "readonly"
+                            ],
+                            "subrole": "checkbox"
+                          },
+                          {
+                            "available_actions": [
+                              "ScrollTo"
+                            ],
+                            "name": "HOME_0001.png",
+                            "role": "statictext",
+                            "role_description": "文本",
+                            "subrole": "description"
+                          }
+                        ],
+                        "role": "group",
+                        "role_description": "组",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "文章",
+                    "subrole": "article"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "选片预览",
+                        "role": "image",
+                        "role_description": "图形",
+                        "subrole": "img"
+                      },
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "children": [
+                          {
+                            "available_actions": [
+                              "Toggle",
+                              "ScrollTo",
+                              "Click"
+                            ],
+                            "name": "选择 HOME_0002.png",
+                            "ref_id": "@s1ragcj5rflwm:e90",
+                            "role": "checkbox",
+                            "role_description": "复选框",
+                            "states": [
+                              "disabled",
+                              "checked",
+                              "readonly"
+                            ],
+                            "subrole": "checkbox"
+                          },
+                          {
+                            "available_actions": [
+                              "ScrollTo"
+                            ],
+                            "name": "HOME_0002.png",
+                            "role": "statictext",
+                            "role_description": "文本",
+                            "subrole": "description"
+                          }
+                        ],
+                        "role": "group",
+                        "role_description": "组",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "文章",
+                    "subrole": "article"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "选片预览",
+                        "role": "image",
+                        "role_description": "图形",
+                        "subrole": "img"
+                      },
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "children": [
+                          {
+                            "available_actions": [
+                              "Toggle",
+                              "ScrollTo",
+                              "Click"
+                            ],
+                            "name": "选择 HOME_0003.png",
+                            "ref_id": "@s1ragcj5rflwm:e91",
+                            "role": "checkbox",
+                            "role_description": "复选框",
+                            "states": [
+                              "disabled",
+                              "checked",
+                              "readonly"
+                            ],
+                            "subrole": "checkbox"
+                          },
+                          {
+                            "available_actions": [
+                              "ScrollTo"
+                            ],
+                            "name": "HOME_0003.png",
+                            "role": "statictext",
+                            "role_description": "文本",
+                            "subrole": "description"
+                          }
+                        ],
+                        "role": "group",
+                        "role_description": "组",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "文章",
+                    "subrole": "article"
+                  }
+                ],
+                "name": "相册照片",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "gallery"
+                },
+                "role": "group",
+                "role_description": "区域",
+                "subrole": "region"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "已选 3 / 3 张",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "count"
+                    },
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "Click",
+                      "ScrollTo"
+                    ],
+                    "name": "确认选择并锁定",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "confirm"
+                    },
+                    "ref_id": "@s1ragcj5rflwm:e92",
+                    "role": "button",
+                    "role_description": "按钮",
+                    "states": [
+                      "disabled"
+                    ],
+                    "subrole": "button"
+                  },
+                  {
+                    "available_actions": [
+                      "Click",
+                      "ScrollTo",
+                      "SetFocus"
+                    ],
+                    "name": "刷新相册",
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "refresh"
+                    },
+                    "ref_id": "@s1ragcj5rflwm:e93",
+                    "role": "button",
+                    "role_description": "按钮",
+                    "subrole": "button"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "确认后无法修改。链接仅能查看本相册，可能被摄影师撤销或过期。",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "subrole": "description"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "subrole": "group"
+                  }
+                ],
+                "role": "group",
+                "role_description": "章节页脚",
+                "subrole": "group"
+              }
+            ],
+            "role": "group",
+            "role_description": "主要",
+            "subrole": "main"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "native_id": {
+              "kind": "automation_id",
+              "value": "aix-action-loading-host"
+            },
+            "role": "group",
+            "role_description": "组",
+            "subrole": "group"
+          },
+          {
+            "available_actions": [
+              "ScrollTo"
+            ],
+            "children": [
+              {
+                "available_actions": [
+                  "Click",
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "name": "×",
+                    "role": "statictext",
+                    "role_description": "文本",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "description"
+                  }
+                ],
+                "name": "×",
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "aix-drop-panel-close-btn"
+                },
+                "ref_id": "@s1ragcj5rflwm:e94",
+                "role": "link",
+                "role_description": "链接",
+                "states": [
+                  "offscreen",
+                  "readonly"
+                ],
+                "subrole": "link"
+              },
+              {
+                "available_actions": [
+                  "ScrollTo"
+                ],
+                "children": [
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "role": "image",
+                        "role_description": "图形",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "img"
+                      },
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "children": [
+                          {
+                            "available_actions": [
+                              "ScrollTo"
+                            ],
+                            "name": "拖拽到此处完成下载",
+                            "role": "statictext",
+                            "role_description": "文本",
+                            "states": [
+                              "offscreen"
+                            ],
+                            "subrole": "description"
+                          }
+                        ],
+                        "role": "group",
+                        "role_description": "组",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "group"
+                      },
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "children": [
+                          {
+                            "available_actions": [
+                              "ScrollTo"
+                            ],
+                            "name": "图片将完成下载",
+                            "role": "statictext",
+                            "role_description": "文本",
+                            "states": [
+                              "offscreen"
+                            ],
+                            "subrole": "description"
+                          }
+                        ],
+                        "role": "group",
+                        "role_description": "组",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "group"
+                      }
+                    ],
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  },
+                  {
+                    "available_actions": [
+                      "ScrollTo"
+                    ],
+                    "children": [
+                      {
+                        "available_actions": [
+                          "ScrollTo"
+                        ],
+                        "name": "AIX智能下载器",
+                        "role": "statictext",
+                        "role_description": "文本",
+                        "states": [
+                          "offscreen"
+                        ],
+                        "subrole": "description"
+                      }
+                    ],
+                    "native_id": {
+                      "kind": "automation_id",
+                      "value": "aix-supported-by"
+                    },
+                    "role": "group",
+                    "role_description": "组",
+                    "states": [
+                      "offscreen"
+                    ],
+                    "subrole": "group"
+                  }
+                ],
+                "native_id": {
+                  "kind": "automation_id",
+                  "value": "aix-drop-panel-inner"
+                },
+                "role": "group",
+                "role_description": "组",
+                "states": [
+                  "offscreen"
+                ],
+                "subrole": "group"
+              }
+            ],
+            "native_id": {
+              "kind": "automation_id",
+              "value": "aix-drop-panel"
+            },
+            "role": "group",
+            "role_description": "组",
+            "states": [
+              "offscreen"
+            ],
+            "subrole": "group"
+          }
+        ],
+        "ref_id": "@s1ragcj5rflwm:e88",
+        "role": "group",
+        "role_description": "组",
+        "subrole": "group"
+      }
+    ],
+    "name": "光镜客户选片",
+    "native_id": {
+      "kind": "automation_id",
+      "value": "RootWebArea"
+    },
+    "ref_id": "@s1ragcj5rflwm:e87",
+    "role": "document",
+    "role_description": "文档",
+    "states": [
+      "focused",
+      "readonly"
+    ],
+    "subrole": "document",
+    "value": "http://127.0.0.1:17715/s/d8430ff8c61bf71cb96bcbf968ad0c099d5e"
+  }
+}

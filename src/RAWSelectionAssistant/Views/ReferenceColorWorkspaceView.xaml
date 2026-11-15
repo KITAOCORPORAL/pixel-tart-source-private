@@ -148,6 +148,8 @@
     <Button x:Name="EditRailButton" Content="{views:StudioText EditPanel}" Click="OnToggleEditRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <Button x:Name="ContextRailButton" Content="{views:StudioText AuxPanel}" Click="OnToggleAuxRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <views:StudioExportMenu Margin="8,0,0,0" />
+    <Button Content="发送所选编辑结果到客户选片" Command="{Binding PrepareOnlineSelectionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
+    <Button Content="导出客户所选照片" Command="{Binding ExportSelectedCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
    </WrapPanel>
   </Grid>

@@ -70,6 +70,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private ReferenceTargetItem? _copiedAdjustments;
     public Action<IReadOnlyList<string>>? OpenPublishing { get; set; }
+    public Func<IReadOnlyList<string>,Task>? OpenOnlineSelection { get; set; }
+    public Guid? WorkflowProjectId { get; private set; }
+    public void BindWorkflowProject(Guid projectId) => WorkflowProjectId=projectId;
+    public AsyncRelayCommand PrepareOnlineSelectionCommand { get; }
     public bool HasCopiedAdjustments => _copiedAdjustments is not null;
     public RelayCommand CopyAdjustmentsCommand { get; }
     public RelayCommand ApplyAdjustmentsCommand { get; }
@@ -116,10 +120,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         }
     }
 
-    private async Task PreparePublishingAsync()
+    private async Task PreparePublishingAsync(bool forSelection=false)
     {
         await StopComparisonAsync();
-        if (OpenPublishing is null || IsExporting || IsInstantGenerating) return;
+        if ((forSelection ? OpenOnlineSelection is null || WorkflowProjectId is null : OpenPublishing is null) || IsExporting || IsInstantGenerating) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
@@ -163,7 +167,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             ExportFailureSummary = failures.Count == 0 ? "" : StudioLocalizationService.Current.Format("PrepareFailures", string.Join(", ", failures));
             SetExportStatus("PrepareFinished", paths.Count, items.Length, failures.Count);
             if (failures.Count > 0) _dialogs.ShowInfo(ExportStatus + "\n" + ExportFailureSummary);
-            if (paths.Count > 0){publishingLease.CompleteExisting();publishingLease.Handoff();publishingLease.Dispose();OpenPublishing(paths);handedOff=true;}
+            if (paths.Count > 0)
+            {
+                publishingLease.CompleteExisting();
+                if(forSelection) await OpenOnlineSelection!(paths);
+                else {publishingLease.Handoff();publishingLease.Dispose();OpenPublishing!(paths);handedOff=true;}
+            }
         }
         catch (OperationCanceledException) { ExportStatus = "已停止准备发布"; }
         finally
@@ -200,6 +209,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
+        PrepareOnlineSelectionCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(true), _ => OpenOnlineSelection is not null && WorkflowProjectId is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
         SyncSelectedCommand = new RelayCommand(_ => SyncCurrentTo(SyncDestinationTargets), _ => !IsProfessionalRaw && ActiveTarget is not null && SyncDestinationTargets.Count > 0 && !IsLoading);
         SyncAllCommand = new RelayCommand(_ => SyncCurrentTo(VisibleTargets.Where(x => !ReferenceEquals(x, ActiveTarget)).ToArray()), _ => ActiveTarget is not null && VisibleTargets.Any(x => !ReferenceEquals(x, ActiveTarget)) && !IsLoading);
         OpenNodeSyncCommand = new RelayCommand(_ => { FreezeSync(); _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in _pendingSync?.Adjustment.Stack?.Nodes ?? []) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; }, _ => CanSyncSelectedNodes);
@@ -445,7 +455,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         SetSelectedRatingCommand?.RaiseCanExecuteChanged(); SetSelectedColorLabelCommand?.RaiseCanExecuteChanged();
         SaveSessionCommand?.RaiseCanExecuteChanged(); OpenSessionCommand?.RaiseCanExecuteChanged(); RaiseBatchHistory();
         OpenNodeSyncCommand?.RaiseCanExecuteChanged(); SyncSelectedCommand?.RaiseCanExecuteChanged(); SyncAllCommand?.RaiseCanExecuteChanged();
-        CopyAdjustmentsCommand?.RaiseCanExecuteChanged(); ApplyAdjustmentsCommand?.RaiseCanExecuteChanged(); PreparePublishingCommand?.RaiseCanExecuteChanged();
+        CopyAdjustmentsCommand?.RaiseCanExecuteChanged(); ApplyAdjustmentsCommand?.RaiseCanExecuteChanged(); PreparePublishingCommand?.RaiseCanExecuteChanged(); PrepareOnlineSelectionCommand?.RaiseCanExecuteChanged();
         OpenAdjustmentCopyCommand?.RaiseCanExecuteChanged(); ConfirmAdjustmentCopyCommand?.RaiseCanExecuteChanged();
         ChooseTargetCommand?.RaiseCanExecuteChanged();
         ExportSelectedCommand?.RaiseCanExecuteChanged(); ExportAllCommand?.RaiseCanExecuteChanged();

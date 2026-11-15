@@ -10,6 +10,16 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class OnlineSelectionV1WpfTests
 {
     [TestMethod]
+    public async Task ExplicitWorkflowCreationPersistsOriginalProjectIdentity()
+    {
+        var store=new InMemorySelectionWorkspaceStore();var viewModel=new OnlineSelectionViewModel(store:store);
+        viewModel.ProjectName="合成贯通项目";viewModel.ClientName="合成客户";viewModel.TargetCountText="1";
+        var original=Guid.NewGuid();await viewModel.CreateForWorkflowAsync([],original);
+        Assert.AreEqual(original,viewModel.ProjectPage.Project!.WorkflowProjectId);
+        var snapshot=await store.LoadAsync();Assert.AreEqual(original,snapshot.Projects.Single().WorkflowProjectId);
+    }
+
+    [TestMethod]
     public void ViewModel_DefaultProviderIsNoneAndLocalPrototypeRemainsUsable()
     {
         var viewModel = new OnlineSelectionViewModel();

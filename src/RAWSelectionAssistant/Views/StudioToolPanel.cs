@@ -186,6 +186,8 @@ public sealed class StudioToolPanel : StackPanel
             var label=row.Children.OfType<TextBlock>().FirstOrDefault();if(label is null)continue;
             int index=body.Children.IndexOf(row);body.Children.Remove(field.Slider);body.Children.Remove(row);
             row.Children.Remove(field.Number);row.Children.Remove(label);
+            System.Windows.Automation.AutomationProperties.SetAutomationId(field.Number,"CompactStudioValue-"+field.Parameter.NodeType+"-"+field.Parameter.Key);
+            System.Windows.Automation.AutomationProperties.SetAutomationId(field.Slider,"CompactStudioSlider-"+field.Parameter.NodeType+"-"+field.Parameter.Key);
             var line=new Grid{Height=22,Margin=new Thickness(0)};
             line.ColumnDefinitions.Add(new(){Width=new GridLength(87)});line.ColumnDefinitions.Add(new());line.ColumnDefinitions.Add(new(){Width=new GridLength(44)});
             label.FontSize=11;label.Text=label.Text.Split(" · ")[0];label.TextWrapping=TextWrapping.NoWrap;line.Children.Add(label);

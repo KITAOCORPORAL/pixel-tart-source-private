@@ -359,6 +359,12 @@ public partial class App : Application
 
             StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
+            var workflowArgument=e.Args.FirstOrDefault(a=>a.StartsWith("--workflow-project=",StringComparison.Ordinal));
+            if(Guid.TryParse(workflowArgument?["--workflow-project=".Length..],out var workflowProject))
+            {
+                var studioArgument=e.Args.FirstOrDefault(a=>a.StartsWith("--studio-resume=",StringComparison.Ordinal));
+                await _mainViewModel.ResumeWorkflowProjectAsync(workflowProject,studioArgument?["--studio-resume=".Length..]);
+            }
             if(e.Args.Contains("--mobile-schedule",StringComparer.Ordinal))
             {
                 _mainViewModel.NavigateCommand.Execute("WorkCalendar");

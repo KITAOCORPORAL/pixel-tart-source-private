@@ -194,6 +194,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService, matchV4Executor: matchV4Executor,
             assetRepositoryFactory: assetRepositoryFactory, versionRepository:new Core.Services.Projects.StudioVersionRepository(Path.Combine(AppDataPaths.DataDirectory,"StudioVersions")),filmTaskBridge:taskOperationBridge);
         if (PublishingPage is not null) ReferenceColorPage.OpenPublishing = paths => { PublishingPage.AddFiles(paths); Navigate("Publishing"); };
+        EditIndexedProjectCommand=new AsyncRelayCommand(_=>EditIndexedProjectAsync(),_=>!IsBusy&&Sources.Count>0);
+        ReferenceColorPage.OpenOnlineSelection=PrepareCurrentProjectSelectionAsync;
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {
             await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, null, null).ConfigureAwait(true);
@@ -1003,6 +1005,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public RelayCommand PurchaseCommand { get; }
     public AsyncRelayCommand SaveOutputPresetCommand { get; }
     public AsyncRelayCommand SaveProjectCommand { get; }
+    public AsyncRelayCommand EditIndexedProjectCommand { get; }
     public AsyncRelayCommand RunBatchCommand { get; }
     public RelayCommand ToggleSidebarCommand { get; }
     public RelayCommand SetThemeCommand { get; }
@@ -2958,6 +2961,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         PurchaseCommand.RaiseCanExecuteChanged();
         SaveOutputPresetCommand.RaiseCanExecuteChanged();
         SaveProjectCommand.RaiseCanExecuteChanged();
+        EditIndexedProjectCommand.RaiseCanExecuteChanged();
         RunBatchCommand.RaiseCanExecuteChanged();
     }
 

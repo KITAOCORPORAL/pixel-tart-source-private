@@ -1,0 +1,148 @@
+{
+  "sourceLocalReceipt": "independent-result-restored.json",
+  "sourceSha256": "5a9e1fef3d260ef1f0688925825180cda8049a47e037666d15b1a8b208e86fe5",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-9178974",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionProjectListItemViewModel",
+      "role": "option",
+      "states": [
+        "focused",
+        "selected"
+      ]
+    },
+    {
+      "name": "3 张照片 · 已选 3 张",
+      "role": "statictext"
+    },
+    {
+      "name": "已选 3/3",
+      "role": "statictext"
+    },
+    {
+      "name": "本地代理 3 张 · 服务确认 3 张",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineUploadSummary"
+      }
+    },
+    {
+      "name": "服务器确认回执：v1 / r8 · 2026-11-15 14:07:20 +00:00",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineConfirmationReceipt"
+      }
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled",
+        "checked"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled",
+        "checked"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionAssetViewModel",
+      "role": "row"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "image"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "statictext"
+    },
+    {
+      "name": "服务已确认上传",
+      "role": "statictext"
+    },
+    {
+      "name": "已选",
+      "role": "checkbox",
+      "states": [
+        "disabled",
+        "checked"
+      ]
+    },
+    {
+      "name": "已选",
+      "role": "statictext",
+      "states": [
+        "disabled"
+      ]
+    }
+  ]
+}

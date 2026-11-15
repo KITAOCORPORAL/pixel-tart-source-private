@@ -1,0 +1,79 @@
+{
+  "sourceLocalReceipt": "server-results-received.json",
+  "sourceSha256": "2109e3f93b9f59b0a2cf29821bbc6752484c290aaff094fa20a235813b7279e5",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-90048796",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.ViewModels.OnlineSelectionProjectListItemViewModel",
+      "role": "option"
+    },
+    {
+      "name": "3 张照片 · 已选 0 张",
+      "role": "statictext"
+    },
+    {
+      "name": "已选 3/3",
+      "role": "statictext"
+    },
+    {
+      "name": "本地代理 3 张 · 服务确认 3 张",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineUploadSummary"
+      }
+    },
+    {
+      "name": "客户已确认 3 张，结果已校验并保存，可同步归片。",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineOperationStatus"
+      }
+    },
+    {
+      "name": "服务器确认回执：v1 / r8 · 2026-11-15 14:07:20 +00:00",
+      "role": "statictext",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineConfirmationReceipt"
+      }
+    },
+    {
+      "name": "客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。",
+      "role": "statictext"
+    },
+    {
+      "name": "同步归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "OnlineSyncWorkflow"
+      }
+    },
+    {
+      "name": "同步归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "选片项目已创建并导入 3 张照片，代理 JPG 已就绪。",
+      "role": "statictext"
+    }
+  ]
+}

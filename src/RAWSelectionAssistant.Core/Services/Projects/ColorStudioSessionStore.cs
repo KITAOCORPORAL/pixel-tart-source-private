@@ -72,8 +72,10 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
 {
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
     public bool EmbeddedVersionsAuthoritative {get;init;}
+    public Guid? WorkflowProjectId { get; init; }
     public ColorStudioSessionDocument Normalize()
     {
+        if(WorkflowProjectId==Guid.Empty)throw new InvalidDataException("工作文件归片项目身份无效。");
         if (Version != 1 || Targets is null || Targets.Count > 10000) throw new InvalidDataException("不支持的 Color Studio 工作文件版本或照片数量。");
         if (Targets.Any(x => x is null || x.Id == Guid.Empty || string.IsNullOrWhiteSpace(x.Path)) || Targets.Select(x => x.Id).Distinct().Count() != Targets.Count)
             throw new InvalidDataException("工作文件中包含无效或重复的照片身份。");

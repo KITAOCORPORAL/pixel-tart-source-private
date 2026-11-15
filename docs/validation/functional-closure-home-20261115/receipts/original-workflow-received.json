@@ -1,0 +1,258 @@
+{
+  "sourceLocalReceipt": "original-workflow-received.json",
+  "sourceSha256": "3d69dea0d9f88d80e38efc289dfb783b447ad572f82d146a84d58beb4c4e79c4",
+  "authority": "normal complete EXE; native accessibility; no runtime field injection",
+  "window": {
+    "id": "w-90048796",
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行"
+  },
+  "observations": [
+    {
+      "name": "当前工作区 · 归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "归片工作区",
+      "role": "button",
+      "native_id": {
+        "kind": "automation_id",
+        "value": "PrimaryNavigationWorkflow"
+      }
+    },
+    {
+      "name": "归片工作区",
+      "role": "statictext"
+    },
+    {
+      "name": "归片",
+      "role": "statictext"
+    },
+    {
+      "name": "JPG / RAW",
+      "role": "statictext"
+    },
+    {
+      "name": "JPG 状态",
+      "role": "column"
+    },
+    {
+      "name": "JPG 状态",
+      "role": "statictext"
+    },
+    {
+      "name": "JPG 文件名",
+      "role": "column"
+    },
+    {
+      "name": "JPG 文件名",
+      "role": "statictext"
+    },
+    {
+      "name": "RAW 状态",
+      "role": "column"
+    },
+    {
+      "name": "RAW 状态",
+      "role": "statictext"
+    },
+    {
+      "name": "RAW 文件名",
+      "role": "column"
+    },
+    {
+      "name": "RAW 文件名",
+      "role": "statictext"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.Models.MediaSelectionItem",
+      "role": "row"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0",
+      "role": "cell",
+      "value": "True"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0001.png"
+    },
+    {
+      "name": "HOME_0001.png",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "HOME_0001",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0001"
+    },
+    {
+      "name": "HOME_0001",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 7",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.Models.MediaSelectionItem",
+      "role": "row"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0",
+      "role": "cell",
+      "value": "True"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0002.png"
+    },
+    {
+      "name": "HOME_0002.png",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "HOME_0002",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0002"
+    },
+    {
+      "name": "HOME_0002",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 7",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.Models.MediaSelectionItem",
+      "role": "row"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0",
+      "role": "cell",
+      "value": "True"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0003.png"
+    },
+    {
+      "name": "HOME_0003.png",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "HOME_0003",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ],
+      "value": "HOME_0003"
+    },
+    {
+      "name": "HOME_0003",
+      "role": "statictext"
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 7",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9",
+      "role": "cell",
+      "states": [
+        "readonly"
+      ]
+    },
+    {
+      "name": "输入：  ·  JPG：  ·  RAW：  ·  备注：",
+      "role": "statictext"
+    },
+    {
+      "name": "客户确认结果已进入对应归片项目；可继续扫描和匹配，原片未修改。",
+      "role": "statictext"
+    }
+  ]
+}
