@@ -1,8 +1,14 @@
 param([switch]$Service,[switch]$ResumeStudio)
 $ErrorActionPreference='Stop'
-$repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$c=Get-Content -LiteralPath (Join-Path $repo 'artifacts/home-20261115/CONTEXT.json') -Raw | ConvertFrom-Json
-$private=Get-Content -LiteralPath (Join-Path $repo 'artifacts/home-20261115/PRIVATE_CONNECTION.json') -Raw | ConvertFrom-Json
+$packagedContext=Join-Path $PSScriptRoot 'home-context.json'
+if(Test-Path -LiteralPath $packagedContext){
+ $c=Get-Content -LiteralPath $packagedContext -Raw | ConvertFrom-Json
+ $private=Get-Content -LiteralPath $c.privateConnectionPath -Raw | ConvertFrom-Json
+}else{
+ $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+ $c=Get-Content -LiteralPath (Join-Path $repo 'artifacts/home-20261115/CONTEXT.json') -Raw | ConvertFrom-Json
+ $private=Get-Content -LiteralPath (Join-Path $repo 'artifacts/home-20261115/PRIVATE_CONNECTION.json') -Raw | ConvertFrom-Json
+}
 if($Service){
  $env:PIXELTART_SELECTION_LOCALDEV_ROOT=Join-Path $c.artifactRoot 'selection-service-state'
  $env:PIXELTART_SELECTION_LOCALDEV_PORT=[string]$c.selectionPort
