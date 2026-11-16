@@ -32,7 +32,8 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Attach()
  {
-  Detach(cancel:false);model=DataContext as ReferenceColorWorkspaceViewModel;model?.EnableLightPrintWorkspace();
+  Detach(cancel:false);model=DataContext as ReferenceColorWorkspaceViewModel;
+  model?.SetLightPrintPreviewVisible(EditModes.SelectedIndex==1);model?.EnableLightPrintWorkspace();
   // Weak subscription also covers controls constructed but never attached/unloaded.
   if(model is not null){PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,R54EditorChanged,string.Empty);}
   PhotoViewport.LostMouseCapture-=MaskCaptureLost;PhotoViewport.LostMouseCapture+=MaskCaptureLost;
@@ -78,8 +79,11 @@ public partial class PhotoGradePageView:UserControl
   for(int n=0;n<panes.Length;n++)panes[n].Visibility=i==n?Visibility.Visible:Visibility.Collapsed;
   if(FilmAction is not null)FilmAction.Visibility=i==1?Visibility.Visible:Visibility.Collapsed;if(PanelTitle is not null)PanelTitle.Text=new[]{"调整","光片","图层","风格","变体"}[Math.Clamp(i,0,4)];
   if(i==1&&r53ResourceTab!="即时胶片"){r53ResourceTab="即时胶片";RenderR53Resources();}
-  if(i==1&&model is{} workspace){if(workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";workspace.RequestLightPrintPreview();}
   ApplyR53Layout();SavePanelLayout();
+  // Persist the newly selected tab before restoring draft controls. Their Layout
+  // notifications must not reselect the tab we just left.
+  model?.SetLightPrintPreviewVisible(i==1);
+  if(i==1&&model is{} workspace){if(workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";workspace.RequestLightPrintPreview();}
  }
  private void FileMenu(object sender,RoutedEventArgs e)=>Menu(sender,("导入照片",model?.ChooseTargetCommand),("打开项目",model?.OpenSessionCommand),("保存项目",model?.SaveSessionCommand));
  private void EditMenu(object sender,RoutedEventArgs e)=>Menu(sender,("撤销",model?.PhotoGradeUndoCommand),("重做",model?.PhotoGradeRedoCommand));

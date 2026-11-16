@@ -4,6 +4,14 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
  private bool _lightPrintEnabled,_developingLightPrint,_lightPrintReshoot,_restoringLightPrintControls;
+ // A photo-page host may keep the film controls bound while their tab is hidden.
+ private bool _lightPrintPreviewVisible=true;
+ internal void SetLightPrintPreviewVisible(bool visible)
+ {
+  if(_lightPrintPreviewVisible==visible)return;
+  _lightPrintPreviewVisible=visible;
+  if(!visible)CancelLightPrintTask(true);
+ }
  private CancellationTokenSource? _lightPrintPreviewCancellation;
  private long _lightPrintPreviewRevision;
  private TetherReferenceModeViewModel.PreparedSourceState? _lightPrintBeforeDraft;
@@ -107,7 +115,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  }
  private void QueueLightPrintPreview()
  {
-  if(!_lightPrintEnabled||_developingLightPrint||_disposed||IsLightPrintLocked||IsLoading||IsExporting||IsInstantGenerating||ActiveTarget is not{} target)return;
+  if(!_lightPrintEnabled||!_lightPrintPreviewVisible||_developingLightPrint||_disposed||IsLightPrintLocked||IsLoading||IsExporting||IsInstantGenerating||ActiveTarget is not{} target)return;
   InstantEngineVersion="V3";_lightPrintPreviewCancellation?.Cancel();var cts=new CancellationTokenSource();_lightPrintPreviewCancellation=cts;var revision=Interlocked.Increment(ref _lightPrintPreviewRevision);var activation=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
   if(_lightPrintDraftTarget!=target.Id){_lightPrintBeforeDraft=null;_lightPrintDraftTarget=target.Id;}
   _lightPrintBeforeDraft??=Editor.CapturePreparedSource();LightPrintStatus="实时预览…（未显影，不改旧变体）";

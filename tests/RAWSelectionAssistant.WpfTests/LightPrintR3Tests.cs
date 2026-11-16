@@ -8,7 +8,7 @@ namespace RAWSelectionAssistant.WpfTests;
  {
   EnsureTestApplication();var root=Root();try
   {
-   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"first.png",30));var page=new PhotoGradePageView{DataContext=vm};page.Measure(new Size(1366,768));page.Arrange(new Rect(0,0,1366,768));page.UpdateLayout();var target=vm.ActiveTarget!;var count=target.EditVersions.Count;
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"first.png",30));var page=new PhotoGradePageView{DataContext=vm};page.Measure(new Size(1366,768));page.Arrange(new Rect(0,0,1366,768));page.UpdateLayout();((TabControl)page.FindName("EditModes")).SelectedIndex=1;var target=vm.ActiveTarget!;var count=target.EditVersions.Count;
    var before=Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!);vm.SelectedPhotographerPaperId="blue-duochrome600";await vm.LightPrintPreviewWork;Assert.AreNotEqual(before,Pixels(vm.Editor.MatchedImage!),vm.LightPrintStatus);Assert.IsNull(target.RawDefinition);Assert.AreEqual(count,target.EditVersions.Count);
    var square=Pixels(vm.Editor.MatchedImage!);vm.SelectedLightPrintFrameId="generic.white.circle";await vm.LightPrintPreviewWork;Assert.AreNotEqual(square,Pixels(vm.Editor.MatchedImage!));
    vm.SelectedPhotographerPaperId="itype-bw";vm.SelectedPhotographerPaperId="sx70-color";vm.SelectedPhotographerPaperId="itype-color";await vm.LightPrintPreviewWork;Assert.AreEqual("itype-color",vm.SelectedInstantProfile.Id);var readyDraft=Pixels(vm.Editor.MatchedImage!);vm.InstantCameraAnimation=false;
@@ -66,6 +66,21 @@ namespace RAWSelectionAssistant.WpfTests;
    vm.SelectedPhotographerPaperId="itype-color";await vm.LightPrintPreviewWork;await vm.DevelopLightPrintCommand.ExecuteAsync(null);var frozen=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var exposure=vm.InstantV3Exposure;
    Assert.IsFalse(vm.ResetPhotoV3DraftCommand.CanExecute(null));vm.ResetPhotoV3DraftCommand.Execute(null);Assert.AreEqual(exposure,vm.InstantV3Exposure);Assert.AreEqual(frozen,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition));
    var icons=vm.LightPrintFrameChoices.Select(f=>f.Window).Distinct().ToArray();Assert.AreEqual(2,icons.Length);page.DataContext=null;
+  }finally{Directory.Delete(root,true);}
+ });
+ [TestMethod]public Task OrdinaryPhotoKeepsHiddenFilmDraftDormantAndRestoresSourceWhenLeavingFilm()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=Root();try
+  {
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"ordinary.png",65));
+   var original=vm.Editor.SourceImage;var page=new PhotoGradePageView{DataContext=vm};var tabs=(TabControl)page.FindName("EditModes");
+   page.Measure(new Size(1366,768));page.Arrange(new Rect(0,0,1366,768));page.UpdateLayout();Assert.AreEqual(0,tabs.SelectedIndex);
+   var idleWork=vm.LightPrintPreviewWork;vm.SelectedPhotographerPaperId="blue-duochrome600";vm.SelectedLightPrintFrameId="generic.white.circle";
+   await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.ApplicationIdle);await vm.LightPrintPreviewWork;
+   Assert.AreSame(idleWork,vm.LightPrintPreviewWork,"Hidden film controls must not queue full-resolution draft decoding");Assert.IsTrue(vm.PhotographerPapers.All(p=>p.Preview is null),"Hidden paper galleries must not decode a second full-resolution input");Assert.AreSame(original,vm.Editor.SourceImage,"Ordinary source changed while film tab was hidden");Assert.IsFalse(vm.Editor.IndependentRawMode);Assert.IsNull(vm.ActiveTarget!.RawDefinition);
+   tabs.SelectedIndex=1;await vm.LightPrintPreviewWork;Assert.IsTrue(vm.Editor.IndependentRawMode);Assert.IsNotNull(vm.Editor.MatchedImage);Assert.IsNull(vm.ActiveTarget.RawDefinition);
+   tabs.SelectedIndex=0;await vm.LightPrintPreviewWork;Assert.AreEqual(0,tabs.SelectedIndex,"Cancelling a draft must not restore the previous panel tab");Assert.AreSame(original,vm.Editor.SourceImage,"Leaving film tab did not restore original source");Assert.IsFalse(vm.Editor.IndependentRawMode);
+   idleWork=vm.LightPrintPreviewWork;vm.SelectedPhotographerPaperId="itype-bw";await vm.LightPrintPreviewWork;Assert.AreSame(idleWork,vm.LightPrintPreviewWork);Assert.AreSame(original,vm.Editor.SourceImage,"Hidden follow-up controls changed restored source");page.DataContext=null;
   }finally{Directory.Delete(root,true);}
  });
  private static string Root(){var p=Path.Combine(Path.GetTempPath(),"LightPrintR3-"+Guid.NewGuid());Directory.CreateDirectory(p);return p;}
