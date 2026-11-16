@@ -125,9 +125,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
         TrimProfessionalMasters(target);
         Editor.LinearDocumentEditing=definition.ColorState?.Version==2;ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
-        Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
-        Editor.RawLocalEditing=definition.InstantFilm is null&&(definition.ProcessingVersion==4&&!definition.IsRenderedInput||definition.ProcessingVersion==5&&definition.RenderedInputVersion==2);OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
-        Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LocalEdits?.Stack??definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
+        // Restoring a prepared recipe emits editor notifications before the new stack is installed.
+        // Suppress persistence of that transient state, as for other snapshot restores.
+        var wasApplyingSnapshot=_applyingActiveSnapshot;_applyingActiveSnapshot=true;
+        try
+        {
+            Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
+            Editor.RawLocalEditing=definition.InstantFilm is null&&(definition.ProcessingVersion==4&&!definition.IsRenderedInput||definition.ProcessingVersion==5&&definition.RenderedInputVersion==2);OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
+            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LocalEdits?.Stack??definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
+        }
+        finally { _applyingActiveSnapshot=wasApplyingSnapshot; }
         using var presentationMeasurement=StudioPreviewDiagnostics.Measure("Present");
         Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token,render:false);Editor.StopProcessing();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)throw new OperationCanceledException(token);Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
         var thumb=new TransformedBitmap(image,new System.Windows.Media.ScaleTransform(Math.Min(1,320d/image.PixelWidth),Math.Min(1,320d/image.PixelWidth)));thumb.Freeze();target.Thumbnail=thumb;target.SourceThumbnail=before;target.Status=ReferenceTargetStatus.Adjusted;target.Error=null;if(ReferenceEquals(FailedTarget,target))FailedTarget=null;

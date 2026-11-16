@@ -49,6 +49,21 @@ public sealed class PreparedPreviewTransactionTests
             Assert.IsNull(vm.ActiveTarget.ColorAdjustmentStackSnapshot);var exposedPixels=Pixels(vm.Editor.MatchedImage!);
             await vm.PhotoGradeUndoCommand.ExecuteAsync(null);Assert.IsNull(vm.ActiveTarget.RawDefinition);Assert.AreEqual(stack,JsonSerializer.Serialize(vm.Editor.AdjustmentStack));Assert.AreEqual(priorPixels,Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!));
             await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(exposedPixels,Pixels(vm.Editor.MatchedImage!));
+            Assert.AreNotEqual(priorPixels,exposedPixels);
+            var recipe=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);
+            vm.QuickExportFormat=StudioExportFormat.Tiff;await vm.ExportAllCommand.ExecuteAsync(null);
+            Assert.AreEqual(ReferenceExportStatus.Succeeded,vm.ActiveTarget.ExportStatus,vm.ExportFailureSummary);
+            var firstOutput=vm.ActiveTarget.OutputPath!;var firstPixels=Pixels(StudioQuickExport.Load(firstOutput));
+            Assert.AreEqual(0,ProfessionalRawExport.Inspect(firstOutput,vm.ActiveTarget.LinearRawMaster!,definition,StudioExportFormat.Tiff).MaximumError);
+            var session=Path.Combine(root,"exposure.ptstudio.json");await vm.SaveSessionAsync(session);
+            var reopenedOutput=Path.Combine(root,"reopened");Directory.CreateDirectory(reopenedOutput);
+            using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(reopenedOutput));await restored.LoadSessionAsync(session);
+            Assert.AreEqual(recipe,JsonSerializer.Serialize(restored.ActiveTarget!.RawDefinition));
+            Assert.AreEqual(exposedPixels,Pixels(restored.Editor.MatchedImage!));
+            Assert.AreEqual(0,restored.Editor.AdjustmentStack.Nodes.Count);
+            restored.QuickExportFormat=StudioExportFormat.Tiff;await restored.ExportAllCommand.ExecuteAsync(null);
+            Assert.AreEqual(ReferenceExportStatus.Succeeded,restored.ActiveTarget.ExportStatus,restored.ExportFailureSummary);
+            Assert.AreEqual(firstPixels,Pixels(StudioQuickExport.Load(restored.ActiveTarget.OutputPath!)));
         }finally{Directory.Delete(root,true);}
     });
     [DataTestMethod][DataRow("PreviewPrepared")][DataRow("PreviewCommit")]
