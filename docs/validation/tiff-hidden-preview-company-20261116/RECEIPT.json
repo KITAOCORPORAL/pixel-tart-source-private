@@ -1,7 +1,7 @@
 {
-  "observedAtUtc": "2026-11-16T06:42:05.115Z",
+  "observedAtUtc": "2026-11-16T07:43:06.539Z",
   "clientTimeZone": "Europe/Berlin",
-  "status": "PARTIAL_R2_CONTROLLED_PASS_ORDINARY_RETEST_PENDING",
+  "status": "PARTIAL_ORDINARY_R2_IMPORTED_WAITING_STABLE_VISIBLE_WINDOW",
   "source": {
     "continuedFrom": "d64948d665d0af0c9b7719798aec8ce57251c786",
     "memoryProductSource": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
@@ -14,14 +14,15 @@
       "e28074f1": "14eda5c7"
     },
     "integratedSessionDifference": "Only WorkflowProjectId preservation differs from e28074f1 in Session.cs; cache transfer/clear/rollback retained",
-    "evidenceCommit": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c",
-    "remoteVerified": false,
+    "evidenceCommit": "234211b3cfda45abc455d2f57aba15321acbe9cd",
+    "remoteVerified": true,
     "remoteBranch": "origin/fix/tiff-hidden-preview-company-20261116",
     "previousIntegratedBase": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
     "currentProductSource": "62191dfface51c981b1361a4333a3c0981067cb1",
     "hiddenPreviewFixCommit": "62191dfface51c981b1361a4333a3c0981067cb1",
     "hiddenPreviewFixOriginal": "b1352e64c05d4cdf656f5f164e8253f2cdbb00ad",
-    "srgbEvidenceCommit": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c"
+    "srgbEvidenceCommit": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c",
+    "remoteHead": "234211b3cfda45abc455d2f57aba15321acbe9cd"
   },
   "srgb": {
     "baseline": "bdc913c9463573247b9b6460f9a1102e40e74a31",
@@ -91,21 +92,99 @@
     "intervalMs": 50,
     "monitorRunning": true,
     "forcedGcUsed": false,
-    "importCompleted": false,
+    "importCompleted": true,
     "phase": "native-import-and-settle",
     "pending": [
-      "Company TIFF native import",
-      "Fit/100%/zoom changes",
+      "Stable restored ordinary window",
+      "Repeat visible fit/100%/zoom with confirmed geometry",
       "First actual ordinary-App export",
       "Save/close and independent ordinary-App reopen",
       "Second actual ordinary-App export",
-      "Complete row pixel/depth/orientation/ICC comparison of those ordinary-App outputs"
+      "Full row-pixel/depth/orientation/ICC comparison of ordinary-App outputs"
     ],
     "inputFailures": [
       "Screenshot timed out twice after fresh binding",
-      "GetCursorPos failed: access denied (0x80070005)"
+      "GetCursorPos failed: access denied (0x80070005)",
+      "Window restoration only persisted transiently in tool observations; native snapshots return to237x39",
+      "Screen capture returned a black237x39 image even after a restored geometry snapshot"
     ],
-    "scope": "Unique byte-identical ordinary apphost from the same product DLL as the passed controlled tests; no injected dialogs"
+    "scope": "Unique byte-identical ordinary apphost from the same product DLL as the passed controlled tests; no injected dialogs",
+    "sourceConfirmedInRuntimeLog": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "lastInputError": "GetCursorPos failed: 拒绝访问。 (0x80070005)",
+    "loadedFileName": "DSCF0347_仿色.tif",
+    "loadedVisibleCount": 1,
+    "guardStopObserved": false,
+    "currentResourceStats": {
+      "samples": 84292,
+      "peakPrivateBytes50ms": 1231872000,
+      "osPeakWorkingSetBytes": 968880128,
+      "phases": {
+        "startup": {
+          "samples": 12340,
+          "peakPrivateBytes": 334942208,
+          "peakWorkingSetBytes": 330915840
+        },
+        "native-import-and-settle": {
+          "samples": 16084,
+          "peakPrivateBytes": 1048084480,
+          "peakWorkingSetBytes": 912736256
+        },
+        "native-loaded-natural-idle": {
+          "samples": 11959,
+          "peakPrivateBytes": 924504064,
+          "peakWorkingSetBytes": 827379712
+        },
+        "native-fit": {
+          "samples": 1211,
+          "peakPrivateBytes": 904318976,
+          "peakWorkingSetBytes": 967766016
+        },
+        "native-100-percent": {
+          "samples": 981,
+          "peakPrivateBytes": 903008256,
+          "peakWorkingSetBytes": 966557696
+        },
+        "native-zoom-out": {
+          "samples": 1324,
+          "peakPrivateBytes": 903475200,
+          "peakWorkingSetBytes": 897425408
+        },
+        "native-zoom-in": {
+          "samples": 178,
+          "peakPrivateBytes": 903499776,
+          "peakWorkingSetBytes": 897589248
+        },
+        "native-100-return": {
+          "samples": 714,
+          "peakPrivateBytes": 903467008,
+          "peakWorkingSetBytes": 897609728
+        },
+        "native-export-dialog": {
+          "samples": 21430,
+          "peakPrivateBytes": 904450048,
+          "peakWorkingSetBytes": 899264512
+        },
+        "native-window-restore": {
+          "samples": 8458,
+          "peakPrivateBytes": 1231872000,
+          "peakWorkingSetBytes": 864075776
+        },
+        "native-visible-restore-and-fit": {
+          "samples": 1452,
+          "peakPrivateBytes": 1028902912,
+          "peakWorkingSetBytes": 462651392
+        },
+        "16-native-visible-100": {
+          "samples": 8161,
+          "peakPrivateBytes": 1024811008,
+          "peakWorkingSetBytes": 457355264
+        }
+      }
+    },
+    "nativeControlRoute": "Official Open Computer Use 0.1.54 Windows UIA/Win32 tool calls; no ViewModel injection or fixed dialogs",
+    "zoomRequests": "Fit,100%,out,in,100% acknowledged in native controls; earlier minimized-window actions excluded from visible acceptance",
+    "visibleWindowAcceptance": "NOT_COMPLETE: root geometry returned to237x39 after restoration to3860x2180; no stable visible screen capture",
+    "firstActualExport": "NOT_STARTED_EXPORT_DIALOG_NOT_RELIABLY_OBSERVED"
   },
   "productMainline": {
     "ownedPid52544Untouched": true,
@@ -127,16 +206,16 @@
     "minimalPatch": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/SRGB_MINIMAL.patch",
     "firstExportDirectory": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-r2-exports-first",
     "reopenExportDirectory": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-r2-exports-reopen",
-    "sessionPath": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/sessions/company-DSCF0347-r2.ptstudio.json"
+    "sessionPath": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/sessions/company-DSCF0347-r2.ptstudio.json",
+    "currentReport": "E:/Kitao-Worktrees/tiff-hidden-preview-company-20261116/docs/validation/tiff-hidden-preview-company-20261116/REPORT.md",
+    "currentComparison": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/HIDDEN_R2_COMPARISON.json"
   },
   "workerThreadId": "01a1d406-1647-7643-86ae-20e70d4b2758",
   "nextUserAction": {
     "windowPid": 12852,
-    "windowId": 7672378,
     "processName": "KitaoTiffCompanyR2_20261116",
-    "entry": "导入 / 导出 → 导入照片",
-    "exactPath": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export/DSCF0347_仿色.tif",
-    "reason": "Prior native instance was terminated by unchanged 2GiB guard; fresh repaired R2 needs native import"
+    "action": "Restore the already-loaded R2 window and keep it expanded; do not reimport or minimize it",
+    "reason": "Native automation can invoke controls, but the observed window repeatedly returns to minimized geometry"
   },
   "originalOrdinaryFailure": {
     "pid": 4532,

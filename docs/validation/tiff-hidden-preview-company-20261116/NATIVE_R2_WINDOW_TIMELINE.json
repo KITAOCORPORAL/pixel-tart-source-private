@@ -1,0 +1,137 @@
+{
+  "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "pid": 12852,
+  "observedBoundsReturnToMinimized": true,
+  "windowBoundsCause": "UNKNOWN; no assumption that user caused it",
+  "numericZoomReadbackAvailable": false,
+  "screenCaptureUsable": false,
+  "ordinaryExportStarted": false,
+  "timeline": [
+    {
+      "file": "02-fit-action.json",
+      "atUtc": "2026-11-16T07:06:05.206Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 397,
+        "name": "适合",
+        "area": "PhotoGradePageView top viewport toolbar"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "03-100-action.json",
+      "atUtc": "2026-11-16T07:06:58.814Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 400,
+        "name": "100%",
+        "area": "PhotoGradePageView top viewport toolbar"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "04-zoom-out-action.json",
+      "atUtc": "2026-11-16T07:07:48.689Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 402,
+        "name": "缩小",
+        "area": "PhotoGradePageView top viewport toolbar"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "05-zoom-in-action.json",
+      "atUtc": "2026-11-16T07:08:56.695Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 403,
+        "name": "放大",
+        "area": "PhotoGradePageView top viewport toolbar"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "06-100-return-action.json",
+      "atUtc": "2026-11-16T07:09:07.376Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": "400",
+        "name": "100%",
+        "area": "PhotoGradePageView top viewport toolbar"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "07-file-menu-action.json",
+      "atUtc": "2026-11-16T07:09:41.955Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 358,
+        "name": "导入 / 导出"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "09-export-shortcut-action.json",
+      "atUtc": "2026-11-16T07:20:38.360Z",
+      "tool": "recorded native control request",
+      "target": "Control_L+e",
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "10-primary-file-click-action.json",
+      "atUtc": "2026-11-16T07:25:10.574Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": "358",
+        "name": "导入 / 导出"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "11-close-menu-action.json",
+      "atUtc": "2026-11-16T07:27:22.125Z",
+      "tool": "recorded native control request",
+      "target": "Escape",
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    },
+    {
+      "file": "12-restore-window-action.json",
+      "atUtc": "2026-11-16T07:27:55.088Z",
+      "tool": "recorded native control request",
+      "target": {
+        "index": 6,
+        "name": "最大化或还原窗口"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 3860, height: 2180}"
+    },
+    {
+      "file": "14-restore-primary-action.json",
+      "atUtc": "2026-11-16T07:35:03.165Z",
+      "tool": "click",
+      "target": {
+        "element_index": "6"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 3860, height: 2180}"
+    },
+    {
+      "file": "15-visible-fit-primary-action.json",
+      "atUtc": "2026-11-16T07:35:08.676Z",
+      "tool": "click",
+      "target": {
+        "element_index": "389"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 3860, height: 2180}"
+    },
+    {
+      "file": "16-native-visible-100-action.json",
+      "atUtc": "2026-11-16T07:36:16.051Z",
+      "tool": "click",
+      "target": {
+        "element_index": "392"
+      },
+      "root": "\t0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}"
+    }
+  ]
+}

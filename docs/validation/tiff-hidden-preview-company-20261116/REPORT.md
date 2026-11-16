@@ -35,10 +35,12 @@ STOP、原始LAUNCH/EXIT、最后90秒采样见ordinary-failure/；全部134622�
 
 这些窗口在屏幕外、对话框固定，属于受控宿主；不代表普通App/系统文件选择器或真实屏幕已通过。过程50ms峰值是整个进程峰值，各阶段内存来自命名快照；通用guard的startup阶段标签不被解释为逐操作50ms峰值。完整结果见HIDDEN_R2_CONTROLLED_RECEIPT.json和HIDDEN_R2_COMPARISON.json。
 
-## 当前真实入口断点
+## 当前真实入口断点（本次接续更新）
 
-同一产品DLL的普通App使用字节相同的唯一apphost KitaoTiffCompanyR2_20261116.exe，PID12852、窗口7672378，独立company-tiff-r2-runtime。2GiB/50ms守卫继续运行。原生截图两次超时，点击返回GetCursorPos拒绝访问0x80070005；因此准备了准确窗口和原授权路径供用户重新选择。
+用户已通过系统原生入口导入原授权TIFF。普通App PID12852的AX读回确认DSCF0347_仿色.tif、1/1张，运行日志确认62191dff；2GiB/50ms守卫持续运行，无STOP。截至本轮观察，私有提交采样峰值1174.80MiB。完整原始采样保存在ordinary-hidden-r2-first。
 
-修复后的普通App尚未载入照片；原生导入、适合/100%/缩放、实际导出、保存关闭、独立重开和第二次导出仍待完成。最终普通App产物逐行比较也待完成，不能用上面的受控输出替代。
+Open Computer Use0.1.54原生控件通道可请求适合、100%和缩放动作，但窗口多次在237×39的最小化几何与3860×2180的还原几何之间返回，原因未确定。背景/最小化下的按钮回执仅列为诊断，不提升为连续可见窗口或数值缩放读回通过。截图通道仍返回黑色237×39图像；当前没有可靠的真实屏幕像素证据。记录见NATIVE_R2_PROGRESS.json和NATIVE_R2_WINDOW_TIMELINE.json。
 
-产品线原窗口PID9616、workflow-runtime、项目和手机预约未操作。高光1bfdfbe9保持研究状态。本会话不发布分叉产品包；由产品Codex统一整合。最新本机RESULT.json及产品线TIFF_SRGB_WORKER_RESULT.json为接续入口。
+普通App首份实际导出、保存关闭、独立重开、第二次导出及这些普通App输出的完整逐行比较尚未完成。已准备独立输出目录及项目路径；当前需要将已载入的R2保持展开，之后继续原生导出/系统对话框操作。上面的受控宿主两轮输出不能代替此未完成链路。
+
+同一产品DLL的唯一apphost为KitaoTiffCompanyR2_20261116.exe。独立company-tiff-r2-runtime、2GiB守卫保持；不需再次导入或更换源码。产品线其他窗口、workflow-runtime、项目和手机预约均未操作，高光1bfdfbe9仍为研究。由产品Codex统一整合，不发布分叉产品包。
