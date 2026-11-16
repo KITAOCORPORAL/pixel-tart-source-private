@@ -1,0 +1,86 @@
+{
+  "status": "READY_FOR_FRESH_SESSION_HANDOFF",
+  "checks": [
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "expected": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+      "sealed": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+      "live": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+      "expected": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3",
+      "sealed": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3",
+      "live": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "expected": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1",
+      "sealed": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1",
+      "live": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs",
+      "expected": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61",
+      "sealed": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61",
+      "live": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "tools/FunctionalClosureAcceptance/Compare-RenderedTiffOutputs.py",
+      "expected": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265",
+      "sealed": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265",
+      "live": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "tools/FunctionalClosureAcceptance/Native-ProductStep.ps1",
+      "expected": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00",
+      "sealed": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00",
+      "live": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/Program.cs",
+      "expected": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d",
+      "sealed": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d",
+      "live": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d",
+      "sealedMatch": true,
+      "liveMatch": true
+    },
+    {
+      "path": "tools/ProductMemoryIntegrationReplay/run_guarded.py",
+      "expected": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259",
+      "sealed": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259",
+      "live": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259",
+      "sealedMatch": true,
+      "liveMatch": true
+    }
+  ],
+  "oldTests": {
+    "authority": "UNFROZEN_WORKTREE",
+    "platform": "x64",
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "E:\\Kitao-Deliveries\\product-functional-integration-20261113\\memory-candidate-sealed-20261113\\TEST_EVIDENCE.json",
+    "includesNewHiddenFilmLifecycleRegression": true
+  },
+  "preserveOriginalDirty": true,
+  "selectedWriteSet": [
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+    "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+    "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+    "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs"
+  ],
+  "excludes": "Untracked native input helpers and replay edits are not product changes"
+}

@@ -1,0 +1,251 @@
+{
+  "observedAtUtc": "2026-11-16T06:42:05.115Z",
+  "clientTimeZone": "Europe/Berlin",
+  "status": "PARTIAL_R2_CONTROLLED_PASS_ORDINARY_RETEST_PENDING",
+  "source": {
+    "continuedFrom": "d64948d665d0af0c9b7719798aec8ce57251c786",
+    "memoryProductSource": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+    "integratedBase": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+    "srgbFixCommit": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+    "branch": "fix/tiff-hidden-preview-company-20261116",
+    "worktree": "E:/Kitao-Worktrees/tiff-hidden-preview-company-20261116",
+    "memoryMapping": {
+      "edd6d25e": "17a95b5a",
+      "e28074f1": "14eda5c7"
+    },
+    "integratedSessionDifference": "Only WorkflowProjectId preservation differs from e28074f1 in Session.cs; cache transfer/clear/rollback retained",
+    "evidenceCommit": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c",
+    "remoteVerified": false,
+    "remoteBranch": "origin/fix/tiff-hidden-preview-company-20261116",
+    "previousIntegratedBase": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+    "currentProductSource": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "hiddenPreviewFixCommit": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "hiddenPreviewFixOriginal": "b1352e64c05d4cdf656f5f164e8253f2cdbb00ad",
+    "srgbEvidenceCommit": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c"
+  },
+  "srgb": {
+    "baseline": "bdc913c9463573247b9b6460f9a1102e40e74a31",
+    "baselineReproduced": true,
+    "failure": "NotSupportedException from old transient adjustment stack while restoring prepared recipe",
+    "minimalFix": "Guard synchronous prepared editor snapshot restoration with existing _applyingActiveSnapshot; restore prior guard in finally",
+    "pixelMathChanged": false,
+    "integratedRegression": {
+      "total": 28,
+      "passed": 28,
+      "failed": 0,
+      "platform": "x64",
+      "configuration": "Release",
+      "classes": {
+        "PreparedPreviewTransactionTests": 18,
+        "LinearSrgbAndImmediateTests": 2,
+        "RasterPreviewNativeCacheTests": 8
+      }
+    },
+    "verifiedContracts": [
+      "Original file input despite current .8 edit before .3 sRGB exposure",
+      "Actual existing sRGB exposure math",
+      "Undo restores previous adjustment stack and pixels; redo restores exposure",
+      "Recipe and pixels preserved by save/load",
+      "Production export command writes TIFF; independent workspace reopen writes matching full image pixels",
+      "Prepared failure, cancellation and rollback behavior"
+    ],
+    "ordinaryAppExposureUndoReopenExport": "PENDING_NATIVE_IMPORT; regression evidence uses real production commands in WPF fixtures"
+  },
+  "companyInput": {
+    "Path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+    "FileSha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+    "Width": 7752,
+    "Height": 5184,
+    "Format": "Rgb48",
+    "BitsPerPixel": 48,
+    "ChannelBits": 16,
+    "Orientation": 1,
+    "RowsRead": 5184,
+    "StoredPixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+    "Rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+    "Icc": [
+      {
+        "Bytes": 3144,
+        "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      }
+    ]
+  },
+  "reusedHomeEvidence": {
+    "commit": "d64948d665d0af0c9b7719798aec8ce57251c786",
+    "authority": "Controlled offscreen PhotoGradePageView with fixed dialogs",
+    "syntheticFirstPeakMiB": 1229.76,
+    "syntheticReopenPeakMiB": 1239.48,
+    "sonyFirstPeakMiB": 1231.16,
+    "sonyReopenPeakMiB": 1244.32,
+    "companyInputWasUnavailableAtHome": true,
+    "ordinaryAppAcceptanceClaimed": false
+  },
+  "ordinaryApp": {
+    "pid": 12852,
+    "windowId": 7672378,
+    "executable": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/hidden-r2-bin/KitaoTiffCompanyR2_20261116.exe",
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "runtime": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/company-tiff-r2-runtime",
+    "guardRun": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-hidden-r2-first",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "monitorRunning": true,
+    "forcedGcUsed": false,
+    "importCompleted": false,
+    "phase": "native-import-and-settle",
+    "pending": [
+      "Company TIFF native import",
+      "Fit/100%/zoom changes",
+      "First actual ordinary-App export",
+      "Save/close and independent ordinary-App reopen",
+      "Second actual ordinary-App export",
+      "Complete row pixel/depth/orientation/ICC comparison of those ordinary-App outputs"
+    ],
+    "inputFailures": [
+      "Screenshot timed out twice after fresh binding",
+      "GetCursorPos failed: access denied (0x80070005)"
+    ],
+    "scope": "Unique byte-identical ordinary apphost from the same product DLL as the passed controlled tests; no injected dialogs"
+  },
+  "productMainline": {
+    "ownedPid52544Untouched": true,
+    "ownedWorkflowRuntimeUntouched": true,
+    "patchAndResultCommunicated": true,
+    "packageOwner": "product Codex",
+    "separateProductPackagePublished": false,
+    "currentSourceBase": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+    "currentOwnedWindowPid": 9616,
+    "currentOwnedWindowUntouched": true,
+    "packageMemoryAcceptance": "Still PARTIAL until repaired ordinary App cycle passes"
+  },
+  "highlightCandidate": "1bfdfbe9 remains research; no changes merged",
+  "artifacts": {
+    "binaryBinding": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/FINAL_BINARY_BINDING.json",
+    "inputProbe": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/INPUT_ROW_PROBE.json",
+    "baselineTest": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/tests-baseline/baseline.trx",
+    "integratedTest": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/tests-integrated/integrated.trx",
+    "minimalPatch": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/SRGB_MINIMAL.patch",
+    "firstExportDirectory": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-r2-exports-first",
+    "reopenExportDirectory": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-r2-exports-reopen",
+    "sessionPath": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/sessions/company-DSCF0347-r2.ptstudio.json"
+  },
+  "workerThreadId": "01a1d406-1647-7643-86ae-20e70d4b2758",
+  "nextUserAction": {
+    "windowPid": 12852,
+    "windowId": 7672378,
+    "processName": "KitaoTiffCompanyR2_20261116",
+    "entry": "导入 / 导出 → 导入照片",
+    "exactPath": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export/DSCF0347_仿色.tif",
+    "reason": "Prior native instance was terminated by unchanged 2GiB guard; fresh repaired R2 needs native import"
+  },
+  "originalOrdinaryFailure": {
+    "pid": 4532,
+    "windowId": 3016918,
+    "executable": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-app-final/KitaoTiffCompany20261116.exe",
+    "sourceConfirmedInRuntimeLog": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+    "runtime": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/company-tiff-runtime",
+    "windowPage": "Darkroom / PhotoGradePageView; no input loaded",
+    "guardRun": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/ordinary-final-first",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "monitorRunning": false,
+    "forcedGcUsed": false,
+    "completed": [
+      "Ordinary Release x64 App startup",
+      "Runtime source identity and isolated root",
+      "Native accessibility tree readback"
+    ],
+    "pending": [
+      "Native import of company TIFF",
+      "Fit / 100% / zoom switches",
+      "First actual export",
+      "Save session / close / independent ordinary App reopen",
+      "Second actual export",
+      "Full output row-pixel / bit-depth / orientation / ICC comparison",
+      "TIFF-loaded natural idle and minimize/restore resource phases"
+    ],
+    "inputFailures": [
+      "Window capture timed out waiting on channel",
+      "Click reports coordinate input geometry is unavailable",
+      "Keyboard focus transitions unreliable; did not assume controls were invoked"
+    ],
+    "startupRouteSetup": "Only isolated settings.json LastPrimaryPage set to ReferenceColor while prior app was closed",
+    "rawDecodes": 0,
+    "rawCountAuthority": "No media loaded in ordinary App yet; authorized input probe references only WIC and has no camera RAW decoder dependency",
+    "guardSourceSha256": "2a1e14bb4ababfabcad203cc4b40f503ffea5b9d8151bedd3db378a62c17c943",
+    "importResult": "2GiB STOP after user confirmed native import; last AX readback preceded loaded image",
+    "stop": {
+      "reason": "2GiB resource guard",
+      "sample": {
+        "elapsedMs": 6855668.8388000475,
+        "privateBytes": 2149568512,
+        "workingSetBytes": 1696428032,
+        "osPeakWorkingSetBytes": 1697746944,
+        "phase": "native-import-preparation"
+      }
+    },
+    "rawExitReceipt": {
+      "pid": 4532,
+      "exitCode": null,
+      "monitorEndedWhileAppAlive": true,
+      "stop": "2GiB resource guard",
+      "peakPrivateBytes50ms": 2149568512,
+      "osPeakWorkingSetBytes": 1697746944,
+      "samples": 134622,
+      "phases": {
+        "startup": {
+          "samples": 1947,
+          "peakPrivateBytes": 324767744,
+          "peakWorkingSetBytes": 315072512
+        },
+        "native-import-preparation": {
+          "samples": 132675,
+          "peakPrivateBytes": 2149568512,
+          "peakWorkingSetBytes": 1696428032
+        }
+      },
+      "forcedGcUsed": false,
+      "newRawDecodeLimit": 0
+    },
+    "rawExitReceiptCaveat": "Original launcher wrote receipt immediately after taskkill; null exitCode is not success. Subsequent process query confirms process absent."
+  },
+  "hiddenPreviewRepair": {
+    "sealedCandidateStatus": "READY_FOR_FRESH_SESSION_HANDOFF",
+    "sealedFilesMatchOriginal": true,
+    "productionFilesChanged": 3,
+    "testFilesChanged": 1,
+    "baselineTestReproduced": true,
+    "correctX64RebuildRegression": {
+      "passed": 34,
+      "total": 34,
+      "failed": 0
+    },
+    "sameProductDllForTestsHostAndOrdinaryApp": true,
+    "transientOldBinaryRun": "NOT_CANDIDATE_RESULT; retained separately",
+    "pixelFormulasOrIccChanged": false,
+    "currentNativeStopAllocationProfiled": false,
+    "diagnosisBoundary": "Hidden preview gap reproduced and repaired; the original complete-App STOP has not been independently allocation-profiled, and final ordinary-App success remains pending"
+  },
+  "controlledCompanyCandidate": {
+    "authority": "Production PhotoGradePageView with fixed dialogs and offscreen window; not ordinary EXE/native chooser acceptance",
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "first": {
+      "pid": 49764,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 808693760
+    },
+    "reopen": {
+      "pid": 53748,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 846376960
+    },
+    "newRawDecodes": 0,
+    "rawDecoderRequests": 0,
+    "forcedGcUsed": false,
+    "allPixelsDepthOrientationAndIccPass": true,
+    "receipt": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/HIDDEN_R2_CONTROLLED_RECEIPT.json",
+    "comparison": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/HIDDEN_R2_COMPARISON.json"
+  }
+}

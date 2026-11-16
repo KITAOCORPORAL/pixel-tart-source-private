@@ -1,0 +1,8 @@
+{
+  "status": "NOT_CANDIDATE_RESULT",
+  "run": "tests-hidden-fixed/hidden-film-after.trx",
+  "reason": "Sealed source copy retains November 13 timestamps; incremental build reused product DLL without SetLightPrintPreviewVisible",
+  "sourceHasGate": true,
+  "executedProductDllHasGate": false,
+  "correctiveAction": "Explicit Rebuild of Release Platform=x64, then --no-build --no-restore tests; verify DLL marker before attribution"
+}

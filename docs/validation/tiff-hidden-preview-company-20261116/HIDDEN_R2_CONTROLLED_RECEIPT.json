@@ -1,0 +1,264 @@
+{
+  "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "authority": "Controlled WPF product view with fixed dialogs and offscreen window; not ordinary App/native picker acceptance",
+  "runs": {
+    "first": {
+      "result": {
+        "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+        "processId": 49764,
+        "productVersion": "2.3.0+62191dfface51c981b1361a4333a3c0981067cb1",
+        "input": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+        "output": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-first\\export\\DSCF0347_仿色_仿色.tif",
+        "session": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-first\\rendered.ptstudio.json",
+        "reopenedInIndependentProcess": false,
+        "visualHost": true,
+        "completeViewportFlow": true,
+        "rawDecoderRequests": 0,
+        "rawDecodeCalls": 0,
+        "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+        "source": {
+          "type": "CachedBitmap",
+          "id": 60430471,
+          "width": 7752,
+          "height": 5184,
+          "bits": 48,
+          "frozen": true,
+          "minimumPixelBytes": 241118208
+        }
+      },
+      "guard": {
+        "pid": 49764,
+        "exitCode": 0,
+        "monitorEndedWhileAppAlive": false,
+        "stop": null,
+        "peakPrivateBytes50ms": 808693760,
+        "osPeakWorkingSetBytes": 683819008,
+        "samples": 691,
+        "phases": {
+          "startup": {
+            "samples": 691,
+            "peakPrivateBytes": 808693760,
+            "peakWorkingSetBytes": 683814912
+          }
+        },
+        "forcedGcUsed": false,
+        "newRawDecodeLimit": 0
+      },
+      "snapshots": [
+        {
+          "name": "rendered-fit-idle",
+          "atUtc": "2026-11-16T06:24:46.6264856+00:00",
+          "privateBytes": 800210944,
+          "workingSetBytes": 675504128
+        },
+        {
+          "name": "rendered-100-idle",
+          "atUtc": "2026-11-16T06:24:48.1854449+00:00",
+          "privateBytes": 807825408,
+          "workingSetBytes": 679378944
+        },
+        {
+          "name": "rendered-20-idle",
+          "atUtc": "2026-11-16T06:24:49.7176617+00:00",
+          "privateBytes": 808693760,
+          "workingSetBytes": 680521728
+        },
+        {
+          "name": "rendered-100-return-idle",
+          "atUtc": "2026-11-16T06:24:51.245161+00:00",
+          "privateBytes": 808693760,
+          "workingSetBytes": 680587264
+        },
+        {
+          "name": "rendered-export-idle",
+          "atUtc": "2026-11-16T06:25:07.5894998+00:00",
+          "privateBytes": 760045568,
+          "workingSetBytes": 658927616
+        },
+        {
+          "name": "rendered-minimized-idle",
+          "atUtc": "2026-11-16T06:25:12.6197531+00:00",
+          "privateBytes": 758669312,
+          "workingSetBytes": 657641472
+        },
+        {
+          "name": "rendered-restored-idle",
+          "atUtc": "2026-11-16T06:25:14.150762+00:00",
+          "privateBytes": 782106624,
+          "workingSetBytes": 658952192
+        },
+        {
+          "name": "rendered-close-natural-idle",
+          "atUtc": "2026-11-16T06:25:16.7433609+00:00",
+          "privateBytes": 783228928,
+          "workingSetBytes": 662077440
+        }
+      ]
+    },
+    "reopen": {
+      "result": {
+        "status": "PASS_CONTROLLED_REAL_TIFF_IO",
+        "processId": 53748,
+        "productVersion": "2.3.0+62191dfface51c981b1361a4333a3c0981067cb1",
+        "input": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+        "output": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-reopen\\export\\DSCF0347_仿色_仿色.tif",
+        "session": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-first\\rendered.ptstudio.json",
+        "reopenedInIndependentProcess": true,
+        "visualHost": true,
+        "completeViewportFlow": true,
+        "rawDecoderRequests": 0,
+        "rawDecodeCalls": 0,
+        "authority": "Controlled product ViewModel and visible-view classes with fixed file dialogs; not physical user-entry acceptance",
+        "source": {
+          "type": "CachedBitmap",
+          "id": 42646994,
+          "width": 7752,
+          "height": 5184,
+          "bits": 48,
+          "frozen": true,
+          "minimumPixelBytes": 241118208
+        }
+      },
+      "guard": {
+        "pid": 53748,
+        "exitCode": 0,
+        "monitorEndedWhileAppAlive": false,
+        "stop": null,
+        "peakPrivateBytes50ms": 846376960,
+        "osPeakWorkingSetBytes": 725422080,
+        "samples": 723,
+        "phases": {
+          "startup": {
+            "samples": 723,
+            "peakPrivateBytes": 846376960,
+            "peakWorkingSetBytes": 725417984
+          }
+        },
+        "forcedGcUsed": false,
+        "newRawDecodeLimit": 0
+      },
+      "snapshots": [
+        {
+          "name": "rendered-fit-idle",
+          "atUtc": "2026-11-16T06:29:29.5556021+00:00",
+          "privateBytes": 836513792,
+          "workingSetBytes": 717647872
+        },
+        {
+          "name": "rendered-100-idle",
+          "atUtc": "2026-11-16T06:29:31.0933533+00:00",
+          "privateBytes": 837189632,
+          "workingSetBytes": 723984384
+        },
+        {
+          "name": "rendered-20-idle",
+          "atUtc": "2026-11-16T06:29:32.6241983+00:00",
+          "privateBytes": 818245632,
+          "workingSetBytes": 725258240
+        },
+        {
+          "name": "rendered-100-return-idle",
+          "atUtc": "2026-11-16T06:29:34.1501903+00:00",
+          "privateBytes": 817266688,
+          "workingSetBytes": 724058112
+        },
+        {
+          "name": "rendered-export-idle",
+          "atUtc": "2026-11-16T06:29:50.3063783+00:00",
+          "privateBytes": 773058560,
+          "workingSetBytes": 684847104
+        },
+        {
+          "name": "rendered-minimized-idle",
+          "atUtc": "2026-11-16T06:29:55.3416417+00:00",
+          "privateBytes": 771661824,
+          "workingSetBytes": 683175936
+        },
+        {
+          "name": "rendered-restored-idle",
+          "atUtc": "2026-11-16T06:29:56.873171+00:00",
+          "privateBytes": 794099712,
+          "workingSetBytes": 683651072
+        },
+        {
+          "name": "rendered-close-natural-idle",
+          "atUtc": "2026-11-16T06:29:59.4740919+00:00",
+          "privateBytes": 797138944,
+          "workingSetBytes": 687046656
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "status": "PASS_FULL_ROW_PIXEL_AND_METADATA_COMPARISON",
+    "authority": "Actual files read row by row; hashes include every stored channel and normalized RGB48 sample; does not attest UI operations",
+    "checks": {
+      "allOutputStoredChannelsMatch": true,
+      "allOutputRgb48RowsMatch": true,
+      "uneditedOutputMatchesInput": true,
+      "dimensionsMatch": true,
+      "sixteenBitChannels": true,
+      "orientationOne": true,
+      "iccPreserved": true
+    },
+    "input": {
+      "Path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "FileSha256": "0DA1BF38E42B0B76AEE28F2B9A0AF013CEFF4CB9C46102128732D0626D667C6F",
+      "Width": 7752,
+      "Height": 5184,
+      "Format": "Rgb48",
+      "BitsPerPixel": 48,
+      "ChannelBits": 16,
+      "Orientation": 1,
+      "RowsRead": 5184,
+      "StoredPixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "Rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "Icc": [
+        {
+          "Bytes": 3144,
+          "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ]
+    },
+    "first": {
+      "Path": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-first\\export\\DSCF0347_仿色_仿色.tif",
+      "FileSha256": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+      "Width": 7752,
+      "Height": 5184,
+      "Format": "Rgba64",
+      "BitsPerPixel": 64,
+      "ChannelBits": 16,
+      "Orientation": 1,
+      "RowsRead": 5184,
+      "StoredPixelSha256": "3C8991889561662A51B1C20DAF8CDF87D16FDA29870261263D4F4371A5FD5543",
+      "Rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "Icc": [
+        {
+          "Bytes": 3144,
+          "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ]
+    },
+    "reopened": {
+      "Path": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-controlled-reopen\\export\\DSCF0347_仿色_仿色.tif",
+      "FileSha256": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+      "Width": 7752,
+      "Height": 5184,
+      "Format": "Rgba64",
+      "BitsPerPixel": 64,
+      "ChannelBits": 16,
+      "Orientation": 1,
+      "RowsRead": 5184,
+      "StoredPixelSha256": "3C8991889561662A51B1C20DAF8CDF87D16FDA29870261263D4F4371A5FD5543",
+      "Rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+      "Icc": [
+        {
+          "Bytes": 3144,
+          "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        }
+      ]
+    }
+  },
+  "phaseMetricNote": "50ms guard peaks are for each entire process; stage memory values are measured snapshots. Generic guard phase label startup is not interpreted as operation-level 50ms phase peaks.",
+  "forcedGcUsed": false
+}
