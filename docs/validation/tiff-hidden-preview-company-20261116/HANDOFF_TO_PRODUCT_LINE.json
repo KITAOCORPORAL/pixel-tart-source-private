@@ -1,0 +1,38 @@
+{
+  "observedAtUtc": "2026-11-16T09:20:19.421Z",
+  "status": "READY_FOR_PRODUCT_LINE_UNIFIED_DIAGNOSTIC_PACKAGE",
+  "functionalMemoryTaskComplete": true,
+  "srgbFixCommit": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+  "hiddenPreviewFixCommit": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "finalNativeEvidenceCommit": "9e9c8d59345bc7ed5bf3d7c74eb1279d9ba4483b",
+  "integratedFunctionalSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "srcAndTestsIdentical": true,
+  "nativePids": [
+    12852,
+    21192
+  ],
+  "bothNormalExit": true,
+  "stop": false,
+  "privatePeakBytes": [
+    1231872000,
+    1004740608
+  ],
+  "guardBytes": 2147483648,
+  "allRowsAndChannelsCompared": true,
+  "channelBits": 16,
+  "orientation": 1,
+  "iccPreserved": true,
+  "authorizedInputUnchanged": true,
+  "newCameraRawDecodes": 0,
+  "forcedGcUsed": false,
+  "testsWithIdenticalProductDll": {
+    "passed": 34,
+    "failed": 0
+  },
+  "screenCaptureVerified": false,
+  "numericZoomReadbackAvailable": false,
+  "highlightsRemainResearch": true,
+  "packageOwnerThreadId": "01a1e355-64ea-74e0-b7b5-15ec557fdc30",
+  "noCompetingProductPackagePublished": true,
+  "canonicalResult": "E:/Kitao-Deliveries/tiff-srgb-company-20261116/RESULT.json"
+}
