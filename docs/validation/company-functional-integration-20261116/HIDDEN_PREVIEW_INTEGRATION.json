@@ -1,0 +1,29 @@
+{
+  "atUtc": "2026-11-16T06:29:26.868Z",
+  "previousSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "newProductSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "workerCommit": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "originalWorkerCommit": "b1352e64",
+  "integratedAs": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "subjectSourcesAndTestsEqual": true,
+  "sourceFileComparison": [
+    {
+      "file": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "normalizedMatchesPreservedCompanyDirty": true,
+      "oldNormalizedSha256": "0185a97f688653b46d583561b206eb96c613fe9841167ce45c3ad6d937f055d1",
+      "newNormalizedSha256": "0185a97f688653b46d583561b206eb96c613fe9841167ce45c3ad6d937f055d1"
+    },
+    {
+      "file": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+      "normalizedMatchesPreservedCompanyDirty": true,
+      "oldNormalizedSha256": "3a36a62f4c2fe3aea787a7f000d846033fbbb7e7fa034a9199307385dd237592",
+      "newNormalizedSha256": "3a36a62f4c2fe3aea787a7f000d846033fbbb7e7fa034a9199307385dd237592"
+    },
+    {
+      "file": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "normalizedMatchesPreservedCompanyDirty": true,
+      "oldNormalizedSha256": "df8ad9faedb21e175e8106f4322b2782ff8f7c766022eab6fe5dffd40d5751e6",
+      "newNormalizedSha256": "df8ad9faedb21e175e8106f4322b2782ff8f7c766022eab6fe5dffd40d5751e6"
+    }
+  ]
+}

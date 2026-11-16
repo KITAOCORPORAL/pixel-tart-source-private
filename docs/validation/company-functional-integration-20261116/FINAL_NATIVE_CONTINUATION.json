@@ -1,0 +1,28 @@
+{
+  "atUtc": "2026-11-16T07:36:38.895120+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "appPid": 25968,
+  "tool": "Open Computer Use supported native MCP tools; fresh AX state before exposed Invoke; no app/ViewModel injection",
+  "status": "NATIVE_RESCAN_AND_INDEXED_EDITOR_REOPEN_PASS_FULL_SEQUENCE_NOT_COMPLETED",
+  "actions": [
+    {
+      "action": "Sources and index step",
+      "result": "Original source-jpegs only"
+    },
+    {
+      "action": "Scan photos",
+      "result": "Native status: JPG2 RAW0 total2 skipped0"
+    },
+    {
+      "action": "Edit indexed project photos",
+      "result": "Normal editor shows both original JPEGs and saved state"
+    },
+    {
+      "action": "Send selected edited results to customer selection",
+      "result": "MCP action did not return; independent readback showed original editor, no new prepared directory; full sequence not claimed"
+    }
+  ],
+  "clientRecovery": "Only owned MCP client process43820 and descendants terminated; existing App25968 and services retained",
+  "newRawDecodes": 0,
+  "completeFinalSequence": false
+}

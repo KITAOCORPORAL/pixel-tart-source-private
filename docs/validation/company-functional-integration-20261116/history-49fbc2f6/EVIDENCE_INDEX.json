@@ -1,0 +1,122 @@
+{
+  "productSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "atUtc": "2026-11-16T06:14:16.906Z",
+  "artifactPolicy": "Whitelisted synthetic/owned receipts only; JSON/TRX canonicalLF. Live raw traces/credentials stay external.",
+  "artifacts": [
+    {
+      "file": ".gitattributes",
+      "bytes": 94,
+      "sha256": "4882388954377bb963efc7a25196faf490722080763b47963208a445c5df31eb"
+    },
+    {
+      "file": "ACTUAL_WORKFLOW.json",
+      "bytes": 4233,
+      "sha256": "5bbd8998c2718cbc5d873075797c34e9667b523db9073bb53fad12888a6460ed"
+    },
+    {
+      "file": "BATCH_AFTER_RETURN_SAVE.json",
+      "bytes": 2637,
+      "sha256": "1254643bab54de704910a6658425d179bb6be5f75ddf656308204c11158b8706"
+    },
+    {
+      "file": "BATCH_POST_EXPORT_REOPEN.json",
+      "bytes": 2637,
+      "sha256": "9fa12cf015db38b2b936fed6e40448cc35ed3688b4561de445828656e3ae1966"
+    },
+    {
+      "file": "BATCH_REOPEN_RESCAN.json",
+      "bytes": 2637,
+      "sha256": "96853f0c9d730c8a58d804c9122cc9c5a59ae81d343366de42cd44170e3bfda0"
+    },
+    {
+      "file": "COMPONENT_BINDINGS.json",
+      "bytes": 1423,
+      "sha256": "0de68e181f5f81fc712f51d37e6ea9b36454bb439779c825265673c430256896"
+    },
+    {
+      "file": "CURRENT_RECEIPT.json",
+      "bytes": 1514,
+      "sha256": "909c2ddd41710c19e7015d1bcd30b87c417fd152d801dda9f331295be9d44783"
+    },
+    {
+      "file": "CURRENT_REPORT.md",
+      "bytes": 8404,
+      "sha256": "9c3f8cf2cf1a3240476fb624a395b608e7d6b277acd353902d30e45dd197547e"
+    },
+    {
+      "file": "customer-confirmed.png",
+      "bytes": 21929,
+      "sha256": "0c5d6429590853f6ab94cd91aea431a8c053fa70feb8147e21e5fce350540d10"
+    },
+    {
+      "file": "exposure.trx",
+      "bytes": 4159,
+      "sha256": "15906b0d7c6c95aee91366f809e7735d01c112c7336d81916d6f60ea1f6de92c"
+    },
+    {
+      "file": "memory.trx",
+      "bytes": 38435,
+      "sha256": "e9a86824a80cb2fb678a1d2ca27cacefe565c3cdd528dabe7407dbec9dac4984"
+    },
+    {
+      "file": "NATIVE_ENTRY_RECEIPT.json",
+      "bytes": 9374,
+      "sha256": "9532d6b7873fa9b855d73c0fb797ad2b5d143e330954143d29864a104930dde8"
+    },
+    {
+      "file": "PACKAGE_STARTUP.json",
+      "bytes": 1087,
+      "sha256": "3075fe1c03b1ce0cd53c33e990212e8e7c9ef9d1adecbbe0d4fb1da54ac83aa8"
+    },
+    {
+      "file": "PHONE_PREPARATION.json",
+      "bytes": 963,
+      "sha256": "699ec1b2802a0681dfffc4050de22fe988d1c252a5e4604368243c04d5b8736d"
+    },
+    {
+      "file": "REMAINING_BLOCKERS.json",
+      "bytes": 1652,
+      "sha256": "02b70a2e13eff41d0605d6ad8d2b7d976ed0a35658b8865cabd45add9ec2f4c6"
+    },
+    {
+      "file": "RESOURCE_SUMMARY.json",
+      "bytes": 8368,
+      "sha256": "a04928701753645b45558b2a67f059ad0ac5ca9dc01e6b2c3c3a4b1f25625129"
+    },
+    {
+      "file": "source.trx",
+      "bytes": 8430,
+      "sha256": "9e3c5a9949c715598b9f0c3c6ccee8b1c34f0762e9dcf63e1dcdf5e9b307540d"
+    },
+    {
+      "file": "SOURCE_AUDIT.json",
+      "bytes": 10700,
+      "sha256": "2fbb3f4f123ebd4d5978ebcf1a129e59f02edc468ef33a9b7e9c9689773a55a4"
+    },
+    {
+      "file": "SOURCE_RESCAN_PROOF.json",
+      "bytes": 2812,
+      "sha256": "4c4904febc4d1d56496530b2a80835e620f56aa72dbb1e009bac702fb7e01e5f"
+    },
+    {
+      "file": "TESTS.json",
+      "bytes": 1866,
+      "sha256": "ad89e373cc9e72ef44ee00a14260cf75d011a37ef45c61f8f1550583aace3293"
+    },
+    {
+      "file": "TIFF_ORDINARY_EXIT.json",
+      "bytes": 543,
+      "sha256": "a365351c67550c99d329377841e8be43ff28acdf9509e443bacfb76065b19df0"
+    },
+    {
+      "file": "TIFF_ORDINARY_STOP.json",
+      "bytes": 243,
+      "sha256": "2922e9c2d784528504d5a5166d20a079e29e877253e90f5569c7e6359ae78b47"
+    },
+    {
+      "file": "TIFF_STATUS.json",
+      "bytes": 1606,
+      "sha256": "368e25af8fd9971d3d68602a7f120c4f0fdfbf1a9eabee78fcd10c50bde770c4"
+    }
+  ]
+}

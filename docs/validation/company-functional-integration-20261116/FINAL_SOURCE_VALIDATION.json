@@ -1,0 +1,44 @@
+{
+  "atUtc": "2026-11-16T07:11:53.638109+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "previousNativeWorkflowSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "homeBase": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+  "status": "FINAL_COMPONENTS_REGRESSION_STATE_AND_OUTPUT_HASHES_VERIFIED_NATIVE_SEQUENCE_PARTIAL",
+  "compiledComponents": 4,
+  "exeAndDllBindings": 10,
+  "targetedTestsPassed": 39,
+  "changedSinceNativeSequence": [
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+    "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+    "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+    "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs"
+  ],
+  "sourcePolicyAndSessionIdentityUnchanged": true,
+  "original": {
+    "projectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "sourceCount": 1,
+    "result": "v1/r4",
+    "bookingRevision": 2
+  },
+  "batch": {
+    "projectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+    "sourceCount": 1,
+    "result": "v1/r6",
+    "matchesObservedInAx": 2
+  },
+  "outputsRehashed": 2,
+  "batchNormalExeReadback": "FINAL_batch-initial.ax.txt",
+  "originalNormalExeReadback": "FINAL_original-initial.ax.txt",
+  "finalNativeRescanReceipt": "FINAL_BATCH_RETURN_RESCAN.json",
+  "nativeCompleteSequenceOnFinalSource": "NOT_COMPLETED",
+  "desktop": {
+    "firstFailure": "coordinate input geometry is unavailable",
+    "captureRecovery": "window capture timed out twice",
+    "fallback": "Computer Use reported physical Escape stopped control; no further UI actions"
+  },
+  "iPhone": "NOT_RUN_NEEDS_PERSONAL_LOGIN",
+  "ordinary40Mp": "PENDING_SEPARATE_NATIVE_ACCEPTANCE",
+  "newRawDecodes": 0,
+  "nativeContinuation": "FINAL_NATIVE_CONTINUATION.json",
+  "nativeRecovery": "Alternate Open Computer Use exposed native actions completed scan and indexed-editor entry; selection handoff action outcome unverified"
+}

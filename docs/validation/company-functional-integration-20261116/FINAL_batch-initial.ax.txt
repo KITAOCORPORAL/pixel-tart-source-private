@@ -1,0 +1,224 @@
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: GuangjingCompanyBatch.exe.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Secondary Actions: Raise
+		1 文本 光
+		2 文本 光镜
+		3 文本 当前工作区 · 归片工作区
+		4 菜单 ID: TopMenu
+			5 菜单项 文件(F)
+				6 文本 文件(_F)
+			7 菜单项 项目(P)
+				8 文本 项目(_P)
+			9 菜单项 编辑(E)
+				10 文本 编辑(_E)
+			11 菜单项 视图(V)
+				12 文本 视图(_V)
+			13 菜单项 工具(T)
+				14 文本 工具(_T)
+			15 菜单项 帮助(H)
+				16 文本 帮助(_H)
+		17 按钮 最小化窗口
+			18 文本 —
+		19 按钮 最大化或还原窗口
+			20 文本 □
+		21 按钮 关闭窗口
+			22 文本 ×
+		23 按钮
+		24 窗格 侧栏根区域 ID: SidebarRoot
+		25 窗格 ID: SidebarNavigationScroll
+			26 文本 工作
+			27 按钮 工作台 Description: 工作台 ID: PrimaryNavigationWorkbench
+			28 按钮 素材库 Description: 素材库 ID: AssetLibraryNavigationButton
+			29 按钮 归片工作区 Description: 归片工作区 ID: PrimaryNavigationWorkflow
+			30 按钮 工作日历 Description: 工作日历 ID: PrimaryNavigationWorkCalendar
+			31 按钮 策划中心 Description: 策划中心 ID: PrimaryNavigationPlanning
+			32 按钮 联机拍摄 Description: 联机拍摄 ID: PrimaryNavigationTether
+			33 按钮 暗室 Description: 暗室 ID: PrimaryNavigationReferenceColor
+			34 按钮 在线选片 Description: 在线选片 ID: PrimaryNavigationOnlineSelection
+			35 按钮 摄影收支 Description: 摄影收支 ID: PrimaryNavigationFinance
+			36 按钮 项目历史 Description: 项目历史 ID: PrimaryNavigationHistory
+			37 分隔符 (disabled)
+			38 文本 工具
+			39 按钮 工具箱 Description: 打开完整工具集合。 ID: PrimaryNavigationToolbox
+			40 分隔符 (disabled)
+			41 文本 系统
+			42 按钮 授权与版本 Description: 授权与版本
+			43 按钮 设置 Description: 设置 ID: SidebarSettingsButton
+			44 按钮 帮助 Description: 帮助
+		45 文本 免费版
+		46 按钮 查看授权与版本 Description: 查看授权与版本
+			47 文本 升级
+		48 文本 授权与版本
+		49 按钮 收起侧栏 Description: 收起侧栏 ID: SidebarCollapseButton
+		240 窗格
+			241 文本 归片
+			242 按钮 1 来源与索引
+				243 文本 1 来源与索引
+			244 按钮 2 导入选片
+				245 文本 2 导入选片
+			246 按钮 3 匹配检查
+				247 文本 3 匹配检查
+			248 按钮 4 输出交付
+				249 文本 4 输出交付
+			250 窗格
+				441 文本 核对冲突与未找到项 Description: 开始匹配后核对状态。状态旁可查看明细，Alt+Enter 快速打开。
+			260 文本 选片记录
+			261 文本 2
+			262 文本 目标文件
+			263 文本 2
+			264 文本 JPG / RAW
+			265 文本 2 / 0
+			266 文本 冲突 / 未找到
+			267 文本 0 / 0
+			268 文本 已复制
+			269 文本 0
+			442 按钮 开始匹配 ID: MatchButton
+				443 文本 开始匹配
+			270 按钮 保存项目
+				271 文本 保存项目
+			272 按钮 (disabled) 取消当前任务 ID: CancelButton
+				273 文本 (disabled) 取消当前任务
+			274 按钮 清空任务 ID: ClearTaskButton
+				275 文本 清空任务
+			276 编辑 (settable, string) Description: 按客户输入、标准化名称、编号或备注搜索（Ctrl+F） ID: SearchBox
+			277 复选框 只看冲突与待处理
+				278 文本 只看冲突与待处理
+			279 文本 Alt+Enter 查看明细 Description: 查看明细位于总体状态右侧；Alt+Enter 快速打开
+			280 数据网格 ID: ResultsGrid
+				281 标头 ID: PART_ColumnHeadersPresenter
+					282 标头项 选
+						283 文本 选
+						284 缩略 ID: PART_RightHeaderGripper
+					285 标头项 客户原始输入
+						286 文本 客户原始输入
+						287 缩略 ID: PART_LeftHeaderGripper
+						288 缩略 ID: PART_RightHeaderGripper
+					289 标头项 总体状态
+						290 文本 总体状态
+						291 缩略 ID: PART_LeftHeaderGripper
+						292 缩略 ID: PART_RightHeaderGripper
+					293 标头项 处理
+						294 文本 处理
+						295 缩略 ID: PART_LeftHeaderGripper
+						296 缩略 ID: PART_RightHeaderGripper
+					297 标头项 标准化名称
+						298 文本 标准化名称
+						299 缩略 ID: PART_LeftHeaderGripper
+						300 缩略 ID: PART_RightHeaderGripper
+					301 标头项 数字编号
+						302 文本 数字编号
+						303 缩略 ID: PART_LeftHeaderGripper
+						304 缩略 ID: PART_RightHeaderGripper
+					305 标头项 JPG 状态
+						306 文本 JPG 状态
+						307 缩略 ID: PART_LeftHeaderGripper
+						308 缩略 ID: PART_RightHeaderGripper
+					309 标头项 JPG 文件名
+						310 文本 JPG 文件名
+						311 缩略 ID: PART_LeftHeaderGripper
+						312 缩略 ID: PART_RightHeaderGripper
+					313 标头项 RAW 状态
+						314 文本 RAW 状态
+						315 缩略 ID: PART_LeftHeaderGripper
+						316 缩略 ID: PART_RightHeaderGripper
+					317 标头项 RAW 文件名
+						318 文本 RAW 文件名
+						319 缩略 ID: PART_LeftHeaderGripper
+						320 缩略 ID: PART_RightHeaderGripper
+					321 标头项 其他格式
+						322 文本 其他格式
+						323 缩略 ID: PART_LeftHeaderGripper
+						324 缩略 ID: PART_RightHeaderGripper
+					325 标头项 匹配文件数
+						326 文本 匹配文件数
+						327 缩略 ID: PART_LeftHeaderGripper
+						328 缩略 ID: PART_RightHeaderGripper
+					329 标头项 冲突数
+						330 文本 冲突数
+						331 缩略 ID: PART_LeftHeaderGripper
+						332 缩略 ID: PART_RightHeaderGripper
+					333 标头项 备注
+						334 文本 备注
+						335 缩略 ID: PART_LeftHeaderGripper
+						336 缩略 ID: PART_RightHeaderGripper
+				337 数据项 (selectable) RAWSelectionAssistant.Core.Models.MediaSelectionItem
+					338 数据网格单元 (settable, string) 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0 Value: True
+						339 复选框
+					340 数据网格单元 COMPANY_0001.png Description: COMPANY_0001.png Value: COMPANY_0001.png
+						341 文本 COMPANY_0001.png
+					342 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2
+						343 文本 完整匹配
+					344 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3
+						345 按钮 查看匹配明细
+							346 文本 查看明细
+					347 数据网格单元 COMPANY_0001 Description: COMPANY_0001 Value: COMPANY_0001
+						348 文本 COMPANY_0001
+					349 数据网格单元 1 Description: 1 Value: 1
+						350 文本 1
+					351 数据网格单元 已找到来源 JPG Description: 已找到来源 JPG Value: 已找到来源 JPG
+						352 文本 已找到来源 JPG
+					353 数据网格单元 COMPANY_0001.jpg Description: COMPANY_0001.jpg Value: COMPANY_0001.jpg
+						354 文本 COMPANY_0001.jpg
+					355 数据网格单元 — Description: — Value: —
+						356 文本 —
+					357 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9
+						358 文本
+					359 数据网格单元 0 Description: 0 Value: 0
+						360 文本 0
+					361 数据网格单元 1 Description: 1 Value: 1
+						362 文本 1
+					363 数据网格单元 0 Description: 0 Value: 0
+						364 文本 0
+					365 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 13
+						366 文本
+				367 数据项 (selectable) RAWSelectionAssistant.Core.Models.MediaSelectionItem
+					368 数据网格单元 (settable, string) 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0 Value: True
+						369 复选框
+					370 数据网格单元 COMPANY_0002.png Description: COMPANY_0002.png Value: COMPANY_0002.png
+						371 文本 COMPANY_0002.png
+					372 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2
+						373 文本 完整匹配
+					374 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3
+						375 按钮 查看匹配明细
+							376 文本 查看明细
+					377 数据网格单元 COMPANY_0002 Description: COMPANY_0002 Value: COMPANY_0002
+						378 文本 COMPANY_0002
+					379 数据网格单元 2 Description: 2 Value: 2
+						380 文本 2
+					381 数据网格单元 已找到来源 JPG Description: 已找到来源 JPG Value: 已找到来源 JPG
+						382 文本 已找到来源 JPG
+					383 数据网格单元 COMPANY_0002.jpg Description: COMPANY_0002.jpg Value: COMPANY_0002.jpg
+						384 文本 COMPANY_0002.jpg
+					385 数据网格单元 — Description: — Value: —
+						386 文本 —
+					387 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9
+						388 文本
+					389 数据网格单元 0 Description: 0 Value: 0
+						390 文本 0
+					391 数据网格单元 1 Description: 1 Value: 1
+						392 文本 1
+					393 数据网格单元 0 Description: 0 Value: 0
+						394 文本 0
+					395 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 13
+						396 文本
+			397 文本 所选记录快速摘要
+			398 文本 输入：COMPANY_0001.png · JPG：已找到来源 JPG · RAW：— · 备注：
+			399 按钮 查看完整明细
+				400 文本 查看完整明细
+			401 滚动条 (settable, float) Value: 377.9999999999999 ID: PART_HorizontalScrollBar
+				402 按钮 ID: PageLeft
+				403 缩略
+				404 按钮 ID: PageRight
+		106 窗格 工作台根区域 ID: WorkbenchRoot
+		107 文本 匹配完成：完整 2，部分 0，冲突 0，未找到 0
+		108 文本 已索引 2 个照片文件
+		109 文本 ·
+		110 文本 ·
+		111 文本 已处理 2
+		112 进度栏 Value: 0
+		113 自定义 拍摄提醒通知
+			114 窗格
+				115 列表视图
+
+Document text: ```
+COMPANY_0001.png
+```

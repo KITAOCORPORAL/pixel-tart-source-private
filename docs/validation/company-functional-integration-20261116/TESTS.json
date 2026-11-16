@@ -1,0 +1,55 @@
+{
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "configuration": "Release",
+  "platform": "x64",
+  "sourceBuildRoot": "E:\\Kitao-Worktrees\\company-functional-20261116",
+  "runs": [
+    {
+      "name": "Raster/prepared/sRGB/hidden-preview",
+      "counters": {
+        "total": 34,
+        "executed": 34,
+        "passed": 34,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "evidence": "final-memory.trx"
+    },
+    {
+      "name": "Source policy and workflow identity",
+      "counters": {
+        "total": 5,
+        "executed": 5,
+        "passed": 5,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "evidence": "final-source.trx"
+    }
+  ],
+  "passed": 39,
+  "failed": 0,
+  "scope": "Targeted regression only; native/iPhone/40MP acceptance not implied"
+}

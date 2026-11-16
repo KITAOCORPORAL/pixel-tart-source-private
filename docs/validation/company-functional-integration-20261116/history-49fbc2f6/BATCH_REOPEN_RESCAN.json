@@ -1,0 +1,78 @@
+{
+  "atUtc": "2026-11-16T05:04:02.755842+00:00",
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "pid": 43780,
+  "projectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+  "root": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime",
+  "project": {
+    "Id": "e9fdf6c1-4950-4010-a939-a30af961216d",
+    "Name": "公司合成闭环 20261116",
+    "ProjectType": "JpegOnly",
+    "RootPath": "",
+    "SourceOnlineSelectionProjectId": "5960a0d8-c9c8-4a1a-81ac-93564599795b"
+  },
+  "sources": [
+    {
+      "Path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs",
+      "Priority": 0
+    }
+  ],
+  "inputs": [
+    {
+      "OriginalInput": "COMPANY_0001.png"
+    },
+    {
+      "OriginalInput": "COMPANY_0002.png"
+    }
+  ],
+  "projectCount": 1,
+  "albums": [
+    {
+      "id": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+      "name": "公司合成闭环 20261116",
+      "workflowId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+      "status": 5
+    }
+  ],
+  "results": [
+    {
+      "albumId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+      "version": 1,
+      "revision": 6,
+      "locked": true,
+      "selected": [
+        "38783444-be79-4a36-8969-65105a00cb62",
+        "5ee05324-898d-4182-bb8f-78763a6ee790"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "38783444-be79-4a36-8969-65105a00cb62",
+      "projectId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+      "file": "COMPANY_0001.png",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime\\OnlineSelection\\Prepared\\e9fdf6c149504010a939a30af961216d\\202a7e5316664595885b8ad9cf2ed745\\COMPANY_0001.png",
+      "cloudId": "38783444be794a36896965105a00cb62"
+    },
+    {
+      "id": "5ee05324-898d-4182-bb8f-78763a6ee790",
+      "projectId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+      "file": "COMPANY_0002.png",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime\\OnlineSelection\\Prepared\\e9fdf6c149504010a939a30af961216d\\202a7e5316664595885b8ad9cf2ed745\\COMPANY_0002.png",
+      "cloudId": "5ee05324898d4182bb8f78763a6ee790"
+    }
+  ],
+  "originalFiles": [
+    {
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0001.jpg",
+      "bytes": 16376,
+      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
+    },
+    {
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0002.jpg",
+      "bytes": 15629,
+      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
+    }
+  ],
+  "newRawDecodes": 0
+}

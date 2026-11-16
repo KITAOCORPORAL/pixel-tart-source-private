@@ -1,0 +1,148 @@
+{
+  "atUtc": "2026-11-16T05:46:45.094Z",
+  "clientTimeZone": "Europe/Helsinki",
+  "companySource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "homeBase": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+  "homeLatestReportFrozenAt": "be2f9c70; old todos predate later fixes/build commits",
+  "currentHead": {
+    "exit": 0,
+    "stdout": "9523626013c443b8f0cb03ea3a6d97b9a7f5d150\n",
+    "stderr": ""
+  },
+  "homeCommits": {
+    "exit": 0,
+    "stdout": "0a45ee0e7971c18c6bb4b7e287bced86c448263b build(workflow): publish integrated home package with preserved external runtime\n14eda5c7758a962784252566b0a0d7ba784c8221 fix(memory): transfer prepared raster cache with session ownership and rollback\n17a95b5a5dab83a47090c36c83abf300a637c80c fix(memory): reuse frozen raster for rendered input and read export headers only\na9d1bb9685796c84c1c604cf671b0f64bdb61225 fix(workflow): retain original source when customer results return to an existing project\nbe2f9c70e0bc655d687163e149427a7c0346b590 feat(workflow): preserve same-project edit selection return and household native receipts\nbdc913c9463573247b9b6460f9a1102e40e74a31 docs(product): record unified R3 source and remote delivery readback\n",
+    "stderr": ""
+  },
+  "memoryMapping": [
+    {
+      "original": "edd6d25e",
+      "integrated": "17a95b5a",
+      "stablePatchId": "dd369961180a69ed9760ee1e218e07d94860f328",
+      "present": true
+    },
+    {
+      "original": "e28074f1",
+      "integrated": "14eda5c7",
+      "present": true,
+      "cacheTransferClearRollbackRetained": true,
+      "comparison": {
+        "exit": 0,
+        "stdout": "diff --git a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs\nindex 8c0fbcd0..525dee7f 100644\n--- a/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs\n+++ b/src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs\n@@ -60,7 +60,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel\n         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,\n             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,\n             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput){VariantsExpanded=item.VariantsExpanded}).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,\n-            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true};\n+            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true,WorkflowProjectId=WorkflowProjectId};\n         path=Path.GetFullPath(path);\n         if(Targets.Any(t=>string.Equals(Path.GetFullPath(t.Path),path,StringComparison.OrdinalIgnoreCase)))throw new IOException(\"不能将工作文件保存到源照片路径。\");\n         // Session embeds its versions as one portable snapshot. Repository persistence is an\n@@ -130,7 +130,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel\n         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);\n         var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldSourceCache=_sourceCache.ToArray();\n         var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;\n-        var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;\n+        var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldWorkflow=WorkflowProjectId;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;\n         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();\n         try\n         {\n@@ -181,7 +181,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel\n             token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??\"项目激活失败\");\n         }\n         else { TargetImage = null; TargetName = \"尚未选择待调色照片\"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }\n-        NotifyR53Variants(); RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));OnPropertyChanged(nameof(ExplicitSdrDisplayColor));OnPropertyChanged(nameof(ManualMonitorProfile));NotifyColorState();\n+        WorkflowProjectId=document.WorkflowProjectId; NotifyR53Variants(); RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));OnPropertyChanged(nameof(ExplicitSdrDisplayColor));OnPropertyChanged(nameof(ManualMonitorProfile));NotifyColorState();\n         _batchUndo.Clear();_batchRedo.Clear();RaiseBatchHistory();\n         SetStatus(\"SessionRestored\", restored.Length, missing);\n         if(staged is not null)\n@@ -204,7 +204,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel\n             _sourceCache.Clear();foreach(var cached in oldSourceCache)_sourceCache.AddLast(cached);\n             Targets.Clear();foreach(var item in oldTargets)Targets.Add(item);\n             FailedTarget=oldFailed;Editor.RestoreTargetEngine(oldEngine,oldMode);\n-            FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;\n+            FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;WorkflowProjectId=oldWorkflow;\n             _applyingActiveSnapshot=true;\n             if(oldActive is not null)\n             {\n",
+        "stderr": ""
+      },
+      "regressionFileEqual": true
+    }
+  ],
+  "sourcePolicy": {
+    "commit": "a9d1bb96",
+    "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionWorkflowSourcePolicy.cs",
+    "sha256": "d6e0f64c9f5134c336c023dfebff956b3f679dce7a7e92a7a9da50375259ef5a",
+    "unchangedInCompany": true,
+    "finalPackageVerifiedBy": "SOURCE_RESCAN_PROOF.json plus COMPONENT_BINDINGS.json and PACKAGE_FILES.json"
+  },
+  "srgb": {
+    "commit": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+    "sourceFile": "ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+    "pixelMathChanged": false
+  },
+  "uiEntryFix": {
+    "commit": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+    "files": [
+      "MainWindow.xaml",
+      "Views/PhotoGradePageView.xaml"
+    ],
+    "commandsAlreadyExisted": true
+  },
+  "postSourceCodeDiff": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "oldCompany": {
+    "head": "4aa17e64efb16dffde208c306ede2a62ba0ec9d8",
+    "files": [
+      {
+        "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+        "bytes": 19341,
+        "sha256": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+        "untracked": false,
+        "afterSha256": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+        "unchanged": true
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+        "bytes": 5645,
+        "sha256": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3",
+        "untracked": false,
+        "afterSha256": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3",
+        "unchanged": true
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+        "bytes": 18224,
+        "sha256": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1",
+        "untracked": false,
+        "afterSha256": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1",
+        "unchanged": true
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs",
+        "bytes": 15650,
+        "sha256": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61",
+        "untracked": false,
+        "afterSha256": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61",
+        "unchanged": true
+      },
+      {
+        "path": "tools/ProductMemoryIntegrationReplay/Program.cs",
+        "bytes": 25963,
+        "sha256": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d",
+        "untracked": false,
+        "afterSha256": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d",
+        "unchanged": true
+      },
+      {
+        "path": "tools/ProductMemoryIntegrationReplay/run_guarded.py",
+        "bytes": 4767,
+        "sha256": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259",
+        "untracked": false,
+        "afterSha256": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259",
+        "unchanged": true
+      },
+      {
+        "path": "tools/FunctionalClosureAcceptance/Compare-RenderedTiffOutputs.py",
+        "bytes": 3648,
+        "sha256": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265",
+        "untracked": true,
+        "afterSha256": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265",
+        "unchanged": true
+      },
+      {
+        "path": "tools/FunctionalClosureAcceptance/Native-ProductStep.ps1",
+        "bytes": 3775,
+        "sha256": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00",
+        "untracked": true,
+        "afterSha256": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00",
+        "unchanged": true
+      }
+    ],
+    "readOnlyPreserved": true
+  },
+  "homeOriginalRuntimeAvailable": false,
+  "homeOriginalPackageBinaryAvailableOnThisMachine": false,
+  "homePackageBuildScriptDeclaresFixes": true,
+  "homePackageBinaryNotInferredFromScript": true,
+  "newRawDecodes": 0,
+  "highlightAndPendingRawAdmission": "UNCHANGED",
+  "finalAudit": {
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "homeAncestor": true,
+    "memoryPatchIdRechecked": "dd369961180a69ed9760ee1e218e07d94860f328",
+    "sessionDifference": "Only WorkflowProjectId save/load/rollback preservation relative to e28074f1",
+    "compiledInputDirty": false,
+    "companyOriginalUncommittedChangesStillPresent": true,
+    "originalWorktree": "E:/Kitao-Worktrees/product-functional-closure-20261112",
+    "hiddenPreviewIntegration": "HIDDEN_PREVIEW_INTEGRATION.json"
+  }
+}

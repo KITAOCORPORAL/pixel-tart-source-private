@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="37765708-033e-454f-a28b-9abb4366e654" name="Administrator@PC-20250309WEIZ 2026-11-16 12:49:18" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-16T12:49:18.1267539+08:00" queuing="2026-11-16T12:49:18.1267542+08:00" start="2026-11-16T12:49:17.2116033+08:00" finish="2026-11-16T12:49:18.1313342+08:00" />
+  <TestSettings name="default" id="943676b5-3341-40d0-93e3-c9bc168c4631">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-16_12_49_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a0bdf681-699b-4d8d-b186-eb249a33398a" testId="14f1477c-c499-8715-aedf-0b0340fa9703" testName="SimilarUserPathOutsideManagedProjectBoundaryIsNotRemoved" computerName="PC-20250309WEIZ" duration="00:00:00.0090954" startTime="2026-11-16T12:49:17.8482411+08:00" endTime="2026-11-16T12:49:17.8786929+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0bdf681-699b-4d8d-b186-eb249a33398a" />
+    <UnitTestResult executionId="9748944d-ba69-434c-8dc2-5f3926c7f2ac" testId="14085941-7ff5-8102-93be-d02de29cbfa0" testName="ExistingFreeProjectKeepsOneOriginalSourceAfterSelectionReturn" computerName="PC-20250309WEIZ" duration="00:00:00.0091172" startTime="2026-11-16T12:49:17.8482709+08:00" endTime="2026-11-16T12:49:17.8786854+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9748944d-ba69-434c-8dc2-5f3926c7f2ac" />
+    <UnitTestResult executionId="8ef0be7f-003c-4c87-8a05-0ef4b03e022d" testId="129967cc-8279-8dc2-b731-75b9ae41657b" testName="SessionSaveReopenPreservesExplicitWorkflowIdentity" computerName="PC-20250309WEIZ" duration="00:00:00.1619139" startTime="2026-11-16T12:49:17.8482305+08:00" endTime="2026-11-16T12:49:18.0300596+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8ef0be7f-003c-4c87-8a05-0ef4b03e022d" />
+    <UnitTestResult executionId="8b9ba65e-612f-4016-90b6-3a1378022cfe" testId="14af3d4f-64ca-8627-99f9-fc018695edd4" testName="RepeatedReturnDoesNotAddManagedSourceAndPreservesOtherUserSources" computerName="PC-20250309WEIZ" duration="00:00:00.0091202" startTime="2026-11-16T12:49:17.8482636+08:00" endTime="2026-11-16T12:49:17.8786854+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8b9ba65e-612f-4016-90b6-3a1378022cfe" />
+    <UnitTestResult executionId="99b73c8e-d5f3-4fbe-a008-63e0f77671cb" testId="1daf7079-870a-839c-9744-02dd645907c7" testName="StandaloneOnlineSelectionCanStillEstablishItsInitialSource" computerName="PC-20250309WEIZ" duration="00:00:00.0091041" startTime="2026-11-16T12:49:17.8482526+08:00" endTime="2026-11-16T12:49:17.8786853+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="99b73c8e-d5f3-4fbe-a008-63e0f77671cb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExistingFreeProjectKeepsOneOriginalSourceAfterSelectionReturn" storage="e:\kitao-worktrees\company-functional-20261116\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="14085941-7ff5-8102-93be-d02de29cbfa0">
+      <Execution id="9748944d-ba69-434c-8dc2-5f3926c7f2ac" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.SelectionWorkflowSourcePolicyTests" name="ExistingFreeProjectKeepsOneOriginalSourceAfterSelectionReturn" />
+    </UnitTest>
+    <UnitTest name="RepeatedReturnDoesNotAddManagedSourceAndPreservesOtherUserSources" storage="e:\kitao-worktrees\company-functional-20261116\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="14af3d4f-64ca-8627-99f9-fc018695edd4">
+      <Execution id="8b9ba65e-612f-4016-90b6-3a1378022cfe" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.SelectionWorkflowSourcePolicyTests" name="RepeatedReturnDoesNotAddManagedSourceAndPreservesOtherUserSources" />
+    </UnitTest>
+    <UnitTest name="StandaloneOnlineSelectionCanStillEstablishItsInitialSource" storage="e:\kitao-worktrees\company-functional-20261116\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="1daf7079-870a-839c-9744-02dd645907c7">
+      <Execution id="99b73c8e-d5f3-4fbe-a008-63e0f77671cb" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.SelectionWorkflowSourcePolicyTests" name="StandaloneOnlineSelectionCanStillEstablishItsInitialSource" />
+    </UnitTest>
+    <UnitTest name="SimilarUserPathOutsideManagedProjectBoundaryIsNotRemoved" storage="e:\kitao-worktrees\company-functional-20261116\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="14f1477c-c499-8715-aedf-0b0340fa9703">
+      <Execution id="a0bdf681-699b-4d8d-b186-eb249a33398a" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.SelectionWorkflowSourcePolicyTests" name="SimilarUserPathOutsideManagedProjectBoundaryIsNotRemoved" />
+    </UnitTest>
+    <UnitTest name="SessionSaveReopenPreservesExplicitWorkflowIdentity" storage="e:\kitao-worktrees\company-functional-20261116\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="129967cc-8279-8dc2-b731-75b9ae41657b">
+      <Execution id="8ef0be7f-003c-4c87-8a05-0ef4b03e022d" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.HomeWorkflowSessionIdentityTests" name="SessionSaveReopenPreservesExplicitWorkflowIdentity" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="14f1477c-c499-8715-aedf-0b0340fa9703" executionId="a0bdf681-699b-4d8d-b186-eb249a33398a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14085941-7ff5-8102-93be-d02de29cbfa0" executionId="9748944d-ba69-434c-8dc2-5f3926c7f2ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="129967cc-8279-8dc2-b731-75b9ae41657b" executionId="8ef0be7f-003c-4c87-8a05-0ef4b03e022d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14af3d4f-64ca-8627-99f9-fc018695edd4" executionId="8b9ba65e-612f-4016-90b6-3a1378022cfe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1daf7079-870a-839c-9744-02dd645907c7" executionId="99b73c8e-d5f3-4fbe-a008-63e0f77671cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 E:\Kitao-Worktrees\company-functional-20261116\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

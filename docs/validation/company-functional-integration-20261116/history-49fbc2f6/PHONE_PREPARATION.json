@@ -1,0 +1,20 @@
+{
+  "status": "PREPARED_SERVICE_APP_AND_EXISTING_BOOKING_WAITING_PERSONAL_TAILNET",
+  "atUtc": "2026-11-16T05:45:12.536227+00:00",
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "appPid": 54088,
+  "servicePid": 25892,
+  "existingBookingId": "a08ae657-84ce-43e5-948c-a5f39aae32e9",
+  "bookingRevision": 4,
+  "newDeviceId": "8403044704d544648fa9fd30b89cb3ed",
+  "deviceExpiresAtUtc": "2026-11-18T04:17:47.3992104+00:00",
+  "credentialAcceptedAfterAppAndServiceReopen": true,
+  "anonymousRejected": true,
+  "bookingMutations": false,
+  "backendState": "NeedsLogin",
+  "httpsVerified": false,
+  "iPhoneBidirectional": "NOT_RUN",
+  "credentialOrAuthUrlBundled": false,
+  "oldCredentialExpiredAtUtc": "2026-11-14T04:06:19.9374276+00:00",
+  "next": "Personal login, then Continue-CompanyMobile.py --apply; verify original tailnet/company DNS/trustedHTTPS, issue the prepared private device URL, and only then perform iPhone->PC->iPhone and final restarts."
+}

@@ -1,0 +1,31 @@
+{
+  "status": "PASS_COMPANY_COLD_APP_START_AND_BOTH_SHELL_REUSE",
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "atUtc": "2026-11-16T05:34:59.383753+00:00",
+  "package": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-49fbc2f6-win-x64",
+  "identity": {
+    "pid": 53760,
+    "desktopPid": 52576,
+    "startedUtc": "2026-11-16T04:52:19.6206452Z",
+    "desktopStartedUtc": "filetime:134392808237092217",
+    "instanceId": "7ead51e2d290416cb8373847ac49c8b3",
+    "desktopRoot": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime"
+  },
+  "runs": [
+    {
+      "shell": "powershell.exe",
+      "exitCode": 0,
+      "sameAppAndService": true,
+      "noSecondWriter": true
+    },
+    {
+      "shell": "pwsh.exe",
+      "exitCode": 0,
+      "sameAppAndService": true,
+      "noSecondWriter": true
+    }
+  ],
+  "serviceReady": true,
+  "samePrivateRoot": true,
+  "scope": "Package startup and single-writer reuse; cold starter uses ordinary App. Mainline and memory measurements use separately recorded2GiB guarded runs."
+}

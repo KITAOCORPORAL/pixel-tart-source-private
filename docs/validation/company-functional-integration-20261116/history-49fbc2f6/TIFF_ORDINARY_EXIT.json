@@ -1,0 +1,23 @@
+{
+  "pid": 4532,
+  "exitCode": null,
+  "monitorEndedWhileAppAlive": true,
+  "stop": "2GiB resource guard",
+  "peakPrivateBytes50ms": 2149568512,
+  "osPeakWorkingSetBytes": 1697746944,
+  "samples": 134622,
+  "phases": {
+    "startup": {
+      "samples": 1947,
+      "peakPrivateBytes": 324767744,
+      "peakWorkingSetBytes": 315072512
+    },
+    "native-import-preparation": {
+      "samples": 132675,
+      "peakPrivateBytes": 2149568512,
+      "peakWorkingSetBytes": 1696428032
+    }
+  },
+  "forcedGcUsed": false,
+  "newRawDecodeLimit": 0
+}

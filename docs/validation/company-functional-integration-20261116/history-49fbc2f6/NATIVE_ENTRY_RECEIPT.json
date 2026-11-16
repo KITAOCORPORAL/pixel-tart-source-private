@@ -1,0 +1,219 @@
+{
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "authority": "Normal source-bound App, native UIA/control file dialogs, desktop browser; not injected ViewModel workflow",
+  "projectIds": {
+    "original": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "companyBatch": "e9fdf6c1-4950-4010-a939-a30af961216d"
+  },
+  "nativeSteps": [
+    "original-delivery-04-online",
+    "original-delivery-07-resync",
+    "original-delivery-08-save",
+    "original-post-03-rescan-verified",
+    "batch-final-04-rescan",
+    "batch-final-08-edit-indexed",
+    "batch-final-11-edit-half-stop",
+    "batch-final-15-send-edit-to-selection",
+    "batch-final-18-upload-confirmed",
+    "batch-final-20-publish-state",
+    "batch-final-23-client-result-verified",
+    "batch-reopen-05-rescan-observed",
+    "batch-reopen-08-limit-observed",
+    "batch-reopen-20-match-observed",
+    "batch-final-proof-04-result-restored"
+  ],
+  "receipts": [
+    {
+      "label": "original-delivery-04-online",
+      "atUtc": "2026-11-16T05:40:32.5184574+00:00",
+      "pid": 53104,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "a2eb8ffae89d5f67d2c4cc54d43ec2e4c9c8a74f519197640ccd5b3ea734a4db",
+      "safeRelevantTexts": [
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "original-delivery-07-resync",
+      "atUtc": "2026-11-16T05:40:44.3207910+00:00",
+      "pid": 53104,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "b39511f366beb8e32393d91f171fdf2b7db7f0a3a1e2f55b34bb650252bef77d",
+      "safeRelevantTexts": [
+        "本地代理 1 张 · 服务确认 1 张",
+        "服务器确认回执：v1 / r4 · 2026-11-13 10:39:10 +00:00",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "original-delivery-08-save",
+      "atUtc": "2026-11-16T05:40:50.1039646+00:00",
+      "pid": 53104,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "e18ece7aa033093f3113aed7d87e073d29bc19c62080cb82d84cf505a142714c",
+      "safeRelevantTexts": [
+        "客户确认结果已进入对应归片项目；可继续扫描和匹配，原片未修改。",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "original-post-03-rescan-verified",
+      "atUtc": "2026-11-16T05:48:44.9758986+00:00",
+      "pid": 9616,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "b212179948a46823e954d1aeb7037dec40073f0867e556faf36d4930d6dbc616",
+      "safeRelevantTexts": [
+        "综合索引已更新：JPG 2，RAW 0，共 2 个文件；跳过 0 个不可访问目录",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-08-edit-indexed",
+      "atUtc": "2026-11-16T04:48:17.5729523+00:00",
+      "pid": 54456,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "bdfa579c9797569264740a3eedbb28311945a9384b7733cdb9bd6ed9f6a46b99",
+      "safeRelevantTexts": [
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-11-edit-half-stop",
+      "atUtc": "2026-11-16T04:48:39.9112729+00:00",
+      "pid": 54456,
+      "action": "SetValue",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "918ec13a77804d8aee90c3d922d5818747b4f05fbf08f3558b3469c1f8f528cc",
+      "safeRelevantTexts": [
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-15-send-edit-to-selection",
+      "atUtc": "2026-11-16T04:53:19.6440535+00:00",
+      "pid": 54456,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "41057ec892de9084a96a3d664d4b9f1dce0d903f226aced4c34005183e2f0494",
+      "safeRelevantTexts": [
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-18-upload-confirmed",
+      "atUtc": "2026-11-16T04:54:50.6932073+00:00",
+      "pid": 54456,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "368228ec8d3451ad8197b283d828dca73d1b0987b5fa269cf18e4549350218a4",
+      "safeRelevantTexts": [
+        "本地代理 2 张 · 服务确认 2 张",
+        "服务已确认上传，可按当前规则发布。",
+        "服务已确认上传",
+        "服务已确认上传",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-20-publish-state",
+      "atUtc": "2026-11-16T04:54:57.0724460+00:00",
+      "pid": 54456,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "c6b68864e6f9f09f6500d2a0a50fba705865c1f2d81c01e8beaace8ec8db8ef5",
+      "safeRelevantTexts": [
+        "本地代理 2 张 · 服务确认 2 张",
+        "项目已发布；客户可通过受保护链接进入选片。",
+        "服务已确认上传",
+        "服务已确认上传",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-23-client-result-verified",
+      "atUtc": "2026-11-16T05:00:05.8289372+00:00",
+      "pid": 54456,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "d8594e2fc4ecbdee0001701e2ee4053ee4f55949646a8f2be72bde9660dce96d",
+      "safeRelevantTexts": [
+        "本地代理 2 张 · 服务确认 2 张",
+        "客户已确认 2 张，结果已校验并保存，可同步归片。",
+        "服务器确认回执：v1 / r6 · 2026-11-16 04:57:40 +00:00",
+        "服务已确认上传",
+        "服务已确认上传",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-reopen-05-rescan-observed",
+      "atUtc": "2026-11-16T05:04:02.6703144+00:00",
+      "pid": 43780,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "613feb8629259293ceb270d6efb849c2ab6302af4938c5bcbbdd04d934e66718",
+      "safeRelevantTexts": [
+        "综合索引已更新：JPG 2，RAW 0，共 2 个文件；跳过 0 个不可访问目录",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-reopen-08-limit-observed",
+      "atUtc": "2026-11-16T05:05:30.6424224+00:00",
+      "pid": 43780,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "7ede448baa87d85bd5a2db7e26c0963e794666cc651ed176bc76c376406ba200",
+      "safeRelevantTexts": [
+        "免费版最多添加 1 个照片来源目录。\n\n你可以继续使用免费版基础功能；如需此能力，请在“授权与版本”页查看专业版说明。购买页面只会在你主动点击时打开。",
+        "免费版最多添加 1 个照片来源目录。",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-reopen-20-match-observed",
+      "atUtc": "2026-11-16T05:13:09.6834395+00:00",
+      "pid": 43780,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "8070e61ef14aba114a7eccc09c723a66d217b2223136f7f7b1bae9c5770ae547",
+      "safeRelevantTexts": [
+        "匹配完成：完整 2，部分 0，冲突 0，未找到 0",
+        "已索引 2 个照片文件"
+      ]
+    },
+    {
+      "label": "batch-final-proof-04-result-restored",
+      "atUtc": "2026-11-16T05:18:10.1802366+00:00",
+      "pid": 48672,
+      "action": "Observe",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "0cb81446f8cc8ba05f98e6157e290b70ee0180264b49524037137a8bcd88f8d9",
+      "safeRelevantTexts": [
+        "本地代理 2 张 · 服务确认 2 张",
+        "服务器确认回执：v1 / r6 · 2026-11-16 04:57:40 +00:00",
+        "服务已确认上传",
+        "服务已确认上传"
+      ]
+    },
+    {
+      "label": "batch-final-04-rescan",
+      "atUtc": "2026-11-16T04:46:33.8569061+00:00",
+      "pid": 54456,
+      "action": "Invoke",
+      "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+      "localSha256": "2bf98179b511fc35fb0b6b69d4614eb7a32eeb1a6bb1021edc0dc27cff127419",
+      "safeRelevantTexts": [
+        "综合索引已更新：JPG 2，RAW 0，共 2 个文件；跳过 0 个不可访问目录",
+        "已索引 2 个照片文件"
+      ]
+    }
+  ],
+  "physicalMouseClaimed": false,
+  "rawDesktopCapturesBundled": false
+}

@@ -1,0 +1,81 @@
+{
+  "atUtc": "2026-11-16T05:53:16.249Z",
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "status": "PASS_NORMAL_EXE_RETURN_SAVE_REOPEN_RESCAN",
+  "originalCompany": {
+    "projectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "booking": {
+      "Id": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+      "ProjectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+      "Revision": 2
+    },
+    "sourceCount": 1,
+    "sources": [
+      {
+        "Path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\synthetic-inputs\\source-jpegs",
+        "Priority": 0
+      }
+    ],
+    "projectCount": 1,
+    "result": {
+      "albumId": "fc2a3492-bb03-4253-a074-e3e551dce0d6",
+      "version": 1,
+      "revision": 4,
+      "locked": true,
+      "selected": [
+        "0462c2a7-2549-47a8-ad0b-b6e910cd43df"
+      ]
+    },
+    "independentBeforePid": 53104,
+    "independentAfterPid": 9616,
+    "rescanJpegCount": 2,
+    "rescanRawCount": 0,
+    "legacySourceRestoredExplicitlyFrom": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-output\\c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b\\edited-jpeg",
+    "resultNotRewritten": true,
+    "fullNewPublishNotRepeatedOnLockedLegacyAlbum": true
+  },
+  "companyBatch": {
+    "projectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+    "sourceCount": 1,
+    "sources": [
+      {
+        "Path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs",
+        "Priority": 0
+      }
+    ],
+    "projectCount": 1,
+    "result": {
+      "albumId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+      "version": 1,
+      "revision": 6,
+      "locked": true,
+      "selected": [
+        "38783444-be79-4a36-8969-65105a00cb62",
+        "5ee05324-898d-4182-bb8f-78763a6ee790"
+      ]
+    },
+    "independentBeforePid": 54456,
+    "independentAfterPid": 48672,
+    "rescanJpegCount": 2,
+    "rescanRawCount": 0,
+    "matchComplete": 2,
+    "matchPartial": 0,
+    "matchConflicts": 0,
+    "matchMissing": 0,
+    "derivedPreparedDirectories": [
+      "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime\\OnlineSelection\\Prepared\\e9fdf6c149504010a939a30af961216d\\202a7e5316664595885b8ad9cf2ed745",
+      "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\workflow-runtime\\OnlineSelection\\Prepared\\e9fdf6c149504010a939a30af961216d\\202a7e5316664595885b8ad9cf2ed745"
+    ],
+    "derivedRootsNotAdded": true,
+    "freeSecondSourceRejected": true,
+    "freeLimitNativeReceipt": "batch-reopen-08-limit-observed.json"
+  },
+  "homeSourcePolicyCommit": "a9d1bb96",
+  "sourcePolicyUnchanged": true,
+  "entitlementLimitUnchanged": true,
+  "normalExeControlAuthority": "UI Automation patterns and standard observed file-dialog controls; no injected ViewModel import/sync and no physical mouse claim",
+  "newRawDecodes": 0,
+  "finalProductSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "finalSourceReadback": "FINAL_SOURCE_VALIDATION.json",
+  "previousNativeSequenceSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e"
+}

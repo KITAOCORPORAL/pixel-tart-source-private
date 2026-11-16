@@ -1,0 +1,213 @@
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.exe.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Secondary Actions: Raise
+		1 文本 光
+		2 文本 光镜
+		3 文本 当前工作区 · 归片工作区
+		4 菜单 ID: TopMenu
+			5 菜单项 文件(F)
+				6 文本 文件(_F)
+			7 菜单项 项目(P)
+				8 文本 项目(_P)
+			9 菜单项 编辑(E)
+				10 文本 编辑(_E)
+			11 菜单项 视图(V)
+				12 文本 视图(_V)
+			13 菜单项 工具(T)
+				14 文本 工具(_T)
+			15 菜单项 帮助(H)
+				16 文本 帮助(_H)
+		17 按钮 最小化窗口
+			18 文本 —
+		19 按钮 最大化或还原窗口
+			20 文本 □
+		21 按钮 关闭窗口
+			22 文本 ×
+		23 按钮
+		24 窗格 侧栏根区域 ID: SidebarRoot
+		25 窗格 ID: SidebarNavigationScroll
+			26 文本 工作
+			27 按钮 工作台 Description: 工作台 ID: PrimaryNavigationWorkbench
+			28 按钮 素材库 Description: 素材库 ID: AssetLibraryNavigationButton
+			29 按钮 归片工作区 Description: 归片工作区 ID: PrimaryNavigationWorkflow
+			30 按钮 工作日历 Description: 工作日历 ID: PrimaryNavigationWorkCalendar
+			31 按钮 策划中心 Description: 策划中心 ID: PrimaryNavigationPlanning
+			32 按钮 联机拍摄 Description: 联机拍摄 ID: PrimaryNavigationTether
+			33 按钮 暗室 Description: 暗室 ID: PrimaryNavigationReferenceColor
+			34 按钮 在线选片 Description: 在线选片 ID: PrimaryNavigationOnlineSelection
+			35 按钮 摄影收支 Description: 摄影收支 ID: PrimaryNavigationFinance
+			36 按钮 项目历史 Description: 项目历史 ID: PrimaryNavigationHistory
+			37 分隔符 (disabled)
+			38 文本 工具
+			39 按钮 工具箱 Description: 打开完整工具集合。 ID: PrimaryNavigationToolbox
+			40 分隔符 (disabled)
+			41 文本 系统
+			42 按钮 授权与版本 Description: 授权与版本
+			43 按钮 设置 Description: 设置 ID: SidebarSettingsButton
+			44 按钮 帮助 Description: 帮助
+		45 文本 免费版
+		46 按钮 查看授权与版本 Description: 查看授权与版本
+			47 文本 升级
+		48 文本 授权与版本
+		49 按钮 收起侧栏 Description: 收起侧栏 ID: SidebarCollapseButton
+		50 窗格
+			51 文本 归片
+			52 按钮 1 来源与索引
+				53 文本 1 来源与索引
+			54 按钮 2 导入选片
+				55 文本 2 导入选片
+			56 按钮 3 匹配检查
+				57 文本 3 匹配检查
+			58 按钮 4 输出交付
+				59 文本 4 输出交付
+			60 窗格
+				61 文本 输出设置
+				62 文本 项目名称
+				63 编辑 (settable, string) 项目名称 Value: 合成项目 · 全流程核验 20261112 ID: ProjectNameInput
+				64 文本 输出到
+				65 编辑 (settable, string)
+				66 按钮 选择 ID: BrowseOutputButton
+					67 文本 选择
+				68 文本 合成项目 · 全流程核验 20261112_精选JPG_20261116_1444 Description: 合成项目 · 全流程核验 20261112_精选JPG_20261116_1444
+				69 组合框 ID: OutputModeSelector
+				70 分隔符 (disabled)
+				71 文本 导出报告
+				72 复选框 复制完成后自动导出报告
+					73 文本 复制完成后自动导出报告
+				74 复选框 (disabled) CSV 报告
+					75 文本 (disabled) CSV 报告
+				76 复选框 (disabled) JSON 报告（专业版）
+					77 文本 (disabled) JSON 报告（专业版）
+				78 复选框 (disabled) 操作日志 TXT（专业版）
+					79 文本 (disabled) 操作日志 TXT（专业版）
+				80 文本 复制完成后不自动生成报告，可随时手动导出。
+			81 文本 选片记录
+			82 文本 1
+			83 文本 目标文件
+			84 文本 1
+			85 文本 JPG / RAW
+			86 文本 0 / 0
+			87 文本 冲突 / 未找到
+			88 文本 0 / 0
+			89 文本 已复制
+			90 文本 0
+			91 按钮 (disabled) 复制已匹配文件 ID: CopyButton
+				92 文本 (disabled) 复制已匹配文件
+			93 按钮 (disabled) 导出报告 ID: ExportButton
+				94 文本 (disabled) 导出报告
+			95 按钮 (disabled) 打开输出文件夹 ID: OpenOutputButton
+				96 文本 (disabled) 打开输出文件夹
+			97 按钮 保存项目
+				98 文本 保存项目
+			99 按钮 (disabled) 取消当前任务 ID: CancelButton
+				100 文本 (disabled) 取消当前任务
+			101 按钮 清空任务 ID: ClearTaskButton
+				102 文本 清空任务
+			103 编辑 (settable, string) Description: 按客户输入、标准化名称、编号或备注搜索（Ctrl+F） ID: SearchBox
+			104 复选框 只看冲突与待处理
+				105 文本 只看冲突与待处理
+			106 文本 Alt+Enter 查看明细 Description: 查看明细位于总体状态右侧；Alt+Enter 快速打开
+			107 数据网格 ID: ResultsGrid
+				108 标头 ID: PART_ColumnHeadersPresenter
+					109 标头项 选
+						110 文本 选
+						111 缩略 ID: PART_RightHeaderGripper
+					112 标头项 客户原始输入
+						113 文本 客户原始输入
+						114 缩略 ID: PART_LeftHeaderGripper
+						115 缩略 ID: PART_RightHeaderGripper
+					116 标头项 总体状态
+						117 文本 总体状态
+						118 缩略 ID: PART_LeftHeaderGripper
+						119 缩略 ID: PART_RightHeaderGripper
+					120 标头项 处理
+						121 文本 处理
+						122 缩略 ID: PART_LeftHeaderGripper
+						123 缩略 ID: PART_RightHeaderGripper
+					124 标头项 标准化名称
+						125 文本 标准化名称
+						126 缩略 ID: PART_LeftHeaderGripper
+						127 缩略 ID: PART_RightHeaderGripper
+					128 标头项 数字编号
+						129 文本 数字编号
+						130 缩略 ID: PART_LeftHeaderGripper
+						131 缩略 ID: PART_RightHeaderGripper
+					132 标头项 JPG 状态
+						133 文本 JPG 状态
+						134 缩略 ID: PART_LeftHeaderGripper
+						135 缩略 ID: PART_RightHeaderGripper
+					136 标头项 JPG 文件名
+						137 文本 JPG 文件名
+						138 缩略 ID: PART_LeftHeaderGripper
+						139 缩略 ID: PART_RightHeaderGripper
+					140 标头项 RAW 状态
+						141 文本 RAW 状态
+						142 缩略 ID: PART_LeftHeaderGripper
+						143 缩略 ID: PART_RightHeaderGripper
+					144 标头项 RAW 文件名
+						145 文本 RAW 文件名
+						146 缩略 ID: PART_LeftHeaderGripper
+						147 缩略 ID: PART_RightHeaderGripper
+					148 标头项 其他格式
+						149 文本 其他格式
+						150 缩略 ID: PART_LeftHeaderGripper
+						151 缩略 ID: PART_RightHeaderGripper
+					152 标头项 匹配文件数
+						153 文本 匹配文件数
+						154 缩略 ID: PART_LeftHeaderGripper
+						155 缩略 ID: PART_RightHeaderGripper
+					156 标头项 冲突数
+						157 文本 冲突数
+						158 缩略 ID: PART_LeftHeaderGripper
+						159 缩略 ID: PART_RightHeaderGripper
+					160 标头项 备注
+						161 文本 备注
+						162 缩略 ID: PART_LeftHeaderGripper
+						163 缩略 ID: PART_RightHeaderGripper
+				164 数据项 (selectable) RAWSelectionAssistant.Core.Models.MediaSelectionItem
+					165 数据网格单元 (settable, string) 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0 Value: True
+						166 复选框
+					167 数据网格单元 WF_0001_仿色.jpg Description: WF_0001_仿色.jpg Value: WF_0001_仿色.jpg
+						168 文本 WF_0001_仿色.jpg
+					169 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2
+						170 文本 等待匹配
+					171 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3
+						172 按钮 (disabled) 查看匹配明细
+							173 文本 (disabled) 查看明细
+					174 数据网格单元 WF_0001_仿色 Description: WF_0001_仿色 Value: WF_0001_仿色
+						175 文本 WF_0001_仿色
+					176 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 5
+						177 文本
+					178 数据网格单元 — Description: — Value: —
+						179 文本 —
+					180 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 7
+						181 文本
+					182 数据网格单元 — Description: — Value: —
+						183 文本 —
+					184 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9
+						185 文本
+					186 数据网格单元 0 Description: 0 Value: 0
+						187 文本 0
+					188 数据网格单元 0 Description: 0 Value: 0
+						189 文本 0
+					190 数据网格单元 0 Description: 0 Value: 0
+						191 文本 0
+					192 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 13
+						193 文本
+			194 文本 所选记录快速摘要
+			195 文本 输入： · JPG： · RAW： · 备注：
+			196 按钮 (disabled) 查看完整明细
+				197 文本 (disabled) 查看完整明细
+		198 窗格 工作台根区域 ID: WorkbenchRoot
+		199 文本 项目已载入，可继续工作。
+		200 文本
+		201 文本 ·
+		202 文本 ·
+		203 文本 已处理 0
+		204 进度栏 Value: 0
+		205 自定义 拍摄提醒通知
+			206 窗格
+				207 列表视图
+
+Document text: ```
+合成项目 · 全流程核验 20261112
+```

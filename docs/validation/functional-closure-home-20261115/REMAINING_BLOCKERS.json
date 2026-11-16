@@ -1,21 +1,49 @@
 {
-  "status": "PARTIAL_BEFORE_REPEATABILITY_FIX",
-  "items": [
+  "status": "SUPERSEDED_BY_COMPANY_20261116_PRODUCT_PARTIAL",
+  "updatedDate": "2026-11-16",
+  "report": "../company-functional-integration-20261116/CURRENT_REPORT.md",
+  "resolved": [
     {
       "id": "DERIVED_SOURCE_FREE_LIMIT",
-      "action": "Preserve original source directory only on same-project handoff; re-scan after result return; no license bypass."
+      "source": "a9d1bb96",
+      "verifiedIn": "49fbc2f6",
+      "result": "Native return/save/reopen/rescan preserves original source only; free second-source gate retained"
     },
     {
       "id": "MEMORY_INTEGRATION",
-      "action": "Coordinate common bdc913c9 baseline and explicitly integrate the two approved minimal product commits."
+      "mapping": {
+        "edd6d25e": "17a95b5a",
+        "e28074f1": "14eda5c7"
+      },
+      "verifiedIn": "49fbc2f6",
+      "result": "All cache ownership hunks retained with home workflow identity; sRGB recovery a9932b73 included"
     },
     {
       "id": "FINAL_SOURCE_PACKAGE_BINDING",
-      "action": "Publish complete package after source commit, verify source SHA and repeat independent reopen."
-    },
+      "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+      "result": "Four compiled modules and39 targeted checks bound to final e818; complete native workflow retains49 source label and final sequence pending"
+    }
+  ],
+  "items": [
     {
       "id": "IPHONE_ROUNDTRIP",
-      "action": "Prepared synthetic booking and protected private URL; actual iPhone feedback still missing."
+      "status": "NEEDS_PERSONAL_TAILSCALE_LOGIN",
+      "action": "Company service, App, preserved revision4 appointment and renewed device credential ready; apply HTTPS only after Running, then real iPhone roundtrip"
+    },
+    {
+      "id": "COMPANY_40MP_NATIVE",
+      "status": "PREVIOUS_A993_STOP_FINAL_HIDDEN_FIX_NATIVE_ACCEPTANCE_PENDING",
+      "action": "e818 hidden-preview fix included. Preserve earlierSTOP and independent621 R2 boundaries; final source ordinary40MP acceptance still pending under2GiB."
+    },
+    {
+      "id": "FINAL_SOURCE_NATIVE_SEQUENCE",
+      "status": "PENDING_UI_CONTROL_STOPPED",
+      "action": "Repeat complete normal EXE workflow on final e818 when desktop control is available; retain49 historical source label."
     }
-  ]
+  ],
+  "latestCompanyProductSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "latestCompanyReport": "../company-functional-integration-20261116/CURRENT_REPORT.md",
+  "finalCompanyNativeSequence": "PENDING_UI_CONTROL_STOPPED",
+  "finalTargetedChecks": "39/39",
+  "phone": "PREPARED_NEEDS_PERSONAL_TAILSCALE_LOGIN"
 }

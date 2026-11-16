@@ -1,0 +1,99 @@
+{
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "status": "PASS_INDEPENDENT_COMPANY_SYNTHETIC_BATCH",
+  "projectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+  "albumId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+  "resultVersion": 1,
+  "resultRevision": 6,
+  "selectedAssets": [
+    {
+      "assetId": "38783444-be79-4a36-8969-65105a00cb62",
+      "file": "COMPANY_0001.png",
+      "cloudId": "38783444be794a36896965105a00cb62"
+    },
+    {
+      "assetId": "5ee05324-898d-4182-bb8f-78763a6ee790",
+      "file": "COMPANY_0002.png",
+      "cloudId": "5ee05324898d4182bb8f78763a6ee790"
+    }
+  ],
+  "steps": [
+    "Native choose owned source folder; scan2 JPEG/0 RAW",
+    "Save project; JPEG-only entitlement category",
+    "Visible indexed-editor command; load same project originals",
+    "BasicTone exposure0.5 on COMPANY_0002; save versions and workflow-bound session",
+    "Prepare selected edited outputs to durable per-project PNG intermediates",
+    "Upload2 proxies with remote confirmations and publish",
+    "Actual desktop browser selects each image and confirms lock v1/r6",
+    "PC validates/stores result and syncs back to same project",
+    "Save, normal close and independent EXE/session reopen",
+    "Re-scan original root:2 JPEG; match complete2; normal one-source free limit retained",
+    "Actual product JPEG8 exports2 with recipe sidecars and unchanged original input hashes",
+    "Normal close and a further independent process restores same project/album/locked result/workfile/output identities"
+  ],
+  "session": {
+    "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\company-batch.ptstudio.json",
+    "workflowProjectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+    "targets": [
+      {
+        "id": "3115cf17-7959-43bc-b837-d4e48175f6bd",
+        "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+        "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+        "parameters": []
+      },
+      {
+        "id": "73ac7cb2-8dc7-406b-897d-aed286d6b641",
+        "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+        "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+        "parameters": [
+          {
+            "exposure": 0.5
+          }
+        ]
+      }
+    ]
+  },
+  "outputs": [
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\edited-delivery\\COMPANY_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "exportId": "0bdbd538-98fe-4061-9ca3-7081da512ef8",
+      "assetId": "38783444-be79-4a36-8969-65105a00cb62",
+      "numericParameters": [],
+      "sidecarOutputHashVerified": true
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\edited-delivery\\COMPANY_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "exportId": "74fee3d0-a365-413a-82f6-abb76fe07f1c",
+      "assetId": "5ee05324-898d-4182-bb8f-78763a6ee790",
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ],
+      "sidecarOutputHashVerified": true
+    }
+  ],
+  "independentReopenedPid": 48672,
+  "desktopBrowserIsNotIPhone": true,
+  "newRawDecodes": 0
+}

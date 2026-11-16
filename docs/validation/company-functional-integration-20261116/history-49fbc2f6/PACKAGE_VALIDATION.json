@@ -1,0 +1,39 @@
+{
+  "atUtc": "2026-11-16T06:19:08.780Z",
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "status": "PASS_DIAGNOSTIC_PACKAGE_WITH_EXPLICIT_TIFF_AND_PHONE_GAPS",
+  "archiveSha256": "e3bb00cd3d3ed4bee39cfa7a400d5ab494650403626948ef8d1af211fce57ee6",
+  "archiveFiles": 1469,
+  "manifestListedFiles": 1468,
+  "checks": {
+    "crcVerified": true,
+    "packageManifestCoverageAndDigestsVerified": true,
+    "fourCompiledComponentsSourceBound": true,
+    "aliasApphostsByteIdentical": true,
+    "extensionMatchesFrozenTree": true,
+    "sourcePolicyRetainedAndNativeRescanPassed": true,
+    "cacheCommitsAndWorkflowIdentityPreserved": true,
+    "final33TargetedRegressionPassed": true,
+    "companyOwnBatchActualWorkflowPassed": true,
+    "originalProjectBookingAndOldResultPreserved": true,
+    "sourceCountRemainsOneAndFreeLimitRetained": true,
+    "credentialsAuthUrlsDatabasesPixelsAndRawInputsExcluded": true,
+    "companyPathConfigurationAndStartupReuseVerified": true,
+    "latestOrdinaryTiffStopExplicitlyIncluded": true,
+    "rawNullExitNotCountedAsSuccess": true
+  },
+  "actualIPhonePassed": false,
+  "ordinaryCompany40MpTiffPassed": false,
+  "releaseReady": false,
+  "postSealRecordExcludedFromItsOwnArchive": true,
+  "legacyOriginalOutputFileBytesPreserved": {
+    "sha256": "1671535d57c5f488d20336415411b9d5d72eb52619461289375b34b1c2dc3083",
+    "bytes": 21474
+  },
+  "legacyProjectOutputHintBoundary": {
+    "before": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-output\\c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b\\final-delivery\\合成项目 · 全流程核验 20261112_精选JPG_20261113_1920",
+    "after": "",
+    "sourceOnlySaveDidNotClaimOutputHintMigrationAcceptance": true,
+    "oldOutputFileRetained": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "atUtc": "2026-11-16T07:40:16.953256+00:00",
+  "clientTimeZone": "Europe/Helsinki",
+  "status": "SEALED_FULL_MODULE_DIAGNOSTIC_PRODUCT_PARTIAL",
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "package": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64",
+  "entry": "Start-FullProduct-LocalTest.cmd",
+  "archive": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64-20261116.zip",
+  "archiveBytes": 249920758,
+  "archiveSha256": "7ab76c74a56391026e7777d5e01e8d759f58fb57b0109f864097c91330f637cf",
+  "manifestListedFiles": 1519,
+  "archiveFiles": 1520,
+  "fourCompiledComponentsSourceBound": true,
+  "homeSourcePolicyInPackage": true,
+  "memoryCommitsInPackage": [
+    "edd6d25e via17a95b5a",
+    "e28074f1 via14eda5c7"
+  ],
+  "hiddenPreviewFixInPackage": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "companyPathsRegenerated": true,
+  "targetedRegressionPassed": 39,
+  "previousCompleteNativeWorkflowSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "finalCompleteNativeWorkflow": "PARTIAL_SEE_REPORT",
+  "actualIPhonePassed": false,
+  "ordinaryCompany40MpTiffPassed": false,
+  "credentialsAndRawRuntimeExcluded": true,
+  "setupInstaller": false,
+  "releaseReady": false,
+  "postSealReceiptNotEmbeddedInOwnArchive": true
+}

@@ -1,0 +1,54 @@
+{
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "runs": [
+    {
+      "run": "hidden-final-batch",
+      "pid": 25968,
+      "samples": 33137,
+      "peakPrivateBytes50ms": 479821824,
+      "osPeakWorkingSetBytes": 471224320,
+      "last": {
+        "atUtc": 1794813113.3765986,
+        "elapsedMs": 1680998.6709000077,
+        "privateBytes": 405921792,
+        "workingSetBytes": 464666624,
+        "osPeakWorkingSetBytes": 471224320
+      },
+      "processStillRunning": true,
+      "guardBytes": 2147483648
+    },
+    {
+      "run": "hidden-final-original",
+      "pid": 27940,
+      "samples": 32369,
+      "peakPrivateBytes50ms": 343474176,
+      "osPeakWorkingSetBytes": 326836224,
+      "last": {
+        "atUtc": 1794813113.4786148,
+        "elapsedMs": 1642399.5263000252,
+        "privateBytes": 296161280,
+        "workingSetBytes": 321802240,
+        "osPeakWorkingSetBytes": 326836224
+      },
+      "processStillRunning": true,
+      "guardBytes": 2147483648
+    },
+    {
+      "run": "hidden-final-phone",
+      "pid": 2820,
+      "samples": 31635,
+      "peakPrivateBytes50ms": 295124992,
+      "osPeakWorkingSetBytes": 310140928,
+      "last": {
+        "atUtc": 1794813113.580626,
+        "elapsedMs": 1604787.569600041,
+        "privateBytes": 278917120,
+        "workingSetBytes": 307380224,
+        "osPeakWorkingSetBytes": 310140928
+      },
+      "processStillRunning": true,
+      "guardBytes": 2147483648
+    }
+  ],
+  "scope": "Whole process including idle/dialog/automation; not action latency; no forced GC; excludes services/browser"
+}

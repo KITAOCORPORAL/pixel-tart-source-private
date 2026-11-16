@@ -1,0 +1,21 @@
+{
+  "atUtc": "2026-11-16T07:40:16.953256+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "status": "PASS_ARCHIVE_COMPONENT_VERSION_DIGEST_AND_SECRET_EXCLUSION",
+  "archiveSha256": "7ab76c74a56391026e7777d5e01e8d759f58fb57b0109f864097c91330f637cf",
+  "checks": {
+    "crcVerified": true,
+    "everyArchivedMemberSha256Verified": true,
+    "manifestCoverageVerified": true,
+    "compiledExeDllVersionsVerified": true,
+    "apphostAliasesIdentical": true,
+    "extensionMatchesFrozenSource": true,
+    "tests39Passed": true,
+    "sourceFixAndMemoryIdentityRetained": true,
+    "privateRuntimeAndCredentialsExcluded": true
+  },
+  "nativeFinalSequence": "PARTIAL_SEE_CURRENT_REPORT",
+  "actualIPhonePassed": false,
+  "ordinaryCompany40MpTiffPassed": false,
+  "releaseReady": false
+}

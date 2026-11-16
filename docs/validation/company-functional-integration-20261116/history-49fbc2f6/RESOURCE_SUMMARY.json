@@ -1,0 +1,258 @@
+{
+  "atUtc": "2026-11-16T05:56:00.145507+00:00",
+  "guardBytes": 2147483648,
+  "samplePeriodMs": 50,
+  "scope": "Per-App lifetime includes natural idle, dialogs, coding waits and automation; excludes browser/services. These small JPEG runs do not establish40MP TIFF native acceptance. No forcedGC was requested by this task.",
+  "runs": [
+    {
+      "run": "batch-independent-reopen",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 43780,
+      "samples": 14790,
+      "peakPrivateBytes50ms": 496963584,
+      "osPeakWorkingSetBytes": 547876864,
+      "lastSample": {
+        "atUtc": 1794806095.6426687,
+        "elapsedMs": 749382.092099986,
+        "workingSetBytes": 106045440,
+        "osPeakWorkingSetBytes": 547876864,
+        "privateBytes": 56832000
+      },
+      "exit": {
+        "pid": 43780,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 14790,
+        "peakPrivateBytes50ms": 496963584,
+        "osPeakWorkingSetBytes": 547876864,
+        "lifetimeMs": 749433.0484999809,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "batch-post-export-reopen",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 48672,
+      "samples": 7055,
+      "peakPrivateBytes50ms": 520953856,
+      "osPeakWorkingSetBytes": 556314624,
+      "lastSample": {
+        "atUtc": 1794806473.468399,
+        "elapsedMs": 356708.50900001824,
+        "workingSetBytes": 163577856,
+        "osPeakWorkingSetBytes": 556314624,
+        "privateBytes": 58888192
+      },
+      "exit": {
+        "pid": 48672,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 7055,
+        "peakPrivateBytes50ms": 520953856,
+        "osPeakWorkingSetBytes": 556314624,
+        "lifetimeMs": 356759.02630004566,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "batch-ui-01",
+      "source": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+      "pid": 43280,
+      "samples": 22469,
+      "peakPrivateBytes50ms": 330153984,
+      "osPeakWorkingSetBytes": 364498944,
+      "lastSample": {
+        "atUtc": 1794804184.4783764,
+        "elapsedMs": 1141553.8199000293,
+        "workingSetBytes": 335360000,
+        "osPeakWorkingSetBytes": 364498944,
+        "privateBytes": 256229376
+      },
+      "exit": {
+        "pid": 43280,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 22469,
+        "peakPrivateBytes50ms": 330153984,
+        "osPeakWorkingSetBytes": 364498944,
+        "lifetimeMs": 1141604.5712999767,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "batch-ui-final",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 54456,
+      "samples": 18815,
+      "peakPrivateBytes50ms": 843395072,
+      "osPeakWorkingSetBytes": 833724416,
+      "lastSample": {
+        "atUtc": 1794805292.3807309,
+        "elapsedMs": 955821.9976999098,
+        "workingSetBytes": 413310976,
+        "osPeakWorkingSetBytes": 833724416,
+        "privateBytes": 598065152
+      },
+      "exit": {
+        "pid": 54456,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 18815,
+        "peakPrivateBytes50ms": 843395072,
+        "osPeakWorkingSetBytes": 833724416,
+        "lifetimeMs": 955873.1450999621,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "guarded-launches/final-batch-ready",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 52576,
+      "samples": 26411,
+      "peakPrivateBytes50ms": 542294016,
+      "osPeakWorkingSetBytes": 501284864,
+      "lastSample": {
+        "atUtc": 1794808559.7349777,
+        "elapsedMs": 1336015.800800058,
+        "privateBytes": 361492480,
+        "workingSetBytes": 430125056,
+        "osPeakWorkingSetBytes": 501284864
+      },
+      "exit": null,
+      "ongoing": true,
+      "guardTriggered": false
+    },
+    {
+      "run": "guarded-launches/original-final-ready",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 53104,
+      "samples": 4766,
+      "peakPrivateBytes50ms": 353316864,
+      "osPeakWorkingSetBytes": 386756608,
+      "lastSample": {
+        "atUtc": 1794807650.3747146,
+        "elapsedMs": 240937.52969999332,
+        "privateBytes": 295960576,
+        "workingSetBytes": 356564992,
+        "osPeakWorkingSetBytes": 386756608
+      },
+      "exit": {
+        "pid": 53104,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 4766,
+        "peakPrivateBytes50ms": 353316864,
+        "osPeakWorkingSetBytes": 386756608,
+        "lifetimeMs": 240988.1842000177,
+        "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "guarded-launches/original-post-resync-reopen",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 9616,
+      "samples": 9579,
+      "peakPrivateBytes50ms": 363880448,
+      "osPeakWorkingSetBytes": 340860928,
+      "lastSample": {
+        "atUtc": 1794808559.7349803,
+        "elapsedMs": 484827.3369000526,
+        "privateBytes": 300929024,
+        "workingSetBytes": 330305536,
+        "osPeakWorkingSetBytes": 340860928
+      },
+      "exit": null,
+      "ongoing": true,
+      "guardTriggered": false
+    },
+    {
+      "run": "guarded-launches/phone-ready",
+      "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "pid": 54088,
+      "samples": 25701,
+      "peakPrivateBytes50ms": 306565120,
+      "osPeakWorkingSetBytes": 314888192,
+      "lastSample": {
+        "atUtc": 1794808559.836501,
+        "elapsedMs": 1300100.9880999336,
+        "privateBytes": 304918528,
+        "workingSetBytes": 314703872,
+        "osPeakWorkingSetBytes": 314888192
+      },
+      "exit": null,
+      "ongoing": true,
+      "guardTriggered": false
+    },
+    {
+      "run": "original-ui-01",
+      "source": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+      "pid": 52544,
+      "samples": 33447,
+      "peakPrivateBytes50ms": 2044076032,
+      "osPeakWorkingSetBytes": 1837088768,
+      "lastSample": {
+        "atUtc": 1794802417.1043193,
+        "elapsedMs": 1703728.638199973,
+        "workingSetBytes": 122720256,
+        "osPeakWorkingSetBytes": 1837088768,
+        "privateBytes": 58888192
+      },
+      "exit": {
+        "pid": 52544,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 33447,
+        "peakPrivateBytes50ms": 2044076032,
+        "osPeakWorkingSetBytes": 1837088768,
+        "lifetimeMs": 1703779.2797000147,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    },
+    {
+      "run": "original-ui-final",
+      "source": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+      "pid": 34876,
+      "samples": 84882,
+      "peakPrivateBytes50ms": 378036224,
+      "osPeakWorkingSetBytes": 339595264,
+      "lastSample": {
+        "atUtc": 1794807108.8197901,
+        "elapsedMs": 4305167.005899944,
+        "workingSetBytes": 233869312,
+        "osPeakWorkingSetBytes": 339595264,
+        "privateBytes": 278077440
+      },
+      "exit": {
+        "pid": 34876,
+        "exitCode": 0,
+        "stop": null,
+        "samples": 84882,
+        "peakPrivateBytes50ms": 378036224,
+        "osPeakWorkingSetBytes": 339595264,
+        "lifetimeMs": 4305219.811100047,
+        "timingScope": "Whole process including UI automation, dialogs and idle; not pure operation latency",
+        "newRawDecodesAuthorized": 0
+      },
+      "ongoing": false,
+      "guardTriggered": false
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "source": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+  "workflowProjectId": "e9fdf6c1-4950-4010-a939-a30af961216d",
+  "albumId": "5960a0d8-c9c8-4a1a-81ac-93564599795b",
+  "selectionVersion": 1,
+  "resultRevision": 6,
+  "actualProductEncodedOutput": true,
+  "originalInputLayoutUnchanged": true,
+  "rows": [
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\edited-delivery\\COMPANY_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "exportId": "0bdbd538-98fe-4061-9ca3-7081da512ef8",
+      "assetId": "38783444-be79-4a36-8969-65105a00cb62",
+      "numericParameters": [],
+      "sidecarOutputHashVerified": true
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\edited-delivery\\COMPANY_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "exportId": "74fee3d0-a365-413a-82f6-abb76fe07f1c",
+      "assetId": "5ee05324-898d-4182-bb8f-78763a6ee790",
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ],
+      "sidecarOutputHashVerified": true
+    }
+  ],
+  "notClaimed": "JPEG output differs from PNG selection intermediate due encoding; no byte equality across formats claimed"
+}
