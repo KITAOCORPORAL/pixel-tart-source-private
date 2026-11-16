@@ -1,0 +1,246 @@
+{
+  "observedAtUtc": "2026-11-16T08:38:24.093Z",
+  "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "savedPath": "E:/Kitao-Deliveries/company-functional-20261116/continuation-20261116/ordinary-tiff.ptstudio.json",
+  "sessionSha256": "42cc8b89ae1f3ea5ea586253ebcc0526dc0cec7e6a7f90c35b06ecbc22304baf",
+  "savedSessionVersion": 1,
+  "targetCount": 1,
+  "targetSummary": {
+    "id": "af62a649-22ea-48cd-a1ee-490abddaf0ff",
+    "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+    "assetId": null,
+    "selected": true,
+    "look": null,
+    "stack": null,
+    "film": {
+      "enabled": false,
+      "profileId": "PT-N01",
+      "profileAmount": 100,
+      "grainAmount": 0,
+      "grainSize": 35,
+      "halationAmount": 0,
+      "bloomAmount": 0,
+      "vignetteAmount": 0,
+      "surfaceAmount": 0,
+      "textureId": "None",
+      "textureAmount": 0,
+      "seed": 17,
+      "spatialVersion": 1
+    },
+    "engine": 0,
+    "executionMode": 0,
+    "sessionRating": 0,
+    "sessionColorLabel": null,
+    "libraryId": null,
+    "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+    "editVersions": [
+      {
+        "id": "d15929be-1d81-9840-9f8a-5aa023d1b5a3",
+        "name": "原始",
+        "createdAt": "2026-11-16T06:53:33.2176485+00:00",
+        "libraryId": null,
+        "assetId": null,
+        "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+        "look": null,
+        "stack": null,
+        "film": null,
+        "engine": 0,
+        "mode": 0,
+        "rawDefinition": null,
+        "rawInput": null,
+        "originVersionId": null,
+        "originIdentity": null,
+        "archived": false,
+        "isOriginal": true,
+        "isMain": false,
+        "mainExplicit": false,
+        "rating": 0,
+        "colorLabel": null,
+        "processingVersion": 1
+      },
+      {
+        "id": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+        "name": "默认版本",
+        "createdAt": "2026-11-16T06:53:33.1500532+00:00",
+        "libraryId": null,
+        "assetId": null,
+        "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+        "look": null,
+        "stack": null,
+        "film": {
+          "enabled": false,
+          "profileId": "PT-N01",
+          "profileAmount": 100,
+          "grainAmount": 0,
+          "grainSize": 35,
+          "halationAmount": 0,
+          "bloomAmount": 0,
+          "vignetteAmount": 0,
+          "surfaceAmount": 0,
+          "textureId": "None",
+          "textureAmount": 0,
+          "seed": 17,
+          "spatialVersion": 1
+        },
+        "engine": 0,
+        "mode": 0,
+        "rawDefinition": null,
+        "rawInput": null,
+        "originVersionId": null,
+        "originIdentity": null,
+        "archived": false,
+        "isOriginal": false,
+        "isMain": true,
+        "mainExplicit": false,
+        "rating": 0,
+        "colorLabel": null,
+        "processingVersion": 1
+      }
+    ],
+    "activeEditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+    "catalogRevision": 0,
+    "rawDefinition": null,
+    "rawInput": null,
+    "variantsExpanded": false
+  },
+  "firstExit": {
+    "pid": 12852,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 1231872000,
+    "osPeakWorkingSetBytes": 968880128,
+    "samples": 135231,
+    "phases": {
+      "startup": {
+        "samples": 12340,
+        "peakPrivateBytes": 334942208,
+        "peakWorkingSetBytes": 330915840
+      },
+      "native-import-and-settle": {
+        "samples": 16084,
+        "peakPrivateBytes": 1048084480,
+        "peakWorkingSetBytes": 912736256
+      },
+      "native-loaded-natural-idle": {
+        "samples": 11959,
+        "peakPrivateBytes": 924504064,
+        "peakWorkingSetBytes": 827379712
+      },
+      "native-fit": {
+        "samples": 1211,
+        "peakPrivateBytes": 904318976,
+        "peakWorkingSetBytes": 967766016
+      },
+      "native-100-percent": {
+        "samples": 981,
+        "peakPrivateBytes": 903008256,
+        "peakWorkingSetBytes": 966557696
+      },
+      "native-zoom-out": {
+        "samples": 1324,
+        "peakPrivateBytes": 903475200,
+        "peakWorkingSetBytes": 897425408
+      },
+      "native-zoom-in": {
+        "samples": 178,
+        "peakPrivateBytes": 903499776,
+        "peakWorkingSetBytes": 897589248
+      },
+      "native-100-return": {
+        "samples": 714,
+        "peakPrivateBytes": 903467008,
+        "peakWorkingSetBytes": 897609728
+      },
+      "native-export-dialog": {
+        "samples": 21430,
+        "peakPrivateBytes": 904450048,
+        "peakWorkingSetBytes": 899264512
+      },
+      "native-window-restore": {
+        "samples": 8458,
+        "peakPrivateBytes": 1231872000,
+        "peakWorkingSetBytes": 864075776
+      },
+      "native-visible-restore-and-fit": {
+        "samples": 1452,
+        "peakPrivateBytes": 1028902912,
+        "peakWorkingSetBytes": 462651392
+      },
+      "16-native-visible-100": {
+        "samples": 8161,
+        "peakPrivateBytes": 1024811008,
+        "peakWorkingSetBytes": 457355264
+      },
+      "native-waiting-stable-visible-window": {
+        "samples": 25019,
+        "peakPrivateBytes": 1037348864,
+        "peakWorkingSetBytes": 464564224
+      },
+      "ordinary-first-export-dialog": {
+        "samples": 10912,
+        "peakPrivateBytes": 1024778240,
+        "peakWorkingSetBytes": 723554304
+      },
+      "ordinary-fit": {
+        "samples": 2342,
+        "peakPrivateBytes": 995266560,
+        "peakWorkingSetBytes": 567820288
+      },
+      "ordinary-100-percent": {
+        "samples": 1358,
+        "peakPrivateBytes": 999038976,
+        "peakWorkingSetBytes": 571908096
+      },
+      "ordinary-zoom-out-from100": {
+        "samples": 5264,
+        "peakPrivateBytes": 995246080,
+        "peakWorkingSetBytes": 566423552
+      },
+      "ordinary-return100-and-save": {
+        "samples": 2664,
+        "peakPrivateBytes": 995958784,
+        "peakWorkingSetBytes": 571727872
+      },
+      "ordinary-minimized-idle": {
+        "samples": 1919,
+        "peakPrivateBytes": 995663872,
+        "peakWorkingSetBytes": 571600896
+      },
+      "ordinary-restored-idle": {
+        "samples": 1381,
+        "peakPrivateBytes": 1011363840,
+        "peakWorkingSetBytes": 574062592
+      },
+      "ordinary-natural-close": {
+        "samples": 80,
+        "peakPrivateBytes": 1001422848,
+        "peakWorkingSetBytes": 576266240
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "relaunch": {
+    "pid": 21192,
+    "app": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-bin\\KitaoTiffCompanyR2_20261116.exe",
+    "exeSha256": "3e3ce39082041b323b40bc61f6c668540250adf3944b89bde2ab80b1c92ea4e1",
+    "productAssemblySha256": "b9f733537b001a780beb5d28061e0165131074948c132c78b8ebc64bbb9be596",
+    "runtime": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\company-tiff-r2-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1794817616.2451754,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "independentProcessConfirmed": true,
+  "projectReopenUiCompletion": false,
+  "scope": "Session bytes and normal process close/new PID independently verified; completed native OpenSession and second export still require producer receipts",
+  "sessionChecks": {
+    "singleTarget": true,
+    "authorizedPath": true,
+    "authorizedSourceHash": true,
+    "activeVersionMatchesFirstExport": true,
+    "rasterDefinitionPreserved": true
+  }
+}

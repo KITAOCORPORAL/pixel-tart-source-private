@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "atUtc": "2026-11-16T09:50:57.917Z",
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "authority": "Scoped native-process and actual file evidence; historical sources retained; no screen-color acceptance implied",
+  "independentEvidenceCommit": "9e9c8d59345bc7ed5bf3d7c74eb1279d9ba4483b",
+  "artifacts": [
+    {
+      "file": ".gitattributes",
+      "bytes": 81,
+      "sha256": "10f0b3a9a27bed73084dfb14405b99aa4f7203bc2947b7df01da72aa0d2dde55"
+    },
+    {
+      "file": "BATCH_AFTER_NATIVE_REOPEN_RESCAN.json",
+      "bytes": 2637,
+      "sha256": "61f283b10577d3761eb28adeb2abaa64555a0ae1c6b9fa28132fa42a2faae2cb"
+    },
+    {
+      "file": "BATCH_READONLY_RECHECK.json",
+      "bytes": 2637,
+      "sha256": "ad8362c6ff69d178f9090286510a1e112ed4d079c364977cce6e32e721cdcbe2"
+    },
+    {
+      "file": "CURRENT_PROGRESS.json",
+      "bytes": 3364,
+      "sha256": "94b315e4a3fe7dd5fd13a9924b96f7dd84c299f817f62f8f06112b78722a37da"
+    },
+    {
+      "file": "DOCUMENT_INDEX.json",
+      "bytes": 1738,
+      "sha256": "dc347fe24f4aaa570f1a26973308d18a3156192e7bec129f98e72dac27cb3bc8"
+    },
+    {
+      "file": "FINAL_JPEG_EXPORTS.json",
+      "bytes": 2259,
+      "sha256": "c99f7b64e33a3dba3fa1b0ef78f5bba7fd1b4ec9ea2ea1b3a336f5354b77cb45"
+    },
+    {
+      "file": "HANDOFF.md",
+      "bytes": 2662,
+      "sha256": "ac8b709740264412aba1048d265deff9b452a7585606b274bb416a6f88b3fc09"
+    },
+    {
+      "file": "HISTORICAL_EVIDENCE_INDEX_AT_09fd766f.json",
+      "bytes": 11778,
+      "sha256": "e5772a0d5078a919d5628b6d1bfdf87cd3156c50369f70664180e71caf4c3099"
+    },
+    {
+      "file": "INDEPENDENT_NATIVE_REVIEW.json",
+      "bytes": 14302,
+      "sha256": "6017cf2cbe88e8d986953d5ed32f1205a1858336b36ca4856d35d71f3c20e0e6"
+    },
+    {
+      "file": "JPEG_FINAL_RECEIPT.json",
+      "bytes": 4706,
+      "sha256": "595a575f898a540b383c77e74c54847387478454a91ff6ae83359d4d7d2d0d37"
+    },
+    {
+      "file": "Native-ContinuationStep-full-snapshot.ps1",
+      "bytes": 5499,
+      "sha256": "d4a8c8523cf4ab4260c30b729d1a62fe983f92e3b033c3c0627c27653ab4e3d4"
+    },
+    {
+      "file": "Native-ContinuationStep.ps1",
+      "bytes": 5644,
+      "sha256": "cd7abe59ecbaed20383faf543421e0fd9815b0915cc410a77d2481704e6f9d92"
+    },
+    {
+      "file": "NATIVE_ACTION_TIMELINE.json",
+      "bytes": 79322,
+      "sha256": "6e66fe54d2de77e87185dc1ee6d4c0e403271ef8da4a5bf00fc7864ad46dfe79"
+    },
+    {
+      "file": "ORIGINAL_READONLY_RECHECK.json",
+      "bytes": 2298,
+      "sha256": "d6f2626da9dc11f82662b355cd500d2617cda874f027f2e1559f40e8be559227"
+    },
+    {
+      "file": "PHONE_STATUS.json",
+      "bytes": 616,
+      "sha256": "b3206baff0e6cbc3efc0025781fe134427c240b9bb115f9a4bcf516d2e850802"
+    },
+    {
+      "file": "PRESERVED_INPUTS.json",
+      "bytes": 3863,
+      "sha256": "4c9028c9d5369c55d2e236b79f98d3b6ab3918d02b00f6f94f776ccd87d26e9e"
+    },
+    {
+      "file": "REMAINING.json",
+      "bytes": 1494,
+      "sha256": "e10de25f08feb4bf9325ea40cdd38b42285d60e673d0154cf44db35cb47c0230"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 5364,
+      "sha256": "534ac7c63788c681c9e0db97f8aaf90f30cd85ac15e86111ce2fd727a60046cc"
+    },
+    {
+      "file": "RESOURCE_SUMMARY.json",
+      "bytes": 8951,
+      "sha256": "e8bd45b54d67fca66e238d3afb3a818c04a1f08d9405f5fd8b7293c6409f65e7"
+    },
+    {
+      "file": "RETAINED_DATA_INDEX.json",
+      "bytes": 4004,
+      "sha256": "520f7f6401fa1e09c912e0701bd3fcf2255d17a73d38a997e6d902597b3b9b9e"
+    },
+    {
+      "file": "SESSION_AND_PROCESS_BINDING.json",
+      "bytes": 7633,
+      "sha256": "7de0dff4bf439ad4b6788754f7902d77def9d7f2c25270490a51df66c9f944ae"
+    },
+    {
+      "file": "STORAGE_RECHECK.json",
+      "bytes": 633,
+      "sha256": "f20b2f9c1748ccb580211a2bbe6738dc65ab1d5cafeb668078b9cd2f68715924"
+    },
+    {
+      "file": "TIFF_INTEGRATED_COMPARISON.json",
+      "bytes": 2631,
+      "sha256": "cbf05981e95566599a1e2fbfed42f1380cfe6040a18f1c53dc35fe14a12e76d4"
+    },
+    {
+      "file": "TIFF_PAIR_COMPARISON.json",
+      "bytes": 2627,
+      "sha256": "2f3e15ae9b7a14e4a0dcc8cdcb10f43e3f45c522458093afe9637e184f1527b9"
+    },
+    {
+      "file": "TIFF_PAIR_VERIFICATION.json",
+      "bytes": 4251,
+      "sha256": "3c48301df23b31196219fa7ae265329fb90fcee698d218cde043249847948250"
+    },
+    {
+      "file": "TIFF_RECEIPT.json",
+      "bytes": 14941,
+      "sha256": "f6ad0011c7d3dca066da154421713a2b017e903b11a398cf0c348bdc0c5cca77"
+    },
+    {
+      "file": "VALIDATION.json",
+      "bytes": 1439,
+      "sha256": "96f5c77bb4898ffb4dec17ca9977d9bbffd4dcbb665d7fb32724a1fe65b2695d"
+    }
+  ]
+}

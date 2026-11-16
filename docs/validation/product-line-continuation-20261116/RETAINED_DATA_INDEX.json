@@ -1,0 +1,84 @@
+{
+  "atUtc": "2026-11-16T09:43:08.175Z",
+  "policy": "Original paths retained; no files removed. This is the critical evidence index, not an exhaustive disk inventory.",
+  "files": [
+    {
+      "role": "Authorized TIFF input",
+      "file": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "bytes": 241121559,
+      "sha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+    },
+    {
+      "role": "Untouched original full package",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64-20261116.zip",
+      "bytes": 249920758,
+      "sha256": "7ab76c74a56391026e7777d5e01e8d759f58fb57b0109f864097c91330f637cf"
+    },
+    {
+      "role": "Saved native TIFF project",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+      "bytes": 5393,
+      "sha256": "42cc8b89ae1f3ea5ea586253ebcc0526dc0cec7e6a7f90c35b06ecbc22304baf"
+    },
+    {
+      "role": "JPEG pre-save byte snapshot",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-before-final-save.ptstudio.json",
+      "bytes": 9963,
+      "sha256": "9a3a8a196f24b88fe7fc0716d82119bc6e187403f2620a74164f29a6455ad269"
+    },
+    {
+      "role": "JPEG native saved project snapshot",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-final.ptstudio.json",
+      "bytes": 9963,
+      "sha256": "9a3a8a196f24b88fe7fc0716d82119bc6e187403f2620a74164f29a6455ad269"
+    },
+    {
+      "role": "Actual TIFF output",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\DSCF0347_仿色_仿色.tif",
+      "bytes": 184117714,
+      "sha256": "2d485825533649a63d31a319a13b2709992ea02bdb326b3fe3ecb37a061e84a8"
+    },
+    {
+      "role": "Actual TIFF output",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen\\DSCF0347_仿色_仿色.tif",
+      "bytes": 184117714,
+      "sha256": "2d485825533649a63d31a319a13b2709992ea02bdb326b3fe3ecb37a061e84a8"
+    },
+    {
+      "role": "Actual TIFF output",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-integrated\\DSCF0347_仿色_仿色.tif",
+      "bytes": 184117714,
+      "sha256": "2d485825533649a63d31a319a13b2709992ea02bdb326b3fe3ecb37a061e84a8"
+    },
+    {
+      "role": "Actual final JPEG output",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final\\COMPANY_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075"
+    },
+    {
+      "role": "Actual final JPEG output",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final\\COMPANY_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859"
+    },
+    {
+      "role": "Full original resource samples",
+      "file": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\ordinary-hidden-r2-first\\RESOURCE_SAMPLES.jsonl",
+      "bytes": 22217775,
+      "sha256": "2d080add18e79428af41c766b5bd6f115f6aeb44c93ca4c7ac77e04b78fd318f"
+    },
+    {
+      "role": "Full original resource samples",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-reopen-guard\\RESOURCE_SAMPLES.jsonl",
+      "bytes": 4523773,
+      "sha256": "257f6fed600aed6af95d0e130796f57dd9fdc78b6336bc9d2f2b21cad3e79843"
+    },
+    {
+      "role": "Full original resource samples",
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-integrated-guard\\RESOURCE_SAMPLES.jsonl",
+      "bytes": 2448220,
+      "sha256": "2796aa04f6f66c80de9c2e00ae8d6c0606f486d815e8153189c4f08649c79ae1"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "atUtc": "2026-11-16T07:11:53.638109+00:00",
-  "clientTimeZone": "Europe/Helsinki",
-  "status": "FROZEN_FULL_MODULE_PACKAGE_READY_NATIVE_WORKFLOW_HISTORY_PASS_FINAL_NATIVE_SEQUENCE_PARTIAL",
+  "atUtc": "2026-11-16T09:40:31.854Z",
+  "clientTimeZone": "Europe/Berlin",
+  "status": "FROZEN_PACKAGE_TIFF_AND_JPEG_NATIVE_CONTRACT_PASS_PRODUCT_PARTIAL",
   "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
   "branch": "integration/company-functional-20261116",
   "homeBase": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
@@ -36,13 +36,28 @@
   "phoneBookingRevision": 4,
   "tailscale": "NeedsLogin",
   "iPhoneBidirectional": "NOT_RUN",
-  "ordinary40MpTiff": "PREVIOUS_A993_STOP_RETAINED_FINAL_ACCEPTANCE_PENDING",
+  "ordinary40MpTiff": "PASS_ORDINARY_LIFECYCLE_AND_EXACT_PACKAGED_EXE_FULL_ROW_OUTPUT",
   "companyDirtyFilesPreserved": 8,
   "newRawDecodes": 0,
   "setupInstaller": false,
   "releaseReady": false,
   "hiddenPreviewFixIncluded": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
   "fullNativeSequenceSource": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
-  "finalSourceNativeSequence": "NOT_COMPLETED_UI_CONTROL_STOPPED",
-  "finalSourceReadOnlyDataAndOutputHashValidation": true
+  "finalSourceNativeSequence": "SCOPED_PASS_EXISTING_CONFIRMED_BATCH_EXPORT_SAVE_REOPEN_RESCAN",
+  "finalSourceReadOnlyDataAndOutputHashValidation": true,
+  "freshFinalSourcePublishConfirmCycle": "NOT_REPUBLISHED_EXISTING_LOCK_RETAINED",
+  "latestContinuation": "../product-line-continuation-20261116/REPORT.md",
+  "latestTiffReceipt": "../product-line-continuation-20261116/TIFF_RECEIPT.json",
+  "latestJpegReceipt": "../product-line-continuation-20261116/JPEG_FINAL_RECEIPT.json",
+  "screenNumericViewportAcceptance": "PARTIAL",
+  "ordinaryTiffExits": [
+    0,
+    0,
+    0
+  ],
+  "ordinaryTiffPeakPrivateMiB": [
+    1174.8046875,
+    958.1953125,
+    954.96875
+  ]
 }

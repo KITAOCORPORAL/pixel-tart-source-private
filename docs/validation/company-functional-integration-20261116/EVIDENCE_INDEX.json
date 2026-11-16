@@ -35,13 +35,13 @@
     },
     {
       "file": "CURRENT_RECEIPT.json",
-      "bytes": 1822,
-      "sha256": "6905806a7b02769714542adfb9bba1f710a82a1cf9d57be1ae8c538053a303e4"
+      "bytes": 2340,
+      "sha256": "3f8366e777e92fb7ff5fa7543d975343fa7bff6f9c170bffb977b896a2f8e27f"
     },
     {
       "file": "CURRENT_REPORT.md",
-      "bytes": 7332,
-      "sha256": "5e64ff4d2e583f90fc96070aee70996e15e7e27b146cb85541453568d655f576"
+      "bytes": 7687,
+      "sha256": "7bf8585538640a71e7b3ff99c809d33d61f416de3c5462fb06dc85f3542f2124"
     },
     {
       "file": "customer-confirmed.png",
@@ -310,8 +310,8 @@
     },
     {
       "file": "REMAINING_BLOCKERS.json",
-      "bytes": 2078,
-      "sha256": "e6b9dbaeea2129716a53eb2695e448fe4887bc3c62985681f226fdbb1e444832"
+      "bytes": 2568,
+      "sha256": "7589febf467489183cb6cc32ede48757de4b2e633081f5ae63209019c98120e6"
     },
     {
       "file": "RESOURCE_SUMMARY.json",
@@ -353,5 +353,9 @@
       "bytes": 1606,
       "sha256": "368e25af8fd9971d3d68602a7f120c4f0fdfbf1a9eabee78fcd10c50bde770c4"
     }
-  ]
+  ],
+  "continuationAtUtc": "2026-11-16T09:48:06.492Z",
+  "priorIndexSnapshot": "../product-line-continuation-20261116/HISTORICAL_EVIDENCE_INDEX_AT_09fd766f.json",
+  "priorIndexCommit": "09fd766f186a401a8d6975d279608cf8cf4aaca4",
+  "latestContinuationIndex": "../product-line-continuation-20261116/EVIDENCE_INDEX.json"
 }

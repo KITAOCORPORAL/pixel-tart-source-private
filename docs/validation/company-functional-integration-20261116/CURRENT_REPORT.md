@@ -1,6 +1,8 @@
 # 公司整合交付 · 2026-11-16
 
-客户端时区 Europe/Helsinki。**PARTIAL：最终源码完整诊断包及服务已准备；原公司与合成 JPEG 闭环有真实历史回执；最终源码全段桌面复验、iPhone 双向修改仍未完成。**
+客户端时区 Europe/Berlin。**PARTIAL：最终e818实际TIFF/JPEG导出、保存与独立重开续验已通过；iPhone双向、连续屏幕和数值缩放门禁仍未完成。**
+
+最新续验与精简交接见 [接续报告](../product-line-continuation-20261116/REPORT.md) 和 [交接入口](../product-line-continuation-20261116/HANDOFF.md)。下文封包时证据保持原来源标签。
 
 ## 源码、公司未提交成果与包
 
@@ -36,11 +38,11 @@
 
 Tailscale 本轮仍 **NeedsLogin**；`tailscale up --timeout=5s` 已签发当前本人登录链接，匿名打开HTTP200。链接仅在聊天和包外 `TAILSCALE_LOGIN_PRIVATE.txt`，不入Git/包。服务、原预约与接续工具均已齐备。本人登录后使用包中 `Continue-CompanyPhone.cmd` 或工具 `Continue-CompanyMobile.py --apply`，核对原 tailnet、公司 Self DNS、专用可信HTTPS和原设备后才交付手机访问链接。接续脚本与时区观察服务依赖一并收录，手机令牌/链接仍在原私有运行根。当前没有真实 iPhone 双向修改证据。
 
-## 仍需完成
+## 接续后的状态
 
-1. 桌面控制恢复后，在最终 e8180221 完成全段普通 EXE 流程复验；旧49真实闭环和新e818定向复验保持各自标签。
-2. 本人完成 Tailscale 登录后，继续 iPhone→PC→iPhone 修改及两端重开；此刻仍未建立公司可信HTTPS。
-3. 40MP TIFF：原 a993普通窗口导入触发2GiB的 STOP/null-exit 回执继续保留。e818包含隐藏预览修复；另一62191dff R2普通窗口验收仍在进行，不能借用它提升本包为通过。守卫不放宽，不追加RAW解码。
-4. 旧0a窗口 CanvasOwnerClosing 重入现象保留；未保存内容已另存，独立公司批次正常关闭不等于通用关闭边界已修复。
+1. 已补充最终e818的普通TIFF实际导出/项目重开/完整逐行比较，以及JPEG再次导出、保存、独立重开、原生重扫和曝光0.5恢复。详细回执见接续报告；旧49浏览器发布确认保持原标签和锁定结果。
+2. 本人完成Tailscale登录后继续可信HTTPS、iPhone双向修改及两端重开；服务、原预约和有效设备凭据已准备。
+3. a993原普通TIFF导入STOP和旧49后续STOP完整保留。新621普通双进程和最终包e818额外验证均exit0/no STOP，2GiB守卫不放宽，新增RAW解码0。
+4. 连续屏幕像素与数值zoom读回仍受工具/现有UIA暴露限制，不提升为屏幕色准验收。旧0a CanvasOwnerClosing重入仍保留历史；新测试进程自然关闭成功不等于所有关闭情形都已覆盖。
 
-包排除 SQLite、源图/像素缓存、owner key、token、本人登录链接与客户私有URL；不生成安装器。相机SDK/硬件科学门禁、RAW后继授权及高光研究维持原边界。完整产品不能发行。
+原全模块ZIP未改写，最新证据作为独立续验交付。包排除数据库、源图/像素缓存、owner key、token、本人登录链接和客户私有URL；不生成安装器。硬件、RAW后继授权、高光研究维持原边界，完整产品不能发行。

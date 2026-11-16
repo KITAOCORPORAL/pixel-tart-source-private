@@ -1,0 +1,360 @@
+{
+  "observedAtUtc": "2026-11-16T09:03:59.720Z",
+  "clientTimeZone": "Europe/Berlin",
+  "status": "PASS_ORDINARY_APP_TIFF_CYCLE_AND_FULL_ROW_READBACK",
+  "authority": "Ordinary production executable, human native import, native UI Automation button/dialog actions, real saved project, two independent processes and actual TIFF outputs. Independent read-only artifact verification is separate from UI producer.",
+  "checks": {
+    "pairAllChecks": true,
+    "firstNormalExit": true,
+    "reopenNormalExit": true,
+    "guard2GiB": true,
+    "firstUnderGuard": true,
+    "reopenUnderGuard": true,
+    "independentPids": true,
+    "sameProductBinary": true,
+    "sameIsolatedRuntime": true,
+    "sessionSourceAndVersion": true,
+    "nativeSessionReopened": true,
+    "nativeSecondExportCompleted": true,
+    "noForcedGc": true
+  },
+  "source": {
+    "tested": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "integrated": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "srcTree": "623bad114418fa984fc86762e78a6004e7d2a614",
+    "testsTree": "1ba50b4a2262c6cc9d22a824d9a384722272c8cc",
+    "srcAndTestsIdentical": true,
+    "srgbRepair": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+    "hiddenPreviewRepair": "62191dfface51c981b1361a4333a3c0981067cb1"
+  },
+  "first": {
+    "launch": {
+      "pid": 12852,
+      "app": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-bin\\KitaoTiffCompanyR2_20261116.exe",
+      "exeSha256": "3e3ce39082041b323b40bc61f6c668540250adf3944b89bde2ab80b1c92ea4e1",
+      "productAssemblySha256": "b9f733537b001a780beb5d28061e0165131074948c132c78b8ebc64bbb9be596",
+      "runtime": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\company-tiff-r2-runtime",
+      "guardBytes": 2147483648,
+      "intervalMs": 50,
+      "newRawDecodeLimit": 0,
+      "startedUtc": 1794810696.85883,
+      "authority": "native-app"
+    },
+    "exit": {
+      "pid": 12852,
+      "exitCode": 0,
+      "monitorEndedWhileAppAlive": false,
+      "stop": null,
+      "peakPrivateBytes50ms": 1231872000,
+      "osPeakWorkingSetBytes": 968880128,
+      "samples": 135231,
+      "phases": {
+        "startup": {
+          "samples": 12340,
+          "peakPrivateBytes": 334942208,
+          "peakWorkingSetBytes": 330915840
+        },
+        "native-import-and-settle": {
+          "samples": 16084,
+          "peakPrivateBytes": 1048084480,
+          "peakWorkingSetBytes": 912736256
+        },
+        "native-loaded-natural-idle": {
+          "samples": 11959,
+          "peakPrivateBytes": 924504064,
+          "peakWorkingSetBytes": 827379712
+        },
+        "native-fit": {
+          "samples": 1211,
+          "peakPrivateBytes": 904318976,
+          "peakWorkingSetBytes": 967766016
+        },
+        "native-100-percent": {
+          "samples": 981,
+          "peakPrivateBytes": 903008256,
+          "peakWorkingSetBytes": 966557696
+        },
+        "native-zoom-out": {
+          "samples": 1324,
+          "peakPrivateBytes": 903475200,
+          "peakWorkingSetBytes": 897425408
+        },
+        "native-zoom-in": {
+          "samples": 178,
+          "peakPrivateBytes": 903499776,
+          "peakWorkingSetBytes": 897589248
+        },
+        "native-100-return": {
+          "samples": 714,
+          "peakPrivateBytes": 903467008,
+          "peakWorkingSetBytes": 897609728
+        },
+        "native-export-dialog": {
+          "samples": 21430,
+          "peakPrivateBytes": 904450048,
+          "peakWorkingSetBytes": 899264512
+        },
+        "native-window-restore": {
+          "samples": 8458,
+          "peakPrivateBytes": 1231872000,
+          "peakWorkingSetBytes": 864075776
+        },
+        "native-visible-restore-and-fit": {
+          "samples": 1452,
+          "peakPrivateBytes": 1028902912,
+          "peakWorkingSetBytes": 462651392
+        },
+        "16-native-visible-100": {
+          "samples": 8161,
+          "peakPrivateBytes": 1024811008,
+          "peakWorkingSetBytes": 457355264
+        },
+        "native-waiting-stable-visible-window": {
+          "samples": 25019,
+          "peakPrivateBytes": 1037348864,
+          "peakWorkingSetBytes": 464564224
+        },
+        "ordinary-first-export-dialog": {
+          "samples": 10912,
+          "peakPrivateBytes": 1024778240,
+          "peakWorkingSetBytes": 723554304
+        },
+        "ordinary-fit": {
+          "samples": 2342,
+          "peakPrivateBytes": 995266560,
+          "peakWorkingSetBytes": 567820288
+        },
+        "ordinary-100-percent": {
+          "samples": 1358,
+          "peakPrivateBytes": 999038976,
+          "peakWorkingSetBytes": 571908096
+        },
+        "ordinary-zoom-out-from100": {
+          "samples": 5264,
+          "peakPrivateBytes": 995246080,
+          "peakWorkingSetBytes": 566423552
+        },
+        "ordinary-return100-and-save": {
+          "samples": 2664,
+          "peakPrivateBytes": 995958784,
+          "peakWorkingSetBytes": 571727872
+        },
+        "ordinary-minimized-idle": {
+          "samples": 1919,
+          "peakPrivateBytes": 995663872,
+          "peakWorkingSetBytes": 571600896
+        },
+        "ordinary-restored-idle": {
+          "samples": 1381,
+          "peakPrivateBytes": 1011363840,
+          "peakWorkingSetBytes": 574062592
+        },
+        "ordinary-natural-close": {
+          "samples": 80,
+          "peakPrivateBytes": 1001422848,
+          "peakWorkingSetBytes": 576266240
+        }
+      },
+      "forcedGcUsed": false,
+      "newRawDecodeLimit": 0
+    },
+    "output": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\DSCF0347_仿色_仿色.tif",
+    "outputSha256": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8"
+  },
+  "reopen": {
+    "launch": {
+      "pid": 21192,
+      "app": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\hidden-r2-bin\\KitaoTiffCompanyR2_20261116.exe",
+      "exeSha256": "3e3ce39082041b323b40bc61f6c668540250adf3944b89bde2ab80b1c92ea4e1",
+      "productAssemblySha256": "b9f733537b001a780beb5d28061e0165131074948c132c78b8ebc64bbb9be596",
+      "runtime": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\company-tiff-r2-runtime",
+      "guardBytes": 2147483648,
+      "intervalMs": 50,
+      "newRawDecodeLimit": 0,
+      "startedUtc": 1794817616.2451754,
+      "authority": "ordinary App prepared for native UI input"
+    },
+    "exit": {
+      "pid": 21192,
+      "exitCode": 0,
+      "monitorEndedWhileAppAlive": false,
+      "stop": null,
+      "peakPrivateBytes50ms": 1004740608,
+      "osPeakWorkingSetBytes": 868675584,
+      "samples": 27554,
+      "phases": {
+        "startup": {
+          "samples": 3001,
+          "peakPrivateBytes": 318230528,
+          "peakWorkingSetBytes": 316874752
+        },
+        "ordinary-reopen-file-menu": {
+          "samples": 9084,
+          "peakPrivateBytes": 341151744,
+          "peakWorkingSetBytes": 363794432
+        },
+        "ordinary-open-saved-session": {
+          "samples": 3352,
+          "peakPrivateBytes": 1004740608,
+          "peakWorkingSetBytes": 868630528
+        },
+        "ordinary-reopen-fit100": {
+          "samples": 2791,
+          "peakPrivateBytes": 960282624,
+          "peakWorkingSetBytes": 843591680
+        },
+        "ordinary-reopen-zoom-out": {
+          "samples": 631,
+          "peakPrivateBytes": 963436544,
+          "peakWorkingSetBytes": 845688832
+        },
+        "ordinary-reopen-100-return": {
+          "samples": 3396,
+          "peakPrivateBytes": 968384512,
+          "peakWorkingSetBytes": 850407424
+        },
+        "ordinary-second-export-dialog": {
+          "samples": 4890,
+          "peakPrivateBytes": 992108544,
+          "peakWorkingSetBytes": 860340224
+        },
+        "ordinary-reopen-natural-close": {
+          "samples": 409,
+          "peakPrivateBytes": 971051008,
+          "peakWorkingSetBytes": 860041216
+        }
+      },
+      "forcedGcUsed": false,
+      "newRawDecodeLimit": 0
+    },
+    "output": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen\\DSCF0347_仿色_仿色.tif",
+    "outputSha256": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8"
+  },
+  "session": {
+    "path": "E:/Kitao-Deliveries/company-functional-20261116/continuation-20261116/ordinary-tiff.ptstudio.json",
+    "sha256AtInitialSave": "42cc8b89ae1f3ea5ea586253ebcc0526dc0cec7e6a7f90c35b06ecbc22304baf",
+    "checks": {
+      "singleTarget": true,
+      "authorizedPath": true,
+      "authorizedSourceHash": true,
+      "activeVersionMatchesFirstExport": true,
+      "rasterDefinitionPreserved": true
+    }
+  },
+  "pixelVerification": {
+    "status": "PASS_INDEPENDENT_ORDINARY_APP_FULL_ROW_PAIR",
+    "authority": "Independent read-only verification of two completed ordinary-App outputs; UI/PID/session acceptance must be joined from producer receipts",
+    "checks": {
+      "allOutputStoredChannelsMatch": true,
+      "allOutputRgb48RowsMatch": true,
+      "uneditedOutputMatchesInput": true,
+      "dimensionsMatch": true,
+      "sixteenBitChannels": true,
+      "orientationOne": true,
+      "iccPreserved": true,
+      "firstFileMatchesManifest": true,
+      "reopenFileMatchesManifest": true,
+      "sourceUnchanged": true,
+      "sameFrozenAdjustment": true
+    },
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "integratedSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceAndTestsTreesEqual": true,
+    "firstManifest": {
+      "ExportId": "3cfc0cc9-c30d-41ac-a907-36898c30f056",
+      "LibraryId": null,
+      "AssetId": null,
+      "SourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "EditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+      "ProcessingVersion": 1,
+      "Recipe": "Tiff",
+      "OutputPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\DSCF0347_仿色_仿色.tif",
+      "OutputHash": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+      "CompletedAt": "2026-11-16T08:09:17.7582802+00:00",
+      "RecipeSnapshot": {
+        "Version": 1,
+        "Format": ".tif",
+        "BitDepth": 16,
+        "SizeMode": "Original",
+        "Width": 7752,
+        "Height": 5184,
+        "Edge": null,
+        "Quality": null,
+        "Compression": "Zip",
+        "ColorProfile": "sRGB",
+        "MetadataPolicy": "Orientation normalized; source metadata discarded",
+        "Sharpening": "Not applied",
+        "Watermarks": null,
+        "OutputWidth": null,
+        "OutputHeight": null,
+        "RecipeName": null,
+        "FilenameTemplate": null,
+        "AdjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "Dpi": null,
+        "RawDefinition": null,
+        "RawInput": null,
+        "OutputValidation": null
+      },
+      "ManifestVersion": 3,
+      "CompletionState": "Completed",
+      "ManagedTaskId": "3cfc0cc9-c30d-41ac-a907-36898c30f056",
+      "ManagedArtifactPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\.kitao-export-tasks\\3cfc0cc9c30d41aca90736898c30f056\\encoded.bin"
+    },
+    "reopenManifest": {
+      "ExportId": "4f1bab09-9313-4aa8-9f5f-0c2975cbccef",
+      "LibraryId": null,
+      "AssetId": null,
+      "SourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "EditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+      "ProcessingVersion": 1,
+      "Recipe": "Tiff",
+      "OutputPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen\\DSCF0347_仿色_仿色.tif",
+      "OutputHash": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+      "CompletedAt": "2026-11-16T08:48:48.8263669+00:00",
+      "RecipeSnapshot": {
+        "Version": 1,
+        "Format": ".tif",
+        "BitDepth": 16,
+        "SizeMode": "Original",
+        "Width": 7752,
+        "Height": 5184,
+        "Edge": null,
+        "Quality": null,
+        "Compression": "Zip",
+        "ColorProfile": "sRGB",
+        "MetadataPolicy": "Orientation normalized; source metadata discarded",
+        "Sharpening": "Not applied",
+        "Watermarks": null,
+        "OutputWidth": null,
+        "OutputHeight": null,
+        "RecipeName": null,
+        "FilenameTemplate": null,
+        "AdjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+        "Dpi": null,
+        "RawDefinition": null,
+        "RawInput": null,
+        "OutputValidation": null
+      },
+      "ManifestVersion": 3,
+      "CompletionState": "Completed",
+      "ManagedTaskId": "4f1bab09-9313-4aa8-9f5f-0c2975cbccef",
+      "ManagedArtifactPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen\\.kitao-export-tasks\\4f1bab0993134aa89f5f0c2975cbccef\\encoded.bin"
+    },
+    "comparisonPath": "E:\\Kitao-Deliveries\\tiff-srgb-company-20261116\\native-final-review\\ORDINARY_PAIR_COMPARISON.json",
+    "newRawDecodes": 0,
+    "probeHasCameraRawDecoderReferences": false
+  },
+  "uiProducerThreadId": "01a1e355-64ea-74e0-b7b5-15ec557fdc30",
+  "uiProducerRoot": "E:/Kitao-Deliveries/company-functional-20261116/continuation-20261116",
+  "limitations": [
+    "Real-screen screenshot capture unavailable; no screen-pixel/monitor-color acceptance is claimed.",
+    "Numeric viewport zoom is not exposed by the UI; fit/100%/zoom button execution and maximized window state are recorded by native UI Automation.",
+    "The native process has no independent camera decoder-call counter. Only the authorized already-rendered TIFF was admitted; project and output recipes have null RawDefinition/RawInput; no new camera RAW inputs or decode actions were used. Controlled replay counts remain separate.",
+    "R2 executable reports source62191dff. The entire src/tests trees match integrated e818 exactly; this is source equivalence, not a claim that package binaries with different informational versions are byte-identical."
+  ],
+  "newCameraRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "forcedGcUsed": false,
+  "highlightsResearch": "1bfdfbe9 retained as research; no highlight candidate merged here",
+  "packageOwner": "Product continuation; no divergent product package published by this memory chat"
+}

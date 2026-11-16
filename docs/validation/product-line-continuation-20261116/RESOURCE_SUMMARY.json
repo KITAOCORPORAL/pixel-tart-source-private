@@ -1,0 +1,316 @@
+{
+  "atUtc": "2026-11-16T09:32:02.036Z",
+  "scope": "Whole process lifetime peaks. Named phase samples are retained; screenshots and operation latency are not inferred.",
+  "guardBytes": 2147483648,
+  "newRawDecodes": 0,
+  "forcedGcUsed": false,
+  "ordinaryR2First": {
+    "pid": 12852,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 1231872000,
+    "osPeakWorkingSetBytes": 968880128,
+    "samples": 135231,
+    "phases": {
+      "startup": {
+        "samples": 12340,
+        "peakPrivateBytes": 334942208,
+        "peakWorkingSetBytes": 330915840
+      },
+      "native-import-and-settle": {
+        "samples": 16084,
+        "peakPrivateBytes": 1048084480,
+        "peakWorkingSetBytes": 912736256
+      },
+      "native-loaded-natural-idle": {
+        "samples": 11959,
+        "peakPrivateBytes": 924504064,
+        "peakWorkingSetBytes": 827379712
+      },
+      "native-fit": {
+        "samples": 1211,
+        "peakPrivateBytes": 904318976,
+        "peakWorkingSetBytes": 967766016
+      },
+      "native-100-percent": {
+        "samples": 981,
+        "peakPrivateBytes": 903008256,
+        "peakWorkingSetBytes": 966557696
+      },
+      "native-zoom-out": {
+        "samples": 1324,
+        "peakPrivateBytes": 903475200,
+        "peakWorkingSetBytes": 897425408
+      },
+      "native-zoom-in": {
+        "samples": 178,
+        "peakPrivateBytes": 903499776,
+        "peakWorkingSetBytes": 897589248
+      },
+      "native-100-return": {
+        "samples": 714,
+        "peakPrivateBytes": 903467008,
+        "peakWorkingSetBytes": 897609728
+      },
+      "native-export-dialog": {
+        "samples": 21430,
+        "peakPrivateBytes": 904450048,
+        "peakWorkingSetBytes": 899264512
+      },
+      "native-window-restore": {
+        "samples": 8458,
+        "peakPrivateBytes": 1231872000,
+        "peakWorkingSetBytes": 864075776
+      },
+      "native-visible-restore-and-fit": {
+        "samples": 1452,
+        "peakPrivateBytes": 1028902912,
+        "peakWorkingSetBytes": 462651392
+      },
+      "16-native-visible-100": {
+        "samples": 8161,
+        "peakPrivateBytes": 1024811008,
+        "peakWorkingSetBytes": 457355264
+      },
+      "native-waiting-stable-visible-window": {
+        "samples": 25019,
+        "peakPrivateBytes": 1037348864,
+        "peakWorkingSetBytes": 464564224
+      },
+      "ordinary-first-export-dialog": {
+        "samples": 10912,
+        "peakPrivateBytes": 1024778240,
+        "peakWorkingSetBytes": 723554304
+      },
+      "ordinary-fit": {
+        "samples": 2342,
+        "peakPrivateBytes": 995266560,
+        "peakWorkingSetBytes": 567820288
+      },
+      "ordinary-100-percent": {
+        "samples": 1358,
+        "peakPrivateBytes": 999038976,
+        "peakWorkingSetBytes": 571908096
+      },
+      "ordinary-zoom-out-from100": {
+        "samples": 5264,
+        "peakPrivateBytes": 995246080,
+        "peakWorkingSetBytes": 566423552
+      },
+      "ordinary-return100-and-save": {
+        "samples": 2664,
+        "peakPrivateBytes": 995958784,
+        "peakWorkingSetBytes": 571727872
+      },
+      "ordinary-minimized-idle": {
+        "samples": 1919,
+        "peakPrivateBytes": 995663872,
+        "peakWorkingSetBytes": 571600896
+      },
+      "ordinary-restored-idle": {
+        "samples": 1381,
+        "peakPrivateBytes": 1011363840,
+        "peakWorkingSetBytes": 574062592
+      },
+      "ordinary-natural-close": {
+        "samples": 80,
+        "peakPrivateBytes": 1001422848,
+        "peakWorkingSetBytes": 576266240
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "ordinaryR2IndependentReopen": {
+    "pid": 21192,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 1004740608,
+    "osPeakWorkingSetBytes": 868675584,
+    "samples": 27554,
+    "phases": {
+      "startup": {
+        "samples": 3001,
+        "peakPrivateBytes": 318230528,
+        "peakWorkingSetBytes": 316874752
+      },
+      "ordinary-reopen-file-menu": {
+        "samples": 9084,
+        "peakPrivateBytes": 341151744,
+        "peakWorkingSetBytes": 363794432
+      },
+      "ordinary-open-saved-session": {
+        "samples": 3352,
+        "peakPrivateBytes": 1004740608,
+        "peakWorkingSetBytes": 868630528
+      },
+      "ordinary-reopen-fit100": {
+        "samples": 2791,
+        "peakPrivateBytes": 960282624,
+        "peakWorkingSetBytes": 843591680
+      },
+      "ordinary-reopen-zoom-out": {
+        "samples": 631,
+        "peakPrivateBytes": 963436544,
+        "peakWorkingSetBytes": 845688832
+      },
+      "ordinary-reopen-100-return": {
+        "samples": 3396,
+        "peakPrivateBytes": 968384512,
+        "peakWorkingSetBytes": 850407424
+      },
+      "ordinary-second-export-dialog": {
+        "samples": 4890,
+        "peakPrivateBytes": 992108544,
+        "peakWorkingSetBytes": 860340224
+      },
+      "ordinary-reopen-natural-close": {
+        "samples": 409,
+        "peakPrivateBytes": 971051008,
+        "peakWorkingSetBytes": 860041216
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "exactPackagedE818Tiff": {
+    "pid": 43984,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 1001357312,
+    "osPeakWorkingSetBytes": 878714880,
+    "samples": 15220,
+    "phases": {
+      "startup": {
+        "samples": 2162,
+        "peakPrivateBytes": 331165696,
+        "peakWorkingSetBytes": 320851968
+      },
+      "packaged-e818-open-project": {
+        "samples": 2279,
+        "peakPrivateBytes": 1001357312,
+        "peakWorkingSetBytes": 878686208
+      },
+      "packaged-e818-fit": {
+        "samples": 197,
+        "peakPrivateBytes": 944312320,
+        "peakWorkingSetBytes": 848605184
+      },
+      "packaged-e818-100": {
+        "samples": 153,
+        "peakPrivateBytes": 943685632,
+        "peakWorkingSetBytes": 840470528
+      },
+      "packaged-e818-zoom-out": {
+        "samples": 243,
+        "peakPrivateBytes": 957317120,
+        "peakWorkingSetBytes": 855711744
+      },
+      "packaged-e818-return100": {
+        "samples": 2302,
+        "peakPrivateBytes": 950624256,
+        "peakWorkingSetBytes": 846774272
+      },
+      "packaged-e818-minimized-idle": {
+        "samples": 185,
+        "peakPrivateBytes": 947105792,
+        "peakWorkingSetBytes": 842711040
+      },
+      "packaged-e818-restored-idle": {
+        "samples": 1762,
+        "peakPrivateBytes": 966770688,
+        "peakWorkingSetBytes": 843030528
+      },
+      "packaged-e818-export": {
+        "samples": 5432,
+        "peakPrivateBytes": 978268160,
+        "peakWorkingSetBytes": 853811200
+      },
+      "packaged-e818-natural-close": {
+        "samples": 505,
+        "peakPrivateBytes": 949829632,
+        "peakWorkingSetBytes": 850989056
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "exactPackagedE818JpegLongRun": {
+    "pid": 25968,
+    "exitCode": 0,
+    "stop": null,
+    "samples": 182052,
+    "peakPrivateBytes50ms": 623374336,
+    "osPeakWorkingSetBytes": 525647872,
+    "lifetimeMs": 9231307.231899932,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "readonlyR2PairComparison": {
+    "pid": 55256,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 16773120,
+    "osPeakWorkingSetBytes": 48898048,
+    "samples": 87,
+    "phases": {
+      "startup": {
+        "samples": 87,
+        "peakPrivateBytes": 16773120,
+        "peakWorkingSetBytes": 45371392
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "readonlyPackagedE818Comparison": {
+    "pid": 38452,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 16683008,
+    "osPeakWorkingSetBytes": 46723072,
+    "samples": 86,
+    "phases": {
+      "startup": {
+        "samples": 86,
+        "peakPrivateBytes": 16683008,
+        "peakWorkingSetBytes": 46718976
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "exactPackagedE818JpegIndependentReopen": {
+    "pid": 37000,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 575762432,
+    "osPeakWorkingSetBytes": 561139712,
+    "samples": 17365,
+    "phases": {
+      "startup": {
+        "samples": 2795,
+        "peakPrivateBytes": 305303552,
+        "peakWorkingSetBytes": 308633600
+      },
+      "final-batch-native-rescan": {
+        "samples": 14320,
+        "peakPrivateBytes": 575762432,
+        "peakWorkingSetBytes": 560881664
+      },
+      "final-batch-natural-close": {
+        "samples": 250,
+        "peakPrivateBytes": 508252160,
+        "peakWorkingSetBytes": 527421440
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  }
+}

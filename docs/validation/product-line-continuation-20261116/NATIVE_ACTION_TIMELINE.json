@@ -1,0 +1,2873 @@
+[
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-01-observe.json",
+    "atUtc": "2026-11-16T08:01:48.8794687+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Observe",
+    "target": {
+      "name": "",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-02-file-menu.json",
+    "atUtc": "2026-11-16T08:02:43.6228065+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "PhotoExport"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "",
+        "nativeHandle": 20125188
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-03-export-command.json",
+    "atUtc": "2026-11-16T08:03:41.1459445+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "导出主变体…",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-04-format-options.json",
+    "atUtc": "2026-11-16T08:04:48.9024905+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Expand",
+    "target": {
+      "name": "快速导出格式",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      },
+      {
+        "name": "",
+        "nativeHandle": 7019920
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-05-tiff16.json",
+    "atUtc": "2026-11-16T08:05:44.8150844+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "SelectItem",
+    "target": {
+      "name": "快速导出格式",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      },
+      {
+        "name": "",
+        "nativeHandle": 44109578
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-06-export-selected.json",
+    "atUtc": "2026-11-16T08:05:53.7803401+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "导出所选",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-07-folder-observe.json",
+    "atUtc": "2026-11-16T08:06:57.6828911+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Observe",
+    "target": {
+      "name": "",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "快速导出 1 张 · TIF · sRGB",
+        "nativeHandle": 2953028
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_FIRST_SetFile.json",
+    "atUtc": "2026-11-16T08:09:02.0602704+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first",
+    "fileSha256": null,
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_FIRST_Confirm.json",
+    "atUtc": "2026-11-16T08:09:03.1037418+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first",
+    "fileSha256": null,
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-08-after-export.json",
+    "atUtc": "2026-11-16T08:10:58.8667598+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Observe",
+    "target": {
+      "name": "",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 1774286
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-09-dismiss-export.json",
+    "atUtc": "2026-11-16T08:12:23.2707374+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "取消",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-10-viewport-observe.json",
+    "atUtc": "2026-11-16T08:12:39.2759913+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      },
+      {
+        "name": "",
+        "nativeHandle": 4067410,
+        "visualState": null,
+        "rect": "1671,941,540,136"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-11-fit.json",
+    "atUtc": "2026-11-16T08:14:04.7356111+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "适合",
+      "id": "",
+      "runtimeId": "7:12852:3676373",
+      "rect": "2865,77,55,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-12-actual100.json",
+    "atUtc": "2026-11-16T08:15:55.9005577+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:12852:17327269",
+      "rect": "3225,77,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-14-after-zoom-observe.json",
+    "atUtc": "2026-11-16T08:18:36.7808759+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-15-zoom-out-confirmed.json",
+    "atUtc": "2026-11-16T08:20:31.0674679+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "缩小",
+      "id": "",
+      "runtimeId": "7:12852:23927906",
+      "rect": "3297,77,39,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-16-return100.json",
+    "atUtc": "2026-11-16T08:21:33.2358375+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:12852:17327269",
+      "rect": "3225,77,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Maximized",
+        "rect": "-10,-10,3860,2180"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-17-save-project.json",
+    "atUtc": "2026-11-16T08:21:44.5290296+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "未保存项目",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378
+      },
+      {
+        "name": "保存 Color Studio 工作文件",
+        "nativeHandle": 6358994
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_SAVE_SetFile.json",
+    "atUtc": "2026-11-16T08:22:49.6365508+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "保存 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": null,
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_SAVE_Confirm.json",
+    "atUtc": "2026-11-16T08:22:51.9911833+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "保存 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": null,
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-18-minimize.json",
+    "atUtc": "2026-11-16T08:23:41.3278992+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Minimize",
+    "target": {
+      "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "id": "",
+      "runtimeId": "42:7672378",
+      "rect": "-10,-10,3860,2180"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Minimized",
+        "rect": "-32000,-32000,237,39"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\tiff-19-restore.json",
+    "atUtc": "2026-11-16T08:25:18.6478833+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Restore",
+    "target": {
+      "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "id": "",
+      "runtimeId": "42:7672378",
+      "rect": "-32000,-32000,237,39"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 7672378,
+        "visualState": "Normal",
+        "rect": "796,810,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\tiff-20-natural-close.json",
+    "atUtc": "2026-11-16T08:26:18.2634299+00:00",
+    "pid": 12852,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "关闭窗口",
+      "id": ""
+    },
+    "windows": [],
+    "keyReadback": []
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-01-observe.json",
+    "atUtc": "2026-11-16T08:27:49.4256249+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\reopen-02-file-menu.json",
+    "atUtc": "2026-11-16T08:29:52.4489799+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "PhotoExport"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510
+      },
+      {
+        "name": "",
+        "nativeHandle": 7476782
+      }
+    ],
+    "keyReadback": []
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\reopen-04-current-menu.json",
+    "atUtc": "2026-11-16T08:31:59.9779732+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "PhotoExport"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510
+      },
+      {
+        "name": "",
+        "nativeHandle": 3609258
+      }
+    ],
+    "keyReadback": []
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-07-focused-open-project.json",
+    "atUtc": "2026-11-16T08:35:53.1940710+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "InvokeMenuChild",
+    "target": {
+      "name": "导入 / 导出",
+      "id": "PhotoExport",
+      "runtimeId": "7:21192:54322137",
+      "rect": "2345,386,116,36"
+    },
+    "requestedValue": "打开项目…",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      },
+      {
+        "name": "打开 Color Studio 工作文件",
+        "nativeHandle": 2561030,
+        "visualState": "Normal",
+        "rect": "205,344,1200,900"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_REOPEN_SetFile.json",
+    "atUtc": "2026-11-16T08:37:15.9147980+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": "42CC8B89AE1F3EA5EA586253EBCC0526DC0CEC7E6A7F90C35B06ECBC22304BAF",
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_REOPEN_Confirm.json",
+    "atUtc": "2026-11-16T08:37:16.8817073+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": "42CC8B89AE1F3EA5EA586253EBCC0526DC0CEC7E6A7F90C35B06ECBC22304BAF",
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-08-session-loaded.json",
+    "atUtc": "2026-11-16T08:38:00.1696123+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "",
+        "nativeHandle": 3609506,
+        "visualState": null,
+        "rect": "2345,422,340,55"
+      },
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-09-fit.json",
+    "atUtc": "2026-11-16T08:40:19.6029590+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "适合",
+      "id": "",
+      "runtimeId": "7:21192:57877691",
+      "rect": "1620,431,55,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-10-100.json",
+    "atUtc": "2026-11-16T08:40:34.4689497+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:21192:50544660",
+      "rect": "1980,431,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-12-zoom-out.json",
+    "atUtc": "2026-11-16T08:42:56.0320942+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "缩小",
+      "id": "",
+      "runtimeId": "7:21192:53100807",
+      "rect": "2052,431,39,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-13-return100.json",
+    "atUtc": "2026-11-16T08:43:16.3975548+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:21192:50544660",
+      "rect": "1980,431,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      },
+      {
+        "name": "",
+        "nativeHandle": 3740578,
+        "visualState": null,
+        "rect": "1835,831,540,136"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\reopen-14-focused-export-command.json",
+    "atUtc": "2026-11-16T08:46:02.9684118+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "action": "InvokeMenuChild",
+    "target": {
+      "name": "导入 / 导出",
+      "id": "PhotoExport",
+      "runtimeId": "7:21192:54322137",
+      "rect": "2345,386,116,36"
+    },
+    "requestedValue": "导出主变体…",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      },
+      {
+        "name": "",
+        "nativeHandle": 4002722,
+        "visualState": null,
+        "rect": "1416,1054,540,136"
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 4983496,
+        "visualState": "Normal",
+        "rect": "865,697,1080,675"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\reopen-15-tiff16-format.json",
+    "atUtc": "2026-11-16T08:47:05.1845470+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "SelectItem",
+    "target": {
+      "name": "快速导出格式",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 4983496
+      },
+      {
+        "name": "",
+        "nativeHandle": 5966978
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\reopen-16-export-selected.json",
+    "atUtc": "2026-11-16T08:47:13.7877008+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "导出所选",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510
+      },
+      {
+        "name": "快速导出 1 张 · TIF · sRGB",
+        "nativeHandle": 4395316
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 4983496
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_SECOND_SetFile.json",
+    "atUtc": "2026-11-16T08:48:33.5122326+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen",
+    "fileSha256": null,
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_TIFF_SECOND_Confirm.json",
+    "atUtc": "2026-11-16T08:48:34.6529881+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-reopen",
+    "fileSha256": null,
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\reopen-17-dismiss-export.json",
+    "atUtc": "2026-11-16T08:50:14.0250084+00:00",
+    "pid": 21192,
+    "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "取消",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 2299510
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-01-observe.json",
+    "atUtc": "2026-11-16T08:52:17.7824832+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-02-open-project.json",
+    "atUtc": "2026-11-16T08:53:01.7236404+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "InvokeMenuChild",
+    "target": {
+      "name": "导入 / 导出",
+      "id": "PhotoExport",
+      "runtimeId": "7:43984:35099148",
+      "rect": "2345,386,116,36"
+    },
+    "requestedValue": "打开项目…",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      },
+      {
+        "name": "打开 Color Studio 工作文件",
+        "nativeHandle": 109121100,
+        "visualState": "Normal",
+        "rect": "205,344,1200,900"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_OPEN_SetFile.json",
+    "atUtc": "2026-11-16T08:53:03.0786165+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": "42CC8B89AE1F3EA5EA586253EBCC0526DC0CEC7E6A7F90C35B06ECBC22304BAF",
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_OPEN_Confirm.json",
+    "atUtc": "2026-11-16T08:53:04.4616186+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\ordinary-tiff.ptstudio.json",
+    "fileSha256": "42CC8B89AE1F3EA5EA586253EBCC0526DC0CEC7E6A7F90C35B06ECBC22304BAF",
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-03-loaded.json",
+    "atUtc": "2026-11-16T08:54:14.6871106+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-04-fit.json",
+    "atUtc": "2026-11-16T08:54:55.6786585+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Invoke",
+    "target": {
+      "name": "适合",
+      "id": "",
+      "runtimeId": "7:43984:14212491",
+      "rect": "1620,431,55,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-05-100.json",
+    "atUtc": "2026-11-16T08:55:03.5135186+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:43984:53100807",
+      "rect": "1980,431,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-06-zoom-out.json",
+    "atUtc": "2026-11-16T08:55:15.8740388+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Invoke",
+    "target": {
+      "name": "缩小",
+      "id": "",
+      "runtimeId": "7:43984:19221862",
+      "rect": "2052,431,39,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "205,344,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-07-return100.json",
+    "atUtc": "2026-11-16T08:55:22.6083022+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Invoke",
+    "target": {
+      "name": "100%",
+      "id": "",
+      "runtimeId": "7:43984:53100807",
+      "rect": "1750,343,69,36"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "-25,256,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-08-minimize.json",
+    "atUtc": "2026-11-16T08:57:22.4517732+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Minimize",
+    "target": {
+      "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "id": "",
+      "runtimeId": "42:141823836",
+      "rect": "-25,256,2400,1380"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Minimized",
+        "rect": "-32000,-32000,237,39"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-09-restore.json",
+    "atUtc": "2026-11-16T08:57:30.3211043+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Restore",
+    "target": {
+      "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "id": "",
+      "runtimeId": "42:141823836",
+      "rect": "-32000,-32000,237,39"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "-25,256,2400,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\integrated-11-focused-export-command.json",
+    "atUtc": "2026-11-16T09:00:10.2806901+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "InvokeMenuChild",
+    "target": {
+      "name": "导入 / 导出",
+      "id": "PhotoExport",
+      "runtimeId": "7:43984:35099148",
+      "rect": "2115,298,116,36"
+    },
+    "requestedValue": "导出主变体…",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836,
+        "visualState": "Normal",
+        "rect": "-25,256,2400,1380"
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 48826278,
+        "visualState": "Normal",
+        "rect": "635,609,1080,675"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "CompactStudioSlider-BasicTone-exposure",
+        "value": 0
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\integrated-12-format.json",
+    "atUtc": "2026-11-16T09:01:48.3083521+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "SelectItem",
+    "target": {
+      "name": "快速导出格式",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 48826278
+      },
+      {
+        "name": "",
+        "nativeHandle": 5837834
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\integrated-13-export-selected.json",
+    "atUtc": "2026-11-16T09:01:59.0199331+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "导出所选",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836
+      },
+      {
+        "name": "快速导出 1 张 · TIF · sRGB",
+        "nativeHandle": 6755192
+      },
+      {
+        "name": "导出 · 当前处理链",
+        "nativeHandle": 48826278
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_EXPORT_SetFile.json",
+    "atUtc": "2026-11-16T09:02:00.9135210+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-integrated",
+    "fileSha256": null,
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_EXPORT_Confirm.json",
+    "atUtc": "2026-11-16T09:02:02.4780723+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "快速导出 1 张 · TIF · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-integrated",
+    "fileSha256": null,
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\integrated-14-dismiss-export.json",
+    "atUtc": "2026-11-16T09:03:49.1026808+00:00",
+    "pid": 43984,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "取消",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 141823836
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "DSCF0347_仿色.tif",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-01-current.json",
+    "atUtc": "2026-11-16T09:08:20.7594050+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1774946,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0.5
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-03-menu-current.json",
+    "atUtc": "2026-11-16T09:11:28.5639013+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "PhotoExport"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1774946
+      },
+      {
+        "name": "",
+        "nativeHandle": 7738882
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-05-native-selected-export.json",
+    "atUtc": "2026-11-16T09:13:26.9075544+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "导出客户所选照片",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1774946
+      },
+      {
+        "name": "快速导出 2 张 · JPG · sRGB",
+        "nativeHandle": 50005926
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_JPEG_SetFile.json",
+    "atUtc": "2026-11-16T09:14:49.7012466+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "快速导出 2 张 · JPG · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final",
+    "fileSha256": null,
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_JPEG_Confirm.json",
+    "atUtc": "2026-11-16T09:14:51.0947995+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "快速导出 2 张 · JPG · sRGB",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final",
+    "fileSha256": null,
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-06-save-project.json",
+    "atUtc": "2026-11-16T09:16:16.0205219+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "保存批次",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1774946
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已保存",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-07-natural-close.json",
+    "atUtc": "2026-11-16T09:17:43.3148756+00:00",
+    "pid": 25968,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "关闭窗口",
+      "id": ""
+    },
+    "windows": [],
+    "keyReadback": []
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-08-reopen-observe.json",
+    "atUtc": "2026-11-16T09:19:36.8826147+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "COMPANY_0001.png",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0001.png",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-09-rescan.json",
+    "atUtc": "2026-11-16T09:20:30.6446945+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "ScanButton"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "COMPANY_0001.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-10-match-tab.json",
+    "atUtc": "2026-11-16T09:20:33.9751637+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "3  匹配检查",
+      "id": ""
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "COMPANY_0001.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-11-match.json",
+    "atUtc": "2026-11-16T09:20:39.0282090+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "MatchButton"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "COMPANY_0001.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.png",
+        "id": ""
+      },
+      {
+        "name": "完整匹配",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.png",
+        "id": ""
+      },
+      {
+        "name": "完整匹配",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": ""
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": ""
+      },
+      {
+        "name": "输入：COMPANY_0001.png  ·  JPG：已找到来源 JPG  ·  RAW：—  ·  备注：",
+        "id": ""
+      },
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-12-darkroom.json",
+    "atUtc": "2026-11-16T09:22:18.8184797+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "",
+      "id": "PrimaryNavigationReferenceColor"
+    },
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482
+      }
+    ],
+    "keyReadback": [
+      {
+        "name": "已索引 2 个照片文件",
+        "id": ""
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-14-editor-ready.json",
+    "atUtc": "2026-11-16T09:24:14.3052773+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-17-restore.json",
+    "atUtc": "2026-11-16T09:28:14.6425225+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Restore",
+    "target": {
+      "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "id": "",
+      "runtimeId": "42:1840482",
+      "rect": "-32000,-32000,237,39"
+    },
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-18-restored-open-project.json",
+    "atUtc": "2026-11-16T09:29:59.2954379+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "InvokeMenuChild",
+    "target": {
+      "name": "导入 / 导出",
+      "id": "PhotoExport",
+      "runtimeId": "7:37000:23405516",
+      "rect": "1545,115,116,36"
+    },
+    "requestedValue": "打开项目…",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      },
+      {
+        "name": "打开 Color Studio 工作文件",
+        "nativeHandle": 201723194,
+        "visualState": "Normal",
+        "rect": "35,73,1200,900"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_JPEG_REOPEN_SetFile.json",
+    "atUtc": "2026-11-16T09:31:08.7773157+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.SetFile",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-final.ptstudio.json",
+    "fileSha256": "27012EE24FC383EF31E54223AB3F93C3C968419BF7F3D736A1FC8C2FFF509B1A",
+    "confirmAcknowledged": null
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\native-files\\CONTINUATION_E818_JPEG_REOPEN_Confirm.json",
+    "atUtc": "2026-11-16T09:31:14.5556983+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "authority": "Standard controls of the existing native file dialog; no ViewModel injection or pointer claim",
+    "action": "NativeFileDialog.Confirm",
+    "dialog": "打开 Color Studio 工作文件",
+    "filenameReadback": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-final.ptstudio.json",
+    "fileSha256": "27012EE24FC383EF31E54223AB3F93C3C968419BF7F3D736A1FC8C2FFF509B1A",
+    "confirmAcknowledged": true
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-continuation-uia\\batch-19-restored-parameters.json",
+    "atUtc": "2026-11-16T09:32:00.7617759+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "action": "Observe",
+    "target": null,
+    "requestedValue": "",
+    "windows": [
+      {
+        "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "nativeHandle": 1840482,
+        "visualState": "Normal",
+        "rect": "35,73,1770,1380"
+      },
+      {
+        "name": "",
+        "nativeHandle": 201854266,
+        "visualState": null,
+        "rect": "1210,861,540,136"
+      }
+    ],
+    "selectedReadback": [
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "曝光",
+        "id": "",
+        "value": 0.5
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0001.jpg",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "COMPANY_0002.jpg",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      },
+      {
+        "name": "已保存",
+        "id": "",
+        "value": null
+      }
+    ]
+  },
+  {
+    "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\native-mainline-uia\\batch-20-natural-close.json",
+    "atUtc": "2026-11-16T09:32:47.9905828+00:00",
+    "pid": 37000,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "sourceBinding": "Joined to source-checked native process context",
+    "authority": "Running production window, UI Automation patterns; no injected ViewModel commands or pointer input",
+    "action": "Invoke",
+    "target": {
+      "name": "关闭窗口",
+      "id": ""
+    },
+    "windows": [],
+    "keyReadback": []
+  }
+]

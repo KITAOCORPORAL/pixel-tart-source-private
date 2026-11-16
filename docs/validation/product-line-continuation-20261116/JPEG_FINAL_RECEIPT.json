@@ -1,0 +1,118 @@
+{
+  "atUtc": "2026-11-16T09:36:00.008Z",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "status": "PASS_FINAL_PACKAGE_JPEG_EXPORT_SAVE_REOPEN_RESCAN",
+  "checks": {
+    "projectIdentityPreserved": true,
+    "exactlyOneOriginalSource": true,
+    "customerLockedResultsUnchanged": true,
+    "sourceFilesUnchanged": true,
+    "bothExportsCompleted": true,
+    "exposurePointFiveNativeReopen": true,
+    "editorWorkfileProjectIdentity": true,
+    "naturalExitZero": true,
+    "exportedBytesMatchPreviousAcceptedVersion": true,
+    "originalWorkflowSourceStillOne": true,
+    "originalWorkflowBookingRevisionTwo": true
+  },
+  "firstPid": 25968,
+  "reopenPid": 37000,
+  "sourcePolicy": "Final native rescan uses original source-jpegs; intermediate output not added",
+  "customerResult": {
+    "version": 1,
+    "revision": 6,
+    "selected": 2,
+    "locked": true,
+    "republishedOrReconfirmed": false
+  },
+  "savedOriginalPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\output\\company-batch.ptstudio.json",
+  "savedBeforeCopy": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-before-final-save.ptstudio.json",
+  "savedFinalPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\company-batch-final.ptstudio.json",
+  "savedFinalSha256": "9a3a8a196f24b88fe7fc0716d82119bc6e187403f2620a74164f29a6455ad269",
+  "nativeReadback": {
+    "photos": 2,
+    "exposure": 0.5,
+    "status": "已保存"
+  },
+  "finalExports": [
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final\\COMPANY_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "exportId": "0cec24cd-d928-4a0c-a06b-10fe0e752199",
+      "assetId": "38783444-be79-4a36-8969-65105a00cb62",
+      "numericParameters": [],
+      "sidecarOutputHashVerified": true
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\jpeg-exports-final\\COMPANY_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\company-functional-20261116\\batch-01\\source-jpegs\\COMPANY_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "exportId": "e8a5356b-2af6-4fea-96e0-aac8a175843a",
+      "assetId": "5ee05324-898d-4182-bb8f-78763a6ee790",
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ],
+      "sidecarOutputHashVerified": true
+    }
+  ],
+  "firstExit": {
+    "pid": 25968,
+    "exitCode": 0,
+    "stop": null,
+    "samples": 182052,
+    "peakPrivateBytes50ms": 623374336,
+    "osPeakWorkingSetBytes": 525647872,
+    "lifetimeMs": 9231307.231899932,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "reopenExit": {
+    "pid": 37000,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 575762432,
+    "osPeakWorkingSetBytes": 561139712,
+    "samples": 17365,
+    "phases": {
+      "startup": {
+        "samples": 2795,
+        "peakPrivateBytes": 305303552,
+        "peakWorkingSetBytes": 308633600
+      },
+      "final-batch-native-rescan": {
+        "samples": 14320,
+        "peakPrivateBytes": 575762432,
+        "peakWorkingSetBytes": 560881664
+      },
+      "final-batch-natural-close": {
+        "samples": 250,
+        "peakPrivateBytes": 508252160,
+        "peakWorkingSetBytes": 527421440
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "scope": "Current e818 export/save/independent reopen/native rescan/editor parameter recovery; original browser publication/confirmation remains a separately source-bound49fbc2f6 result. Existing locked customer confirmation was not changed.",
+  "newRawDecodes": 0
+}

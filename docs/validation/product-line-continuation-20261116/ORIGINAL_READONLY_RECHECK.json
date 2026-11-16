@@ -1,0 +1,72 @@
+{
+  "atUtc": "2026-11-16T09:02:37.236129+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "pid": 27940,
+  "projectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+  "root": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-runtime",
+  "project": {
+    "Id": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "Name": "合成项目 · 全流程核验 20261112",
+    "ProjectType": "JpegOnly",
+    "RootPath": "",
+    "SourceOnlineSelectionProjectId": "fc2a3492-bb03-4253-a074-e3e551dce0d6"
+  },
+  "sources": [
+    {
+      "Path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\synthetic-inputs\\source-jpegs",
+      "Priority": 0
+    }
+  ],
+  "inputs": [
+    {
+      "OriginalInput": "WF_0001_仿色.jpg"
+    }
+  ],
+  "projectCount": 1,
+  "booking": {
+    "Id": "b9c03c62-6484-44f5-a1a0-9c9fa472cb26",
+    "ProjectId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+    "Revision": 2
+  },
+  "albums": [
+    {
+      "id": "fc2a3492-bb03-4253-a074-e3e551dce0d6",
+      "name": "合成项目 · 全流程核验 20261112 · 测试选片",
+      "workflowId": "c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b",
+      "status": 5
+    }
+  ],
+  "results": [
+    {
+      "albumId": "fc2a3492-bb03-4253-a074-e3e551dce0d6",
+      "version": 1,
+      "revision": 4,
+      "locked": true,
+      "selected": [
+        "0462c2a7-2549-47a8-ad0b-b6e910cd43df"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "0462c2a7-2549-47a8-ad0b-b6e910cd43df",
+      "projectId": "fc2a3492-bb03-4253-a074-e3e551dce0d6",
+      "file": "WF_0001_仿色.jpg",
+      "path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-output\\c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b\\edited-jpeg\\WF_0001_仿色.jpg",
+      "cloudId": "0462c2a7254947a8ad0bb6e910cd43df"
+    }
+  ],
+  "originalFiles": [
+    {
+      "path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\synthetic-inputs\\source-jpegs\\WF_0001.jpg",
+      "bytes": 16376,
+      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
+    },
+    {
+      "path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\synthetic-inputs\\source-jpegs\\WF_0002.jpg",
+      "bytes": 15629,
+      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
+    }
+  ],
+  "newRawDecodes": 0
+}

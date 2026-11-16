@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "atUtc": "2026-11-16T08:24:33.779Z",
+  "clientTimeZone": "Europe/Berlin",
+  "previousThread": "01a1d2bb-68a3-7973-b2f9-a5e29a6f79e4",
+  "authoritativeProductSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "startingDocumentationCommit": "09fd766f186a401a8d6975d279608cf8cf4aaca4",
+  "localDeliveryRoot": "E:/Kitao-Deliveries/company-functional-20261116",
+  "documents": [
+    {
+      "purpose": "Read first; compact current handoff",
+      "path": "docs/validation/product-line-continuation-20261116/HANDOFF.md"
+    },
+    {
+      "purpose": "Prior full integration report and native workflow scope",
+      "path": "docs/validation/company-functional-integration-20261116/CURRENT_REPORT.md"
+    },
+    {
+      "purpose": "Prior package bytes and digest",
+      "path": "docs/validation/company-functional-integration-20261116/PACKAGE_DELIVERY.json"
+    },
+    {
+      "purpose": "Hidden preview source and controlled TIFF evidence",
+      "gitRef": "cef082e289164d8f82aa8e6057285a6554bc1945",
+      "path": "docs/validation/tiff-hidden-preview-company-20261116/REPORT.md",
+      "evidenceCommit": "9e9c8d59345bc7ed5bf3d7c74eb1279d9ba4483b"
+    },
+    {
+      "purpose": "Live continuation data; private runtime remains outside Git",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116"
+    }
+  ],
+  "dataRetention": "Original sessions, customer confirmations, appointments, source images, historical STOP files and archives retained in place. No cleanup or lossy rewrite.",
+  "contextPolicy": "Read HANDOFF and CURRENT_PROGRESS first; open only evidence needed for the next step. Do not reload the original thread JSONL or all RAW/resource samples into conversation."
+}
