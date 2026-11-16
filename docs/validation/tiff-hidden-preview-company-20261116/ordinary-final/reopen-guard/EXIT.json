@@ -1,0 +1,53 @@
+{
+  "pid": 21192,
+  "exitCode": 0,
+  "monitorEndedWhileAppAlive": false,
+  "stop": null,
+  "peakPrivateBytes50ms": 1004740608,
+  "osPeakWorkingSetBytes": 868675584,
+  "samples": 27554,
+  "phases": {
+    "startup": {
+      "samples": 3001,
+      "peakPrivateBytes": 318230528,
+      "peakWorkingSetBytes": 316874752
+    },
+    "ordinary-reopen-file-menu": {
+      "samples": 9084,
+      "peakPrivateBytes": 341151744,
+      "peakWorkingSetBytes": 363794432
+    },
+    "ordinary-open-saved-session": {
+      "samples": 3352,
+      "peakPrivateBytes": 1004740608,
+      "peakWorkingSetBytes": 868630528
+    },
+    "ordinary-reopen-fit100": {
+      "samples": 2791,
+      "peakPrivateBytes": 960282624,
+      "peakWorkingSetBytes": 843591680
+    },
+    "ordinary-reopen-zoom-out": {
+      "samples": 631,
+      "peakPrivateBytes": 963436544,
+      "peakWorkingSetBytes": 845688832
+    },
+    "ordinary-reopen-100-return": {
+      "samples": 3396,
+      "peakPrivateBytes": 968384512,
+      "peakWorkingSetBytes": 850407424
+    },
+    "ordinary-second-export-dialog": {
+      "samples": 4890,
+      "peakPrivateBytes": 992108544,
+      "peakWorkingSetBytes": 860340224
+    },
+    "ordinary-reopen-natural-close": {
+      "samples": 409,
+      "peakPrivateBytes": 971051008,
+      "peakWorkingSetBytes": 860041216
+    }
+  },
+  "forcedGcUsed": false,
+  "newRawDecodeLimit": 0
+}

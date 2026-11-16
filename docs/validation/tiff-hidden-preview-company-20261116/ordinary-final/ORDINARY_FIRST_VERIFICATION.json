@@ -1,0 +1,84 @@
+{
+  "observedAtUtc": "2026-11-16T08:18:55.024Z",
+  "status": "PASS_ORDINARY_FIRST_EXPORT_FULL_ROW_READBACK",
+  "source": "62191dfface51c981b1361a4333a3c0981067cb1",
+  "integratedSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "sourceTrees": {
+    "src": "623bad114418fa984fc86762e78a6004e7d2a614",
+    "tests": "1ba50b4a2262c6cc9d22a824d9a384722272c8cc",
+    "identicalBetweenBothCommits": true
+  },
+  "checks": {
+    "completed": true,
+    "authorizedInput": true,
+    "fileHashMatchesManifest": true,
+    "width": true,
+    "height": true,
+    "allRows": true,
+    "channelBits16": true,
+    "orientationOne": true,
+    "fullRgbMatchesInput": true,
+    "iccMatchesInput": true,
+    "rasterRecipe": true
+  },
+  "manifest": {
+    "ExportId": "3cfc0cc9-c30d-41ac-a907-36898c30f056",
+    "LibraryId": null,
+    "AssetId": null,
+    "SourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+    "EditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+    "ProcessingVersion": 1,
+    "Recipe": "Tiff",
+    "OutputPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\DSCF0347_仿色_仿色.tif",
+    "OutputHash": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+    "CompletedAt": "2026-11-16T08:09:17.7582802+00:00",
+    "RecipeSnapshot": {
+      "Version": 1,
+      "Format": ".tif",
+      "BitDepth": 16,
+      "SizeMode": "Original",
+      "Width": 7752,
+      "Height": 5184,
+      "Edge": null,
+      "Quality": null,
+      "Compression": "Zip",
+      "ColorProfile": "sRGB",
+      "MetadataPolicy": "Orientation normalized; source metadata discarded",
+      "Sharpening": "Not applied",
+      "Watermarks": null,
+      "OutputWidth": null,
+      "OutputHeight": null,
+      "RecipeName": null,
+      "FilenameTemplate": null,
+      "AdjustmentFingerprint": "7D470A4FF53E57DBD86982DF1C20CFB3FFB0ABBC061AB3CEF04825EA7D40E67A",
+      "Dpi": null,
+      "RawDefinition": null,
+      "RawInput": null,
+      "OutputValidation": null
+    },
+    "ManifestVersion": 3,
+    "CompletionState": "Completed",
+    "ManagedTaskId": "3cfc0cc9-c30d-41ac-a907-36898c30f056",
+    "ManagedArtifactPath": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\.kitao-export-tasks\\3cfc0cc9c30d41aca90736898c30f056\\encoded.bin"
+  },
+  "probe": {
+    "Path": "E:\\Kitao-Deliveries\\company-functional-20261116\\continuation-20261116\\tiff-exports-first\\DSCF0347_仿色_仿色.tif",
+    "FileSha256": "2D485825533649A63D31A319A13B2709992EA02BDB326B3FE3ECB37A061E84A8",
+    "Width": 7752,
+    "Height": 5184,
+    "Format": "Rgba64",
+    "BitsPerPixel": 64,
+    "ChannelBits": 16,
+    "Orientation": 1,
+    "RowsRead": 5184,
+    "StoredPixelSha256": "3C8991889561662A51B1C20DAF8CDF87D16FDA29870261263D4F4371A5FD5543",
+    "Rgb48PixelSha256": "5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA",
+    "Icc": [
+      {
+        "Bytes": 3144,
+        "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      }
+    ]
+  },
+  "authority": "Independent read-only full-row WIC verification of actual ordinary-App output; UI control currently owned by product continuation f438b3d4; real-screen screenshot evidence remains unavailable"
+}

@@ -1,6 +1,6 @@
 # 公司普通 TIFF 越限后的隐藏预览修复
 
-2026-11-16，Europe/Berlin。状态：**受控公司样本两轮通过；修复后的普通 App 仍待原生导入与完整复验。**
+2026-11-16，Europe/Berlin。状态：**公司原授权样本的普通 App 原生功能闭环、2GiB资源守卫及完整逐行像素比较通过；截图和数值缩放读回限制保留。**
 
 ## 源码身份与最小补丁
 
@@ -35,12 +35,50 @@ STOP、原始LAUNCH/EXIT、最后90秒采样见ordinary-failure/；全部134622�
 
 这些窗口在屏幕外、对话框固定，属于受控宿主；不代表普通App/系统文件选择器或真实屏幕已通过。过程50ms峰值是整个进程峰值，各阶段内存来自命名快照；通用guard的startup阶段标签不被解释为逐操作50ms峰值。完整结果见HIDDEN_R2_CONTROLLED_RECEIPT.json和HIDDEN_R2_COMPARISON.json。
 
-## 当前真实入口断点（本次接续更新）
+## 最终普通 App 原生闭环
 
-用户已通过系统原生入口导入原授权TIFF。普通App PID12852的AX读回确认DSCF0347_仿色.tif、1/1张，运行日志确认62191dff；2GiB/50ms守卫持续运行，无STOP。截至本轮观察，私有提交采样峰值1174.80MiB。完整原始采样保存在ordinary-hidden-r2-first。
+用户原生导入后，由产品接续会话f438b3d4独占R2窗口执行原生按钮、系统目录/文件对话框和项目保存/重开；本内存会话停止并发输入，只读核对实际项目、产物、二进制和资源记录。记录不是固定对话框的离屏宿主。
 
-Open Computer Use0.1.54原生控件通道可请求适合、100%和缩放动作，但窗口多次在237×39的最小化几何与3860×2180的还原几何之间返回，原因未确定。背景/最小化下的按钮回执仅列为诊断，不提升为连续可见窗口或数值缩放读回通过。截图通道仍返回黑色237×39图像；当前没有可靠的真实屏幕像素证据。记录见NATIVE_R2_PROGRESS.json和NATIVE_R2_WINDOW_TIMELINE.json。
+普通进程12852完成导入、适合/100%/缩放按钮、实际TIFF导出、项目保存、自然空闲、最小化恢复及正常关闭，exit0、无STOP。保存文件ordinary-tiff.ptstudio.json的SHA42cc8b89ae1f3ea5ea586253ebcc0526dc0cec7e6a7f90c35b06ecbc22304baf，包含唯一授权路径、0da1bf38源哈希和首份实际导出的同一活动版本。
 
-普通App首份实际导出、保存关闭、独立重开、第二次导出及这些普通App输出的完整逐行比较尚未完成。已准备独立输出目录及项目路径；当前需要将已载入的R2保持展开，之后继续原生导出/系统对话框操作。上面的受控宿主两轮输出不能代替此未完成链路。
+新进程21192从系统文件对话框打开该项目，原图及曝光0读回，原生执行适合/100%/缩放后实际再次导出，再正常关闭，exit0、无STOP。两次启动的EXE与产品DLL逐字节一致、运行根一致，PID不同。
 
-同一产品DLL的唯一apphost为KitaoTiffCompanyR2_20261116.exe。独立company-tiff-r2-runtime、2GiB守卫保持；不需再次导入或更换源码。产品线其他窗口、workflow-runtime、项目和手机预约均未操作，高光1bfdfbe9仍为研究。由产品Codex统一整合，不发布分叉产品包。
+| 普通运行 | PID | 私有提交50ms峰值MiB | OS工作集峰值MiB | 退出 | STOP |
+|---|---:|---:|---:|---:|---|
+| 首次 |12852|1174.80|924.00|0|无|
+| 独立重开 |21192|958.20|828.43|0|无|
+
+2GiB=2048MiB；阈值保持，未强制GC。全程保留原始采样、第一轮135231条及第二轮27554条。阶段峰值如下；手工阶段标记包含对话框和等待时间，不是单独编码函数的分配普查。
+
+| 运行 | 阶段 | 私有峰值MiB | 工作集峰值MiB |
+|---|---|---:|---:|
+|首次|native-import-and-settle|999.53|870.45|
+|首次|native-loaded-natural-idle|881.68|789.05|
+|首次|ordinary-fit|949.16|541.52|
+|首次|ordinary-100-percent|952.76|545.41|
+|首次|ordinary-zoom-out-from100|949.14|540.18|
+|首次|ordinary-first-export-dialog|977.30|690.04|
+|首次|ordinary-return100-and-save|949.82|545.24|
+|首次|ordinary-minimized-idle|949.54|545.12|
+|首次|ordinary-restored-idle|964.51|547.47|
+|首次|ordinary-natural-close|955.03|549.57|
+|重开|ordinary-open-saved-session|958.20|828.39|
+|重开|ordinary-reopen-fit100|915.80|804.51|
+|重开|ordinary-reopen-zoom-out|918.80|806.51|
+|重开|ordinary-reopen-100-return|923.52|811.01|
+|重开|ordinary-second-export-dialog|946.15|820.48|
+|重开|ordinary-reopen-natural-close|926.07|820.20|
+
+### 两份普通 App 实际产物独立读回
+
+实际输出保留在产品线continuation-20261116/tiff-exports-first与tiff-exports-reopen。独立只读进程55256在同一2GiB守卫下exit0、无STOP，逐行读取完整5184行，比较所有输出存储通道、RGB48样本及元数据；不是抽样或仅比较缩略图。两份均7752×5184、RGBA64/每通道16位、方向1，全部存储通道一致，RGB48与原输入5BE9B355F579CFDC2AEA9FCFEC8E0208A2489B605E85DB84E6BCE688F63FB8AA完全一致，ICC3144字节/SHA2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E保留。两份文件SHA匹配各自Completed侧车，源文件0DA未变，冻结调整fingerprint相同。
+
+正式测试源码62191dff与产品整合e8180221937fa4abb578a16faacebe99a5d4ac1b的整个src/tests Git树完全一致：src623bad114418fa984fc86762e78a6004e7d2a614，tests1ba50b4a2262c6cc9d22a824d9a384722272c8cc。不同InformationalVersion的发布二进制不声称字节一致。sRGB最小修复a9932b73和隐藏预览修复62191dff均已交产品线，打包由产品接续会话统一完成，本会话未发布分叉产品包。
+
+### 验收边界
+
+原生UIA回执确认窗口最大化、原生按钮和系统对话框执行；照片页没有数值缩放属性，故100%/缩放动作有原生执行回执，不声称额外数值读回。截图采集仍不可用，不声称屏幕像素或显示器色准验收。首次后台/最小化下的试探回执保留为诊断，不提升为可见窗口证明。
+
+新增相机RAW输入/解码动作0：只允许原授权已显影TIFF，保存项目/导出侧车RawDefinition和RawInput为空，使用栅格/WIC链；普通进程未安装独立相机解码调用计数器，受控宿主的请求计数0另列。高光1bfdfbe9继续研究，其他RAW后继授权不变。原公司项目、客户结果、预约、原dirty及旧STOP均保留。产品手机/iPhone等其他模块状态由产品线独立报告。
+
+最终独立联合审查见ordinary-final/FINAL_NATIVE_REVIEW.json、ORDINARY_PAIR_VERIFICATION.json、SESSION_AND_PROCESS_BINDING.json和两进程guard回执。本机最新结果为E:/Kitao-Deliveries/tiff-srgb-company-20261116/RESULT.json。
