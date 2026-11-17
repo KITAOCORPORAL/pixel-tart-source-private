@@ -39,12 +39,15 @@ public sealed partial class MainViewModel
   var rejection=ValidateSelectionPreparation(ReferenceColorPage.WorkflowProjectId);
   if(rejection is not null){StatusMessage=rejection;return false;}
   var workflowId=ReferenceColorPage.WorkflowProjectId!.Value;
+  var requestedName=ProjectName.Trim();
   if(paths.Count==0||paths.Select(Path.GetFileName).Distinct(StringComparer.OrdinalIgnoreCase).Count()!=paths.Count)throw new InvalidOperationException("所选编辑结果存在同名冲突，请先分开处理，未创建相册。");
   if(!await SaveCurrentProjectAsync())return false;
+  rejection=ValidateSelectionPreparation(workflowId);
+  if(rejection is not null||ProjectName.Trim()!=requestedName){StatusMessage=rejection??"准备期间项目名已改变，请重试";return false;}
   var folder=Path.Combine(AppDataPaths.OnlineSelectionDirectory,"Prepared",workflowId.ToString("N"),Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);
   var durable=new List<string>();
   foreach(var source in paths){var destination=Path.Combine(folder,Path.GetFileName(source));File.Copy(source,destination,false);if(File.Exists(source+".kitao-export.json"))File.Copy(source+".kitao-export.json",destination+".kitao-export.json",false);durable.Add(destination);}
-  OnlineSelectionPage.ProjectName=ProjectName;OnlineSelectionPage.ClientName="客户";OnlineSelectionPage.TargetCountText=durable.Count.ToString();
+  OnlineSelectionPage.ProjectName=requestedName;OnlineSelectionPage.ClientName="客户";OnlineSelectionPage.TargetCountText=durable.Count.ToString();
   var created=await OnlineSelectionPage.CreateForWorkflowAsync(durable,workflowId);
   if(!created.Succeeded){StatusMessage=created.Message;return false;}
   NavigateToSurface("OnlineSelection");return true;

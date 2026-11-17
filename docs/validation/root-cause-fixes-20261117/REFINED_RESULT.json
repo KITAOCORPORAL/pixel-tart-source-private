@@ -1,0 +1,31 @@
+{
+  "source": "B1_WORKTREE",
+  "cases": [
+    {
+      "case": "preview-release-failure",
+      "pid": 30496,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 136,
+      "peakPrivateBytes50ms": 300167168,
+      "osPeakWorkingSetBytes": 313012224,
+      "lifetimeMs": 6933.626199956052,
+      "timingScope": "Entire synthetic WPF process including startup and deliberate waiting; not product operation latency",
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    {
+      "case": "save-during-edit",
+      "pid": 38728,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 129,
+      "peakPrivateBytes50ms": 312963072,
+      "osPeakWorkingSetBytes": 300929024,
+      "lifetimeMs": 6573.963499977253,
+      "timingScope": "Entire synthetic WPF process including startup and deliberate waiting; not product operation latency",
+      "newRawDecodes": 0,
+      "forcedGc": false
+    }
+  ]
+}

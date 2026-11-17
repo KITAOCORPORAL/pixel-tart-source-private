@@ -37,7 +37,7 @@ public sealed partial class FreeCanvasView : UserControl
     private async Task ReleaseCoreAsync()
     {
         if (!await FlushAsync()) { _releaseTask = null; throw new IOException("画布未能保存，修改和工作区已保留。"); }
-        _released = true; _saveTimer.Stop(); ++_sourceRefresh; Editor.Changed -= EditorChanged;
+        _released = true; IsEnabled = false; _saveTimer.Stop(); ++_sourceRefresh; Editor.Changed -= EditorChanged;
         await Surface.ReleaseAsync();
         await Task.WhenAll(_viewTasks.ToArray());
         _sources.ItemsSource = null; SourceLoader = null; FavoriteLoader = null; ResolveDelegatesAfterRelease();

@@ -35,7 +35,7 @@ internal static class Program
   int code=0;app.Startup+=async(_,_)=>{
    try{Memory("before");await Run();await Task.Delay(350);Memory("after-natural-idle");}
    catch(Exception error){code=3;Record("ProbeFailure",new{error=error.ToString()});}
-   finally{File.WriteAllText(Path.Combine(root,"RESULT.json"),JsonSerializer.Serialize(new{scenario,pid=Environment.ProcessId,source="B1_WORKTREE",basis="fdf01831a65065b574e6a320aba0cb5a4425148f",authority="Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",nativeRawDecodes=0,forcedGc=false,exitCode=code,observations,dispatcherErrors},json));app.Shutdown(code);}
+   finally{File.WriteAllText(Path.Combine(root,"RESULT.json"),JsonSerializer.Serialize(new{scenario,pid=Environment.ProcessId,source=typeof(RAWSelectionAssistant.MainWindow).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,basis="f6655aff201b157a09ee37c46eb82596ff59028f",authority="Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",nativeRawDecodes=0,forcedGc=false,exitCode=code,observations,dispatcherErrors},json));app.Shutdown(code);}
   };app.Run();return code;
  }
  sealed class Provider:IAssetPreviewProvider
@@ -129,6 +129,15 @@ internal static class Program
   if(scenario=="preview-workspace-dispose")
   {
    var f=await Fixture.Create();Set(f.Page,"_previewProvider",provider);var show=f.Page.ShowCanvasAsync(editor.Document);await Task.Delay(80);Check(provider.Calls>0&&!show.IsCompleted,"actual page canvas preview pending");var view=f.Page.ActiveCanvas!;var disposal=f.Page.DisposeAsync().AsTask();await Task.Delay(60);bool disposedBeforePreview=disposal.IsCompleted;Check(!disposedBeforePreview,"page disposal waits for ignored-cancel preview");provider.Complete();await disposal;await show;await Task.Delay(100);Record("WorkspaceDisposeWhilePreviewPending",new{disposedBeforePreview,imagesAfterDispose=view.Surface.LoadedPreviews.Count,providerReceivedCancelableToken=provider.AnyCancelable,pageStartedDisposal=((bool)Field(f.Page,"_disposed")!)});Check(view.Surface.LoadedPreviews.Count==0&&view.Surface.PendingPreviewCount==0,"no preview or owned work survives terminal disposal");var requests=view.Surface.PreviewRequestCount;view.Editor.AddText(1,2,"late mutation");await view.Surface.LoadPreviewsAsync();Check(view.Surface.PreviewRequestCount==requests,"released surface cannot restart");await f.Cleanup();return;
+  }
+  if(scenario=="preview-release-failure")
+  {
+   var f=await Fixture.Create();Set(f.Page,"_previewProvider",provider);var show=f.Page.ShowCanvasAsync(editor.Document);await Task.Delay(80);var view=f.Page.ActiveCanvas!;
+   var first=f.Page.DisposeAsync().AsTask();await Task.Delay(30);Check(!first.IsCompleted,"release awaits in-flight provider before fault");provider.Completion.TrySetException(new InvalidOperationException("Injected terminal provider failure"));
+   bool failed=false;try{await first;}catch(InvalidOperationException){failed=true;}
+   try{await show;}catch(InvalidOperationException){}
+   var second=f.Page.DisposeAsync().AsTask();Check(failed&&ReferenceEquals(first,second)&&second.IsFaulted&&view.IsReleased&&!view.IsEnabled&&((bool)Field(f.Page,"_disposed")!),"irreversible release fault is shared and cannot return to editable Open");
+   Record("TerminalFailureRetained",new{sharedFault=ReferenceEquals(first,second),released=view.IsReleased,pageStartedDisposal=true,savedDocumentReadable=(await f.Store.LoadAsync(view.Editor.Document.CanvasId)) is not null,cleanup="Injected terminal failure; owned process exits with preserved synthetic saved files"});return;
   }
   if(scenario=="preview-loaded-unload-retains")
   {
