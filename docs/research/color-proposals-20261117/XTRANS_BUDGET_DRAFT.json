@@ -1,0 +1,98 @@
+{
+  "status": "DRAFT_NOT_AUTHORIZED_NO_LEDGER_CREATED",
+  "newTaskId": "PROPOSED_XTRANS_CURRENT_PRODUCT_EVAL_AFTER_LIFECYCLE_FREEZE",
+  "currentAuthorization": 0,
+  "currentConsumed": 0,
+  "currentExecutable": 0,
+  "oldBudgets": [
+    {
+      "task": "company-stable-v1-20261110",
+      "evidence": "3ea52612",
+      "maximum": 2,
+      "consumed": 1,
+      "remainingNumeric": 1,
+      "executable": 0,
+      "stopped": true
+    },
+    {
+      "task": "RAW-REOPEN-001-STABLE-INPUT-V1-TIMERFIX-20261110",
+      "evidence": "53e2355d",
+      "maximum": 2,
+      "consumed": 2,
+      "remainingNumeric": 0,
+      "executable": 0,
+      "stopped": false,
+      "exhausted": true
+    },
+    {
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "evidence": "820b4f0d",
+      "maximum": 6,
+      "consumed": 1,
+      "remainingNumeric": 5,
+      "executable": 0,
+      "stopped": true
+    },
+    {
+      "task": "memory DRAFT02 referenced by1bf",
+      "maximumProposed": 6,
+      "authorization": 0,
+      "ledgerCreated": false,
+      "executable": 0
+    }
+  ],
+  "proposedStages": [
+    {
+      "stage": 0,
+      "heavyDecodeMax": 0,
+      "purpose": "Static compatibility + storedRGB controlled cache/preview/export resource gates; no native calls and no new heavy tickets",
+      "ordinaryRawEntryProof": false
+    },
+    {
+      "stage": 1,
+      "heavyDecodeMax": 2,
+      "purpose": "A product cold1 + explicit rebuild1 on approved current integration; cache/save-reopen/export0 decode",
+      "requiresSeparateHumanApproval": true,
+      "notNativePairRerun": "Tests current ordinary product orchestration/identity/resources, reuses already proven native-pair evidence"
+    },
+    {
+      "stage": 2,
+      "heavyDecodeMax": 4,
+      "purpose": "Second confirmedXTrans input/camera cold+rebuild2, nonXTrans default cold+rebuild2",
+      "requiresNewInputHashesAndAuthorization": true,
+      "conditionalNotAutomatic": true
+    },
+    {
+      "stage": 3,
+      "heavyDecodeMax": null,
+      "purpose": "Independent mature-implementation correctness/photographic evaluation or high-precisionProPhoto integration",
+      "budget": "UNASSIGNED_SEPARATE_REVIEW",
+      "cannotClaimFormalAdmissionWithoutGates": true
+    }
+  ],
+  "resourceDraft": {
+    "perProcessPrivateHardBytes": 2147483648,
+    "perProcessOsPeakWorkingSetHardBytes": 2147483648,
+    "sampleTargetMs": 50,
+    "processDeadlineSeconds": 600,
+    "heavyOperationsSerialized": true,
+    "parallelXtransWorkers": 6,
+    "forcedGc": false,
+    "combinedParentWorkerPrivateDraftHardBytes": 2147483648,
+    "combinedBudgetNeedsValidation": "New conservative trial constraint, not an assertion previous separate-process peaks overlapped; lowering concurrency does not imply changing the6 native worker algorithm",
+    "additionalNativeRgbAllocationForABytes": 241118208,
+    "measuredNativeWorkingSetUpliftMiB": [
+      140.7,
+      141.1
+    ],
+    "doNotEquateAllocationAndRss": true
+  },
+  "reservationRules": [
+    "Validate immutable manifest/source/native/binding/options/dependencies before reservation",
+    "Exclusive durable consumed record before spawn/entered heavy path",
+    "Failed/canceled entered attempt consumes; STOP whole authorized stage, no automatic retry/refund",
+    "Cache-hit/export must prove no extra heavy decoder call",
+    "Do not reuse or edit any old task ledger/STOP/authorization to run this draft"
+  ],
+  "rollbackRule": "Leave default发行DLL and prior valid result/session intact; candidate error is explicit and not hidden fallback"
+}

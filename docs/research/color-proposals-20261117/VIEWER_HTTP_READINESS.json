@@ -1,0 +1,26 @@
+{
+  "ready": true,
+  "checks": [
+    {
+      "path": "",
+      "status": 200,
+      "bytes": 9554
+    },
+    {
+      "path": "data.json",
+      "status": 200,
+      "bytes": 45387
+    },
+    {
+      "path": "media/skin-shoulder-E0.png",
+      "status": 200,
+      "bytes": 382447
+    },
+    {
+      "path": "media/xt-5-horizontal-seam-candidate-8.png",
+      "status": 200,
+      "bytes": 122806
+    }
+  ],
+  "newRawDecodes": 0
+}

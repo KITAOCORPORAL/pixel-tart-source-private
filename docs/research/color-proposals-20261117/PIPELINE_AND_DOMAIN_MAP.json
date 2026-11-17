@@ -1,0 +1,45 @@
+{
+  "pinnedProduct": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "renderedExposure": {
+    "file": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/RenderedSrgbExposure.cs",
+    "domain": "Rendered encoded sRGB D65 -> EOTF linear sRGB -> 2^EV -> OETF -> per-channel clip[0,1]",
+    "firstObservedNewIrreversibleLoss": "Final per-channel clamp after encoded-preclip; previous input clipping not recoverable"
+  },
+  "basicTone": {
+    "file": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+    "domain": "Encoded-sRGB float tool node; linear-luma bend/shoulder then EncodeGamut max normalization",
+    "difference": "The exposure subterm atEV0 is identity with other adjustments at defaults; full BasicTone has other controls. PositiveEV rational luma mapping and EncodeGamut are not MaxChannelShoulderV1."
+  },
+  "professionalRaw": {
+    "files": [
+      "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs"
+    ],
+    "domain": "LibRaw linear ProPhoto D65 uint16 -> float master -> matrix to linear sRGB -> luma exponential shoulder -> neutral-axis gamut compression -> OETF",
+    "irreversibleStages": "LibRaw uint16 clipping already in contract; later gamut compression/chroma neutralization and float rounding are separate"
+  },
+  "proposalAPlacement": "Proposed only: rendered-input EOTF -> existing exposure gain -> optional new versioned highlight stage -> original OETF/clip; never appended after existing clip",
+  "currentCandidate": {
+    "fileAtResearch": "tools/PortraitHighlightProbe/MaxChannelShoulderV1.cs",
+    "compiledIn": "Research CLI/tests only",
+    "version": 1,
+    "knee": 0.75,
+    "finiteNonnegativeLinearOnly": true,
+    "renderedEncodedRange": [
+      0,
+      1
+    ],
+    "exposureRange": [
+      -5,
+      5
+    ],
+    "amountControlExists": false,
+    "exactBypassExists": false
+  },
+  "notConflated": [
+    "sensor saturation vs display clipping",
+    "per-channel clip vs max normalization",
+    "neutral gamut compression vs hue discontinuity",
+    "native P6 reproducibility vs rendered-file/wholeApp acceptance"
+  ]
+}

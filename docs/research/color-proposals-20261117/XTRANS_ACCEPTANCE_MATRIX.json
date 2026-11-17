@@ -1,0 +1,135 @@
+{
+  "target": "Future explicitly approved isolated product regression, not default release",
+  "productIntegrationExecuted": false,
+  "existingNativePairReused": true,
+  "matrix": [
+    {
+      "id": "G0",
+      "name": "静态身份/许可/依赖",
+      "criterion": "DLL/binding/ABI/flags/profile/source hashes固定，发行default不变；许可门禁明确",
+      "budget": "0",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "G1",
+      "name": "默认关停与正式构建禁用",
+      "criterion": "env不能单独开启candidate；旧recipe/非XTrans仍default",
+      "budget": "0",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "G2",
+      "name": "已存RGB48受控读回",
+      "criterion": "按完整长度/stride/hash/type重建；不调native，无旧budget重置",
+      "budget": "0",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "G3",
+      "name": "cache污染/错profile/截断",
+      "criterion": "拒绝坏版本/参数/source/native身份；不发布半结果",
+      "budget": "0",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "G4",
+      "name": "取消/超时/失败",
+      "criterion": "自己的child退出并等待；已消费不退款，STOP，不静默fallback",
+      "budget": "0人工合成/假provider",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "G5",
+      "name": "旧/新版本",
+      "criterion": "旧定义输出不变，新profile持久化，旧reader拒绝新版本",
+      "budget": "0/缓存",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P1",
+      "name": "A实际cold",
+      "criterion": "普通冻结诊断EXE真实入口、一次Open/Unpack/Process/MemoryImage，parent与worker均有完整采样",
+      "budget": "1拟议",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P2",
+      "name": "A-cache/编辑/缩放",
+      "criterion": "同一profile读取缓存/master，fit/100%/缩放不额外decode；当前定义与输出身份读回",
+      "budget": "0期待",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P3",
+      "name": "A-save-close-reopen",
+      "criterion": "保存失败/取消保留，保存成功与独立进程重开恢复decoder/version与配方",
+      "budget": "0期待",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P4",
+      "name": "A-TIFF/export",
+      "criterion": "实际产品导出，全行RGB、16位/方向/ICC、快照和源hash，非ROI截图",
+      "budget": "0期待",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P5",
+      "name": "A-rebuild",
+      "criterion": "显式新诊断root/cache代；与同设置cold逐样本比较，不复用已消费票据",
+      "budget": "1拟议",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P6",
+      "name": "B第二XTrans输入",
+      "criterion": "须先验证独立素材/相机/场景授权，cold/rebuild对照；不把同机另一照片当跨相机",
+      "budget": "2另批草案",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P7",
+      "name": "非XTrans对照",
+      "criterion": "一个声明Bayer/其他受支持输入default cold/rebuild，确保未路由candidate",
+      "budget": "2另批草案",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P8",
+      "name": "独立成熟实现/摄影影响",
+      "criterion": "对齐RAW/参数/域后比较固定参考和最大/带外点；旧不稳定baseline非真值",
+      "budget": "预算未定，另审",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P9",
+      "name": "高精度ProPhoto/PV4等",
+      "criterion": "另测UserMultipliers、Gamma1、NoAutoBright、矩阵/裁切，不能用legacy证据代替",
+      "budget": "不属初始接入，预算另审",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    },
+    {
+      "id": "P10",
+      "name": "资源门",
+      "criterion": "每process2GiB/600s、50ms采样+OS峰值，分别记录parent/worker与重叠合计；不forceGC",
+      "budget": "不额外加解码",
+      "status": "NOT_RUN_THIS_RESEARCH",
+      "approved": false
+    }
+  ]
+}

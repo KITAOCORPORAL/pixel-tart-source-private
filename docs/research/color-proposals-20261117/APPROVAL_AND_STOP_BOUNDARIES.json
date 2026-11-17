@@ -1,0 +1,31 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimeZone": "Europe/Berlin",
+  "writeScope": [
+    "docs/research/color-proposals-20261117",
+    "tools/ColorResearchReview20261117 viewer template only"
+  ],
+  "productLifecycleApproval": "LC-B0/B1/B2 approved and product-owned; no color approval inherited",
+  "colorChoices": {
+    "HL_A": "PROPOSAL_ONLY_PRIORITY_REVIEW",
+    "HL_B": "PROPOSAL_ONLY",
+    "HL_C": "PROPOSAL_ONLY",
+    "XTransPort": "PROPOSAL_ONLY"
+  },
+  "thisRound": {
+    "newRawDecodes": 0,
+    "newCandidateRuns": 0,
+    "newReferenceRuns": 0,
+    "nativeLibraryLoads": 0,
+    "newModesImplemented": 0,
+    "defaultExposureChanged": false,
+    "oldRecipesChanged": false,
+    "sourceRenderFilesWritten": 0,
+    "sharpenSixImageRuns": 0,
+    "sharpenV2Created": false
+  },
+  "stop": "After reviewable documents/material viewer and push; wait human selection before algorithm/port implementation",
+  "photosLocal": true,
+  "gplSourcesAndExecutablesLocal": true,
+  "oldStopAndLedgersUnmodified": true
+}

@@ -1,0 +1,27 @@
+{
+  "readOnly": true,
+  "newRawDecodes": 0,
+  "noPixelRecomparison": true,
+  "inputs": [
+    {
+      "id": "company-02",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "bytes": 241121559,
+      "sha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "authorizedIdentitySource": "company-validation-20261015/AUTHORIZED_RAW_INPUTS plus RawColorChain default output identity",
+      "rawSourceHash": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "decoderCalled": false,
+      "role": "Existing rendered TIFF source, not sensor-linear"
+    },
+    {
+      "id": "company-05",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\default-export\\TNAN8886_仿色.tif",
+      "bytes": 121025271,
+      "sha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "authorizedIdentitySource": "company-validation-20261015/AUTHORIZED_RAW_INPUTS plus RawColorChain default output identity",
+      "rawSourceHash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "decoderCalled": false,
+      "role": "Existing rendered TIFF source, not sensor-linear"
+    }
+  ]
+}

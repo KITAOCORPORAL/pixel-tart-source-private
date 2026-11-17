@@ -1,0 +1,190 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimeZone": "Europe/Berlin",
+  "baseProductDocumentation": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "sourcePins": {
+    "highlight": "1bfdfbe9fa62dee4276a0f5d0dd68190388759ee",
+    "xtrans": "53e2355d0bad80b364504145780778e165763d94",
+    "xtransStop": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+    "sharpen": "6f1ae27aff72a7439c661e605a38c1702feea4ce",
+    "productLatest": "433a1d8e88d839839e4f21341e3e2776696d33a5"
+  },
+  "algorithmImplementation": false,
+  "artifacts": [
+    {
+      "file": ".gitattributes",
+      "bytes": 76,
+      "sha256": "3747d17a91cbec70fe8ca1fcd854681869ddd050da9b3eeb0264fad97082e144"
+    },
+    {
+      "file": "APPROVAL_AND_STOP_BOUNDARIES.json",
+      "bytes": 1013,
+      "sha256": "ae3dd8a19a952a8eb8c11ba21d7d4bdcbd3c40f0d4d2a867bdcfba28ddaadb5a"
+    },
+    {
+      "file": "BASELINE_AND_ADMISSION.json",
+      "bytes": 1984,
+      "sha256": "be63a8f353e591c016ddaf30a9c642c3a5db89067b0145239412cc7ae9307161"
+    },
+    {
+      "file": "COMMIT_RELATIONSHIPS.json",
+      "bytes": 890,
+      "sha256": "e883ed42bab4e03bfa68b9c5326826b1407b3b6296f56336a06fd36d7ca6d8fe"
+    },
+    {
+      "file": "DELIVERY_MAP.json",
+      "bytes": 1699,
+      "sha256": "49e8353c2ed10558104b4c2dafb9aeea8533c1c5cffdb719eacdec58c3f7a9bc"
+    },
+    {
+      "file": "FROZEN_EV0_CURVES.png",
+      "bytes": 156533,
+      "sha256": "16d8a9088e96e4996556f696cc587656e5916aba13aa1ab702e7739272512e0a"
+    },
+    {
+      "file": "HANDOFF.md",
+      "bytes": 2446,
+      "sha256": "bc70094d179d9278196757878732c4eb802d66c2621dc17a4c635afe2411cbfa"
+    },
+    {
+      "file": "HIGHLIGHT_OPTIONS.md",
+      "bytes": 9215,
+      "sha256": "0fd23a0aadfd3f0a8afa6ebcd49e0dfc9120f6411ecf0dc3efa794851841a986"
+    },
+    {
+      "file": "LOCAL_COMPARISON_INDEX.json",
+      "bytes": 10183,
+      "sha256": "15fb5191ebf670f1af06246754d8ca7abf3ee5b71c2087c544557645381ccb49"
+    },
+    {
+      "file": "LOCAL_VIEWER_ENTRY.json",
+      "bytes": 384,
+      "sha256": "056c9e3c0f51dfda10a68c6188e3bd024c788c17a682ebcd64450e1eeb8dcfa5"
+    },
+    {
+      "file": "LOCAL_XTRANS_VISUAL_INDEX.json",
+      "bytes": 8063,
+      "sha256": "624a094ac117171edf9ff854953017342df29b781171ab68987da0aa1f4e947a"
+    },
+    {
+      "file": "MATERIAL_GAPS.md",
+      "bytes": 5429,
+      "sha256": "d5c2f9e318c6413ceb3ab16e7081686b266de0fd9f2af8bd45cc030b584f6ece"
+    },
+    {
+      "file": "MATERIAL_IDENTITY_READBACK.json",
+      "bytes": 1244,
+      "sha256": "fe52a21a31be43cb6dcaaac6541f9881dc76e54a139d7b541e76ef3927e574c0"
+    },
+    {
+      "file": "NATIVE_LIBRARY_READBACK.json",
+      "bytes": 907,
+      "sha256": "10bee2f5eb7a54770ceecd8f7e2d7f16073d0a338dd72e3448a4f17f32b523d5"
+    },
+    {
+      "file": "PIPELINE_AND_DOMAIN_MAP.json",
+      "bytes": 2210,
+      "sha256": "1f4bf7f84ce4ecbc7da74ab5734aeae8b839a14a74885f40b75ead8eb03fd07d"
+    },
+    {
+      "file": "PROTECTED_STOP_LEDGER_READBACK.json",
+      "bytes": 2100,
+      "sha256": "ae594e95829cf5cb011de927b9b8e0227802be28fd66d17b1c0db421d2534860"
+    },
+    {
+      "file": "REFERENCES_AND_LIMITS.json",
+      "bytes": 2408,
+      "sha256": "2d8ba762ec9d855565c3faa502424cbcbc72dc31b71d48248b33e0d994c324b2"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 5325,
+      "sha256": "ce62e28ffa12814fc8413411103cb6fe5e5000da87a56ee197c43a486644154e"
+    },
+    {
+      "file": "RESEARCH_STATUS.json",
+      "bytes": 3147,
+      "sha256": "2d999c99653556eaa1f694e0023e453bf2f5a6ea4b21a9178c5a2c4a01b8a8b8"
+    },
+    {
+      "file": "ROI_EFFECTS.json",
+      "bytes": 24431,
+      "sha256": "22aebe9d83916293ab55d485d9c6c899dd74c250e13f5cd44bc2496a8725f31c"
+    },
+    {
+      "file": "SCOPE_AND_HANDOFF.json",
+      "bytes": 1204,
+      "sha256": "9df8d9cd4cd8e5f31d3cca35b2a32b51675e6b038e61e0a4e4896f3408f7d2ea"
+    },
+    {
+      "file": "SHARPENING_SEAL_READBACK.json",
+      "bytes": 3244,
+      "sha256": "31eb7fd4e8341ec6da61737aa5545e82781aa35774e18798e37b1eac721509dd"
+    },
+    {
+      "file": "STATUS_TABLE.md",
+      "bytes": 2277,
+      "sha256": "496be6dac49ce2c6fd428a9cd3972674d9122a380c849f5c26470bbac6c107d0"
+    },
+    {
+      "file": "STOP_LEDGER_AFTER_REVIEW.json",
+      "bytes": 132,
+      "sha256": "c955f41c420cc701d363ab93a944824c14da7e42e8d083dee2e9f69d29ea7055"
+    },
+    {
+      "file": "STORED_XTRANS_VISUAL_READBACK.json",
+      "bytes": 1721,
+      "sha256": "956ee20e674a265a4a30c834b1a63a9a95d796b0caf73528c0ea6899ed46d508"
+    },
+    {
+      "file": "USER_DECISIONS.md",
+      "bytes": 2026,
+      "sha256": "a88a82813bfc88370df5257a3aed070251916e1bb044948b4a448348667f31b2"
+    },
+    {
+      "file": "VALIDATION.json",
+      "bytes": 1558,
+      "sha256": "bd37797b1a1a6d362746745fa13afd588cefc051fca7c5451e8d4e47367a1294"
+    },
+    {
+      "file": "VIEWER_DATA.json",
+      "bytes": 45387,
+      "sha256": "b9d76487c26916a95d42e45a8f5438385c914ac5d4d15fa867698e51482cb109"
+    },
+    {
+      "file": "VIEWER_HTTP_READINESS.json",
+      "bytes": 430,
+      "sha256": "0decae6354cd8aee05dd092acd9866e03c62a4c6b253df1f9c5b6100bf73a96e"
+    },
+    {
+      "file": "VIEWER_READBACK.json",
+      "bytes": 851,
+      "sha256": "ed9d8ab1c6b39fbef3ad57a6f09a95841c6e1050579c4471b1f6b44aae53454c"
+    },
+    {
+      "file": "XTRANS_ACCEPTANCE_MATRIX.json",
+      "bytes": 4566,
+      "sha256": "a6e67f22aec54dd16279dae4a50544661f09bc557cadccec972cc32159e258d1"
+    },
+    {
+      "file": "XTRANS_BUDGET_DRAFT.json",
+      "bytes": 3557,
+      "sha256": "d79a8d0cc9581774e6ed6eef8b89b6675058d857ad92064c92e7a4e496dfd578"
+    },
+    {
+      "file": "XTRANS_OLD_PRODUCT_STOP.json",
+      "bytes": 4075,
+      "sha256": "501589c1c594bde25d8466fb174f16c86f72efa4988cfaa2d2879226f02be631"
+    },
+    {
+      "file": "XTRANS_PORT_PROPOSAL.md",
+      "bytes": 9346,
+      "sha256": "78cc4f705a58bd7e02c1808542e17de9f517930b28fde6a66005d21eaa5956fb"
+    },
+    {
+      "file": "XTRANS_RECEIPT_READBACK.json",
+      "bytes": 4212,
+      "sha256": "941e67780c42dcceea150e4a5d99fcd27bedb54d1257b17b1ef5dd21567fbb83"
+    }
+  ]
+}

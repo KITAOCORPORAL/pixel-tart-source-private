@@ -1,0 +1,64 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimeZone": "Europe/Berlin",
+  "researchBranch": "research/color-proposals-20261117",
+  "reviewOnly": true,
+  "deliverables": [
+    {
+      "id": 1,
+      "name": "Current research state table",
+      "read": [
+        "STATUS_TABLE.md",
+        "RESEARCH_STATUS.json",
+        "BASELINE_AND_ADMISSION.json"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Three highlight options and recommendation/counterexamples",
+      "read": [
+        "HIGHLIGHT_OPTIONS.md",
+        "PIPELINE_AND_DOMAIN_MAP.json",
+        "FROZEN_EV0_CURVES.png"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Viewable frozen-material comparisons and original locations",
+      "read": [
+        "MATERIAL_GAPS.md",
+        "LOCAL_VIEWER_ENTRY.json",
+        "LOCAL_COMPARISON_INDEX.json",
+        "LOCAL_XTRANS_VISUAL_INDEX.json",
+        "VIEWER_READBACK.json"
+      ],
+      "localUrl": "http://127.0.0.1:3920/",
+      "photosRemainLocal": true,
+      "template": "tools/ColorResearchReview20261117/viewer.html"
+    },
+    {
+      "id": 4,
+      "name": "Minimal XTrans port/evidence/budget proposal",
+      "read": [
+        "XTRANS_PORT_PROPOSAL.md",
+        "XTRANS_ACCEPTANCE_MATRIX.json",
+        "XTRANS_BUDGET_DRAFT.json",
+        "XTRANS_OLD_PRODUCT_STOP.json",
+        "XTRANS_RECEIPT_READBACK.json"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Explicit user decisions and stop",
+      "read": [
+        "USER_DECISIONS.md",
+        "APPROVAL_AND_STOP_BOUNDARIES.json",
+        "HANDOFF.md"
+      ]
+    }
+  ],
+  "noMathOrProductImplementation": true,
+  "noNewHeavyRawBudget": true,
+  "sharpenV1Closed": true,
+  "pastMemoryWorkRetainedNotColorProgress": true
+}

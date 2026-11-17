@@ -1,0 +1,58 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimeZone": "Europe/Berlin",
+  "rows": [
+    {
+      "topic": "亮部第一损失：RenderedSrgbExposure",
+      "proved": "固定阶梯/ROI在EOTF与EV/OETF后仍有>1，最终逐通道clamp是该路径首个新损失；当前核公式静态未改",
+      "refuted": "所有高光发硬都来自RAW同一阶段",
+      "unknown": "每张相机源在传感器/WB前是否已饱和",
+      "sourceIntegration": "既有曝光函数在产品；研究observer未合入",
+      "finalExe": "研究逐阶段数值与CLI，不是当前完整EXE逐阶段摄影验收"
+    },
+    {
+      "topic": "BasicTone/RAW显示",
+      "proved": "BasicTone.max归一化/float平台；RAW中性轴压缩与float舍入是不同机制",
+      "refuted": "平台一律等于同一种逐通道clip，或色度趋零就是色相突变",
+      "unknown": "所有组合配方与真实材料的主观影响",
+      "sourceIntegration": "既有节点已入产品，未改默认或旧配方",
+      "finalExe": "不得借用候选ROI升级全部产品显示色准"
+    },
+    {
+      "topic": "MaxChannelShoulderV1",
+      "proved": "579行旧数值复用、3075EV0点、18组固定比较；EV0白1→.875且存在亮度/梯度代价",
+      "refuted": "EV0恒等、零贴顶=恢复旧细节、共同线性比例=全感知色彩不变",
+      "unknown": "白衣/金属/多光照/更多ICC及区别于既有工具的净收益",
+      "sourceIntegration": "仅研究CLI/测试，不在产品Core/UI/recipe",
+      "finalExe": "NOT_ADMITTED_NOT_RUN"
+    },
+    {
+      "topic": "XTrans稳定输入V1",
+      "proved": "同一Fuji两独立native进程P5/serial状态相同，P6全部120559104通道样本0差",
+      "refuted": "同一输入两次一致=跨相机稳定，或候选恢复原LibRaw字节",
+      "unknown": "相对旧P6约19.8万像素变化、带外max870的摄影正确性与广泛稳定性",
+      "sourceIntegration": "a24隔离适配分支存在；当前f665/433产品无该接线，默认DLL仍F500",
+      "finalExe": "旧a24一次导入完成后父应用2GiB STOP；最终e818/433候选全链未通过"
+    },
+    {
+      "topic": "SharedIncrementEnvelopeUnsharpV1",
+      "proved": "6f1ae27a封存；30人工项已填但无明确版本偏好",
+      "refuted": "无差异=两版都可接受或候选更好",
+      "unknown": "独立验证与明确主观净收益",
+      "sourceIntegration": "NOT_ADMITTED_SEALED",
+      "finalExe": "不接入；本轮六图/GPU/V2均0"
+    },
+    {
+      "topic": "TIFF/sRGB/隐藏预览内存成果",
+      "proved": "e818已合入修复；e818普通TIFF保存重开与像素/ICC合同已有fdf证据，非本轮重跑",
+      "refuted": "这些内存修复等于新色彩算法进展，或自动通过XTrans候选父进程资源",
+      "unknown": "433最终普通EXE新关闭TIFF全链仍按产品线PARTIAL",
+      "sourceIntegration": "已入e818且433继承",
+      "finalExe": "e818所测合同PASS；不改标433或XTrans"
+    }
+  ],
+  "newRawDecodes": 0,
+  "newCandidateRuns": 0,
+  "algorithmImplementationApproved": false,
+  "productLifecycleBDoesNotApproveColor": true
+}

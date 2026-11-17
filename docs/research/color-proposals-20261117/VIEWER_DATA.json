@@ -1,0 +1,1241 @@
+{
+  "version": 1,
+  "sourceReview": "1bfdfbe9fa62dee4276a0f5d0dd68190388759ee",
+  "candidate": "MaxChannelShoulderV1",
+  "knee": 0.75,
+  "mathModified": false,
+  "newRawDecodes": 0,
+  "panels": [
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "image": "media/skin-shoulder-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "matchedEv": 0,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.7299450067700731,
+      "candidateHighY": 0.6501257902534828,
+      "matchedHighY": 0.6501257902534828,
+      "highYChangePct": -10.934963014512778,
+      "relativeGradientChangePct": -10.439477989616929,
+      "inputClippedChannels": 64971,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-shoulder-E0-comparison.png",
+      "originalRelativeGradient": 0.0429192463597715,
+      "candidateRelativeGradient": 0.03843870108273369,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "image": "media/skin-shoulder-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "matchedEv": 1.0755444381892687,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.8290876111918982,
+      "candidateHighY": 0.6517044063787042,
+      "matchedHighY": 0.6566156560903598,
+      "highYChangePct": -21.394989192781154,
+      "relativeGradientChangePct": -30.61431347825855,
+      "inputClippedChannels": 64971,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-shoulder-E1-comparison.png",
+      "originalRelativeGradient": 0.09583813897213248,
+      "candidateRelativeGradient": 0.06649795067547476,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "ev": 2,
+      "image": "media/skin-shoulder-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "matchedEv": 2.8850957381671094,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.9459720980410049,
+      "candidateHighY": 0.6726256064875153,
+      "matchedHighY": 0.685009994478752,
+      "highYChangePct": -28.89583023849831,
+      "relativeGradientChangePct": -9.28674942854897,
+      "inputClippedChannels": 64971,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-shoulder-E2-comparison.png",
+      "originalRelativeGradient": 0.07209084598376017,
+      "candidateRelativeGradient": 0.0653959497563272,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "image": "media/skin-hair-edge-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "matchedEv": 0,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.8228657903480031,
+      "candidateHighY": 0.7272647021116342,
+      "matchedHighY": 0.7272647021116342,
+      "highYChangePct": -11.61806571104842,
+      "relativeGradientChangePct": -11.203147876629382,
+      "inputClippedChannels": 65784,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-hair-edge-E0-comparison.png",
+      "originalRelativeGradient": 0.05521403479121868,
+      "candidateRelativeGradient": 0.04902832482490486,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "image": "media/skin-hair-edge-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "matchedEv": 1.0755444381892687,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.875857501598666,
+      "candidateHighY": 0.7260813076350695,
+      "matchedHighY": 0.7304671487812504,
+      "highYChangePct": -17.100520768528703,
+      "relativeGradientChangePct": -15.13600050791446,
+      "inputClippedChannels": 65784,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-hair-edge-E1-comparison.png",
+      "originalRelativeGradient": 0.06344584351671316,
+      "candidateRelativeGradient": 0.053842680319772844,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "ev": 2,
+      "image": "media/skin-hair-edge-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "matchedEv": 2.8850957381671094,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.9056246043825953,
+      "candidateHighY": 0.7101947696425271,
+      "matchedHighY": 0.7296789967707688,
+      "highYChangePct": -21.57956329745495,
+      "relativeGradientChangePct": -11.344076663697066,
+      "inputClippedChannels": 65784,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\skin-hair-edge-E2-comparison.png",
+      "originalRelativeGradient": 0.0663782018575885,
+      "candidateRelativeGradient": 0.058848207750880066,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "image": "media/warm-lit-texture-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "matchedEv": 0,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 975,
+        "targetMeanY": 0.13459408204741258,
+        "actualMeanY": 0.13459408204741258,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.6904779509664007,
+      "candidateHighY": 0.6284542229062472,
+      "matchedHighY": 0.6284542229062472,
+      "highYChangePct": -8.9827239194741,
+      "relativeGradientChangePct": -11.230854957609326,
+      "inputClippedChannels": 42935,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\warm-lit-texture-E0-comparison.png",
+      "originalRelativeGradient": 0.23821229820761078,
+      "candidateRelativeGradient": 0.2114590205047262,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "image": "media/warm-lit-texture-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "matchedEv": 1.0755444381892687,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1.0755444381892687,
+        "offsetEv": 0.0755444381892687,
+        "pixels": 975,
+        "targetMeanY": 0.26794632128838375,
+        "actualMeanY": 0.267946320888677,
+        "absoluteError": 3.9970676768419366e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.8908597110377655,
+      "candidateHighY": 0.6917423515996912,
+      "matchedHighY": 0.6958462131051443,
+      "highYChangePct": -22.35114653530822,
+      "relativeGradientChangePct": 34.209175013400525,
+      "inputClippedChannels": 42935,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\warm-lit-texture-E1-comparison.png",
+      "originalRelativeGradient": 0.15141977910522136,
+      "candidateRelativeGradient": 0.20321923634423103,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 2,
+      "image": "media/warm-lit-texture-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "inputF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "matchedEv": 2.8850957381671094,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2.8850957381671094,
+        "offsetEv": 0.8850957381671094,
+        "pixels": 975,
+        "targetMeanY": 0.48395582918798646,
+        "actualMeanY": 0.4839558288586338,
+        "absoluteError": 3.293526562586635e-10,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.9911095330445359,
+      "candidateHighY": 0.7229363244827712,
+      "matchedHighY": 0.7327194683887986,
+      "highYChangePct": -27.057878026657445,
+      "relativeGradientChangePct": 1073.1854902006405,
+      "inputClippedChannels": 42935,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\warm-lit-texture-E2-comparison.png",
+      "originalRelativeGradient": 0.017134400936179635,
+      "candidateRelativeGradient": 0.2010183056160622,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "image": "media/sunset-gradient-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "matchedEv": null,
+      "matchingStatus": "NO_MIDTONE_ANCHOR",
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "originalHighY": 0.5980026992423118,
+      "candidateHighY": 0.5406162731123769,
+      "matchedHighY": null,
+      "highYChangePct": -9.59634901358225,
+      "relativeGradientChangePct": -18.38382081204474,
+      "inputClippedChannels": 48287,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\sunset-gradient-E0-comparison.png",
+      "originalRelativeGradient": 0.05492277448075984,
+      "candidateRelativeGradient": 0.044825870035213516,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "image": "media/sunset-gradient-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "matchedEv": null,
+      "matchingStatus": "NO_MIDTONE_ANCHOR",
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "originalHighY": 0.9457632031609625,
+      "candidateHighY": 0.6016518781124889,
+      "matchedHighY": null,
+      "highYChangePct": -36.38451188398669,
+      "relativeGradientChangePct": 57.77133041192264,
+      "inputClippedChannels": 48287,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\sunset-gradient-E1-comparison.png",
+      "originalRelativeGradient": 0.03051879892816493,
+      "candidateRelativeGradient": 0.0481499150947054,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "ev": 2,
+      "image": "media/sunset-gradient-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "inputF32Sha256": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "matchedEv": null,
+      "matchingStatus": "NO_MIDTONE_ANCHOR",
+      "anchor": {
+        "status": "NO_MIDTONE_ANCHOR",
+        "pixels": 0
+      },
+      "originalHighY": 0.9944765090592568,
+      "candidateHighY": 0.6180249934146713,
+      "matchedHighY": null,
+      "highYChangePct": -37.8542391112583,
+      "relativeGradientChangePct": 352.23947593432416,
+      "inputClippedChannels": 48287,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\sunset-gradient-E2-comparison.png",
+      "originalRelativeGradient": 0.010902488451155715,
+      "candidateRelativeGradient": 0.04930535663530683,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 0,
+      "image": "media/synthetic-neutral-texture-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "matchedEv": 0,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.18000000311405964,
+        "actualMeanY": 0.18000000311405964,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.8510534665080015,
+      "candidateHighY": 0.8166765440632374,
+      "matchedHighY": 0.8166765440632374,
+      "highYChangePct": -4.039337573680024,
+      "relativeGradientChangePct": -39.46273764982055,
+      "inputClippedChannels": 0,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-neutral-texture-E0-comparison.png",
+      "originalRelativeGradient": 0.0039628116444529295,
+      "candidateRelativeGradient": 0.0023989776816459303,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 1,
+      "image": "media/synthetic-neutral-texture-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "matchedEv": 1,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.36000000622811934,
+        "actualMeanY": 0.3599999829889952,
+        "absoluteError": 2.3239124125051802e-8,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.9996338320333211,
+      "candidateHighY": 0.9283117858479272,
+      "matchedHighY": 0.9283117858479272,
+      "highYChangePct": -7.134817160031515,
+      "relativeGradientChangePct": -3.1347046196991024,
+      "inputClippedChannels": 0,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-neutral-texture-E1-comparison.png",
+      "originalRelativeGradient": 0.0007998503027167102,
+      "candidateRelativeGradient": 0.0007747773583267722,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 2,
+      "image": "media/synthetic-neutral-texture-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "inputF32Sha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "matchedEv": 2,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.7200000124562386,
+        "actualMeanY": 0.7200000057464813,
+        "absoluteError": 6.709757305323194e-9,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 1,
+      "candidateHighY": 0.9725847444521771,
+      "matchedHighY": 0.9725847444521771,
+      "highYChangePct": -2.741525554782287,
+      "relativeGradientChangePct": null,
+      "inputClippedChannels": 0,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-neutral-texture-E2-comparison.png",
+      "originalRelativeGradient": 0,
+      "candidateRelativeGradient": 0.00019478715611736527,
+      "relativeGradientRatioStatus": "UNDEFINED_BASELINE_ZERO"
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 0,
+      "image": "media/synthetic-coloured-specular-E0.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "matchedEv": 0,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 0,
+        "candidateEv": 0,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.18000000311405964,
+        "actualMeanY": 0.18000000311405964,
+        "absoluteError": 0,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.8068636268411675,
+      "candidateHighY": 0.736000270643222,
+      "matchedHighY": 0.736000270643222,
+      "highYChangePct": -8.782569177814114,
+      "relativeGradientChangePct": -27.958113290088725,
+      "inputClippedChannels": 3665,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-coloured-specular-E0-comparison.png",
+      "originalRelativeGradient": 0.011430252496558496,
+      "candidateRelativeGradient": 0.008234569554227477,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 1,
+      "image": "media/synthetic-coloured-specular-E1.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "matchedEv": 1,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 1,
+        "candidateEv": 1,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.36000000622811934,
+        "actualMeanY": 0.3599999829889952,
+        "absoluteError": 2.3239124125051802e-8,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.6192295426325878,
+      "candidateHighY": 0.5678524293508955,
+      "matchedHighY": 0.5678524293508955,
+      "highYChangePct": -8.29694156116454,
+      "relativeGradientChangePct": -37.78111380056836,
+      "inputClippedChannels": 3665,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-coloured-specular-E1-comparison.png",
+      "originalRelativeGradient": 0.008378342950601804,
+      "candidateRelativeGradient": 0.0052129116658330395,
+      "relativeGradientRatioStatus": "DEFINED"
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "ev": 2,
+      "image": "media/synthetic-coloured-specular-E2.png",
+      "width": 1152,
+      "height": 440,
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "inputF32Sha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "matchedEv": 2,
+      "matchingStatus": "MATCHED",
+      "anchor": {
+        "status": "MATCHED",
+        "baselineEv": 2,
+        "candidateEv": 2,
+        "offsetEv": 0,
+        "pixels": 9216,
+        "targetMeanY": 0.7200000124562386,
+        "actualMeanY": 0.7200000057464813,
+        "absoluteError": 6.709757305323194e-9,
+        "sampling": "every fourth row and column, fixed input Y mask .03-.35"
+      },
+      "originalHighY": 0.7774446084988087,
+      "candidateHighY": 0.5947738899182751,
+      "matchedHighY": 0.5947738899182751,
+      "highYChangePct": -23.49630013297771,
+      "relativeGradientChangePct": -16.226057301783236,
+      "inputClippedChannels": 3665,
+      "originalPath": "E:\\Guangjing-Portrait-Highlight-Review-20261112\\roi-comparison02\\synthetic-coloured-specular-E2-comparison.png",
+      "originalRelativeGradient": 0.003334353496734207,
+      "candidateRelativeGradient": 0.0027933193877101017,
+      "relativeGradientRatioStatus": "DEFINED"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "company-02",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "sha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+      "width": 7752,
+      "height": 5184,
+      "orientation": 1,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "domain": "Already rendered sRGB16, no sensor reconstruction",
+      "authorization": "company-validation-20261015/AUTHORIZED_RAW_INPUTS plus RawColorChain default output identity",
+      "rawSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+    },
+    {
+      "id": "company-05",
+      "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-05\\default-export\\TNAN8886_仿色.tif",
+      "sha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8",
+      "width": 5496,
+      "height": 3670,
+      "orientation": 1,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "domain": "Already rendered sRGB16, no sensor reconstruction",
+      "authorization": "company-validation-20261015/AUTHORIZED_RAW_INPUTS plus RawColorChain default output identity",
+      "rawSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401"
+    }
+  ],
+  "fixedRois": [
+    {
+      "id": "skin-shoulder",
+      "source": "company-02",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "subject": "skin shoulder highlight",
+      "kind": "authorized-stored-photo",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+    },
+    {
+      "id": "skin-hair-edge",
+      "source": "company-02",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "subject": "skin / hair highlight boundary",
+      "kind": "authorized-stored-photo",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+    },
+    {
+      "id": "warm-lit-texture",
+      "source": "company-02",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "subject": "warm illuminated textured background; lamp spectrum not measured",
+      "kind": "authorized-stored-photo",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "sourceSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+    },
+    {
+      "id": "sunset-gradient",
+      "source": "company-05",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "subject": "warm sunset gradient control, not a warm lamp or metal reference",
+      "kind": "authorized-stored-photo",
+      "domain": "Already rendered encoded sRGB16 D65; not sensor-linear",
+      "sourceSha256": "30d6e7828fcc8431057465226167d001a6fb1a5d19b972864185c4ed813d8fe8"
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "source": "synthetic-neutral-texture",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "subject": "synthetic neutral bright texture; no real white garment",
+      "kind": "synthetic-not-photographic-acceptance",
+      "domain": "Generated display-linear sRGB then encoded; floating-point input, not camera calibration",
+      "sourceSha256": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b"
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "source": "synthetic-coloured-specular",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "subject": "synthetic coloured specular-like mixture; no verified metal material",
+      "kind": "synthetic-not-photographic-acceptance",
+      "domain": "Generated display-linear sRGB then encoded; floating-point input, not camera calibration",
+      "sourceSha256": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2"
+    }
+  ],
+  "curveImage": "media/ev0-curves.png",
+  "limitations": [
+    {
+      "item": "Home DSC08015 frozen full TIFF, crop and f32",
+      "impact": "Original family photo visual repeat was not run; frozen synthetic rows and company inputs substitute only their own scope."
+    },
+    {
+      "item": "Original LLVM-MinGW compiler and reference EXEs",
+      "impact": "Rebuilt identical pinned source/functions using available MSVC; compiler and binary identity differ. RT highlight60 has measured 1.43e-6 max delta."
+    },
+    {
+      "item": "Frozen NumPy/Pillow/Matplotlib/tifffile environment",
+      "impact": "Actual library versions recorded; read-only uncompressed TIFF parser used. No claim of identical full historical environment."
+    },
+    {
+      "item": "Confirmed white garment highlight photograph",
+      "impact": "Synthetic neutral bright texture only; no real white-fabric photographic acceptance."
+    },
+    {
+      "item": "Verified metal specular photograph",
+      "impact": "Synthetic coloured specular-like control only; no real metal acceptance."
+    },
+    {
+      "item": "Calibrated warm light spectral reference",
+      "impact": "Warm-lit background and sunset control are observed photographs, not measured source spectra."
+    },
+    {
+      "item": "Canon fixed midtone anchor",
+      "impact": "Insufficient fixed-mask midtone pixels; three mid-matched conditions are unavailable and explicitly null."
+    }
+  ],
+  "xtransPanels": [
+    {
+      "id": "1-max-difference",
+      "order": [
+        "old-first",
+        "old-second",
+        "candidate"
+      ],
+      "individuals": [
+        {
+          "role": "old-first",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\1-max-difference-old-first-8.png",
+          "localViewerFile": "media/xt-1-max-difference-old-first-8.png",
+          "sha256": "2F673CBD2B9C2685F1E31A997E5A07119FC43D3F2A5E96708D88F07B7BC1D1ED"
+        },
+        {
+          "role": "old-second",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\1-max-difference-old-second-8.png",
+          "localViewerFile": "media/xt-1-max-difference-old-second-8.png",
+          "sha256": "2F673CBD2B9C2685F1E31A997E5A07119FC43D3F2A5E96708D88F07B7BC1D1ED"
+        },
+        {
+          "role": "candidate",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\1-max-difference-candidate-8.png",
+          "localViewerFile": "media/xt-1-max-difference-candidate-8.png",
+          "sha256": "ABA4CDF73A200E0A330E57C84BC44C7417408CDE17F501098DBEABFF38E51FC8"
+        }
+      ],
+      "scope": "Pinned256x256 crops, native-size layout, no new decoder or renderer execution",
+      "montageAvailable": true,
+      "originalPath": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-final\\1-max-difference-comparison.png",
+      "image": "media/xt-1-max-difference-comparison.png",
+      "sha256": "6a50ad468a6e40bc8b91da10c0195ee5f0c577afbb1ffc5b3a85f35e0c7daa22"
+    },
+    {
+      "id": "2-vertical-seam",
+      "order": [
+        "old-first",
+        "old-second",
+        "candidate"
+      ],
+      "individuals": [
+        {
+          "role": "old-first",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\2-vertical-seam-old-first-8.png",
+          "localViewerFile": "media/xt-2-vertical-seam-old-first-8.png",
+          "sha256": "414969B42E2A4E9FD319F008361E7A34615A193760770CF121E794D8DE647A2E"
+        },
+        {
+          "role": "old-second",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\2-vertical-seam-old-second-8.png",
+          "localViewerFile": "media/xt-2-vertical-seam-old-second-8.png",
+          "sha256": "414969B42E2A4E9FD319F008361E7A34615A193760770CF121E794D8DE647A2E"
+        },
+        {
+          "role": "candidate",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\2-vertical-seam-candidate-8.png",
+          "localViewerFile": "media/xt-2-vertical-seam-candidate-8.png",
+          "sha256": "83EDDDD541603A64A5413701C4149B146DCEE7149D2D91D34835E2C0514CF6F0"
+        }
+      ],
+      "scope": "Pinned256x256 crops, native-size layout, no new decoder or renderer execution",
+      "montageAvailable": true,
+      "originalPath": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-final\\2-vertical-seam-comparison.png",
+      "image": "media/xt-2-vertical-seam-comparison.png",
+      "sha256": "e5d45b20fc386b8cedaa23a867e85f4e19934172e876ceaddc9bc06a6c33aebe"
+    },
+    {
+      "id": "3-vertical-seam",
+      "order": [
+        "old-first",
+        "old-second",
+        "candidate"
+      ],
+      "individuals": [
+        {
+          "role": "old-first",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\3-vertical-seam-old-first-8.png",
+          "localViewerFile": "media/xt-3-vertical-seam-old-first-8.png",
+          "sha256": "4A716BB814B7561AD87FD65F95F705F61864DF4CAD05B7EEBC3C33E2970B6EE1"
+        },
+        {
+          "role": "old-second",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\3-vertical-seam-old-second-8.png",
+          "localViewerFile": "media/xt-3-vertical-seam-old-second-8.png",
+          "sha256": "ED56B7AF72B809C5E15307CC04EA1562168AEB444BFFA6A9CA3E87A3665219C5"
+        },
+        {
+          "role": "candidate",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\3-vertical-seam-candidate-8.png",
+          "localViewerFile": "media/xt-3-vertical-seam-candidate-8.png",
+          "sha256": "7F31759A4EFD823CE36796A2A35081BC20E05CCC0BDBD890CC0005F162920F76"
+        }
+      ],
+      "scope": "Pinned256x256 crops, native-size layout, no new decoder or renderer execution",
+      "montageAvailable": true,
+      "originalPath": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-final\\3-vertical-seam-comparison.png",
+      "image": "media/xt-3-vertical-seam-comparison.png",
+      "sha256": "54ff6412df2c51df5efb867283b17e652be1af460dee970a2137fd55e7eff539"
+    },
+    {
+      "id": "4-outside-seam-band",
+      "order": [
+        "old-first",
+        "old-second",
+        "candidate"
+      ],
+      "individuals": [
+        {
+          "role": "old-first",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\4-outside-seam-band-old-first-8.png",
+          "localViewerFile": "media/xt-4-outside-seam-band-old-first-8.png",
+          "sha256": "D689CBE0350097FD402DD90ED0523EF028002608C3D396C94303B03E064B4C01"
+        },
+        {
+          "role": "old-second",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\4-outside-seam-band-old-second-8.png",
+          "localViewerFile": "media/xt-4-outside-seam-band-old-second-8.png",
+          "sha256": "D689CBE0350097FD402DD90ED0523EF028002608C3D396C94303B03E064B4C01"
+        },
+        {
+          "role": "candidate",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\4-outside-seam-band-candidate-8.png",
+          "localViewerFile": "media/xt-4-outside-seam-band-candidate-8.png",
+          "sha256": "838563E6B96FF02EDA27601AEBE611C33351D268E6F0B7EAA9912B64E3D07793"
+        }
+      ],
+      "scope": "Pinned256x256 crops, native-size layout, no new decoder or renderer execution",
+      "montageAvailable": true,
+      "originalPath": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-final\\4-outside-seam-band-comparison.png",
+      "image": "media/xt-4-outside-seam-band-comparison.png",
+      "sha256": "22a0c1a43b6b9fff01d0fb77199958dd73ba653a81329da7c70276db86b4a39b"
+    },
+    {
+      "id": "5-horizontal-seam",
+      "order": [
+        "old-first",
+        "old-second",
+        "candidate"
+      ],
+      "individuals": [
+        {
+          "role": "old-first",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\5-horizontal-seam-old-first-8.png",
+          "localViewerFile": "media/xt-5-horizontal-seam-old-first-8.png",
+          "sha256": "42A00CB4C5823E3DCCC375E8B6F2511E6DB445C2D28BE93A909369ACB5F1BB8A"
+        },
+        {
+          "role": "old-second",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\5-horizontal-seam-old-second-8.png",
+          "localViewerFile": "media/xt-5-horizontal-seam-old-second-8.png",
+          "sha256": "42A00CB4C5823E3DCCC375E8B6F2511E6DB445C2D28BE93A909369ACB5F1BB8A"
+        },
+        {
+          "role": "candidate",
+          "file": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\crops-frozen-a24fac65\\5-horizontal-seam-candidate-8.png",
+          "localViewerFile": "media/xt-5-horizontal-seam-candidate-8.png",
+          "sha256": "0C52A6A32B8189DCED18D9EF4CDEB4AC6FBA8DF04E704BDCEDB44843733C9D7B"
+        }
+      ],
+      "scope": "Pinned256x256 crops, native-size layout, no new decoder or renderer execution",
+      "montageAvailable": false,
+      "note": "Fifth montage absent; three pinned frozen component PNGs shown separately"
+    }
+  ],
+  "xtransComparisons": [
+    {
+      "roi": "1-max-difference",
+      "x": 2373,
+      "y": 664,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 44,
+        "changedChannels": 54,
+        "maxChannelDifference": 32,
+        "meanAbsoluteDifferencePerChannel": 0.0013376871744791667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 54,
+        "changedChannels": 68,
+        "maxChannelDifference": 8107,
+        "meanAbsoluteDifferencePerChannel": 0.3490041097005208,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "1-max-difference",
+      "x": 2373,
+      "y": 664,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 44,
+        "changedChannels": 54,
+        "maxChannelDifference": 32,
+        "meanAbsoluteDifferencePerChannel": 0.0013376871744791667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 54,
+        "changedChannels": 68,
+        "maxChannelDifference": 8107,
+        "meanAbsoluteDifferencePerChannel": 0.3490041097005208,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "2-vertical-seam",
+      "x": 2363,
+      "y": 1736,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 311,
+        "changedChannels": 408,
+        "maxChannelDifference": 28,
+        "meanAbsoluteDifferencePerChannel": 0.006154378255208333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 408,
+        "changedChannels": 553,
+        "maxChannelDifference": 7041,
+        "meanAbsoluteDifferencePerChannel": 1.5896759033203125,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "2-vertical-seam",
+      "x": 2363,
+      "y": 1736,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 311,
+        "changedChannels": 408,
+        "maxChannelDifference": 28,
+        "meanAbsoluteDifferencePerChannel": 0.006154378255208333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 408,
+        "changedChannels": 553,
+        "maxChannelDifference": 7041,
+        "meanAbsoluteDifferencePerChannel": 1.5896759033203125,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "3-vertical-seam",
+      "x": 1867,
+      "y": 2248,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 492,
+        "changedChannels": 646,
+        "maxChannelDifference": 13,
+        "meanAbsoluteDifferencePerChannel": 0.007090250651041667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 665,
+        "changedChannels": 953,
+        "maxChannelDifference": 3564,
+        "meanAbsoluteDifferencePerChannel": 1.8036753336588542,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "3-vertical-seam",
+      "x": 1867,
+      "y": 2248,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 493,
+        "changedChannels": 647,
+        "maxChannelDifference": 13,
+        "meanAbsoluteDifferencePerChannel": 0.0070953369140625,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 666,
+        "changedChannels": 955,
+        "maxChannelDifference": 3564,
+        "meanAbsoluteDifferencePerChannel": 1.8050740559895833,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "4-outside-seam-band",
+      "x": 2372,
+      "y": 1219,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 83,
+        "changedChannels": 111,
+        "maxChannelDifference": 20,
+        "meanAbsoluteDifferencePerChannel": 0.0016377766927083333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 127,
+        "changedChannels": 173,
+        "maxChannelDifference": 5245,
+        "meanAbsoluteDifferencePerChannel": 0.4143473307291667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "4-outside-seam-band",
+      "x": 2372,
+      "y": 1219,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 83,
+        "changedChannels": 111,
+        "maxChannelDifference": 20,
+        "meanAbsoluteDifferencePerChannel": 0.0016377766927083333,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 127,
+        "changedChannels": 173,
+        "maxChannelDifference": 5245,
+        "meanAbsoluteDifferencePerChannel": 0.4143473307291667,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "5-horizontal-seam",
+      "x": 4096,
+      "y": 2859,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-first",
+      "renderedRgb8": {
+        "changedPixels": 479,
+        "changedChannels": 747,
+        "maxChannelDifference": 19,
+        "meanAbsoluteDifferencePerChannel": 0.008371988932291666,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 668,
+        "changedChannels": 1141,
+        "maxChannelDifference": 4804,
+        "meanAbsoluteDifferencePerChannel": 2.1463521321614585,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    },
+    {
+      "roi": "5-horizontal-seam",
+      "x": 4096,
+      "y": 2859,
+      "width": 256,
+      "height": 256,
+      "baseline": "old-second",
+      "renderedRgb8": {
+        "changedPixels": 479,
+        "changedChannels": 747,
+        "maxChannelDifference": 19,
+        "meanAbsoluteDifferencePerChannel": 0.008371988932291666,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      },
+      "renderedRgb16": {
+        "changedPixels": 668,
+        "changedChannels": 1141,
+        "maxChannelDifference": 4804,
+        "meanAbsoluteDifferencePerChannel": 2.1463521321614585,
+        "pixelCount": 65536,
+        "channelCount": 196608
+      }
+    }
+  ]
+}

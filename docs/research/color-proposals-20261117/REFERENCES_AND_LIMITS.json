@@ -1,0 +1,58 @@
+{
+  "frozenNumericalReferences": [
+    {
+      "project": "darktable",
+      "version": "4.8.1",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "entry": "src/iop/exposure.c::process",
+      "scope": "scalar exposure stage black0/scale2^EV, not full application render",
+      "gplSourceAndExeLocalOnly": true
+    },
+    {
+      "project": "RawTherapee",
+      "version": "5.11",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "entry": "highlightToneCurve/CurveFactory/hlcurve, hlcompr0/60",
+      "scope": "scalar stage, not candidate golden and not full RAW/ICC application parity",
+      "gplSourceAndExeLocalOnly": true
+    }
+  ],
+  "contextDocumentation": [
+    {
+      "requested": "https://docs.darktable.org/usermanual/4.8/en/module-reference/processing-modules/exposure/",
+      "observedRedirect": "https://docs.darktable.org/usermanual/5.6/en/module-reference/processing-modules/exposure/",
+      "use": "Conceptual exposure/clipping context only, never replacement for pinned4.8.1 numerical source",
+      "observedTitle": "darktable 5.6 user manual - exposure"
+    },
+    {
+      "url": "https://rawpedia.pixls.us/exposure/",
+      "use": "Distinguish highlight reconstruction, exposure compression and other controls; current documentation is not pinned numerical oracle"
+    },
+    {
+      "requested": "https://www.libraw.org/about-license",
+      "observedStatus": "HTTP_ERROR_THIS_TASK",
+      "use": "No current web license claim; use pinned local source/license audit and require new distribution review before port"
+    }
+  ],
+  "scope": "References reused from prior frozen executions; no new reference run, no external source copied into product",
+  "notLegalOrCalibrationApproval": true,
+  "actualUrlReadback": [
+    {
+      "requested": "https://docs.darktable.org/usermanual/4.8/en/module-reference/processing-modules/exposure/",
+      "status": 200,
+      "finalUrl": "https://docs.darktable.org/usermanual/5.6/en/module-reference/processing-modules/exposure/",
+      "title": "darktable 5.6 user manual - exposure"
+    },
+    {
+      "requested": "https://rawpedia.pixls.us/exposure/",
+      "status": 200,
+      "finalUrl": "https://rawpedia.pixls.us/exposure/",
+      "title": "RawPedia - Exposure"
+    },
+    {
+      "requested": "https://www.libraw.org/about-license",
+      "status": "UNAVAILABLE",
+      "error": "HTTPError"
+    }
+  ]
+}
