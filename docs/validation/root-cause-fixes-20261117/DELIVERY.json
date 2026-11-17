@@ -15,11 +15,17 @@
   "checksPassed": 52,
   "lifecycleScenarios": 17,
   "ordinaryFullWorkflowPassed": false,
-  "ordinaryBlocker": "Computer Use physical Escape stopped; system folder picker unconfirmed",
+  "ordinaryBlocker": "GetCursorPos failed: 拒绝访问。 (0x80070005); source picker awaiting personal confirmation",
   "phone": "NeedsLogin",
   "phoneActual": false,
   "newRawDecodes": 0,
   "forcedGc": false,
   "installer": false,
-  "releaseReady": false
+  "releaseReady": false,
+  "latestAcceptanceAtUtc": "2026-11-17T10:24:43.151Z",
+  "latestAcceptanceReport": "final-acceptance-20261117/RESULTS.md",
+  "finalOrdinaryExeStarted": true,
+  "phoneCredentialCurrentlyValid": true,
+  "packageUnchangedSinceSeal": true,
+  "noNewProductPackage": true
 }

@@ -1,5 +1,7 @@
 {
   "productSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "updatedAtUtc": "2026-11-17T10:25:49.188727+00:00",
+  "scope": "Original repair evidence plus ordinary final-source continuation; sealed product archive remains unchanged",
   "entries": [
     {
       "file": ".gitattributes",
@@ -132,14 +134,104 @@
       "sha256": "169b546de2598e655f03a1519ff88805391b4a65c95bc42633718f2e35140b59"
     },
     {
+      "file": "final-acceptance-20261117/AUTHORIZED_TIFF_CURRENT.json",
+      "bytes": 700,
+      "sha256": "59c5a9e159b730d0b93835145c588046f4dfe820f3a9d1cf25fb6f168e2ff096"
+    },
+    {
+      "file": "final-acceptance-20261117/BLANK_NAME_NORMAL_UI.json",
+      "bytes": 220,
+      "sha256": "d18cc219ef06af3c16441d9051e4c96aa87181255aabcec31277a6b97f07d00e"
+    },
+    {
+      "file": "final-acceptance-20261117/COMPONENT_BINDINGS_CURRENT.json",
+      "bytes": 1907,
+      "sha256": "2c92ea9c74e9bed6dbb4876ed54b3ab10e61358e38ae6967c1861a705dd52b90"
+    },
+    {
+      "file": "final-acceptance-20261117/CURRENT_PROJECT_READBACK.json",
+      "bytes": 513,
+      "sha256": "671a81797b91cdfbf19ad9fbb2139c0cec1f94c454cbbb718f31c42fc6a4c05c"
+    },
+    {
+      "file": "final-acceptance-20261117/FINAL_APP_SERVICE_CURRENT.json",
+      "bytes": 1016,
+      "sha256": "96f4267e33aea1f99f788832ebb895322693118fb582be6923884ff22ad80d34"
+    },
+    {
+      "file": "final-acceptance-20261117/NAMED_PROJECT_NORMAL_UI.json",
+      "bytes": 418,
+      "sha256": "cba6cb5134a8eaa9d787c4fb3b27817e714a36762c45a25ca93c7b4c4becc7f1"
+    },
+    {
+      "file": "final-acceptance-20261117/NATURAL_MEMORY_CURRENT.json",
+      "bytes": 597,
+      "sha256": "e615fa90714fd296a3ae2385109e96ce726762956dca3666aaf3963bf24b4299"
+    },
+    {
+      "file": "final-acceptance-20261117/PACKAGE_RECHECK.json",
+      "bytes": 552,
+      "sha256": "af368847c8c609d005ceba2a6dd0757904596f44e37fbe6d730fab127e48acd7"
+    },
+    {
+      "file": "final-acceptance-20261117/PHONE_CURRENT.json",
+      "bytes": 911,
+      "sha256": "3ebe57b99f5f87e490c472feb9df095ecad2139b229dff4f6eb3e1ea2eeeb609"
+    },
+    {
+      "file": "final-acceptance-20261117/PRIOR_ORDINARY_STATUS_9dd7cabb.json",
+      "bytes": 1767,
+      "sha256": "14f0731ae37cc1274c65f2524bab05bfcdbc1a889ca4118cda94d9a09745de5c"
+    },
+    {
+      "file": "final-acceptance-20261117/RESULTS.md",
+      "bytes": 4113,
+      "sha256": "1c24c91e8af6191677282676e14b9f6ee7a17bb90de7a8eb8837bef3babe6b24"
+    },
+    {
+      "file": "final-acceptance-20261117/SOURCE_PICKER_HANDOFF.json",
+      "bytes": 1055,
+      "sha256": "ddf1401f36c329d7e4dd991b4476de69a6d68eb3137df4bf71ef2e40c8fdc2d5"
+    },
+    {
+      "file": "final-acceptance-20261117/UI_004-perform_secondary_action.txt",
+      "bytes": 10467,
+      "sha256": "a59a373ba1ee7e3c9e38dd58edccf9750c9bc036169e49a0378f57bf7203285e"
+    },
+    {
+      "file": "final-acceptance-20261117/UI_006-set_value.txt",
+      "bytes": 10467,
+      "sha256": "55409c58b608bce3e7f93fb81ecc4876808fa2ffdd9b6e22db5c5f3a37b4dfd6"
+    },
+    {
+      "file": "final-acceptance-20261117/UI_008-perform_secondary_action.txt",
+      "bytes": 10467,
+      "sha256": "a59a373ba1ee7e3c9e38dd58edccf9750c9bc036169e49a0378f57bf7203285e"
+    },
+    {
+      "file": "final-acceptance-20261117/UI_010-set_value.txt",
+      "bytes": 10580,
+      "sha256": "9d959bccb78173a1836c4ab1d843aa334e949a16f872ea861fbbd34fd18b7083"
+    },
+    {
+      "file": "final-acceptance-20261117/UI_012-perform_secondary_action.txt",
+      "bytes": 10580,
+      "sha256": "29c31888a567bb3a6edbcf444a1830536643d81397cc1ae8050a86b5dde761bf"
+    },
+    {
+      "file": "final-acceptance-20261117/WHITESPACE_NAME_NORMAL_UI.json",
+      "bytes": 371,
+      "sha256": "f942c2f25a9cfdcd67146e23c222dcb4773d7944967b8d6d51e1ae8a73124293"
+    },
+    {
       "file": "FINAL_REGRESSION.json",
       "bytes": 1588,
       "sha256": "ddc7ab9d6e14ca182babd7f363830e7e96e7c254f2126df7734448ff3b5cf9ce"
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 1773,
-      "sha256": "7943cb851e18b27266f29344fca66459e49e1593aaddfe5a3dd2a5b2df68950b"
+      "bytes": 2856,
+      "sha256": "67df8fc6e44424feef933b73e43186c6313faace8ebb01aa0988704aede1c7c5"
     },
     {
       "file": "memory-selection.trx",
@@ -158,8 +250,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 1767,
-      "sha256": "14f0731ae37cc1274c65f2524bab05bfcdbc1a889ca4118cda94d9a09745de5c"
+      "bytes": 1895,
+      "sha256": "140d1cbfca933031d005ca4e5f798a1910206c0e37617926cf56dfbddb9a0289"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -178,8 +270,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 9794,
-      "sha256": "0cb905a979474f6333734fc421f22437e29c46a59193764e1e1381ecbc9fb636"
+      "bytes": 10518,
+      "sha256": "0ea7eb0eb6bccf1a97b7b703bb4411863d7b1c10a7a0c0d3d7dcf272931523a8"
     },
     {
       "file": "source-identity.trx",

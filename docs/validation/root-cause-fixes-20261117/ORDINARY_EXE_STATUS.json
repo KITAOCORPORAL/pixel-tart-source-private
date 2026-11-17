@@ -1,42 +1,42 @@
 {
-  "atUtc": "2026-11-17T08:03:26.487982+00:00",
-  "source": "eef3b35bd530ad060548ee1bde1a38f312e2e100",
+  "atUtc": "2026-11-17T10:24:43.151Z",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
   "finalProductSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
   "launch": {
-    "pid": 2004,
-    "createdFileTime": "134393740072188829",
-    "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-eef3b35b-Full-win-x64\\App\\GuangjingRootCauseQA.exe",
-    "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\ordinary-qa\\workflow-runtime",
-    "source": "eef3b35bd530ad060548ee1bde1a38f312e2e100",
-    "mainDllSha256": "2ca00640b9e734adcd553b766b9468d853671425eb762fcb41967219446621b4",
-    "startedUtc": 1794900407.2360811,
+    "pid": 42840,
+    "createdFileTime": "134393833573345200",
+    "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-433a1d8e-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+    "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\workflow-runtime",
+    "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+    "mainDllSha256": "c387e55579f3cc581ea79c309ef46b7a99755646aff79a165d2d3f5ec4577b76",
+    "startedUtc": 1794909757.345163,
     "newRawDecodesAuthorized": 0,
     "guardBytes": 2147483648
   },
-  "status": "INCOMPLETE_COMPUTER_USE_STOPPED_BY_PHYSICAL_ESCAPE",
-  "ordinaryCandidateStarted": true,
-  "finalOrdinaryExeStarted": false,
+  "status": "PARTIAL_FINAL_433_NAME_SAVE_VALIDATED_SOURCE_PICKER_PERMISSION_BLOCK",
+  "finalOrdinaryExeStarted": true,
   "sameSourceSelectionServiceReady": true,
-  "projectCountAtStop": 0,
-  "stage": "Native source-folder picker; target filename set but confirmation not completed",
-  "sourceJpegs": [
-    {
-      "file": "COMPANY_0001.jpg",
-      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
-    },
-    {
-      "file": "COMPANY_0002.jpg",
-      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
-    }
-  ],
+  "currentServicePid": 36564,
+  "projectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+  "projectCountAtCheckpoint": 1,
+  "sourceCount": 0,
+  "albumCount": 0,
+  "preparedPngCount": 0,
+  "selectionVersion": null,
+  "lockedResult": null,
+  "editVersion": null,
   "fullSameProjectFlowPassed": false,
-  "reason": "Computer Use returned physical Escape stopped control; no more Computer Use actions performed",
-  "uiToolLimits": [
-    "WGC capture timed out",
-    "Element click geometry unavailable",
-    "Fallback pane click did not confirm system folder picker"
-  ],
+  "stage": "Named project saved; source-folder dialog open; source not selected",
+  "controlBlock": "GetCursorPos failed: 拒绝访问。 (0x80070005)",
+  "noBlindRetry": true,
+  "noAlternateInputBypass": true,
+  "blankAndWhitespaceNameSaveEntry": "PASS_NORMAL_UI_SAVE_ONLY",
+  "blankNamePreRenderSend": "NOT_RUN_NORMAL_UI",
+  "normalCloseAndIndependentReopen": "NOT_RUN_NORMAL_UI",
+  "twoFinalDataRootInstances": "NOT_COMPLETED",
+  "ordinary40MpClosingExport": "NOT_RUN_UI_BLOCKED",
+  "receipt": "final-acceptance-20261117/RESULTS.md",
+  "priorCandidateReceipt": "final-acceptance-20261117/PRIOR_ORDINARY_STATUS_9dd7cabb.json",
   "originalUserWorkspaceMutated": false,
-  "candidateSourceShaVerifiedByLiveMainDll": true,
-  "finalSourceNotRelabeledFromCandidate": true
+  "testSeamUsed": false
 }

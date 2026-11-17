@@ -1,0 +1,20 @@
+{
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "processName": "KitaoPhotoSelector.exe",
+  "pid": 42840,
+  "createdFileTime": "134393833573345200",
+  "parentWindow": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+  "dialog": "选择照片来源目录",
+  "requiredFolder": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs",
+  "requiredAction": "在文件夹框填写上述目录，再点击选择文件夹",
+  "observedControls": [
+    "\t\t1 window 选择照片来源目录 Frame: {x: 0, y: 0, width: 2121, height: 1638}\r",
+    "\t\t\t17 pane 文件夹: Frame: {x: 215, y: 1532, width: 58, height: 24}\r",
+    "\t\t\t18 pane ID: 1152 Frame: {x: 281, y: 1526, width: 1802, height: 36}\r",
+    "\t\t\t19 pane 选择文件夹 Frame: {x: 1787, y: 1570, width: 146, height: 39}\r"
+  ],
+  "controlBlock": "sky.activate_window returned GetCursorPos failed: 拒绝访问。 (0x80070005)",
+  "blindRetry": false,
+  "alternateInputBypass": false,
+  "sourceFolderConfirmed": false
+}
