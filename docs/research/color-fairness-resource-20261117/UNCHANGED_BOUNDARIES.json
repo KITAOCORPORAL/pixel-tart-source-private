@@ -1,0 +1,52 @@
+{
+  "oldProtectedLedgerRecords": 8,
+  "oldRecordsUnchanged": true,
+  "originalNativeBindingsVerified": 4,
+  "发行DllReplacements": 0,
+  "candidateMathChanges": 0,
+  "newRawDecodes": 0,
+  "newHeavyLedgerCreated": false,
+  "sharpenV1": "SEALED_NO_RUN_NO_V2",
+  "records": [
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\ledger\\first.consumed",
+      "bytes": 444,
+      "sha256": "ced1e3137b3a9094145eb9e80fd783b9ffa16e677c91878b9e9e4f0190cf4494"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\ledger\\STOP_AFTER_FAILURE.json",
+      "bytes": 519,
+      "sha256": "49cac6d30dea56c32f886eee5b31fc6014d6bd426de54b73dda39200f54dbe69"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-20261110\\BUDGET_STOPPED.json",
+      "bytes": 808,
+      "sha256": "b3e6a4d60db4f635a3259764e90839ccb426523eaf3ee79bbdac98a76d4b677d"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\ledger\\first.consumed",
+      "bytes": 453,
+      "sha256": "0a1e45a78aa11c63f077ed6b3eee73bbbf426f659310921ddd9eb6c599133e51"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-StableV1-TimerFix-20261110\\ledger\\second.consumed",
+      "bytes": 454,
+      "sha256": "43696e801d1a2b1fcbc74839355a06d498723aa00f7fb9e16fe9a6b1e8e2d48a"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\STOP.json",
+      "bytes": 140,
+      "sha256": "d1aa3961c6114248e8b4d1926c3d55362620a2b28d956065c76d0f7e26ae8dc9"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+      "bytes": 489,
+      "sha256": "32ad1b80c276824f11a3488a393bbc08b24d4e586838d139e2766de7af05947e"
+    },
+    {
+      "path": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed.worker-entered",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

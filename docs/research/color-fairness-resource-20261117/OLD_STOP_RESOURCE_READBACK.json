@@ -1,0 +1,1192 @@
+{
+  "source": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+  "filesReadCompletely": [
+    "ui-steps/A-cold/desktop-02/RESOURCE_SAMPLES.json",
+    "path-evidence/A-cold-2408.jsonl",
+    "ledger/STOP.json",
+    "worker/result.json",
+    "worker/resources.json"
+  ],
+  "samples": 26626,
+  "last": {
+    "elapsedMs": 1356635.3285000077,
+    "workingSetBytes": 1700630528,
+    "osPeakWorkingSetBytes": 1700634624,
+    "privateBytes": 2167267328
+  },
+  "penultimate": {
+    "elapsedMs": 1356584.3216000067,
+    "workingSetBytes": 1678856192,
+    "osPeakWorkingSetBytes": 1690849280,
+    "privateBytes": 2006130688
+  },
+  "productPathEvents": [
+    {
+      "atUtc": "2026-11-11T02:30:06.7954145+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "ProductPathBegin",
+      "value": {
+        "name": "DarkroomImport"
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:06.9648712+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "HeaderOnlyProbe",
+      "value": {
+        "Sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+        "filters": 9,
+        "colors": 3,
+        "nativeSha": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+        "noUnpack": true
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:06.972836+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "CacheMiss",
+      "value": {
+        "key": "e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7",
+        "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+        "reason": "Absent"
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:07.0501522+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "DecodeReserved",
+      "value": {
+        "path": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+        "inputSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+        "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F"
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:14.0583602+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "CandidateWorkerExited",
+      "value": {
+        "reservation": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+        "pid": 30028,
+        "exitCode": 0,
+        "elapsedMs": 6999.7489,
+        "peakWorkingSetBytes": 925487104,
+        "peakPrivateBytes50ms": 900198400,
+        "combinedWorkingSetPeak50ms": 1354985472,
+        "combinedPrivateBytesPeak50ms": 1327030272
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:16.1010128+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "CacheStored",
+      "value": {
+        "key": "e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7",
+        "identity": "XTransStableInputSeparateRgbV1/157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+        "index": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\cache-A\\e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7.json",
+        "pixelSha": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E"
+      }
+    },
+    {
+      "atUtc": "2026-11-11T02:30:16.7930284+00:00",
+      "task": "RAW-XTRANS-STABLE-V1-PRODUCT-REGRESSION-20261110",
+      "step": "A-cold",
+      "pid": 2408,
+      "kind": "ProductPathEnd",
+      "value": {
+        "name": "DarkroomImport",
+        "completed": true,
+        "elapsedMs": 9992.9774,
+        "pathLocalWorkingSetPeak50ms": 1224409088,
+        "pathLocalPrivatePeak50ms": 1211416576,
+        "samples": 201,
+        "lifetimeOsPeakWorkingSetBytes": 1226874880,
+        "privateBytesAtEnd": 1211994112,
+        "timingScope": "Product command after source/destination dialog; includes decode/render/encode and own metadata"
+      }
+    }
+  ],
+  "workerOverlap": {
+    "reservation": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\ledger\\174ea3018bb24ae2bf49bfb94ee430e6.consumed",
+    "pid": 30028,
+    "exitCode": 0,
+    "elapsedMs": 6999.7489,
+    "peakWorkingSetBytes": 925487104,
+    "peakPrivateBytes50ms": 900198400,
+    "combinedWorkingSetPeak50ms": 1354985472,
+    "combinedPrivateBytesPeak50ms": 1327030272
+  },
+  "productPathEnd": {
+    "name": "DarkroomImport",
+    "completed": true,
+    "elapsedMs": 9992.9774,
+    "pathLocalWorkingSetPeak50ms": 1224409088,
+    "pathLocalPrivatePeak50ms": 1211416576,
+    "samples": 201,
+    "lifetimeOsPeakWorkingSetBytes": 1226874880,
+    "privateBytesAtEnd": 1211994112,
+    "timingScope": "Product command after source/destination dialog; includes decode/render/encode and own metadata"
+  },
+  "approximateStopSecondsAfterImportEnd": 198.7045986328125,
+  "clockLimitation": "LaunchUTC/monotoniczero not atomicallysynchronized;~199s is coarse relationship, not exclusive stage stopwatch",
+  "postEndOneSecondMaxima": [
+    {
+      "second": 1155,
+      "privateMiB": 635.88671875,
+      "wsMiB": 651.19921875
+    },
+    {
+      "second": 1156,
+      "privateMiB": 635.88671875,
+      "wsMiB": 651.21484375
+    },
+    {
+      "second": 1157,
+      "privateMiB": 1173.59765625,
+      "wsMiB": 1176.81640625
+    },
+    {
+      "second": 1158,
+      "privateMiB": 1319.47265625,
+      "wsMiB": 1276.2109375
+    },
+    {
+      "second": 1159,
+      "privateMiB": 1319.47265625,
+      "wsMiB": 1276.3046875
+    },
+    {
+      "second": 1160,
+      "privateMiB": 1319.47265625,
+      "wsMiB": 1276.3046875
+    },
+    {
+      "second": 1161,
+      "privateMiB": 1313.34765625,
+      "wsMiB": 1276.328125
+    },
+    {
+      "second": 1162,
+      "privateMiB": 1312.5078125,
+      "wsMiB": 1276.33203125
+    },
+    {
+      "second": 1163,
+      "privateMiB": 1312.5078125,
+      "wsMiB": 1276.33203125
+    },
+    {
+      "second": 1164,
+      "privateMiB": 1312.5078125,
+      "wsMiB": 1276.33203125
+    },
+    {
+      "second": 1165,
+      "privateMiB": 1312.18359375,
+      "wsMiB": 1276.01953125
+    },
+    {
+      "second": 1166,
+      "privateMiB": 1312.28515625,
+      "wsMiB": 1276.06640625
+    },
+    {
+      "second": 1167,
+      "privateMiB": 1312.22265625,
+      "wsMiB": 1276.046875
+    },
+    {
+      "second": 1168,
+      "privateMiB": 1312.02734375,
+      "wsMiB": 1275.953125
+    },
+    {
+      "second": 1169,
+      "privateMiB": 1312.24609375,
+      "wsMiB": 1276.1796875
+    },
+    {
+      "second": 1170,
+      "privateMiB": 1312.18359375,
+      "wsMiB": 1276.1796875
+    },
+    {
+      "second": 1171,
+      "privateMiB": 1302.67578125,
+      "wsMiB": 1266.65234375
+    },
+    {
+      "second": 1172,
+      "privateMiB": 1302.67578125,
+      "wsMiB": 1266.65234375
+    },
+    {
+      "second": 1173,
+      "privateMiB": 1299.05078125,
+      "wsMiB": 1263.02734375
+    },
+    {
+      "second": 1174,
+      "privateMiB": 1297.30078125,
+      "wsMiB": 1261.27734375
+    },
+    {
+      "second": 1175,
+      "privateMiB": 1295.7265625,
+      "wsMiB": 1259.71484375
+    },
+    {
+      "second": 1176,
+      "privateMiB": 1295.109375,
+      "wsMiB": 1259.109375
+    },
+    {
+      "second": 1177,
+      "privateMiB": 1295.109375,
+      "wsMiB": 1259.109375
+    },
+    {
+      "second": 1178,
+      "privateMiB": 1295.05078125,
+      "wsMiB": 1259.06640625
+    },
+    {
+      "second": 1179,
+      "privateMiB": 1295.01171875,
+      "wsMiB": 1259.0390625
+    },
+    {
+      "second": 1180,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1181,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1182,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1183,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1184,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1185,
+      "privateMiB": 1295.0859375,
+      "wsMiB": 1259.10546875
+    },
+    {
+      "second": 1186,
+      "privateMiB": 1295.046875,
+      "wsMiB": 1259.078125
+    },
+    {
+      "second": 1187,
+      "privateMiB": 1295.046875,
+      "wsMiB": 1259.078125
+    },
+    {
+      "second": 1188,
+      "privateMiB": 1295.046875,
+      "wsMiB": 1259.078125
+    },
+    {
+      "second": 1189,
+      "privateMiB": 1295.046875,
+      "wsMiB": 1259.078125
+    },
+    {
+      "second": 1190,
+      "privateMiB": 1295.046875,
+      "wsMiB": 1259.078125
+    },
+    {
+      "second": 1191,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1192,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1193,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1194,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1195,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1196,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1197,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1198,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1199,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1200,
+      "privateMiB": 1294.91796875,
+      "wsMiB": 1258.97265625
+    },
+    {
+      "second": 1201,
+      "privateMiB": 1294.85546875,
+      "wsMiB": 1258.31640625
+    },
+    {
+      "second": 1202,
+      "privateMiB": 1294.85546875,
+      "wsMiB": 1258.31640625
+    },
+    {
+      "second": 1203,
+      "privateMiB": 1295.265625,
+      "wsMiB": 1258.734375
+    },
+    {
+      "second": 1204,
+      "privateMiB": 1295.265625,
+      "wsMiB": 1258.734375
+    },
+    {
+      "second": 1205,
+      "privateMiB": 1295.265625,
+      "wsMiB": 1258.734375
+    },
+    {
+      "second": 1206,
+      "privateMiB": 1295.265625,
+      "wsMiB": 1258.734375
+    },
+    {
+      "second": 1207,
+      "privateMiB": 1295.265625,
+      "wsMiB": 1258.734375
+    },
+    {
+      "second": 1208,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.70703125
+    },
+    {
+      "second": 1209,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.70703125
+    },
+    {
+      "second": 1210,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.70703125
+    },
+    {
+      "second": 1211,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1212,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1213,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1214,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1215,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1216,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1217,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1218,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1219,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1220,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1221,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1222,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1223,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1224,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1225,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1226,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1227,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1228,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1229,
+      "privateMiB": 1295.15625,
+      "wsMiB": 1258.6796875
+    },
+    {
+      "second": 1230,
+      "privateMiB": 1295.22265625,
+      "wsMiB": 1258.71875
+    },
+    {
+      "second": 1231,
+      "privateMiB": 1295.22265625,
+      "wsMiB": 1258.71875
+    },
+    {
+      "second": 1232,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1233,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1234,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1235,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1236,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1237,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1238,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1239,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1240,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1241,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1242,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1243,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1244,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1245,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1246,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1247,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1248,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1249,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1250,
+      "privateMiB": 1295.2265625,
+      "wsMiB": 1258.72265625
+    },
+    {
+      "second": 1251,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1252,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1253,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1254,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1255,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1256,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1257,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1258,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1259,
+      "privateMiB": 1295.16015625,
+      "wsMiB": 1258.68359375
+    },
+    {
+      "second": 1260,
+      "privateMiB": 1295.2578125,
+      "wsMiB": 1258.7421875
+    },
+    {
+      "second": 1261,
+      "privateMiB": 1295.2578125,
+      "wsMiB": 1258.7421875
+    },
+    {
+      "second": 1262,
+      "privateMiB": 1295.2578125,
+      "wsMiB": 1258.7421875
+    },
+    {
+      "second": 1263,
+      "privateMiB": 1295.30078125,
+      "wsMiB": 1258.8671875
+    },
+    {
+      "second": 1264,
+      "privateMiB": 1295.30078125,
+      "wsMiB": 1258.8671875
+    },
+    {
+      "second": 1265,
+      "privateMiB": 1295.30078125,
+      "wsMiB": 1258.8671875
+    },
+    {
+      "second": 1266,
+      "privateMiB": 1295.30078125,
+      "wsMiB": 1258.8671875
+    },
+    {
+      "second": 1267,
+      "privateMiB": 1295.30078125,
+      "wsMiB": 1258.8671875
+    },
+    {
+      "second": 1268,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1269,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1270,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1271,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1272,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1273,
+      "privateMiB": 1295.26171875,
+      "wsMiB": 1258.83984375
+    },
+    {
+      "second": 1274,
+      "privateMiB": 1294.83203125,
+      "wsMiB": 1258.546875
+    },
+    {
+      "second": 1275,
+      "privateMiB": 1294.83203125,
+      "wsMiB": 1258.546875
+    },
+    {
+      "second": 1276,
+      "privateMiB": 1294.83203125,
+      "wsMiB": 1258.546875
+    },
+    {
+      "second": 1277,
+      "privateMiB": 1294.83203125,
+      "wsMiB": 1258.546875
+    },
+    {
+      "second": 1278,
+      "privateMiB": 1294.83203125,
+      "wsMiB": 1258.546875
+    },
+    {
+      "second": 1279,
+      "privateMiB": 1303.23828125,
+      "wsMiB": 1260.3359375
+    },
+    {
+      "second": 1280,
+      "privateMiB": 1304.34375,
+      "wsMiB": 1261.2734375
+    },
+    {
+      "second": 1281,
+      "privateMiB": 1305.18359375,
+      "wsMiB": 1261.67578125
+    },
+    {
+      "second": 1282,
+      "privateMiB": 1305.26953125,
+      "wsMiB": 1261.84765625
+    },
+    {
+      "second": 1283,
+      "privateMiB": 1305.30859375,
+      "wsMiB": 1262.234375
+    },
+    {
+      "second": 1284,
+      "privateMiB": 1305.3203125,
+      "wsMiB": 1262.31640625
+    },
+    {
+      "second": 1285,
+      "privateMiB": 1305.2421875,
+      "wsMiB": 1262.32421875
+    },
+    {
+      "second": 1286,
+      "privateMiB": 1305.23046875,
+      "wsMiB": 1262.34765625
+    },
+    {
+      "second": 1287,
+      "privateMiB": 1305.23046875,
+      "wsMiB": 1262.34765625
+    },
+    {
+      "second": 1288,
+      "privateMiB": 1305.23046875,
+      "wsMiB": 1262.34765625
+    },
+    {
+      "second": 1289,
+      "privateMiB": 1305.23046875,
+      "wsMiB": 1262.34765625
+    },
+    {
+      "second": 1290,
+      "privateMiB": 1305.296875,
+      "wsMiB": 1262.38671875
+    },
+    {
+      "second": 1291,
+      "privateMiB": 1305.296875,
+      "wsMiB": 1262.38671875
+    },
+    {
+      "second": 1292,
+      "privateMiB": 1305.296875,
+      "wsMiB": 1262.390625
+    },
+    {
+      "second": 1293,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.3984375
+    },
+    {
+      "second": 1294,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.3984375
+    },
+    {
+      "second": 1295,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.4140625
+    },
+    {
+      "second": 1296,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.4140625
+    },
+    {
+      "second": 1297,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1298,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1299,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1300,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1301,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1302,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1303,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1304,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1305,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1306,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1307,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1308,
+      "privateMiB": 1305.3046875,
+      "wsMiB": 1262.41796875
+    },
+    {
+      "second": 1309,
+      "privateMiB": 1305.34765625,
+      "wsMiB": 1262.453125
+    },
+    {
+      "second": 1310,
+      "privateMiB": 1305.34765625,
+      "wsMiB": 1262.453125
+    },
+    {
+      "second": 1311,
+      "privateMiB": 1305.28125,
+      "wsMiB": 1262.4140625
+    },
+    {
+      "second": 1312,
+      "privateMiB": 1305.28125,
+      "wsMiB": 1262.4140625
+    },
+    {
+      "second": 1313,
+      "privateMiB": 1305.28125,
+      "wsMiB": 1262.609375
+    },
+    {
+      "second": 1314,
+      "privateMiB": 1319.23828125,
+      "wsMiB": 1263.28125
+    },
+    {
+      "second": 1315,
+      "privateMiB": 1319.328125,
+      "wsMiB": 1263.57421875
+    },
+    {
+      "second": 1316,
+      "privateMiB": 1319.328125,
+      "wsMiB": 1263.63671875
+    },
+    {
+      "second": 1317,
+      "privateMiB": 1326.84765625,
+      "wsMiB": 1271.859375
+    },
+    {
+      "second": 1318,
+      "privateMiB": 1327.36328125,
+      "wsMiB": 1272.26171875
+    },
+    {
+      "second": 1319,
+      "privateMiB": 1327.36328125,
+      "wsMiB": 1272.26171875
+    },
+    {
+      "second": 1320,
+      "privateMiB": 1327.4296875,
+      "wsMiB": 1272.42578125
+    },
+    {
+      "second": 1321,
+      "privateMiB": 1327.4296875,
+      "wsMiB": 1272.42578125
+    },
+    {
+      "second": 1322,
+      "privateMiB": 1318.609375,
+      "wsMiB": 1263.27734375
+    },
+    {
+      "second": 1323,
+      "privateMiB": 1318.734375,
+      "wsMiB": 1263.359375
+    },
+    {
+      "second": 1324,
+      "privateMiB": 1318.91015625,
+      "wsMiB": 1263.390625
+    },
+    {
+      "second": 1325,
+      "privateMiB": 1318.9140625,
+      "wsMiB": 1263.39453125
+    },
+    {
+      "second": 1326,
+      "privateMiB": 1319.86328125,
+      "wsMiB": 1263.40234375
+    },
+    {
+      "second": 1327,
+      "privateMiB": 1320.28515625,
+      "wsMiB": 1263.41015625
+    },
+    {
+      "second": 1328,
+      "privateMiB": 1320.3203125,
+      "wsMiB": 1263.43359375
+    },
+    {
+      "second": 1329,
+      "privateMiB": 1320.3203125,
+      "wsMiB": 1263.43359375
+    },
+    {
+      "second": 1330,
+      "privateMiB": 1320.3203125,
+      "wsMiB": 1263.43359375
+    },
+    {
+      "second": 1331,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1332,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1333,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1334,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1335,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1336,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1337,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1338,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1339,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1340,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1341,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1342,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1343,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1344,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1345,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1346,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1347,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1348,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1349,
+      "privateMiB": 1320.22265625,
+      "wsMiB": 1263.37109375
+    },
+    {
+      "second": 1350,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1351,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1352,
+      "privateMiB": 1320.29296875,
+      "wsMiB": 1263.4140625
+    },
+    {
+      "second": 1353,
+      "privateMiB": 1320.3828125,
+      "wsMiB": 1263.4375
+    },
+    {
+      "second": 1354,
+      "privateMiB": 1320.3828125,
+      "wsMiB": 1263.4375
+    },
+    {
+      "second": 1355,
+      "privateMiB": 1704.33984375,
+      "wsMiB": 1295.07421875
+    },
+    {
+      "second": 1356,
+      "privateMiB": 2066.8671875,
+      "wsMiB": 1621.84765625
+    }
+  ],
+  "knownLifetime": {
+    "nativeWorker": "Exited before cache/output importcomplete; no evidence of residentnative memory in lateparent",
+    "parentRGB48": "Read fromworker result/cache then converted tofloat; whether oldushort remainsrooted atlateSTOPunknown",
+    "floatMaster": "Sourcecode requires onefullfloatmaster; no oldheapdump to count rootexactly",
+    "bitmap": "old viewport hiddenpromotion may allocatefullRGB24/WIC; specificold late action unobserved",
+    "cache": "cacheonDisk confirmed, not separatepersistentRAM by filename",
+    "preview": "originalSTOP has no allocationstack/visibility trace sufficient to assign",
+    "export": "noProductPathBegin/exportfile evidence; do not assign originalSTOP to export"
+  },
+  "conclusion": "Original postimportparentresourceFAIL confirmed, exactrootallocations not identifiable from samples alone. NewzeroRAWhost separately reproduces export/reopenworking-setpressure and narrows current remaining codepath.",
+  "workerResult": {
+    "status": "completed",
+    "nativeSha256": "157BBA02166BDB78E171154E1F4B03AE58F7DF97A110282B37AB3B5988FDC67F",
+    "bindingSha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+    "width": 7752,
+    "height": 5184,
+    "metadata": {
+      "CameraMake": "Fujifilm",
+      "CameraModel": "X-T5",
+      "CapturedAt": "2026-09-27T11:20:32+00:00",
+      "Orientation": 1,
+      "ColorSpace": "sRGB"
+    },
+    "pixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+    "productDecoderType": "RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder",
+    "heavyDecodeCalls": 1,
+    "debuggerAttached": false,
+    "elapsedMs": 6898.6929
+  },
+  "workerResources": {
+    "ProcessId": 30028,
+    "peakWorkingSetBytes": 925487104,
+    "privateBytesAtExit": 253755392,
+    "debuggerAttached": false,
+    "elapsedMs": 6915.4833
+  }
+}

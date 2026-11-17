@@ -1,0 +1,21 @@
+{
+  "localOnly": true,
+  "checks": [
+    {
+      "url": "http://127.0.0.1:3920/fairness-20261117/",
+      "status": 200,
+      "bytes": 5310
+    },
+    {
+      "url": "http://127.0.0.1:3920/fairness-20261117/data.json",
+      "status": 200,
+      "bytes": 304867
+    },
+    {
+      "url": "http://127.0.0.1:3920/fairness-20261117/panels/warm-lit-texture-E1-post-curve-mid_high.png",
+      "status": 200,
+      "bytes": 811336
+    }
+  ],
+  "newCandidateRuns": 0
+}

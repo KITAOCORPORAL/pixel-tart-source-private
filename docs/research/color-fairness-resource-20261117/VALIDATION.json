@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-17",
+  "clientTimeZone": "Europe/Helsinki",
+  "base": "9fffb690cd76f58281dcc0ac29894e73f0210c13",
+  "productKernelIdentity": [
+    "e818",
+    "433 matches forrelevant sourcepaths"
+  ],
+  "fixedComparison": {
+    "roiEvCases": 12,
+    "methods": 5,
+    "conditions": 3,
+    "displayPanels": 180,
+    "anchoredMethods": 50,
+    "jointMatches": 17,
+    "jointNoMatchInBounds": 33,
+    "canonUncomparable": 10,
+    "midErrorMaxAllowed": 0.00002,
+    "fullHighMeanRelativeErrorMaxAllowed": 0.005,
+    "candidateExecutions": 0,
+    "candidateMathChanged": false,
+    "oldFrozenCandidateOutputsRead": true
+  },
+  "resourceScope": {
+    "controlledProductVmRuns": 2,
+    "resourceGuardStops": 2,
+    "ordinaryExeAcceptance": false,
+    "rawOriginalFilesOpened": 0,
+    "rawNativeWorkersStarted": 0,
+    "heavyRunLedgersCreated": 0,
+    "forcedGc": false,
+    "firstGuardPeakPrivateBytes": 2548523008,
+    "secondGuardPeakPrivateBytes": 2174521344,
+    "proxyExportPayloadParityPassed": true,
+    "defaultAndCandidateDllBindingsUnchanged": true,
+    "sourceMasterObjectSharingChecked": true,
+    "oldExactStopAllocationUnknown": true
+  },
+  "preservation": {
+    "original820bFilesVerified": 22,
+    "olderProtectedStopLedgerRecordsVerified": 8,
+    "sharpenV1Unchanged": true,
+    "noSourceTestAgchanges": true,
+    "photosRemainLocal": true
+  },
+  "validation": {
+    "acceptedProductControlRunExit0": true,
+    "acceptedControlRequests": 12162,
+    "controlGuardLimitBytes": 536870912,
+    "resourceGuardLimitBytes": 2147483648,
+    "deadlineSeconds": 600,
+    "sourcePythonSyntaxPassed": true,
+    "viewerJsSyntaxPassed": true,
+    "selectedDisplayPanelsExact": 4,
+    "jsonFilesParsedBeforeThisFile": 15
+  },
+  "stop": "NO_ALGORITHM_OR_PRODUCT_IMPLEMENTATION_AFTER_DELIVERY"
+}

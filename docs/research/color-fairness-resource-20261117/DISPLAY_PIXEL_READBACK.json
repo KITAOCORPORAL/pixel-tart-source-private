@@ -1,0 +1,39 @@
+{
+  "panelsChecked": 4,
+  "status": "PASS_DISPLAY_CELLS_NO_RESAMPLING",
+  "checks": [
+    {
+      "id": "skin-shoulder",
+      "ev": 0,
+      "method": "post-curve",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "nativeCell384Exact": true
+    },
+    {
+      "id": "warm-lit-texture",
+      "ev": 1,
+      "method": "post-curve",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "nativeCell384Exact": true
+    },
+    {
+      "id": "warm-lit-texture",
+      "ev": 1,
+      "method": "basic-highlights",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "nativeCell384Exact": true
+    },
+    {
+      "id": "sunset-gradient",
+      "ev": 1,
+      "method": "basic-highlights",
+      "condition": "mid+high",
+      "status": "NO_MIDTONE_ANCHOR",
+      "nativeCell384Exact": true
+    }
+  ],
+  "noScientificPreferenceClaim": true
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-17",
+  "clientTimeZone": "Europe/Helsinki",
+  "base": "9fffb690cd76f58281dcc0ac29894e73f0210c13",
+  "initialPlanSha256": "c6d41ae4f63a7b5f1344b9de2865d2c2acbd2d285297c6aaa444b11dbcf9ea9e",
+  "validPlanSha256": "759a1ed54569c2c7ad8ad22f2c4990fe343bc2be418d647039b05ccc8ed02136",
+  "preflightRejected": {
+    "root": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\invalid-preflight-comparator",
+    "status": "NOT_VALID_SCIENTIFIC_EVIDENCE",
+    "issues": [
+      "ApproximateControlformulaDifferentFromProduct",
+      "EncodedLinearMetricMix",
+      "WrongLocalAnchorInsteadOfFrozenSeparateAnchor"
+    ],
+    "validConclusionsFromTheseRows": false
+  },
+  "planRevisionBeforeValidResults": "Version2 pins real product calls/original anchors; identical fixedROIs,EVs,methods,bounds/tolerances; no output-based method orROI selection",
+  "exactControlRuns": [
+    {
+      "role": "First exact fixture withoutadditionalRmsdiagnostic",
+      "calls": 12162,
+      "exit": 0,
+      "scientificControlOutputMathSame": true
+    },
+    {
+      "role": "Final exact authoritative fixture withRmsdiagnostic",
+      "calls": 12162,
+      "exit": 0,
+      "resourceFile": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\fair-exact\\RESOURCE.json"
+    }
+  ],
+  "resourceFixtures": {
+    "preflight": "Build/path/dependency setup failures before workingmemoryrun retained locally, not product failure",
+    "fullDetailRun": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-vm-e818-01",
+    "independentReopenProxyRun": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-vm-e818-reopen-proxy-02",
+    "resourceStops": 2,
+    "ordinaryAcceptance": false
+  },
+  "noCandidateMathExecution": true,
+  "noRawNativeWorker": true,
+  "newHeavyLedger": false,
+  "forcedGc": false,
+  "rawRoot": "E:/Kitao-Deliveries/color-fairness-resource-20261117"
+}

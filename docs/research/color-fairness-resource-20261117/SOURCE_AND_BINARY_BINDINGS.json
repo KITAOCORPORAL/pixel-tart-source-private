@@ -1,0 +1,82 @@
+{
+  "researchBase": "9fffb690cd76f58281dcc0ac29894e73f0210c13",
+  "frozenResourceProduct": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "latestProductCodeCompared": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "sources": [
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "blobAtCurrentBase": "ec0bba74c85e61204f7a27e8524d9d2a44438720",
+      "blobAtE818": "ec0bba74c85e61204f7a27e8524d9d2a44438720",
+      "blobAt433": "ec0bba74c85e61204f7a27e8524d9d2a44438720"
+    },
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/RenderedSrgbExposure.cs",
+      "blobAtCurrentBase": "b65e4ade5bdf84f4bf1514c5c751cd99bd189bf7",
+      "blobAtE818": "b65e4ade5bdf84f4bf1514c5c751cd99bd189bf7",
+      "blobAt433": "b65e4ade5bdf84f4bf1514c5c751cd99bd189bf7"
+    },
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "blobAtCurrentBase": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e",
+      "blobAtE818": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e",
+      "blobAt433": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e"
+    },
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "blobAtCurrentBase": "e26b0a413f8e53e845087053414436de833d46cb",
+      "blobAtE818": "e26b0a413f8e53e845087053414436de833d46cb",
+      "blobAt433": "e26b0a413f8e53e845087053414436de833d46cb"
+    },
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "blobAtCurrentBase": "b35a43cc5a256d5e67c5b0a721010fcd19a6407e",
+      "blobAtE818": "b35a43cc5a256d5e67c5b0a721010fcd19a6407e",
+      "blobAt433": "b35a43cc5a256d5e67c5b0a721010fcd19a6407e"
+    }
+  ],
+  "binaries": [
+    {
+      "kind": "frozenProductApp",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\App\\KitaoPhotoSelector.dll",
+      "bytes": 4167680,
+      "sha256": "6f5b2170f07d838aef26800638816f85161bebedc0578b84daa7be7517491f69"
+    },
+    {
+      "kind": "frozenProductCore",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\App\\RAWSelectionAssistant.Core.dll",
+      "bytes": 7803392,
+      "sha256": "5c51fe1e95c1412cb879879b888be4630ab52c7e9747389b52cd28ba38f3ffd2"
+    },
+    {
+      "kind": "exactControlCore",
+      "path": "E:\\Kitao-Worktrees\\color-proposals-20261117\\tools\\ColorFairnessResource20261117\\bin\\x64\\Release\\net10.0\\RAWSelectionAssistant.Core.dll",
+      "bytes": 7803392,
+      "sha256": "33a0b6cff36439a1de0b26b95967088488db95171313c92b787027b044d5e6e3"
+    },
+    {
+      "kind": "exactControlHost",
+      "path": "E:\\Kitao-Worktrees\\color-proposals-20261117\\tools\\ColorFairnessResource20261117\\bin\\x64\\Release\\net10.0\\ColorFairnessExactControlProbe20261117.dll",
+      "bytes": 19968,
+      "sha256": "a88a9fc2eccfdb909a06b81f0cc361de7af28ed7569cbc7d62b231ed54080a4f"
+    },
+    {
+      "kind": "resourceFirstStoppedHost",
+      "path": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\HOST_FIRST_STOP_BOUND.dll",
+      "bytes": 40448,
+      "sha256": "c327ff4d3ea7b29e7ebbece3d1b3de431ae57382b972e40206e886b31c73b0ea"
+    },
+    {
+      "kind": "resourceReopenStoppedHost",
+      "path": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-stage\\ColorZeroRawResourceHost20261117.dll",
+      "bytes": 40960,
+      "sha256": "aedb22419b9eec6fd8dbcc87f1ea1a2e52299d973c91eec6b4b323316481342d"
+    }
+  ],
+  "sourceMathVersusBinaryIdentityKeptDistinct": true,
+  "finalResourceHostProjectParameterBuild": {
+    "sha256": "aedb22419b9eec6fd8dbcc87f1ea1a2e52299d973c91eec6b4b323316481342d",
+    "sameAsMeasuredSecond": true,
+    "sourceProductHintProperty": "ProductAppDirectory",
+    "newExecution": false
+  }
+}

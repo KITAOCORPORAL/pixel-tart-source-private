@@ -1,0 +1,248 @@
+{
+  "version": 2,
+  "status": "REVISED_TOOL_BINDING_BEFORE_VALID_RESULTS",
+  "base": "9fffb690cd76f58281dcc0ac29894e73f0210c13",
+  "sourceProduct": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "candidate": "MaxChannelShoulderV1/Knee0.75",
+  "candidateMath": "Reuse existing fixed candidate f32 sameEV and midmatched; no new candidate run/math",
+  "inputs": [
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "file": "skin-shoulder.f32",
+      "hash": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f",
+      "roi": [
+        2000,
+        1750,
+        384,
+        384
+      ],
+      "source": "company-02",
+      "anchor": "company-02"
+    },
+    {
+      "id": "skin-hair-edge",
+      "kind": "authorized-stored-photo",
+      "file": "skin-hair-edge.f32",
+      "hash": "90a27f19ecd84f214161bab47ed58fbd381587ee211a018b5f784a8ba654963b",
+      "roi": [
+        2450,
+        1700,
+        384,
+        384
+      ],
+      "source": "company-02",
+      "anchor": "company-02"
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "file": "warm-lit-texture.f32",
+      "hash": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d",
+      "roi": [
+        2300,
+        500,
+        384,
+        384
+      ],
+      "source": "company-02",
+      "anchor": "company-02"
+    },
+    {
+      "id": "sunset-gradient",
+      "kind": "authorized-stored-photo",
+      "file": "sunset-gradient.f32",
+      "hash": "833f4d4ae22287188c56e04d4b0afc1e6490d8910f528b13992be74aaab9c972",
+      "roi": [
+        300,
+        1600,
+        384,
+        384
+      ],
+      "source": "company-05",
+      "anchor": "company-05"
+    },
+    {
+      "id": "synthetic-neutral-texture",
+      "kind": "synthetic-not-photographic-acceptance",
+      "file": "synthetic-neutral-texture.f32",
+      "hash": "c03790ea0efea0d212f2d1aa2e83f1efff2ada8f15ba641feeb34f503225a76b",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "source": "synthetic-neutral-texture",
+      "anchor": "synthetic-neutral-texture"
+    },
+    {
+      "id": "synthetic-coloured-specular",
+      "kind": "synthetic-not-photographic-acceptance",
+      "file": "synthetic-coloured-specular.f32",
+      "hash": "249609075fdc36550e98fd47624ee82b2fa3fb9b0e3ca46086be32805e8274d2",
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "source": "synthetic-coloured-specular",
+      "anchor": "synthetic-coloured-specular"
+    }
+  ],
+  "exposureCases": [
+    0,
+    1
+  ],
+  "methods": [
+    {
+      "id": "post-highlights",
+      "order": "Legacy EOTF/EV/OETF/clip -> BasicTone exposure0/highlights s",
+      "fixedStrength": -50,
+      "range": [
+        -100,
+        0
+      ]
+    },
+    {
+      "id": "post-whites",
+      "order": "Legacy clipped output -> BasicTone exposure0/whites s",
+      "fixedStrength": -50,
+      "range": [
+        -100,
+        0
+      ]
+    },
+    {
+      "id": "post-curve",
+      "order": "Legacy clipped output -> existing encoded-sRGB RGB Curve",
+      "fixedStrength": 0.875,
+      "range": [
+        0.75,
+        1
+      ],
+      "points": "(0,0),(.25,.25),(.5,.5),(.75,.75),(1,s); existing monotone Hermite"
+    },
+    {
+      "id": "basic-highlights",
+      "order": "BasicTone own exposure e -> highlights s -> whites0 -> EncodeGamut",
+      "fixedStrength": -50,
+      "range": [
+        -100,
+        0
+      ],
+      "warning": "Different exposure operator; matched-output alternative, not isolated legacy exposure delta"
+    },
+    {
+      "id": "basic-whites",
+      "order": "BasicTone own exposure e -> highlights0 -> whites s -> EncodeGamut",
+      "fixedStrength": -50,
+      "range": [
+        -100,
+        0
+      ],
+      "warning": "Different exposure operator; label separately"
+    }
+  ],
+  "conditions": [
+    "sameEV fixedStrength",
+    "fixedMidtone matched by control exposure with fixedStrength to legacy mid anchor",
+    "mid+high match by exposure plus one control strength to frozen candidate MIDMATCH target"
+  ],
+  "masks": {
+    "midtone": "Frozen source anchor RGB every4th row/column; input linear Y0.03..0.35; >=16pixels",
+    "high": "SameROI every4th row/column; fixed input max(linearRGB*2^referenceEV)>.75; >=16pixels",
+    "fullMetrics": "Full384x384 output/target after fit, same fixed high mask"
+  },
+  "solver": {
+    "exposureRange": [
+      -5,
+      5
+    ],
+    "exposureCoarseIntervals": 8,
+    "exposureBisections": 18,
+    "strengthCoarseIntervals": 8,
+    "strengthBisections": 14,
+    "bracketSelection": "first bracket in ordered range; retain all coarse residuals; no ROI or family reranking",
+    "maxRequests": 22000,
+    "processSeconds": 600,
+    "processPrivateBytes": 536870912,
+    "targetMidAbsError": 0.00002,
+    "targetHighRelativeError": 0.005,
+    "fullPostfitTolerance": "mid2e-5/high0.5%; fail=>NOT_MATCHED not normalized"
+  },
+  "missingAnchor": "NO_MIDTONE_ANCHOR -> sameEV only; do not use different ROI",
+  "whitepoint": "Report full q99/max and neutral white mapping; not an additional fit target",
+  "scope": "12 fixed ROI/EVcases,5existing-control families, bounded deterministic fitting; no new material/Amount/V2",
+  "subjectivePreferences": "Do not fill user answers",
+  "nativeCalls": 0,
+  "newRawDecodes": 0,
+  "rawBatchLedgerCreated": false,
+  "originalPlanSha256": "c6d41ae4f63a7b5f1344b9de2865d2c2acbd2d285297c6aaa444b11dbcf9ea9e",
+  "changeReason": "Reject approximate preflight executor; use exact current product classes and original frozen anchor. Inputs/methods/exposures/thresholds unchanged.",
+  "anchors": {
+    "company-02": {
+      "roi": [
+        3300,
+        2500,
+        384,
+        384
+      ],
+      "file": "company-02-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Fixed input luminance mask 0.03 <= Y <= 0.35, minimum16 pixels; mean output linear Y matched by candidate EV only"
+    },
+    "company-05": {
+      "roi": [
+        900,
+        900,
+        384,
+        384
+      ],
+      "file": "company-05-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Fixed input luminance mask 0.03 <= Y <= 0.35, minimum16 pixels; mean output linear Y matched by candidate EV only"
+    },
+    "synthetic-neutral-texture": {
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "file": "synthetic-neutral-texture-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Independent neutral 18% linear sRGB anchor"
+    },
+    "synthetic-coloured-specular": {
+      "roi": [
+        0,
+        0,
+        384,
+        384
+      ],
+      "file": "synthetic-coloured-specular-midtone.f32",
+      "shape": [
+        384,
+        384,
+        3
+      ],
+      "rule": "Independent neutral 18% linear sRGB anchor"
+    }
+  },
+  "controlBinding": "Exact ColorStudioToolProcessor.Apply; original product Curve uses master curve only and all individual R/G/B curves identity",
+  "matchTarget": "Candidate existing frozen midmatched output; legacy separate anchor fixed from1bf; no ROI-local midtone substitute"
+}

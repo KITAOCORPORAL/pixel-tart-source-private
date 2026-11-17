@@ -1,0 +1,23 @@
+{
+  "status": "PASS_STREAMED_STORED_RGB48_EXPORT_PARITY",
+  "file": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-vm-e818-reopen-proxy-02\\frozen-replay_仿色.tif",
+  "width": 7752,
+  "height": 5184,
+  "bits": [
+    16,
+    16,
+    16
+  ],
+  "orientation": 1,
+  "pixelBytes": 241118208,
+  "allRgbPayloadSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+  "icc": {
+    "bytes": 3144,
+    "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e"
+  },
+  "noRawOrNativeDecoder": true,
+  "streamBlockMaxBytes": 1048576,
+  "fileSha256": "c9e028ecdbafb1cdaf4d9d4d03eabdefc161e50184d7044a4106480c5d1b975a",
+  "completedSidecarMatches": true,
+  "sourceIdentityScope": "Synthetic replay marker SourceHash, not new originalRAF decode; frozenRGBpayload hash remains0806D680"
+}
