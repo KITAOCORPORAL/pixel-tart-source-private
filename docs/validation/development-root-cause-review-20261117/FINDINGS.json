@@ -1,0 +1,85 @@
+{
+  "sourceProduct": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "findings": [
+    {
+      "id": "OWN-01",
+      "status": "CONFIRMED_SOURCE_LINKED_CONTROLLED_REPRO",
+      "priority": "P1",
+      "problem": "Stale recovery can terminate another instance namespace",
+      "necessaryConditions": "All other same-name candidates are same-session, no-window, older than15seconds and matching ProductName; requested namespace has no activation ACK",
+      "evidence": [
+        "RUNTIME_OWNERSHIP_REPRODUCTION.json",
+        "OWNERSHIP_SOURCE_BINDING.json"
+      ],
+      "currentCode": "src/RAWSelectionAssistant/Utilities/SingleInstanceManager.cs:56-114",
+      "limits": "Owned console fixtures only; no ordinary user data loss claimed",
+      "productFix": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "SEL-01",
+      "status": "CONFIRMED_ORDINARY_PACKAGED_UI",
+      "priority": "P2",
+      "problem": "Persisted fallback project name and empty UI name diverge; render/copy precedes downstream validation",
+      "evidence": [
+        "EMPTY_NAME_PREFLIGHT_REPRODUCTION.json"
+      ],
+      "currentCode": "MainViewModel.cs2536; MainViewModel.OnlineSelection.cs35-41; OnlineSelectionViewModels.cs688-690",
+      "limits": "Native naming workaround completed validation; source defect remains",
+      "productFix": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "CLOSE-C1-C3",
+      "status": "CONFIRMED_CONTROLLED_WPF_NECESSARY_CONDITIONS",
+      "priority": "P1",
+      "problem": "Separate close participants replay intent or read mutable target across await",
+      "evidence": [
+        "CLOSE_INVESTIGATION_LINK.json",
+        "CLOSE_INVESTIGATION_SUMMARY.json"
+      ],
+      "limits": "Old现场 nested pump source and old canvas revision remain UNKNOWN",
+      "productFix": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "IMAGE-I1-I3",
+      "status": "CONFIRMED_CONTROLLED_WPF_TERMINAL_BOUNDARY",
+      "priority": "P1",
+      "problem": "Unloaded cancellation does not suppress late publication or Changed-triggered work; parent disposal does not drain canvas tasks",
+      "evidence": [
+        "CLOSE_INVESTIGATION_LINK.json",
+        "CLOSE_INVESTIGATION_SUMMARY.json"
+      ],
+      "limits": "15 expected observations include reproduced defects; not15 product passes",
+      "productFix": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "PERF-DB",
+      "status": "STATIC_CALLCHAIN_CONFIRMED_LATENCY_UNMEASURED",
+      "priority": "P2",
+      "problem": "History loads can repeat within result return and ListAsync performs1+2N queries",
+      "evidence": [
+        "PERFORMANCE_EVIDENCE.json"
+      ],
+      "limits": "No user-scale timing claim or immediate storage refactor approved"
+    },
+    {
+      "id": "ID-SOURCE",
+      "status": "HISTORICAL_FIXED_CURRENT_NATIVE_CYCLE_PASS",
+      "problem": "Derived delivery directories were formerly appended as original sources",
+      "evidence": [
+        "PATCH_EQUIVALENCE.json",
+        "FINAL_SELECTION_CYCLE.json"
+      ],
+      "currentFix": "a9d1bb9685796c84c1c604cf671b0f64bdb61225",
+      "limits": "Existing bad historical sources are not automatically repaired; source provenance must remain explicit"
+    },
+    {
+      "id": "ENV-PHONE",
+      "status": "ACCOUNT_ACTION_BLOCKED_ENVIRONMENT_PREPARED",
+      "problem": "Tailscale NeedsLogin; local service/device/booking pass but trusted company HTTPS/iPhone cannot start",
+      "evidence": [
+        "PHONE_READY.json"
+      ],
+      "limits": "No iPhone bidirectional or hardware acceptance claimed"
+    }
+  ]
+}

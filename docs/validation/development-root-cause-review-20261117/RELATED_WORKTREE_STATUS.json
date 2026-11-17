@@ -1,0 +1,20 @@
+{
+  "scope": "All refs/worktrees enumerated separately in preflight; dirty checks limited to related active trees",
+  "sites": [
+    {
+      "root": "E:/Kitao-Worktrees/company-functional-20261116",
+      "head": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+      "status": " M AGENTS.md\n?? docs/validation/development-root-cause-review-20261117/\n?? tools/RuntimeOwnershipInvestigation/\n"
+    },
+    {
+      "root": "E:/Kitao-Worktrees/product-functional-closure-20261112",
+      "head": "4aa17e64efb16dffde208c306ede2a62ba0ec9d8",
+      "status": " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs\n M src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs\n M src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs\n M tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs\n M tools/ProductMemoryIntegrationReplay/Program.cs\n M tools/ProductMemoryIntegrationReplay/run_guarded.py\n?? tools/FunctionalClosureAcceptance/Compare-RenderedTiffOutputs.py\n?? tools/FunctionalClosureAcceptance/Native-ProductStep.ps1\n?? ws-3f9bdab8/\n"
+    },
+    {
+      "root": "E:/Kitao-Worktrees/close-lifecycle-investigation-20261117",
+      "head": "5d4cb04edba67ed6742f623e92de76e2cfd774c5",
+      "status": ""
+    }
+  ]
+}

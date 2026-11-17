@@ -1,0 +1,71 @@
+{
+  "scope": "src/tests stable patch-id; commit ancestry kept separate",
+  "patches": [
+    {
+      "sha": "edd6d25e",
+      "patchId": "dd369961180a69ed9760ee1e218e07d94860f328",
+      "ancestor": false,
+      "fullSha": "edd6d25e685a7058a4e3f2d6b4c2a70f155eb3cf"
+    },
+    {
+      "sha": "17a95b5a",
+      "patchId": "dd369961180a69ed9760ee1e218e07d94860f328",
+      "ancestor": true,
+      "fullSha": "17a95b5a5dab83a47090c36c83abf300a637c80c"
+    },
+    {
+      "sha": "e28074f1",
+      "patchId": "a449bf0d44bd6f7f9b92b60e103feca79279f208",
+      "ancestor": false,
+      "fullSha": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd"
+    },
+    {
+      "sha": "14eda5c7",
+      "patchId": "d5bdb21207333df540245d76218baeca94eab41f",
+      "ancestor": true,
+      "fullSha": "14eda5c7758a962784252566b0a0d7ba784c8221"
+    },
+    {
+      "sha": "b1352e64",
+      "patchId": "b8471eabfb508c3b3a667184539d414d224245e1",
+      "ancestor": false,
+      "fullSha": "b1352e64c05d4cdf656f5f164e8253f2cdbb00ad"
+    },
+    {
+      "sha": "62191dff",
+      "patchId": "b8471eabfb508c3b3a667184539d414d224245e1",
+      "ancestor": false,
+      "fullSha": "62191dfface51c981b1361a4333a3c0981067cb1"
+    },
+    {
+      "sha": "e8180221",
+      "patchId": "b8471eabfb508c3b3a667184539d414d224245e1",
+      "ancestor": true,
+      "fullSha": "e8180221937fa4abb578a16faacebe99a5d4ac1b"
+    },
+    {
+      "sha": "0776b988",
+      "patchId": "7afa6696b8bf51958c92b572bd8de8e5dafd8419",
+      "ancestor": false,
+      "fullSha": "0776b988ba99774f59d0e90251e210e3e441d1fe"
+    },
+    {
+      "sha": "6f9f4027",
+      "patchId": "d058234a0d2b60d04e0e20afbac3171e58770af9",
+      "ancestor": false,
+      "fullSha": "6f9f40277a714cd54ddace08ea65fee1047e91f2"
+    },
+    {
+      "sha": "a9d1bb96",
+      "patchId": "7b8881624400fcaeb191ba80fe665ebe3b7c4ed1",
+      "ancestor": true,
+      "fullSha": "a9d1bb9685796c84c1c604cf671b0f64bdb61225"
+    },
+    {
+      "sha": "a9932b73",
+      "patchId": "d06d42fb20671bca0a37d13d897c3c42f441702b",
+      "ancestor": true,
+      "fullSha": "a9932b7333b6e04915f9679805ff028f2bd94eaa"
+    }
+  ]
+}

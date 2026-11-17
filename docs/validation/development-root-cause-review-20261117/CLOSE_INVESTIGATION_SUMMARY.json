@@ -1,0 +1,267 @@
+{
+  "atUtc": "2026-11-17T02:01:55.264947+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "controlledCases": 15,
+  "repeatResourceCase": 1,
+  "allExpectedProbeOutcomesObserved": true,
+  "productBugsReproducedNotReleasePass": true,
+  "cases": [
+    {
+      "round": "v2",
+      "case": "close-saved",
+      "pid": 22344,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 138817536,
+      "osPeakWorkingSetBytes": 204668928,
+      "stop": null,
+      "receipt": "receipts/v2/close-saved/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "ClosingObserver",
+        "CloseOutcome"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-nested-frame",
+      "pid": 51768,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 138825728,
+      "osPeakWorkingSetBytes": 206934016,
+      "stop": null,
+      "receipt": "receipts/v2/close-nested-frame/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "NestedFrameEnter",
+        "DispatcherUnhandledException",
+        "NestedFrameExit",
+        "CloseOutcome",
+        "ClosingObserver",
+        "NestedFrameEnter",
+        "NestedFrameExit"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-nested-frame-repeat",
+      "pid": 3532,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 139575296,
+      "osPeakWorkingSetBytes": 207417344,
+      "stop": null,
+      "receipt": "receipts/v2/close-nested-frame-repeat/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "NestedFrameEnter",
+        "DispatcherUnhandledException",
+        "NestedFrameExit",
+        "CloseOutcome",
+        "ClosingObserver",
+        "NestedFrameEnter",
+        "NestedFrameExit"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-cancel-other-handler",
+      "pid": 41040,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 139628544,
+      "osPeakWorkingSetBytes": 205193216,
+      "stop": null,
+      "receipt": "receipts/v2/close-cancel-other-handler/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "IndependentCancel",
+        "ClosingObserver",
+        "CloseOutcome"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-repeated",
+      "pid": 21400,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 140210176,
+      "osPeakWorkingSetBytes": 204431360,
+      "stop": null,
+      "receipt": "receipts/v2/close-repeated/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "ClosingObserver",
+        "ClosingObserver",
+        "CloseOutcome"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-save-pending",
+      "pid": 26788,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 140324864,
+      "osPeakWorkingSetBytes": 206159872,
+      "stop": null,
+      "receipt": "receipts/v2/close-save-pending/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "ClosingObserver",
+        "CloseWhileSaveHeld",
+        "ClosingObserver",
+        "CloseOutcome"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-hide-pending",
+      "pid": 31004,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 137170944,
+      "osPeakWorkingSetBytes": 202948608,
+      "stop": null,
+      "receipt": "receipts/v2/close-hide-pending/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "CloseOutcome",
+        "ClosingObserver"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "close-workspace-first",
+      "pid": 52996,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 135499776,
+      "osPeakWorkingSetBytes": 203513856,
+      "stop": null,
+      "receipt": "receipts/v2/close-workspace-first/RESULT.json",
+      "observedKinds": [
+        "ClosingObserver",
+        "CloseOutcome"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "save-cancel",
+      "pid": 39524,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 141455360,
+      "osPeakWorkingSetBytes": 207286272,
+      "stop": null,
+      "receipt": "receipts/v2/save-cancel/RESULT.json",
+      "observedKinds": [
+        "Cancel",
+        "DispatcherUnhandledException"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "save-failure-retry",
+      "pid": 54832,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 144531456,
+      "osPeakWorkingSetBytes": 212275200,
+      "stop": null,
+      "receipt": "receipts/v2/save-failure-retry/RESULT.json",
+      "observedKinds": [
+        "SaveFailure",
+        "SaveRetry"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "save-undo-reopen-export",
+      "pid": 37524,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 145768448,
+      "osPeakWorkingSetBytes": 216260608,
+      "stop": null,
+      "receipt": "receipts/v2/save-undo-reopen-export/RESULT.json",
+      "observedKinds": [
+        "SaveUndoRedoReopenExport"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "preview-after-unload",
+      "pid": 22612,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 25890816,
+      "osPeakWorkingSetBytes": 69398528,
+      "stop": null,
+      "receipt": "receipts/v2/preview-after-unload/RESULT.json",
+      "observedKinds": [
+        "LatePreviewAfterUnload"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "preview-editor-change-after-unload",
+      "pid": 6384,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 26099712,
+      "osPeakWorkingSetBytes": 72351744,
+      "stop": null,
+      "receipt": "receipts/v2/preview-editor-change-after-unload/RESULT.json",
+      "observedKinds": [
+        "EditorSubscriptionAfterUnload"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "preview-workspace-dispose",
+      "pid": 23604,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 152043520,
+      "osPeakWorkingSetBytes": 217927680,
+      "stop": null,
+      "receipt": "receipts/v2/preview-workspace-dispose/RESULT.json",
+      "observedKinds": [
+        "WorkspaceDisposeWhilePreviewPending"
+      ]
+    },
+    {
+      "round": "v2",
+      "case": "preview-loaded-unload-retains",
+      "pid": 42980,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 50606080,
+      "osPeakWorkingSetBytes": 94990336,
+      "stop": null,
+      "receipt": "receipts/v2/preview-loaded-unload-retains/RESULT.json",
+      "observedKinds": [
+        "UnloadedSurfaceOwners"
+      ]
+    },
+    {
+      "round": "repeat-resource",
+      "case": "preview-workspace-dispose",
+      "pid": 30396,
+      "exitCode": 0,
+      "peakPrivateBytes50ms": 148348928,
+      "osPeakWorkingSetBytes": 217255936,
+      "stop": null,
+      "receipt": "receipts/repeat-resource/preview-workspace-dispose/RESULT.json",
+      "observedKinds": [
+        "WorkspaceDisposeWhilePreviewPending"
+      ]
+    }
+  ],
+  "maxPeakPrivateBytes50ms": 152043520,
+  "maxOsPeakWorkingSetBytes": 217927680,
+  "guardBytes": 2147483648,
+  "forcedGc": false,
+  "newRawDecodes": 0,
+  "scope": "Per-process startup plus synthetic controls and idle; not large-photo acceptance or product operation latency",
+  "initialFixtureIssues": [
+    {
+      "run": "smoke/preview-after-unload",
+      "reason": "Synthetic object CanvasId missing; constructor rejected it",
+      "status": "NOT_PRODUCT_FAILURE"
+    },
+    {
+      "run": "v1/preview-workspace-dispose",
+      "reason": "Fake library/asset identity resolved unavailable before provider",
+      "status": "NOT_PRODUCT_FAILURE"
+    }
+  ]
+}

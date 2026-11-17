@@ -1,0 +1,39 @@
+{
+  "observedAtUtc": "2026-11-17T04:06:40.040Z",
+  "selectionService": {
+    "observedAtUtc": "2026-11-17T03:59:50.4069386+00:00",
+    "pid": 27948,
+    "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\SelectionService\\PixelTart.SelectionApi.Server.exe",
+    "createdFileTime": "134393543912893242",
+    "version": "2.3.0+e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "endpoint": "http://127.0.0.1:10517/",
+    "instanceId": "33a2f55f3db542358670eb2329083415",
+    "root": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\selection-service-state",
+    "retainedForReview": true,
+    "credentialIncluded": false
+  },
+  "phoneService": {
+    "pid": 53528,
+    "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+    "reused": true,
+    "scope": "Existing prepared company phone runtime",
+    "deviceAndBookingVerified": true
+  },
+  "selectionDesktopProcesses": {
+    "pids": [
+      54848,
+      40680
+    ],
+    "exits": [
+      0,
+      0
+    ]
+  },
+  "phoneDesktop": {
+    "lastPid": 40724,
+    "currentAlive": false,
+    "lastExit": 0,
+    "restartEntry": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\Start-CompanyPhoneCalendar.cmd"
+  },
+  "privateAuthNotIncluded": true
+}

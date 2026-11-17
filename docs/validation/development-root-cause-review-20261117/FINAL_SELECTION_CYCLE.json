@@ -1,0 +1,92 @@
+{
+  "clientDate": "2026-11-17",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "status": "PASS_NEW_FINAL_VERSION_SYNTHETIC_SELECTION_CYCLE",
+  "scope": "Ordinary packaged desktop UI + real in-app browser + ordinary native export/save/reopen/rescan; synthetic JPEG only",
+  "projectId": "d37d24c5-513a-4d9f-a363-3b14babb34c1",
+  "albumId": "2b8a8972-6b0d-4718-9eb0-3c25922fc286",
+  "sourceCount": 1,
+  "projectCount": 1,
+  "selected": [
+    "b5832024-74cf-4f2b-8bcb-06f565b64c81",
+    "6db134ab-b8b7-41bd-b277-3daf43c4f338"
+  ],
+  "selectionVersion": 1,
+  "revision": 6,
+  "locked": true,
+  "workflowIdentityPreserved": true,
+  "sourceDirectoriesPreserved": true,
+  "browserRefreshRetainedLock": true,
+  "exposureAfterNativeReopen": 0.5,
+  "exports": [
+    {
+      "file": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\output\\final-jpegs\\REVIEW_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\source-jpegs\\REVIEW_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "exportId": "f86ee37d-dd49-47c2-9d2d-f56a4a4f407b",
+      "assetId": "b5832024-74cf-4f2b-8bcb-06f565b64c81",
+      "numericParameters": [],
+      "sidecarOutputHashVerified": true
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\output\\final-jpegs\\REVIEW_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\source-jpegs\\REVIEW_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "exportId": "1bfc0fd2-bc73-4f83-9bc3-edb88bac7f5e",
+      "assetId": "6db134ab-b8b7-41bd-b277-3daf43c4f338",
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ],
+      "sidecarOutputHashVerified": true
+    }
+  ],
+  "firstRun": {
+    "pid": 54848,
+    "exitCode": 0,
+    "stop": null,
+    "samples": 49969,
+    "peakPrivateBytes50ms": 575913984,
+    "osPeakWorkingSetBytes": 621465600,
+    "lifetimeMs": 2527610.8611000236,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "independentReopen": {
+    "pid": 40680,
+    "exitCode": 0,
+    "stop": null,
+    "samples": 5211,
+    "peakPrivateBytes50ms": 507174912,
+    "osPeakWorkingSetBytes": 457416704,
+    "lifetimeMs": 263515.1893000584,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "emptyNameFailure": "Recorded separately; native naming workaround used, product not patched",
+  "browserProof": "CUSTOMER_CONFIRMED.png",
+  "originalExistingResultsRewritten": false,
+  "newRawDecodes": 0,
+  "forcedGc": false,
+  "guardBytes": 2147483648,
+  "confirmedAtUtc": "2026-11-17T02:19:20.6177111+00:00",
+  "reopenExitInitiator": "NOT_RECORDED; exit0 and no guard STOP independently observed",
+  "activeUIAtEnd": false
+}

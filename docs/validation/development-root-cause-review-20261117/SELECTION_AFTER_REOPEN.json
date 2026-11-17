@@ -1,0 +1,78 @@
+{
+  "atUtc": "2026-11-17T02:48:51.944405+00:00",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "pid": 40680,
+  "projectId": "d37d24c5-513a-4d9f-a363-3b14babb34c1",
+  "root": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\workflow-runtime",
+  "project": {
+    "Id": "d37d24c5-513a-4d9f-a363-3b14babb34c1",
+    "Name": "最终版本独立闭环 20261117",
+    "ProjectType": "JpegOnly",
+    "RootPath": "",
+    "SourceOnlineSelectionProjectId": "2b8a8972-6b0d-4718-9eb0-3c25922fc286"
+  },
+  "sources": [
+    {
+      "Path": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\source-jpegs",
+      "Priority": 0
+    }
+  ],
+  "inputs": [
+    {
+      "OriginalInput": "REVIEW_0001.png"
+    },
+    {
+      "OriginalInput": "REVIEW_0002.png"
+    }
+  ],
+  "projectCount": 1,
+  "albums": [
+    {
+      "id": "2b8a8972-6b0d-4718-9eb0-3c25922fc286",
+      "name": "最终版本独立闭环 20261117",
+      "workflowId": "d37d24c5-513a-4d9f-a363-3b14babb34c1",
+      "status": 5
+    }
+  ],
+  "results": [
+    {
+      "albumId": "2b8a8972-6b0d-4718-9eb0-3c25922fc286",
+      "version": 1,
+      "revision": 6,
+      "locked": true,
+      "selected": [
+        "b5832024-74cf-4f2b-8bcb-06f565b64c81",
+        "6db134ab-b8b7-41bd-b277-3daf43c4f338"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "b5832024-74cf-4f2b-8bcb-06f565b64c81",
+      "projectId": "2b8a8972-6b0d-4718-9eb0-3c25922fc286",
+      "file": "REVIEW_0001.png",
+      "path": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\workflow-runtime\\OnlineSelection\\Prepared\\d37d24c5513a4d9fa3633b14babb34c1\\97fdbeb28c5b4773b3d29f6989648276\\REVIEW_0001.png",
+      "cloudId": "b583202474cf4f2b8bcb06f565b64c81"
+    },
+    {
+      "id": "6db134ab-b8b7-41bd-b277-3daf43c4f338",
+      "projectId": "2b8a8972-6b0d-4718-9eb0-3c25922fc286",
+      "file": "REVIEW_0002.png",
+      "path": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\workflow-runtime\\OnlineSelection\\Prepared\\d37d24c5513a4d9fa3633b14babb34c1\\97fdbeb28c5b4773b3d29f6989648276\\REVIEW_0002.png",
+      "cloudId": "6db134abb8b741bdb2773daf43c4f338"
+    }
+  ],
+  "originalFiles": [
+    {
+      "path": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\source-jpegs\\REVIEW_0001.jpg",
+      "bytes": 16376,
+      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
+    },
+    {
+      "path": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\source-jpegs\\REVIEW_0002.jpg",
+      "bytes": 15629,
+      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
+    }
+  ],
+  "newRawDecodes": 0
+}

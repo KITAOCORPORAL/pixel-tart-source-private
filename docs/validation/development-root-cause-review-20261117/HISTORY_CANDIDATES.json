@@ -1,0 +1,649 @@
+{
+  "window": {
+    "from": "2026-11-04T00:00:00+01:00",
+    "untilExclusive": "2026-11-18T00:00:00+01:00"
+  },
+  "totalAllRefs": 135,
+  "filter": "Literal subject keywords; candidates require changed-file/callchain confirmation; not a count of unique bugs",
+  "commits": [
+    {
+      "sha": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+      "authorDate": "2026-11-16T17:52:20+08:00",
+      "commitDate": "2026-11-16T17:52:20+08:00",
+      "parents": [
+        "09fd766f186a401a8d6975d279608cf8cf4aaca4"
+      ],
+      "subject": "docs(company): verify native TIFF export and final JPEG reopen"
+    },
+    {
+      "sha": "cef082e289164d8f82aa8e6057285a6554bc1945",
+      "authorDate": "2026-11-16T17:20:35+08:00",
+      "commitDate": "2026-11-16T17:20:35+08:00",
+      "parents": [
+        "9e9c8d59345bc7ed5bf3d7c74eb1279d9ba4483b"
+      ],
+      "subject": "docs(memory): pin completed native evidence for unified product handoff"
+    },
+    {
+      "sha": "9e9c8d59345bc7ed5bf3d7c74eb1279d9ba4483b",
+      "authorDate": "2026-11-16T17:17:43+08:00",
+      "commitDate": "2026-11-16T17:17:43+08:00",
+      "parents": [
+        "23a3eb3de10e685a24cf2e138c9048618439e424"
+      ],
+      "subject": "test(memory): seal ordinary company TIFF reopen and exact output verification"
+    },
+    {
+      "sha": "23a3eb3de10e685a24cf2e138c9048618439e424",
+      "authorDate": "2026-11-16T15:45:55+08:00",
+      "commitDate": "2026-11-16T15:45:55+08:00",
+      "parents": [
+        "234211b3cfda45abc455d2f57aba15321acbe9cd"
+      ],
+      "subject": "docs(memory): record ordinary TIFF import and remaining visible-window gate"
+    },
+    {
+      "sha": "70b8578eff158c596ad314eead8cd1c32004be96",
+      "authorDate": "2026-11-16T15:43:40+08:00",
+      "commitDate": "2026-11-16T15:43:40+08:00",
+      "parents": [
+        "e8180221937fa4abb578a16faacebe99a5d4ac1b"
+      ],
+      "subject": "docs(company): seal integrated diagnostic and scoped workflow evidence"
+    },
+    {
+      "sha": "234211b3cfda45abc455d2f57aba15321acbe9cd",
+      "authorDate": "2026-11-16T14:46:35+08:00",
+      "commitDate": "2026-11-16T14:46:35+08:00",
+      "parents": [
+        "62191dfface51c981b1361a4333a3c0981067cb1"
+      ],
+      "subject": "test(memory): retain native import STOP and bind repaired company TIFF evidence"
+    },
+    {
+      "sha": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+      "authorDate": "2026-11-16T14:20:25+08:00",
+      "commitDate": "2026-11-16T14:26:18+08:00",
+      "parents": [
+        "9523626013c443b8f0cb03ea3a6d97b9a7f5d150"
+      ],
+      "subject": "fix(memory): keep hidden film previews dormant during ordinary photo import"
+    },
+    {
+      "sha": "62191dfface51c981b1361a4333a3c0981067cb1",
+      "authorDate": "2026-11-16T14:20:25+08:00",
+      "commitDate": "2026-11-16T14:20:46+08:00",
+      "parents": [
+        "49fbc2f6d47e3bacabb34878e89e37e33523939e"
+      ],
+      "subject": "fix(memory): keep hidden film previews dormant during ordinary photo import"
+    },
+    {
+      "sha": "b1352e64c05d4cdf656f5f164e8253f2cdbb00ad",
+      "authorDate": "2026-11-16T14:20:25+08:00",
+      "commitDate": "2026-11-16T14:20:25+08:00",
+      "parents": [
+        "71d82b8848e8ba7b4e249226e3833e7c3c31f39c"
+      ],
+      "subject": "fix(memory): keep hidden film previews dormant during ordinary photo import"
+    },
+    {
+      "sha": "9523626013c443b8f0cb03ea3a6d97b9a7f5d150",
+      "authorDate": "2026-11-16T12:20:55+08:00",
+      "commitDate": "2026-11-16T13:09:35+08:00",
+      "parents": [
+        "49fbc2f6d47e3bacabb34878e89e37e33523939e"
+      ],
+      "subject": "test(photo): record company sRGB regression and prepare guarded native TIFF acceptance"
+    },
+    {
+      "sha": "49fbc2f6d47e3bacabb34878e89e37e33523939e",
+      "authorDate": "2026-11-16T12:38:36+08:00",
+      "commitDate": "2026-11-16T12:38:36+08:00",
+      "parents": [
+        "a9932b7333b6e04915f9679805ff028f2bd94eaa"
+      ],
+      "subject": "fix(workflow): expose indexed editing and selection preparation in the active workspace"
+    },
+    {
+      "sha": "71d82b8848e8ba7b4e249226e3833e7c3c31f39c",
+      "authorDate": "2026-11-16T12:20:55+08:00",
+      "commitDate": "2026-11-16T12:20:55+08:00",
+      "parents": [
+        "a9932b7333b6e04915f9679805ff028f2bd94eaa"
+      ],
+      "subject": "test(photo): record company sRGB regression and prepare guarded native TIFF acceptance"
+    },
+    {
+      "sha": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+      "authorDate": "2026-11-16T00:16:33+08:00",
+      "commitDate": "2026-11-16T00:16:33+08:00",
+      "parents": [
+        "14eda5c7758a962784252566b0a0d7ba784c8221"
+      ],
+      "subject": "build(workflow): publish integrated home package with preserved external runtime"
+    },
+    {
+      "sha": "14eda5c7758a962784252566b0a0d7ba784c8221",
+      "authorDate": "2026-11-15T22:50:50+08:00",
+      "commitDate": "2026-11-16T00:10:27+08:00",
+      "parents": [
+        "17a95b5a5dab83a47090c36c83abf300a637c80c"
+      ],
+      "subject": "fix(memory): transfer prepared raster cache with session ownership and rollback"
+    },
+    {
+      "sha": "17a95b5a5dab83a47090c36c83abf300a637c80c",
+      "authorDate": "2026-11-15T22:29:36+08:00",
+      "commitDate": "2026-11-16T00:10:27+08:00",
+      "parents": [
+        "a9d1bb9685796c84c1c604cf671b0f64bdb61225"
+      ],
+      "subject": "fix(memory): reuse frozen raster for rendered input and read export headers only"
+    },
+    {
+      "sha": "a9d1bb9685796c84c1c604cf671b0f64bdb61225",
+      "authorDate": "2026-11-16T00:10:26+08:00",
+      "commitDate": "2026-11-16T00:10:26+08:00",
+      "parents": [
+        "be2f9c70e0bc655d687163e149427a7c0346b590"
+      ],
+      "subject": "fix(workflow): retain original source when customer results return to an existing project"
+    },
+    {
+      "sha": "be2f9c70e0bc655d687163e149427a7c0346b590",
+      "authorDate": "2026-11-16T00:05:57+08:00",
+      "commitDate": "2026-11-16T00:05:57+08:00",
+      "parents": [
+        "bdc913c9463573247b9b6460f9a1102e40e74a31"
+      ],
+      "subject": "feat(workflow): preserve same-project edit selection return and household native receipts"
+    },
+    {
+      "sha": "d64948d665d0af0c9b7719798aec8ce57251c786",
+      "authorDate": "2026-11-15T23:06:59+08:00",
+      "commitDate": "2026-11-15T23:07:58+08:00",
+      "parents": [
+        "e28074f18ea6d76d7715451bce89d6c80c3cc2fd"
+      ],
+      "subject": "test(memory): seal guarded home TIFF viewport and independent-reopen evidence"
+    },
+    {
+      "sha": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+      "authorDate": "2026-11-15T22:50:50+08:00",
+      "commitDate": "2026-11-15T22:50:50+08:00",
+      "parents": [
+        "edd6d25e685a7058a4e3f2d6b4c2a70f155eb3cf"
+      ],
+      "subject": "fix(memory): transfer prepared raster cache with session ownership and rollback"
+    },
+    {
+      "sha": "edd6d25e685a7058a4e3f2d6b4c2a70f155eb3cf",
+      "authorDate": "2026-11-15T22:29:36+08:00",
+      "commitDate": "2026-11-15T22:29:36+08:00",
+      "parents": [
+        "bdc913c9463573247b9b6460f9a1102e40e74a31"
+      ],
+      "subject": "fix(memory): reuse frozen raster for rendered input and read export headers only"
+    },
+    {
+      "sha": "4aa17e64efb16dffde208c306ede2a62ba0ec9d8",
+      "authorDate": "2026-11-13T21:33:16+08:00",
+      "commitDate": "2026-11-13T21:33:16+08:00",
+      "parents": [
+        "6f9f40277a714cd54ddace08ea65fee1047e91f2"
+      ],
+      "subject": "docs(r3): seal same-project JPEG loop and precise TIFF handoff"
+    },
+    {
+      "sha": "6f9f40277a714cd54ddace08ea65fee1047e91f2",
+      "authorDate": "2026-11-13T19:08:00+08:00",
+      "commitDate": "2026-11-13T19:08:00+08:00",
+      "parents": [
+        "0776b988ba99774f59d0e90251e210e3e441d1fe"
+      ],
+      "subject": "fix(selection): keep confirmed delivery within the active source capability"
+    },
+    {
+      "sha": "0776b988ba99774f59d0e90251e210e3e441d1fe",
+      "authorDate": "2026-11-13T18:04:59+08:00",
+      "commitDate": "2026-11-13T18:04:59+08:00",
+      "parents": [
+        "bdc913c9463573247b9b6460f9a1102e40e74a31"
+      ],
+      "subject": "fix(selection): bind albums to the current workflow without replacing its project"
+    },
+    {
+      "sha": "46788f5bc0b136e1d2cb1782600374d131f1b509",
+      "authorDate": "2026-11-13T14:03:10+08:00",
+      "commitDate": "2026-11-13T14:03:10+08:00",
+      "parents": [
+        "df3a7e446c28db7d0b44f200ff734399854c38d9"
+      ],
+      "subject": "docs(memory): record minimal integration and prepare guarded native TIFF handoff"
+    },
+    {
+      "sha": "bdc913c9463573247b9b6460f9a1102e40e74a31",
+      "authorDate": "2026-11-13T13:30:13+08:00",
+      "commitDate": "2026-11-13T13:30:13+08:00",
+      "parents": [
+        "1b6845fe389836e765fa2559ee72f3c3531f02f7"
+      ],
+      "subject": "docs(product): record unified R3 source and remote delivery readback"
+    },
+    {
+      "sha": "1b6845fe389836e765fa2559ee72f3c3531f02f7",
+      "authorDate": "2026-11-13T13:28:37+08:00",
+      "commitDate": "2026-11-13T13:28:37+08:00",
+      "parents": [
+        "939d540cab110d5966a536b104fac36e8673800d"
+      ],
+      "subject": "test(product): seal unified functional-memory diagnostics and guarded TIFF evidence"
+    },
+    {
+      "sha": "4c3503c90fc16d51d267a6edff90108c6cb93fb9",
+      "authorDate": "2026-11-13T12:05:24+08:00",
+      "commitDate": "2026-11-13T12:05:24+08:00",
+      "parents": [
+        "54aa5ab2115d16e872ca15074144d8ec4c692707"
+      ],
+      "subject": "fix(memory): reuse content-bound immutable raster sources during export"
+    },
+    {
+      "sha": "54aa5ab2115d16e872ca15074144d8ec4c692707",
+      "authorDate": "2026-11-13T11:44:35+08:00",
+      "commitDate": "2026-11-13T11:44:35+08:00",
+      "parents": [
+        "a3bc3127420c185c57efb62c40743dcab0f0d79c"
+      ],
+      "subject": "fix(memory): avoid eager full raster decoding before detached previews"
+    },
+    {
+      "sha": "a3bc3127420c185c57efb62c40743dcab0f0d79c",
+      "authorDate": "2026-11-13T11:30:58+08:00",
+      "commitDate": "2026-11-13T11:30:58+08:00",
+      "parents": [
+        "2d20b3274f9b84c93d891742a2c5887e46b87b6a"
+      ],
+      "subject": "fix(memory): detach raster previews without a full managed staging buffer"
+    },
+    {
+      "sha": "df3a7e446c28db7d0b44f200ff734399854c38d9",
+      "authorDate": "2026-11-12T18:03:02+08:00",
+      "commitDate": "2026-11-13T10:31:21+08:00",
+      "parents": [
+        "fe5ef8181a7a1164a4ce585e549d3f874706d9d6"
+      ],
+      "subject": "fix(workflow): refresh history after planning creates a project"
+    },
+    {
+      "sha": "43781bfe17605beadaffb572acb2866c452a788c",
+      "authorDate": "2026-11-12T19:03:38+08:00",
+      "commitDate": "2026-11-12T19:03:38+08:00",
+      "parents": [
+        "6523972ff09beb933af2b75944662a63d7b3b7ad"
+      ],
+      "subject": "docs(workflow): record R2 delivery remote readback"
+    },
+    {
+      "sha": "6523972ff09beb933af2b75944662a63d7b3b7ad",
+      "authorDate": "2026-11-12T19:01:04+08:00",
+      "commitDate": "2026-11-12T19:01:04+08:00",
+      "parents": [
+        "ea5b421b03329535a8834545ac3196dc5e4295e4"
+      ],
+      "subject": "test(workflow): seal R2 functional diagnostics and remaining device gates"
+    },
+    {
+      "sha": "ea5b421b03329535a8834545ac3196dc5e4295e4",
+      "authorDate": "2026-11-12T18:03:02+08:00",
+      "commitDate": "2026-11-12T18:03:02+08:00",
+      "parents": [
+        "64c87a88c3cbcb4a71915ddb2ef1686f0fbcbe06"
+      ],
+      "subject": "fix(workflow): refresh history after planning creates a project"
+    },
+    {
+      "sha": "de0b04fffd953b46d3f48400b32f646f3b65bf9f",
+      "authorDate": "2026-11-12T16:10:49+08:00",
+      "commitDate": "2026-11-12T16:10:49+08:00",
+      "parents": [
+        "6ccc5230065aa2c07f6068a7fb8b3271b8a9733a"
+      ],
+      "subject": "docs(memory): seal company product integration, cache lifecycle and diagnostic package"
+    },
+    {
+      "sha": "1bfdfbe9fa62dee4276a0f5d0dd68190388759ee",
+      "authorDate": "2026-11-12T11:57:31+08:00",
+      "commitDate": "2026-11-12T11:57:31+08:00",
+      "parents": [
+        "618ba10233d9b0f182074847c0000d1bd5ae3fc3"
+      ],
+      "subject": "research(color): review EV0 shoulder cost with fixed authorized crops and memory replay"
+    },
+    {
+      "sha": "481e89206a044cfca9793161c9c333db5475567e",
+      "authorDate": "2026-11-11T23:14:22+08:00",
+      "commitDate": "2026-11-11T23:14:22+08:00",
+      "parents": [
+        "b29bff914eed894ac663c1c0a006e18d76672035"
+      ],
+      "subject": "docs(research): seal portrait highlight source and numerical delivery manifest"
+    },
+    {
+      "sha": "c598443ef92bd7ecd7311154e5a2ec7874cd9224",
+      "authorDate": "2026-11-11T23:01:04+08:00",
+      "commitDate": "2026-11-11T23:01:04+08:00",
+      "parents": [
+        "7edd9a65da2a189fadd615c59063283f90037a98"
+      ],
+      "subject": "docs(calendar): seal mobile schedule HTTP native restart and home package receipts"
+    },
+    {
+      "sha": "057fe82085183df723b4542fbff2e09fc8bc896b",
+      "authorDate": "2026-11-11T17:28:02+08:00",
+      "commitDate": "2026-11-11T17:28:02+08:00",
+      "parents": [
+        "2e034c4b577276210a3c978e72fc798ffe1b5f70"
+      ],
+      "subject": "docs(capture): close R2 real Chrome acceptance with preserved queue identities and receipts"
+    },
+    {
+      "sha": "6e57eb268e7640f69b755d7d8380cd7d74d09604",
+      "authorDate": "2026-11-11T14:27:29+08:00",
+      "commitDate": "2026-11-11T14:27:29+08:00",
+      "parents": [
+        "b86d02455be77e4ed0f44ddd5b9816681979746e"
+      ],
+      "subject": "docs(raw): seal no-RAW memory diagnosis, paired replay and pending successor batch"
+    },
+    {
+      "sha": "820b4f0da7f8b741f0547dbfa72d49c0ae3a1105",
+      "authorDate": "2026-11-11T10:45:40+08:00",
+      "commitDate": "2026-11-11T10:45:40+08:00",
+      "parents": [
+        "6d555cf11de07f7dfe01d23369417f10812cc2ed"
+      ],
+      "subject": "docs(raw): record actual X-Trans cold import and parent memory guard stop"
+    },
+    {
+      "sha": "0eda778636a4c2359eefd4611450dcf180f863c1",
+      "authorDate": "2026-11-11T09:47:17+08:00",
+      "commitDate": "2026-11-11T09:47:17+08:00",
+      "parents": [
+        "3a328d0498e98345d9255676bd17ef7c47f0987b"
+      ],
+      "subject": "docs(capture): close all five real Chrome single-image acceptance cases with user evidence"
+    },
+    {
+      "sha": "13a87f29214e45b4cf0b2877e752d3eb127c023c",
+      "authorDate": "2026-11-10T18:31:36+08:00",
+      "commitDate": "2026-11-10T18:31:36+08:00",
+      "parents": [
+        "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77"
+      ],
+      "subject": "docs(raw): seal isolated X-Trans product regression checkpoint and resumable tooling"
+    },
+    {
+      "sha": "a24fac65ae91f3fdef7ff16a58dd462a5b7cbe77",
+      "authorDate": "2026-11-10T17:00:36+08:00",
+      "commitDate": "2026-11-10T17:00:36+08:00",
+      "parents": [
+        "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b"
+      ],
+      "subject": "feat(raw): add opt-in isolated X-Trans diagnostic worker and decoder-aware cache"
+    },
+    {
+      "sha": "189178e3fc1f71257fa30a717104eeedf54d6062",
+      "authorDate": "2026-11-10T13:40:24+08:00",
+      "commitDate": "2026-11-10T13:40:24+08:00",
+      "parents": [
+        "ed5d15d451c5f92dc8ff99d9a4ff91af3e76289c"
+      ],
+      "subject": "docs(capture): seal native machine receipts, developer package and pending real Chrome handoff"
+    },
+    {
+      "sha": "adad7d91788f019a4bb4ee6aca27d5611071f450",
+      "authorDate": "2026-11-10T12:46:47+08:00",
+      "commitDate": "2026-11-10T12:46:47+08:00",
+      "parents": [
+        "1f58779d23e83be1b8bca14a46d8d2e61c431ca4"
+      ],
+      "subject": "fix(capture): recover around interrupted cache writes and preserve the prepared destination root"
+    },
+    {
+      "sha": "1f58779d23e83be1b8bca14a46d8d2e61c431ca4",
+      "authorDate": "2026-11-10T12:43:16+08:00",
+      "commitDate": "2026-11-10T12:43:16+08:00",
+      "parents": [
+        "3713fbe7ce57d0b004505e07b6a6d31d4577acba"
+      ],
+      "subject": "fix(capture): expose original-page action beside the selected image and commit original cache atomically"
+    },
+    {
+      "sha": "2661f2d3fc6d993363d1e30c8b0339ae9fcc238b",
+      "authorDate": "2026-11-10T11:37:49+08:00",
+      "commitDate": "2026-11-10T11:37:49+08:00",
+      "parents": [
+        "ca712a3c4daacc9e2fd8990f8fb776440c2b4592"
+      ],
+      "subject": "docs(selection): seal human Safari confirmation, same-build PC collection and independent workflow reopen"
+    },
+    {
+      "sha": "ca712a3c4daacc9e2fd8990f8fb776440c2b4592",
+      "authorDate": "2026-11-10T10:47:15+08:00",
+      "commitDate": "2026-11-10T10:47:15+08:00",
+      "parents": [
+        "c8a2f5cbb3945ea5367445c4f8967639ae543b15"
+      ],
+      "subject": "docs(selection): seal converged build and protected HTTPS Safari handoff awaiting human feedback"
+    },
+    {
+      "sha": "c8a2f5cbb3945ea5367445c4f8967639ae543b15",
+      "authorDate": "2026-11-10T10:30:35+08:00",
+      "commitDate": "2026-11-10T10:30:35+08:00",
+      "parents": [
+        "7769b8ee63ad46cd22efb154145766c45b34ba69"
+      ],
+      "subject": "test(database): assert schema eight after the additive selection identity migration"
+    },
+    {
+      "sha": "7769b8ee63ad46cd22efb154145766c45b34ba69",
+      "authorDate": "2026-11-10T10:23:25+08:00",
+      "commitDate": "2026-11-10T10:23:25+08:00",
+      "parents": [
+        "f0714b7ac4993cb061b3676a15d6dec95ca4bad8"
+      ],
+      "subject": "fix(selection): persist reciprocal workflow identity across SQLite reopen and ordinary save"
+    },
+    {
+      "sha": "f0714b7ac4993cb061b3676a15d6dec95ca4bad8",
+      "authorDate": "2026-11-10T10:16:11+08:00",
+      "commitDate": "2026-11-10T10:16:11+08:00",
+      "parents": [
+        "d49f2b81eb49ecf236ca0935bce157b03b525964"
+      ],
+      "subject": "test(selection): verify rejection before persistence and exercise HTTP recovery cases"
+    },
+    {
+      "sha": "d49f2b81eb49ecf236ca0935bce157b03b525964",
+      "authorDate": "2026-11-10T10:11:26+08:00",
+      "commitDate": "2026-11-10T10:11:26+08:00",
+      "parents": [
+        "181de897a7adf6557b5a54232020dc7a2c7d45b5"
+      ],
+      "subject": "test(selection): forward chunked desktop JSON through the bounded HTTP fault proxy"
+    },
+    {
+      "sha": "181de897a7adf6557b5a54232020dc7a2c7d45b5",
+      "authorDate": "2026-11-10T10:05:41+08:00",
+      "commitDate": "2026-11-10T10:05:41+08:00",
+      "parents": [
+        "8e447075301074fd1a3c966b34ec64635dd72eb2"
+      ],
+      "subject": "feat(selection): converge validated confirmation receipts and lost-response recovery on transport-free Core"
+    },
+    {
+      "sha": "8e447075301074fd1a3c966b34ec64635dd72eb2",
+      "authorDate": "2026-11-10T09:35:37+08:00",
+      "commitDate": "2026-11-10T09:35:37+08:00",
+      "parents": [
+        "81bc7be925a0fe7d2600ec275a6049a621e283de"
+      ],
+      "subject": "docs(selection): seal HTTP v1 desktop roundtrip, package and pending phone acceptance"
+    },
+    {
+      "sha": "c36e1f38323bdb11bf4f731421893ff5cabfce00",
+      "authorDate": "2026-11-10T00:48:08+08:00",
+      "commitDate": "2026-11-10T00:48:08+08:00",
+      "parents": [
+        "feef4bc25a13d26a297bad39af99f3332bf9ce25"
+      ],
+      "subject": "docs(selection): seal native PC roundtrip receipts and ready iPhone Safari handoff"
+    },
+    {
+      "sha": "feef4bc25a13d26a297bad39af99f3332bf9ce25",
+      "authorDate": "2026-11-10T00:44:01+08:00",
+      "commitDate": "2026-11-10T00:44:01+08:00",
+      "parents": [
+        "8652a02c26e2ff831c596e1c78ae2213cda656b8"
+      ],
+      "subject": "fix(selection): verify server confirmation receipts and expose runnable PC entrypoints"
+    },
+    {
+      "sha": "8652a02c26e2ff831c596e1c78ae2213cda656b8",
+      "authorDate": "2026-11-09T22:01:13+08:00",
+      "commitDate": "2026-11-09T22:01:13+08:00",
+      "parents": [
+        "6f28d5ba5ead64ed5083516d236e2a2271580deb"
+      ],
+      "subject": "docs(selection): record verified delivery and pending Safari acceptance"
+    },
+    {
+      "sha": "39e60d3feff52f156a72d16f7820f0b968bd9b5b",
+      "authorDate": "2026-11-09T21:57:54+08:00",
+      "commitDate": "2026-11-09T21:57:54+08:00",
+      "parents": [
+        "ea081ecb0930600fce9ee2e714c741fcd3c12b7e"
+      ],
+      "subject": "docs(research): distinguish source byte identities and retain native handoff limits"
+    },
+    {
+      "sha": "6f28d5ba5ead64ed5083516d236e2a2271580deb",
+      "authorDate": "2026-11-09T21:57:01+08:00",
+      "commitDate": "2026-11-09T21:57:01+08:00",
+      "parents": [
+        "37ea6c9abaae94a3f4e2ac6b615837eb02e89633"
+      ],
+      "subject": "feat(selection): deliver protected HTTP selection roundtrip with durable desktop writeback"
+    },
+    {
+      "sha": "81bc7be925a0fe7d2600ec275a6049a621e283de",
+      "authorDate": "2026-11-09T20:50:35+08:00",
+      "commitDate": "2026-11-09T20:50:35+08:00",
+      "parents": [
+        "c44f800a428ba097e024c91e7691dbf3b6a17355"
+      ],
+      "subject": "test(selection): verify packaged local service and configured full desktop entry"
+    },
+    {
+      "sha": "c44f800a428ba097e024c91e7691dbf3b6a17355",
+      "authorDate": "2026-11-09T20:25:22+08:00",
+      "commitDate": "2026-11-09T20:25:22+08:00",
+      "parents": [
+        "064f53e0e73913415e48a56ebd73f4d885f109fc"
+      ],
+      "subject": "refactor(selection): preserve transport-free Core and configure HTTP in desktop infrastructure"
+    },
+    {
+      "sha": "064f53e0e73913415e48a56ebd73f4d885f109fc",
+      "authorDate": "2026-11-09T19:54:39+08:00",
+      "commitDate": "2026-11-09T19:54:39+08:00",
+      "parents": [
+        "34b72f448d1ac094156295b875b6c2d96ec9af66"
+      ],
+      "subject": "chore(selection): keep generated Python caches out of the source delivery"
+    },
+    {
+      "sha": "34b72f448d1ac094156295b875b6c2d96ec9af66",
+      "authorDate": "2026-11-09T19:52:19+08:00",
+      "commitDate": "2026-11-09T19:52:19+08:00",
+      "parents": [
+        "37ea6c9abaae94a3f4e2ac6b615837eb02e89633"
+      ],
+      "subject": "feat(selection): connect full desktop, HTTP LocalDev service and protected mobile web selection"
+    },
+    {
+      "sha": "37ea6c9abaae94a3f4e2ac6b615837eb02e89633",
+      "authorDate": "2026-11-09T17:00:28+08:00",
+      "commitDate": "2026-11-09T17:00:28+08:00",
+      "parents": [
+        "5645a9af4388f1752faed7212d94e5df622c7e53"
+      ],
+      "subject": "docs(collage): seal used-badge native acceptance, full package and online provider slice audit"
+    },
+    {
+      "sha": "42476a1c1ab73f8aedf3ada973c8302efa83204f",
+      "authorDate": "2026-11-09T14:36:40+08:00",
+      "commitDate": "2026-11-09T14:36:40+08:00",
+      "parents": [
+        "221f5c9bcebfb1e1b1d28c6435b057f83d9b645d"
+      ],
+      "subject": "docs(collage): seal native entry acceptance and complete diagnostic package"
+    },
+    {
+      "sha": "221f5c9bcebfb1e1b1d28c6435b057f83d9b645d",
+      "authorDate": "2026-11-09T14:25:33+08:00",
+      "commitDate": "2026-11-09T14:25:33+08:00",
+      "parents": [
+        "623d0a8ccab6305320fd2d93eda2bcdcc45711f3"
+      ],
+      "subject": "test(collage): wait for native shelf after closing source filter"
+    },
+    {
+      "sha": "623d0a8ccab6305320fd2d93eda2bcdcc45711f3",
+      "authorDate": "2026-11-09T14:21:05+08:00",
+      "commitDate": "2026-11-09T14:21:05+08:00",
+      "parents": [
+        "38dd3f92bb2db7238f7f058008887929ec971c93"
+      ],
+      "subject": "feat(collage): persist material favorites and reuse canvas import workflow"
+    },
+    {
+      "sha": "cb0093a08a94ae2838e54bea4dd8ccd64a5de336",
+      "authorDate": "2026-11-09T14:06:16+08:00",
+      "commitDate": "2026-11-09T14:06:16+08:00",
+      "parents": [
+        "fcd4f4f9b259bad933f1616a331c7ed615b60d8e"
+      ],
+      "subject": "research(raw): close F2 on 64d4dc6e with four original fixture checks"
+    },
+    {
+      "sha": "973856b017555d96764d99db60ffb463be8eebd5",
+      "authorDate": "2026-11-06T14:55:00+08:00",
+      "commitDate": "2026-11-06T14:55:00+08:00",
+      "parents": [
+        "1cabb0cfcbe2184fb55c066326cbd3c1d1bd23eb"
+      ],
+      "subject": "diagnostic(raw): implement internal checkpoint source instrumentation and task-wide bounded host"
+    },
+    {
+      "sha": "e2437d2300b37872d5b66482a721e3b6463f1ce4",
+      "authorDate": "2026-11-04T11:39:47+08:00",
+      "commitDate": "2026-11-04T11:39:47+08:00",
+      "parents": [
+        "dde29aefba76d3e6a095f88a73a829d2eb728df8"
+      ],
+      "subject": "docs(raw): record verified remote audit delivery identity"
+    },
+    {
+      "sha": "dde29aefba76d3e6a095f88a73a829d2eb728df8",
+      "authorDate": "2026-11-04T11:37:29+08:00",
+      "commitDate": "2026-11-04T11:37:29+08:00",
+      "parents": [
+        "41743c9b00cc28b1f2c463063697528dff4b9efb"
+      ],
+      "subject": "docs(raw): close default-chain audit with preserved Fuji reopen failure and bound evidence"
+    }
+  ]
+}

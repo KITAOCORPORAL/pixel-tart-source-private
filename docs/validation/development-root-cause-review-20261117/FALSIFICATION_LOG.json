@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "hypothesis": "Workfile save is an unprotected fingerprint TOCTOU",
+      "result": "FALSIFIED_FOR_ORDINARY_SAVE_PATH",
+      "evidence": "ColorStudioSessionStore120-127 holds exclusive.session.lock around fingerprint/write; ReferenceColorWorkspaceViewModel.Session69 calls SaveCheckedAsync; raw SaveAsync has no separate ordinaryUI caller"
+    },
+    {
+      "hypothesis": "Isolated runtime bypasses all single-instance checks",
+      "result": "FALSIFIED",
+      "evidence": "App622-637 adds a root-hash namespace, then acquires SingleInstanceManager; the defect is recovery enumerating outside that namespace"
+    },
+    {
+      "hypothesis": "Old selection.js/css remains an active duplicate client",
+      "result": "FALSIFIED_CURRENT_TREE",
+      "evidence": "Current wwwroot contains only selection.html, selection-client.js/css and server explicitly routes these; no cleanup of nonexistent files proposed"
+    },
+    {
+      "hypothesis": "Two rollback-titled cache commits are two Git rollbacks",
+      "result": "FALSIFIED",
+      "evidence": "They implement runtime cache ownership failure rollback; no explicit Git revert subjects or merge commits in the135-commit window"
+    },
+    {
+      "hypothesis": "Any successful ordinary TIFF cycle proves canvas close/memory terminal behavior",
+      "result": "FALSIFIED_SCOPE",
+      "evidence": "TIFF file/lifecycle contract passed earlier; separate canvas15-case controlled matrix reproduces distinct terminal/close defects"
+    },
+    {
+      "hypothesis": "A prior calendar LAUNCH means the calendar is currently running",
+      "result": "FALSIFIED",
+      "evidence": "Prior calendar PID2820 exited0; current app was explicitly restored asPID40724 and native calendar UI verified"
+    }
+  ]
+}

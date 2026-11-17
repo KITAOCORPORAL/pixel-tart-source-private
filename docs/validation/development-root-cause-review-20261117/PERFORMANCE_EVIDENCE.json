@@ -1,0 +1,91 @@
+{
+  "existingEvidenceReused": true,
+  "noRepeatTiffRuns": true,
+  "rows": [
+    {
+      "operation": "Native folder confirmation to TIFF Completed sidecar",
+      "source": "62191dff",
+      "fromUtc": "2026-11-16T08:09:03.1037418+00:00",
+      "toUtc": "2026-11-16T08:09:17.7582802+00:00",
+      "elapsedMs": 14655,
+      "scope": "Includes UI dispatch, encoding and file IO; not isolated encoder CPU time",
+      "inputWidth": 7752,
+      "inputHeight": 5184,
+      "newRun": false
+    },
+    {
+      "operation": "Native folder confirmation to TIFF Completed sidecar",
+      "source": "62191dff",
+      "fromUtc": "2026-11-16T08:48:34.6529881+00:00",
+      "toUtc": "2026-11-16T08:48:48.8263669+00:00",
+      "elapsedMs": 14174,
+      "scope": "Includes UI dispatch, encoding and file IO; not isolated encoder CPU time",
+      "inputWidth": 7752,
+      "inputHeight": 5184,
+      "newRun": false
+    },
+    {
+      "operation": "Native folder confirmation to TIFF Completed sidecar",
+      "source": "e8180221",
+      "fromUtc": "2026-11-16T09:02:02.4780723+00:00",
+      "toUtc": "2026-11-16T09:02:16.7469327+00:00",
+      "elapsedMs": 14268,
+      "scope": "Includes UI dispatch, encoding and file IO; not isolated encoder CPU time",
+      "inputWidth": 7752,
+      "inputHeight": 5184,
+      "newRun": false
+    },
+    {
+      "operation": "Build log timer",
+      "file": "BUILD_App.log",
+      "timerLines": [],
+      "scope": "Build/restore/package preparation; not product UI latency",
+      "measurement": "NOT_RECORDED_IN_LOG"
+    },
+    {
+      "operation": "Build log timer",
+      "file": "BUILD_ScheduleService.log",
+      "timerLines": [],
+      "scope": "Build/restore/package preparation; not product UI latency",
+      "measurement": "NOT_RECORDED_IN_LOG"
+    },
+    {
+      "operation": "Build log timer",
+      "file": "BUILD_SelectionService.log",
+      "timerLines": [],
+      "scope": "Build/restore/package preparation; not product UI latency",
+      "measurement": "NOT_RECORDED_IN_LOG"
+    },
+    {
+      "operation": "Build log timer",
+      "file": "BUILD_native-host.log",
+      "timerLines": [],
+      "scope": "Build/restore/package preparation; not product UI latency",
+      "measurement": "NOT_RECORDED_IN_LOG"
+    },
+    {
+      "operation": "Synthetic source stale recovery",
+      "elapsedMs": 3446.790099958889,
+      "sourceWaitTimeoutMs": 3000,
+      "fixtureAgingMs": 16500,
+      "scope": "Recovery interval includes the production3-second activation acknowledgment timeout; fixture aging excluded"
+    }
+  ],
+  "staticFindings": [
+    {
+      "file": "src/RAWSelectionAssistant.Core/Services/Database/SqliteDomainRepositories.cs",
+      "finding": "ListAsync executes project query plus source/input queries per project",
+      "queryCount": "1+2N",
+      "latencyClaim": "NOT_MEASURED"
+    },
+    {
+      "file": "src/RAWSelectionAssistant/ViewModels/MainViewModel.OnlineSelection.cs",
+      "finding": "Accept result can save/reload current history, reload for identity lookup, upsert and reload again",
+      "latencyClaim": "Repeated IO/callchain confirmed; user-scale cost not yet measured"
+    },
+    {
+      "finding": "Native automation uses before/after whole-tree snapshots and fixed timeouts; process lifetimes include idle/user waits",
+      "latencyClaim": "Do not rank whole lifetime or tool timeout as product operation latency"
+    }
+  ]
+}

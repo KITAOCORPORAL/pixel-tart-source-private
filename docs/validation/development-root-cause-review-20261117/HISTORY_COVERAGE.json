@@ -1,0 +1,14 @@
+{
+  "clientTimeZone": "Europe/Berlin",
+  "window": {
+    "from": "2026-11-04T00:00:00+01:00",
+    "untilExclusive": "2026-11-18T00:00:00+01:00"
+  },
+  "initialAllRefsUniqueCommits": 135,
+  "initialSubjectCandidates": 71,
+  "latestBeforeMainReviewCommit": 136,
+  "supplementalResearchCommit": "5d4cb04edba67ed6742f623e92de76e2cfd774c5",
+  "deepChangedFileReviewCommits": 19,
+  "initialCoverage": "All135 commit metadata;71 topic candidates,19 bounded changed-file/callchain reviews plus explicit origins outside window",
+  "notClaimed": "Not a semantic review of every line in repository history and not a unique-bug count"
+}

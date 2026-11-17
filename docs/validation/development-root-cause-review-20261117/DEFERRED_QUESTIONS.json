@@ -1,0 +1,21 @@
+{
+  "knownPreferences": [
+    "minimal scoped change",
+    "preserve architecture and original data",
+    "structural review before implementation",
+    "no repeat sufficient tests"
+  ],
+  "unresolved": [
+    {
+      "id": "unnamed-project-policy",
+      "question": "未命名项目发送选片时，希望产品如何处理？",
+      "affects": "B2 validation/normalization behavior; no implementation until aligned"
+    },
+    {
+      "id": "same-workflow-album-history",
+      "question": "同一归片项目后续交付如何组织相册与确认版本？",
+      "affects": "Future identity/schema policy; excluded from current minimal patch"
+    }
+  ],
+  "currentOptionsAreConditional": true
+}

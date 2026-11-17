@@ -1,0 +1,18 @@
+{
+  "observedAtUtc": "2026-11-17T02:38:20.721Z",
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "status": "CONFIRMED_ORDINARY_UI_LATE_EMPTY_NAME_VALIDATION",
+  "workflowProjectPersistedWithFallbackName": true,
+  "uiProjectNameWasEmpty": true,
+  "pngSideEffectsBeforeValidation": 2,
+  "selectionWorkspaceCreatedAtFailure": false,
+  "visibleStatus": "请填写项目名。",
+  "failureSnapshot": "E:\\Kitao-Deliveries\\development-review-20261117\\selection-final-e818\\native-mainline-uia\\13-selection-ready.json",
+  "sourceCalls": [
+    "MainViewModel.cs:2536 fallback name stored only on project record",
+    "MainViewModel.OnlineSelection.cs:35-40 copies prepared files then passes UI ProjectName",
+    "OnlineSelectionViewModels.cs:688-690 validates draft after earlier work"
+  ],
+  "workaround": "Native project-name input and save, then resend; not a product fix",
+  "originalFailureArtifactsRetained": true
+}

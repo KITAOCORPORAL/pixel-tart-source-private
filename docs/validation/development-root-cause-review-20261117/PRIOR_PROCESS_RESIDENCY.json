@@ -1,0 +1,47 @@
+[
+  {
+    "run": "hidden-final-phone",
+    "exit": {
+      "pid": 2820,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 201996,
+      "peakPrivateBytes50ms": 295124992,
+      "osPeakWorkingSetBytes": 310140928,
+      "lifetimeMs": 10245360.928399954,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    },
+    "stop": null
+  },
+  {
+    "run": "hidden-final-original",
+    "exit": {
+      "pid": 27940,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 204120,
+      "peakPrivateBytes50ms": 343474176,
+      "osPeakWorkingSetBytes": 326836224,
+      "lifetimeMs": 10353828.951300006,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    },
+    "stop": null
+  },
+  {
+    "run": "hidden-final-batch",
+    "exit": {
+      "pid": 25968,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 182052,
+      "peakPrivateBytes50ms": 623374336,
+      "osPeakWorkingSetBytes": 525647872,
+      "lifetimeMs": 9231307.231899932,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    },
+    "stop": null
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "startingDelivery": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "linkedUnchangedProductionSources": [
+    {
+      "file": "src/RAWSelectionAssistant/Utilities/SingleInstanceManager.cs",
+      "sha256": "749de4091fce3e9cfec526a14c089ed0e58807dbaa5c97c39e0b2b112a4382a4",
+      "gitBlobAtProduct": "f8b61db7dffd0094ae456d8e4cc3f30e4938073e"
+    },
+    {
+      "file": "src/RAWSelectionAssistant.Core/Models/Branding.cs",
+      "sha256": "fa9d2e09fb0b1ec5d2f8d8d804cda8bc854d1520160f8d868cb24cade7383e33",
+      "gitBlobAtProduct": "1238826aea69024a769676a8bebc951392a97613"
+    }
+  ],
+  "diagnosticTool": "tools/RuntimeOwnershipInvestigation",
+  "fixtureOnly": true
+}

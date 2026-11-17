@@ -1,0 +1,45 @@
+{
+  "clientDate": "2026-11-17",
+  "clientTimeZone": "Europe/Berlin",
+  "reviewWindow": {
+    "from": "2026-11-04T00:00:00+01:00",
+    "untilExclusive": "2026-11-18T00:00:00+01:00"
+  },
+  "startingDelivery": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "phase": "ROOT_CAUSE_AND_EXECUTABLE_PROPOSAL_READY_FOR_REVIEW",
+  "productFixImplemented": false,
+  "approvedDecisions": "APPROVED_DECISIONS.json",
+  "principles": "AGENTS.md + TEN_PRINCIPLES.md",
+  "rootFindings": "FINDINGS.json",
+  "options": "OPTIONS_AND_MINIMAL_SCOPE.md",
+  "unknownPreferences": "PREFERENCES_TO_ALIGN.md",
+  "newFinalSelectionCycle": "FINAL_SELECTION_CYCLE.json",
+  "phone": "PHONE_READY.json",
+  "newRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "forceGc": false,
+  "repeatTiffRuns": false,
+  "repeat39RegressionRuns": false,
+  "productSrcTestsUnchanged": true,
+  "originalDirtyWorktreePreserved": true,
+  "independentCloseEvidenceCommit": "5d4cb04edba67ed6742f623e92de76e2cfd774c5",
+  "rawRoot": "E:/Kitao-Deliveries/development-review-20261117",
+  "next": "Review minimalB scope and unresolved business semantics; personal tailnet login then existing HTTPS/iPhone continuation",
+  "releaseReady": false,
+  "phoneWindow": "OBSERVED_EXIT0_START_ENTRY_READY",
+  "selectionDesktop": "TWO_PROCESSES_EXIT0",
+  "retainedServices": {
+    "selection": {
+      "pid": 27948,
+      "port": 10517,
+      "scope": "new synthetic review root"
+    },
+    "phone": {
+      "pid": 53528,
+      "scope": "existing prepared phone root"
+    }
+  },
+  "principlesCommit": "a60954974fe577ce996aca9a9b7a2accbfbe292e",
+  "reviewOutput": "Investigation+conditional minimumB proposal, no product implementation"
+}

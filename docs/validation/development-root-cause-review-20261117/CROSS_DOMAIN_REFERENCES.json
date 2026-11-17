@@ -1,0 +1,29 @@
+{
+  "primarySourcesOnly": true,
+  "browserReadVerified": true,
+  "webSearchToolReturnedNoUsableResult": true,
+  "notPixelNodeApproval": true,
+  "references": [
+    {
+      "system": "SQLite",
+      "officialUrl": "https://www.sqlite.org/isolation.html",
+      "readVia": "Official browser page2026-11-17",
+      "appliedIdea": "Keep database aggregate updates inside their existing SQLite transaction; commit visibility is scoped to that database, not an automatic atomic boundary spanning JSON files, UI tasks and image buffers.",
+      "limits": "Do not replace the existing project transaction or add a distributed transaction framework without a demonstrated cross-store recovery gap."
+    },
+    {
+      "system": "Stripe API idempotency",
+      "officialUrl": "https://docs.stripe.com/api/idempotent_requests",
+      "readVia": "Official API reference; API2026-10-28.endive visible",
+      "appliedIdea": "Bind retries to an operation identity and equivalent request parameters; validate before beginning side effects and distinguish retry from a deliberate new version.",
+      "limits": "APIv1 andv2 have different retry/result policies; do not copy a24-hour payment-key retention rule into long-lived photography projects or claim unlimited exactly-once behavior."
+    },
+    {
+      "system": "Microsoft WPF weak event patterns",
+      "officialUrl": "https://learn.microsoft.com/en-us/dotnet/desktop/wpf/events/weak-event-patterns",
+      "readVia": "Official Microsoft Learn page",
+      "appliedIdea": "Event sources can extend listeners lifetimes. An owner must deliberately detach or use suitable weak-event support when the source outlives the view.",
+      "limits": "Weak events address reference retention, not cancellation completion, epoch validity, save revision correctness or in-flight task draining."
+    }
+  ]
+}

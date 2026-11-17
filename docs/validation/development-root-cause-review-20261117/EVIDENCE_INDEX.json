@@ -1,0 +1,194 @@
+{
+  "startingDelivery": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "principlesCommit": "a60954974fe577ce996aca9a9b7a2accbfbe292e",
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "independentEvidenceCommit": "5d4cb04edba67ed6742f623e92de76e2cfd774c5",
+  "scope": "Root-cause/proposal; separately scoped ordinary synthetic closure; defects reproduced are not product acceptance",
+  "artifacts": [
+    {
+      "file": ".gitattributes",
+      "bytes": 76,
+      "sha256": "3747d17a91cbec70fe8ca1fcd854681869ddd050da9b3eeb0264fad97082e144"
+    },
+    {
+      "file": "ACTIVE_RUNTIME_OWNERS.json",
+      "bytes": 1316,
+      "sha256": "d76aa183e0edd6ac4ef8b410533c534c26d33ce3b72098cf84da887fc6cb2c30"
+    },
+    {
+      "file": "APPROVED_DECISIONS.json",
+      "bytes": 1665,
+      "sha256": "92e005babf0140ae038051a0aaecc64b73a65270ecab7e0636777386a7e5bdad"
+    },
+    {
+      "file": "CLOSE_INVESTIGATION_LINK.json",
+      "bytes": 623,
+      "sha256": "8570166419d85be57cbf7f477a6d666f38b6db37d0c1cf3659a78bd07c8cdedf"
+    },
+    {
+      "file": "CLOSE_INVESTIGATION_SUMMARY.json",
+      "bytes": 7334,
+      "sha256": "31a283b3c3974bad9312dc1f56bd8c9eb6c68f1a1ab9200df7a442e241a142e2"
+    },
+    {
+      "file": "CROSS_DOMAIN_REFERENCES.json",
+      "bytes": 1838,
+      "sha256": "2c5bad924c86a1f3494636f00e4809456bce843bca3e60effb64dcee2233397c"
+    },
+    {
+      "file": "CURRENT_STATUS.json",
+      "bytes": 1728,
+      "sha256": "31249c821d3c3fea7fa1d565ba810a37ceae05f0f0ce6e33d1aa61a3da740726"
+    },
+    {
+      "file": "CUSTOMER_CONFIRMED.png",
+      "bytes": 40688,
+      "sha256": "04f75285ab05b4d770f914dc06416557143478c9d6bb405b88747a7089c476e6"
+    },
+    {
+      "file": "DEFERRED_QUESTIONS.json",
+      "bytes": 702,
+      "sha256": "aa99454d940d4111f44a109c9d4bec8516f03c11623cf2d447b32ac3ef878532"
+    },
+    {
+      "file": "DELIVERY_SCOPE.json",
+      "bytes": 887,
+      "sha256": "ee32f6511eec5b30745d731c3681e80fc20ca45a460ac8e8ebe89e8a7bc35041"
+    },
+    {
+      "file": "EMPTY_NAME_PREFLIGHT_REPRODUCTION.json",
+      "bytes": 927,
+      "sha256": "917a3d9b940024c4b5a0238be7975ca8e0ca1ef6b57565beb0523cb7a9cc2c07"
+    },
+    {
+      "file": "EVIDENCE_ENTRIES.json",
+      "bytes": 1370,
+      "sha256": "435630506266843192a592026d328aabdc4ff3762a8fe7f407316c97c6bb5226"
+    },
+    {
+      "file": "FALSIFICATION_LOG.json",
+      "bytes": 1784,
+      "sha256": "438b35407769f4aa62f117758d51748aa58549f74c2df66b453908613ad430e7"
+    },
+    {
+      "file": "FINAL_CYCLE_COMPONENT_BINDING.json",
+      "bytes": 1848,
+      "sha256": "eb3c2d6511c3d9940de9b184865a7e776fce3811a4dfc3ac3cb89e81744a49a6"
+    },
+    {
+      "file": "FINAL_SELECTION_CYCLE.json",
+      "bytes": 3787,
+      "sha256": "40e6cf39a0dfa4c37b3425c10e3b194f6e82aca90c821b0d3bcfed25f5a97f24"
+    },
+    {
+      "file": "FINDINGS.json",
+      "bytes": 3533,
+      "sha256": "59f21c0c837d81cad05f25ee7dae808ba99fe87d3911a39ffdbf6b73276b0642"
+    },
+    {
+      "file": "HANDOFF.md",
+      "bytes": 2721,
+      "sha256": "c71d592277069285181da1ebcdd97dba9d9b2ef5521f6cd50aecda03e03db9c4"
+    },
+    {
+      "file": "HISTORY_AND_PERFORMANCE.md",
+      "bytes": 5683,
+      "sha256": "7e87c0c2c28388c9c278570f01c2b7de285c7c82d9c386a533bb12568f11a2bf"
+    },
+    {
+      "file": "HISTORY_CANDIDATES.json",
+      "bytes": 24953,
+      "sha256": "3370b748f899dd314e81dc1adf134b364d24a0baeccedf45318607c7a4273848"
+    },
+    {
+      "file": "HISTORY_COVERAGE.json",
+      "bytes": 625,
+      "sha256": "9515de177c1419961898810eaf9cc3c654f14db5435a9b35612d0293815e4f4a"
+    },
+    {
+      "file": "IDENTITY_AND_OUTCOME_MAP.md",
+      "bytes": 2994,
+      "sha256": "5e8d13db82bd776d1ae909d66129d4eebb33c73914271565f4850a7c17b54938"
+    },
+    {
+      "file": "OPTIONS_AND_MINIMAL_SCOPE.md",
+      "bytes": 6296,
+      "sha256": "06fd5b4d89be1066af5f800e5cb3322a5da1f303ebbee6bf3a6e0f263d24707b"
+    },
+    {
+      "file": "OWNERSHIP_SOURCE_BINDING.json",
+      "bytes": 735,
+      "sha256": "5e23cb2bb37cac52072c6e978433f1e94b731c9e04a8550169c3ed8e225dfd68"
+    },
+    {
+      "file": "PATCH_EQUIVALENCE.json",
+      "bytes": 2112,
+      "sha256": "14a0d6ba4083ccaf7eb8958ae3a918fbc28c7533bb3d355e2b291c14070239e8"
+    },
+    {
+      "file": "PERFORMANCE_EVIDENCE.json",
+      "bytes": 3401,
+      "sha256": "6726abad24a173f00beaac0d0c4364416f946a53e665a6fec437a3497bed679c"
+    },
+    {
+      "file": "PHONE_READY.json",
+      "bytes": 1794,
+      "sha256": "407a51b1f7b7b46357d19bc70c3cf65e43f96a0866baca0ab2dcc6d0a66a648a"
+    },
+    {
+      "file": "PREFERENCES_TO_ALIGN.md",
+      "bytes": 996,
+      "sha256": "7c539e38cc663cc0788f0fa97efc710e821b62d5b0df0ce3c9c34b89f6d7e833"
+    },
+    {
+      "file": "PRIOR_PROCESS_RESIDENCY.json",
+      "bytes": 1357,
+      "sha256": "9bfadaf5c5503464b782fbf9246b0d7d5841ca413d2e029e015bc98badce4d10"
+    },
+    {
+      "file": "PR_COVERAGE.json",
+      "bytes": 401,
+      "sha256": "429f174311e40a879da0daf142eda5acf6a7ce3a270a72e2fbf729404f295ffa"
+    },
+    {
+      "file": "RELATED_WORKTREE_STATUS.json",
+      "bytes": 1258,
+      "sha256": "42a402215f09ffe4db64e04a3e875b93d13a7c84a66c29e01ce7bc13e88abf81"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 8833,
+      "sha256": "5676482cbfdb6b40c4f941732fc254ba669162f7549b5447ce56e55e815776b6"
+    },
+    {
+      "file": "RUNTIME_OWNERSHIP_REPRODUCTION.json",
+      "bytes": 2518,
+      "sha256": "79bf718b22e6e4ec711be5b1667d9015f578837023e3b983b50740717b562ed9"
+    },
+    {
+      "file": "SCOPE_AND_PRESERVATION.json",
+      "bytes": 514,
+      "sha256": "c7c905a342e8041ee7a3cea5bfc67e0eaef3907ac0f9f716da9af612794b6194"
+    },
+    {
+      "file": "SELECTION_AFTER_REOPEN.json",
+      "bytes": 2713,
+      "sha256": "681bf863fcedf28ba1902454ee007c5857fe859ccb39ed7210fef0188bb08163"
+    },
+    {
+      "file": "TEN_PRINCIPLES.md",
+      "bytes": 1900,
+      "sha256": "5f62b7e2b4fa0dd519260775dc29b169e5ab077ea773186eaefb76ade9d824ed"
+    },
+    {
+      "file": "TEN_PRINCIPLES_SOURCE.png",
+      "bytes": 333642,
+      "sha256": "071374b6ee98ecdafeb9aacc350f8f88d7f74a67d6b5edbf357927b0f65c0e97"
+    },
+    {
+      "file": "VALIDATION.json",
+      "bytes": 885,
+      "sha256": "2dd3853e0e6193344bfd4729487e8a3d2a1b04c7ef4711c876dbb982a552880f"
+    }
+  ]
+}

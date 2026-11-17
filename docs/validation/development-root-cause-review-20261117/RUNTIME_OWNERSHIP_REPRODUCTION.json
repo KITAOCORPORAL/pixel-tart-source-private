@@ -1,0 +1,72 @@
+{
+  "status": "CONFIRMED_CROSS_ROOT_STALE_RECOVERY_TERMINATION",
+  "scope": "Exact linked production SingleInstanceManager/Branding, owned console fixtures only; not ordinary desktop acceptance",
+  "nonce": "968dbafce014469fbe6f9ed5184fda7a",
+  "run": "E:\\Kitao-Deliveries\\development-review-20261117\\ownership-968dbafce0",
+  "owners": [
+    {
+      "pid": 48720,
+      "role": "ownerA",
+      "instance": "968dbafce014469fbe6f9ed5184fda7a-rootA",
+      "acquired": true,
+      "processName": "KitaoOwnershipProbe_968dbafce0",
+      "exe": "E:\\Kitao-Deliveries\\development-review-20261117\\ownership-968dbafce0\\bin\\KitaoOwnershipProbe_968dbafce0.exe",
+      "productName": "Kitao Studio 光镜",
+      "expectedProduct": "Kitao Studio 光镜",
+      "mainWindow": 0,
+      "utc": "2026-11-17T01:47:38.120477+00:00"
+    },
+    {
+      "pid": 11160,
+      "role": "ownerB",
+      "instance": "968dbafce014469fbe6f9ed5184fda7a-rootB",
+      "acquired": true,
+      "processName": "KitaoOwnershipProbe_968dbafce0",
+      "exe": "E:\\Kitao-Deliveries\\development-review-20261117\\ownership-968dbafce0\\bin\\KitaoOwnershipProbe_968dbafce0.exe",
+      "productName": "Kitao Studio 光镜",
+      "expectedProduct": "Kitao Studio 光镜",
+      "mainWindow": 0,
+      "utc": "2026-11-17T01:47:38.1204901+00:00"
+    }
+  ],
+  "recover": {
+    "pid": 20988,
+    "role": "recoverA",
+    "instance": "968dbafce014469fbe6f9ed5184fda7a-rootA",
+    "acquired": true,
+    "processName": "KitaoOwnershipProbe_968dbafce0",
+    "exe": "E:\\Kitao-Deliveries\\development-review-20261117\\ownership-968dbafce0\\bin\\KitaoOwnershipProbe_968dbafce0.exe",
+    "productName": "Kitao Studio 光镜",
+    "expectedProduct": "Kitao Studio 光镜",
+    "mainWindow": 0,
+    "utc": "2026-11-17T01:47:57.7490212+00:00"
+  },
+  "exitCodes": {
+    "ownerA": 4294967295,
+    "ownerB": 4294967295,
+    "recoverA": 0
+  },
+  "otherRootWasNotRequested": true,
+  "otherRootTerminated": true,
+  "elapsedMs": 19993.397200014442,
+  "recoveryMs": 3446.790099958889,
+  "resourcePeaks": {
+    "ownerA": {
+      "privateBytes": 8237056,
+      "workingSetBytes": 29577216
+    },
+    "ownerB": {
+      "privateBytes": 7831552,
+      "workingSetBytes": 28454912
+    },
+    "recoverA": {
+      "privateBytes": 11177984,
+      "workingSetBytes": 31911936
+    }
+  },
+  "guardBytes": 2147483648,
+  "forcedGc": false,
+  "newRawDecodes": 0,
+  "noProductProcessOrUserRootUsed": true,
+  "exeSha256": "aa8cf45db9f78023ddfee11ea959eaf08f13c558f6f2188f8d085101d098c09d"
+}

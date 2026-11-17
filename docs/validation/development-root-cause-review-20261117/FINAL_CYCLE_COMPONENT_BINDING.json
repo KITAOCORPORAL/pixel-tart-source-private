@@ -1,0 +1,38 @@
+{
+  "productSource": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "sourceTree": "623bad114418fa984fc86762e78a6004e7d2a614",
+  "nativeProcessVersionCheckedByUiTool": true,
+  "serviceVersionCheckedByOs": true,
+  "bindings": [
+    {
+      "role": "app",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\App\\KitaoPhotoSelector.dll",
+      "bytes": 4167680,
+      "sha256": "6f5b2170f07d838aef26800638816f85161bebedc0578b84daa7be7517491f69"
+    },
+    {
+      "role": "selectionService",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\SelectionService\\PixelTart.SelectionApi.Server.dll",
+      "bytes": 78848,
+      "sha256": "8908d686752f74c7117493ac9df29bc0247dd7edf286afcf1db3313b5ece3a4a"
+    },
+    {
+      "role": "browserClient",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\SelectionService\\wwwroot\\selection-client.js",
+      "bytes": 9100,
+      "sha256": "26bf1ccb7649536feb050e6f9ffa3d51ab2d23d4dca0622bf536e2c20349fd81",
+      "sourceFile": "src/PixelTart.SelectionApi.Server/wwwroot/selection-client.js",
+      "sourceSha256": "26bf1ccb7649536feb050e6f9ffa3d51ab2d23d4dca0622bf536e2c20349fd81",
+      "sourceMatches": true
+    },
+    {
+      "role": "browserHtml",
+      "path": "E:\\Kitao-Deliveries\\company-functional-20261116\\Guangjing-Company-Integrated-e8180221-win-x64\\SelectionService\\wwwroot\\selection.html",
+      "bytes": 883,
+      "sha256": "682b9849ac21bed76a3d38fc0241ffd1e68b5d88cc2ed18e95dc16e6a956cccf",
+      "sourceFile": "src/PixelTart.SelectionApi.Server/wwwroot/selection.html",
+      "sourceSha256": "682b9849ac21bed76a3d38fc0241ffd1e68b5d88cc2ed18e95dc16e6a956cccf",
+      "sourceMatches": true
+    }
+  ]
+}
