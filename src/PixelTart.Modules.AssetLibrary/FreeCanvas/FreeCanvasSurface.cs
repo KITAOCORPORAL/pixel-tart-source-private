@@ -19,6 +19,11 @@ public sealed class FreeCanvasSurface : FrameworkElement
     private readonly Dictionary<Guid,string> _ownedKeys=[];
     private readonly System.Windows.Threading.DispatcherTimer _previewDebounce=new(){Interval=TimeSpan.FromMilliseconds(80)};
     private CancellationTokenSource? _previewCancellation;
+    private bool _suspended, _released;
+    private readonly HashSet<Task> _previewTasks = [];
+    private Task? _releaseTask;
+    public int PendingPreviewCount => _previewTasks.Count;
+    public bool IsReleased => _released;
     private Guid? _previewCanvasId;
     private long _previewGeneration;
     public long OwnedDecodeCount {get;private set;}
@@ -40,9 +45,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public FreeCanvasSurface(CanvasEditor editor, IAssetPreviewProvider provider)
     {
         Editor = editor; _provider = provider; Focusable = true; ClipToBounds = true; AllowDrop = true;
-        _previewDebounce.Tick+=(_,_)=>{_previewDebounce.Stop();_=LoadPreviewsCoreAsync(false);};
-        Editor.Changed += (_, _) => { InvalidateVisual(); SchedulePreviews(); };
-        Unloaded+=(_,_)=>{_previewDebounce.Stop();_previewCancellation?.Cancel();};
+        _previewDebounce.Tick+=(_,_)=>{_previewDebounce.Stop();_=RunPreviewAsync(false);};
+        Editor.Changed += EditorChanged;
+        Unloaded+=(_,_)=>SuspendPreviews();
+        Loaded+=(_,_)=>ResumePreviews();
         SizeChanged += (_, _) => { if (_isFit) Fit(_fitSelection); else InvalidateVisual(); };
     }
     public CanvasEditor Editor { get; }
@@ -59,8 +65,27 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public Point ScreenToWorld(Point point) => new((point.X - _pan.X) / _zoom, (point.Y - _pan.Y) / _zoom);
     public Point WorldToScreen(Point point) => new(point.X * _zoom + _pan.X, point.Y * _zoom + _pan.Y);
     public Func<CanvasObject, Task<string?>>? ResolveSource { get; set; }
+    private void EditorChanged(object? sender, EventArgs e) { if (_released || _suspended) return; InvalidateVisual(); SchedulePreviews(); }
+    public void SuspendPreviews() { _suspended = true; ++_previewGeneration; _previewDebounce.Stop(); _previewCancellation?.Cancel(); }
+    public void ResumePreviews() { if (_released) return; _suspended = false; SchedulePreviews(); }
+    public Task DrainPreviewsAsync() => Task.WhenAll(_previewTasks.ToArray().Select(async task => { try { await task; } catch(OperationCanceledException) { } }));
+    public Task ReleaseAsync() => _releaseTask ??= ReleaseCoreAsync();
+    private async Task ReleaseCoreAsync()
+    {
+        _released = true; SuspendPreviews(); Editor.Changed -= EditorChanged;
+        try { await DrainPreviewsAsync(); }
+        finally { _previewCancellation?.Dispose(); _previewCancellation = null; _images.Clear(); _widths.Clear(); _loading.Clear(); _ownedKeys.Clear(); _sourceErrors.Clear(); ResolveSource = null; InvalidateVisual(); }
+    }
+    private bool Current(long generation, CanvasDocument document, CancellationToken token) => !_released && !_suspended && !token.IsCancellationRequested && generation == _previewGeneration && ReferenceEquals(document, Editor.Document);
+    private async Task RunPreviewAsync(bool revalidate)
+    {
+        if (_released || _suspended) return;
+        var task = LoadPreviewsCoreAsync(revalidate); _previewTasks.Add(task);
+        try { await task; } catch (OperationCanceledException) { } finally { _previewTasks.Remove(task); }
+    }
     private void SchedulePreviews()
     {
+        if (_released || _suspended) return;
         foreach(var item in Editor.Document.Objects.Where(x=>x.IsImage))
         {
             var key=item.PlanningSource is {} identity?$"owned|{identity.PlanningRoot}|{identity.Copy.RelativePath}|{identity.Copy.Sha256}":$"external|{item.SourcePath}|{item.LibraryId}|{item.AssetId}|{item.ContentHash}";
@@ -68,10 +93,12 @@ public sealed class FreeCanvasSurface : FrameworkElement
         }
         _previewDebounce.Stop();_previewDebounce.Start();
     }
-    public Task LoadPreviewsAsync(){_previewDebounce.Stop();return LoadPreviewsCoreAsync(true);}
+    public Task LoadPreviewsAsync(){_previewDebounce.Stop();return RunPreviewAsync(true);}
     private async Task LoadPreviewsCoreAsync(bool revalidate)
     {
-        _previewCancellation?.Cancel();_previewCancellation=new();var token=_previewCancellation.Token;
+        _previewCancellation?.Cancel();using var cancellation=new CancellationTokenSource();_previewCancellation=cancellation;var token=cancellation.Token;
+        try
+        {
         PreviewRequestCount++;
         var generation=++_previewGeneration;
         var document=Editor.Document;
@@ -83,7 +110,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var viewport=new Rect(ScreenToWorld(new(-300,-300)),ScreenToWorld(new(Math.Max(1,ActualWidth)+300,Math.Max(1,ActualHeight)+300)));
         foreach (var item in Editor.Document.Objects.Where(item => item.IsImage && (ActualWidth==0 || viewport.IntersectsWith(new Rect(item.X,item.Y,item.Width,item.Height)))).Take(128).ToArray())
         {
-            if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))break;
+            if(!Current(generation,document,token))break;
             var sourceKey=item.PlanningSource is {} identity?$"owned|{identity.PlanningRoot}|{identity.Copy.RelativePath}|{identity.Copy.Sha256}":$"external|{item.SourcePath}|{item.LibraryId}|{item.AssetId}|{item.ContentHash}";
             if(_ownedKeys.GetValueOrDefault(item.ObjectId)!=sourceKey){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);_ownedKeys[item.ObjectId]=sourceKey;}
             if(item.PlanningSource is {} owned)
@@ -96,16 +123,16 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 {
                     var copy=owned.Bind();
                     OwnedDecodeCount++;var bitmap=await Task.Run(()=>CanvasPixelRenderer.ReadSource(item,token,1024),token);
-                    if(generation!=_previewGeneration||!ReferenceEquals(snapshot,Editor.Document))continue;
+                    if(!Current(generation,snapshot,token))continue;
                     _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);TrimPreviews(item.ObjectId);
                 }
                 catch(OperationCanceledException)when(token.IsCancellationRequested){return;}
                 catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
-                {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布自有副本预览失败 "+item.ObjectId,e);}}
+                {if(Current(generation,snapshot,token)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布自有副本预览失败 "+item.ObjectId,e);}}
                 continue;
             }
             if(item.LibraryId==Guid.Empty&&item.AssetId is null&&!string.IsNullOrEmpty(item.ContentHash))
-            {if(!revalidate&&_images.ContainsKey(item.ObjectId))continue;try{var bitmap=await Task.Run(()=>CanvasPixelRenderer.ReadSource(item,token),token);if(generation==_previewGeneration&&ReferenceEquals(document,Editor.Document)){_images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);}}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException){_images.Remove(item.ObjectId);_sourceErrors[item.ObjectId]=error.Message;}continue;}
+            {if(!revalidate&&_images.ContainsKey(item.ObjectId))continue;try{var bitmap=await Task.Run(()=>CanvasPixelRenderer.ReadSource(item,token),token);if(Current(generation,document,token)){_images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);}}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException){_images.Remove(item.ObjectId);_sourceErrors[item.ObjectId]=error.Message;}continue;}
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
             if (_loading.Contains((item.ObjectId,generation)) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
             _loading.Add((item.ObjectId,generation));
@@ -115,17 +142,17 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))continue;
                 if (resolvedPath is null) { _images.Remove(item.ObjectId); _widths.Remove(item.ObjectId); continue; }
                 var result = await _provider.GetAsync(new(resolvedPath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, requested,
-                    File.Exists(resolvedPath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline, item.AssetId, item.ContentHash));
+                    File.Exists(resolvedPath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline, item.AssetId, item.ContentHash),token);
                 if (result.Bitmap is null && !_images.ContainsKey(item.ObjectId))
                     foreach (var width in Enumerable.Range(1,16).Select(value=>value*256).OrderByDescending(value=>value))
                     {
-                        result = await _provider.GetAsync(new(item.SourcePath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, width, AssetThumbnailState.Offline, item.AssetId, item.ContentHash));
+                        result = await _provider.GetAsync(new(item.SourcePath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, width, AssetThumbnailState.Offline, item.AssetId, item.ContentHash),token);
                         if (result.Bitmap is not null) break;
                     }
                 if(result.Bitmap is null&&!File.Exists(item.SourcePath))
                     foreach(var purpose in new[]{AssetPreviewPurpose.ViewerPreview,AssetPreviewPurpose.QuickLoupe})
                     {
-                        result=await _provider.GetAsync(new(item.SourcePath,purpose,AssetPreviewQuality.High,purpose==AssetPreviewPurpose.QuickLoupe?1600:2048,AssetThumbnailState.Offline,item.AssetId,item.ContentHash));
+                        result=await _provider.GetAsync(new(item.SourcePath,purpose,AssetPreviewQuality.High,purpose==AssetPreviewPurpose.QuickLoupe?1600:2048,AssetThumbnailState.Offline,item.AssetId,item.ContentHash),token);
                         if(result.Bitmap is not null)break;
                     }
                 if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))continue;
@@ -136,6 +163,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
             finally { _loading.Remove((item.ObjectId,generation)); }
         }
         InvalidateVisual();
+        }
+        finally { if(ReferenceEquals(_previewCancellation,cancellation))_previewCancellation=null; }
     }
     private void TrimPreviews(Guid keep)
     {

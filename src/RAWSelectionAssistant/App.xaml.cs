@@ -460,6 +460,18 @@ public partial class App : Application
         }
     }
 
+    private Task? _normalShutdown;
+    internal Task PrepareNormalShutdownAsync() => _normalShutdown ??= PrepareNormalShutdownCoreAsync();
+    private async Task PrepareNormalShutdownCoreAsync()
+    {
+        if (_moduleRegistry is not null)
+        {
+            await _moduleRegistry.ShutdownAsync();
+            var failures=_moduleRegistry.Diagnostics.Where(item=>item.State==ModuleLifecycleState.Failed).ToArray();
+            if(failures.Length>0)throw new InvalidOperationException("模块关闭失败："+string.Join("；",failures.Select(item=>item.ModuleId)));
+        }
+    }
+
     protected override void OnExit(ExitEventArgs e)
     {
         _capturePipe?.Dispose();

@@ -1,0 +1,101 @@
+{
+  "scenario": "close-nested-frame",
+  "pid": 50632,
+  "source": "B1_WORKTREE",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14057472,
+        "workingSetBytes": 51658752,
+        "osPeakWorkingSetBytes": 51662848,
+        "managedBytesEstimate": 2354984,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T07:12:25.0267349+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 1,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T07:12:29.2398301+00:00"
+    },
+    {
+      "kind": "NestedFrameEnter",
+      "value": {
+        "depth": 1
+      },
+      "utc": "2026-11-17T07:12:29.2399121+00:00"
+    },
+    {
+      "kind": "NestedFrameExit",
+      "value": {
+        "errors": 0
+      },
+      "utc": "2026-11-17T07:12:29.2400443+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 2,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T07:12:29.3758405+00:00"
+    },
+    {
+      "kind": "NestedFrameEnter",
+      "value": {
+        "depth": 1
+      },
+      "utc": "2026-11-17T07:12:29.3758546+00:00"
+    },
+    {
+      "kind": "NestedFrameExit",
+      "value": {
+        "errors": 0
+      },
+      "utc": "2026-11-17T07:12:29.7994117+00:00"
+    },
+    {
+      "kind": "CloseOutcome",
+      "value": {
+        "closed": true,
+        "closeEvents": 2,
+        "dispatcherErrors": 0,
+        "pending": false,
+        "phase": "Closed",
+        "detail": ""
+      },
+      "utc": "2026-11-17T07:12:29.8221617+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 308150272,
+        "workingSetBytes": 274808832,
+        "osPeakWorkingSetBytes": 282218496,
+        "managedBytesEstimate": 59068832,
+        "gc0": 22,
+        "gc1": 9,
+        "gc2": 2,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T07:12:30.1778268+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

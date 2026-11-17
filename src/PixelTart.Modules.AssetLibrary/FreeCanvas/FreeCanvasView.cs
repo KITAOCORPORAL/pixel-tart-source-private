@@ -26,7 +26,33 @@ public sealed partial class FreeCanvasView : UserControl
     private readonly TextBox _name = new() { Width=160,Margin=new(8,2,8,2) };
     private Point? _sourceDrag;
     private int _sourceRefresh;
-    private bool _discardPending;
+    private bool _discardPending, _released, _suspended;
+    private readonly HashSet<Task> _viewTasks = [];
+    private Task? _releaseTask;
+    public bool IsReleased => _released;
+    public async Task PauseForCloseAsync() { _suspended=true; _saveTimer.Stop(); ++_sourceRefresh; Surface.SuspendPreviews(); await Surface.DrainPreviewsAsync(); await Task.WhenAll(_viewTasks.ToArray()); }
+    public void ResumeAfterCanceledClose() { if(_released)return;_suspended=false;Surface.ResumePreviews();if(!ReferenceEquals(_saved,Editor.Document))_saveTimer.Start(); }
+    public bool IsSavedRevision(CanvasDocument document) => ReferenceEquals(document, Editor.Document) && (_discardPending || ReferenceEquals(_saved, document));
+    public Task ReleaseAsync() { if (_releaseTask?.IsFaulted == true && !_released) _releaseTask=null; return _releaseTask ??= ReleaseCoreAsync(); }
+    private async Task ReleaseCoreAsync()
+    {
+        if (!await FlushAsync()) { _releaseTask = null; throw new IOException("画布未能保存，修改和工作区已保留。"); }
+        _released = true; _saveTimer.Stop(); ++_sourceRefresh; Editor.Changed -= EditorChanged;
+        await Surface.ReleaseAsync();
+        await Task.WhenAll(_viewTasks.ToArray());
+        _sources.ItemsSource = null; SourceLoader = null; FavoriteLoader = null; ResolveDelegatesAfterRelease();
+    }
+    private void ResolveDelegatesAfterRelease() { OpenDocument = null; CloseRequested = null; ViewAsset = null; RevealAsset = null; RelocateAsset = null; SaveBoard = null; BoardLoader = null; AnalyzePalette = null; }
+    private async Task Track(Task work) { _viewTasks.Add(work); try { await work; } finally { _viewTasks.Remove(work); } }
+    private async void ViewLoaded(object sender, RoutedEventArgs e)
+    {
+        if (_released) return;
+        _suspended = false; Surface.ResumePreviews();
+        try { await Track(LoadViewAsync()); } catch (Exception error) { new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布加载失败",error); }
+    }
+    private async Task LoadViewAsync() { Surface.Fit(); await Surface.LoadPreviewsAsync(); if(_released)return; await RefreshSourcesAsync(); if(_released)return; await FlushAsync(); UpdateTools(); }
+    private void ViewUnloaded(object sender, RoutedEventArgs e) { _suspended = true; _saveTimer.Stop(); ++_sourceRefresh; Surface.SuspendPreviews(); }
+
     private readonly Button _undoButton, _redoButton;
     private readonly Button _moreButton;
     public Panel ProjectPanel { get; private set; } = null!;
@@ -95,9 +121,9 @@ public sealed partial class FreeCanvasView : UserControl
         var stage=new Grid{ClipToBounds=true};InstallR53Inspector(root);root.Children.Add(stage);stage.Children.Add(Surface);
         _floatingBorder.SetResourceReference(BackgroundProperty,"Brush.Surface.Elevated");_floatingBorder.SetResourceReference(BorderBrushProperty,"Brush.Border");_floatingBorder.BorderThickness=new(1);_floatingBorder.Child=null;_properties.Children.Add(_floating);
         editor.Changed+=EditorChanged;Surface.ViewChanged+=(_,_)=>{if(Surface.Tool=="画笔")_status.Text=Surface.BrushStatus;UpdateTools();};Surface.ContextRequested+=(_,_)=>OpenContextMenu();Surface.TextEditRequested+=(_,_)=>EditText();
-        _saveTimer.Tick+=async(_,_)=>{_saveTimer.Stop();await FlushAsync();};
-        Loaded+=async(_,_)=>{Surface.Fit();await Surface.LoadPreviewsAsync();await RefreshSourcesAsync();await FlushAsync();UpdateTools();};
-        Unloaded+=async(_,_)=>{_saveTimer.Stop();if(!_discardPending)await FlushAsync();};
+        _saveTimer.Tick+=async(_,_)=>{_saveTimer.Stop();if(!_released)await Track(FlushAsync());};
+        Loaded+=ViewLoaded;
+        Unloaded+=ViewUnloaded;
         PreviewKeyDown+=(_,e)=>
         {
             if(Surface.IsKeyboardFocusWithin||Keyboard.FocusedElement is TextBox or ComboBox)return;
@@ -121,21 +147,23 @@ public sealed partial class FreeCanvasView : UserControl
     public void ShowSources(string source) { _drawer.Visibility=Visibility.Visible;_sourceKind.SelectedItem=source;_=RefreshSourcesAsync(); }
     private void EditorChanged(object? sender,EventArgs args)
     {
+        if (_released) return;
         UpdateTools();
         UpdateUsedMaterials();
         if(ReferenceEquals(_observed,Editor.Document))return;
-        _observed=Editor.Document;_status.Text="正在保存…";_saveTimer.Stop();_saveTimer.Start();
+        _observed=Editor.Document;_status.Text="正在保存…";_saveTimer.Stop();if(!_suspended)_saveTimer.Start();
     }
     public async Task<bool> FlushAsync()
     {
-        if(_discardPending)return true;
+        if(_released || _discardPending)return true;
         _saveTimer.Stop();await _saveGate.WaitAsync();
         try { while(!ReferenceEquals(_saved,Editor.Document)){var snapshot=Editor.Document;await _store.SaveAsync(snapshot);_saved=snapshot;}_status.Text="已保存";_status.ToolTip=null;return true; }
         catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布保存失败",exception);_status.Text="保存失败，未保存修改已保留；请检查目标路径、写入权限、磁盘空间或文件占用后点击“保存”重试。";_status.TextWrapping=TextWrapping.Wrap;_status.ToolTip=$"目标目录：{_store.DirectoryPath}{Environment.NewLine}{exception.Message}";return false;}
         finally{_saveGate.Release();}
     }
-    public Task<bool> PrepareDocumentChangeAsync() => PrepareDocumentChangeAsync(() => MessageBox.Show(Window.GetWindow(this),
-        "保存当前画布的未保存修改？\n是：保存；否：放弃；取消：继续编辑。", "未保存的画布", MessageBoxButton.YesNoCancel, MessageBoxImage.Question));
+    internal Func<MessageBoxResult>? DocumentClosePrompt {get;set;}
+    public Task<bool> PrepareDocumentChangeAsync() => PrepareDocumentChangeAsync(DocumentClosePrompt ?? (() => MessageBox.Show(Window.GetWindow(this),
+        "保存当前画布的未保存修改？\n是：保存；否：放弃；取消：继续编辑。", "未保存的画布", MessageBoxButton.YesNoCancel, MessageBoxImage.Question)));
     internal async Task<bool> PrepareDocumentChangeAsync(Func<MessageBoxResult> prompt)
     {
         _saveTimer.Stop();
@@ -153,10 +181,11 @@ public sealed partial class FreeCanvasView : UserControl
         void Add(string header, Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
         foreach(var zoom in new[]{.5,.75,1d,1.25,1.5,2d}){var value=zoom;Add($"{value:P0}",()=>Surface.SetZoom(value));} menu.IsOpen=true;
     }
-    public async Task ImportFilesAsync(IReadOnlyList<string>? paths=null)
+    public Task ImportFilesAsync(IReadOnlyList<string>? paths=null) => _released ? Task.CompletedTask : Track(ImportFilesCoreAsync(paths));
+    private async Task ImportFilesCoreAsync(IReadOnlyList<string>? paths)
     {
         if(paths is null){var dialog=new Microsoft.Win32.OpenFileDialog{Filter="图片|*.png;*.jpg;*.jpeg;*.tif;*.tiff",Multiselect=true};if(dialog.ShowDialog(Window.GetWindow(this))!=true)return;paths=dialog.FileNames;}
-        try{var objects=new List<CanvasObject>();foreach(var path in paths){var item=await CanvasPixelRenderer.ImportAsync(path,Editor.Document,_store.DirectoryPath);objects.Add(item with{X=32+objects.Count*24,Y=32+objects.Count*24});}Editor.Add(objects);await Surface.LoadPreviewsAsync();_status.Text="已导入画布自有副本，原图未修改";}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or UnauthorizedAccessException){_status.Text="导入未完成："+error.Message;}
+        try{var objects=new List<CanvasObject>();foreach(var path in paths){var item=await CanvasPixelRenderer.ImportAsync(path,Editor.Document,_store.DirectoryPath);objects.Add(item with{X=32+objects.Count*24,Y=32+objects.Count*24});}if(_released)return;Editor.Add(objects);await Surface.LoadPreviewsAsync();_status.Text="已导入画布自有副本，原图未修改";}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or UnauthorizedAccessException){_status.Text="导入未完成："+error.Message;}
     }
     public void ExportTransparentTo(string path){CanvasPixelRenderer.ExportPng(Editor.Document,path);_status.Text="透明PNG已导出 · sRGB";}
     private async void ExportTransparent(){var dialog=new Microsoft.Win32.SaveFileDialog{Filter="透明PNG|*.png",FileName=Editor.Document.Name+".png"};if(dialog.ShowDialog(Window.GetWindow(this))!=true)return;try{if(!await FlushAsync())return;ExportTransparentTo(dialog.FileName);}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException){_status.Text="导出未完成："+error.Message;}}
@@ -207,11 +236,12 @@ public sealed partial class FreeCanvasView : UserControl
     {
         var menu=new ContextMenu();foreach(var document in await _store.ListAsync()){var item=new MenuItem{Header=document.Name};item.Click+=async(_,_)=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(await _store.LoadAsync(document.CanvasId) ?? document);};menu.Items.Add(item);}if(menu.Items.Count==0)menu.Items.Add(new MenuItem{Header="暂无已保存画布",IsEnabled=false});menu.PlacementTarget=this;menu.IsOpen=true;
     }
-    private async Task RefreshSourcesAsync()
+    private Task RefreshSourcesAsync() => Track(RefreshSourcesCoreAsync());
+    private async Task RefreshSourcesCoreAsync()
     {
-        if(SourceLoader is null)return;var generation=++_sourceRefresh;var source=_sourceKind.SelectedItem?.ToString()??"素材库";var search=_sourceSearch.Text;
+        if(_released || _suspended || SourceLoader is null)return;var generation=++_sourceRefresh;var source=_sourceKind.SelectedItem?.ToString()??"素材库";var search=_sourceSearch.Text;
         _sources.ItemsSource=null; // Do not accept a selection from the previous filter while loading.
-        try{var items=await SourceLoader(source,search);var favorites=FavoriteLoader is null?new HashSet<CanvasFavorite>():await FavoriteLoader();if(generation==_sourceRefresh&&source==_sourceKind.SelectedItem?.ToString()&&search==_sourceSearch.Text){_favoriteIdentities=favorites;_sources.ItemsSource=items;UpdateFavoriteButton();}}
+        try{var items=await SourceLoader(source,search);var favorites=FavoriteLoader is null?new HashSet<CanvasFavorite>():await FavoriteLoader();if(!_released&&!_suspended&&generation==_sourceRefresh&&source==_sourceKind.SelectedItem?.ToString()&&search==_sourceSearch.Text){_favoriteIdentities=favorites;_sources.ItemsSource=items;UpdateFavoriteButton();}}
         catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidOperationException or System.Text.Json.JsonException){_status.Text=$"素材暂不可用：{exception.Message}";}
     }
     private void AddSources(){var center=Surface.ScreenToWorld(new(Surface.ActualWidth/2,Surface.ActualHeight/2));Editor.Add(_sources.SelectedItems.Cast<CanvasObject>().Select((item,index)=>item with{X=center.X+index*24,Y=center.Y+index*24}));Surface.Focus();}

@@ -187,7 +187,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         {
             lock (_disposeSync)
             {
-                if (!_disposed) _disposeTask = null;
+                if (!_disposed && _canvas?.IsReleased != true) _disposeTask = null;
+                else _disposed = true;
                 completion.TrySetException(exception);
             }
         }
@@ -196,8 +197,9 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async Task DisposeCoreAsync()
     {
         if (_canvas is not null && !await _canvas.FlushAsync()) throw new IOException("画布未能保存，无法释放工作区。");
+        if (_canvas is not null) await _canvas.ReleaseAsync();
         _disposed = true;
-        if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
+        CanvasWorkspace.Content = null; _canvas = null;
         CloseToolbarPopups();
         PreviewMouseDown -= PopupOutsideClick;
         _visualRevision++;

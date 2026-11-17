@@ -54,6 +54,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(SessionPath is not null){_r53Autosave.Stop();_r53Autosave.Start();}
     }
     /// <summary>Called by the real shell close path. A failed save keeps the window open.</summary>
+    public long CloseEditRevision => _r53EditRevision;
     public async Task<bool> FlushR53BeforeCloseAsync()
     {
         _r53Autosave.Stop();

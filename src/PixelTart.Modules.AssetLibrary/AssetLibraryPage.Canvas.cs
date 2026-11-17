@@ -12,9 +12,18 @@ public partial class AssetLibraryPage
     private FreeCanvasView? _canvas;
     private readonly List<InspirationTrayCardView> _boardSelection=[];
     public FreeCanvasView? ActiveCanvas => _canvas;
-    private Window? _canvasOwner;
-    private bool _allowCanvasOwnerClose;
-    private bool _canvasOwnerClosePending;
+    private bool _canvasClosePreparing;
+    public sealed record CanvasCloseSnapshot(FreeCanvasView View, CanvasDocument Document);
+    public async Task<CanvasCloseSnapshot?> PrepareCanvasCloseAsync()
+    {
+        _canvasClosePreparing=true;
+        var canvas=_canvas;
+        if(canvas is null)return null;
+        if(!await canvas.PrepareDocumentChangeAsync()) { _canvasClosePreparing=false; return null; }
+        return new(canvas,canvas.Editor.Document);
+    }
+    public bool IsCanvasCloseCurrent(CanvasCloseSnapshot? snapshot) => snapshot is null ? _canvas is null : ReferenceEquals(_canvas,snapshot.View)&&snapshot.View.IsSavedRevision(snapshot.Document);
+    public void CancelCanvasClose() { _canvasClosePreparing=false;_canvas?.ResumeAfterCanceledClose(); }
     private async Task OpenSavedCanvasMenuAsync(FrameworkElement target)
     {
         var menu=new ContextMenu { PlacementTarget=target };
@@ -35,8 +44,12 @@ public partial class AssetLibraryPage
     }
     public async Task ShowCanvasAsync(CanvasDocument document)
     {
+        if(_disposed || _canvasClosePreparing)return;
         var projects=await _viewModel.CanvasProjectsAsync();
+        if(_disposed || _canvasClosePreparing)return;
         if(_canvas is not null&&!await _canvas.PrepareDocumentChangeAsync())return;
+        if(_canvas is {} previous)await previous.ReleaseAsync();
+        if(_disposed || _canvasClosePreparing)return;
         var store=new CanvasDocumentStore(document.StorageRoot??_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
         canvas.Surface.ResolveSource = async item =>
@@ -64,9 +77,9 @@ public partial class AssetLibraryPage
             }
             new AssetViewerWindow([item.SourcePath],0,_previewProvider){Owner=Window.GetWindow(this)}.Show();
         };
-        canvas.RevealAsset=async item=>{if(await canvas.FlushAsync()){await _viewModel.RevealCanvasAssetAsync(item);HideCanvas();}};
+        canvas.RevealAsset=async item=>{if(await canvas.FlushAsync()){await _viewModel.RevealCanvasAssetAsync(item);await HideCanvasAsync();}};
         canvas.AnalyzePalette=_viewModel.AnalyzeCanvasPaletteAsync;
-        canvas.CloseRequested=()=>{HideCanvas();return Task.CompletedTask;};canvas.OpenDocument=ShowCanvasAsync;
+        canvas.CloseRequested=HideCanvasAsync;canvas.OpenDocument=ShowCanvasAsync;
         var picker=new ComboBox{Width=220,Margin=new(8,2,8,2),ItemsSource=projects.Select(item=>new CanvasProjectChoice(item.Id,item.Name)).ToArray(),DisplayMemberPath=nameof(CanvasProjectChoice.Name),SelectedValuePath=nameof(CanvasProjectChoice.Id),ToolTip="关联项目"};
         picker.SelectedItem=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==document.ProjectId)??picker.Items[0];
         picker.SelectionChanged+=(_,_)=>{if(picker.SelectedItem is CanvasProjectChoice item)editor.SetProject(item.Id);};canvas.ProjectPanel.Children.Add(picker);
@@ -88,27 +101,16 @@ public partial class AssetLibraryPage
         editor.Changed+=(_,_)=>{var choice=picker.Items.Cast<CanvasProjectChoice>().FirstOrDefault(item=>item.Id==editor.Document.ProjectId);if(choice is not null&&!Equals(choice,picker.SelectedItem))picker.SelectedItem=choice;};
         LibraryWorkspace.Visibility=Visibility.Collapsed;
         CanvasWorkspace.Content=canvas;CanvasWorkspace.Visibility=Visibility.Visible;
-        if(_canvasOwner is null&&Window.GetWindow(this) is {} owner){_canvasOwner=owner;owner.Closing+=CanvasOwnerClosing;}
-        canvas.UpdateLayout();await canvas.Surface.LoadPreviewsAsync();await canvas.FlushAsync();
+
+        canvas.UpdateLayout();await canvas.Surface.LoadPreviewsAsync();if(!_disposed&&!canvas.IsReleased)await canvas.FlushAsync();
     }
-    private void HideCanvas(){CanvasWorkspace.Visibility=Visibility.Collapsed;CanvasWorkspace.Content=null;_canvas=null;LibraryWorkspace.Visibility=Visibility.Visible;}
-    private async void CanvasOwnerClosing(object? sender,System.ComponentModel.CancelEventArgs e)
+    private async Task HideCanvasAsync()
     {
-        if (_allowCanvasOwnerClose || _canvas is null) return;
-        e.Cancel = true;
-        if (_canvasOwnerClosePending || sender is not Window owner) return;
-        _canvasOwnerClosePending = true;
-        try
-        {
-            // A saved document completes preparation synchronously. Leave the original
-            // Closing event before prompting or calling Close again (WPF forbids reentry).
-            await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.Background);
-            if (_disposed || _canvas is null || !await _canvas.PrepareDocumentChangeAsync()) return;
-            _allowCanvasOwnerClose = true;
-            try { owner.Close(); }
-            finally { _allowCanvasOwnerClose = false; }
-        }
-        finally { _canvasOwnerClosePending = false; }
+        if(_canvasClosePreparing)return;
+        var canvas=_canvas;
+        if(canvas is not null)await canvas.ReleaseAsync();
+        if(!ReferenceEquals(canvas,_canvas))return;
+        CanvasWorkspace.Visibility=Visibility.Collapsed;CanvasWorkspace.Content=null;_canvas=null;LibraryWorkspace.Visibility=Visibility.Visible;
     }
     private void CanvasBoardSelectionChanged(object sender,SelectionChangedEventArgs e)
     {

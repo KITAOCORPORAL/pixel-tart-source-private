@@ -184,75 +184,88 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
-    private bool _darkroomCloseSaving;
-    private bool _darkroomCloseFlushed;
-    private bool _planningCloseFlushed;
-    private bool _planningCloseSaving;
-    private bool _tetherCloseDisposed;
-    private bool _tetherCloseDisposing;
-    private async void Window_Closing(object? sender, CancelEventArgs e)
+    private bool _finalClose, _closeQueued, _closeCompleted;
+    private Task? _closeTask;
+    public string ClosePhase { get; private set; } = "Open";
+    public string CloseDetail {get;private set;} = "";
+    public Task? PendingClose => _closeTask;
+
+    // OnClosing returns through every subscriber before any asynchronous preparation
+    // is queued. A Yield from inside a subscriber is unsafe under nested pumping.
+    protected override void OnClosing(CancelEventArgs e)
     {
-        if (AssetLibraryWorkspace is not null && GetHostedAssetLibraryPage()?.ViewModel is { HasUnsavedSmartFolderChanges: true } library)
+        if (_finalClose) { base.OnClosing(e); return; }
+        var requestedPage=GetHostedAssetLibraryPage();
+        var requestedCanvas=requestedPage?.ActiveCanvas;
+        var requestedViewModel=_viewModel;
+        e.Cancel = false;
+        base.OnClosing(e);
+        var participantCanceled=e.Cancel;
+        e.Cancel = true;
+        if(participantCanceled) { CloseDetail="关闭已取消"; return; }
+        if (_closeQueued || _closeTask is { IsCompleted: false } || ClosePhase == "Faulted") return;
+        _closeQueued = true;
+        var completion=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _closeTask=completion.Task;
+        _ = Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(async () =>
         {
-            e.Cancel = true;
-            library.RequestSmartFolderClose(() => _ = Dispatcher.BeginInvoke(new Action(Close)));
-            return;
-        }
-        if (!_planningCloseFlushed && _viewModel?.PlanningPage is { } planning)
-        {
-            e.Cancel = true;
-            if (_planningCloseSaving) return;
-            _planningCloseSaving = true;
-            var saved = await planning.FlushAsync();
-            _planningCloseSaving = false;
-            if (saved) { _planningCloseFlushed = true; _ = Dispatcher.BeginInvoke(new Action(Close)); }
-            return;
-        }
-        if (!TryCloseBookingEditorVisual())
-        {
-            e.Cancel = true;
-            _planningCloseFlushed = false;
-            return;
-        }
+            _closeQueued = false;
+            try { await CoordinateCloseAsync(requestedPage,requestedCanvas,requestedViewModel); completion.TrySetResult(); }
+            catch(Exception error) { completion.TrySetException(error); }
+        }));
+    }
+    private void Window_Closing(object? sender, CancelEventArgs e) { /* Root OnClosing owns the synchronous cancel and scheduling boundary. */ }
 
-        if (!_darkroomCloseFlushed && _viewModel?.ReferenceColorPage is { } darkroom)
+    private async Task CoordinateCloseAsync(PixelTart.Modules.AssetLibrary.AssetLibraryPage? page, PixelTart.Modules.AssetLibrary.FreeCanvas.FreeCanvasView? canvas, MainViewModel? viewModel)
+    {
+        bool releasing = false;
+        ClosePhase = "Preparing"; CloseDetail="";
+        try
         {
-            e.Cancel = true;
-            if (_darkroomCloseSaving) return;
-            _darkroomCloseSaving = true;
+            if(!ReferenceEquals(page,GetHostedAssetLibraryPage()) || !ReferenceEquals(canvas,page?.ActiveCanvas) || !ReferenceEquals(viewModel,_viewModel)) {CloseDetail="关闭目标已改变";return;}
+            // The existing smart-folder guard must stay editable; its completion
+            // initiates a new attempt, never a component-owned final Close.
+            if (page?.ViewModel is { HasUnsavedSmartFolderChanges: true } library)
+            {
+                library.RequestSmartFolderClose(() => _ = Dispatcher.BeginInvoke(new Action(Close)));
+                return;
+            }
+            if (!TryCloseBookingEditorVisual()) return;
             IsEnabled = false;
-            try
-            {
-                if (await darkroom.FlushR53BeforeCloseAsync())
-                {
-                    _darkroomCloseFlushed = true;
-                    _ = Dispatcher.BeginInvoke(new Action(Close));
-                }
-                else _planningCloseFlushed = false;
-            }
-            finally { _darkroomCloseSaving = false; if (!_darkroomCloseFlushed) IsEnabled = true; }
-            return;
+            var canvasSnapshot = page is null ? null : await page.PrepareCanvasCloseAsync();
+            if (canvas is not null && canvasSnapshot is null) {CloseDetail="画布取消或保存失败";return;}
+            if (viewModel?.PlanningPage is {} planning && !await planning.FlushAsync()) return;
+            if (viewModel?.ReferenceColorPage is {} darkroom && !await darkroom.FlushR53BeforeCloseAsync()) return;
+            var darkroomRevision=viewModel?.ReferenceColorPage.CloseEditRevision;
+            if(canvasSnapshot is not null)await canvasSnapshot.View.PauseForCloseAsync();
+            if(darkroomRevision!=viewModel?.ReferenceColorPage.CloseEditRevision) {CloseDetail="暗室保存后版本已改变";return;}
+            // Recheck the exact target/revision after the other participants awaited.
+            if (!ReferenceEquals(viewModel, _viewModel) || !ReferenceEquals(page, GetHostedAssetLibraryPage()) || page?.IsCanvasCloseCurrent(canvasSnapshot) == false) {CloseDetail="准备期间目标或保存版本已改变";return;}
+            ClosePhase = "Releasing"; releasing = true;
+            if (viewModel?.TetherPage is {} tether) await tether.DisposeAsync();
+            if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host) await host.DisposeAsync();
+            else if (page is not null) await page.DisposeAsync();
+            // App.OnExit previously synchronously waited on module Shutdown, which
+            // can start dispatcher-affine cleanup. Drain it while the dispatcher lives.
+            if (Application.Current is App app) await app.PrepareNormalShutdownAsync();
+            viewModel?.CaptureWindowState(ActualWidth, ActualHeight, Left, Top);
+            _finalClose = true;
+            Close();
+            if (!_closeCompleted) throw new InvalidOperationException("最终关闭被其他处理器取消；保存文件已保留，工作区已停止，请重新打开已保存项目。");
+            ClosePhase = "Closed";
         }
-
-        // Drain dispatcher-affine preview work before synchronous App.OnExit cleanup.
-        if (!_tetherCloseDisposed && _viewModel?.TetherPage is { } tether)
+        catch (Exception error)
         {
-            e.Cancel = true;
-            if (_tetherCloseDisposing) return;
-            _tetherCloseDisposing = true;
-            try { await tether.DisposeAsync(); }
-            catch (Exception ex) { System.Diagnostics.Trace.TraceError("Tether shutdown: {0}", ex); }
-            finally
-            {
-                _tetherCloseDisposing = false;
-                _tetherCloseDisposed = true;
-                _ = Dispatcher.BeginInvoke(new Action(Close));
-            }
-            return;
+            ClosePhase = releasing ? "Faulted" : "Open";
+            new RAWSelectionAssistant.Core.Services.FileLogService().Error("关闭失败，阶段=" + (releasing ? "Releasing" : "Preparing"), error);
+            MessageBox.Show(this, releasing
+                ? "关闭清理未完成，工作区已停止。已保存文件保留；请保留日志并重新打开保存的项目。\n" + error.Message
+                : "未能完成关闭准备，修改和工作区已保留，请检查保存位置后重试。\n" + error.Message,
+                "光镜未关闭", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-        if (DataContext is MainViewModel viewModel)
+        finally
         {
-            viewModel.CaptureWindowState(ActualWidth, ActualHeight, Left, Top);
+            if (!releasing) { page?.CancelCanvasClose(); ClosePhase = "Open"; IsEnabled = true; }
         }
     }
 
@@ -371,6 +384,7 @@ public partial class MainWindow : Window
 
     private void Window_Closed(object? sender, EventArgs e)
     {
+        _closeCompleted=true;
 #if INPUT_ROUTING_DIAGNOSTICS
         DisposePhysicalPointerDiagnostics();
 #endif

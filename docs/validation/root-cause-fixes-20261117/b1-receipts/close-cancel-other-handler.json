@@ -1,0 +1,89 @@
+{
+  "scenario": "close-cancel-other-handler",
+  "pid": 24924,
+  "source": "B1_WORKTREE",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14065664,
+        "workingSetBytes": 51662848,
+        "osPeakWorkingSetBytes": 51666944,
+        "managedBytesEstimate": 2354984,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T07:12:30.6828227+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 1,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T07:12:35.2744649+00:00"
+    },
+    {
+      "kind": "IndependentCancel",
+      "value": {
+        "canceled": true
+      },
+      "utc": "2026-11-17T07:12:35.2744913+00:00"
+    },
+    {
+      "kind": "CloseOutcome",
+      "value": {
+        "closed": false,
+        "closeEvents": 1,
+        "dispatcherErrors": 0,
+        "pending": false,
+        "phase": "Open",
+        "detail": "\u5173\u95ED\u5DF2\u53D6\u6D88"
+      },
+      "utc": "2026-11-17T07:12:35.3748763+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 2,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T07:12:35.4846302+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 3,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T07:12:35.5370249+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 277659648,
+        "workingSetBytes": 268832768,
+        "osPeakWorkingSetBytes": 279977984,
+        "managedBytesEstimate": 54222536,
+        "gc0": 22,
+        "gc1": 9,
+        "gc2": 2,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T07:12:35.8401972+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}
