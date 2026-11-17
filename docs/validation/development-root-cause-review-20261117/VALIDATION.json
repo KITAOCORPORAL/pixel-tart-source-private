@@ -1,7 +1,7 @@
 {
-  "atUtc": "2026-11-17T04:18:12.604Z",
+  "atUtc": "2026-11-17T04:25:49.605Z",
   "clientTimeZone": "Europe/Berlin",
-  "jsonParsed": 23,
+  "jsonParsed": 28,
   "tenOriginalPrinciples": true,
   "originalPixelRulesPreserved": true,
   "secretAuthenticationExcluded": true,
@@ -12,11 +12,16 @@
   "old40MpTiffAnd39Regressions": "REUSED_NO_REPEAT",
   "productFixes": "NOT_IMPLEMENTED_PENDING_REVIEW",
   "rawDataRetained": true,
-  "files": 33,
-  "bytes": 470850,
+  "files": 38,
   "independentEvidenceHashesVerified": 80,
   "currentProductSourceAndTests": "NO_DIFF_FROM_E818",
   "expectedNewOwnedDiagnosticOutcome": "CONFIRMED_COUNTEREXAMPLE_NOT_FIXED_PRODUCT",
   "rawOwnedNativeFirstExit": 0,
-  "rawOwnedNativeReopenExit": 0
+  "rawOwnedNativeReopenExit": 0,
+  "initialSnapshotCounts": {
+    "jsonParsed": 23,
+    "files": 33,
+    "bytes": 470850
+  },
+  "validationScope": "Final curated document snapshot; original runtime files remain external"
 }
