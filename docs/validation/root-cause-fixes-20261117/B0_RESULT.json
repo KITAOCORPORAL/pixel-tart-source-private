@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "recover",
+      "instance": "RootCause-dc5bbc27120949588c91d68c811fd961-A",
+      "durationMs": 3096.04610002134
+    },
+    {
+      "case": "activate",
+      "instance": "RootCause-dc5bbc27120949588c91d68c811fd961-C",
+      "durationMs": 83.20310001727194
+    },
+    {
+      "case": "unowned",
+      "instance": "RootCause-dc5bbc27120949588c91d68c811fd961-unowned",
+      "durationMs": 75.23499999660999
+    },
+    {
+      "case": "abandoned",
+      "instance": "RootCause-dc5bbc27120949588c91d68c811fd961-abandoned",
+      "durationMs": 83.10859999619424
+    },
+    {
+      "case": "recover-again",
+      "instance": "RootCause-dc5bbc27120949588c91d68c811fd961-A",
+      "durationMs": 3092.7821000805125
+    }
+  ],
+  "twoRootsCoexist": true,
+  "unresponsiveAndSlowNoWindowPreserved": true,
+  "unsavedContentPreserved": true,
+  "pidReuseCannotAuthorizeTermination": true,
+  "pidReuseScope": "No PID lookup or termination in recovery; stale metadata has no authority",
+  "actualMutexAndAbandonedAcquired": true,
+  "sameRootActivation": true,
+  "sourceSha256": "44b5642848c15a922b03fea1be9992a250d9595cb8bd403deb1d9fe0b1bc5e78"
+}

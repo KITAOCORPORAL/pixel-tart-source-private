@@ -632,7 +632,12 @@ public partial class App : Application
             assemblyName += "-Acceptance-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(AppDataPaths.Root)))[..16];
 #endif
         _singleInstance = new SingleInstanceManager($"{assemblyName}-96AFD8F1-7EF9-4D10-AFA9-18C6BE383E17");
-        if (!_singleInstance.TryAcquire()) return false;
+        if (!_singleInstance.TryAcquire())
+        {
+            if (_singleInstance.LastAcquisition == InstanceAcquisition.ExistingInstanceUnresponsive)
+                MessageBox.Show("此数据目录的光镜实例仍在运行，但尚未响应激活。它可能正在启动、保存或关闭；已保留该进程和未保存内容，请稍候重试。", "光镜正在处理", MessageBoxButton.OK, MessageBoxImage.Information);
+            return false;
+        }
         _singleInstance.ActivationRequested += ActivateMainWindow;
         return true;
     }
