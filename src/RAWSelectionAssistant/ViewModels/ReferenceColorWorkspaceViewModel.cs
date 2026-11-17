@@ -70,7 +70,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private ReferenceTargetItem? _copiedAdjustments;
     public Action<IReadOnlyList<string>>? OpenPublishing { get; set; }
-    public Func<IReadOnlyList<string>,Task>? OpenOnlineSelection { get; set; }
+    public Func<IReadOnlyList<string>,Task<bool>>? OpenOnlineSelection { get; set; }
+    public Func<Guid?,Task<string?>>? ValidateOnlineSelection {get;set;}
     public Guid? WorkflowProjectId { get; private set; }
     public void BindWorkflowProject(Guid projectId) => WorkflowProjectId=projectId;
     public AsyncRelayCommand PrepareOnlineSelectionCommand { get; }
@@ -122,12 +123,23 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task PreparePublishingAsync(bool forSelection=false)
     {
+        if(forSelection)
+        {
+            var rejection=ValidateOnlineSelection is null ? "项目身份校验不可用，请重新打开归片项目。" : await ValidateOnlineSelection(WorkflowProjectId);
+            if(rejection is not null){StatusText=rejection;return;}
+        }
         await StopComparisonAsync();
         if ((forSelection ? OpenOnlineSelection is null || WorkflowProjectId is null : OpenPublishing is null) || IsExporting || IsInstantGenerating) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
         var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,SourceHash:item.SourceHash,Look:main.Look,Stack:main.Stack?.DeepClone(),Film:main.Film,Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
+        if(forSelection)
+        {
+            if(frozen.Any(item=>item.VersionId==Guid.Empty||string.IsNullOrWhiteSpace(item.SourceHash))){StatusText="所选编辑版本无效，请重新打开项目。";return;}
+            foreach(var item in frozen)if(!await ValidateTargetIdentityAsync(item.Item,CancellationToken.None)){StatusText=item.Item.Error??"源素材身份无效";return;}
+        }
+        var publishingRevision=_r53EditRevision;
         var publishingLease=new PublishingIntermediateLease();
         var directory=publishingLease.DirectoryPath;var handedOff=false;
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
@@ -165,14 +177,20 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 { failures.Add(item.Item.FileName); }
             }
             ExportFailureSummary = failures.Count == 0 ? "" : StudioLocalizationService.Current.Format("PrepareFailures", string.Join(", ", failures));
-            SetExportStatus("PrepareFinished", paths.Count, items.Length, failures.Count);
+
             if (failures.Count > 0) _dialogs.ShowInfo(ExportStatus + "\n" + ExportFailureSummary);
             if (paths.Count > 0)
             {
                 publishingLease.CompleteExisting();
-                if(forSelection) await OpenOnlineSelection!(paths);
+                if(forSelection)
+                {
+                    var rejection=ValidateOnlineSelection is null ? "项目身份校验不可用" : await ValidateOnlineSelection(WorkflowProjectId);
+                    if(rejection is not null||publishingRevision!=_r53EditRevision){StatusText=rejection??"准备期间编辑版本已改变，请重试";return;}
+                    if(!await OpenOnlineSelection!(paths)){StatusText="未创建选片项目，请核对项目名称和身份后重试";return;}
+                }
                 else {publishingLease.Handoff();publishingLease.Dispose();OpenPublishing!(paths);handedOff=true;}
             }
+            SetExportStatus("PrepareFinished", paths.Count, items.Length, failures.Count);
         }
         catch (OperationCanceledException) { ExportStatus = "已停止准备发布"; }
         finally

@@ -13,6 +13,11 @@ using RAWSelectionAssistant.Utilities;
 
 namespace RAWSelectionAssistant.ViewModels;
 
+public sealed record SelectionCreationResult(bool Succeeded, string Message, Guid? ProjectId = null)
+{
+    public static SelectionCreationResult Rejected(string message) => new(false,message);
+}
+
 public enum OnlineSelectionProjectTab
 {
     Photos,
@@ -662,6 +667,7 @@ public sealed class OnlineSelectionViewModel : ObservableObject
 
     private bool TryValidateCreateInput()
     {
+        if(string.IsNullOrWhiteSpace(ProjectName)){StatusText="请填写项目名";return false;}
         if (!int.TryParse(TargetCountText, out var targetCount) || targetCount <= 0)
         {
             StatusText = "目标数量必须是大于零的数字。";
@@ -675,19 +681,22 @@ public sealed class OnlineSelectionViewModel : ObservableObject
         return false;
     }
 
-    public Task CreateProjectAsync(IEnumerable<string> initialPaths, CancellationToken cancellationToken = default) => CreateProjectCoreAsync(initialPaths,null,cancellationToken);
-    public Task CreateForWorkflowAsync(IEnumerable<string> paths,Guid workflowProjectId,CancellationToken cancellationToken=default) => CreateProjectCoreAsync(paths,workflowProjectId,cancellationToken);
-    private async Task CreateProjectCoreAsync(IEnumerable<string> initialPaths, Guid? workflowProjectId,CancellationToken cancellationToken)
+    public Task<SelectionCreationResult> CreateProjectAsync(IEnumerable<string> initialPaths, CancellationToken cancellationToken = default) => CreateProjectCoreAsync(initialPaths,null,cancellationToken);
+    public Task<SelectionCreationResult> CreateForWorkflowAsync(IEnumerable<string> paths,Guid workflowProjectId,CancellationToken cancellationToken=default) => CreateProjectCoreAsync(paths,workflowProjectId,cancellationToken);
+    private async Task<SelectionCreationResult> CreateProjectCoreAsync(IEnumerable<string> initialPaths, Guid? workflowProjectId,CancellationToken cancellationToken)
     {
+        if(string.IsNullOrWhiteSpace(ProjectName)){StatusText="请填写项目名";return SelectionCreationResult.Rejected(StatusText);}
+        if(workflowProjectId==Guid.Empty){StatusText="归片项目身份无效";return SelectionCreationResult.Rejected(StatusText);}
+        if(IsBusy||ProjectPage.IsBusy){StatusText="当前正在创建或处理项目，请稍候";return SelectionCreationResult.Rejected(StatusText);}
         var selectedPaths = (initialPaths ?? []).Where(path => !string.IsNullOrWhiteSpace(path)).ToArray();
         if (!int.TryParse(TargetCountText, out var targetCount) || targetCount <= 0)
         {
             StatusText = "目标数量必须是大于零的数字。";
-            return;
+            return SelectionCreationResult.Rejected(StatusText);
         }
         var project = SelectionProjectFactory.CreateDraft(ProjectName, ClientName, targetCount, Deadline?.ToUniversalTime()) with { WorkflowProjectId=workflowProjectId };
         var validation = SelectionProjectValidator.ValidateDraft(project);
-        if (!validation.IsValid) { StatusText = validation.Message; return; }
+        if (!validation.IsValid) { StatusText = validation.Message; return SelectionCreationResult.Rejected(StatusText); }
         IsBusy = true;
         try
         {
@@ -709,6 +718,7 @@ public sealed class OnlineSelectionViewModel : ObservableObject
                     : failedCount == 0
                         ? $"选片项目已创建并导入 {importedCount} 张照片，代理 JPG 已就绪。"
                         : $"选片项目已创建并导入 {importedCount} 张照片，其中 {failedCount} 张代理生成失败。";
+            return new SelectionCreationResult(true,StatusText,project.Id);
         }
         finally { IsBusy = false; }
     }

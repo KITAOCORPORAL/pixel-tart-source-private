@@ -196,6 +196,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         if (PublishingPage is not null) ReferenceColorPage.OpenPublishing = paths => { PublishingPage.AddFiles(paths); Navigate("Publishing"); };
         EditIndexedProjectCommand=new AsyncRelayCommand(_=>EditIndexedProjectAsync(),_=>!IsBusy&&Sources.Count>0);
         ReferenceColorPage.OpenOnlineSelection=PrepareCurrentProjectSelectionAsync;
+        ReferenceColorPage.ValidateOnlineSelection = id => Task.FromResult(ValidateSelectionPreparation(id));
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {
             await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, null, null).ConfigureAwait(true);
@@ -2531,9 +2532,10 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         await Task.CompletedTask;
     }
 
-    private async Task SaveCurrentProjectAsync()
+    private async Task<bool> SaveCurrentProjectAsync()
     {
-        _currentProject.Name = string.IsNullOrWhiteSpace(ProjectName) ? "未命名项目" : ProjectName.Trim();
+        if(string.IsNullOrWhiteSpace(ProjectName)){StatusMessage="请填写项目名";return false;}
+        _currentProject.Name = ProjectName.Trim();
         _currentProject.Category = CollectionCategory;
         _currentProject.OutputMode = OutputMode;
         _currentProject.OutputBaseDirectory = OutputBaseDirectory;
@@ -2552,6 +2554,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         await _projectHistoryService.UpsertAsync(_currentProject);
         await ReloadProjectHistoryAsync();
         OnPropertyChanged(nameof(CurrentProjectStatus));
+        return true;
     }
 
     private async Task ReloadProjectHistoryAsync()
@@ -2735,7 +2738,8 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
 
     private void RegenerateOutputFolderName()
     {
-        var project = string.IsNullOrWhiteSpace(ProjectName) ? "未命名项目" : ProjectName.Trim();
+        if(string.IsNullOrWhiteSpace(ProjectName)){OutputFolderName=string.Empty;return;}
+        var project = ProjectName.Trim();
         foreach (var invalid in Path.GetInvalidFileNameChars()) project = project.Replace(invalid, '_');
         var suffix = CollectionCategory switch
         {

@@ -17,7 +17,7 @@ public sealed partial class MainViewModel
  }
  private async Task EditIndexedProjectAsync()
  {
-  await SaveCurrentProjectAsync();
+  if(!await SaveCurrentProjectAsync())return;
   var roots=Sources.Select(s=>Path.GetFullPath(s.Path).TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar).ToArray();
   var photos=_mediaIndex.Files.Where(f=>roots.Any(root=>Path.GetFullPath(f.FullPath).StartsWith(root,StringComparison.OrdinalIgnoreCase))).Select(f=>f.FullPath).Where(p=>new[]{".jpg",".jpeg"}.Contains(Path.GetExtension(p),StringComparer.OrdinalIgnoreCase)).Where(File.Exists).ToArray();
   if(photos.Length==0){StatusMessage="请先扫描来源目录，当前项目没有可编辑的索引 JPEG。";return;}
@@ -28,17 +28,26 @@ public sealed partial class MainViewModel
   foreach(var path in photos) await ReferenceColorPage.LoadTargetAsync(path);
   NavigateToSurface("ReferenceColor");
  }
- private async Task PrepareCurrentProjectSelectionAsync(IReadOnlyList<string> paths)
+ private string? ValidateSelectionPreparation(Guid? workflowId)
  {
-  if(ReferenceColorPage.WorkflowProjectId is not Guid workflowId||workflowId!=_currentProject.Id)throw new InvalidOperationException("暗室与当前归片项目身份不一致，请打开对应项目后继续。");
+  if(string.IsNullOrWhiteSpace(ProjectName))return "请填写项目名";
+  if(workflowId is null||workflowId==Guid.Empty||workflowId!=_currentProject.Id)return "暗室与当前归片项目身份不一致，请打开对应项目后继续。";
+  return null;
+ }
+ private async Task<bool> PrepareCurrentProjectSelectionAsync(IReadOnlyList<string> paths)
+ {
+  var rejection=ValidateSelectionPreparation(ReferenceColorPage.WorkflowProjectId);
+  if(rejection is not null){StatusMessage=rejection;return false;}
+  var workflowId=ReferenceColorPage.WorkflowProjectId!.Value;
   if(paths.Count==0||paths.Select(Path.GetFileName).Distinct(StringComparer.OrdinalIgnoreCase).Count()!=paths.Count)throw new InvalidOperationException("所选编辑结果存在同名冲突，请先分开处理，未创建相册。");
-  await SaveCurrentProjectAsync();
+  if(!await SaveCurrentProjectAsync())return false;
   var folder=Path.Combine(AppDataPaths.OnlineSelectionDirectory,"Prepared",workflowId.ToString("N"),Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);
   var durable=new List<string>();
   foreach(var source in paths){var destination=Path.Combine(folder,Path.GetFileName(source));File.Copy(source,destination,false);if(File.Exists(source+".kitao-export.json"))File.Copy(source+".kitao-export.json",destination+".kitao-export.json",false);durable.Add(destination);}
   OnlineSelectionPage.ProjectName=ProjectName;OnlineSelectionPage.ClientName="客户";OnlineSelectionPage.TargetCountText=durable.Count.ToString();
-  await OnlineSelectionPage.CreateForWorkflowAsync(durable,workflowId);
-  NavigateToSurface("OnlineSelection");
+  var created=await OnlineSelectionPage.CreateForWorkflowAsync(durable,workflowId);
+  if(!created.Succeeded){StatusMessage=created.Message;return false;}
+  NavigateToSurface("OnlineSelection");return true;
  }
  private async Task<Guid> AcceptOnlineSelectionWorkflowAsync(SelectionProject selection,SelectionFinalResult result,IReadOnlyList<SelectionAsset> assets,string archive)
  {
