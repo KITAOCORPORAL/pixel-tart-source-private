@@ -1,9 +1,9 @@
 {
   "scenario": "save-cancel",
-  "pid": 44180,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 45208,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14061568,
-        "workingSetBytes": 51593216,
-        "osPeakWorkingSetBytes": 51597312,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14020608,
+        "workingSetBytes": 51683328,
+        "osPeakWorkingSetBytes": 51687424,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:59.4269103+00:00"
+      "utc": "2026-11-17T08:00:30.9367744+00:00"
     },
     {
       "kind": "Cancel",
@@ -30,22 +30,22 @@
         "dirtyPreserved": true,
         "autosaveResumed": true
       },
-      "utc": "2026-11-17T07:13:04.1985018+00:00"
+      "utc": "2026-11-17T08:00:36.1613253+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 301924352,
-        "workingSetBytes": 270450688,
-        "osPeakWorkingSetBytes": 280866816,
-        "managedBytesEstimate": 62260808,
+        "privateBytes": 277528576,
+        "workingSetBytes": 263913472,
+        "osPeakWorkingSetBytes": 273952768,
+        "managedBytesEstimate": 62175528,
         "gc0": 22,
         "gc1": 9,
         "gc2": 2,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:13:04.6420928+00:00"
+      "utc": "2026-11-17T08:00:36.7433212+00:00"
     }
   ],
   "dispatcherErrors": []

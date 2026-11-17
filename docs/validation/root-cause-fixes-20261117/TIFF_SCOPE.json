@@ -1,0 +1,15 @@
+{
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "retainedPriorEvidence": "docs/validation/product-line-continuation-20261116/{TIFF_RECEIPT.json,TIFF_PAIR_COMPARISON.json,TIFF_INTEGRATED_COMPARISON.json}",
+  "pixelAndPreparedServicesUnchanged": [
+    "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+    "src/RAWSelectionAssistant/Services/RenderedSrgbInput.cs",
+    "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs"
+  ],
+  "targetedMemoryPixelExposureTestsPassed": true,
+  "newOrdinary40MpCloseAcceptance": "NOT_RUN_AFTER_USER_STOPPED_COMPUTER_USE",
+  "newRawDecodes": 0,
+  "prior40MpEvidenceNotRelabeledAsNewSource": true
+}

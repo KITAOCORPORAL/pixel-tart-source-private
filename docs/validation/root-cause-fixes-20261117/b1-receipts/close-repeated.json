@@ -1,9 +1,9 @@
 {
   "scenario": "close-repeated",
-  "pid": 42672,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 32472,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14155776,
-        "workingSetBytes": 51699712,
-        "osPeakWorkingSetBytes": 51703808,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14290944,
+        "workingSetBytes": 51961856,
+        "osPeakWorkingSetBytes": 51965952,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:36.3384158+00:00"
+      "utc": "2026-11-17T08:00:04.8279184+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -30,7 +30,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:40.939791+00:00"
+      "utc": "2026-11-17T08:00:09.5444126+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -39,7 +39,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:40.9398544+00:00"
+      "utc": "2026-11-17T08:00:09.5444826+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -48,7 +48,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:41.1260928+00:00"
+      "utc": "2026-11-17T08:00:09.712821+00:00"
     },
     {
       "kind": "CloseOutcome",
@@ -60,22 +60,22 @@
         "phase": "Closed",
         "detail": ""
       },
-      "utc": "2026-11-17T07:12:41.150988+00:00"
+      "utc": "2026-11-17T08:00:09.7303215+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 290037760,
-        "workingSetBytes": 283619328,
-        "osPeakWorkingSetBytes": 301334528,
-        "managedBytesEstimate": 52834088,
-        "gc0": 22,
+        "privateBytes": 305860608,
+        "workingSetBytes": 296284160,
+        "osPeakWorkingSetBytes": 310423552,
+        "managedBytesEstimate": 59396992,
+        "gc0": 21,
         "gc1": 9,
         "gc2": 2,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:41.5075615+00:00"
+      "utc": "2026-11-17T08:00:10.5763138+00:00"
     }
   ],
   "dispatcherErrors": []

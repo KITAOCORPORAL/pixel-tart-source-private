@@ -12,7 +12,7 @@ for label in a.scenarios.split(','):
   if name.startswith('PIXEL_TART_ACCEPTANCE_') or name.startswith('PIXEL_TART_XTRANS_'):env.pop(name,None)
  with (case/'stdout.log').open('w') as stdout,(case/'stderr.log').open('w') as stderr:
   proc=subprocess.Popen([str(exe),scenario,str(case)],cwd=exe.parent,env=env,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
-  (case/'LAUNCH.json').write_text(json.dumps(dict(pid=proc.pid,exe=str(exe),scenario=scenario,source='B1_WORKTREE',exeSha256=hashlib.sha256(exe.read_bytes()).hexdigest(),guardBytes=2**31,intervalMs=50,newRawDecodes=0,forcedGc=False),indent=2)+'\n',encoding='utf-8')
+  (case/'LAUNCH.json').write_text(json.dumps(dict(pid=proc.pid,exe=str(exe),scenario=scenario,source=a.source,exeSha256=hashlib.sha256(exe.read_bytes()).hexdigest(),guardBytes=2**31,intervalMs=50,newRawDecodes=0,forcedGc=False),indent=2)+'\n',encoding='utf-8')
   handle=k.OpenProcess(0x410,False,proc.pid);assert handle
   start=time.monotonic();peak_private=peak_working=count=0;stop=None
   with (case/'RESOURCE_SAMPLES.jsonl').open('w',encoding='utf-8') as samples:
@@ -29,7 +29,7 @@ for label in a.scenarios.split(','):
  row=dict(case=label,pid=proc.pid,exitCode=proc.returncode,stop=stop,samples=count,peakPrivateBytes50ms=peak_private,osPeakWorkingSetBytes=peak_working,lifetimeMs=(time.monotonic()-start)*1000,timingScope='Entire synthetic WPF process including startup and deliberate waiting; not product operation latency',newRawDecodes=0,forcedGc=False)
  (case/'EXIT.json').write_text(json.dumps(row,indent=2)+'\n',encoding='utf-8');rows.append(row)
  print(json.dumps(dict(case=label,exitCode=proc.returncode,stop=stop,peakMiB=round(peak_private/2**20,2))),flush=True)
-(root/'RUN_SUMMARY.json').write_text(json.dumps(dict(source='B1_WORKTREE',cases=rows),indent=2)+'\n',encoding='utf-8')
+(root/'RUN_SUMMARY.json').write_text(json.dumps(dict(source=a.source,cases=rows),indent=2)+'\n',encoding='utf-8')
 
 import sys
 sys.exit(1 if any(r['exitCode']!=0 or r['stop'] for r in rows) else 0)

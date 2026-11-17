@@ -1,0 +1,27 @@
+{
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "base": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "B0": "f55825bb",
+  "B1": "057d58ff",
+  "B2": "eef3b35bd530ad060548ee1bde1a38f312e2e100",
+  "counterexampleRefinement": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "changedProductFiles": [
+    "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+    "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+    "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+    "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+    "src/RAWSelectionAssistant/App.xaml.cs",
+    "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+    "src/RAWSelectionAssistant/Utilities/SingleInstanceManager.cs",
+    "src/RAWSelectionAssistant/ViewModels/MainViewModel.OnlineSelection.cs",
+    "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+    "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.R53.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs"
+  ],
+  "package": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-433a1d8e-Full-win-x64",
+  "mainDllSha256": "c387e55579f3cc581ea79c309ef46b7a99755646aff79a165d2d3f5ec4577b76",
+  "noNewRaw": true,
+  "uiRedesign": false,
+  "installer": false
+}

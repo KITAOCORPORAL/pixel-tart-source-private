@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "recover",
+      "instance": "RootCause-e1e02c202b5545c2a60fa8a931d0a477-A",
+      "durationMs": 3087.327799992636
+    },
+    {
+      "case": "activate",
+      "instance": "RootCause-e1e02c202b5545c2a60fa8a931d0a477-C",
+      "durationMs": 86.36700001079589
+    },
+    {
+      "case": "unowned",
+      "instance": "RootCause-e1e02c202b5545c2a60fa8a931d0a477-unowned",
+      "durationMs": 77.65260001178831
+    },
+    {
+      "case": "abandoned",
+      "instance": "RootCause-e1e02c202b5545c2a60fa8a931d0a477-abandoned",
+      "durationMs": 81.19249995797873
+    },
+    {
+      "case": "recover-again",
+      "instance": "RootCause-e1e02c202b5545c2a60fa8a931d0a477-A",
+      "durationMs": 3105.8838999597356
+    }
+  ],
+  "twoRootsCoexist": true,
+  "unresponsiveAndSlowNoWindowPreserved": true,
+  "unsavedContentPreserved": true,
+  "pidReuseCannotAuthorizeTermination": true,
+  "pidReuseScope": "No PID lookup or termination in recovery; stale metadata has no authority",
+  "actualMutexAndAbandonedAcquired": true,
+  "sameRootActivation": true,
+  "sourceSha256": "44b5642848c15a922b03fea1be9992a250d9595cb8bd403deb1d9fe0b1bc5e78",
+  "guardBytes": 2147483648,
+  "intervalMs": 50,
+  "resourcePeaks": {
+    "42528": {
+      "privateBytes": 7241728,
+      "workingSetBytes": 27369472
+    },
+    "48068": {
+      "privateBytes": 6758400,
+      "workingSetBytes": 26619904
+    },
+    "40036": {
+      "privateBytes": 5013504,
+      "workingSetBytes": 24948736
+    },
+    "31932": {
+      "privateBytes": 7090176,
+      "workingSetBytes": 27017216
+    },
+    "32840": {
+      "privateBytes": 5599232,
+      "workingSetBytes": 20307968
+    },
+    "37244": {
+      "privateBytes": 5844992,
+      "workingSetBytes": 23175168
+    },
+    "51344": {
+      "privateBytes": 5189632,
+      "workingSetBytes": 17858560
+    },
+    "47044": {
+      "privateBytes": 5001216,
+      "workingSetBytes": 17178624
+    }
+  },
+  "guardStops": [],
+  "forcedGc": false
+}

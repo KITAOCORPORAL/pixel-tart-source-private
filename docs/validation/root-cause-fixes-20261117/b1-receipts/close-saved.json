@@ -1,9 +1,9 @@
 {
   "scenario": "close-saved",
-  "pid": 25188,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 37528,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14147584,
-        "workingSetBytes": 51765248,
-        "osPeakWorkingSetBytes": 51769344,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14123008,
+        "workingSetBytes": 51990528,
+        "osPeakWorkingSetBytes": 51994624,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:13.2856504+00:00"
+      "utc": "2026-11-17T07:59:40.1979789+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -30,7 +30,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:17.8507543+00:00"
+      "utc": "2026-11-17T07:59:45.1278099+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -39,7 +39,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:17.9955843+00:00"
+      "utc": "2026-11-17T07:59:45.2904542+00:00"
     },
     {
       "kind": "CloseOutcome",
@@ -51,22 +51,22 @@
         "phase": "Closed",
         "detail": ""
       },
-      "utc": "2026-11-17T07:12:18.0195747+00:00"
+      "utc": "2026-11-17T07:59:45.3040534+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 274968576,
-        "workingSetBytes": 267456512,
-        "osPeakWorkingSetBytes": 276320256,
-        "managedBytesEstimate": 52924480,
+        "privateBytes": 273874944,
+        "workingSetBytes": 265519104,
+        "osPeakWorkingSetBytes": 277835776,
+        "managedBytesEstimate": 55388432,
         "gc0": 22,
         "gc1": 9,
         "gc2": 2,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:18.3752883+00:00"
+      "utc": "2026-11-17T07:59:45.6601792+00:00"
     }
   ],
   "dispatcherErrors": []

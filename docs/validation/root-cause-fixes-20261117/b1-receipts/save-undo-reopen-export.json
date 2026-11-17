@@ -1,9 +1,9 @@
 {
   "scenario": "save-undo-reopen-export",
-  "pid": 9640,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 55136,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14049280,
-        "workingSetBytes": 51617792,
-        "osPeakWorkingSetBytes": 51621888,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14086144,
+        "workingSetBytes": 51699712,
+        "osPeakWorkingSetBytes": 51703808,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:13:10.6906538+00:00"
+      "utc": "2026-11-17T08:00:43.2651778+00:00"
     },
     {
       "kind": "SaveUndoRedoReopenExport",
@@ -33,22 +33,22 @@
         "exportSha256": "13E4389CC54C7F35501385B37AC7F8FB296DD2B6762033AD141C3F6BFED3F482",
         "pixelMathModified": false
       },
-      "utc": "2026-11-17T07:13:15.35833+00:00"
+      "utc": "2026-11-17T08:00:48.1693405+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 295194624,
-        "workingSetBytes": 278462464,
-        "osPeakWorkingSetBytes": 286388224,
-        "managedBytesEstimate": 55286824,
+        "privateBytes": 286183424,
+        "workingSetBytes": 277041152,
+        "osPeakWorkingSetBytes": 285929472,
+        "managedBytesEstimate": 58079176,
         "gc0": 22,
         "gc1": 9,
         "gc2": 2,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:13:15.7992276+00:00"
+      "utc": "2026-11-17T08:00:48.6473143+00:00"
     }
   ],
   "dispatcherErrors": []

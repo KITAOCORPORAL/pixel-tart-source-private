@@ -1,0 +1,42 @@
+{
+  "atUtc": "2026-11-17T08:03:26.487982+00:00",
+  "source": "eef3b35bd530ad060548ee1bde1a38f312e2e100",
+  "finalProductSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "launch": {
+    "pid": 2004,
+    "createdFileTime": "134393740072188829",
+    "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-eef3b35b-Full-win-x64\\App\\GuangjingRootCauseQA.exe",
+    "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\ordinary-qa\\workflow-runtime",
+    "source": "eef3b35bd530ad060548ee1bde1a38f312e2e100",
+    "mainDllSha256": "2ca00640b9e734adcd553b766b9468d853671425eb762fcb41967219446621b4",
+    "startedUtc": 1794900407.2360811,
+    "newRawDecodesAuthorized": 0,
+    "guardBytes": 2147483648
+  },
+  "status": "INCOMPLETE_COMPUTER_USE_STOPPED_BY_PHYSICAL_ESCAPE",
+  "ordinaryCandidateStarted": true,
+  "finalOrdinaryExeStarted": false,
+  "sameSourceSelectionServiceReady": true,
+  "projectCountAtStop": 0,
+  "stage": "Native source-folder picker; target filename set but confirmation not completed",
+  "sourceJpegs": [
+    {
+      "file": "COMPANY_0001.jpg",
+      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
+    },
+    {
+      "file": "COMPANY_0002.jpg",
+      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
+    }
+  ],
+  "fullSameProjectFlowPassed": false,
+  "reason": "Computer Use returned physical Escape stopped control; no more Computer Use actions performed",
+  "uiToolLimits": [
+    "WGC capture timed out",
+    "Element click geometry unavailable",
+    "Fallback pane click did not confirm system folder picker"
+  ],
+  "originalUserWorkspaceMutated": false,
+  "candidateSourceShaVerifiedByLiveMainDll": true,
+  "finalSourceNotRelabeledFromCandidate": true
+}

@@ -1,9 +1,9 @@
 {
   "scenario": "save-during-edit",
-  "pid": 34688,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 45336,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14077952,
-        "workingSetBytes": 51609600,
-        "osPeakWorkingSetBytes": 51613696,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14086144,
+        "workingSetBytes": 51712000,
+        "osPeakWorkingSetBytes": 51716096,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:13:25.7773482+00:00"
+      "utc": "2026-11-17T08:00:59.111859+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -30,7 +30,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:13:30.3927587+00:00"
+      "utc": "2026-11-17T08:01:04.2234161+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -39,7 +39,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:13:30.3928026+00:00"
+      "utc": "2026-11-17T08:01:04.2234671+00:00"
     },
     {
       "kind": "CloseWhileSaveHeld",
@@ -48,7 +48,7 @@
         "closeEvents": 2,
         "pending": true
       },
-      "utc": "2026-11-17T07:13:30.6983559+00:00"
+      "utc": "2026-11-17T08:01:04.5173342+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -57,7 +57,7 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:13:31.0529608+00:00"
+      "utc": "2026-11-17T08:01:04.8983945+00:00"
     },
     {
       "kind": "CloseOutcome",
@@ -69,29 +69,29 @@
         "phase": "Closed",
         "detail": ""
       },
-      "utc": "2026-11-17T07:13:31.1724954+00:00"
+      "utc": "2026-11-17T08:01:05.0620485+00:00"
     },
     {
       "kind": "LaterRevisionSaved",
       "value": {
         "objects": 2
       },
-      "utc": "2026-11-17T07:13:31.2085261+00:00"
+      "utc": "2026-11-17T08:01:05.0752659+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 326275072,
-        "workingSetBytes": 287043584,
-        "osPeakWorkingSetBytes": 302653440,
-        "managedBytesEstimate": 43813520,
+        "privateBytes": 299057152,
+        "workingSetBytes": 286793728,
+        "osPeakWorkingSetBytes": 301920256,
+        "managedBytesEstimate": 44167848,
         "gc0": 24,
         "gc1": 11,
         "gc2": 3,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:13:31.5670329+00:00"
+      "utc": "2026-11-17T08:01:05.4321998+00:00"
     }
   ],
   "dispatcherErrors": []

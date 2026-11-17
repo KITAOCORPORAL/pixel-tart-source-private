@@ -1,9 +1,9 @@
 {
   "scenario": "close-nested-frame",
-  "pid": 45212,
-  "source": "B1_WORKTREE",
-  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
-  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "pid": 14820,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
   "nativeRawDecodes": 0,
   "forcedGc": false,
   "exitCode": 0,
@@ -12,16 +12,16 @@
       "kind": "NaturalMemory",
       "value": {
         "point": "before",
-        "privateBytes": 14315520,
-        "workingSetBytes": 51728384,
-        "osPeakWorkingSetBytes": 51732480,
-        "managedBytesEstimate": 2354984,
+        "privateBytes": 14069760,
+        "workingSetBytes": 51642368,
+        "osPeakWorkingSetBytes": 51646464,
+        "managedBytesEstimate": 2363208,
         "gc0": 0,
         "gc1": 0,
         "gc2": 0,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:18.8642934+00:00"
+      "utc": "2026-11-17T07:59:46.2260712+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -30,21 +30,21 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:23.5076884+00:00"
+      "utc": "2026-11-17T07:59:51.1382738+00:00"
     },
     {
       "kind": "NestedFrameEnter",
       "value": {
         "depth": 1
       },
-      "utc": "2026-11-17T07:12:23.5077532+00:00"
+      "utc": "2026-11-17T07:59:51.1383289+00:00"
     },
     {
       "kind": "NestedFrameExit",
       "value": {
         "errors": 0
       },
-      "utc": "2026-11-17T07:12:23.5078707+00:00"
+      "utc": "2026-11-17T07:59:51.1384282+00:00"
     },
     {
       "kind": "ClosingObserver",
@@ -53,21 +53,21 @@
         "cancel": false,
         "frameDepth": 0
       },
-      "utc": "2026-11-17T07:12:23.6465815+00:00"
+      "utc": "2026-11-17T07:59:51.3284868+00:00"
     },
     {
       "kind": "NestedFrameEnter",
       "value": {
         "depth": 1
       },
-      "utc": "2026-11-17T07:12:23.6465953+00:00"
+      "utc": "2026-11-17T07:59:51.3285005+00:00"
     },
     {
       "kind": "NestedFrameExit",
       "value": {
         "errors": 0
       },
-      "utc": "2026-11-17T07:12:24.1142601+00:00"
+      "utc": "2026-11-17T07:59:51.6820268+00:00"
     },
     {
       "kind": "CloseOutcome",
@@ -79,22 +79,22 @@
         "phase": "Closed",
         "detail": ""
       },
-      "utc": "2026-11-17T07:12:24.1411664+00:00"
+      "utc": "2026-11-17T07:59:51.7848017+00:00"
     },
     {
       "kind": "NaturalMemory",
       "value": {
         "point": "after-natural-idle",
-        "privateBytes": 314888192,
-        "workingSetBytes": 288780288,
-        "osPeakWorkingSetBytes": 304717824,
-        "managedBytesEstimate": 59091688,
+        "privateBytes": 301068288,
+        "workingSetBytes": 286474240,
+        "osPeakWorkingSetBytes": 302841856,
+        "managedBytesEstimate": 59982688,
         "gc0": 22,
         "gc1": 9,
         "gc2": 2,
         "forcedCollection": false
       },
-      "utc": "2026-11-17T07:12:24.5077635+00:00"
+      "utc": "2026-11-17T07:59:52.1442737+00:00"
     }
   ],
   "dispatcherErrors": []

@@ -1,0 +1,54 @@
+{
+  "scenario": "preview-release-failure",
+  "pid": 20912,
+  "source": "2.3.0+433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "basis": "f6655aff201b157a09ee37c46eb82596ff59028f",
+  "authority": "Controlled synthetic WPF host of the repaired production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14106624,
+        "workingSetBytes": 51740672,
+        "osPeakWorkingSetBytes": 51744768,
+        "managedBytesEstimate": 2363208,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T08:01:05.9462106+00:00"
+    },
+    {
+      "kind": "TerminalFailureRetained",
+      "value": {
+        "sharedFault": true,
+        "released": true,
+        "pageStartedDisposal": true,
+        "savedDocumentReadable": true,
+        "cleanup": "Injected terminal failure; owned process exits with preserved synthetic saved files"
+      },
+      "utc": "2026-11-17T08:01:11.4318207+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 296378368,
+        "workingSetBytes": 293896192,
+        "osPeakWorkingSetBytes": 310251520,
+        "managedBytesEstimate": 57411488,
+        "gc0": 21,
+        "gc1": 9,
+        "gc2": 2,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T08:01:11.7875073+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}
