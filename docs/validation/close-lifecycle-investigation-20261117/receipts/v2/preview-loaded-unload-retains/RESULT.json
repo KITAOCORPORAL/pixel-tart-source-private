@@ -1,0 +1,67 @@
+{
+  "scenario": "preview-loaded-unload-retains",
+  "pid": 42980,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14090240,
+        "workingSetBytes": 51752960,
+        "osPeakWorkingSetBytes": 51757056,
+        "managedBytesEstimate": 2379656,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:50.8615562+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "preview-loaded",
+        "privateBytes": 50335744,
+        "workingSetBytes": 92602368,
+        "osPeakWorkingSetBytes": 92606464,
+        "managedBytesEstimate": 18071160,
+        "gc0": 1,
+        "gc1": 1,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:50.9274463+00:00"
+    },
+    {
+      "kind": "UnloadedSurfaceOwners",
+      "value": {
+        "images": 1,
+        "retainedBytesLowerBound": 16777216,
+        "interpretation": "Proves retained owner references, not an unbounded GC leak or immediate OS decommit requirement"
+      },
+      "utc": "2026-11-17T01:42:52.1403015+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 51343360,
+        "workingSetBytes": 93736960,
+        "osPeakWorkingSetBytes": 93741056,
+        "managedBytesEstimate": 18120408,
+        "gc0": 1,
+        "gc1": 1,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:52.5035589+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

@@ -1,0 +1,107 @@
+{
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "base": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "sameCanvasHandlerInOldAndCurrent": {
+    "0a45ee0e": "0e2ba07d5da7a71b27a37a6fab1552404cc013f3",
+    "e8180221": "0e2ba07d5da7a71b27a37a6fab1552404cc013f3",
+    "fdf01831": "0e2ba07d5da7a71b27a37a6fab1552404cc013f3"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+      "sha256": "fd5d21ec0fe5c60f68471d5c6a32a0ef763003b10eb45778fe090fbd2afacb21",
+      "blobAtFunctionalSource": "0e2ba07d5da7a71b27a37a6fab1552404cc013f3",
+      "currentBlob": "0e2ba07d5da7a71b27a37a6fab1552404cc013f3"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+      "sha256": "9561403782c0c5e63bb098f053293b571647ff6732c6562433f36d3f63ae12f5",
+      "blobAtFunctionalSource": "d3a1fd7bfde3af9b7086014a65dd1b28129ff57e",
+      "currentBlob": "d3a1fd7bfde3af9b7086014a65dd1b28129ff57e"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryWorkspaceHost.cs",
+      "sha256": "848a82c0402058343ec83051b9fa563344d0487015ae3ea7021d3fe1c128c7e9",
+      "blobAtFunctionalSource": "f9e22597dca334b7672749f01a489cc03a06617c",
+      "currentBlob": "f9e22597dca334b7672749f01a489cc03a06617c"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "sha256": "fe8ead7a1ef5cd739745ac0b07f8f051b0de5dde9d8caa011c83a872e25e1e5f",
+      "blobAtFunctionalSource": "aef2ee038cfa00d186b3037a4f369619c3d93029",
+      "currentBlob": "aef2ee038cfa00d186b3037a4f369619c3d93029"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+      "sha256": "c3e73a346c599800196ca362b8e6c45d7f64c0525116cfa4c1d95be2af2a66f3",
+      "blobAtFunctionalSource": "48033f4aa9c124dcd419826bdd657e5c66d2f883",
+      "currentBlob": "48033f4aa9c124dcd419826bdd657e5c66d2f883"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+      "sha256": "51f6a790e36e3ad510d020c8661bd1a799d7d8b7624c7411f203df49db342cf5",
+      "blobAtFunctionalSource": "80085db31718c873505a376576d31c7bac7a2435",
+      "currentBlob": "80085db31718c873505a376576d31c7bac7a2435"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/App.xaml.cs",
+      "sha256": "938f16ffa3ea1aa5d705dff9bc0ba46dc4036e68f79572fbcd6d7f7a560f9ea3",
+      "blobAtFunctionalSource": "218528b7c0c8a09a77e9e01d82c0db0d34268c33",
+      "currentBlob": "218528b7c0c8a09a77e9e01d82c0db0d34268c33"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+      "sha256": "21efd282db8de201bf41c48fee1338b6131449c999c88205699c4040cd7e3176",
+      "blobAtFunctionalSource": "525dee7f75240b23d9355f6224e90cb8f0ab6c44",
+      "currentBlob": "525dee7f75240b23d9355f6224e90cb8f0ab6c44"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "sha256": "a301a02d3e86b3db5e923665147c773a051c7243769e2162d1d0c6ea2e246f71",
+      "blobAtFunctionalSource": "2f9a08092c48e6091c522087b3d1cce8321148ea",
+      "currentBlob": "2f9a08092c48e6091c522087b3d1cce8321148ea"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "sha256": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127",
+      "blobAtFunctionalSource": "09b37a73003a440892b780979747dc7f6f823028",
+      "currentBlob": "09b37a73003a440892b780979747dc7f6f823028"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RenderedSrgbInput.cs",
+      "sha256": "9a30a6875cb2933bcda11369fc9b64ffc7eb7bf9975b36f1a5222e52ddb4f35f",
+      "blobAtFunctionalSource": "81ddff3f5c3e831b4df6c68e94510528a0f234e0",
+      "currentBlob": "81ddff3f5c3e831b4df6c68e94510528a0f234e0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs",
+      "sha256": "b84a308167790e85e2df3146cc2eeec2eafc5f88a8341725015dd8bccc0f56b4",
+      "blobAtFunctionalSource": "4060fa99885b0ad5a307597b61b0d1af296c8d8a",
+      "currentBlob": "4060fa99885b0ad5a307597b61b0d1af296c8d8a"
+    }
+  ],
+  "compiledDiagnosticBindings": [
+    {
+      "file": "CloseLifecycleInvestigation.dll",
+      "bytes": 61952,
+      "sha256": "356785502b30364c044bd7ccf9bb31ccd1f5e3fb88111212a8b07473955f11fa"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "bytes": 4167680,
+      "sha256": "6f5b2170f07d838aef26800638816f85161bebedc0578b84daa7be7517491f69"
+    },
+    {
+      "file": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1253888,
+      "sha256": "8ebf319553a9460e37668a0e35b4192cf6dcc8cc050c2c2912d3dbba309071b4"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "bytes": 7803392,
+      "sha256": "ed942839c40e91c88505d3cce9873c5535caf7ee26ca14a831c4ee4294fff439"
+    }
+  ],
+  "productSourceFilesModified": false,
+  "privateSyntheticFaultGates": true
+}

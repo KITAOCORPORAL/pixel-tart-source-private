@@ -1,0 +1,53 @@
+{
+  "scenario": "preview-editor-change-after-unload",
+  "pid": 6384,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14090240,
+        "workingSetBytes": 51654656,
+        "osPeakWorkingSetBytes": 51658752,
+        "managedBytesEstimate": 2379656,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:46.622957+00:00"
+    },
+    {
+      "kind": "EditorSubscriptionAfterUnload",
+      "value": {
+        "requestsBefore": 0,
+        "requestsAfter": 1,
+        "Calls": 1,
+        "imagesAfterUnload": 1
+      },
+      "utc": "2026-11-17T01:42:46.9162401+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 25829376,
+        "workingSetBytes": 68902912,
+        "osPeakWorkingSetBytes": 68907008,
+        "managedBytesEstimate": 5506784,
+        "gc0": 1,
+        "gc1": 1,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:47.2823609+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

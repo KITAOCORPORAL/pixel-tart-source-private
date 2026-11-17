@@ -1,0 +1,57 @@
+{
+  "sources": [
+    {
+      "file": "wpf-window-v10.cs",
+      "url": "https://raw.githubusercontent.com/dotnet/wpf/v10.0.0/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Window.cs",
+      "status": 200,
+      "sha256": "d33f6ae14a2f2c7220ae0ccf490ae3308368235f0523d606a47a3923b7f2ad1f",
+      "bytes": 343481,
+      "markerLineNumbers": [
+        161,
+        275,
+        2199,
+        2211,
+        2232,
+        2384,
+        2474,
+        3703,
+        4361,
+        4384,
+        5344,
+        5466,
+        5582
+      ]
+    },
+    {
+      "file": "wpf-threading.html",
+      "url": "https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/threading-model",
+      "status": 200,
+      "sha256": "bf3c66977d073e3b3437a2ae08de2e5cf6c482ce5fd1a50c75db730ca7d276ee",
+      "bytes": 107621,
+      "markerLineNumbers": [
+        1515,
+        1516,
+        1533
+      ]
+    },
+    {
+      "file": "cooperative-cancellation.html",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads",
+      "status": 200,
+      "sha256": "22c0b8c7241a772fc4d9c435efbe4b02ae579616b4d67d73f0fe600eaf9c801e",
+      "bytes": 85124,
+      "markerLineNumbers": []
+    },
+    {
+      "file": "wpf-tag.json",
+      "url": "https://api.github.com/repos/dotnet/wpf/git/ref/tags/v10.0.0",
+      "status": 200,
+      "sha256": "71bec5bb11b37eb91476dcb70b28eca914f6882ced32ff18280faa6e94e7afb1",
+      "bytes": 331,
+      "markerLineNumbers": []
+    }
+  ],
+  "wpfVersion": "v10.0.0",
+  "wpfCommit": "72ca82c7a0f57eb8d0168246468b9cc1a6c14a5a",
+  "rawSourceStoredOutsideRepository": true
+}

@@ -1,0 +1,35 @@
+{
+  "scenario": "preview-after-unload",
+  "pid": 8244,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 3,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14159872,
+        "workingSetBytes": 51662848,
+        "osPeakWorkingSetBytes": 51666944,
+        "managedBytesEstimate": 2379656,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:38:09.945494+00:00"
+    },
+    {
+      "kind": "ProbeFailure",
+      "value": {
+        "error": "System.IO.InvalidDataException: 画布对象数据无效。\r\n   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore.Validate(CanvasDocument document)\r\n   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor..ctor(CanvasDocument document)\r\n   at Program.Preview()\r\n   at Program.Run()\r\n   at Program.<>c__DisplayClass11_0.<<Main>b__1>d.MoveNext()"
+      },
+      "utc": "2026-11-17T01:38:09.9835139+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

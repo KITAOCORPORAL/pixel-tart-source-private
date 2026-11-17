@@ -1,0 +1,62 @@
+{
+  "scenario": "save-failure-retry",
+  "pid": 54832,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14266368,
+        "workingSetBytes": 51707904,
+        "osPeakWorkingSetBytes": 51712000,
+        "managedBytesEstimate": 2354984,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:39.7740594+00:00"
+    },
+    {
+      "kind": "SaveFailure",
+      "value": {
+        "prepared": false,
+        "dirtyRetained": true,
+        "oldFileRetained": true,
+        "disposeFailed": true,
+        "startedDisposal": false
+      },
+      "utc": "2026-11-17T01:42:41.8449394+00:00"
+    },
+    {
+      "kind": "SaveRetry",
+      "value": {
+        "newFileReadable": true,
+        "disposalRetrySucceeded": true
+      },
+      "utc": "2026-11-17T01:42:42.0292929+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 144531456,
+        "workingSetBytes": 211976192,
+        "osPeakWorkingSetBytes": 211980288,
+        "managedBytesEstimate": 18670680,
+        "gc0": 4,
+        "gc1": 2,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:42.4106051+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

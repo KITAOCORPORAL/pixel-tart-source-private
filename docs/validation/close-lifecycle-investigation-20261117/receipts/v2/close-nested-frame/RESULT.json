@@ -1,0 +1,110 @@
+{
+  "scenario": "close-nested-frame",
+  "pid": 51768,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14065664,
+        "workingSetBytes": 51687424,
+        "osPeakWorkingSetBytes": 51691520,
+        "managedBytesEstimate": 2379656,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:15.1049644+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 1,
+        "cancel": true,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T01:42:17.0039616+00:00"
+    },
+    {
+      "kind": "NestedFrameEnter",
+      "value": {
+        "depth": 1
+      },
+      "utc": "2026-11-17T01:42:17.004002+00:00"
+    },
+    {
+      "kind": "DispatcherUnhandledException",
+      "value": {
+        "type": "System.InvalidOperationException",
+        "Message": "在窗口关闭期间，无法将可见性设置为可见，也无法调用 Show、ShowDialog、Close 或 WindowInteropHelper.EnsureHandle。"
+      },
+      "utc": "2026-11-17T01:42:17.0978082+00:00"
+    },
+    {
+      "kind": "NestedFrameExit",
+      "value": {
+        "errors": 1
+      },
+      "utc": "2026-11-17T01:42:17.1031795+00:00"
+    },
+    {
+      "kind": "CloseOutcome",
+      "value": {
+        "closed": false,
+        "closeEvents": 1,
+        "dispatcherErrors": 1,
+        "pending": false,
+        "allow": false
+      },
+      "utc": "2026-11-17T01:42:17.2848548+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 2,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T01:42:17.369897+00:00"
+    },
+    {
+      "kind": "NestedFrameEnter",
+      "value": {
+        "depth": 1
+      },
+      "utc": "2026-11-17T01:42:17.3699093+00:00"
+    },
+    {
+      "kind": "NestedFrameExit",
+      "value": {
+        "errors": 1
+      },
+      "utc": "2026-11-17T01:42:17.3811546+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 138448896,
+        "workingSetBytes": 206581760,
+        "osPeakWorkingSetBytes": 206585856,
+        "managedBytesEstimate": 15260512,
+        "gc0": 4,
+        "gc1": 2,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:17.759767+00:00"
+    }
+  ],
+  "dispatcherErrors": [
+    "System.InvalidOperationException: 在窗口关闭期间，无法将可见性设置为可见，也无法调用 Show、ShowDialog、Close 或 WindowInteropHelper.EnsureHandle。\r\n   at System.Windows.Window.VerifyNotClosing()\r\n   at System.Windows.Window.InternalClose(Boolean shutdown, Boolean ignoreCancel)\r\n   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.CanvasOwnerClosing(Object sender, CancelEventArgs e)\r\n   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__124_0(Object state)\r\n   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)\r\n   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)"
+  ]
+}

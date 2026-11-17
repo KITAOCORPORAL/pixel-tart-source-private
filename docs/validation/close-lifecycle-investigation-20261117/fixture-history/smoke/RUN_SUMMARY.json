@@ -1,0 +1,31 @@
+{
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "cases": [
+    {
+      "case": "close-saved",
+      "pid": 15496,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 62,
+      "peakPrivateBytes50ms": 138792960,
+      "osPeakWorkingSetBytes": 202244096,
+      "lifetimeMs": 3160.8716000337154,
+      "timingScope": "Entire synthetic WPF process including startup and deliberate waiting; not product operation latency",
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    {
+      "case": "preview-after-unload",
+      "pid": 8244,
+      "exitCode": 3,
+      "stop": null,
+      "samples": 10,
+      "peakPrivateBytes50ms": 14364672,
+      "osPeakWorkingSetBytes": 62328832,
+      "lifetimeMs": 510.0434999912977,
+      "timingScope": "Entire synthetic WPF process including startup and deliberate waiting; not product operation latency",
+      "newRawDecodes": 0,
+      "forcedGc": false
+    }
+  ]
+}

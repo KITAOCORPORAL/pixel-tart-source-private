@@ -1,0 +1,149 @@
+{
+  "scope": "Causal path-specific history; not a count of all PRs or all14-day changes",
+  "commits": [
+    {
+      "sha": "206051ebd63b2b34b45520f7fcbea4e3d9954471",
+      "authorDate": "2026-10-04T18:27:19+08:00",
+      "commitDate": "2026-10-04T18:27:19+08:00",
+      "subject": "fix(canvas): defer owner close after document save",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs"
+      ]
+    },
+    {
+      "sha": "fc811b54a4a140543a4c9bead47de8b60e7529f2",
+      "authorDate": "2026-11-02T10:22:07+08:00",
+      "commitDate": "2026-11-02T10:22:07+08:00",
+      "subject": "fix(workflow): preserve current library on reopen and guide canvas save recovery",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryWorkspaceHost.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs"
+      ]
+    },
+    {
+      "sha": "89b64fd220bcb806065a13a061f0c392a2fdb050",
+      "authorDate": "2026-11-02T14:19:25+08:00",
+      "commitDate": "2026-11-02T14:19:25+08:00",
+      "subject": "fix(workspace): retry save-blocked disposal without losing shared cleanup state",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryWorkspaceHost.cs"
+      ]
+    },
+    {
+      "sha": "17981934fb64901d926df0a385d05daea0474ed3",
+      "authorDate": "2026-11-11T13:03:19+08:00",
+      "commitDate": "2026-11-13T09:28:15+08:00",
+      "subject": "fix(raw): prevent hidden viewport detail promotion and release display ownership",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+        "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RawPostImportMemoryTests.cs"
+      ]
+    },
+    {
+      "sha": "a3bc3127420c185c57efb62c40743dcab0f0d79c",
+      "authorDate": "2026-11-13T11:30:58+08:00",
+      "commitDate": "2026-11-13T11:30:58+08:00",
+      "subject": "fix(memory): detach raster previews without a full managed staging buffer",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "4c3503c90fc16d51d267a6edff90108c6cb93fb9",
+      "authorDate": "2026-11-13T12:05:24+08:00",
+      "commitDate": "2026-11-13T12:05:24+08:00",
+      "subject": "fix(memory): reuse content-bound immutable raster sources during export",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "edd6d25e685a7058a4e3f2d6b4c2a70f155eb3cf",
+      "authorDate": "2026-11-15T22:29:36+08:00",
+      "commitDate": "2026-11-15T22:29:36+08:00",
+      "subject": "fix(memory): reuse frozen raster for rendered input and read export headers only",
+      "isAncestorOfFunctionalSource": false,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "17a95b5a5dab83a47090c36c83abf300a637c80c",
+      "authorDate": "2026-11-15T22:29:36+08:00",
+      "commitDate": "2026-11-16T00:10:27+08:00",
+      "subject": "fix(memory): reuse frozen raster for rendered input and read export headers only",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "e28074f18ea6d76d7715451bce89d6c80c3cc2fd",
+      "authorDate": "2026-11-15T22:50:50+08:00",
+      "commitDate": "2026-11-15T22:50:50+08:00",
+      "subject": "fix(memory): transfer prepared raster cache with session ownership and rollback",
+      "isAncestorOfFunctionalSource": false,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "14eda5c7758a962784252566b0a0d7ba784c8221",
+      "authorDate": "2026-11-15T22:50:50+08:00",
+      "commitDate": "2026-11-16T00:10:27+08:00",
+      "subject": "fix(memory): transfer prepared raster cache with session ownership and rollback",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+        "tests/RAWSelectionAssistant.WpfTests/RasterPreviewNativeCacheTests.cs"
+      ]
+    },
+    {
+      "sha": "a9932b7333b6e04915f9679805ff028f2bd94eaa",
+      "authorDate": "2026-11-16T11:58:50+08:00",
+      "commitDate": "2026-11-16T11:59:03+08:00",
+      "subject": "fix(photo): restore prepared exposure snapshots without persisting transient edits",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PreparedPreviewTransactionTests.cs"
+      ]
+    },
+    {
+      "sha": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+      "authorDate": "2026-11-16T14:20:25+08:00",
+      "commitDate": "2026-11-16T14:26:18+08:00",
+      "subject": "fix(memory): keep hidden film previews dormant during ordinary photo import",
+      "isAncestorOfFunctionalSource": true,
+      "changedFiles": [
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+        "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+        "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+        "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs"
+      ]
+    }
+  ]
+}

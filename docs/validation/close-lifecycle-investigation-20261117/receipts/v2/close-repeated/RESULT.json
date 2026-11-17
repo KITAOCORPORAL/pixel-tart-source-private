@@ -1,0 +1,81 @@
+{
+  "scenario": "close-repeated",
+  "pid": 21400,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 14045184,
+        "workingSetBytes": 51585024,
+        "osPeakWorkingSetBytes": 51589120,
+        "managedBytesEstimate": 2379656,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:24.5049921+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 1,
+        "cancel": true,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T01:42:26.4657937+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 2,
+        "cancel": true,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T01:42:26.4658198+00:00"
+    },
+    {
+      "kind": "ClosingObserver",
+      "value": {
+        "closeEvents": 3,
+        "cancel": false,
+        "frameDepth": 0
+      },
+      "utc": "2026-11-17T01:42:26.5420887+00:00"
+    },
+    {
+      "kind": "CloseOutcome",
+      "value": {
+        "closed": true,
+        "closeEvents": 3,
+        "dispatcherErrors": 0,
+        "pending": false,
+        "allow": false
+      },
+      "utc": "2026-11-17T01:42:26.6617402+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 140206080,
+        "workingSetBytes": 204165120,
+        "osPeakWorkingSetBytes": 204169216,
+        "managedBytesEstimate": 14744976,
+        "gc0": 4,
+        "gc1": 2,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:27.0245685+00:00"
+    }
+  ],
+  "dispatcherErrors": []
+}

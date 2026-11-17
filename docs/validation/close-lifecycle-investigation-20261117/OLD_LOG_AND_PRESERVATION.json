@@ -1,0 +1,38 @@
+{
+  "logPath": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-runtime\\Logs\\app-20261116.log",
+  "logSha256": "6689922bbcc73d1f4de0993536cb6f5d068e32fb0e0f74cf81d8f7189bb73641",
+  "excerptLineStart": 44,
+  "excerpt": [
+    "2026-11-16 12:11:43.597 [ERROR] 发生未处理的界面异常。",
+    "System.InvalidOperationException: 在窗口关闭期间，无法将可见性设置为可见，也无法调用 Show、ShowDialog、Close 或 WindowInteropHelper.EnsureHandle。",
+    "   at System.Windows.Window.VerifyNotClosing()",
+    "   at System.Windows.Window.InternalClose(Boolean shutdown, Boolean ignoreCancel)",
+    "   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.CanvasOwnerClosing(Object sender, CancelEventArgs e)",
+    "   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__124_0(Object state)",
+    "   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)",
+    "   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)",
+    "2026-11-16 12:13:36.705 [INFO] 应用程序已退出。",
+    "2026-11-16 12:20:03.906 [INFO] STARTUP_STAGE=02 Logging"
+  ],
+  "processSourceFromStartup": "0a45ee0e7971c18c6bb4b7e287bced86c448263b",
+  "backup": {
+    "path": "E:\\Kitao-Deliveries\\product-functional-closure-20261112\\workflow-output\\c5bc4616-66eb-43eb-8fb6-70fbcc7f0e0b\\preserved-window-before-restart-20261116.ptstudio.json",
+    "bytes": 5329,
+    "sha256Before": "fb0b089b95f6ca7348923acedce7f3bc09a9ccac07043f214446dfc356d117d5",
+    "topLevelKeys": [
+      "targets",
+      "activeTargetId",
+      "filterScope",
+      "minimumRating",
+      "colorLabelFilter",
+      "version",
+      "layout",
+      "embeddedVersionsAuthoritative",
+      "workflowProjectId"
+    ],
+    "documentKind": "Darkroom workfile backup; not evidence that an old canvas dirty revision was saved"
+  },
+  "oldCanvasIdOrDirtyRevisionKnown": false,
+  "oldFullShellNestedPumpOrigin": "UNKNOWN",
+  "filesReadOnly": true
+}

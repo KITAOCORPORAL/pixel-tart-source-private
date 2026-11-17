@@ -1,0 +1,62 @@
+{
+  "scenario": "save-cancel",
+  "pid": 39524,
+  "source": "e8180221937fa4abb578a16faacebe99a5d4ac1b",
+  "basis": "fdf01831a65065b574e6a320aba0cb5a4425148f",
+  "authority": "Controlled synthetic WPF host, unmodified production classes; reflection only for explicit state gates/prompt delegates. Not full Shell/physical UI acceptance",
+  "nativeRawDecodes": 0,
+  "forcedGc": false,
+  "exitCode": 0,
+  "observations": [
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "before",
+        "privateBytes": 13987840,
+        "workingSetBytes": 51589120,
+        "osPeakWorkingSetBytes": 51593216,
+        "managedBytesEstimate": 2354984,
+        "gc0": 0,
+        "gc1": 0,
+        "gc2": 0,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:36.7097418+00:00"
+    },
+    {
+      "kind": "Cancel",
+      "value": {
+        "accepted": false,
+        "dirtyPreserved": true,
+        "autosaveResumed": true
+      },
+      "utc": "2026-11-17T01:42:38.7223829+00:00"
+    },
+    {
+      "kind": "DispatcherUnhandledException",
+      "value": {
+        "type": "System.Threading.Tasks.TaskCanceledException",
+        "Message": "A task was canceled."
+      },
+      "utc": "2026-11-17T01:42:38.9381554+00:00"
+    },
+    {
+      "kind": "NaturalMemory",
+      "value": {
+        "point": "after-natural-idle",
+        "privateBytes": 140742656,
+        "workingSetBytes": 207097856,
+        "osPeakWorkingSetBytes": 207101952,
+        "managedBytesEstimate": 16036896,
+        "gc0": 4,
+        "gc1": 2,
+        "gc2": 1,
+        "forcedCollection": false
+      },
+      "utc": "2026-11-17T01:42:39.2879967+00:00"
+    }
+  ],
+  "dispatcherErrors": [
+    "System.Threading.Tasks.TaskCanceledException: A task was canceled.\r\n   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryDatabase.OpenConnectionAsync(Boolean write, CancellationToken cancellationToken)\r\n   at RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository.QueryIndexedPageAsync(AssetLibraryQuery query, Int32 pageSize, AssetLibraryQueryCursor cursor, CancellationToken cancellationToken)\r\n   at RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository.QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken)\r\n   at PixelTart.Modules.AssetLibrary.AssetLibraryViewModel.LoadCanvasSourcesAsync(String source, String search, Nullable`1 projectId)\r\n   at PixelTart.Modules.AssetLibrary.FreeCanvas.FreeCanvasView.RefreshSourcesAsync()\r\n   at PixelTart.Modules.AssetLibrary.FreeCanvas.FreeCanvasView.<>c__DisplayClass24_0.<<-ctor>b__25>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__124_0(Object state)\r\n   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)\r\n   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)"
+  ]
+}
