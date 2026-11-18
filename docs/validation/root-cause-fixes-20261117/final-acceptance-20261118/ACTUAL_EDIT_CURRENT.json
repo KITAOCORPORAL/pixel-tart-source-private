@@ -1,0 +1,95 @@
+{
+  "atUtc": "2026-11-18T04:48:27.750556+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "authority": "Actual final-package EXE native actions with read-only persisted state corroboration",
+  "project": {
+    "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+    "Name": "最终433验收·同项目JPEG 20261117",
+    "ProjectType": "JpegAndRaw",
+    "SourceOnlineSelectionProjectId": null
+  },
+  "sources": [
+    {
+      "Id": "2b1bfaa1-2bf2-4224-8980-e840f04cde91",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs",
+      "Purpose": "Mixed",
+      "Priority": 0
+    }
+  ],
+  "sourceCount": 1,
+  "sourceRowIdBeforeLastSave": "3db0a8fc-ee9c-45b1-86bd-3400a79d07dc",
+  "sourceRowIdAfterEditEntry": "2b1bfaa1-2bf2-4224-8980-e840f04cde91",
+  "sourceRowGuidIsNotStableAcrossSave": true,
+  "sourceRowExplanation": "SqliteProjectRepository deletes child sources and reinserts Guid.NewGuid on Upsert. Raw row GUID is not preserved; project/path/count remain stable. Not relabeled as source-ID persistence PASS.",
+  "indexedJpeg": 2,
+  "indexedRaw": 0,
+  "versions": [
+    {
+      "identity": "external-sha256:fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "catalogRevision": 1,
+      "selectedVersion": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "isMain": true,
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "stack": null,
+      "catalogSha256": "a1b1aa0e38b02e8d0456fa4bb7c7a85ff96c24fea32d1c225c711226658831d3"
+    },
+    {
+      "identity": "external-sha256:7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "catalogRevision": 1,
+      "selectedVersion": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "isMain": true,
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "stack": {
+        "Nodes": [
+          {
+            "Id": "06f09b79-71de-4f98-853c-ce1063d39922",
+            "Type": 7,
+            "Name": "基础与 HDR 影调",
+            "Enabled": true,
+            "FilmSettings": null,
+            "Opacity": 1,
+            "Blend": 0,
+            "LocalMask": null,
+            "UserLocked": false,
+            "SystemLocked": false,
+            "NumericParameters": {
+              "exposure": 0.5
+            },
+            "Samples": [],
+            "NegativeSamples": []
+          }
+        ],
+        "Version": 2,
+        "WorkingSpace": "OKLabD65",
+        "ProcessingVersion": 2
+      },
+      "catalogSha256": "2f2ee395ce9cbf57dd7b33875f5baca777fa43d29dc2eecf4fa7b4713c560339"
+    }
+  ],
+  "editedExposure": 0.5,
+  "albumCount": 0,
+  "sessionPath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\final433-jpeg.ptstudio.json",
+  "sessionFileExists": false,
+  "sourceJpegs": [
+    {
+      "file": "COMPANY_0001.jpg",
+      "sha256": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13"
+    },
+    {
+      "file": "COMPANY_0002.jpg",
+      "sha256": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69"
+    }
+  ],
+  "normalUiSteps": [
+    "Source folder selected by user; app confirmed original source",
+    "Scan button:2 JPEG0 RAW",
+    "Normal Save Project",
+    "Indexed editor loads2 originals",
+    "Numeric exposure draft0.5 then actual Save Version; persisted stack verified"
+  ],
+  "currentStage": "Native Save Color Studio file dialog; full filename entered/read back; Save confirmation not observed",
+  "fullWorkflowPassed": false,
+  "testInterfaceUsed": false,
+  "newRawDecodes": 0
+}

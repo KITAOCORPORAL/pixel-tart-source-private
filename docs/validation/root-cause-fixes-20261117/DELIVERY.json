@@ -15,7 +15,7 @@
   "checksPassed": 52,
   "lifecycleScenarios": 17,
   "ordinaryFullWorkflowPassed": false,
-  "ordinaryBlocker": "Permission restored; modal child-control cache unavailable, FrameArrived timeout; folder confirmation unobserved",
+  "ordinaryBlocker": "Native save dialog controls partially mapped; full workfile save not observed",
   "phone": "NeedsLogin",
   "phoneActual": false,
   "newRawDecodes": 0,
@@ -25,8 +25,8 @@
   "latestAcceptanceAtUtc": "2026-11-17T10:24:43.151Z",
   "latestAcceptanceReport": "final-acceptance-20261117/RESULTS.md",
   "finalOrdinaryExeStarted": true,
-  "phoneCredentialCurrentlyValid": true,
+  "phoneCredentialCurrentlyValid": false,
   "packageUnchangedSinceSeal": true,
   "noNewProductPackage": true,
-  "latestResumeReport": "resume-20261118/RESULTS.md"
+  "latestResumeReport": "final-acceptance-20261118/RESULTS.md"
 }
