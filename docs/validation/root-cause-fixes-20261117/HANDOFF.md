@@ -1,5 +1,8 @@
 # 根因修复短交接
 
+**用户关闭后最新：** 旧App42840已exit0/noSTOP，最终433新PID48348已从原工作文件正常重开，同项目/两选片/曝光0.5与本地锁定v1/r6恢复。当前是照片页，需用户按“导入/导出→导出主变体→导出所选”重做输出目录选择，见final-acceptance-20261118/USER_REOPEN_EXPORT_HANDOFF.md。实际JPEG仍0；此重开在导出前，不冒称最终闭环通过。
+
+
 **当前最新断点：** 结果归档与原项目回写已完成（相册42af2986…关联项目08d18374…、两条客户输入、来源原目录1个）；普通匹配与保存完成，分类JpgAndRaw导致缺RAW的部分匹配2，不伪称完整2。已进入普通“快速导出2张·JPG·sRGB”输出目录选择器，需选本轮output\edited-delivery并点选择文件夹；JPEG实际输出仍0。见final-acceptance-20261118/RETURN_AND_EXPORT_PENDING.md和WORKFLOW_RETURN_CURRENT.json。旧“归档待选”断点已完成，无需重复同步。
 
 

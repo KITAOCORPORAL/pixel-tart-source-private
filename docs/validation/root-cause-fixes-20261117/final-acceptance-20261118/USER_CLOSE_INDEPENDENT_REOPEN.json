@@ -1,0 +1,75 @@
+{
+  "atUtc": "2026-11-18T07:56:44.335550+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "priorProcessExit": {
+    "pid": 42840,
+    "exitCode": 0,
+    "stop": null,
+    "samples": 1543244,
+    "peakPrivateBytes50ms": 733855744,
+    "osPeakWorkingSetBytes": 599674880,
+    "lifetimeMs": 78245972.0681,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "newLaunch": {
+    "pid": 48348,
+    "createdFileTime": "134394617392563752",
+    "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-433a1d8e-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+    "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\workflow-runtime",
+    "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+    "mainDllSha256": "c387e55579f3cc581ea79c309ef46b7a99755646aff79a165d2d3f5ec4577b76",
+    "startedUtc": 1794988139.2734506,
+    "newRawDecodesAuthorized": 0,
+    "guardBytes": 2147483648
+  },
+  "independentPid": true,
+  "userReportedSoftwareClosed": true,
+  "normalExeProductionResumeArguments": true,
+  "testInjection": false,
+  "normalUiReadback": "INDEPENDENT_REOPEN_UI.ax.txt: 已保存; exposure editor0.5/slider0.5; bothCOMPANY originals",
+  "sessionPath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\final433-jpeg.ptstudio.json",
+  "sessionSha256": "d9d3eadf2a6c66c724c85829a5a01ebe3798d5ad0c3053729b685f58307f5138",
+  "sessionUnchangedDuringReopen": true,
+  "workflowProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+  "projects": [
+    {
+      "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Name": "最终433验收·同项目JPEG 20261117",
+      "SourceOnlineSelectionProjectId": "42af2986-48c3-4b11-907e-532bb6acc6a6"
+    }
+  ],
+  "sources": [
+    {
+      "Id": "6da5b0e0-ffe4-431c-b342-a885de7b4bcc",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs"
+    }
+  ],
+  "selectionInputs": [
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0001.png"
+    },
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0002.png"
+    }
+  ],
+  "localLockedResult": {
+    "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+    "version": 1,
+    "revision": 6,
+    "locked": true
+  },
+  "actualJpegExports": [],
+  "exportPreparedThroughNormalUi": false,
+  "exportMenuAttempt": "Import/Export action occurred; later transient menu lookup unavailable. No export command or folder dialog was falsely marked successful.",
+  "nextManualSteps": [
+    "导入 / 导出",
+    "导出主变体…",
+    "导出所选",
+    "choose output/edited-delivery then Select folder"
+  ],
+  "remaining": "Actual JPEG encoding/output checks and after-export close/reopen; TIFF and other ordinary boundary/phone acceptance remain partial"
+}
