@@ -15,7 +15,7 @@
   "checksPassed": 52,
   "lifecycleScenarios": 17,
   "ordinaryFullWorkflowPassed": false,
-  "ordinaryBlocker": "Native save dialog controls partially mapped; full workfile save not observed",
+  "ordinaryBlocker": "Selection-send native action unconfirmed; parent UI remains saved editor",
   "phone": "NeedsLogin",
   "phoneActual": false,
   "newRawDecodes": 0,
@@ -28,5 +28,6 @@
   "phoneCredentialCurrentlyValid": false,
   "packageUnchangedSinceSeal": true,
   "noNewProductPackage": true,
-  "latestResumeReport": "final-acceptance-20261118/RESULTS.md"
+  "latestResumeReport": "final-acceptance-20261118/SELECTION_SEND_PENDING.md",
+  "normalWorkfileSavePassed": true
 }

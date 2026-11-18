@@ -1,0 +1,54 @@
+{
+  "atUtc": "2026-11-18T05:14:51.921547+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "sessionPath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\final433-jpeg.ptstudio.json",
+  "sessionBytes": 10017,
+  "sessionSha256": "e85eed85055a66818d8effa9d94e4bc530f8891f72550e821611cb1a44fd4a5d",
+  "nativeUserConfirmedSave": true,
+  "normalUiSavedStateObserved": true,
+  "workflowProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+  "targets": [
+    {
+      "id": "a178e48b-9b64-4511-8a82-2a29d908a9d4",
+      "file": "COMPANY_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "activeEditVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "selected": true,
+      "numericParameters": []
+    },
+    {
+      "id": "7db41661-f4e1-4712-9637-47c08a1cd1ab",
+      "file": "COMPANY_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "activeEditVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "selected": true,
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Name": "最终433验收·同项目JPEG 20261117",
+      "SourceOnlineSelectionProjectId": null
+    }
+  ],
+  "sources": [
+    {
+      "Id": "2b1bfaa1-2bf2-4224-8980-e840f04cde91",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs"
+    }
+  ],
+  "projectCount": 1,
+  "sourceCount": 1,
+  "albumCount": 0,
+  "preparedPngCount": 0,
+  "selectionSendObserved": false,
+  "selectionSendAttempt": "Installed Open Computer Use exposed Invoke did not return; parent editor still shows saved state; no normal creation observed",
+  "nextNormalUiControl": "最终433照片页右上角发送客户选片",
+  "noBusinessTestSeamUsed": true
+}

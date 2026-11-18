@@ -1,6 +1,6 @@
 {
   "productSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "scope": "Original repairs plus final ordinary scan/edit continuation; workfile save still unconfirmed",
+  "scope": "Repair evidence and normal final433 scan/edit/workfile save; send-to-selection unconfirmed",
   "entries": [
     {
       "file": ".gitattributes",
@@ -243,6 +243,11 @@
       "sha256": "b7039033f417e92456d6eab5c30ea1f906b3f28bbe70ff0a2e370939c0a6ae9c"
     },
     {
+      "file": "final-acceptance-20261118/SELECTION_SEND_PENDING.md",
+      "bytes": 1557,
+      "sha256": "42057aa7ff79e5e7bc315b1e3ef59be4155fa9b5b4bea3fb43be70559e80fa2c"
+    },
+    {
       "file": "final-acceptance-20261118/UI_002-perform_secondary_action.txt",
       "bytes": 9288,
       "sha256": "9139086c6545fdabd81c4a138e1049491549fdf2f73a95ae93a866a5254b6689"
@@ -268,14 +273,19 @@
       "sha256": "455bfa513f201726dd78aa7f82419b483f82d5fae7af225f40844c03b26dccb8"
     },
     {
+      "file": "final-acceptance-20261118/WORKFILE_SAVED_CURRENT.json",
+      "bytes": 2001,
+      "sha256": "1e4b079897d914d0401f8cec16ee1a110e1892e548ec2f30107281c5283d0aeb"
+    },
+    {
       "file": "FINAL_REGRESSION.json",
       "bytes": 1588,
       "sha256": "ddc7ab9d6e14ca182babd7f363830e7e96e7c254f2126df7734448ff3b5cf9ce"
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 4040,
-      "sha256": "89018fe05f9f07a1e778dd9139002b390fa4b6f3b6e687453e207d84071c34b2"
+      "bytes": 4471,
+      "sha256": "559c130c3947d100bb6e21f86d9be413c5a597e76ca82e3f596fc87e55c651d3"
     },
     {
       "file": "memory-selection.trx",
@@ -294,8 +304,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 2572,
-      "sha256": "3f8f5b69434903ce3b9d5ee8ef6a76676c74817572585c522027d1ef0ff7e656"
+      "bytes": 2814,
+      "sha256": "62d695d4c90a4be5e55ec0281a6679166c45c3df1b1b97ecc856452b56f569c3"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -314,8 +324,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 11122,
-      "sha256": "7b2c2de8764f87c3d03d1df63c01256fafa5ec0340eeb67d69dbc5a964d3ada9"
+      "bytes": 11553,
+      "sha256": "05be7b6b64423cdb8ae94d69583bc1c6cad5f33cdc5fcf175336d318f36ef26d"
     },
     {
       "file": "resume-20261118/CONTROL_STATE.json",
