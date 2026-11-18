@@ -15,7 +15,7 @@
   "checksPassed": 52,
   "lifecycleScenarios": 17,
   "ordinaryFullWorkflowPassed": false,
-  "ordinaryBlocker": "Selection-send native action unconfirmed; parent UI remains saved editor",
+  "ordinaryBlocker": "System archive-folder picker confirmation not observed; parent window minimized/offscreen in native snapshot",
   "phone": "NeedsLogin",
   "phoneActual": false,
   "newRawDecodes": 0,
@@ -28,6 +28,8 @@
   "phoneCredentialCurrentlyValid": false,
   "packageUnchangedSinceSeal": true,
   "noNewProductPackage": true,
-  "latestResumeReport": "final-acceptance-20261118/SELECTION_SEND_PENDING.md",
-  "normalWorkfileSavePassed": true
+  "latestResumeReport": "final-acceptance-20261118/CUSTOMER_RESULT_AND_ARCHIVE_PENDING.md",
+  "normalWorkfileSavePassed": true,
+  "normalSelectionPublishedAndLocked": true,
+  "normalPcCustomerResultReadback": true
 }

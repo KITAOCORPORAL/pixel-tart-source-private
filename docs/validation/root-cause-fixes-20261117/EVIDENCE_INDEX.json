@@ -1,6 +1,6 @@
 {
   "productSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "scope": "Repair evidence and normal final433 scan/edit/workfile save; send-to-selection unconfirmed",
+  "scope": "Final433 ordinary publish/customer locked2/PC refresh; workflow return waits normal archive directory confirmation",
   "entries": [
     {
       "file": ".gitattributes",
@@ -228,6 +228,21 @@
       "sha256": "ae7809f29d9ad45519f4c9830c6b3536ef052bfd30c244a4d4d69682ad354e1b"
     },
     {
+      "file": "final-acceptance-20261118/CUSTOMER_CONFIRMED_FINAL.png",
+      "bytes": 54915,
+      "sha256": "88ff8a2d47ccc6aa89407bc27facc3b5d4fb5a0f4b373b4e9ef5efa456cb8706"
+    },
+    {
+      "file": "final-acceptance-20261118/CUSTOMER_LOCK_AND_PC_REFRESH.json",
+      "bytes": 3204,
+      "sha256": "51b882fafefe54a709a3f2297f947d21cb7d273132c220a927099224a978bfb2"
+    },
+    {
+      "file": "final-acceptance-20261118/CUSTOMER_RESULT_AND_ARCHIVE_PENDING.md",
+      "bytes": 2019,
+      "sha256": "3d4156fc13464c91d29e5b8e3901cc508debb8dece95f177cd19ad1d5dfe2b37"
+    },
+    {
       "file": "final-acceptance-20261118/PHONE_CURRENT.json",
       "bytes": 335,
       "sha256": "1538a5d5e9c15fa2060a73c3a98e921c9c3910320cee990265279619a4200825"
@@ -273,6 +288,31 @@
       "sha256": "455bfa513f201726dd78aa7f82419b483f82d5fae7af225f40844c03b26dccb8"
     },
     {
+      "file": "final-acceptance-20261118/UPLOAD_002-perform_secondary_action.txt",
+      "bytes": 11893,
+      "sha256": "62b9058f5b2d27bd4827004cbbaba094d2e23cf76b83cfa047385cc485ac4249"
+    },
+    {
+      "file": "final-acceptance-20261118/UPLOAD_004-perform_secondary_action.txt",
+      "bytes": 12015,
+      "sha256": "a862a9d21038934778576e333c001841836feabb6cdbad721f17e05711381c79"
+    },
+    {
+      "file": "final-acceptance-20261118/UPLOAD_006-perform_secondary_action.txt",
+      "bytes": 11924,
+      "sha256": "bed29d32361235504233407501513c5e2ad76dfa04a1f1debec72498088a3621"
+    },
+    {
+      "file": "final-acceptance-20261118/UPLOAD_008-perform_secondary_action.txt",
+      "bytes": 10821,
+      "sha256": "de99c155eeac382476d5ae91630e848172a5d7a67e2d97448886dbcc53b024be"
+    },
+    {
+      "file": "final-acceptance-20261118/UPLOAD_010-perform_secondary_action.txt",
+      "bytes": 14124,
+      "sha256": "73074f2dded3c38884c13232d27b02cdd127dec40f1d82d268b914d23e407d69"
+    },
+    {
       "file": "final-acceptance-20261118/WORKFILE_SAVED_CURRENT.json",
       "bytes": 2001,
       "sha256": "1e4b079897d914d0401f8cec16ee1a110e1892e548ec2f30107281c5283d0aeb"
@@ -284,8 +324,8 @@
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 4471,
-      "sha256": "559c130c3947d100bb6e21f86d9be413c5a597e76ca82e3f596fc87e55c651d3"
+      "bytes": 5025,
+      "sha256": "d8922d0a8fc6cee4013c63e0399011ffb9361ffbff29106e2053767aee7e10b6"
     },
     {
       "file": "memory-selection.trx",
@@ -304,8 +344,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 2814,
-      "sha256": "62d695d4c90a4be5e55ec0281a6679166c45c3df1b1b97ecc856452b56f569c3"
+      "bytes": 3089,
+      "sha256": "a518015ee25653f445e3c237f129817d717e5dc68af551846b6f2bd1da1afb26"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -324,8 +364,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 11553,
-      "sha256": "05be7b6b64423cdb8ae94d69583bc1c6cad5f33cdc5fcf175336d318f36ef26d"
+      "bytes": 12107,
+      "sha256": "162e4b6be0ae7a5f68ed39be10ddcc0a3bf8c79201f0eb224142546ee79bba71"
     },
     {
       "file": "resume-20261118/CONTROL_STATE.json",

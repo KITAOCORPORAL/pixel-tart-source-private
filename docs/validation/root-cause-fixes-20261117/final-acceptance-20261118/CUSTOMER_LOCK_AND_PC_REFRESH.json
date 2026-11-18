@@ -1,0 +1,63 @@
+{
+  "atUtc": "2026-11-18T05:59:03.670441+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "projectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+  "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+  "albumCount": 1,
+  "workflowLinkVerified": true,
+  "assets": [
+    {
+      "assetId": "97ace726-d3f6-47ed-b413-48fea6debd93",
+      "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+      "file": "COMPANY_0001.png",
+      "localSourcePath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\workflow-runtime\\OnlineSelection\\Prepared\\08d18374fb964efb9451cae9b8c48c40\\63b94d3eb81045098d6679105c361a13\\COMPANY_0001.png",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "intermediateSha256": "39d35a957499bfb513d9c0d60be1d45b751f983c806867ea2800f0b9e0b27582",
+      "cloudAssetId": "97ace726d3f647edb41348fea6debd93"
+    },
+    {
+      "assetId": "aba3dcce-4a29-42a5-92cd-1311aa4d7029",
+      "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+      "file": "COMPANY_0002.png",
+      "localSourcePath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\workflow-runtime\\OnlineSelection\\Prepared\\08d18374fb964efb9451cae9b8c48c40\\63b94d3eb81045098d6679105c361a13\\COMPANY_0002.png",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "intermediateSha256": "5df5b42c1bb2dc2bc6ba1fee2256363f5689beec85d5e6700d992c5f724e25ca",
+      "cloudAssetId": "aba3dcce4a2942a592cd1311aa4d7029"
+    }
+  ],
+  "proxyUpload": "Actual normal PC action; native summary2 local2 service-confirmed",
+  "published": "Actual normal PC Publish command; native service-published status",
+  "customerConfirmation": "Actual Chrome page checkbox1,checkbox2,confirm-and-lock; screenshot saved",
+  "selectionVersion": 1,
+  "resultRevision": 6,
+  "locked": true,
+  "selected": [
+    "97ace726-d3f6-47ed-b413-48fea6debd93",
+    "aba3dcce-4a29-42a5-92cd-1311aa4d7029"
+  ],
+  "confirmedAtUtc": "2026-11-18T05:52:18.7054947+00:00",
+  "pcRefresh": "Actual normal PC Refresh Customer Result; localFinalResults persisted",
+  "projects": [
+    {
+      "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Name": "最终433验收·同项目JPEG 20261117",
+      "SourceOnlineSelectionProjectId": null
+    }
+  ],
+  "sources": [
+    {
+      "Id": "6c7fb8aa-3131-431b-94e6-66f19fee1027",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs"
+    }
+  ],
+  "selectionInputs": [],
+  "workflowReturnCompleted": false,
+  "workflowReturnStage": "Normal Sync Workflow opened Choose selection-result archive directory; folder confirmation not observed",
+  "currentNativeDialog": "选择选片结果归档目录",
+  "archiveDirectory": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output",
+  "screenshotSha256": "88ff8a2d47ccc6aa89407bc27facc3b5d4fb5a0f4b373b4e9ef5efa456cb8706",
+  "rawOrUserRootMutation": false
+}
