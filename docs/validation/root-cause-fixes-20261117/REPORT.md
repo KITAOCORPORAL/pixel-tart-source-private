@@ -1,5 +1,8 @@
 # 光镜根因修复执行与交付
 
+**当前最新断点：** 结果归档与原项目回写已完成（相册42af2986…关联项目08d18374…、两条客户输入、来源原目录1个）；普通匹配与保存完成，分类JpgAndRaw导致缺RAW的部分匹配2，不伪称完整2。已进入普通“快速导出2张·JPG·sRGB”输出目录选择器，需选本轮output\edited-delivery并点选择文件夹；JPEG实际输出仍0。见final-acceptance-20261118/RETURN_AND_EXPORT_PENDING.md和WORKFLOW_RETURN_CURRENT.json。旧“归档待选”断点已完成，无需重复同步。
+
+
 **最新：** 最终433已普通上传代理2/2并发布，真实Chrome逐项选择后确认锁定v1/r6；PC已普通刷新并保存唯一锁定结果。相册42af2986…关联原项目08d18374…。当前“同步归片工作区”打开结果归档目录选择器，需选本轮output并点击选择文件夹；原项目关联/SelectionInputs尚未写入，收回不标通过。见final-acceptance-20261118/CUSTOMER_RESULT_AND_ARCHIVE_PENDING.md及截图。旧“发送未确认”断点已前移，后续导出/关闭/独立重开/TIFF仍PARTIAL。
 
 

@@ -1,0 +1,413 @@
+App=KitaoPhotoSelector (pid 42840)
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 237, height: 39}
+		1 窗口 导出 · 当前处理链 Frame: {x: 33380, y: 32713, width: 1080, height: 675}
+			2 文本 导出 Frame: {x: 33409, y: 32776, width: 1022, height: 28}
+			3 文本 当前输出 Frame: {x: 33409, y: 32825, width: 423, height: 27}
+			4 文本 当前所选照片 · 原尺寸 Frame: {x: 33409, y: 32861, width: 423, height: 27}
+			5 文本 格式 Frame: {x: 33409, y: 32912, width: 423, height: 27}
+			6 组合框 快速导出格式 Secondary Actions: Expand Frame: {x: 33409, y: 32947, width: 198, height: 60}
+			7 文本 输出色彩 Frame: {x: 33409, y: 33025, width: 423, height: 27}
+			8 文本 sRGB · 兼容路径嵌入配置 Frame: {x: 33409, y: 33061, width: 423, height: 27}
+			9 文本 PNG16 / TIFF16 / JPEG8 Frame: {x: 33409, y: 33097, width: 423, height: 27}
+			10 窗格  Secondary Actions: Scroll Frame: {x: 33859, y: 32825, width: 572, height: 459}
+				11 文本 照片与位置 Frame: {x: 33880, y: 32825, width: 539, height: 27}
+				12 文本 所选照片 2 张 Frame: {x: 33880, y: 32861, width: 539, height: 27}
+				13 图像  Frame: {x: 33880, y: 32906, width: 234, height: 156}
+				14 文本 COMPANY_0002.jpg Frame: {x: 33880, y: 33077, width: 539, height: 27}
+				15 文本 文件名：原文件名 + 仿色 Frame: {x: 33880, y: 33116, width: 539, height: 27}
+				16 文本 原始尺寸 · 不缩放
+位置：确认后选择目录 Frame: {x: 33880, y: 33155, width: 539, height: 54}
+				17 文本 已显影光片导出相框与画面合成；使用完整冻结定义，不导出预览截图。 Frame: {x: 33880, y: 33227, width: 539, height: 54}
+				18 文本 已准备 2 / 2；失败 0 Frame: {x: 33880, y: 33299, width: 539, height: 27}
+				19 文本  Frame: {x: 33880, y: 33326, width: 539, height: 27}
+				20 滚动条 ID: PART_VerticalScrollBar Frame: {x: 34419, y: 32825, width: 12, height: 459}
+					21 按钮 ID: PageUp Secondary Actions: Invoke
+					22 缩略 
+					23 按钮 ID: PageDown Secondary Actions: Invoke Frame: {x: 34422, y: 33224, width: 6, height: 60}
+			24 按钮 停止 Secondary Actions: Invoke Frame: {x: 34118, y: 33302, width: 79, height: 57}
+				25 文本 停止 Frame: {x: 34138, y: 33317, width: 40, height: 27}
+			26 按钮 取消 Secondary Actions: Invoke Frame: {x: 34209, y: 33302, width: 85, height: 57}
+				27 文本 取消 Frame: {x: 34232, y: 33317, width: 40, height: 27}
+			28 按钮 导出所选 Secondary Actions: Invoke Frame: {x: 34306, y: 33302, width: 125, height: 57}
+				29 文本 导出所选 Frame: {x: 34329, y: 33317, width: 80, height: 27}
+		30 文本 光 Frame: {x: 35, y: 8, width: 14, height: 19}
+		31 文本 光镜 Frame: {x: 75, y: 6, width: 34, height: 23}
+		32 文本 已保存 Frame: {x: 1497, y: 4, width: 60, height: 27}
+		33 按钮 最小化窗口 Secondary Actions: Invoke Frame: {x: 1581, y: 0, width: 63, height: 51}
+			34 文本 — Frame: {x: 1602, y: 12, width: 21, height: 27}
+		35 按钮 最大化或还原窗口 Secondary Actions: Invoke Frame: {x: 1644, y: 0, width: 63, height: 51}
+			36 文本 □ Frame: {x: 1669, y: 12, width: 13, height: 27}
+		37 按钮 关闭窗口 Secondary Actions: Invoke Frame: {x: 1707, y: 0, width: 63, height: 51}
+			38 文本 × Frame: {x: 1731, y: 12, width: 15, height: 27}
+		39 按钮  Secondary Actions: Invoke Frame: {x: 124, y: 0, width: 1445, height: 57}
+		40 窗格 侧栏根区域 Frame: {x: 0, y: 46, width: 60, height: 1292}
+		41 窗格 ID: SidebarNavigationScroll Secondary Actions: Scroll Frame: {x: 0, y: 61, width: 60, height: 1112}
+			42 按钮 工作台 Secondary Actions: Invoke Frame: {x: 0, y: 63, width: 60, height: 51}
+			43 按钮 素材库 Secondary Actions: Invoke Frame: {x: 0, y: 117, width: 60, height: 51}
+			44 按钮 归片工作区 Secondary Actions: Invoke Frame: {x: 0, y: 171, width: 60, height: 51}
+			45 按钮 工作日历 Secondary Actions: Invoke Frame: {x: 0, y: 225, width: 60, height: 51}
+			46 按钮 策划中心 Secondary Actions: Invoke Frame: {x: 0, y: 279, width: 60, height: 51}
+			47 按钮 联机拍摄 Secondary Actions: Invoke Frame: {x: 0, y: 333, width: 60, height: 51}
+			48 按钮 暗室 Secondary Actions: Invoke Frame: {x: 0, y: 387, width: 60, height: 51}
+			49 按钮 在线选片 Secondary Actions: Invoke Frame: {x: 0, y: 441, width: 60, height: 51}
+			50 按钮 摄影收支 Secondary Actions: Invoke Frame: {x: 0, y: 495, width: 60, height: 51}
+			51 按钮 项目历史 Secondary Actions: Invoke Frame: {x: 0, y: 549, width: 60, height: 51}
+			52 分隔符  Frame: {x: 9, y: 607, width: 42, height: 2}
+			53 按钮 工具箱 Secondary Actions: Invoke Frame: {x: 0, y: 617, width: 60, height: 51}
+			54 分隔符  Frame: {x: 9, y: 675, width: 42, height: 2}
+			55 按钮 授权与版本 Secondary Actions: Invoke Frame: {x: 0, y: 685, width: 60, height: 51}
+			56 按钮 设置 Secondary Actions: Invoke Frame: {x: 0, y: 739, width: 60, height: 51}
+			57 按钮 帮助 Secondary Actions: Invoke Frame: {x: 0, y: 793, width: 60, height: 51}
+		58 文本 免费版 Frame: {x: 26, y: 1197, width: 51, height: 37}
+		59 按钮 查看授权与版本 Secondary Actions: Invoke Frame: {x: 26, y: 1197, width: 8, height: 37}
+			60 文本 升级 Frame: {x: 36, y: 1202, width: 40, height: 27}
+		61 文本 授权与版本 Frame: {x: 26, y: 1239, width: 82, height: 21}
+		62 按钮 收起侧栏 Secondary Actions: Invoke Frame: {x: 0, y: 1286, width: 60, height: 51}
+		63 窗格 工作台根区域
+		64 自定义 参考仿色工作区 Frame: {x: 60, y: 36, width: 1710, height: 1314}
+			65 文本 参考仿色 · 色彩工作室 Frame: {x: 72, y: 45, width: 316, height: 30}
+			66 按钮 新照片调色页 V1 Secondary Actions: Invoke Frame: {x: 72, y: 75, width: 171, height: 57}
+				67 文本 新照片调色页 V1 Frame: {x: 82, y: 90, width: 152, height: 27}
+			68 按钮 即时胶片 · 创作 Secondary Actions: Toggle Frame: {x: 388, y: 45, width: 165, height: 61}
+				69 文本 即时胶片 · 创作 Frame: {x: 402, y: 63, width: 137, height: 27}
+			70 按钮 新 RAW 处理版本 Secondary Actions: Invoke Frame: {x: 553, y: 45, width: 202, height: 61}
+				71 文本 新 RAW 处理版本 Frame: {x: 575, y: 63, width: 159, height: 27}
+			72 按钮 打开批次 Secondary Actions: Invoke Frame: {x: 755, y: 45, width: 123, height: 61}
+				73 文本 打开批次 Frame: {x: 777, y: 63, width: 80, height: 27}
+			74 按钮 重新定位当前素材 Secondary Actions: Invoke Frame: {x: 878, y: 45, width: 123, height: 61}
+				75 文本 重新定位 Frame: {x: 900, y: 63, width: 80, height: 27}
+			76 组合框  Secondary Actions: Expand Frame: {x: 1001, y: 45, width: 150, height: 61}
+			77 按钮 选择版本 Secondary Actions: Invoke Frame: {x: 1151, y: 45, width: 123, height: 61}
+				78 文本 选择版本 Frame: {x: 1173, y: 63, width: 80, height: 27}
+			79 编辑  Secondary Actions: SetValue, Scroll Frame: {x: 1274, y: 45, width: 135, height: 61}
+			80 按钮 重命名 Secondary Actions: Invoke Frame: {x: 1409, y: 45, width: 103, height: 61}
+				81 文本 重命名 Frame: {x: 1431, y: 63, width: 60, height: 27}
+			82 按钮 归档 Secondary Actions: Invoke Frame: {x: 1512, y: 45, width: 83, height: 61}
+				83 文本 归档 Frame: {x: 1534, y: 63, width: 40, height: 27}
+			84 按钮 跨库复制版本 Secondary Actions: Invoke Frame: {x: 1595, y: 45, width: 163, height: 61}
+				85 文本 跨库复制版本 Frame: {x: 1617, y: 63, width: 120, height: 27}
+			86 按钮 保存版本 Secondary Actions: Invoke Frame: {x: 388, y: 106, width: 123, height: 48}
+				87 文本 保存版本 Frame: {x: 410, y: 117, width: 80, height: 27}
+			88 按钮 创建独立编辑版本 Secondary Actions: Invoke Frame: {x: 511, y: 106, width: 123, height: 48}
+				89 文本 新建版本 Frame: {x: 533, y: 117, width: 80, height: 27}
+			90 按钮 切换当前照片编辑版本 Secondary Actions: Invoke Frame: {x: 634, y: 106, width: 123, height: 48}
+				91 文本 切换版本 Frame: {x: 656, y: 117, width: 80, height: 27}
+			92 按钮 撤销标注 Secondary Actions: Invoke Frame: {x: 757, y: 106, width: 123, height: 48}
+				93 文本 撤销标注 Frame: {x: 779, y: 117, width: 80, height: 27}
+			94 按钮 重做标注 Secondary Actions: Invoke Frame: {x: 880, y: 106, width: 123, height: 48}
+				95 文本 重做标注 Frame: {x: 902, y: 117, width: 80, height: 27}
+			96 按钮 保存批次 Secondary Actions: Invoke Frame: {x: 1003, y: 106, width: 123, height: 48}
+				97 文本 保存批次 Frame: {x: 1025, y: 117, width: 80, height: 27}
+			98 按钮 专注看图 Secondary Actions: Invoke Frame: {x: 1138, y: 106, width: 123, height: 48}
+				99 文本 专注看图 Frame: {x: 1160, y: 117, width: 80, height: 27}
+			100 按钮 调整面板 Secondary Actions: Invoke Frame: {x: 1273, y: 106, width: 123, height: 48}
+				101 文本 调整面板 Frame: {x: 1295, y: 117, width: 80, height: 27}
+			102 按钮 辅助栏 Secondary Actions: Invoke Frame: {x: 1408, y: 106, width: 103, height: 48}
+				103 文本 辅助栏 Frame: {x: 1430, y: 117, width: 60, height: 27}
+			104 按钮 导出 Secondary Actions: Invoke Frame: {x: 1523, y: 106, width: 79, height: 48}
+				105 文本 导出 Frame: {x: 1543, y: 117, width: 40, height: 27}
+			106 按钮 发送所选编辑结果到客户选片 Secondary Actions: Invoke Frame: {x: 388, y: 154, width: 303, height: 48}
+				107 文本 发送所选编辑结果到客户选片 Frame: {x: 410, y: 165, width: 260, height: 27}
+			108 按钮 导出客户所选照片 Secondary Actions: Invoke Frame: {x: 691, y: 154, width: 203, height: 48}
+				109 文本 导出客户所选照片 Frame: {x: 713, y: 165, width: 160, height: 27}
+			110 按钮 导入 Secondary Actions: Invoke Frame: {x: 906, y: 154, width: 79, height: 48}
+				111 文本 导入 Frame: {x: 926, y: 165, width: 40, height: 27}
+			112 组 当前预览分析 Secondary Actions: Collapse Frame: {x: 1272, y: 223, width: 474, height: 370}
+				113 按钮 ID: HeaderSite Secondary Actions: Toggle Frame: {x: 1272, y: 223, width: 474, height: 57}
+					114 文本 当前预览分析 Frame: {x: 1302, y: 238, width: 444, height: 27}
+				115 窗格 ID: AnalysisScroll Secondary Actions: Scroll Frame: {x: 1272, y: 292, width: 474, height: 301}
+					116 文本 当前调整后预览 · sRGB · 768×512 代理；透明像素不计 Frame: {x: 1272, y: 292, width: 462, height: 21}
+					117 组合框 RGB直方图通道 Secondary Actions: Expand Frame: {x: 1617, y: 318, width: 117, height: 61}
+					118 文本 RGB 直方图 Frame: {x: 1272, y: 335, width: 345, height: 27}
+					119 文本 sRGB 编码值   0 ───── 128 ───── 255 Frame: {x: 1276, y: 484, width: 453, height: 20}
+					120 文本 明度直方图 Frame: {x: 1272, y: 512, width: 462, height: 21}
+					121 文本 线性亮度 Y   0 ───── 0.5 ───── 1 Frame: {x: 1276, y: 598, width: 453, height: 20}
+					122 滚动条 ID: PART_VerticalScrollBar Frame: {x: 1734, y: 292, width: 12, height: 301}
+						123 按钮 ID: PageUp Secondary Actions: Invoke
+						124 缩略 
+						125 按钮 ID: PageDown Secondary Actions: Invoke Frame: {x: 1737, y: 568, width: 6, height: 25}
+			126 组 线性亮度分区 Secondary Actions: Expand Frame: {x: 1272, y: 602, width: 474, height: 57}
+				127 按钮 ID: HeaderSite Secondary Actions: Toggle Frame: {x: 1272, y: 602, width: 474, height: 57}
+					128 文本 线性亮度分区 Frame: {x: 1302, y: 617, width: 444, height: 27}
+			129 列表视图 工具页 Frame: {x: 1272, y: 665, width: 474, height: 48}
+				130 列表项 基础 Secondary Actions: Select, ScrollIntoView Frame: {x: 1272, y: 665, width: 90, height: 48}
+					131 文本 基础 Frame: {x: 1296, y: 675, width: 40, height: 27}
+				132 列表项 色彩 Secondary Actions: Select, ScrollIntoView Frame: {x: 1362, y: 665, width: 90, height: 48}
+					133 文本 色彩 Frame: {x: 1386, y: 675, width: 40, height: 27}
+				134 列表项 影调 Secondary Actions: Select, ScrollIntoView Frame: {x: 1452, y: 665, width: 90, height: 48}
+					135 文本 影调 Frame: {x: 1476, y: 675, width: 40, height: 27}
+				136 列表项 细节 Secondary Actions: Select, ScrollIntoView Frame: {x: 1542, y: 665, width: 90, height: 48}
+					137 文本 细节 Frame: {x: 1566, y: 675, width: 40, height: 27}
+				138 列表项 风格化 Secondary Actions: Select, ScrollIntoView Frame: {x: 1632, y: 665, width: 90, height: 48}
+					139 文本 风格化 Frame: {x: 1646, y: 675, width: 60, height: 27}
+			140 窗格  Secondary Actions: Scroll Frame: {x: 1272, y: 713, width: 474, height: 371}
+				141 组  Secondary Actions: Collapse Frame: {x: 1272, y: 693, width: 462, height: 237}
+					142 按钮  Secondary Actions: Toggle Frame: {x: 1272, y: 693, width: 30, height: 57}
+					143 按钮 复位本组 Secondary Actions: Invoke Frame: {x: 1688, y: 704, width: 46, height: 36}
+					144 复选框 白平衡 Secondary Actions: Toggle Frame: {x: 1302, y: 708, width: 377, height: 27}
+						145 文本 白平衡 Frame: {x: 1340, y: 708, width: 340, height: 27}
+					146 编辑 冷暖偏移 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 754, width: 102, height: 38}
+					147 文本 冷暖偏移 Frame: {x: 1275, y: 759, width: 354, height: 27}
+					148 滑块 冷暖偏移 Frame: {x: 1275, y: 792, width: 456, height: 45}
+						149 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 800, width: 218, height: 30}
+						150 缩略  Frame: {x: 1493, y: 800, width: 21, height: 30}
+						151 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1513, y: 800, width: 218, height: 30}
+					152 编辑 绿－洋红 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 840, width: 102, height: 38}
+					153 文本 绿－洋红 Frame: {x: 1275, y: 845, width: 354, height: 27}
+					154 滑块 绿－洋红 Frame: {x: 1275, y: 879, width: 456, height: 45}
+						155 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 887, width: 218, height: 30}
+						156 缩略  Frame: {x: 1493, y: 887, width: 21, height: 30}
+						157 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1513, y: 887, width: 218, height: 30}
+				158 组  Secondary Actions: Collapse Frame: {x: 1272, y: 933, width: 462, height: 1038}
+					159 按钮  Secondary Actions: Toggle Frame: {x: 1272, y: 933, width: 30, height: 57}
+					160 复选框 基础与 HDR 影调 Secondary Actions: Toggle Frame: {x: 1302, y: 948, width: 432, height: 27}
+						161 文本 基础与 HDR 影调 Frame: {x: 1340, y: 948, width: 395, height: 27}
+					162 组  Secondary Actions: Collapse Frame: {x: 1272, y: 993, width: 462, height: 324}
+						163 按钮  Secondary Actions: Toggle Frame: {x: 1272, y: 993, width: 30, height: 57}
+						164 按钮 复位本组 Secondary Actions: Invoke Frame: {x: 1688, y: 1004, width: 46, height: 36}
+						165 文本 基础曝光 Frame: {x: 1302, y: 1008, width: 377, height: 27}
+						166 编辑 曝光 Value: 0.5 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1054, width: 102, height: 38}
+						167 文本 曝光 · EV Frame: {x: 1275, y: 1059, width: 354, height: 27}
+						168 滑块 曝光 Frame: {x: 1275, y: 1092, width: 456, height: 45}
+							169 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1100, width: 234, height: 30}
+							170 缩略 ID: Thumb Frame: {x: 1509, y: 1100, width: 30, height: 30}
+							171 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1539, y: 1100, width: 192, height: 30}
+						172 编辑 亮度 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1140, width: 102, height: 38}
+						173 文本 亮度 Frame: {x: 1275, y: 1145, width: 354, height: 27}
+						174 滑块 亮度 Frame: {x: 1275, y: 1179, width: 456, height: 45}
+							175 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1187, width: 213, height: 30}
+							176 缩略 ID: Thumb Frame: {x: 1488, y: 1187, width: 30, height: 30}
+							177 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1187, width: 213, height: 30}
+						178 编辑 对比度 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1228, width: 102, height: 38}
+						179 文本 对比度 Frame: {x: 1275, y: 1233, width: 354, height: 27}
+						180 滑块 对比度 Frame: {x: 1275, y: 1266, width: 456, height: 45}
+							181 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1274, width: 213, height: 30}
+							182 缩略 ID: Thumb Frame: {x: 1488, y: 1274, width: 30, height: 30}
+							183 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1274, width: 213, height: 30}
+					184 组  Secondary Actions: Collapse Frame: {x: 1272, y: 1320, width: 462, height: 411}
+						185 按钮  Secondary Actions: Toggle Frame: {x: 1272, y: 1320, width: 30, height: 57}
+						186 按钮 复位本组 Secondary Actions: Invoke Frame: {x: 1688, y: 1331, width: 46, height: 36}
+						187 文本 HDR 影调 Frame: {x: 1302, y: 1335, width: 377, height: 27}
+						188 编辑 高光 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1381, width: 102, height: 38}
+						189 文本 高光 Frame: {x: 1275, y: 1386, width: 354, height: 27}
+						190 滑块 高光 Frame: {x: 1275, y: 1419, width: 456, height: 45}
+							191 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1427, width: 213, height: 30}
+							192 缩略 ID: Thumb Frame: {x: 1488, y: 1427, width: 30, height: 30}
+							193 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1427, width: 213, height: 30}
+						194 编辑 阴影 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1467, width: 102, height: 38}
+						195 文本 阴影 Frame: {x: 1275, y: 1472, width: 354, height: 27}
+						196 滑块 阴影 Frame: {x: 1275, y: 1506, width: 456, height: 45}
+							197 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1514, width: 213, height: 30}
+							198 缩略 ID: Thumb Frame: {x: 1488, y: 1514, width: 30, height: 30}
+							199 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1514, width: 213, height: 30}
+						200 编辑 白场 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1555, width: 102, height: 38}
+						201 文本 白场 Frame: {x: 1275, y: 1560, width: 354, height: 27}
+						202 滑块 白场 Frame: {x: 1275, y: 1593, width: 456, height: 45}
+							203 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1601, width: 213, height: 30}
+							204 缩略 ID: Thumb Frame: {x: 1488, y: 1601, width: 30, height: 30}
+							205 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1601, width: 213, height: 30}
+						206 编辑 黑场 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1641, width: 102, height: 38}
+						207 文本 黑场 Frame: {x: 1275, y: 1646, width: 354, height: 27}
+						208 滑块 黑场 Frame: {x: 1275, y: 1680, width: 456, height: 45}
+							209 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1688, width: 213, height: 30}
+							210 缩略 ID: Thumb Frame: {x: 1488, y: 1688, width: 30, height: 30}
+							211 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1688, width: 213, height: 30}
+					212 组  Secondary Actions: Collapse Frame: {x: 1272, y: 1734, width: 462, height: 237}
+						213 按钮  Secondary Actions: Toggle Frame: {x: 1272, y: 1734, width: 30, height: 57}
+						214 按钮 复位本组 Secondary Actions: Invoke Frame: {x: 1688, y: 1745, width: 46, height: 36}
+						215 文本 全局颜色 Frame: {x: 1302, y: 1749, width: 377, height: 27}
+						216 编辑 饱和度 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1795, width: 102, height: 38}
+						217 文本 饱和度 Frame: {x: 1275, y: 1800, width: 354, height: 27}
+						218 滑块 饱和度 Frame: {x: 1275, y: 1833, width: 456, height: 45}
+							219 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1841, width: 213, height: 30}
+							220 缩略 ID: Thumb Frame: {x: 1488, y: 1841, width: 30, height: 30}
+							221 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1841, width: 213, height: 30}
+						222 编辑 自然饱和度 Value: 0 Secondary Actions: SetValue, Scroll Frame: {x: 1629, y: 1881, width: 102, height: 38}
+						223 文本 自然饱和度 Frame: {x: 1275, y: 1886, width: 354, height: 27}
+						224 滑块 自然饱和度 Frame: {x: 1275, y: 1920, width: 456, height: 45}
+							225 按钮 ID: DecreaseLarge Secondary Actions: Invoke Frame: {x: 1275, y: 1928, width: 213, height: 30}
+							226 缩略 ID: Thumb Frame: {x: 1488, y: 1928, width: 30, height: 30}
+							227 按钮 ID: IncreaseLarge Secondary Actions: Invoke Frame: {x: 1518, y: 1928, width: 213, height: 30}
+				228 滚动条 ID: PART_VerticalScrollBar Frame: {x: 1734, y: 713, width: 12, height: 371}
+					229 按钮 ID: PageUp Secondary Actions: Invoke Frame: {x: 1737, y: 713, width: 6, height: 7}
+					230 缩略 
+					231 按钮 ID: PageDown Secondary Actions: Invoke Frame: {x: 1737, y: 827, width: 6, height: 257}
+			232 窗格 ID: PhotoToolsBand Secondary Actions: Scroll Frame: {x: 72, y: 211, width: 1176, height: 70}
+				233 按钮 选择 Secondary Actions: Toggle Frame: {x: 356, y: 215, width: 65, height: 61}
+					234 文本 选择 Frame: {x: 368, y: 231, width: 40, height: 27}
+				235 按钮 抓手 Secondary Actions: Toggle Frame: {x: 425, y: 215, width: 65, height: 61}
+					236 文本 抓手 Frame: {x: 437, y: 231, width: 40, height: 27}
+				237 按钮 缩放 Secondary Actions: Toggle Frame: {x: 494, y: 215, width: 65, height: 61}
+					238 文本 缩放 Frame: {x: 506, y: 231, width: 40, height: 27}
+				239 按钮 取样 Secondary Actions: Toggle Frame: {x: 563, y: 215, width: 65, height: 61}
+					240 文本 取样 Frame: {x: 575, y: 231, width: 40, height: 27}
+				241 按钮 原图 Secondary Actions: Toggle Frame: {x: 632, y: 215, width: 65, height: 61}
+					242 文本 原图 Frame: {x: 644, y: 231, width: 40, height: 27}
+				243 按钮 适合 Secondary Actions: Invoke Frame: {x: 709, y: 223, width: 45, height: 45}
+				244 按钮 100% Secondary Actions: Invoke Frame: {x: 754, y: 223, width: 72, height: 45}
+					245 文本 100% Frame: {x: 763, y: 232, width: 54, height: 27}
+				246 按钮 缩小 Secondary Actions: Invoke Frame: {x: 826, y: 223, width: 45, height: 45}
+				247 文本 95% Frame: {x: 878, y: 232, width: 42, height: 27}
+				248 按钮 放大 Secondary Actions: Invoke Frame: {x: 928, y: 223, width: 45, height: 45}
+				249 组合框 预览模式 Secondary Actions: Expand Frame: {x: 985, y: 215, width: 153, height: 61}
+				250 按钮 撤销调整 Secondary Actions: Invoke Frame: {x: 1150, y: 223, width: 45, height: 45}
+				251 按钮 重做调整 Secondary Actions: Invoke Frame: {x: 1195, y: 223, width: 45, height: 45}
+			252 文本 现场监看仿色已更新；RAW/JPEG 源文件未修改。 Frame: {x: 82, y: 1057, width: 1155, height: 21}
+			253 缩略 ID: RightResize Frame: {x: 1248, y: 211, width: 10, height: 885}
+			254 组 照片 Secondary Actions: Collapse Frame: {x: 78, y: 1111, width: 1674, height: 224}
+				255 按钮 展开或收起胶片栏 Secondary Actions: Toggle Frame: {x: 78, y: 1111, width: 30, height: 57}
+				256 窗格  Secondary Actions: Scroll Frame: {x: 108, y: 1111, width: 1644, height: 65}
+					257 按钮 照片布局 Secondary Actions: Invoke Frame: {x: 108, y: 1111, width: 123, height: 61}
+						258 文本 照片布局 Frame: {x: 130, y: 1129, width: 80, height: 27}
+					259 组合框 照片范围 Secondary Actions: Expand Frame: {x: 231, y: 1111, width: 153, height: 61}
+					260 文本 2 / 2 张 · 已选 2 · 隐藏已选 0（不参与） Frame: {x: 394, y: 1128, width: 361, height: 27}
+					261 文本 至少 Frame: {x: 766, y: 1128, width: 40, height: 27}
+					262 滑块 评分筛选 Frame: {x: 806, y: 1111, width: 150, height: 61}
+					263 按钮 所有色标 Secondary Actions: Invoke Frame: {x: 964, y: 1117, width: 36, height: 48}
+						264 文本 ∀ Frame: {x: 975, y: 1131, width: 13, height: 20}
+					265 按钮 无色标 Secondary Actions: Invoke Frame: {x: 1000, y: 1117, width: 36, height: 48}
+					266 按钮 红色标 Secondary Actions: Invoke Frame: {x: 1036, y: 1117, width: 36, height: 48}
+					267 按钮 橙色标 Secondary Actions: Invoke Frame: {x: 1072, y: 1117, width: 36, height: 48}
+					268 按钮 黄色标 Secondary Actions: Invoke Frame: {x: 1108, y: 1117, width: 36, height: 48}
+					269 按钮 绿色标 Secondary Actions: Invoke Frame: {x: 1144, y: 1117, width: 36, height: 48}
+					270 按钮 蓝色标 Secondary Actions: Invoke Frame: {x: 1180, y: 1117, width: 36, height: 48}
+					271 按钮 紫色标 Secondary Actions: Invoke Frame: {x: 1216, y: 1117, width: 36, height: 48}
+					272 按钮 清除筛选 Secondary Actions: Invoke Frame: {x: 1259, y: 1111, width: 123, height: 61}
+						273 文本 清除筛选 Frame: {x: 1281, y: 1129, width: 80, height: 27}
+					274 按钮 同步到所选 Secondary Actions: Invoke Frame: {x: 1382, y: 1111, width: 143, height: 61}
+						275 文本 同步到所选 Frame: {x: 1404, y: 1129, width: 100, height: 27}
+					276 按钮 节点同步… Secondary Actions: Invoke Frame: {x: 1525, y: 1111, width: 139, height: 61}
+						277 文本 节点同步… Frame: {x: 1547, y: 1129, width: 96, height: 27}
+					278 按钮 更多 Secondary Actions: Invoke Frame: {x: 1664, y: 1111, width: 83, height: 61}
+						279 文本 更多 Frame: {x: 1686, y: 1129, width: 40, height: 27}
+				280 文本 已准备 2 / 2；失败 0 Frame: {x: 120, y: 1314, width: 1632, height: 21}
+				281 列表视图 ID: Filmstrip Secondary Actions: Scroll Frame: {x: 108, y: 1176, width: 1644, height: 135}
+					282 列表项 RAWSelectionAssistant.ViewModels.ReferenceTargetItem Secondary Actions: Select, ScrollIntoView Frame: {x: 110, y: 1178, width: 1641, height: 108}
+						283 图像  Frame: {x: 120, y: 1187, width: 135, height: 90}
+						284 文本 ★ 0 Frame: {x: 120, y: 1259, width: 31, height: 20}
+					285 列表项 RAWSelectionAssistant.ViewModels.ReferenceTargetItem Secondary Actions: Select, ScrollIntoView Frame: {x: 110, y: 1286, width: 1641, height: 108}
+						286 图像  Frame: {x: 120, y: 1295, width: 135, height: 90}
+						287 文本 ★ 0 Frame: {x: 120, y: 1367, width: 31, height: 20}
+		288 自定义  Frame: {x: 60, y: 36, width: 1710, height: 1314}
+			289 文本 已保存 Frame: {x: 1711, y: 26, width: 50, height: 21}
+			290 文本 光镜 Frame: {x: 72, y: 26, width: 33, height: 21}
+			291 按钮 文件 Secondary Actions: Invoke Frame: {x: 125, y: 36, width: 55, height: 36}
+				292 文本 文件 Frame: {x: 133, y: 40, width: 40, height: 27}
+			293 按钮 编辑 Secondary Actions: Invoke Frame: {x: 183, y: 36, width: 55, height: 36}
+				294 文本 编辑 Frame: {x: 191, y: 40, width: 40, height: 27}
+			295 按钮 调整 Secondary Actions: Invoke Frame: {x: 241, y: 36, width: 55, height: 36}
+				296 文本 调整 Frame: {x: 249, y: 40, width: 40, height: 27}
+			297 按钮 视图 Secondary Actions: Invoke Frame: {x: 299, y: 36, width: 55, height: 36}
+				298 文本 视图 Frame: {x: 307, y: 40, width: 40, height: 27}
+			299 按钮 帮助 Secondary Actions: Invoke Frame: {x: 357, y: 36, width: 55, height: 36}
+				300 文本 帮助 Frame: {x: 365, y: 40, width: 40, height: 27}
+			301 按钮  Secondary Actions: Invoke Frame: {x: 70, y: 42, width: 39, height: 36}
+			302 按钮  Secondary Actions: Invoke Frame: {x: 112, y: 42, width: 39, height: 36}
+			303 按钮  Secondary Actions: Invoke Frame: {x: 154, y: 42, width: 39, height: 36}
+			304 按钮 裁剪工具 Secondary Actions: Invoke Frame: {x: 196, y: 42, width: 55, height: 36}
+				305 文本 裁切 Frame: {x: 204, y: 46, width: 40, height: 27}
+			306 按钮 画笔 Secondary Actions: Invoke Frame: {x: 254, y: 42, width: 55, height: 36}
+				307 文本 画笔 Frame: {x: 262, y: 46, width: 40, height: 27}
+			308 按钮 资源 Secondary Actions: Invoke Frame: {x: 312, y: 42, width: 55, height: 36}
+				309 文本 资源 Frame: {x: 320, y: 46, width: 40, height: 27}
+			310 按钮 简易 Secondary Actions: Invoke Frame: {x: 859, y: 42, width: 55, height: 36}
+				311 文本 简易 Frame: {x: 867, y: 46, width: 40, height: 27}
+			312 按钮 专业 Secondary Actions: Invoke Frame: {x: 917, y: 42, width: 55, height: 36}
+				313 文本 专业 Frame: {x: 925, y: 46, width: 40, height: 27}
+			314 按钮 ID: PhotoUndo Secondary Actions: Invoke Frame: {x: 1246, y: 42, width: 39, height: 36}
+			315 按钮 ID: PhotoRedo Secondary Actions: Invoke Frame: {x: 1288, y: 42, width: 39, height: 36}
+			316 按钮 文件与编辑操作 Secondary Actions: Invoke Frame: {x: 1330, y: 42, width: 39, height: 36}
+			317 按钮 发送所选编辑结果到客户选片 Secondary Actions: Invoke Frame: {x: 1372, y: 42, width: 135, height: 36}
+				318 文本 发送客户选片 Frame: {x: 1380, y: 46, width: 120, height: 27}
+			319 按钮 导入 / 导出 Secondary Actions: Invoke Frame: {x: 1510, y: 42, width: 116, height: 36}
+				320 文本 导入 / 导出 Frame: {x: 1518, y: 46, width: 101, height: 27}
+			321 按钮  Secondary Actions: Invoke Frame: {x: 1629, y: 42, width: 39, height: 36}
+			322 按钮 比较变体 Secondary Actions: Invoke Frame: {x: 1670, y: 42, width: 55, height: 36}
+				323 文本 比较 Frame: {x: 1678, y: 46, width: 40, height: 27}
+			324 按钮 比较菜单 Secondary Actions: Invoke Frame: {x: 1728, y: 42, width: 33, height: 36}
+				325 文本 ▾ Frame: {x: 1736, y: 46, width: 17, height: 27}
+			326 按钮 适合 Secondary Actions: Invoke Frame: {x: 1187, y: 87, width: 55, height: 36}
+				327 文本 适合 Frame: {x: 1195, y: 91, width: 40, height: 27}
+			328 文本 变体 2/2 · 默认版本 · 主变体 默认版本 Frame: {x: 1255, y: 77, width: 278, height: 21}
+			329 按钮 100% Secondary Actions: Invoke Frame: {x: 1547, y: 87, width: 69, height: 36}
+				330 文本 100% Frame: {x: 1555, y: 91, width: 54, height: 27}
+			331 按钮 缩小 Secondary Actions: Invoke Frame: {x: 1619, y: 87, width: 39, height: 36}
+			332 按钮 放大 Secondary Actions: Invoke Frame: {x: 1661, y: 87, width: 39, height: 36}
+			333 文本 精细 Frame: {x: 75, y: 77, width: 33, height: 21}
+			334 文本 选择 Frame: {x: 117, y: 77, width: 33, height: 21}
+			335 按钮 展开或折叠示波器 Secondary Actions: Invoke Frame: {x: 169, y: 87, width: 75, height: 36}
+				336 文本 示波器 Frame: {x: 177, y: 91, width: 60, height: 27}
+			337 文本 参考线 Frame: {x: 246, y: 77, width: 50, height: 21}
+			338 组合框 ID: GuideChoice Secondary Actions: Expand Frame: {x: 299, y: 89, width: 117, height: 30}
+			339 按钮 适应 Secondary Actions: Invoke Frame: {x: 74, y: 1092, width: 55, height: 36}
+				340 文本 适应 Frame: {x: 82, y: 1096, width: 40, height: 27}
+			341 按钮 100% Secondary Actions: Invoke Frame: {x: 132, y: 1092, width: 69, height: 36}
+				342 文本 100% Frame: {x: 140, y: 1096, width: 54, height: 27}
+			343 按钮 前后对比 Secondary Actions: Invoke Frame: {x: 1603, y: 1092, width: 95, height: 36}
+				344 文本 前后对比 Frame: {x: 1611, y: 1096, width: 80, height: 27}
+			345 按钮 胶片条 Secondary Actions: Invoke Frame: {x: 71, y: 1142, width: 75, height: 36}
+				346 文本 胶片条 Frame: {x: 79, y: 1146, width: 60, height: 27}
+			347 文本 2 Frame: {x: 159, y: 1148, width: 10, height: 21}
+			348 按钮 展开/收起变体 Secondary Actions: Invoke Frame: {x: 183, y: 1142, width: 144, height: 36}
+				349 文本 展开/收起变体 Frame: {x: 191, y: 1146, width: 129, height: 27}
+			350 按钮 ＋ F2 Secondary Actions: Invoke Frame: {x: 329, y: 1142, width: 64, height: 36}
+				351 文本 ＋ F2 Frame: {x: 337, y: 1146, width: 49, height: 27}
+			352 按钮 复制 F3 Secondary Actions: Invoke Frame: {x: 397, y: 1142, width: 84, height: 36}
+				353 文本 复制 F3 Frame: {x: 405, y: 1146, width: 69, height: 27}
+			354 组合框  Secondary Actions: Expand Frame: {x: 485, y: 1144, width: 117, height: 30}
+			355 组合框  Secondary Actions: Expand Frame: {x: 608, y: 1144, width: 102, height: 30}
+			356 按钮 清除筛选 Secondary Actions: Invoke Frame: {x: 715, y: 1142, width: 95, height: 36}
+				357 文本 清除筛选 Frame: {x: 723, y: 1146, width: 80, height: 27}
+			358 列表视图 ID: PhotoStrip Secondary Actions: Scroll Frame: {x: 60, y: 1175, width: 1650, height: 138}
+				359 列表项 RAWSelectionAssistant.ViewModels.ReferenceTargetItem Secondary Actions: Select, ScrollIntoView Frame: {x: 71, y: 1183, width: 173, height: 123}
+					360 按钮  Secondary Actions: Invoke Frame: {x: 76, y: 1186, width: 153, height: 75}
+						361 图像  Frame: {x: 99, y: 1188, width: 108, height: 72}
+					362 文本 ▱ 2 Frame: {x: 188, y: 1190, width: 32, height: 23}
+					363 文本  Frame: {x: 188, y: 1213, width: 32, height: 23}
+					364 复选框  Secondary Actions: Toggle Frame: {x: 78, y: 1190, width: 37, height: 22}
+					365 按钮 ★ Secondary Actions: Invoke Frame: {x: 95, y: 1261, width: 18, height: 24}
+						366 文本 ★ Frame: {x: 96, y: 1261, width: 16, height: 27}
+					367 按钮 ★ Secondary Actions: Invoke Frame: {x: 115, y: 1261, width: 18, height: 24}
+						368 文本 ★ Frame: {x: 116, y: 1261, width: 16, height: 27}
+					369 按钮 ★ Secondary Actions: Invoke Frame: {x: 137, y: 1261, width: 18, height: 24}
+						370 文本 ★ Frame: {x: 138, y: 1261, width: 16, height: 27}
+					371 按钮 ★ Secondary Actions: Invoke Frame: {x: 157, y: 1261, width: 18, height: 24}
+						372 文本 ★ Frame: {x: 158, y: 1261, width: 16, height: 27}
+					373 按钮 ★ Secondary Actions: Invoke Frame: {x: 179, y: 1261, width: 18, height: 24}
+						374 文本 ★ Frame: {x: 180, y: 1261, width: 16, height: 27}
+					375 文本 0 Frame: {x: 203, y: 1261, width: 10, height: 24}
+					376 文本 COMPANY_0001.jpg Frame: {x: 76, y: 1285, width: 153, height: 23}
+				377 列表项 RAWSelectionAssistant.ViewModels.ReferenceTargetItem Secondary Actions: Select, ScrollIntoView Frame: {x: 244, y: 1183, width: 173, height: 123}
+					378 按钮  Secondary Actions: Invoke Frame: {x: 249, y: 1186, width: 153, height: 75}
+						379 图像  Frame: {x: 272, y: 1188, width: 108, height: 72}
+					380 文本 ▱ 2 Frame: {x: 361, y: 1190, width: 32, height: 23}
+					381 文本  Frame: {x: 361, y: 1213, width: 32, height: 23}
+					382 复选框  Secondary Actions: Toggle Frame: {x: 251, y: 1190, width: 37, height: 22}
+					383 按钮 ★ Secondary Actions: Invoke Frame: {x: 268, y: 1261, width: 18, height: 24}
+						384 文本 ★ Frame: {x: 269, y: 1261, width: 16, height: 27}
+					385 按钮 ★ Secondary Actions: Invoke Frame: {x: 288, y: 1261, width: 18, height: 24}
+						386 文本 ★ Frame: {x: 289, y: 1261, width: 16, height: 27}
+					387 按钮 ★ Secondary Actions: Invoke Frame: {x: 310, y: 1261, width: 18, height: 24}
+						388 文本 ★ Frame: {x: 311, y: 1261, width: 16, height: 27}
+					389 按钮 ★ Secondary Actions: Invoke Frame: {x: 330, y: 1261, width: 18, height: 24}
+						390 文本 ★ Frame: {x: 331, y: 1261, width: 16, height: 27}
+					391 按钮 ★ Secondary Actions: Invoke Frame: {x: 352, y: 1261, width: 18, height: 24}
+						392 文本 ★ Frame: {x: 353, y: 1261, width: 16, height: 27}
+					393 文本 0 Frame: {x: 376, y: 1261, width: 10, height: 24}
+					394 文本 COMPANY_0002.jpg Frame: {x: 249, y: 1285, width: 153, height: 23}
+			395 按钮 打开参数面板 Secondary Actions: Invoke Frame: {x: 1712, y: 87, width: 57, height: 36}
+			396 按钮  Secondary Actions: Invoke Frame: {x: 1712, y: 123, width: 57, height: 36}
+			397 按钮  Secondary Actions: Invoke Frame: {x: 1712, y: 159, width: 57, height: 36}
+			398 按钮 已保存 Secondary Actions: Invoke Frame: {x: 1682, y: 1313, width: 75, height: 36}
+				399 文本 已保存 Frame: {x: 1690, y: 1317, width: 60, height: 27}
+			400 文本 变体 2/2 · 默认版本 · 主变体 默认版本 Frame: {x: 72, y: 1320, width: 1608, height: 21}
+		401 文本 准备就绪 Frame: {x: 27, y: 1365, width: 1716, height: 23}
+		402 文本 已索引 2 个照片文件 Frame: {x: 786, y: 1365, width: 156, height: 23}
+		403 文本 ·  Frame: {x: 954, y: 1365, width: 9, height: 23}
+		404 文本 ·  Frame: {x: 975, y: 1365, width: 9, height: 23}
+		405 文本 
+		406 进度栏  Frame: {x: 27, y: 1397, width: 1716, height: 4}
+		407 自定义 拍摄提醒通知
+			408 窗格  Secondary Actions: Scroll
+				409 列表视图 

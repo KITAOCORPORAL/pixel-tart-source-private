@@ -1,0 +1,73 @@
+{
+  "atUtc": "2026-11-18T07:38:38.510994+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "projects": [
+    {
+      "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Name": "最终433验收·同项目JPEG 20261117",
+      "ProjectType": "JpegAndRaw",
+      "SourceOnlineSelectionProjectId": "42af2986-48c3-4b11-907e-532bb6acc6a6"
+    }
+  ],
+  "sources": [
+    {
+      "Id": "6da5b0e0-ffe4-431c-b342-a885de7b4bcc",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs",
+      "Purpose": "Mixed"
+    }
+  ],
+  "inputs": [
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0001.png"
+    },
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0002.png"
+    }
+  ],
+  "projectCount": 1,
+  "sourceCount": 1,
+  "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+  "resultVersion": 1,
+  "resultRevision": 6,
+  "locked": true,
+  "archive": {
+    "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\customer-results\\selection-42af298648c34b11907e532bb6acc6a6-20261118055218.json",
+    "sha256": "dde6710318308f46a2a4e3105e41789c5f87c9b97b1126069f49edabcc293843",
+    "selectedIds": [
+      "97ace726-d3f6-47ed-b413-48fea6debd93",
+      "aba3dcce-4a29-42a5-92cd-1311aa4d7029"
+    ]
+  },
+  "normalWorkflowReturnPassed": true,
+  "normalProjectSaveAfterReturn": true,
+  "normalMatch": {
+    "nativeReceipt": "native-match-export-20261118/004-perform_secondary_action.txt",
+    "complete": 0,
+    "partial": 2,
+    "conflict": 0,
+    "missing": 0,
+    "reason": "ProjectTypeJpegAndRaw expects RAW as well; both originalJPEGs found, noRAW imported"
+  },
+  "normalWorkfile": {
+    "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\final433-jpeg.ptstudio.json",
+    "sha256": "e85eed85055a66818d8effa9d94e4bc530f8891f72550e821611cb1a44fd4a5d",
+    "workflowId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+    "exposure": 0.5
+  },
+  "nativeUiActions": [
+    "Sync Workflow opened archive dialog; first attempt empty/cancel preserved",
+    "Second archive selection wrote actual JSON and original workflow relation",
+    "Match check->Start Match->Save Project->Darkroom",
+    "Import/Export->Export Main Variant->Export Selected"
+  ],
+  "exportWindow": "快速导出 2 张 · JPG · sRGB",
+  "exportDirectory": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\edited-delivery",
+  "exportDirectoryConfirmed": false,
+  "actualJpegExports": [],
+  "noNewRawDecodes": true,
+  "sourceRowGuidStability": "Not preserved by current repository; actual GUID recorded, path/count verified",
+  "normalFullFlowPassed": false
+}
