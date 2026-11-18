@@ -1,0 +1,42 @@
+{
+  "clientDate": "2026-11-18",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "userAllowedAccess": true,
+  "normalAppPid": 42840,
+  "normalAppPath": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-433a1d8e-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+  "window": "选择照片来源目录",
+  "activationSucceeded": true,
+  "folderValueSetAndReadBack": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs",
+  "confirmationObserved": false,
+  "controlErrors": [
+    "element 181 is not available in cached app state",
+    "FrameArrived timed out",
+    "element 120 has no cached secondary actions"
+  ],
+  "keyboardObservation": {
+    "before": "SearchEditBox",
+    "after": "SearchEditBox",
+    "focusChanged": false
+  },
+  "dialogBounds": {
+    "width": 2121,
+    "height": 1638
+  },
+  "capturedViewport": {
+    "width": 1920,
+    "height": 1350
+  },
+  "confirmButtonObservedBounds": {
+    "x": 1787,
+    "y": 1570,
+    "width": 146,
+    "height": 39
+  },
+  "newProductCode": false,
+  "testSeamUsed": false,
+  "finalResult": "PARTIAL_SYSTEM_DIALOG_INPUT_NOT_CONFIRMED",
+  "requiredManualAction": "点击底部选择文件夹；若底部不可见，先还原或缩小该对话框。路径已填好。",
+  "noFurtherBlindRetry": true,
+  "confirmButtonOutsideAutomationCapture": true,
+  "screenResolutionNotInferredFromCapture": true
+}

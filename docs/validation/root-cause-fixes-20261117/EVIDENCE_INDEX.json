@@ -1,7 +1,6 @@
 {
   "productSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "updatedAtUtc": "2026-11-17T10:25:49.188727+00:00",
-  "scope": "Original repair evidence plus ordinary final-source continuation; sealed product archive remains unchanged",
+  "scope": "Repair evidence plus final ordinary acceptance and20261118 control-resume observations; product bundle unchanged",
   "entries": [
     {
       "file": ".gitattributes",
@@ -230,8 +229,8 @@
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 2856,
-      "sha256": "67df8fc6e44424feef933b73e43186c6313faace8ebb01aa0988704aede1c7c5"
+      "bytes": 3436,
+      "sha256": "bad981bed391989b229825f069734231f6c8e7810a01a9a22b0a2a8dc96893c3"
     },
     {
       "file": "memory-selection.trx",
@@ -250,8 +249,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 1895,
-      "sha256": "140d1cbfca933031d005ca4e5f798a1910206c0e37617926cf56dfbddb9a0289"
+      "bytes": 2273,
+      "sha256": "952064d45140a5fab0abbb9d5b9b3167ef301c025937b17b6e7e21213b8f7984"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -272,6 +271,31 @@
       "file": "REPORT.md",
       "bytes": 10518,
       "sha256": "0ea7eb0eb6bccf1a97b7b703bb4411863d7b1c10a7a0c0d3d7dcf272931523a8"
+    },
+    {
+      "file": "resume-20261118/CONTROL_STATE.json",
+      "bytes": 1407,
+      "sha256": "b6677e8e920d7e181f02fcc7a0bb2fb971a89f62c46167e3b18e24c13b2e3642"
+    },
+    {
+      "file": "resume-20261118/PHONE_CURRENT.json",
+      "bytes": 415,
+      "sha256": "5da99a967acc054aae466418b4dd790fad62118de81b5edf822e8f5dcabf7eac"
+    },
+    {
+      "file": "resume-20261118/PROJECT_CURRENT.json",
+      "bytes": 473,
+      "sha256": "57a9359f7d883f13047ef64dedd9290b5d2d760a7cf8424ad5fa0009492be6db"
+    },
+    {
+      "file": "resume-20261118/RESOURCE_CURRENT.json",
+      "bytes": 463,
+      "sha256": "d0d69f7a708b49cfb092b065df1098917d63d9ee4ae8cc63a34bb3b72d5d8f6d"
+    },
+    {
+      "file": "resume-20261118/RESULTS.md",
+      "bytes": 2128,
+      "sha256": "405b76e7e1ec0208bd2edfea6664fc266daaf8a559feef454f642289abf0ff33"
     },
     {
       "file": "source-identity.trx",

@@ -13,7 +13,7 @@
     "newRawDecodesAuthorized": 0,
     "guardBytes": 2147483648
   },
-  "status": "PARTIAL_FINAL_433_NAME_SAVE_VALIDATED_SOURCE_PICKER_PERMISSION_BLOCK",
+  "status": "PARTIAL_SYSTEM_DIALOG_CONTROL_MAPPING_AFTER_ACCESS_RESTORED",
   "finalOrdinaryExeStarted": true,
   "sameSourceSelectionServiceReady": true,
   "currentServicePid": 36564,
@@ -27,7 +27,7 @@
   "editVersion": null,
   "fullSameProjectFlowPassed": false,
   "stage": "Named project saved; source-folder dialog open; source not selected",
-  "controlBlock": "GetCursorPos failed: 拒绝访问。 (0x80070005)",
+  "controlBlock": "Permission restored; modal child-control cache unavailable, FrameArrived timeout; folder confirmation unobserved",
   "noBlindRetry": true,
   "noAlternateInputBypass": true,
   "blankAndWhitespaceNameSaveEntry": "PASS_NORMAL_UI_SAVE_ONLY",
@@ -38,5 +38,10 @@
   "receipt": "final-acceptance-20261117/RESULTS.md",
   "priorCandidateReceipt": "final-acceptance-20261117/PRIOR_ORDINARY_STATUS_9dd7cabb.json",
   "originalUserWorkspaceMutated": false,
-  "testSeamUsed": false
+  "testSeamUsed": false,
+  "previousControlBlock": "GetCursorPos failed: 拒绝访问。 (0x80070005)",
+  "userAllowedAccess": true,
+  "latestResume": "resume-20261118/RESULTS.md",
+  "latestClientDate": "2026-11-18",
+  "requiredManualAction": "点击底部选择文件夹；若底部不可见，先还原或缩小该对话框。路径已填好。"
 }

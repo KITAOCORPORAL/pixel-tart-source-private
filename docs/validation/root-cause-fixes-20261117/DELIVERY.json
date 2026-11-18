@@ -15,7 +15,7 @@
   "checksPassed": 52,
   "lifecycleScenarios": 17,
   "ordinaryFullWorkflowPassed": false,
-  "ordinaryBlocker": "GetCursorPos failed: 拒绝访问。 (0x80070005); source picker awaiting personal confirmation",
+  "ordinaryBlocker": "Permission restored; modal child-control cache unavailable, FrameArrived timeout; folder confirmation unobserved",
   "phone": "NeedsLogin",
   "phoneActual": false,
   "newRawDecodes": 0,
@@ -27,5 +27,6 @@
   "finalOrdinaryExeStarted": true,
   "phoneCredentialCurrentlyValid": true,
   "packageUnchangedSinceSeal": true,
-  "noNewProductPackage": true
+  "noNewProductPackage": true,
+  "latestResumeReport": "resume-20261118/RESULTS.md"
 }
