@@ -1,5 +1,5 @@
 {
-  "atUtc": "2026-11-19T06:19:08.034982+00:00",
+  "atUtc": "2026-11-19T07:04:36.174917+00:00",
   "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "launch": {
     "pid": 56424,
@@ -12,17 +12,17 @@
     "newRawDecodesAuthorized": 0,
     "guardBytes": 2147483648
   },
-  "stage": "EMPTY_DARKROOM_OPEN_RECOVERY_PENDING_NATIVE_AUTOMATION_TIMEOUT",
+  "stage": "OPENED_EXPOSURE_CYCLE_01_02_03_01_VERIFIED_UNDO_SAVE_EXPORT_PENDING",
   "recoveryFile": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
   "recoverySha256": "474f6d83a3d7b5d5d0008499fff3d43e2c8216108c11e537049d0b9166ed19fb",
-  "sourceLoaded": false,
+  "sourceLoaded": true,
   "ordinaryTiffAccepted": false,
   "lastResourceSample": {
-    "atUtc": 1795069148.0299745,
-    "elapsedMs": 1774578.185499995,
-    "privateBytes": 300711936,
-    "workingSetBytes": 372133888,
-    "osPeakWorkingSetBytes": 380014592
+    "atUtc": 1795071876.408053,
+    "elapsedMs": 4502956.264600041,
+    "privateBytes": 1354641408,
+    "workingSetBytes": 1568104448,
+    "osPeakWorkingSetBytes": 1769078784
   },
   "stopObserved": false,
   "ownedProcessPreserved": true,
@@ -33,5 +33,14 @@
     "CUA accessibility state unavailable for selected window"
   ],
   "noNewRaw": true,
-  "controlledRepeatNotOrdinary": true
+  "controlledRepeatNotOrdinary": true,
+  "currentVisibleExposure": 0.1,
+  "ordinaryExposureCycleReadbacks": [
+    0.1,
+    0.2,
+    0.3,
+    0.1
+  ],
+  "receipt": "ORDINARY_OPENED_CURRENT.json",
+  "nextControl": "普通保存项目、撤销重做、导出主变体，工具不能可靠Invoke；正常关/独立重开及实际TIFF尚未完成"
 }

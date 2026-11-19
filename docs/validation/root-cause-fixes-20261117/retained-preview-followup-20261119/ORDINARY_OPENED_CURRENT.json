@@ -1,0 +1,66 @@
+{
+  "atUtc": "2026-11-19T07:04:36.174917+00:00",
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "status": "PARTIAL_ORDINARY_OPEN_AND_EXPOSURE_CYCLE_VERIFIED",
+  "pid": 56424,
+  "createdFileTime": "134395409734408196",
+  "authorizedInput": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+  "recoveryFile": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
+  "recoverySha256": "a321c8a74c86b9656b508deb640f247da70dadc18372d78088815a9acd0a21de",
+  "recoveryStoredExposure": 0.1,
+  "openedByUser": true,
+  "ordinarySourceLoaded": true,
+  "initialVisibleExposure": 0.1,
+  "ordinaryExposureReadbacks": [
+    0.1,
+    0.2,
+    0.3,
+    0.1
+  ],
+  "readbacks": [
+    {
+      "file": "AFTER_EXPOSURE02.ax.txt",
+      "sha256": "be85a8b736b12339cf7cbe373ccd8f6646f9858ccd4682fdc74286dd05ca33f5",
+      "readbackExposure": "0.2",
+      "publicAccessibility": true
+    },
+    {
+      "file": "AFTER_EXPOSURE03.ax.txt",
+      "sha256": "00c076514affd7f665f0952d5956889bc2a3065d95a457976e8df9dd0fccff61",
+      "readbackExposure": "0.3",
+      "publicAccessibility": true
+    },
+    {
+      "file": "AFTER_RESTORE01.ax.txt",
+      "sha256": "8dcd4d51681f17243293fe3bc0099706adf7c471bb73a1ba6b605b02c346af84",
+      "readbackExposure": "0.1",
+      "publicAccessibility": true
+    }
+  ],
+  "control": "Public RangeValue on visible CompactStudioSlider-BasicTone-exposure; timeout response was followed by separate actual UI readback before next step",
+  "ordinaryUndoRedo": "NOT_VERIFIED_NATIVE_INVOKE_TIMED_OUT",
+  "ordinaryPostEditWorkfileSave": "NOT_CONFIRMED_THIS_RESUME",
+  "ordinaryCloseAndIndependentProcessReopen": "NOT_RUN_CURRENT_SOURCE",
+  "ordinaryTiffExportCount": 0,
+  "colorDepthOrientationIccVerification": "PENDING_REAL_EXPORT",
+  "noGuardStopObserved": true,
+  "resourceReceipt": "ORDINARY_OPENED_RESOURCE.json",
+  "readOnlyOfflineStateCheck": {
+    "isLoading": false,
+    "sessionLoading": false,
+    "editorProcessingState": 0,
+    "pendingDebounceWork": 0,
+    "readOnlyTarget": false,
+    "sourceAndMatchedImagePresent": true,
+    "scope": "Heap snapshot before +0.2 editing, local only"
+  },
+  "toolLimitations": [
+    "Open Computer Use SetValue on numeric field reported nonenabled",
+    "Open Computer Use slider not settable in its snapshot",
+    "Sky supports public RangeValue; completion timed out but updated value read back separately",
+    "Open Computer Use native get/invoke timed out after30s",
+    "Sky screenshot capture timed out; no guessed coordinate clicks used",
+    "Sky Invoke unsupported for Button"
+  ],
+  "phone": "BROWSER_ACCOUNT_LOGIN_VERIFIED_CLIENT_STILL_NEEDSLOGIN"
+}

@@ -1,6 +1,6 @@
 {
   "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
-  "scope": "Current repository receipts include post-seal report cleanup; package keeps original immutable snapshot and its own EVIDENCE_INDEX. All new findings retain source binding.",
+  "scope": "Current source-bound external receipts: d07 ordinary source loaded and exposure cycle verified; undo/save/close/reopen/TIFF outputs incomplete; browser login verified but device client NeedsLogin. Immutable product ZIP unchanged.",
   "entries": [
     {
       "file": ".gitattributes",
@@ -444,8 +444,8 @@
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 2568,
-      "sha256": "7f890a776ed74630ad410653386638e2ea0813eadc4e3dddd109dd054d7d17d7"
+      "bytes": 2805,
+      "sha256": "1a6d72ad63e778a6ad1ec06a8c1eb77c8f932be9c675fa98db0f6375493dbe6a"
     },
     {
       "file": "history/COMPONENT_BINDINGS_433_before_memory_update_20261119.json",
@@ -478,9 +478,19 @@
       "sha256": "40ac10291496afd28f8675f9c7e4e6cecb20ddc909fca976a2ac6729067c2aaf"
     },
     {
+      "file": "history/HANDOFF_before_opened_resume_20261119.md",
+      "bytes": 2568,
+      "sha256": "7f890a776ed74630ad410653386638e2ea0813eadc4e3dddd109dd054d7d17d7"
+    },
+    {
       "file": "history/HANDOFF_before_retained_owner_update_20261119.md",
       "bytes": 2549,
       "sha256": "a1864fa3b9491456f38c7c774be27c3e3c806aa228a23d1f93376d52db3c8051"
+    },
+    {
+      "file": "history/ORDINARY_EXE_STATUS_before_opened_resume_20261119.json",
+      "bytes": 1707,
+      "sha256": "457053c686d42be0bae5a5556411cbcbe6cd29be8435e898ff71f9c8b5f38401"
     },
     {
       "file": "history/ORDINARY_EXE_STATUS_before_retained_owner_update_20261119.json",
@@ -524,8 +534,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 1707,
-      "sha256": "457053c686d42be0bae5a5556411cbcbe6cd29be8435e898ff71f9c8b5f38401"
+      "bytes": 1902,
+      "sha256": "69c68db71298e31012902847677d429e1e1606c9168fffc4657d72c0a0978ec0"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -544,8 +554,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 10777,
-      "sha256": "c4f75e3bd90890f1e587e651d7ec5b236288a3ab0766acffdafecb83239c1ca9"
+      "bytes": 10825,
+      "sha256": "1c92584966230f8f741d8991a33a64ff06c8de82840b55c66a4bc22a80931795"
     },
     {
       "file": "resume-20261118/CONTROL_STATE.json",
@@ -624,8 +634,38 @@
     },
     {
       "file": "retained-preview-followup-20261119/ORDINARY_CURRENT.json",
+      "bytes": 1903,
+      "sha256": "550af0630efa2b8928253eea34693c3b3fa219eb774121a98f42af782f35f7e0"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_CURRENT_before_opened_resume.json",
       "bytes": 1592,
       "sha256": "3a4d67b1fce49398ed71cd98664764338aa3325a75cc051fff56514166aebf33"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_OPENED_CURRENT.json",
+      "bytes": 2746,
+      "sha256": "9fdad362383c202201eca4892bddfef8cf7e836c066882fdc65966798ec10080"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_OPENED_RESOURCE.json",
+      "bytes": 940,
+      "sha256": "ca3b5fd2fcc2830902e09a937684952d66fd765077e18a705aa22154e0592831"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_READBACK_EXPOSURE02.ax.txt",
+      "bytes": 24733,
+      "sha256": "be85a8b736b12339cf7cbe373ccd8f6646f9858ccd4682fdc74286dd05ca33f5"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_READBACK_EXPOSURE03.ax.txt",
+      "bytes": 24733,
+      "sha256": "00c076514affd7f665f0952d5956889bc2a3065d95a457976e8df9dd0fccff61"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_READBACK_RESTORED01.ax.txt",
+      "bytes": 24733,
+      "sha256": "8dcd4d51681f17243293fe3bc0099706adf7c471bb73a1ba6b605b02c346af84"
     },
     {
       "file": "retained-preview-followup-20261119/PHONE_PREPARED.json",
@@ -639,6 +679,11 @@
     },
     {
       "file": "retained-preview-followup-20261119/PHONE_STATUS_CURRENT.json",
+      "bytes": 1009,
+      "sha256": "c5194e60d048f94abcfceac15ee580349d5586047bb90db289cb5df3dd913ce9"
+    },
+    {
+      "file": "retained-preview-followup-20261119/PHONE_STATUS_CURRENT_before_opened_resume.json",
       "bytes": 411,
       "sha256": "d4cd84587c346265a291a665c11737981de39fd4c4be21fb138314ccc14167e1"
     },

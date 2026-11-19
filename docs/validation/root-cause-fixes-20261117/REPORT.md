@@ -2,7 +2,7 @@
 
 2026-11-19当前产品源码d07e4f43，整体PARTIAL。cb8c1adc普通连续编辑/撤销再触发2GiB守卫（2227568640bytes/exit1）；失败证据已固定。新修订只修正分析缓存强持有旧整帧，以及预览缓存按实际位深计费。41项相关回归和受控40MP连续编辑/撤销重做/保存/独立ViewModel重开通过，PrivateBytes峰值1321.35MiB；未强制GC、新RAW0。
 
-普通d07完整EXE已启动，停在空暗室；原生自动化持续30s超时，恢复工作文件尚未打开，普通TIFF保存/正常关闭/独立进程重开/两次TIFF导出仍未通过。手机同源码服务及原合成预约/新设备凭据已准备，Tailscale仍NeedsLogin，HTTPS与iPhone未验。最新下一步只以HANDOFF.md及retained-preview-followup-20261119为准。
+普通d07完整EXE已由用户打开授权恢复文件，曝光0.1→0.2→0.3→0.1已分别读回，未触发守卫；原生Invoke仍30s超时，撤销重做/保存/正常关闭/独立进程重开/两次TIFF导出仍未通过。手机同源码服务及原合成预约/新设备凭据已准备，Tailscale仍NeedsLogin，HTTPS与iPhone未验。最新下一步只以HANDOFF.md及retained-preview-followup-20261119为准。
 
 原433普通JPEG同项目主线PASS继续绑定433，来源路径/数量保持但子行GUID会重建。家中与内存补丁映射已包含。以下为保留的根因修复阶段报告，历史“当前/待办”不作为本轮断点；原完整顶部进展已归档history/REPORT_before_retained_owner_update_20261119.md。
 
@@ -54,7 +54,7 @@ StudioQuickExport、RenderedSrgbInput、RawDisplayBitmapAdapter、prepared Sessi
 
 原433普通EXE同项目JPEG闭环已完成：两张索引、编辑0.5、真实Chrome锁定v1/r6、PC收回、实际JPEG2/ICC3144、正常退出0、独立进程重开和原来源重扫。此前eef/433阶段的系统对话框待办均归历史，不再列为当前未完成。
 
-433首次40MP曝光和cb8c1adc连续曝光/撤销都触发2GiB守卫；两次失败保留。当前d07受控连续操作已通过，但普通PID56424尚为空暗室：Sky及Open Computer Use出现截帧、几何和30s超时，CUA报AX不可用。没有把工具调用超时推断为新的产品死锁；线程栈/资源记录保留。待普通打开恢复文件后继续连续编辑、保存、正常关闭、独立进程重开、实际两次TIFF导出/像素/位深/方向/ICC。普通空名发送、关闭边界、双root和实际iPhone也未全部完成。
+433首次40MP曝光和cb8c1adc连续曝光/撤销都触发2GiB守卫；两次失败保留。当前d07受控连续操作已通过，普通PID56424也已载入并完成0.1→0.2→0.3→0.1曝光循环；Sky及Open Computer Use出现截帧、几何和30s超时，CUA报AX不可用。没有把工具调用超时推断为新的产品死锁；线程栈/资源记录保留。接着验证撤销重做、保存、正常关闭、独立进程重开、实际两次TIFF导出/像素/位深/方向/ICC。普通空名发送、关闭边界、双root和实际iPhone也未全部完成。
 
 手机已验证旧服务owned路径/创建FILETIME/runtime，换为同源码d07服务PID50824；新设备授权签发、本地200/匿名401、受保护原合成预约revision4全行不变。Tailscale仍NeedsLogin，HTTPS和真实iPhone双向修改未完成；登录链接与token仅存本地私有文件。新凭据到期UTC2026-11-21T06:17:20Z。
 
