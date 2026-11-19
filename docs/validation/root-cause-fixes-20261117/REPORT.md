@@ -1,30 +1,10 @@
 # 光镜根因修复执行与交付
 
-**当前内存复验更新：** 原433普通TIFF在曝光0.1后的预览阶段实际2GiB STOP；已保留该失败和自动保存的编辑。必要修订cb8c1adc仅改高位深单曝光缓冲存储，旧Core数值与参考函数未改，授权5184行精确一致及34项受影响回归通过。当前完整包已构建并启动独立普通恢复入口，尚未完成新普通TIFF验收；见tiff-memory-followup-20261119/RCA_AND_SCOPE.md和HANDOFF。旧433 JPEG PASS继续绑定433，不改标cb通过。整体PARTIAL。
+2026-11-19当前产品源码d07e4f43，整体PARTIAL。cb8c1adc普通连续编辑/撤销再触发2GiB守卫（2227568640bytes/exit1）；失败证据已固定。新修订只修正分析缓存强持有旧整帧，以及预览缓存按实际位深计费。41项相关回归和受控40MP连续编辑/撤销重做/保存/独立ViewModel重开通过，PrivateBytes峰值1321.35MiB；未强制GC、新RAW0。
 
+普通d07完整EXE已启动，停在空暗室；原生自动化持续30s超时，恢复工作文件尚未打开，普通TIFF保存/正常关闭/独立进程重开/两次TIFF导出仍未通过。手机同源码服务及原合成预约/新设备凭据已准备，Tailscale仍NeedsLogin，HTTPS与iPhone未验。最新下一步只以HANDOFF.md及retained-preview-followup-20261119为准。
 
-**2026-11-19最新：普通最终433的JPEG同项目主线已PASS**，包括实际2JPEG导出、保存exit0、独立25256重开、本地v1/r6和原来源重扫。仅标此主线，不把来源子行GUID、普通边界或TIFF/手机提升为通过；见final-acceptance-20261119/RESULTS.md。当前启动同包新TIFF独立根，等待普通打开工作文件。以下保留最初交付与逐阶段历史；其中“JPEG闭环未完成”为旧观察，已由最新源绑定回执前移。
-
-
-**用户关闭后最新：** 旧App42840已exit0/noSTOP，最终433新PID48348已从原工作文件正常重开，同项目/两选片/曝光0.5与本地锁定v1/r6恢复。当前是照片页，需用户按“导入/导出→导出主变体→导出所选”重做输出目录选择，见final-acceptance-20261118/USER_REOPEN_EXPORT_HANDOFF.md。实际JPEG仍0；此重开在导出前，不冒称最终闭环通过。
-
-
-**当前最新断点：** 结果归档与原项目回写已完成（相册42af2986…关联项目08d18374…、两条客户输入、来源原目录1个）；普通匹配与保存完成，分类JpgAndRaw导致缺RAW的部分匹配2，不伪称完整2。已进入普通“快速导出2张·JPG·sRGB”输出目录选择器，需选本轮output\edited-delivery并点选择文件夹；JPEG实际输出仍0。见final-acceptance-20261118/RETURN_AND_EXPORT_PENDING.md和WORKFLOW_RETURN_CURRENT.json。旧“归档待选”断点已完成，无需重复同步。
-
-
-**最新：** 最终433已普通上传代理2/2并发布，真实Chrome逐项选择后确认锁定v1/r6；PC已普通刷新并保存唯一锁定结果。相册42af2986…关联原项目08d18374…。当前“同步归片工作区”打开结果归档目录选择器，需选本轮output并点击选择文件夹；原项目关联/SelectionInputs尚未写入，收回不标通过。见final-acceptance-20261118/CUSTOMER_RESULT_AND_ARCHIVE_PENDING.md及截图。旧“发送未确认”断点已前移，后续导出/关闭/独立重开/TIFF仍PARTIAL。
-
-
-**当前断点已前移：** 普通工作文件已由用户确认保存，实际文件和UI“已保存”已核对，项目/两张selected/曝光0.5保持。发送客户选片的原生Invoke未返回，未观察相册创建；当前需在照片页右上角手动点一次“发送客户选片”，见final-acceptance-20261118/SELECTION_SEND_PENDING.md。先前系统保存确认待办已完成，不能继续当当前阻塞。
-
-
-**2026-11-18最新进展：** 用户来源目录确认后，最终433已普通扫描JPEG2/RAW0、保存项目并进入同项目编辑；COMPANY_0002曝光0.5经普通保存版本持久化。当前在“保存 Color Studio 工作文件”对话框，路径已填为output/final433-jpeg.ptstudio.json，尚需点保存(S)。见final-acceptance-20261118/RESULTS.md。项目/来源Path和Count1保持，但来源行GUID被每次Save重建，未标稳定ID通过。手机凭据当前已到期且GET401，昨日有效状态过时。旧段落保留原观察，以下当前断点以前述最新回执为准。
-
-
-**最新普通验收接续：** 当前文档起于9dd7cabb后的一轮普通UI验收，详见[本轮回执](final-acceptance-20261117/RESULTS.md)。最终433 EXE及同源选片服务已实际启动；普通保存入口的空/纯空白拒绝、补名持久保存已验证。新项目08d18374-fb96-4efb-9451-cae9b8c48c40。来源选择器已经打开，但置前返回GetCursorPos拒绝访问，停止界面输入等待本人确认；完整JPEG链、新关闭TIFF链、两个最终DataRoot普通实例及手机仍未通过。以下原交付记录保留其阶段语义；其中“最终433尚未启动”为9dd时状态，已被本段及新回执前移，不能继续当当前事实。产品源码和原封包字节未变。
-
-
-状态：**B0/B1/B2 已实现并完成受控验证；完整产品包已构建，最终普通 EXE 全流程验收未完成**。原始时间戳以UTC回执为准。
+原433普通JPEG同项目主线PASS继续绑定433，来源路径/数量保持但子行GUID会重建。家中与内存补丁映射已包含。以下为保留的根因修复阶段报告，历史“当前/待办”不作为本轮断点；原完整顶部进展已归档history/REPORT_before_retained_owner_update_20261119.md。
 
 ## 决策、基线和源码
 
@@ -72,11 +52,11 @@ StudioQuickExport、RenderedSrgbInput、RawDisplayBitmapAdapter、prepared Sessi
 
 ## 普通EXE、手机及未完成项
 
-前一候选eef3b35b的完整EXE与同源码选片服务已经实际启动，独立合成根 ordinary-qa，专用App别名GuangjingRootCauseQA.exe与主apphost字节一致；2GiB/50ms守卫运行。系统来源目录选择器中已填写新的合成source-jpegs，但控件几何和截图通道不可用，备用点击未确认。随后工具明确报告用户物理Escape停止Computer Use，停止所有界面操作；未保存无关屏幕截图，未操作用户原App。
+原433普通EXE同项目JPEG闭环已完成：两张索引、编辑0.5、真实Chrome锁定v1/r6、PC收回、实际JPEG2/ICC3144、正常退出0、独立进程重开和原来源重扫。此前eef/433阶段的系统对话框待办均归历史，不再列为当前未完成。
 
-后续433a1d8e加入终止期编辑禁用和保存IO后名称复核，工具停止后没有再启动最终普通EXE。因此最终EXE的“同项目导入→编辑→发布→浏览器确认→收回→导出→保存→独立PID重开”**本轮未完成**。ORDINARY_EXE_STATUS保留断点和源码主DLL哈希，不能用52项测试或旧e818完整流程替代。QA窗口/运行根保留；不会为了结束而强杀含未保存内容的App。
+433首次40MP曝光和cb8c1adc连续曝光/撤销都触发2GiB守卫；两次失败保留。当前d07受控连续操作已通过，但普通PID56424尚为空暗室：Sky及Open Computer Use出现截帧、几何和30s超时，CUA报AX不可用。没有把工具调用超时推断为新的产品死锁；线程栈/资源记录保留。待普通打开恢复文件后继续连续编辑、保存、正常关闭、独立进程重开、实际两次TIFF导出/像素/位深/方向/ICC。普通空名发送、关闭边界、双root和实际iPhone也未全部完成。
 
-Tailscale当前NeedsLogin，iPhone真机双向NOT_RUN；没有替用户认证、轮换设备凭据或改预约。此阻塞与本轮代码修复分开。旧用户工作文件备份只读哈希核对，原目录及旧包不删除。
+手机已验证旧服务owned路径/创建FILETIME/runtime，换为同源码d07服务PID50824；新设备授权签发、本地200/匿名401、受保护原合成预约revision4全行不变。Tailscale仍NeedsLogin，HTTPS和真实iPhone双向修改未完成；登录链接与token仅存本地私有文件。新凭据到期UTC2026-11-21T06:17:20Z。
 
 ## 交付与接手
 

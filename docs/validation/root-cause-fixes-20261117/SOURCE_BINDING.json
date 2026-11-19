@@ -1,5 +1,5 @@
 {
-  "source": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
+  "source": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "base": "f6655aff201b157a09ee37c46eb82596ff59028f",
   "B0": "f55825bb",
   "B1": "057d58ff",
@@ -17,18 +17,23 @@
     "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
     "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
     "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.R53.cs",
-    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs"
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "src/RAWSelectionAssistant/Services/ColorStudioBitmapRenderer.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Analysis.cs",
+    "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs"
   ],
-  "package": "E:/Kitao-Deliveries/root-cause-fixes-20261117/Guangjing-RootCause-cb8c1adc-Full-win-x64",
-  "mainDllSha256": "c387e55579f3cc581ea79c309ef46b7a99755646aff79a165d2d3f5ec4577b76",
+  "package": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-d07e4f43-Full-win-x64",
+  "mainDllSha256": "87eec5fbe4af5df0332359c2f95163218cde28ef445876a8d353effadd89cbad",
   "noNewRaw": true,
   "uiRedesign": false,
   "installer": false,
   "originalRepairSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "previousProductSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "previousProductSource": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
   "memoryRepairCommit": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
-  "currentComponentBinding": "tiff-memory-followup-20261119/COMPONENT_BINDINGS.json",
+  "currentComponentBinding": "retained-preview-followup-20261119/COMPONENT_BINDINGS.json",
   "priorOrdinaryJpegEvidenceSource": "433a1d8e",
-  "newSourceOrdinaryTiff": "PENDING_NORMAL_OPEN_RECOVERY",
-  "rootUpdateIsPostSealDoc": true
+  "newSourceOrdinaryTiff": "NOT_LOADED_UI_TIMEOUT",
+  "rootUpdateIsPostSealDoc": true,
+  "retainedPreviewRepairCommit": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "postSealCurrentReportUpdate": true
 }

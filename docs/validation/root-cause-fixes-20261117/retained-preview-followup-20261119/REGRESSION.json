@@ -1,0 +1,41 @@
+{
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "passed": 41,
+  "failed": 0,
+  "processIsolation": "Each test class in its own WPF host",
+  "classes": [
+    {
+      "class": "ColorRangePreviewOverlayTests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "class": "ColorSpaceSurfaceWpfTests",
+      "passed": 5,
+      "failed": 0
+    },
+    {
+      "class": "LightPrintR3Tests",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "class": "LinearSrgbAndImmediateTests",
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "class": "PreparedPreviewTransactionTests",
+      "passed": 18,
+      "failed": 0
+    },
+    {
+      "class": "RasterPreviewNativeCacheTests",
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "initialHostSetupError": "Custom output directory collocated self-contained app runtime; first vstest host aborted before tests. Valid receipts use SDK project test entry, normal output, DOTNET_ROOT_X64 in current process only.",
+  "initialAbortedReceiptNotCounted": true,
+  "verification": "Tests built against exact two-file candidate before commit; no product changes after freeze. Controlled repeat probe assembly and delivery components bind full d07 source."
+}

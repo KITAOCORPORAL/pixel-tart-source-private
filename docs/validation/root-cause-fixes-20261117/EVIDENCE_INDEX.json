@@ -1,7 +1,6 @@
 {
-  "productSource": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
-  "previousOrdinaryJpegMainlineSource": "433a1d8e",
-  "scope": "Preserved433 pass/STOP;cb bounded-storage exactness, affected regression and full update; new ordinary TIFF pending",
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "scope": "Current repository receipts include post-seal report cleanup; package keeps original immutable snapshot and its own EVIDENCE_INDEX. All new findings retain source binding.",
   "entries": [
     {
       "file": ".gitattributes",
@@ -445,8 +444,8 @@
     },
     {
       "file": "HANDOFF.md",
-      "bytes": 2549,
-      "sha256": "a1864fa3b9491456f38c7c774be27c3e3c806aa228a23d1f93376d52db3c8051"
+      "bytes": 2568,
+      "sha256": "7f890a776ed74630ad410653386638e2ea0813eadc4e3dddd109dd054d7d17d7"
     },
     {
       "file": "history/COMPONENT_BINDINGS_433_before_memory_update_20261119.json",
@@ -457,6 +456,11 @@
       "file": "history/DELIVERY_433_before_memory_update_20261119.json",
       "bytes": 1992,
       "sha256": "33d962e46047cbc43bbd8eb2fbf5b278962b91159d5212b73efa9b31a45cfd0f"
+    },
+    {
+      "file": "history/DELIVERY_before_retained_owner_update_20261119.json",
+      "bytes": 1505,
+      "sha256": "2400d0b679d8720f1b206ea730becc37d5498540418cbb87f7bff13cc7e55bdd"
     },
     {
       "file": "history/FINAL_REGRESSION_433_before_memory_update_20261119.json",
@@ -474,9 +478,24 @@
       "sha256": "40ac10291496afd28f8675f9c7e4e6cecb20ddc909fca976a2ac6729067c2aaf"
     },
     {
+      "file": "history/HANDOFF_before_retained_owner_update_20261119.md",
+      "bytes": 2549,
+      "sha256": "a1864fa3b9491456f38c7c774be27c3e3c806aa228a23d1f93376d52db3c8051"
+    },
+    {
+      "file": "history/ORDINARY_EXE_STATUS_before_retained_owner_update_20261119.json",
+      "bytes": 4468,
+      "sha256": "dbcef88826c47eef3520bab86cdd67867e564d77b873a58d40754f052d79382b"
+    },
+    {
       "file": "history/PACKAGE_VALIDATION_433_before_memory_update_20261119.json",
       "bytes": 461,
       "sha256": "0d050fd6aa662de17a1f31189da9483b78d3004cd360f64ae1113a44e80c8794"
+    },
+    {
+      "file": "history/REPORT_before_retained_owner_update_20261119.md",
+      "bytes": 14099,
+      "sha256": "88251ceefa0ac22185de3bc7632e7499e81d7106c81ca48326682a7fa4ec128d"
     },
     {
       "file": "history/SOURCE_BINDING_433_before_memory_update_20261119.json",
@@ -505,8 +524,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 4468,
-      "sha256": "dbcef88826c47eef3520bab86cdd67867e564d77b873a58d40754f052d79382b"
+      "bytes": 1707,
+      "sha256": "457053c686d42be0bae5a5556411cbcbe6cd29be8435e898ff71f9c8b5f38401"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -525,8 +544,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 14099,
-      "sha256": "88251ceefa0ac22185de3bc7632e7499e81d7106c81ca48326682a7fa4ec128d"
+      "bytes": 10777,
+      "sha256": "c4f75e3bd90890f1e587e651d7ec5b236288a3ab0766acffdafecb83239c1ca9"
     },
     {
       "file": "resume-20261118/CONTROL_STATE.json",
@@ -554,14 +573,109 @@
       "sha256": "405b76e7e1ec0208bd2edfea6664fc266daaf8a559feef454f642289abf0ff33"
     },
     {
+      "file": "retained-preview-followup-20261119/CB8C1ADC_ORDINARY_FAILURE.json",
+      "bytes": 3139,
+      "sha256": "dd89c273de65f2f37160c6de64891b6bdadddb20ec67cc068d4db5779281a925"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ColorRangePreviewOverlayTests-valid.trx",
+      "bytes": 4116,
+      "sha256": "cfc9533f5e36ec95610903f1ec8642c4f142f5c2bedec858322fbaba99fd1a58"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ColorSpaceSurfaceWpfTests-valid.trx",
+      "bytes": 8470,
+      "sha256": "63fed230901c73d8e9d07737ef2b3802a8b550dc7c3b8477f9a0b761e583dc98"
+    },
+    {
+      "file": "retained-preview-followup-20261119/COMPONENT_BINDINGS.json",
+      "bytes": 1867,
+      "sha256": "348fbad3092121aeaa35b4dce7a8a62fd937d206b92494fc782e010bbd7ce0b2"
+    },
+    {
+      "file": "retained-preview-followup-20261119/CONTROLLED_REPEAT_RESOURCE.json",
+      "bytes": 374,
+      "sha256": "51fa253b1d0f9105934d30d0c261452baee1975521dc2d225fe7638cf2ccca95"
+    },
+    {
+      "file": "retained-preview-followup-20261119/CONTROLLED_REPEAT_RESULT.json",
+      "bytes": 2402,
+      "sha256": "6e61f881536c9f86008ba56681c14437b450b7eba935725526f47ab0b0ec9c90"
+    },
+    {
+      "file": "retained-preview-followup-20261119/CONTROLLED_REPEAT_STAGES.json",
+      "bytes": 2027,
+      "sha256": "28ddf28d0b07187171f3994f59cffecab36f64ca0b53cec4842ce68afbc97f0e"
+    },
+    {
+      "file": "retained-preview-followup-20261119/LightPrintR3Tests-valid.trx",
+      "bytes": 9883,
+      "sha256": "1897f276d2e6bb871021e3ffd0153911962903019cf2f8f75ad430ee80d93b43"
+    },
+    {
+      "file": "retained-preview-followup-20261119/LinearSrgbAndImmediateTests-valid.trx",
+      "bytes": 4151,
+      "sha256": "0ccb6d7b721ece285da38fc739cf55141124833bee5e2adeee59d37cbe141d97"
+    },
+    {
+      "file": "retained-preview-followup-20261119/MEMORY_PATCH_MAPPING_CURRENT.json",
+      "bytes": 937,
+      "sha256": "9df415ecbcfb39b4107d0a454fa82cdc2f0e17e33b37e3c51a88a00f086a5e2c"
+    },
+    {
+      "file": "retained-preview-followup-20261119/ORDINARY_CURRENT.json",
+      "bytes": 1592,
+      "sha256": "3a4d67b1fce49398ed71cd98664764338aa3325a75cc051fff56514166aebf33"
+    },
+    {
+      "file": "retained-preview-followup-20261119/PHONE_PREPARED.json",
+      "bytes": 743,
+      "sha256": "1fbff558db2fa87062027ddb5433acdffd8cc7522b4b5ecc28ceb80f14bf49c1"
+    },
+    {
+      "file": "retained-preview-followup-20261119/PHONE_SERVICE_LAUNCH.json",
+      "bytes": 272,
+      "sha256": "7cb6ad3e81f4e0db6e545c3fe5afffc75cdd26d5db92854ab1dc1a623ca06202"
+    },
+    {
+      "file": "retained-preview-followup-20261119/PHONE_STATUS_CURRENT.json",
+      "bytes": 411,
+      "sha256": "d4cd84587c346265a291a665c11737981de39fd4c4be21fb138314ccc14167e1"
+    },
+    {
+      "file": "retained-preview-followup-20261119/PreparedPreviewTransactionTests-valid.trx",
+      "bytes": 26927,
+      "sha256": "dfd5db6c191fb0c7fcbf8bdb76b4b4be475958333f3386e2b7776fd6319acd5b"
+    },
+    {
+      "file": "retained-preview-followup-20261119/RasterPreviewNativeCacheTests-valid.trx",
+      "bytes": 12645,
+      "sha256": "1af5ac780da55b4e9e35458081a98b8d7352f65509c24363405eebb4d9596765"
+    },
+    {
+      "file": "retained-preview-followup-20261119/RCA_AND_SCOPE.md",
+      "bytes": 2608,
+      "sha256": "816e277610b72f96ad73f7aa6b473bf5079f7f65518cbd8eab25786675f86051"
+    },
+    {
+      "file": "retained-preview-followup-20261119/REGRESSION.json",
+      "bytes": 1218,
+      "sha256": "4fd2fd31636594b8e41b448474be04c5b49ac245469f94a97ab844ba4e20dc43"
+    },
+    {
+      "file": "retained-preview-followup-20261119/SOURCE_FILES.json",
+      "bytes": 533,
+      "sha256": "93d950c7a87994cf3ba24d99b41efeede6dbe0d72cff76b845bffc1fd68fdb13"
+    },
+    {
       "file": "source-identity.trx",
       "bytes": 8408,
       "sha256": "3990d5052442d48d5b42edf872167a8b07271681d45f7090c614d681a7d501b5"
     },
     {
       "file": "SOURCE_BINDING.json",
-      "bytes": 1820,
-      "sha256": "154840887dd82c67c8ae86284b5c0784716c14e0f08c85f84564109f98891bb8"
+      "bytes": 2212,
+      "sha256": "d1b3ad1e86e0f511891972d18ac9812f9ca021501aa381cb2f5e7db652532cbb"
     },
     {
       "file": "tiff-memory-followup-20261119/affected-memory.trx",

@@ -1,0 +1,64 @@
+{
+  "CONTEXT.json": {
+    "sha256": "8eecd48f535099b4eb98a367de2c35280bcf12f4c16b2121c0242581846dad1a",
+    "record": {
+      "deliveryRoot": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-cb8c1adc-20261119",
+      "workflowAppExecutable": "E:/Kitao-Deliveries/root-cause-fixes-20261117/Guangjing-RootCause-cb8c1adc-Full-win-x64/App/KitaoPhotoSelector.exe",
+      "workflowAppProductSource": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
+      "currentProductSource": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
+      "workflowQaRuntime": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-cb8c1adc-20261119/runtime",
+      "workflowProjectId": null,
+      "workflowAppPid": 56004,
+      "newRawDecodesAuthorized": 0,
+      "sourceDirectory": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export",
+      "outputDirectory": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-cb8c1adc-20261119/output",
+      "authorizedInput": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export/DSCF0347_仿色.tif",
+      "openInputSession": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-cb8c1adc-20261119/output/tiff-recovered-exposure01.ptstudio.json",
+      "stage": "MEMORY_REPAIR_BUILD_ORDINARY_RETEST_PENDING",
+      "previousFailureSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+      "workflowAppCreatedFileTime": "134395315397272068",
+      "activeGuardRun": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-cb8c1adc-20261119\\native-initial"
+    }
+  },
+  "native-initial/LAUNCH.json": {
+    "sha256": "8415e4d368cca84cf7bca0d394330d22f4466fd069be848555cbe0e51ecd4108",
+    "record": {
+      "pid": 56004,
+      "createdFileTime": "134395315397272068",
+      "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-cb8c1adc-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+      "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-cb8c1adc-20261119\\runtime",
+      "source": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
+      "mainDllSha256": "e7e14efc91cccb5dfe7be306e041a492460cb77523811635b3a28bcb50ca0808",
+      "startedUtc": 1795057939.736196,
+      "newRawDecodesAuthorized": 0,
+      "guardBytes": 2147483648
+    }
+  },
+  "native-initial/STOP.json": {
+    "sha256": "c40dad55c91b2ea0449a315b9a48a1cfb01bde6ad38f143df37546c1af4281b9",
+    "record": {
+      "reason": "2GiB resource guard",
+      "sample": {
+        "atUtc": 1795061360.6243663,
+        "elapsedMs": 3420887.676400016,
+        "privateBytes": 2227568640,
+        "workingSetBytes": 1589542912,
+        "osPeakWorkingSetBytes": 1739673600
+      }
+    }
+  },
+  "native-initial/EXIT.json": {
+    "sha256": "a77df0a7c6fce230330ab4deee32c1c21b010169a07aa962114998b66b652320",
+    "record": {
+      "pid": 56004,
+      "exitCode": 1,
+      "stop": "2GiB resource guard",
+      "samples": 67455,
+      "peakPrivateBytes50ms": 2227568640,
+      "osPeakWorkingSetBytes": 1739673600,
+      "lifetimeMs": 3421330.791000044,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    }
+  }
+}

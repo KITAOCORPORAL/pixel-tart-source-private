@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse,ctypes as C,ctypes.wintypes as W,json,os,struct,subprocess,time,hashlib
 p=argparse.ArgumentParser();p.add_argument('--exe',type=Path,required=True);p.add_argument('--root',type=Path,required=True);p.add_argument('--round',default='v1');p.add_argument('--source',default='WORKTREE');p.add_argument('--scenarios',default='close-saved,close-nested-frame,close-nested-frame-repeat,close-cancel-other-handler,close-repeated,close-save-pending,close-hide-pending,close-workspace-first,save-cancel,save-failure-retry,save-undo-reopen-export,preview-after-unload,preview-editor-change-after-unload,preview-workspace-dispose,preview-loaded-unload-retains,save-during-edit');a=p.parse_args()
-root=a.root.resolve()/a.round;root.mkdir(parents=True,exist_ok=False);exe=a.exe.resolve();assert exe.name=='TiffBounded.exe'
+root=a.root.resolve()/a.round;root.mkdir(parents=True,exist_ok=False);exe=a.exe.resolve();assert exe.name in {'TiffBounded.exe','RetainedPreview.exe'}
 k=C.WinDLL('kernel32',use_last_error=True);k.OpenProcess.argtypes=[W.DWORD,W.BOOL,W.DWORD];k.OpenProcess.restype=W.HANDLE;k.K32GetProcessMemoryInfo.argtypes=[W.HANDLE,C.c_void_p,W.DWORD];k.K32GetProcessMemoryInfo.restype=W.BOOL;k.CloseHandle.argtypes=[W.HANDLE]
 rows=[]
 for label in a.scenarios.split(','):
