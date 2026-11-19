@@ -1,15 +1,16 @@
 {
-  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "retainedPriorEvidence": "docs/validation/product-line-continuation-20261116/{TIFF_RECEIPT.json,TIFF_PAIR_COMPARISON.json,TIFF_INTEGRATED_COMPARISON.json}",
-  "pixelAndPreparedServicesUnchanged": [
-    "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
-    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
-    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
-    "src/RAWSelectionAssistant/Services/RenderedSrgbInput.cs",
-    "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs"
-  ],
-  "targetedMemoryPixelExposureTestsPassed": true,
-  "newOrdinary40MpCloseAcceptance": "NOT_RUN_AFTER_USER_STOPPED_COMPUTER_USE",
+  "source": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
+  "previousSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "previousOrdinaryExposure": "FAIL_2GIB_STOP_2424029184_PRIVATE_BYTES",
+  "changedAdapter": "src/RAWSelectionAssistant/Services/ColorStudioBitmapRenderer.cs",
+  "coreNumericalCodeUnchanged": true,
+  "oldWholeFrameMethodPreserved": true,
+  "controlled40MpRowsCompared": 5184,
+  "controlledStoredSampleEquality": true,
+  "controlledPeakPrivateMiB": 868.16,
+  "normalRepairedTiffAcceptance": "NOT_RUN_NORMAL_OPEN_RECOVERY_PENDING",
+  "sourceAndPriorWorkfilesPreserved": true,
   "newRawDecodes": 0,
-  "prior40MpEvidenceNotRelabeledAsNewSource": true
+  "forcedGc": false,
+  "guardBytes": 2147483648
 }
