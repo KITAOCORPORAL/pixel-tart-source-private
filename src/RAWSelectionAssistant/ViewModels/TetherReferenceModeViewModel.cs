@@ -1113,7 +1113,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
             {
                 _previewCache.AddFirst((source, cacheKey, image));
                 var frameBudget = _rawPreviewMaster is null ? 128L * 1024 * 1024 : 256L * 1024 * 1024;
-                while (_previewCache.Count > 4 || (_previewCache.Count > 1 && _previewCache.Sum(item => (long)item.Result.PixelWidth * item.Result.PixelHeight * 4) > frameBudget))
+                while (_previewCache.Count > 4 || (_previewCache.Count > 1 && _previewCache.Sum(item => ((long)item.Result.PixelWidth * item.Result.Format.BitsPerPixel + 7) / 8 * item.Result.PixelHeight) > frameBudget))
                     _previewCache.RemoveLast();
             }
             if (ColorStudioAcceptanceFixture.NativeObserverRequested)

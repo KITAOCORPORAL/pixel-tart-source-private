@@ -60,7 +60,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             var image = inspectedImage ?? (Editor.ShowOriginal ? Editor.SourceImage : Editor.MatchedImage ?? Editor.SourceImage);
             if (image is null || _disposed) return;
             var tier = SamplingTier;
-            var entry = _analysisCache.FirstOrDefault(x => ReferenceEquals(x.Image, image) && x.Tier == tier);
+            var entry = _analysisCache.FirstOrDefault(x => x.Image.TryGetTarget(out var cachedImage) && ReferenceEquals(cachedImage, image) && x.Tier == tier);
             if (entry is null)
             {
                 var frozen = image.IsFrozen ? image : image.CloneCurrentValue();
@@ -72,7 +72,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                     var cloud = ColorSpaceProxyBuilder.Build(buffer, ColorSpaceSampling.Settings(tier), cancellation.Token);
                     // This is inspection of an already rendered image, not a second Match invocation.
                     var model = new ColorSpaceVisualizationModel(cloud, cloud, cloud, [], ColorCloudMode.Source, tier, cloud.SourceFingerprint);
-                    return new PreviewAnalysisEntry(image, tier, buffer, histogram, model, ColorSpaceSurface.BuildColorIndex(buffer, cancellation.Token));
+                    return new PreviewAnalysisEntry(new WeakReference<BitmapSource>(image), tier, buffer, histogram, model, ColorSpaceSurface.BuildColorIndex(buffer, cancellation.Token));
                 }, cancellation.Token);
             }
             if (_disposed || cancellation.IsCancellationRequested || revision != Volatile.Read(ref _colorSpaceRevision)) return;
@@ -135,5 +135,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public double CloudRotationY { get => CloudSettings.RotationY; set => CloudSettings = CloudSettings with { RotationY = value }; }
     public double CloudRotationZ { get => CloudSettings.RotationZ; set => CloudSettings = CloudSettings with { RotationZ = value }; }
     private static double Finite(double value, double min, double max, double fallback) => Math.Clamp(double.IsFinite(value) ? value : fallback, min, max);
-    private sealed record PreviewAnalysisEntry(BitmapSource Image, ColorSpaceSamplingTier Tier, VisualPixelBuffer Pixels, VisualHistogram Histogram, ColorSpaceVisualizationModel Model, OklabColor[] Colors);
+    // Cached analysis owns only its bounded proxy/statistics. Image identity must not
+    // keep retired full-resolution previews alive after the editor releases them.
+    private sealed record PreviewAnalysisEntry(WeakReference<BitmapSource> Image, ColorSpaceSamplingTier Tier, VisualPixelBuffer Pixels, VisualHistogram Histogram, ColorSpaceVisualizationModel Model, OklabColor[] Colors);
 }
