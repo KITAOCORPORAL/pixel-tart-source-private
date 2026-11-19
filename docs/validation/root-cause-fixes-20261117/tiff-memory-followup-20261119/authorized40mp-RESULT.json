@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "mode": "authorized40mp",
+  "rows": [
+    {
+      "mode": "authorized40mp",
+      "input": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "rowsCompared": 5184,
+      "bitsPerChannel": 16,
+      "outputHash": "CD789A0127A8699067ECA5F96767D39F2C4315EAE3F71272A2584E448E2F3EEB",
+      "referenceHash": "CD789A0127A8699067ECA5F96767D39F2C4315EAE3F71272A2584E448E2F3EEB",
+      "exact": true,
+      "referenceScope": "Unchanged old adapter on every input row; independence also checked against whole-frame4MP fixture"
+    }
+  ],
+  "existingPointProcessorReused": true,
+  "colorMathChanged": false,
+  "pixelReference": "Historical RenderHighPrecision unchanged, exactRGBA64 full-frame comparison",
+  "reservationsRestored": true,
+  "forcedGc": false,
+  "newRawDecodes": 0
+}

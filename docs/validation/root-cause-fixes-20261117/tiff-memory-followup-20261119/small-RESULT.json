@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "mode": "small",
+  "rows": [
+    {
+      "input": "Rgb48",
+      "ev": -2,
+      "expected": "8068F96C25998C412AA3EF294C3B4F4CB27BC7CE5362A2FAD92C3807C1F38BA1",
+      "actual": "8068F96C25998C412AA3EF294C3B4F4CB27BC7CE5362A2FAD92C3807C1F38BA1",
+      "exact": true
+    },
+    {
+      "input": "Rgb48",
+      "ev": -0.1,
+      "expected": "B93A95BD6108131E30CBC0D54C52DF12F40CDBB5E4622B8FB66B270ED7910E93",
+      "actual": "B93A95BD6108131E30CBC0D54C52DF12F40CDBB5E4622B8FB66B270ED7910E93",
+      "exact": true
+    },
+    {
+      "input": "Rgb48",
+      "ev": 0,
+      "expected": "25BA370B95F2EAC1EAEF6DFE8ED04DD25C8FE3FA23EE8F4EBE59E89A37FDAA95",
+      "actual": "25BA370B95F2EAC1EAEF6DFE8ED04DD25C8FE3FA23EE8F4EBE59E89A37FDAA95",
+      "exact": true
+    },
+    {
+      "input": "Rgb48",
+      "ev": 0.1,
+      "expected": "288FD645A7BB3C292E28CD395AFC193C2AB9FDC12301102E09CED7B9E42A1CC4",
+      "actual": "288FD645A7BB3C292E28CD395AFC193C2AB9FDC12301102E09CED7B9E42A1CC4",
+      "exact": true
+    },
+    {
+      "input": "Rgb48",
+      "ev": 2,
+      "expected": "4342F27D77641BBB056BAC88B7FCA01B88E1A9431FA4A9414B2417360CEDD917",
+      "actual": "4342F27D77641BBB056BAC88B7FCA01B88E1A9431FA4A9414B2417360CEDD917",
+      "exact": true
+    },
+    {
+      "input": "Rgba64",
+      "ev": -2,
+      "expected": "7374ABE80E5D437F6454B18621973CA019BA008C198C57FEB069D8FE3F5ABF49",
+      "actual": "7374ABE80E5D437F6454B18621973CA019BA008C198C57FEB069D8FE3F5ABF49",
+      "exact": true
+    },
+    {
+      "input": "Rgba64",
+      "ev": -0.1,
+      "expected": "F1661171CD665DCAF737BC7979F7884A3590F492B8B3183B9E68395ECDC3AC08",
+      "actual": "F1661171CD665DCAF737BC7979F7884A3590F492B8B3183B9E68395ECDC3AC08",
+      "exact": true
+    },
+    {
+      "input": "Rgba64",
+      "ev": 0,
+      "expected": "640BC6D348AE75C2AE42CD0CD2F42C597DBF23702CC00CA43502772EF7C67874",
+      "actual": "640BC6D348AE75C2AE42CD0CD2F42C597DBF23702CC00CA43502772EF7C67874",
+      "exact": true
+    },
+    {
+      "input": "Rgba64",
+      "ev": 0.1,
+      "expected": "938E5D52F5D7E4D02E1155D57C7B261489144A368E5DC68FE9A8908971F6D5B7",
+      "actual": "938E5D52F5D7E4D02E1155D57C7B261489144A368E5DC68FE9A8908971F6D5B7",
+      "exact": true
+    },
+    {
+      "input": "Rgba64",
+      "ev": 2,
+      "expected": "6F21659E4B177E15A5494BAC3CD2DC88FEC7A294AE5A3460B7B9B110D6BFFD7F",
+      "actual": "6F21659E4B177E15A5494BAC3CD2DC88FEC7A294AE5A3460B7B9B110D6BFFD7F",
+      "exact": true
+    },
+    {
+      "admissionCounterexamples": 6,
+      "cancelBeforeAllocation": true,
+      "cancelDuringRows": true
+    }
+  ],
+  "existingPointProcessorReused": true,
+  "colorMathChanged": false,
+  "pixelReference": "Historical RenderHighPrecision unchanged, exactRGBA64 full-frame comparison",
+  "reservationsRestored": true,
+  "forcedGc": false,
+  "newRawDecodes": 0
+}

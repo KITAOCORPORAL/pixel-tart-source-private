@@ -1,0 +1,35 @@
+{
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "pid": 21496,
+  "createdFileTime": "134395262047910486",
+  "authority": "Ordinary final433 EXE; existing visible CompactStudioSlider-BasicTone-exposure RangeValue0.1",
+  "firstFailedStage": "After normal exposure commit, before edit/save/reopen/export acceptance could complete",
+  "stop": {
+    "reason": "2GiB resource guard",
+    "sample": {
+      "atUtc": 1795055423.4372332,
+      "elapsedMs": 2818637.941999943,
+      "privateBytes": 2424029184,
+      "workingSetBytes": 1974157312,
+      "osPeakWorkingSetBytes": 1974161408
+    }
+  },
+  "exit": {
+    "pid": 21496,
+    "exitCode": 1,
+    "stop": "2GiB resource guard",
+    "samples": 55521,
+    "peakPrivateBytes50ms": 2424029184,
+    "osPeakWorkingSetBytes": 1974161408,
+    "lifetimeMs": 2819501.4073000057,
+    "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+    "newRawDecodesAuthorized": 0
+  },
+  "newRawDecodes": 0,
+  "originalInputAndJpegWorkspacePreserved": true,
+  "exposureAutosavedBeforeStop": true,
+  "recoverySession": "output/tiff-exposure01-after-stop.ptstudio.json",
+  "loadDeadlockHypothesis": "DISPROVED_BY_LOCAL_READONLY_SNAPSHOT; loading/sessionPreparingfalse, activeTarget/source present; no close task",
+  "initialNumericSetFailure": "Hidden/disabled number control; no edit occurred on that failed attempt",
+  "privateDump": "TIFF_OPEN_PENDING_LOCAL_ONLY.dmp retained locally only; not committed or bundled"
+}

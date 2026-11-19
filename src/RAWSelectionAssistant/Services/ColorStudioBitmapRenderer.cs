@@ -1,4 +1,6 @@
 using System.Windows.Media;
+using System.Runtime.InteropServices;
+using RAWSelectionAssistant.Core.Services.Color;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
@@ -13,7 +15,13 @@ public static class ColorStudioBitmapRenderer
         token.ThrowIfCancellationRequested();
         if (source.Format == PixelFormats.Rgb128Float || source.Format == PixelFormats.Rgba128Float || source.Format == PixelFormats.Prgba128Float)
             return RenderFloat(source, stack, reference, token);
-        if(source.Format.BitsPerPixel>32) return RenderHighPrecision(source,stack,reference,token);
+        if(source.Format.BitsPerPixel>32)
+        {
+            if((source.Format==PixelFormats.Rgb48 || source.Format==PixelFormats.Rgba64) &&
+                (long)source.PixelWidth*source.PixelHeight>4L*1024*1024 && CanRenderBoundedExposure(stack,reference))
+                return RenderBoundedExposure(source,stack,token);
+            return RenderHighPrecision(source,stack,reference,token);
+        }
         var input = HistogramService.EnsureBgra32(source);
         var bgra = new byte[input.PixelWidth * input.PixelHeight * 4];
         input.CopyPixels(bgra, input.PixelWidth * 4, 0);
@@ -59,6 +67,55 @@ public static class ColorStudioBitmapRenderer
             if (result.Span[index] != rgb[index]) samples[p * 4 + c] = DecodeSrgb(result.Span[index]);
         }
         var output = BitmapSource.Create(source.PixelWidth, source.PixelHeight, source.DpiX, source.DpiY, PixelFormats.Rgba128Float, null, samples, source.PixelWidth * 16); output.Freeze(); return output;
+    }
+
+    // Storage/ownership adaptation only. The existing point-effect implementation and
+    // its RGB16 -> float -> RGB16 rounding are unchanged. Never tile a graph, mask,
+    // reference-dependent operation or spatial tool by assuming pixel independence.
+    private static bool CanRenderBoundedExposure(ColorAdjustmentStack stack, ReferenceLook? reference)
+    {
+        if(reference is not null || stack.Graph is not null || stack.ProcessingVersion!=2)return false;
+        var enabled=stack.Normalize().Nodes.Where(node=>node.Enabled).ToArray();
+        return enabled.Length==1 && enabled[0].Type==ColorStudioNodeType.BasicTone &&
+            enabled[0].WideToolVersion==0 && enabled[0].FilmSettings is null &&
+            enabled[0].NumericParameters.Keys.All(key=>key=="exposure") &&
+            StudioLayerComposite.Identity(enabled[0]);
+    }
+    private static BitmapSource RenderBoundedExposure(BitmapSource source,ColorAdjustmentStack stack,CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        var node=stack.Normalize().Nodes.Single(item=>item.Enabled);
+        var width=source.PixelWidth;var height=source.PixelHeight;var stride=checked(width*8);var length=checked(stride*height);
+        var rowsPerBlock=Math.Max(1,Math.Min(height,1024*1024/stride));
+        var rowBytes=new byte[checked(stride*rowsPerBlock)];
+        var rgba=new FormatConvertedBitmap(source,PixelFormats.Rgba64,null,0);
+        // Account temporary native output plus the detached WIC copy; the caller
+        // retains the published bitmap after this operation releases its scratch.
+        using var reservation=StudioGlobalResources.ReserveWork(checked((long)length*2+rowBytes.Length));
+        using var pixels=GraphPixelAllocation.Enter();
+        var memory=Marshal.AllocHGlobal(length);
+        try
+        {
+            for(var y=0;y<height;y+=rowsPerBlock)
+            {
+                token.ThrowIfCancellationRequested();var rows=Math.Min(rowsPerBlock,height-y);var count=checked(width*rows);
+                rgba.CopyPixels(new System.Windows.Int32Rect(0,y,width,rows),rowBytes,stride,0);
+                var samples=MemoryMarshal.Cast<byte,ushort>(rowBytes.AsSpan(0,checked(count*8)));
+                var input=GraphPixelAllocation.Allocate(checked(count*3));
+                for(var p=0;p<count;p++)for(var c=0;c<3;c++)input[p*3+c]=samples[p*4+c]/65535f;
+                using var master=new HighBitDepthImageBuffer(width,rows,input,"16","sRGB");
+                using var processed=ColorStudioRenderPipeline.ApplyPointEffect(master,node,token);
+                var result=processed.Rgb32.Span;
+                for(var p=0;p<count;p++)for(var c=0;c<3;c++)
+                    samples[p*4+c]=(ushort)Math.Clamp(Math.Round(result[p*3+c]*65535),0,65535);
+                // Preserve the original 16-bit alpha samples exactly.
+                Marshal.Copy(rowBytes,0,IntPtr.Add(memory,checked(y*stride)),checked(rows*stride));
+            }
+            token.ThrowIfCancellationRequested();
+            var output=BitmapSource.Create(width,height,source.DpiX,source.DpiY,PixelFormats.Rgba64,null,memory,length,stride);
+            output.Freeze();return output;
+        }
+        finally { Marshal.FreeHGlobal(memory); }
     }
 
     private static BitmapSource RenderHighPrecision(BitmapSource source,ColorAdjustmentStack stack,ReferenceLook? reference,CancellationToken token)

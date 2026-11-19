@@ -1,0 +1,7 @@
+# 像素合同与政策适用
+
+改动类型：缓冲存储/生命周期适配，不新增或改写像素节点；现有BasicTone ProcessingVersion2的Core代码、ColorStudioToolProcessor、ColorStudioRenderPipeline和数学版本原字节保留。没有复制任何第三方实现或接入独立色彩研究线。
+
+输入是已经由既有WIC路径解释/方向归一的显示sRGB RGB48/RGBA64，范围仍为U16样本经原/65535f转换为既有float合同，非传感器RAW/scene-linear。输出仍RGBA64、原尺寸/DPI，原16位alpha不动、无新ICC或方向转换。完整导出继续由既有编码器执行。Gamma、白点、裁切与肩部公式不改，recipe不迁版本。
+
+开源先行POLICY已阅读。这里没有引入需另作两份外部算法比较的新数学实现；禁止把本轮当颜色校准或新算法批准。判据是旧适配器+旧Core的同输入逐位参考一致，任何差异都不准入。真实40MP与普通输出/重开仍须分层验证。所有原科学门禁保留。

@@ -1,0 +1,44 @@
+{
+  "rendererFile": "src/RAWSelectionAssistant/Services/ColorStudioBitmapRenderer.cs",
+  "rendererSha256": "e0a0219167364ca8371ce9653c06d3d330b2ebe7809a814a1b41cdbef4413ead",
+  "legacyHighPrecisionMethodUnchanged": true,
+  "legacyMethodSha256": "34bfc001aa2862894c512b62065901e5b0ec077a1abe8b3b3ae62807cb59f96a",
+  "unchangedCoreFiles": [
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+    "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs"
+  ],
+  "fixtureResults": [
+    {
+      "case": "small",
+      "peakPrivateBytes": 72687616,
+      "osPeakWorkingSetBytes": 101818368,
+      "exitCode": 0,
+      "sourceScope": "Diagnostic candidate; exact renderer file hash recorded in binding"
+    },
+    {
+      "case": "large",
+      "peakPrivateBytes": 438718464,
+      "osPeakWorkingSetBytes": 497598464,
+      "exitCode": 0,
+      "sourceScope": "Diagnostic candidate; exact renderer file hash recorded in binding"
+    },
+    {
+      "case": "authorized40mp",
+      "peakPrivateBytes": 910331904,
+      "osPeakWorkingSetBytes": 942813184,
+      "exitCode": 0,
+      "sourceScope": "Diagnostic candidate; exact renderer file hash recorded in binding"
+    }
+  ],
+  "affectedRegressionPassed": 34,
+  "failed": 0,
+  "normalWindowAfterFix": "NOT_RUN",
+  "noColorMathChange": true,
+  "newRawDecodes": 0,
+  "forcedGc": false,
+  "oldOrdinaryFailureSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "oldJpegFullMainlineSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "controlledResultsNotRelabeledAsNormal": true
+}
