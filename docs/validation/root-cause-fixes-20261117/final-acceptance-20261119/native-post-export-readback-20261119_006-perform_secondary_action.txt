@@ -1,0 +1,124 @@
+App=KitaoPhotoSelector (pid 25256)
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 1770, height: 1290}
+		1 文本 光 Frame: {x: 35, y: 28, width: 14, height: 19}
+		2 文本 光镜 Frame: {x: 75, y: 17, width: 147, height: 23}
+		3 文本 当前工作区 · 在线选片 Frame: {x: 75, y: 40, width: 147, height: 19}
+		4 菜单 ID: TopMenu Frame: {x: 237, y: 12, width: 688, height: 51}
+			5 菜单项 文件(F) Secondary Actions: Expand Frame: {x: 237, y: 12, width: 114, height: 49}
+				6 文本 文件(_F) Frame: {x: 264, y: 24, width: 59, height: 24}
+			7 菜单项 项目(P) Secondary Actions: Expand Frame: {x: 351, y: 12, width: 114, height: 49}
+				8 文本 项目(_P) Frame: {x: 378, y: 24, width: 59, height: 24}
+			9 菜单项 编辑(E) Secondary Actions: Expand Frame: {x: 465, y: 12, width: 114, height: 49}
+				10 文本 编辑(_E) Frame: {x: 492, y: 24, width: 59, height: 24}
+			11 菜单项 视图(V) Secondary Actions: Expand Frame: {x: 579, y: 12, width: 115, height: 49}
+				12 文本 视图(_V) Frame: {x: 606, y: 24, width: 60, height: 24}
+			13 菜单项 工具(T) Secondary Actions: Expand Frame: {x: 694, y: 12, width: 114, height: 49}
+				14 文本 工具(_T) Frame: {x: 721, y: 24, width: 59, height: 24}
+			15 菜单项 帮助(H) Secondary Actions: Expand Frame: {x: 808, y: 12, width: 117, height: 49}
+				16 文本 帮助(_H) Frame: {x: 835, y: 24, width: 62, height: 24}
+		17 按钮 最小化窗口 Secondary Actions: Invoke Frame: {x: 1581, y: 12, width: 63, height: 51}
+			18 文本 — Frame: {x: 1602, y: 24, width: 21, height: 27}
+		19 按钮 最大化或还原窗口 Secondary Actions: Invoke Frame: {x: 1644, y: 12, width: 63, height: 51}
+			20 文本 □ Frame: {x: 1669, y: 24, width: 13, height: 27}
+		21 按钮 关闭窗口 Secondary Actions: Invoke Frame: {x: 1707, y: 12, width: 63, height: 51}
+			22 文本 × Frame: {x: 1731, y: 24, width: 15, height: 27}
+		23 按钮  Secondary Actions: Invoke Frame: {x: 925, y: 0, width: 644, height: 76}
+		24 窗格 侧栏根区域 Frame: {x: 0, y: 88, width: 258, height: 1138}
+		25 窗格 ID: SidebarNavigationScroll Secondary Actions: Scroll Frame: {x: 0, y: 103, width: 258, height: 949}
+			26 文本 工作 Frame: {x: 24, y: 109, width: 234, height: 21}
+			27 按钮 工作台 Secondary Actions: Invoke Frame: {x: 9, y: 138, width: 240, height: 60}
+			28 按钮 素材库 Secondary Actions: Invoke Frame: {x: 9, y: 200, width: 240, height: 60}
+			29 按钮 归片工作区 Secondary Actions: Invoke Frame: {x: 9, y: 264, width: 240, height: 60}
+			30 按钮 工作日历 Secondary Actions: Invoke Frame: {x: 9, y: 326, width: 240, height: 60}
+			31 按钮 策划中心 Secondary Actions: Invoke Frame: {x: 9, y: 390, width: 240, height: 60}
+			32 按钮 联机拍摄 Secondary Actions: Invoke Frame: {x: 9, y: 452, width: 240, height: 60}
+			33 按钮 暗室 Secondary Actions: Invoke Frame: {x: 9, y: 516, width: 240, height: 60}
+			34 按钮 在线选片 Secondary Actions: Invoke Frame: {x: 9, y: 578, width: 240, height: 60}
+			35 按钮 摄影收支 Secondary Actions: Invoke Frame: {x: 9, y: 642, width: 240, height: 60}
+			36 按钮 项目历史 Secondary Actions: Invoke Frame: {x: 9, y: 704, width: 240, height: 60}
+			37 分隔符  Frame: {x: 9, y: 772, width: 240, height: 2}
+			38 文本 工具 Frame: {x: 24, y: 795, width: 234, height: 21}
+			39 按钮 工具箱 Secondary Actions: Invoke Frame: {x: 9, y: 823, width: 240, height: 60}
+			40 分隔符  Frame: {x: 9, y: 891, width: 240, height: 2}
+			41 文本 系统 Frame: {x: 24, y: 914, width: 234, height: 21}
+			42 按钮 授权与版本 Secondary Actions: Invoke Frame: {x: 9, y: 943, width: 240, height: 60}
+			43 按钮 设置 Secondary Actions: Invoke Frame: {x: 9, y: 1005, width: 240, height: 60}
+			44 按钮 帮助 Secondary Actions: Invoke Frame: {x: 9, y: 1069, width: 240, height: 60}
+		45 文本 免费版 Frame: {x: 26, y: 1077, width: 206, height: 37}
+		46 按钮 查看授权与版本 Secondary Actions: Invoke Frame: {x: 173, y: 1077, width: 59, height: 37}
+			47 文本 升级 Frame: {x: 183, y: 1082, width: 40, height: 27}
+		48 文本 授权与版本 Frame: {x: 26, y: 1119, width: 206, height: 21}
+		49 按钮 收起侧栏 Secondary Actions: Invoke Frame: {x: 9, y: 1164, width: 240, height: 60}
+		50 自定义 在线选片 Frame: {x: 258, y: 78, width: 1512, height: 1161}
+			51 文本 在线选片 Frame: {x: 294, y: 114, width: 960, height: 42}
+			52 文本 云服务未配置时，仅可本地选片。 Frame: {x: 300, y: 162, width: 948, height: 23}
+			53 文本 在线服务已配置 Frame: {x: 1308, y: 141, width: 126, height: 23}
+			54 按钮 创建选片项目 Secondary Actions: Invoke Frame: {x: 1458, y: 124, width: 166, height: 57}
+				55 文本 创建选片项目 Frame: {x: 1481, y: 139, width: 120, height: 27}
+			56 按钮 刷新在线选片项目 Secondary Actions: Invoke Frame: {x: 1636, y: 124, width: 86, height: 57}
+				57 文本 刷新 Frame: {x: 1659, y: 139, width: 40, height: 27}
+			58 文本 选片项目 Frame: {x: 318, y: 299, width: 402, height: 30}
+			59 编辑 搜索选片项目 Secondary Actions: SetValue, Scroll Frame: {x: 318, y: 347, width: 402, height: 57}
+			60 组合框 选片项目状态筛选 Secondary Actions: Expand Frame: {x: 318, y: 416, width: 402, height: 61}
+			61 列表视图  Secondary Actions: Scroll Frame: {x: 318, y: 489, width: 402, height: 654}
+				62 列表项 RAWSelectionAssistant.ViewModels.OnlineSelectionProjectListItemViewModel Secondary Actions: Select, ScrollIntoView Frame: {x: 312, y: 491, width: 413, height: 382}
+					63 按钮 最终433验收·同项目JPEG 20261117 Secondary Actions: Invoke Frame: {x: 326, y: 502, width: 385, height: 360}
+						64 文本 选片项目 Frame: {x: 486, y: 603, width: 66, height: 21}
+						65 图像  Frame: {x: 340, y: 516, width: 357, height: 238}
+						66 文本 最终433验收·同项目JPEG 20261117 Frame: {x: 340, y: 723, width: 357, height: 27}
+						67 文本 2 张照片 · 已选 2 张 Frame: {x: 340, y: 759, width: 357, height: 21}
+						68 文本 客户 Frame: {x: 346, y: 786, width: 345, height: 23}
+						69 文本 已完成 Frame: {x: 346, y: 821, width: 50, height: 21}
+						70 文本 ·  目标 2 张 Frame: {x: 396, y: 821, width: 83, height: 21}
+			71 文本 最终433验收·同项目JPEG 20261117 Frame: {x: 807, y: 284, width: 900, height: 30}
+			72 文本 已选 2/2 Frame: {x: 813, y: 320, width: 888, height: 23}
+			73 文本 本地代理 2 张 · 服务确认 2 张 Frame: {x: 807, y: 349, width: 900, height: 23}
+			74 文本 请选择项目开始本地选片工作流。 Frame: {x: 807, y: 372, width: 900, height: 23}
+			75 文本 服务器确认回执：v1 / r6 · 2026-11-18 05:52:18 +00:00 Frame: {x: 819, y: 407, width: 876, height: 27}
+			76 文本 已完成 Frame: {x: 1657, y: 354, width: 50, height: 21}
+			77 列表视图  Frame: {x: 807, y: 470, width: 900, height: 69}
+				78 数据项 OnlineSelectionTabItem { Value = Photos, Label = 照片 } Frame: {x: 807, y: 470, width: 147, height: 69}
+					79 按钮 照片 Secondary Actions: Invoke Frame: {x: 813, y: 476, width: 135, height: 57}
+						80 文本 照片 Frame: {x: 861, y: 491, width: 40, height: 27}
+				81 数据项 OnlineSelectionTabItem { Value = ClientSelection, Label = 客户选片 } Frame: {x: 954, y: 470, width: 147, height: 69}
+					82 按钮 客户选片 Secondary Actions: Invoke Frame: {x: 960, y: 476, width: 135, height: 57}
+						83 文本 客户选片 Frame: {x: 988, y: 491, width: 80, height: 27}
+				84 数据项 OnlineSelectionTabItem { Value = Settings, Label = 设置 } Frame: {x: 1101, y: 470, width: 147, height: 69}
+					85 按钮 设置 Secondary Actions: Invoke Frame: {x: 1107, y: 476, width: 135, height: 57}
+						86 文本 设置 Frame: {x: 1155, y: 491, width: 40, height: 27}
+				87 数据项 OnlineSelectionTabItem { Value = DeliveryResults, Label = 交付结果 } Frame: {x: 1248, y: 470, width: 147, height: 69}
+					88 按钮 交付结果 Secondary Actions: Invoke Frame: {x: 1254, y: 476, width: 135, height: 57}
+						89 文本 交付结果 Frame: {x: 1282, y: 491, width: 80, height: 27}
+			90 按钮 添加照片 Secondary Actions: Invoke Frame: {x: 876, y: 557, width: 126, height: 69}
+				91 文本 添加照片 Frame: {x: 899, y: 578, width: 80, height: 27}
+			92 按钮 发布项目 Secondary Actions: Invoke Frame: {x: 1014, y: 557, width: 126, height: 69}
+				93 文本 发布项目 Frame: {x: 1037, y: 578, width: 80, height: 27}
+			94 按钮 上传 / 重试代理 Secondary Actions: Invoke Frame: {x: 1158, y: 563, width: 187, height: 57}
+				95 文本 上传 / 重试代理 Frame: {x: 1181, y: 578, width: 141, height: 27}
+			96 按钮 复制选片链接 Secondary Actions: Invoke Frame: {x: 1357, y: 563, width: 166, height: 57}
+				97 文本 复制选片链接 Frame: {x: 1380, y: 578, width: 120, height: 27}
+			98 按钮 刷新客户结果 Secondary Actions: Invoke Frame: {x: 1535, y: 563, width: 166, height: 57}
+				99 文本 刷新客户结果 Frame: {x: 1558, y: 578, width: 120, height: 27}
+			100 按钮 撤销发布 Secondary Actions: Invoke Frame: {x: 882, y: 632, width: 126, height: 57}
+				101 文本 撤销发布 Frame: {x: 905, y: 647, width: 80, height: 27}
+			102 文本 交付结果 Frame: {x: 1209, y: 811, width: 96, height: 30}
+			103 文本 客户确认后可同步文件名、选择、收藏和备注；RAW 匹配只依赖稳定文件名或 ImageId。 Frame: {x: 945, y: 853, width: 624, height: 46}
+			104 按钮 同步归片工作区 Secondary Actions: Invoke Frame: {x: 1164, y: 911, width: 186, height: 57}
+				105 文本 同步归片工作区 Frame: {x: 1187, y: 926, width: 140, height: 27}
+			106 按钮 导出 TXT（准备中） Secondary Actions: Invoke Frame: {x: 1016, y: 980, width: 227, height: 57}
+				107 文本 导出 TXT（准备中） Frame: {x: 1039, y: 995, width: 181, height: 27}
+			108 按钮 导出 CSV（准备中） Secondary Actions: Invoke Frame: {x: 1255, y: 980, width: 231, height: 57}
+				109 文本 导出 CSV（准备中） Frame: {x: 1278, y: 995, width: 185, height: 27}
+		110 窗格 工作台根区域
+		111 文本  Frame: {x: 27, y: 1254, width: 1716, height: 23}
+		112 文本 
+		113 文本 ·  Frame: {x: 876, y: 1254, width: 9, height: 23}
+		114 文本 ·  Frame: {x: 897, y: 1254, width: 9, height: 23}
+		115 文本 
+		116 进度栏  Frame: {x: 27, y: 1286, width: 1716, height: 4}
+		117 自定义 拍摄提醒通知
+			118 窗格  Secondary Actions: Scroll
+				119 列表视图 
+
+The focused UI element is 按钮 交付结果.

@@ -1,0 +1,164 @@
+{
+  "atUtc": "2026-11-19T01:48:56.793475+00:00",
+  "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+  "status": "PASS_ORDINARY_FINAL_SOURCE_JPEG_MAINLINE",
+  "authority": "Actual final packaged EXE, native UIA controls and user standard pickers, actual Chrome customer page; no ViewModel/test injection",
+  "projectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+  "albumId": "42af2986-48c3-4b11-907e-532bb6acc6a6",
+  "projectCount": 1,
+  "sourceCount": 1,
+  "sourceRows": [
+    {
+      "Id": "737e1111-e551-4306-b87a-d36afeed45ae",
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs"
+    }
+  ],
+  "rawSourceGuidStable": false,
+  "rawSourceGuidBoundary": "Existing save repository regenerates child-rowGuid; only raw values recorded, not falsely marked stable",
+  "originalSourceDirectoryOnly": true,
+  "projects": [
+    {
+      "Id": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "Name": "最终433验收·同项目JPEG 20261117",
+      "ProjectType": "JpegAndRaw",
+      "SourceOnlineSelectionProjectId": "42af2986-48c3-4b11-907e-532bb6acc6a6"
+    }
+  ],
+  "selectionInputs": [
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0001.png"
+    },
+    {
+      "ProjectId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+      "OriginalInput": "COMPANY_0002.png"
+    }
+  ],
+  "lockedResult": {
+    "version": 1,
+    "revision": 6,
+    "selectedIds": [
+      "97ace726-d3f6-47ed-b413-48fea6debd93",
+      "aba3dcce-4a29-42a5-92cd-1311aa4d7029"
+    ],
+    "locked": true
+  },
+  "exported": [
+    {
+      "file": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\edited-delivery\\COMPANY_0001_仿色.jpg",
+      "bytes": 21149,
+      "sha256": "9e776bd4366c09c3da6c09ccd64dbbd60603a4c8a8fcffa8a2d8ed5454870075",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs\\COMPANY_0001.jpg",
+      "sourceHash": "fa88545e27278bb0ad432e1cf56dd5f8cc6e60c2faf469411972c7f21cd82e13",
+      "editVersionId": "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "exportId": "8f3ba7d5-0c82-4227-8e38-ce16087d293d",
+      "assetId": "97ace726-d3f6-47ed-b413-48fea6debd93",
+      "numericParameters": [],
+      "sidecarOutputHashVerified": true
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\edited-delivery\\COMPANY_0002_仿色.jpg",
+      "bytes": 18827,
+      "sha256": "f962e940fb0b8ebd0f720b0f48645504274ad5ae2e5a874237ba3ce386c48859",
+      "width": 1200,
+      "height": 800,
+      "bitsPerChannel": 8,
+      "iccBytes": 3144,
+      "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "source": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\source-jpegs\\COMPANY_0002.jpg",
+      "sourceHash": "7d1b6f89c2f6fd492680bf96d6f33cff155b1abb25ad2e1de6c9abcf87403e69",
+      "editVersionId": "6cfed453-2004-e59a-cf4d-26fb46ab3a69",
+      "exportId": "7ef6b02d-be08-46cb-9ed5-125ce76f1895",
+      "assetId": "aba3dcce-4a29-42a5-92cd-1311aa4d7029",
+      "numericParameters": [
+        {
+          "exposure": 0.5
+        }
+      ],
+      "sidecarOutputHashVerified": true
+    }
+  ],
+  "session": {
+    "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\output\\final433-jpeg.ptstudio.json",
+    "sha256": "4a290c0017b5cae24663c64bc3a999451af48eaaaa257299f81511ec51d24f73",
+    "workflowId": "08d18374-fb96-4efb-9451-cae9b8c48c40",
+    "activeVersionIds": [
+      "e5542c78-487e-8db8-52bc-8db7ceb02988",
+      "6cfed453-2004-e59a-cf4d-26fb46ab3a69"
+    ],
+    "exposure": 0.5
+  },
+  "normalSteps": [
+    "User source picker; normal scan2 JPEG0 RAW",
+    "Normal indexed editor, exposure+.5, save version and standard workfile save",
+    "Normal send to same workflow,2 preparedPNG/proxies",
+    "Normal upload2/2 andpublish",
+    "ActualChrome select1/select2/confirm v1r6",
+    "NormalPCrefresh validates andstores result",
+    "NormalSyncWorkflow/userarchivepicker returns to original project",
+    "Actual normal JPEG encode2 withCompleted sidecars",
+    "Normal Save workfile andClose",
+    "Independent normalEXE project/workfile resume with newPID",
+    "Locallocked-result UI readback without preceding refresh",
+    "Normaloriginal-source rescan2JPEG0RAW, match, project save"
+  ],
+  "exportProcess": {
+    "pid": 48348,
+    "exit": {
+      "pid": 48348,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 1253085,
+      "peakPrivateBytes50ms": 496508928,
+      "osPeakWorkingSetBytes": 456429568,
+      "lifetimeMs": 63428212.36850007,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    }
+  },
+  "independentReopen": {
+    "launch": {
+      "pid": 25256,
+      "createdFileTime": "134395252687311657",
+      "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-433a1d8e-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+      "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\acceptance-433a1d8e-20261117\\workflow-runtime",
+      "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
+      "mainDllSha256": "c387e55579f3cc581ea79c309ef46b7a99755646aff79a165d2d3f5ec4577b76",
+      "startedUtc": 1795051668.75272,
+      "newRawDecodesAuthorized": 0,
+      "guardBytes": 2147483648
+    },
+    "exposureAndSavedStateVisible": true,
+    "originalFilesAndOutputHashesRetained": true,
+    "lockedResultVisible": "native-post-export-readback-20261119/004-perform_secondary_action.txt",
+    "exit": {
+      "pid": 25256,
+      "exitCode": 0,
+      "stop": null,
+      "samples": 15812,
+      "peakPrivateBytes50ms": 473337856,
+      "osPeakWorkingSetBytes": 447918080,
+      "lifetimeMs": 802397.7570999414,
+      "scope": "Whole App lifetime including idle, dialogs and automation; excludes services/browser. Not operation latency.",
+      "newRawDecodesAuthorized": 0
+    }
+  },
+  "match": {
+    "complete": 0,
+    "partial": 2,
+    "conflict": 0,
+    "missing": 0,
+    "reason": "Existing categoryJpegAndRaw, noRAW input; both originalJPEGs found"
+  },
+  "normalSendBlankNameGate": "NOT_CONFIRMED_TOOL_INVOKE_UNRETURNED; artifacts unchanged, project name restored before final close",
+  "normalOtherB0B1Boundaries": "Controlled probes remain separate; actual cancel-close/repeat-close/two-final-root UI not claimed",
+  "newRawDecodes": 0,
+  "forcedGc": false,
+  "fullProductStatus": "PARTIAL_TIFF_AND_OTHER_NORMAL_BOUNDARIES_PHONE_PENDING"
+}

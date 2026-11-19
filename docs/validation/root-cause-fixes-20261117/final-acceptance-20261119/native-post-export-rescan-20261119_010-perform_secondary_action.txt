@@ -1,0 +1,223 @@
+App=KitaoPhotoSelector (pid 25256)
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Frame: {x: 0, y: 0, width: 1770, height: 1290}
+		1 文本 光 Frame: {x: 35, y: 28, width: 14, height: 19}
+		2 文本 光镜 Frame: {x: 75, y: 17, width: 162, height: 23}
+		3 文本 当前工作区 · 归片工作区 Frame: {x: 75, y: 40, width: 162, height: 19}
+		4 菜单 ID: TopMenu Frame: {x: 252, y: 12, width: 688, height: 51}
+			5 菜单项 文件(F) Secondary Actions: Expand Frame: {x: 252, y: 12, width: 114, height: 49}
+				6 文本 文件(_F) Frame: {x: 279, y: 24, width: 59, height: 24}
+			7 菜单项 项目(P) Secondary Actions: Expand Frame: {x: 366, y: 12, width: 114, height: 49}
+				8 文本 项目(_P) Frame: {x: 393, y: 24, width: 59, height: 24}
+			9 菜单项 编辑(E) Secondary Actions: Expand Frame: {x: 480, y: 12, width: 114, height: 49}
+				10 文本 编辑(_E) Frame: {x: 507, y: 24, width: 59, height: 24}
+			11 菜单项 视图(V) Secondary Actions: Expand Frame: {x: 594, y: 12, width: 115, height: 49}
+				12 文本 视图(_V) Frame: {x: 621, y: 24, width: 60, height: 24}
+			13 菜单项 工具(T) Secondary Actions: Expand Frame: {x: 709, y: 12, width: 114, height: 49}
+				14 文本 工具(_T) Frame: {x: 736, y: 24, width: 59, height: 24}
+			15 菜单项 帮助(H) Secondary Actions: Expand Frame: {x: 823, y: 12, width: 117, height: 49}
+				16 文本 帮助(_H) Frame: {x: 850, y: 24, width: 62, height: 24}
+		17 按钮 最小化窗口 Secondary Actions: Invoke Frame: {x: 1581, y: 12, width: 63, height: 51}
+			18 文本 — Frame: {x: 1602, y: 24, width: 21, height: 27}
+		19 按钮 最大化或还原窗口 Secondary Actions: Invoke Frame: {x: 1644, y: 12, width: 63, height: 51}
+			20 文本 □ Frame: {x: 1669, y: 24, width: 13, height: 27}
+		21 按钮 关闭窗口 Secondary Actions: Invoke Frame: {x: 1707, y: 12, width: 63, height: 51}
+			22 文本 × Frame: {x: 1731, y: 24, width: 15, height: 27}
+		23 按钮  Secondary Actions: Invoke Frame: {x: 940, y: 0, width: 629, height: 76}
+		24 窗格 侧栏根区域 Frame: {x: 0, y: 88, width: 258, height: 1138}
+		25 窗格 ID: SidebarNavigationScroll Secondary Actions: Scroll Frame: {x: 0, y: 103, width: 258, height: 949}
+			26 文本 工作 Frame: {x: 24, y: 109, width: 234, height: 21}
+			27 按钮 工作台 Secondary Actions: Invoke Frame: {x: 9, y: 138, width: 240, height: 60}
+			28 按钮 素材库 Secondary Actions: Invoke Frame: {x: 9, y: 200, width: 240, height: 60}
+			29 按钮 归片工作区 Secondary Actions: Invoke Frame: {x: 9, y: 264, width: 240, height: 60}
+			30 按钮 工作日历 Secondary Actions: Invoke Frame: {x: 9, y: 326, width: 240, height: 60}
+			31 按钮 策划中心 Secondary Actions: Invoke Frame: {x: 9, y: 390, width: 240, height: 60}
+			32 按钮 联机拍摄 Secondary Actions: Invoke Frame: {x: 9, y: 452, width: 240, height: 60}
+			33 按钮 暗室 Secondary Actions: Invoke Frame: {x: 9, y: 516, width: 240, height: 60}
+			34 按钮 在线选片 Secondary Actions: Invoke Frame: {x: 9, y: 578, width: 240, height: 60}
+			35 按钮 摄影收支 Secondary Actions: Invoke Frame: {x: 9, y: 642, width: 240, height: 60}
+			36 按钮 项目历史 Secondary Actions: Invoke Frame: {x: 9, y: 704, width: 240, height: 60}
+			37 分隔符  Frame: {x: 9, y: 772, width: 240, height: 2}
+			38 文本 工具 Frame: {x: 24, y: 795, width: 234, height: 21}
+			39 按钮 工具箱 Secondary Actions: Invoke Frame: {x: 9, y: 823, width: 240, height: 60}
+			40 分隔符  Frame: {x: 9, y: 891, width: 240, height: 2}
+			41 文本 系统 Frame: {x: 24, y: 914, width: 234, height: 21}
+			42 按钮 授权与版本 Secondary Actions: Invoke Frame: {x: 9, y: 943, width: 240, height: 60}
+			43 按钮 设置 Secondary Actions: Invoke Frame: {x: 9, y: 1005, width: 240, height: 60}
+			44 按钮 帮助 Secondary Actions: Invoke Frame: {x: 9, y: 1069, width: 240, height: 60}
+		45 文本 免费版 Frame: {x: 26, y: 1077, width: 206, height: 37}
+		46 按钮 查看授权与版本 Secondary Actions: Invoke Frame: {x: 173, y: 1077, width: 59, height: 37}
+			47 文本 升级 Frame: {x: 183, y: 1082, width: 40, height: 27}
+		48 文本 授权与版本 Frame: {x: 26, y: 1119, width: 206, height: 21}
+		49 按钮 收起侧栏 Secondary Actions: Invoke Frame: {x: 9, y: 1164, width: 240, height: 60}
+		50 窗格  Secondary Actions: Scroll Frame: {x: 258, y: 78, width: 1512, height: 1161}
+			51 文本 归片 Frame: {x: -273, y: 99, width: 2270, height: 31}
+			52 按钮 1  来源与索引 Secondary Actions: Invoke Frame: {x: 2042, y: 99, width: 158, height: 49}
+				53 文本 1  来源与索引 Frame: {x: 2059, y: 110, width: 124, height: 27}
+			54 按钮 2  导入选片 Secondary Actions: Invoke Frame: {x: 2209, y: 99, width: 138, height: 49}
+				55 文本 2  导入选片 Frame: {x: 2226, y: 110, width: 104, height: 27}
+			56 按钮 3  匹配检查 Secondary Actions: Invoke Frame: {x: 2356, y: 99, width: 138, height: 49}
+				57 文本 3  匹配检查 Frame: {x: 2373, y: 110, width: 104, height: 27}
+			58 按钮 4  输出交付 Secondary Actions: Invoke Frame: {x: 2503, y: 99, width: 138, height: 49}
+				59 文本 4  输出交付 Frame: {x: 2520, y: 110, width: 104, height: 27}
+			60 窗格  Secondary Actions: Scroll Frame: {x: -288, y: 202, width: 510, height: 1004}
+				61 文本 核对冲突与未找到项 Frame: {x: -261, y: 229, width: 456, height: 30}
+			62 文本 选片记录 Frame: {x: 258, y: 214, width: 434, height: 21}
+			63 文本 2 Frame: {x: 258, y: 235, width: 434, height: 46}
+			64 文本 目标文件 Frame: {x: 740, y: 214, width: 434, height: 21}
+			65 文本 4 Frame: {x: 740, y: 235, width: 434, height: 46}
+			66 文本 JPG / RAW Frame: {x: 1222, y: 214, width: 434, height: 21}
+			67 文本 2 / 0 Frame: {x: 1222, y: 235, width: 434, height: 46}
+			68 文本 冲突 / 未找到 Frame: {x: 1704, y: 214, width: 434, height: 21}
+			69 文本 0 / 0 Frame: {x: 1704, y: 235, width: 434, height: 46}
+			70 文本 已复制 Frame: {x: 2186, y: 214, width: 446, height: 21}
+			71 文本 0 Frame: {x: 2186, y: 235, width: 446, height: 46}
+			72 按钮 开始匹配 Secondary Actions: Invoke Frame: {x: 255, y: 320, width: 119, height: 57}
+				73 文本 开始匹配 Frame: {x: 275, y: 335, width: 80, height: 27}
+			74 按钮 保存项目 Secondary Actions: Invoke Frame: {x: 386, y: 320, width: 123, height: 57}
+				75 文本 保存项目 Frame: {x: 408, y: 335, width: 80, height: 27}
+			76 按钮 取消当前任务 Secondary Actions: Invoke Frame: {x: 521, y: 320, width: 166, height: 57}
+				77 文本 取消当前任务 Frame: {x: 544, y: 335, width: 120, height: 27}
+			78 按钮 清空任务 Secondary Actions: Invoke Frame: {x: 699, y: 320, width: 126, height: 57}
+				79 文本 清空任务 Frame: {x: 722, y: 335, width: 80, height: 27}
+			80 编辑 ID: SearchBox Secondary Actions: SetValue, Scroll Frame: {x: 240, y: 404, width: 390, height: 57}
+			81 复选框 只看冲突与待处理 Secondary Actions: Toggle Frame: {x: 648, y: 404, width: 197, height: 57}
+				82 文本 只看冲突与待处理 Frame: {x: 686, y: 419, width: 160, height: 27}
+			83 文本 Alt+Enter 查看明细 Frame: {x: 2504, y: 422, width: 146, height: 21}
+			84 数据网格 ID: ResultsGrid Secondary Actions: Scroll Frame: {x: 240, y: 473, width: 2410, height: 625}
+				85 标头 ID: PART_ColumnHeadersPresenter Frame: {x: 240, y: 473, width: 2410, height: 63}
+					86 标头项 选 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 240, y: 473, width: 63, height: 63}
+						87 文本 选 Frame: {x: 255, y: 490, width: 20, height: 27}
+						88 缩略 ID: PART_RightHeaderGripper Frame: {x: 291, y: 473, width: 12, height: 63}
+					89 标头项 客户原始输入 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 303, y: 473, width: 218, height: 63}
+						90 文本 客户原始输入 Frame: {x: 318, y: 490, width: 120, height: 27}
+						91 缩略 ID: PART_LeftHeaderGripper Frame: {x: 303, y: 473, width: 12, height: 63}
+						92 缩略 ID: PART_RightHeaderGripper Frame: {x: 509, y: 473, width: 12, height: 63}
+					93 标头项 总体状态 Secondary Actions: ScrollIntoView Frame: {x: 520, y: 473, width: 158, height: 63}
+						94 文本 总体状态 Frame: {x: 535, y: 490, width: 80, height: 27}
+						95 缩略 ID: PART_LeftHeaderGripper Frame: {x: 520, y: 473, width: 12, height: 63}
+						96 缩略 ID: PART_RightHeaderGripper Frame: {x: 666, y: 473, width: 12, height: 63}
+					97 标头项 处理 Secondary Actions: ScrollIntoView Frame: {x: 678, y: 473, width: 144, height: 63}
+						98 文本 处理 Frame: {x: 693, y: 490, width: 40, height: 27}
+						99 缩略 ID: PART_LeftHeaderGripper Frame: {x: 678, y: 473, width: 12, height: 63}
+						100 缩略 ID: PART_RightHeaderGripper Frame: {x: 810, y: 473, width: 12, height: 63}
+					101 标头项 标准化名称 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 822, y: 473, width: 188, height: 63}
+						102 文本 标准化名称 Frame: {x: 837, y: 490, width: 100, height: 27}
+						103 缩略 ID: PART_LeftHeaderGripper Frame: {x: 822, y: 473, width: 12, height: 63}
+						104 缩略 ID: PART_RightHeaderGripper Frame: {x: 998, y: 473, width: 12, height: 63}
+					105 标头项 数字编号 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1010, y: 473, width: 123, height: 63}
+						106 文本 数字编号 Frame: {x: 1025, y: 490, width: 80, height: 27}
+						107 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1010, y: 473, width: 12, height: 63}
+						108 缩略 ID: PART_RightHeaderGripper Frame: {x: 1121, y: 473, width: 12, height: 63}
+					109 标头项 JPG 状态 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1132, y: 473, width: 147, height: 63}
+						110 文本 JPG 状态 Frame: {x: 1147, y: 490, width: 83, height: 27}
+						111 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1132, y: 473, width: 12, height: 63}
+						112 缩略 ID: PART_RightHeaderGripper Frame: {x: 1267, y: 473, width: 12, height: 63}
+					113 标头项 JPG 文件名 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1280, y: 473, width: 232, height: 63}
+						114 文本 JPG 文件名 Frame: {x: 1295, y: 490, width: 103, height: 27}
+						115 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1280, y: 473, width: 12, height: 63}
+						116 缩略 ID: PART_RightHeaderGripper Frame: {x: 1500, y: 473, width: 12, height: 63}
+					117 标头项 RAW 状态 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1512, y: 473, width: 147, height: 63}
+						118 文本 RAW 状态 Frame: {x: 1527, y: 490, width: 96, height: 27}
+						119 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1512, y: 473, width: 12, height: 63}
+						120 缩略 ID: PART_RightHeaderGripper Frame: {x: 1647, y: 473, width: 12, height: 63}
+					121 标头项 RAW 文件名 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1659, y: 473, width: 232, height: 63}
+						122 文本 RAW 文件名 Frame: {x: 1674, y: 490, width: 116, height: 27}
+						123 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1659, y: 473, width: 12, height: 63}
+						124 缩略 ID: PART_RightHeaderGripper Frame: {x: 1879, y: 473, width: 12, height: 63}
+					125 标头项 其他格式 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 1892, y: 473, width: 123, height: 63}
+						126 文本 其他格式 Frame: {x: 1907, y: 490, width: 80, height: 27}
+						127 缩略 ID: PART_LeftHeaderGripper Frame: {x: 1892, y: 473, width: 12, height: 63}
+						128 缩略 ID: PART_RightHeaderGripper Frame: {x: 2003, y: 473, width: 12, height: 63}
+					129 标头项 匹配文件数 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 2014, y: 473, width: 138, height: 63}
+						130 文本 匹配文件数 Frame: {x: 2029, y: 490, width: 100, height: 27}
+						131 缩略 ID: PART_LeftHeaderGripper Frame: {x: 2014, y: 473, width: 12, height: 63}
+						132 缩略 ID: PART_RightHeaderGripper Frame: {x: 2140, y: 473, width: 12, height: 63}
+					133 标头项 冲突数 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 2152, y: 473, width: 108, height: 63}
+						134 文本 冲突数 Frame: {x: 2167, y: 490, width: 60, height: 27}
+						135 缩略 ID: PART_LeftHeaderGripper Frame: {x: 2152, y: 473, width: 12, height: 63}
+						136 缩略 ID: PART_RightHeaderGripper Frame: {x: 2248, y: 473, width: 12, height: 63}
+					137 标头项 备注 Secondary Actions: Invoke, ScrollIntoView Frame: {x: 2260, y: 473, width: 390, height: 63}
+						138 文本 备注 Frame: {x: 2275, y: 490, width: 40, height: 27}
+						139 缩略 ID: PART_LeftHeaderGripper Frame: {x: 2260, y: 473, width: 12, height: 63}
+						140 缩略 ID: PART_RightHeaderGripper Frame: {x: 2638, y: 473, width: 12, height: 63}
+				141 数据项 RAWSelectionAssistant.Core.Models.MediaSelectionItem Secondary Actions: Invoke, Select, ScrollIntoView Frame: {x: 240, y: 536, width: 2410, height: 63}
+					142 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0 Value: True Secondary Actions: Invoke, SetValue, ScrollIntoView Frame: {x: 240, y: 536, width: 63, height: 63}
+						143 复选框  Secondary Actions: Toggle Frame: {x: 254, y: 556, width: 36, height: 22}
+					144 数据网格单元 COMPANY_0001.png Secondary Actions: SetValue, ScrollIntoView Frame: {x: 303, y: 536, width: 218, height: 63}
+						145 文本 COMPANY_0001.png Frame: {x: 320, y: 556, width: 185, height: 23}
+					146 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 520, y: 536, width: 158, height: 63}
+						147 文本 部分匹配 Frame: {x: 534, y: 554, width: 131, height: 27}
+					148 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 678, y: 536, width: 144, height: 63}
+						149 按钮 查看匹配明细 Secondary Actions: Invoke Frame: {x: 692, y: 546, width: 117, height: 42}
+							150 文本 查看明细 Frame: {x: 710, y: 553, width: 80, height: 27}
+					151 数据网格单元 COMPANY_0001 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 822, y: 536, width: 188, height: 63}
+						152 文本 COMPANY_0001 Frame: {x: 839, y: 556, width: 155, height: 23}
+					153 数据网格单元 1 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1010, y: 536, width: 123, height: 63}
+						154 文本 1 Frame: {x: 1027, y: 556, width: 90, height: 23}
+					155 数据网格单元 已找到来源 JPG Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1132, y: 536, width: 147, height: 63}
+						156 文本 已找到来源 JPG Frame: {x: 1149, y: 556, width: 127, height: 23}
+					157 数据网格单元 COMPANY_0001.jpg Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1280, y: 536, width: 232, height: 63}
+						158 文本 COMPANY_0001.jpg Frame: {x: 1297, y: 556, width: 199, height: 23}
+					159 数据网格单元 未找到 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1512, y: 536, width: 147, height: 63}
+						160 文本 未找到 Frame: {x: 1529, y: 556, width: 114, height: 23}
+					161 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1659, y: 536, width: 232, height: 63}
+						162 文本  Frame: {x: 1676, y: 556, width: 199, height: 23}
+					163 数据网格单元 0 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1892, y: 536, width: 123, height: 63}
+						164 文本 0 Frame: {x: 1909, y: 556, width: 90, height: 23}
+					165 数据网格单元 1 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2014, y: 536, width: 138, height: 63}
+						166 文本 1 Frame: {x: 2031, y: 556, width: 105, height: 23}
+					167 数据网格单元 0 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2152, y: 536, width: 108, height: 63}
+						168 文本 0 Frame: {x: 2169, y: 556, width: 75, height: 23}
+					169 数据网格单元 RAW 未找到 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2260, y: 536, width: 390, height: 63}
+						170 文本 RAW 未找到 Frame: {x: 2277, y: 556, width: 357, height: 23}
+				171 数据项 RAWSelectionAssistant.Core.Models.MediaSelectionItem Secondary Actions: Invoke, Select, ScrollIntoView Frame: {x: 240, y: 599, width: 2410, height: 63}
+					172 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 0 Value: True Secondary Actions: Invoke, SetValue, ScrollIntoView Frame: {x: 240, y: 599, width: 63, height: 63}
+						173 复选框  Secondary Actions: Toggle Frame: {x: 254, y: 619, width: 36, height: 22}
+					174 数据网格单元 COMPANY_0002.png Secondary Actions: SetValue, ScrollIntoView Frame: {x: 303, y: 599, width: 218, height: 63}
+						175 文本 COMPANY_0002.png Frame: {x: 320, y: 619, width: 185, height: 23}
+					176 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 2 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 520, y: 599, width: 158, height: 63}
+						177 文本 部分匹配 Frame: {x: 534, y: 617, width: 131, height: 27}
+					178 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 3 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 678, y: 599, width: 144, height: 63}
+						179 按钮 查看匹配明细 Secondary Actions: Invoke Frame: {x: 692, y: 609, width: 117, height: 42}
+							180 文本 查看明细 Frame: {x: 710, y: 616, width: 80, height: 27}
+					181 数据网格单元 COMPANY_0002 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 822, y: 599, width: 188, height: 63}
+						182 文本 COMPANY_0002 Frame: {x: 839, y: 619, width: 155, height: 23}
+					183 数据网格单元 2 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1010, y: 599, width: 123, height: 63}
+						184 文本 2 Frame: {x: 1027, y: 619, width: 90, height: 23}
+					185 数据网格单元 已找到来源 JPG Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1132, y: 599, width: 147, height: 63}
+						186 文本 已找到来源 JPG Frame: {x: 1149, y: 619, width: 127, height: 23}
+					187 数据网格单元 COMPANY_0002.jpg Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1280, y: 599, width: 232, height: 63}
+						188 文本 COMPANY_0002.jpg Frame: {x: 1297, y: 619, width: 199, height: 23}
+					189 数据网格单元 未找到 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1512, y: 599, width: 147, height: 63}
+						190 文本 未找到 Frame: {x: 1529, y: 619, width: 114, height: 23}
+					191 数据网格单元 项: RAWSelectionAssistant.Core.Models.MediaSelectionItem，列显示索引: 9 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1659, y: 599, width: 232, height: 63}
+						192 文本  Frame: {x: 1676, y: 619, width: 199, height: 23}
+					193 数据网格单元 0 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 1892, y: 599, width: 123, height: 63}
+						194 文本 0 Frame: {x: 1909, y: 619, width: 90, height: 23}
+					195 数据网格单元 1 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2014, y: 599, width: 138, height: 63}
+						196 文本 1 Frame: {x: 2031, y: 619, width: 105, height: 23}
+					197 数据网格单元 0 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2152, y: 599, width: 108, height: 63}
+						198 文本 0 Frame: {x: 2169, y: 619, width: 75, height: 23}
+					199 数据网格单元 RAW 未找到 Secondary Actions: SetValue, ScrollIntoView Frame: {x: 2260, y: 599, width: 390, height: 63}
+						200 文本 RAW 未找到 Frame: {x: 2277, y: 619, width: 357, height: 23}
+			201 文本 所选记录快速摘要 Frame: {x: 258, y: 1128, width: 2211, height: 27}
+			202 文本 输入：COMPANY_0001.png  ·  JPG：已找到来源 JPG  ·  RAW：未找到  ·  备注：RAW 未找到 Frame: {x: 258, y: 1161, width: 2211, height: 27}
+			203 按钮 查看完整明细 Secondary Actions: Invoke Frame: {x: 2469, y: 1128, width: 163, height: 60}
+				204 文本 查看完整明细 Frame: {x: 2491, y: 1145, width: 120, height: 27}
+			205 滚动条 ID: PART_HorizontalScrollBar Frame: {x: 258, y: 1227, width: 1512, height: 12}
+				206 按钮 ID: PageLeft Secondary Actions: Invoke Frame: {x: 258, y: 1230, width: 288, height: 6}
+				207 缩略 
+				208 按钮 ID: PageRight Secondary Actions: Invoke Frame: {x: 1313, y: 1230, width: 457, height: 6}
+		209 窗格 工作台根区域
+		210 文本 匹配完成：完整 0，部分 2，冲突 0，未找到 0 Frame: {x: 27, y: 1254, width: 1716, height: 23}
+		211 文本 已索引 2 个照片文件 Frame: {x: 786, y: 1254, width: 156, height: 23}
+		212 文本 ·  Frame: {x: 954, y: 1254, width: 9, height: 23}
+		213 文本 ·  Frame: {x: 975, y: 1254, width: 9, height: 23}
+		214 文本 已处理 2 Frame: {x: 1677, y: 1254, width: 66, height: 23}
+		215 进度栏  Frame: {x: 27, y: 1286, width: 1716, height: 4}
+		216 自定义 拍摄提醒通知
+			217 窗格  Secondary Actions: Scroll
+				218 列表视图 
+
+The focused UI element is 窗格.

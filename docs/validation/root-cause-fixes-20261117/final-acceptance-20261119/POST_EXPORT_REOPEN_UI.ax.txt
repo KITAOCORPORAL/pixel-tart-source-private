@@ -1,0 +1,385 @@
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.exe.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Secondary Actions: Raise
+		1 文本 光
+		2 文本 光镜
+		3 文本 已保存
+		4 按钮 最小化窗口
+			5 文本 —
+		6 按钮 最大化或还原窗口
+			7 文本 □
+		8 按钮 关闭窗口
+			9 文本 ×
+		10 按钮
+		11 窗格 侧栏根区域 ID: SidebarRoot
+		12 窗格 ID: SidebarNavigationScroll
+			13 按钮 工作台 Description: 工作台 ID: PrimaryNavigationWorkbench
+			14 按钮 素材库 Description: 素材库 ID: AssetLibraryNavigationButton
+			15 按钮 归片工作区 Description: 归片工作区 ID: PrimaryNavigationWorkflow
+			16 按钮 工作日历 Description: 工作日历 ID: PrimaryNavigationWorkCalendar
+			17 按钮 策划中心 Description: 策划中心 ID: PrimaryNavigationPlanning
+			18 按钮 联机拍摄 Description: 联机拍摄 ID: PrimaryNavigationTether
+			19 按钮 暗室 Description: 暗室 ID: PrimaryNavigationReferenceColor
+			20 按钮 在线选片 Description: 在线选片 ID: PrimaryNavigationOnlineSelection
+			21 按钮 摄影收支 Description: 摄影收支 ID: PrimaryNavigationFinance
+			22 按钮 项目历史 Description: 项目历史 ID: PrimaryNavigationHistory
+			23 分隔符 (disabled)
+			24 按钮 工具箱 Description: 打开完整工具集合。 ID: PrimaryNavigationToolbox
+			25 分隔符 (disabled)
+			26 按钮 授权与版本 Description: 授权与版本
+			27 按钮 设置 Description: 设置 ID: SidebarSettingsButton
+			28 按钮 帮助 Description: 帮助
+		29 文本 免费版
+		30 按钮 查看授权与版本 Description: 查看授权与版本
+			31 文本 升级
+		32 文本 授权与版本
+		33 按钮 收起侧栏 Description: 收起侧栏 ID: SidebarCollapseButton
+		34 窗格 工作台根区域 ID: WorkbenchRoot
+		35 自定义 参考仿色工作区
+			36 文本 参考仿色 · 色彩工作室
+			37 按钮 新照片调色页 V1
+				38 文本 新照片调色页 V1
+			39 按钮 即时胶片 · 创作 ID: InstantFilmToggle
+				40 文本 即时胶片 · 创作
+			41 按钮 新 RAW 处理版本
+				42 文本 新 RAW 处理版本
+			43 按钮 打开批次
+				44 文本 打开批次
+			45 按钮 重新定位当前素材
+				46 文本 重新定位
+			47 组合框
+			48 按钮 选择版本
+				49 文本 选择版本
+			50 编辑 (settable, string) Description: 版本名称
+			51 按钮 重命名
+				52 文本 重命名
+			53 按钮 归档
+				54 文本 归档
+			55 按钮 跨库复制版本
+				56 文本 跨库复制版本
+			57 按钮 保存版本
+				58 文本 保存版本
+			59 按钮 创建独立编辑版本
+				60 文本 新建版本
+			61 按钮 切换当前照片编辑版本
+				62 文本 切换版本
+			63 按钮 撤销标注
+				64 文本 撤销标注
+			65 按钮 重做标注
+				66 文本 重做标注
+			67 按钮 保存批次
+				68 文本 保存批次
+			69 按钮 专注看图
+				70 文本 专注看图
+			71 按钮 调整面板 ID: EditRailButton
+				72 文本 调整面板
+			73 按钮 辅助栏 ID: ContextRailButton
+				74 文本 辅助栏
+			75 按钮 导出 Description: 沿用源格式（JPEG / PNG / TIFF）；RAW 渲染为 TIFF16，不能保存为原 RAW
+				76 文本 导出
+			77 按钮 发送所选编辑结果到客户选片
+				78 文本 发送所选编辑结果到客户选片
+			79 按钮 导出客户所选照片
+				80 文本 导出客户所选照片
+			81 按钮 导入
+				82 文本 导入
+			83 组 当前预览分析 ID: CentralAnalysis
+				84 按钮 ID: HeaderSite
+					85 文本 当前预览分析
+				86 窗格 ID: AnalysisScroll
+					87 文本 当前调整后预览 · sRGB · 768×512 代理；透明像素不计 Description: 当前调整后预览 · sRGB · 768×512 代理；透明像素不计
+					88 组合框 RGB直方图通道
+					89 文本 RGB 直方图
+					90 文本 sRGB 编码值 0 ───── 128 ───── 255
+					91 文本 明度直方图
+					92 文本 线性亮度 Y 0 ───── 0.5 ───── 1
+					93 滚动条 (settable, float) Value: 0 ID: PART_VerticalScrollBar
+						94 按钮 ID: PageUp
+						95 缩略
+						96 按钮 ID: PageDown
+			97 组 线性亮度分区 ID: ToneZonesExpander
+				98 按钮 ID: HeaderSite
+					99 文本 线性亮度分区
+			100 列表视图 工具页 ID: ToolModes
+				101 列表项 (selectable) 基础
+					102 文本 基础
+				103 列表项 (selectable) 色彩
+					104 文本 色彩
+				105 列表项 (selectable) 影调
+					106 文本 影调
+				107 列表项 (selectable) 细节
+					108 文本 细节
+				109 列表项 (selectable) 风格化
+					110 文本 风格化
+			111 窗格
+				112 组
+					113 按钮
+					114 按钮 复位本组 Description: 复位本组
+					115 复选框 白平衡
+						116 文本 白平衡
+					117 编辑 (settable, string) 冷暖偏移 Description: Enter 保存，Esc 取消 Value: 0
+					118 文本 冷暖偏移
+					119 滑块 (settable, float) 冷暖偏移 Value: 0
+						120 按钮 ID: DecreaseLarge
+						121 缩略
+						122 按钮 ID: IncreaseLarge
+					123 编辑 (settable, string) 绿－洋红 Description: Enter 保存，Esc 取消 Value: 0
+					124 文本 绿－洋红
+					125 滑块 (settable, float) 绿－洋红 Value: 0
+						126 按钮 ID: DecreaseLarge
+						127 缩略
+						128 按钮 ID: IncreaseLarge
+				129 组
+					130 按钮
+					131 复选框 基础与 HDR 影调
+						132 文本 基础与 HDR 影调
+					133 组
+						134 按钮
+						135 按钮 复位本组 Description: 复位本组
+						136 文本 基础曝光
+						137 编辑 (settable, string) 曝光 Description: Enter 保存，Esc 取消 Value: 0.5
+						138 文本 曝光 · EV
+						139 滑块 (settable, float) 曝光 Value: 0.5
+							140 按钮 ID: DecreaseLarge
+							141 缩略 ID: Thumb
+							142 按钮 ID: IncreaseLarge
+						143 编辑 (settable, string) 亮度 Description: Enter 保存，Esc 取消 Value: 0
+						144 文本 亮度
+						145 滑块 (settable, float) 亮度 Value: 0
+							146 按钮 ID: DecreaseLarge
+							147 缩略 ID: Thumb
+							148 按钮 ID: IncreaseLarge
+						149 编辑 (settable, string) 对比度 Description: Enter 保存，Esc 取消 Value: 0
+						150 文本 对比度
+						151 滑块 (settable, float) 对比度 Value: 0
+							152 按钮 ID: DecreaseLarge
+							153 缩略 ID: Thumb
+							154 按钮 ID: IncreaseLarge
+					155 组
+						156 按钮
+						157 按钮 复位本组 Description: 复位本组
+						158 文本 HDR 影调
+						159 编辑 (settable, string) 高光 Description: Enter 保存，Esc 取消 Value: 0
+						160 文本 高光
+						161 滑块 (settable, float) 高光 Value: 0
+							162 按钮 ID: DecreaseLarge
+							163 缩略 ID: Thumb
+							164 按钮 ID: IncreaseLarge
+						165 编辑 (settable, string) 阴影 Description: Enter 保存，Esc 取消 Value: 0
+						166 文本 阴影
+						167 滑块 (settable, float) 阴影 Value: 0
+							168 按钮 ID: DecreaseLarge
+							169 缩略 ID: Thumb
+							170 按钮 ID: IncreaseLarge
+						171 编辑 (settable, string) 白场 Description: Enter 保存，Esc 取消 Value: 0
+						172 文本 白场
+						173 滑块 (settable, float) 白场 Value: 0
+							174 按钮 ID: DecreaseLarge
+							175 缩略 ID: Thumb
+							176 按钮 ID: IncreaseLarge
+						177 编辑 (settable, string) 黑场 Description: Enter 保存，Esc 取消 Value: 0
+						178 文本 黑场
+						179 滑块 (settable, float) 黑场 Value: 0
+							180 按钮 ID: DecreaseLarge
+							181 缩略 ID: Thumb
+							182 按钮 ID: IncreaseLarge
+					183 组
+						184 按钮
+						185 按钮 复位本组 Description: 复位本组
+						186 文本 全局颜色
+						187 编辑 (settable, string) 饱和度 Description: Enter 保存，Esc 取消 Value: 0
+						188 文本 饱和度
+						189 滑块 (settable, float) 饱和度 Value: 0
+							190 按钮 ID: DecreaseLarge
+							191 缩略 ID: Thumb
+							192 按钮 ID: IncreaseLarge
+						193 编辑 (settable, string) 自然饱和度 Description: Enter 保存，Esc 取消 Value: 0
+						194 文本 自然饱和度
+						195 滑块 (settable, float) 自然饱和度 Value: 0
+							196 按钮 ID: DecreaseLarge
+							197 缩略 ID: Thumb
+							198 按钮 ID: IncreaseLarge
+				199 滚动条 (settable, float) Value: 0 ID: PART_VerticalScrollBar
+					200 按钮 ID: PageUp
+					201 缩略
+					202 按钮 ID: PageDown
+			203 窗格 ID: PhotoToolsBand
+				204 按钮 选择 Description: 选择 (V) · 拖动左右对比分界线 ID: CanvasSelectButton
+					205 文本 选择
+				206 按钮 抓手 Description: 抓手 (H) · 拖动平移；Space 或中键临时平移 ID: CanvasHandButton
+					207 文本 抓手
+				208 按钮 缩放 Description: 缩放 (Z) · 点击放大，Alt 点击缩小；双击适合 ID: CanvasZoomButton
+					209 文本 缩放
+				210 按钮 (disabled) 取样 Description: 颜色取样 · 仅调整栈支持；请加载照片并选中颜色范围节点。独立 RAW / 光片版本不支持颜色范围编辑 ID: CanvasSampleButton
+					211 文本 (disabled) 取样
+				212 按钮 原图 Description: 点击锁定原图 / 恢复；按住 B 临时比较，松开恢复 ID: CanvasCompareButton
+					213 文本 原图
+				214 按钮 适合 Description: 适合
+				215 按钮 100% Description: 100%
+					216 文本 100%
+				217 按钮 缩小 Description: 缩小
+				218 文本 90% ID: ZoomLabel
+				219 按钮 放大 Description: 放大
+				220 组合框 预览模式
+				221 按钮 (disabled) 撤销调整 Description: 撤销调整 (Ctrl+Z) · 仅专业调整栈；独立 RAW / 光片使用版本恢复 ID: CanvasUndoButton
+				222 按钮 (disabled) 重做调整 Description: 重做调整 (Ctrl+Y) · 仅专业调整栈；独立 RAW / 光片使用版本恢复 ID: CanvasRedoButton
+			223 文本 请选择待调色照片。 Description: 请选择待调色照片。
+			224 缩略 ID: RightResize
+			225 组 照片 ID: FilmstripExpander
+				226 按钮 展开或收起胶片栏 Description: 展开或收起胶片栏
+				227 窗格
+					228 按钮 照片布局
+						229 文本 照片布局
+					230 组合框 照片范围
+					231 文本 2 / 2 张 · 已选 2 · 隐藏已选 0（不参与） Description: 2 / 2 张 · 已选 2 · 隐藏已选 0（不参与）
+					232 文本 至少
+					233 滑块 (settable, float) 评分筛选 Value: 0
+					234 按钮 所有色标 Description: 所有色标
+						235 文本 ∀
+					236 按钮 无色标 Description: 无色标
+					237 按钮 红色标 Description: 红色标
+					238 按钮 橙色标 Description: 橙色标
+					239 按钮 黄色标 Description: 黄色标
+					240 按钮 绿色标 Description: 绿色标
+					241 按钮 蓝色标 Description: 蓝色标
+					242 按钮 紫色标 Description: 紫色标
+					243 按钮 清除筛选
+						244 文本 清除筛选
+					245 按钮 同步到所选 Description: 源：COMPANY_0002.jpg → 1 张可见所选照片 ID: AdjustmentCopyAnchor
+						246 文本 同步到所选
+					247 按钮 节点同步… ID: NodeSyncAnchor
+						248 文本 节点同步…
+					249 按钮 更多
+						250 文本 更多
+				251 列表视图 ID: Filmstrip
+					252 列表项 (selectable) RAWSelectionAssistant.ViewModels.ReferenceTargetItem
+						253 图像
+						254 文本 ★ 0
+					255 列表项 (selectable) RAWSelectionAssistant.ViewModels.ReferenceTargetItem
+						256 图像
+						257 文本 ★ 0
+		258 自定义 Description: 资源已收起：点击工具栏资源打开；参数可从右侧图标恢复
+			259 文本 已保存
+			260 文本 光镜
+			261 按钮 文件
+				262 文本 文件
+			263 按钮 编辑
+				264 文本 编辑
+			265 按钮 调整
+				266 文本 调整
+			267 按钮 视图
+				268 文本 视图
+			269 按钮 帮助
+				270 文本 帮助
+			271 按钮 Description: 选择 V
+			272 按钮 Description: 抓手 H
+			273 按钮 Description: 缩放 Z
+			274 按钮 裁剪工具 Description: 裁切 C
+				275 文本 裁切
+			276 按钮 画笔 Description: 局部蒙版画笔 B
+				277 文本 画笔
+			278 按钮 资源 Description: 资源抽屉
+				279 文本 资源
+			280 按钮 简易 Description: 简易 Ctrl+1 ID: R53SimpleMode
+				281 文本 简易
+			282 按钮 专业 Description: 专业 Ctrl+2 ID: R53ProMode
+				283 文本 专业
+			284 按钮 Description: 撤销 ID: PhotoUndo
+			285 按钮 Description: 重做 ID: PhotoRedo
+			286 按钮 文件与编辑操作 Description: 文件与编辑操作
+			287 按钮 发送所选编辑结果到客户选片 ID: PhotoSendOnlineSelection
+				288 文本 发送客户选片
+			289 按钮 导入 / 导出 Description: 导入照片、打开和保存项目、导出 ID: PhotoExport
+				290 文本 导入 / 导出
+			291 按钮 Description: 参数面板
+			292 按钮 比较变体 Description: 变体比较
+				293 文本 比较
+			294 按钮 比较菜单 Description: 比较与灯箱 Ctrl+L ID: ComparisonMenuButton
+				295 文本 ▾
+			296 按钮 适合
+				297 文本 适合
+			298 文本 变体 2/2 · 默认版本 · 主变体 默认版本
+			299 按钮 100%
+				300 文本 100%
+			301 按钮 缩小 Description: 缩小
+			302 按钮 放大 Description: 放大
+			303 文本 精细
+			304 文本 选择 ID: ToolLabel
+			305 按钮 展开或折叠示波器
+				306 文本 示波器
+			307 文本 参考线
+			308 组合框 ID: GuideChoice
+			309 按钮 适应
+				310 文本 适应
+			311 按钮 100%
+				312 文本 100%
+			313 按钮 前后对比 Description: 按住看调整前；反斜杠切换 ID: R53HoldCompare
+				314 文本 前后对比
+			315 按钮 胶片条 Description: 展开或折叠胶片条
+				316 文本 胶片条
+			317 文本 2
+			318 按钮 展开/收起变体
+				319 文本 展开/收起变体
+			320 按钮 ＋ F2
+				321 文本 ＋ F2
+			322 按钮 复制 F3
+				323 文本 复制 F3
+			324 组合框
+			325 组合框
+			326 按钮 清除筛选
+				327 文本 清除筛选
+			328 列表视图 ID: PhotoStrip
+				329 列表项 (selectable) RAWSelectionAssistant.ViewModels.ReferenceTargetItem
+					330 按钮
+						331 图像
+					332 文本 ▱ 2
+					333 文本
+					334 复选框
+					335 按钮 ★
+						336 文本 ★
+					337 按钮 ★
+						338 文本 ★
+					339 按钮 ★
+						340 文本 ★
+					341 按钮 ★
+						342 文本 ★
+					343 按钮 ★
+						344 文本 ★
+					345 文本 0
+					346 文本 COMPANY_0001.jpg
+				347 列表项 (selectable) RAWSelectionAssistant.ViewModels.ReferenceTargetItem
+					348 按钮
+						349 图像
+					350 文本 ▱ 2
+					351 文本
+					352 复选框
+					353 按钮 ★
+						354 文本 ★
+					355 按钮 ★
+						356 文本 ★
+					357 按钮 ★
+						358 文本 ★
+					359 按钮 ★
+						360 文本 ★
+					361 按钮 ★
+						362 文本 ★
+					363 文本 0
+					364 文本 COMPANY_0002.jpg
+			365 按钮 打开参数面板 Description: 打开参数
+			366 按钮 Description: 即时胶片参数
+			367 按钮 Description: 图层
+			368 按钮 已保存 Description: 保存项目；失败后重试
+				369 文本 已保存
+			370 文本 变体 2/2 · 默认版本 · 主变体 默认版本
+		371 文本 准备就绪
+		372 文本
+		373 文本 ·
+		374 文本 ·
+		375 文本
+		376 进度栏 Value: 0
+		377 自定义 拍摄提醒通知
+			378 窗格
+				379 列表视图
+
+Document text: ```
+0
+```

@@ -1,6 +1,6 @@
 {
   "productSource": "433a1d8e88d839839e4f21341e3e2776696d33a5",
-  "scope": "Repair evidence and normal final433 independent reopen after user close; actual JPEG export pending",
+  "scope": "Ordinary final433 JPEG mainline nowPASS; productPARTIAL, independent TIFF Open Workfile pending",
   "entries": [
     {
       "file": ".gitattributes",
@@ -373,12 +373,82 @@
       "sha256": "e8b9e58d58d8012a4368b3c96a31466faae8af7622d3ab7bf49ca86b49399e04"
     },
     {
+      "file": "final-acceptance-20261119/JPEG_EXPORT_FILE_CONTRACT.json",
+      "bytes": 2315,
+      "sha256": "5db32b5e73b870466cdd161686cbda5555c01d55d41f948541c344cd05c4e870"
+    },
+    {
+      "file": "final-acceptance-20261119/JPEG_MAINLINE_PASS.json",
+      "bytes": 6873,
+      "sha256": "3ab8b41947a0f326a8b306e2338f428ce0e1915aae1f8b6aa880cdc9afacae42"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-close-20261119_002-perform_secondary_action.txt",
+      "bytes": 33983,
+      "sha256": "f671d82b7d6ddc41af72150115215698f4be3470521da283ec6f9253697d20b5"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-close-20261119_004-perform_secondary_action.txt",
+      "bytes": 34036,
+      "sha256": "8d079cee57b14287dcbca855e4ddde470939b1744b660f948ff633fb6b936a00"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-readback-20261119_004-perform_secondary_action.txt",
+      "bytes": 11869,
+      "sha256": "6a2ac2ce518685ef10458213f9ab6db75c44c853d9033db2d224da23ba281c16"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-readback-20261119_006-perform_secondary_action.txt",
+      "bytes": 10699,
+      "sha256": "00eeb0c5bc168625c87f756660c1e5347ed7c42fd864191ccaeddc8bf06037c3"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-rescan-20261119_006-perform_secondary_action.txt",
+      "bytes": 21776,
+      "sha256": "5995e1535ef8c3b18a9ae87a6b372e4d60d6a6661cc9c4ed58bc90663a3ec524"
+    },
+    {
+      "file": "final-acceptance-20261119/native-post-export-rescan-20261119_010-perform_secondary_action.txt",
+      "bytes": 21124,
+      "sha256": "1d83ad0fab88cea5a9cd36499bcac8f9684d2402e41e0998a49f81292f241fb0"
+    },
+    {
+      "file": "final-acceptance-20261119/native-restore-name-20261119_008-perform_secondary_action.txt",
+      "bytes": 23466,
+      "sha256": "8e21474777b8aadbd643ea6bb0f5a36f81e39510a9d897a47b800308315acc33"
+    },
+    {
+      "file": "final-acceptance-20261119/PHONE_CURRENT.json",
+      "bytes": 418,
+      "sha256": "d0b7fd87746959918f867835a112b83e2dd51f3c363c7f9e13e2576a2dcb0e0d"
+    },
+    {
+      "file": "final-acceptance-20261119/POST_EXPORT_REOPEN_UI.ax.txt",
+      "bytes": 15272,
+      "sha256": "b6d79e76e21e8d9a93a4b2671290ebfffbd570bd9de501bfd4c80229219195e8"
+    },
+    {
+      "file": "final-acceptance-20261119/RESULTS.md",
+      "bytes": 3487,
+      "sha256": "f382a13cc5ceceaf1f570c3fbc312ff7188bd369bf2d03f70ab1c956b1df687b"
+    },
+    {
+      "file": "final-acceptance-20261119/TIFF_NATIVE_PREPARATION.json",
+      "bytes": 1368,
+      "sha256": "6174858209debda823eb9d9d7b595df161310d2b6107951e016b44b2bf1f453e"
+    },
+    {
       "file": "FINAL_REGRESSION.json",
       "bytes": 1588,
       "sha256": "ddc7ab9d6e14ca182babd7f363830e7e96e7c254f2126df7734448ff3b5cf9ce"
     },
     {
       "file": "HANDOFF.md",
+      "bytes": 2229,
+      "sha256": "cfbe4eaf727bbe6a400a330cfd61e2aedb85d5acdb8b644bb6944f6265bc9561"
+    },
+    {
+      "file": "history/HANDOFF_before_jpeg_mainline_pass_20261119.md",
       "bytes": 6003,
       "sha256": "40ac10291496afd28f8675f9c7e4e6cecb20ddc909fca976a2ac6729067c2aaf"
     },
@@ -399,8 +469,8 @@
     },
     {
       "file": "ORDINARY_EXE_STATUS.json",
-      "bytes": 3465,
-      "sha256": "2abfb6c0e2c64ecde9ff6bc5ee675c32df755c92040f07812023bc6229444268"
+      "bytes": 4211,
+      "sha256": "70b6a833dfd534eff4248e72b1efc0d0ff8a1b23c8d19ac1a470463384c2819c"
     },
     {
       "file": "PHONE_STATUS.json",
@@ -419,8 +489,8 @@
     },
     {
       "file": "REPORT.md",
-      "bytes": 13085,
-      "sha256": "986d336da6085b40b7eb5c9392a4c98aa42dbba85e997bafce8705333227c576"
+      "bytes": 13576,
+      "sha256": "0bf8cda53c249fa04cc73a5edf1f13b904ad6e30e6639cf64dc53d3a830e2b66"
     },
     {
       "file": "resume-20261118/CONTROL_STATE.json",
