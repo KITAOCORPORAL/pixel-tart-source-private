@@ -1,17 +1,23 @@
-# 当前人工断点
+# 当前人工断点：先完成真实 Chrome 客户确认
 
-不自动打开网页或桌面。凭据仅在本机 artifacts/home-resume-final-20261122/phone-private 中，不能复制进 Git 或交付 ZIP。
+普通 App 已经打开本轮独立副本项目，发布两张素材，保存正常退出并独立重开。系统 Chrome 的客户操作仍未执行。请不要重新发布、撤销或用 HTTP 代客户确认。
 
-## 第一步：真实 iPhone
+## 用户当前这一步
 
-在同一 Tailscale 私网中的 iPhone Safari，手动打开 PHONE_URL_PRIVATE.txt 内的完整链接。此链接带授权和预约 ID，直接进入家中 2026-11-15 的原合成预约，当前 revision 2。请先核对显示同一记录与 v2，再将开始/结束一起顺延15分钟并保存，返回实际提示与新版本。若无法读取或版本不同，保留页面，不重复保存。
+从包外 artifacts/home-native-final-20261122/CUSTOMER_URL_PRIVATE.txt 复制完整地址到系统默认 Chrome；只勾选 HOME_0003.png，点击“确认选择并锁定”。页面规则允许0至2张，此测试选1张用于核对收回后仅导出客户所选。回传页面确认回执的版本/状态即可。完整受保护 URL 与 token 不进入 Git、产品包或公开回复。
 
-新设备授权到 2026-11-24 05:45 UTC（柏林时间 06:45）。只读预检已完成，没有代替用户进行以上写入。原家中 PHONE_HANDOFF_ACTIVE 及公司 revision4 历史均保留。
+## 用户确认后，代理负责
 
-## 手机保存之后
+先只读核对同相册锁定快照，再普通 App 刷新收回、同步回同一归片项目，核对来源路径/数量与选中照片，导出所选 JPEG，保存正常关闭、独立进程重开验证结果和编辑状态。最后撤销测试链接并检查不可读。当前尚未做这些确认后的步骤。
 
-由接续者先通过只读 HTTP/SQLite 核对原预约的版本与字段，再让用户运行包外 Start-PhoneDesktop.cmd；该入口使用最终包和同一家庭 calendar 数据根，不是默认隔离根。手动在 PC 对同一预约作一次约定修改后，手机刷新核对新版本，完成双向回执。当前没有启动该桌面，也未执行预约更改。
+当前仍运行的普通 App 和服务见包外 CURRENT_HANDOFF.json；所有 PID/窗口下轮均要重查。若窗口已关闭，使用本轮包外 Resume-Jpeg-Guarded.cmd，它复用本轮项目副本、服务与2GiB/50ms守卫。旧 Start-JpegContinuation 指向上一轮原根，不能拿来替代本轮已发布相册。
 
-## 普通 JPEG 主线
+## 手机：排在 Chrome 闭环之后
 
-运行包外 Start-JpegContinuation.cmd：它使用最终包、原 d07 jpeg-runtime 及新建隔离服务根，旧服务/相册数据保留。选择原归片项目 HOME-D07-JPEG-20261122（ID 3b3a32ee-24d1-4181-9f29-07b80996aa6f），必要时手动打开原 JPEG-same-project.ptstudio.json。沿同一项目验证：名称为空/纯空白时发送提示可见且零新增；补名成功；同项目编辑→相册发布→系统 Chrome 选择确认→PC收回→导出→保存退出→独立进程重开。最终源码普通全流程尚未执行，不能引用 d07/433 的通过冒充。
+家庭手机链接仍在 artifacts/home-resume-final-20261122/phone-private/PHONE_URL_PRIVATE.txt，直达2026-11-15家中原合成预约 revision2；公司历史 revision4 未在家庭找到。新授权到2026-11-24 05:45 UTC（柏林06:45）。只读HTTPS200，未改预约；原PHONE_HANDOFF_ACTIVE与原授权保留。不运行seed/roundtrip/pc-adjust。
+
+iPhone加入同一私网后，需要用户在Safari真实修改并保存，代理核对服务/PC，再PC修改、手机刷新。当前未执行。不要混用公司revision4和家庭revision2。
+
+## 材料
+
+公司Fuji渲染TIFF、公司恢复文件的准确E盘历史路径当前不存在，见 native-final/MATERIAL_CHECK.json。家庭合成40MP普通验收已在d07完成并保留source标签；不能把它改称公司原图或f84普通TIFF通过。

@@ -1,9 +1,11 @@
-# 当前接续：家庭验收 2026-11-22
+# 当前断点：最终源码原生前半程通过，等系统 Chrome 客户确认
 
-最终产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭分支 `home/d07-ordinary-acceptance-20261122`。当前完整事实见 [家庭报告](../home-acceptance-20261122/REPORT.md)、[剩余断点](../home-acceptance-20261122/REMAINING_BLOCKERS.json) 与本目录 DELIVERY.json。
+产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭分支 `home/d07-ordinary-acceptance-20261122`。完整包未修改，DELIVERY.json 仍绑定原 ZIP 字节；新增普通实测见 [本轮原生报告](../home-acceptance-20261122/native-final/REPORT.md)。
 
-d07 家庭合成 40MP 普通 EXE 全循环已通过，仍绑定 d07；原生关闭/双根证据已补齐。后继源码修复空名拒绝可见反馈、历史预约受保护链接；真实包 HTTP25 和无浏览器脚本6通过。最终源码普通 EXE JPEG 主线与 iPhone 双向修改仍待人工操作。
+最终源码普通 EXE 已通过：空名/纯空白可见拒绝与零副作用、补名发送成功、两个 DataRoot 共存/同根次进程退出0、重复关闭单保存窗口/取消保留两图/保存退出0。原 JPEG 项目扫描2JPG/0RAW、曝光0.5、实际上传发布两图，保存退出0后独立进程重开同相册/曝光均保留。公司73988e4f远端无后续；不重复应用已包含的家中/内存补丁。
 
-公司 PID/E盘/旧授权均为历史。家中 Tailscale 当前在线，原家中预约为 revision 2、日期 11 月 15 日，公司 revision 4 未在家庭找到。新手机链接和授权仅在包外，27 张业务表摘要未变；不运行 seed/roundtrip 覆盖。禁止自动浏览器与 Computer Use 的当前规则继续生效。
+当前下一步只需用户在系统Chrome打开包外 CUSTOMER_URL_PRIVATE.txt 内完整链接，选 HOME_0003.png，点击“确认选择并锁定”。用户规则要求网页手动操作，不能用HTTP选择/确认代替。待用户回报后代理只读核对回执，再继续普通PC收回/同项目同步/客户所选JPEG导出/保存退出独立重开/撤销。当前App PID31276、窗口w-530224、root为 artifacts/home-native-final-20261122/jpeg-runtime；下轮必须按路径/创建时间重验，守卫仍运行。详细私有接续文件 artifacts/home-native-final-20261122/CURRENT_HANDOFF.json。
 
-原交接和失败保持在 history/；所有旧树、运行根和包保留。不可把 d07 的普通 TIFF 或旧433普通 JPEG 通过重新标给最终源码。
+d07家庭合成40MP普通全循环已完成，继续绑定d07；433JPEG也保留原source。公司原TIFF/恢复文件不在准确历史路径。手机HTTPS只读200，家中原预约仍v2，公司历史v4未找到；原预约与PHONE_HANDOFF_ACTIVE均保留，绝不seed/roundtrip覆盖。iPhone双向修改留在Chrome主线之后。
+
+原家中JPEG DB/工作文件原字节保持；所有旧树/包/运行根和原未提交的4个HomeD07Acceptance脚本保留。UI未重做。

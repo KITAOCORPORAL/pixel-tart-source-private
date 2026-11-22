@@ -1,0 +1,68 @@
+{
+  "status": "PASS_ORDINARY_SAVE_NORMAL_EXIT_INDEPENDENT_REOPEN_BEFORE_CUSTOMER_CONFIRM",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "firstProcess": {
+    "pid": 22872,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\App\\KitaoPhotoSelector.exe",
+    "exeSha256": "8ce4a1b9222c739fd4f1c9b9f604173229817f10c6c56e8015fae68fe4a420bb",
+    "productAssemblySha256": "9d6b59b44f05c906d2e5a5aa044fab6eff2bc7509593ceeea13f6f858036b51a",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\jpeg-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795346430.0558863,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "firstExit": {
+    "pid": 22872,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 814698496,
+    "osPeakWorkingSetBytes": 699162624,
+    "samples": 35929,
+    "phases": {
+      "startup": {
+        "samples": 35929,
+        "peakPrivateBytes": 814698496,
+        "peakWorkingSetBytes": 697581568
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "reopenProcess": {
+    "pid": 31276,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\App\\KitaoPhotoSelector.exe",
+    "exeSha256": "8ce4a1b9222c739fd4f1c9b9f604173229817f10c6c56e8015fae68fe4a420bb",
+    "productAssemblySha256": "9d6b59b44f05c906d2e5a5aa044fab6eff2bc7509593ceeea13f6f858036b51a",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\jpeg-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795348610.906219,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "workflowProjectId": "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+  "savedRecoverySha256": "9b8ad00ab13b1b73d4cd5d3dc6251de7ce357b7517434aabb8145a4b83a94d3b",
+  "targetDefinitions": [
+    {
+      "fileName": "HOME_0001.jpg",
+      "id": "3c4d0e86-a139-460f-baed-b4376d4e769b",
+      "exposureValues": []
+    },
+    {
+      "fileName": "HOME_0003.jpg",
+      "id": "3b0f3dd8-a498-49fa-939d-faf6ab1318f8",
+      "exposureValues": [
+        0.5
+      ]
+    }
+  ],
+  "uiExposureReadback": 0.5,
+  "firstAndReopenPidsDiffer": true,
+  "samePublishedAlbumAfterReopen": true,
+  "originalProjectDbUnchanged": true,
+  "originalWorkfileUnchanged": true,
+  "finalCustomerResultPersistedAfterReopen": "NOT_RUN_CUSTOMER_HAS_NOT_CONFIRMED"
+}

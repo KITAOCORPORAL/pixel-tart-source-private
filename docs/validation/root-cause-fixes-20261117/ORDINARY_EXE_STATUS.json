@@ -1,7 +1,7 @@
 {
-  "atUtc": "2026-11-22T05:50:47.063401+00:00",
+  "atUtc": "2026-11-22T12:08:36.002332+00:00",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
-  "overall": "PARTIAL_ORDINARY_FINAL_JPEG_AND_IPHONE_PENDING",
+  "overall": "PARTIAL_NATIVE_BOUNDARIES_PASS_BROWSER_RESULT_FLOW_AND_IPHONE_PENDING",
   "ordinaryHomeSynthetic40Mp": {
     "source": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
     "status": "PASS",
@@ -11,7 +11,7 @@
     "evidence": "../home-acceptance-20261122/ORDINARY_40MP_COMPLETE.json"
   },
   "ordinaryD07CloseAndRootBoundaries": "PASS_RECOVERED_ORIGINAL_EVIDENCE",
-  "ordinaryFinalJpeg": "NOT_RUN",
+  "ordinaryFinalJpeg": "PUBLISH_NORMAL_EXIT_AND_INDEPENDENT_REOPEN_PASS_WAIT_REAL_BROWSER_CONFIRMATION",
   "priorOrdinary433Jpeg": "PASS_ORIGINAL_SOURCE_ONLY",
   "finalHttpProtocol": "PASS_25_CHECKS",
   "finalNamedRenderHandoff": "PASS_CONTROLLED_HOST_ONLY",
@@ -19,5 +19,12 @@
   "homeBookingRevision": 2,
   "companyRevision4": "NOT_PRESENT_IN_HOME",
   "noNewRaw": true,
-  "forcedGc": false
+  "forcedGc": false,
+  "ordinaryFinalBlankAndNamedSend": "PASS",
+  "ordinaryFinalCloseCancelSave": "PASS",
+  "ordinaryFinalRootOwnership": "PASS_OWNER_AND_ACKNOWLEDGED_SECONDARY",
+  "firstFinalJpegExitCode": 0,
+  "activeFinalJpegReopenPid": 31276,
+  "activePidMustBeRevalidated": true,
+  "currentReport": "../home-acceptance-20261122/native-final/REPORT.md"
 }

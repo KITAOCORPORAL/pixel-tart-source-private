@@ -28,8 +28,8 @@
     },
     {
       "path": "DELIVERY.json",
-      "bytes": 1327,
-      "sha256": "673a6fbd87f95f40627c003702f47eb1115aa9cdea4578214535b75d8c8074af"
+      "bytes": 1693,
+      "sha256": "743b779dc31d73b218d8b1a530b01ae5081766cb09c91fe16e8d6d22d231be02"
     },
     {
       "path": "final-selection-core.trx",
@@ -53,8 +53,8 @@
     },
     {
       "path": "MANUAL_STEPS.md",
-      "bytes": 1828,
-      "sha256": "546451a870c4f79f5704febeb066546f8e01ef01da754e2f49a4b6b9dd143199"
+      "bytes": 2247,
+      "sha256": "4d2f50d81bc769fc6d7133fffdae338fcd8b5c5dd929b6298b2a5aba5c18a3b7"
     },
     {
       "path": "ORDINARY_40MP_COMPLETE.json",
@@ -83,20 +83,26 @@
     },
     {
       "path": "REMAINING_BLOCKERS.json",
-      "bytes": 481,
-      "sha256": "63f7d7af751b29aa62d741a27ced5082daa3155784807f0dacc02089980fd909"
+      "bytes": 762,
+      "sha256": "23d7c39d6fcc710404bf2259f2c4643e50d211301eea80b038d4ce4c349296e7"
     },
     {
       "path": "REPORT.md",
-      "bytes": 4909,
-      "sha256": "f08903150f74bbf372b9d44f17301ae43e2ed3c25b5cf21a5da8669431145c0a"
+      "bytes": 5164,
+      "sha256": "aa6fd72b38849d7f1a67eaad399f26a724116019b29aa9d571926ef3a1c3f427"
     },
     {
       "path": "ROOT_COEXISTENCE.json",
       "bytes": 2396,
       "sha256": "746e07ee4f762451af0689e06512b6a7351ae3a3c7b9dbf171c8af32927c46cc"
+    },
+    {
+      "path": "native-final/EVIDENCE_INDEX.json",
+      "bytes": 1720,
+      "sha256": "c6a52e664111c910ac0b9388616e8fb37ce90739d02b76e8c814b5d8144d71e3"
     }
   ],
   "archiveBinding": "DELIVERY.json.archiveSha256; package member bytes are independently bound by PACKAGE_FILES.json",
-  "embeddedReportSnapshot": "pre-seal; later manual steps and post-seal receipts remain external"
+  "embeddedReportSnapshot": "pre-seal; later manual steps and post-seal receipts remain external",
+  "postSealNativeEvidence": "native-final/EVIDENCE_INDEX.json"
 }

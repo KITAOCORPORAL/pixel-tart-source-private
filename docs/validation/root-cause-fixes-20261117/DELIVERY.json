@@ -1,7 +1,7 @@
 {
   "atUtc": "2026-11-22T05:54:09.924543+00:00",
   "clientTimeZone": "Europe/Berlin",
-  "status": "SEALED_FULL_DIAGNOSTIC_MANUAL_ACCEPTANCE_PENDING",
+  "status": "SEALED_FULL_DIAGNOSTIC_NATIVE_PREFIX_PASS_BROWSER_AND_PHONE_PENDING",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "branch": "home/d07-ordinary-acceptance-20261122",
   "package": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122",
@@ -16,7 +16,7 @@
   "actualHttpChecksPassed": 25,
   "ordinaryHomeSynthetic40MpSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "ordinaryHomeSynthetic40Mp": "PASS_ORIGINAL_SOURCE",
-  "ordinaryFinalJpegWorkflow": "NOT_RUN",
+  "ordinaryFinalJpegWorkflow": "PARTIAL_NATIVE_PUBLISH_AND_REOPEN_PASS_BROWSER_CONFIRM_SYNC_EXPORT_PENDING",
   "actualIPhone": "NOT_RUN",
   "phoneHttpsAndDevice": "READY",
   "credentialsAndRuntimeExcluded": true,
@@ -24,5 +24,9 @@
   "releaseReady": false,
   "newRawDecodes": 0,
   "forcedGc": false,
-  "embeddedReportIsPreSealSnapshot": true
+  "embeddedReportIsPreSealSnapshot": true,
+  "nativeBoundarySource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "nativeBoundaryResult": "PASS_EMPTY_WHITESPACE_NAMED_SEND_CLOSE_CANCEL_SAVE_ROOTS",
+  "currentNativeReport": "../home-acceptance-20261122/native-final/REPORT.md",
+  "postSealNativeEvidenceAtUtc": "2026-11-22T12:08:36.002332+00:00"
 }

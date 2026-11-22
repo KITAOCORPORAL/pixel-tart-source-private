@@ -1,0 +1,62 @@
+{
+  "status": "PASS_ORDINARY_FINAL_CLOSE_CANCEL_SAVE",
+  "actualSavedPath": "N:\\pixart\\guangjing-product-functional-home-20261115\\artifacts\\home-20261115\\customer-output\\integrated-repeat\\ColorStudio.ptstudio.json",
+  "evidenceCopy": "guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\close-preserved.ptstudio.json",
+  "sha256": "8ac5d03bbbf0010c7da2f4d7d9a99eff454144360dfe53559adfa85a6c7b73a4",
+  "targetCount": 2,
+  "workflowProjectId": "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+  "actualDefaultPathUsedAfterFieldSelectionRejected": true,
+  "requestedPathWasNotClaimedAsActual": true,
+  "sourceFileKept": true,
+  "normalExit": {
+    "pid": 40804,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 442036224,
+    "osPeakWorkingSetBytes": 448811008,
+    "samples": 16912,
+    "phases": {
+      "startup": {
+        "samples": 16912,
+        "peakPrivateBytes": 442036224,
+        "peakWorkingSetBytes": 448806912
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "cancelKeepsBothPhotos": true,
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "repeatedCloseRequest": {
+    "pid": 40804,
+    "createdFileTime": "134398212252073151",
+    "firstNormalClosePosted": true,
+    "secondNormalClosePosted": true,
+    "authority": "Two queued normal native WM_CLOSE requests to verified ordinary EXE; dialog and exit readback required"
+  },
+  "dialogCountFromObservedSnapshot": 1,
+  "evidence": [
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\duplicate-close-dialog.json",
+      "sha256": "bbd741ba134ce9f17bf2d54168596a58a02702704745e70df1f478adda7bcc0a"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\actual-cancel-confirmation.json",
+      "sha256": "4c16968e0c3b02b7f1c6311c0126fe29519e1e22e2d75182ac441d65d65100f8"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\cancel-retains-material.json",
+      "sha256": "4fcafb43a994c900059d5bc457e641feaca5ad2e516dd410c0c8cf10ca6186b7"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\close-save-path-before.json",
+      "sha256": "58e54578ec0775a65d84bd971c79c582ddde24cbdd8db91965c654c8c7b2ffb3"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\close-save-accept.json",
+      "sha256": "c2aa45d36f89dd0afc504ca89dfe6b4ff4db20941d168b70ce68ba6b7f974e03"
+    }
+  ],
+  "toolLimitation": "The filename set was rejected because a toolbar and text field shared automation id 1001. The following save used the dialog default directory. The actual file was validated, retained, and copied to the test evidence root; the helper now disambiguates by role."
+}

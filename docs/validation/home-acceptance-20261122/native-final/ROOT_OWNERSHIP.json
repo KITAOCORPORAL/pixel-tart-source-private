@@ -1,0 +1,156 @@
+{
+  "status": "PASS_ORDINARY_FINAL_ROOT_OWNERSHIP_AND_SAME_ROOT_REQUEST",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "rootA": {
+    "pid": 44792,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\App\\KitaoPhotoSelector.exe",
+    "exeSha256": "8ce4a1b9222c739fd4f1c9b9f604173229817f10c6c56e8015fae68fe4a420bb",
+    "productAssemblySha256": "9d6b59b44f05c906d2e5a5aa044fab6eff2bc7509593ceeea13f6f858036b51a",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\root-a-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795346382.9531748,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "rootB": {
+    "pid": 22872,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\App\\KitaoPhotoSelector.exe",
+    "exeSha256": "8ce4a1b9222c739fd4f1c9b9f604173229817f10c6c56e8015fae68fe4a420bb",
+    "productAssemblySha256": "9d6b59b44f05c906d2e5a5aa044fab6eff2bc7509593ceeea13f6f858036b51a",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\jpeg-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795346430.0558863,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "rootAExit": {
+    "pid": 44792,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 261812224,
+    "osPeakWorkingSetBytes": 292794368,
+    "samples": 2799,
+    "phases": {
+      "startup": {
+        "samples": 2799,
+        "peakPrivateBytes": 261812224,
+        "peakWorkingSetBytes": 292716544
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "rootBExit": {
+    "pid": 22872,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 814698496,
+    "osPeakWorkingSetBytes": 699162624,
+    "samples": 35929,
+    "phases": {
+      "startup": {
+        "samples": 35929,
+        "peakPrivateBytes": 814698496,
+        "peakWorkingSetBytes": 697581568
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "sameRootSecondExit": {
+    "pid": 3540,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 16068608,
+    "osPeakWorkingSetBytes": 60198912,
+    "samples": 5,
+    "phases": {
+      "startup": {
+        "samples": 5,
+        "peakPrivateBytes": 16068608,
+        "peakWorkingSetBytes": 60198912
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "bothObservedAtOnce": [
+    {
+      "accessible": true,
+      "app_name": "KitaoPhotoSelector.exe",
+      "bounds": {
+        "height": 1380.0,
+        "width": 2400.0,
+        "x": 720.0,
+        "y": 354.0
+      },
+      "id": "w-4525410",
+      "is_focused": false,
+      "minimized": false,
+      "pid": 22872,
+      "process_instance": "windows-proc-v1:13439820030:487395",
+      "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "visible": true
+    },
+    {
+      "accessible": true,
+      "app_name": "KitaoPhotoSelector.exe",
+      "bounds": {
+        "height": 920.0,
+        "width": 1600.0,
+        "x": -2480.0,
+        "y": 724.0
+      },
+      "id": "w-134288",
+      "is_focused": false,
+      "minimized": false,
+      "pid": 44792,
+      "process_instance": "windows-proc-v1:13439819982:8300489",
+      "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "visible": true
+    }
+  ],
+  "ownerWindowsAfterSecondRequest": [
+    {
+      "accessible": true,
+      "app_name": "KitaoPhotoSelector.exe",
+      "bounds": {
+        "height": 1380.0,
+        "width": 2400.0,
+        "x": 720.0,
+        "y": 354.0
+      },
+      "id": "w-4525410",
+      "is_focused": false,
+      "minimized": false,
+      "pid": 22872,
+      "process_instance": "windows-proc-v1:13439820030:487395",
+      "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "visible": true
+    },
+    {
+      "accessible": true,
+      "app_name": "KitaoPhotoSelector.exe",
+      "bounds": {
+        "height": 920.0,
+        "width": 1600.0,
+        "x": -2480.0,
+        "y": 724.0
+      },
+      "id": "w-134288",
+      "is_focused": false,
+      "minimized": false,
+      "pid": 44792,
+      "process_instance": "windows-proc-v1:13439819982:8300489",
+      "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+      "visible": true
+    }
+  ],
+  "sameRootActivationEvidence": "The ordinary secondary returned 0 in five 50 ms samples, with the original owner alive and no second writer. This matches the acknowledged activation path; no foreground-focus assertion is made.",
+  "foregroundFocusVerified": false
+}

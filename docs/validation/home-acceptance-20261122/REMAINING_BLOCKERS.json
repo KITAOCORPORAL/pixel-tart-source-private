@@ -1,7 +1,7 @@
 {
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "overall": "PARTIAL_DIAGNOSTIC",
-  "ordinaryFinalJpegWorkflow": "NOT_RUN_MANUAL_STEP_REQUIRED",
+  "ordinaryFinalJpegWorkflow": "PARTIAL_NATIVE_PUBLISH_AND_REOPEN_PASS_BROWSER_CONFIRM_SYNC_EXPORT_PENDING",
   "actualIPhoneBidirectional": "NOT_RUN_MANUAL_STEP_REQUIRED",
   "companyOriginal40Mp": "MATERIAL_NOT_PRESENT",
   "ordinaryHomeSynthetic40Mp": {
@@ -10,5 +10,9 @@
   },
   "noBrowserAutomation": true,
   "newRawDecodes": 0,
-  "forcedGC": false
+  "forcedGC": false,
+  "ordinaryFinalBlankAndNamedSend": "PASS_NATIVE",
+  "ordinaryFinalCloseCancelSave": "PASS_NATIVE",
+  "ordinaryFinalRootOwnership": "PASS_NATIVE_OWNER_AND_ACKNOWLEDGED_SECONDARY",
+  "currentNativeReport": "native-final/REPORT.md"
 }
