@@ -23,7 +23,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The camera RAW did not provide genuine 16-bit RGB output.");
         if (!string.Equals(decoded.Metadata.ColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The RAW output color space is not supported by Color Studio.");
-        return upright ? RawImageOrientation.FromDecodedRgb48(decoded,token) : HighBitDepthImageBuffer.FromRaw(decoded);
+        return upright ? RawImageOrientation.OwnUprightRgb48(decoded,token) : HighBitDepthImageBuffer.FromRaw(decoded);
     }
 
     /// <summary>Same professional RGB48 decode and historical nearest proxy samples, but convert only
@@ -147,7 +147,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         var width = Math.Max(1, (int)Math.Round(source.Width * maximumEdge / (double)edge));
         var height = Math.Max(1, (int)Math.Round(source.Height * maximumEdge / (double)edge));
         var values = new float[checked(width * height * 3)];
-        var original = source.Rgb32.Span;
+        var original = source.ReadSamples();
         for (var y = 0; y < height; y++)
         {
             token.ThrowIfCancellationRequested();
@@ -155,7 +155,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
             for (var x = 0; x < width; x++)
             {
                 var sourceX = Math.Min(source.Width - 1, (int)((x + .5) * source.Width / width));
-                original.Slice((sourceY * source.Width + sourceX) * 3, 3).CopyTo(values.AsSpan((y * width + x) * 3, 3));
+                for(int c=0;c<3;c++)values[(y*width+x)*3+c]=original[(sourceY*source.Width+sourceX)*3+c];
             }
         }
         return new(width, height, values, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
