@@ -54,7 +54,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                     result = await Editor.RenderFrozenV4ThumbnailAsync(master, TetherReferenceModeViewModel.ResolveExperimentalV4Look(look, stack), mode, token);
                 }
                 else if (master is not null)
-                    result = await Task.Run(() => RawDisplayBitmapAdapter.ToBitmap(_rawPipeline.Render(master.Image, look, stack, 320, token, film).Pixels), token);
+                    result = await Task.Run(() => RawDisplayBitmapAdapter.ToBitmap(_rawPipeline.RenderDisplay(master.Image, look, stack, 320, token, film)), token);
                 else result = await Editor.RenderFrozenThumbnailAsync(source, look, stack, film, token);
                 token.ThrowIfCancellationRequested();
                 if (!_disposed && _thumbnailJobs.TryGetValue(target.Id, out var current) && ReferenceEquals(current, job) && Targets.Contains(target) && target.RawDefinition is null)
