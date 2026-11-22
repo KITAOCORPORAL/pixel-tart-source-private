@@ -1,0 +1,29 @@
+{
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "status": "PASS",
+  "entries": [
+    {
+      "file": "final-selection-core.trx",
+      "passed": 44,
+      "failed": 0,
+      "source": "f84f8b2d9f68d668c6387089832e6f52cdd24dab"
+    },
+    {
+      "file": "final-selection-wpf.trx",
+      "passed": 10,
+      "failed": 0,
+      "source": "f84f8b2d9f68d668c6387089832e6f52cdd24dab"
+    },
+    {
+      "file": "CALENDAR_DEEPLINK_TEST.log",
+      "passed": 6,
+      "failed": 0,
+      "source": "f84f8b2d9f68d668c6387089832e6f52cdd24dab"
+    }
+  ],
+  "passed": 60,
+  "failed": 0,
+  "httpChecksSeparate": 25,
+  "controlledSelectionHostSeparate": true,
+  "doesNotClaimNativeOrDeviceAcceptance": true
+}

@@ -1,0 +1,175 @@
+{
+  "status": "PASS_ORDINARY_D07_CLOSE_CANCEL_SAVE",
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "request": {
+    "firstCloseMessage": true,
+    "secondCloseMessage": true,
+    "mechanism": "Two native normal window close requests; not reflection or forced termination",
+    "pid": 38368
+  },
+  "authority": "Recovered original native UI snapshots, saved workfile and normal process exit; not re-executed in continuation",
+  "evidence": [
+    {
+      "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\native\\duplicate-close-one-picker.json",
+      "sha256": "7564daaa1698165a8fa3b15e4d34fda618c5383a15fc5ec2686d723fc7001df1",
+      "command": "snapshot",
+      "visibleReadback": [
+        {
+          "role": "window",
+          "name": "保存 Color Studio 工作文件"
+        },
+        {
+          "role": "statictext",
+          "name": "保存类型:"
+        },
+        {
+          "role": "combobox",
+          "name": "保存类型:"
+        },
+        {
+          "role": "outline",
+          "name": "保存字段"
+        },
+        {
+          "role": "button",
+          "name": "保存(S)"
+        },
+        {
+          "role": "button",
+          "name": "取消"
+        }
+      ],
+      "nativeActionAloneIsNotOutcomeProof": true
+    },
+    {
+      "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\native\\cancel-close-confirmation.json",
+      "sha256": "e3efdc1ba6cf14025b64f3641fb8ffe3ed271f7519e735e1d8857360ac5a40dd",
+      "command": "snapshot",
+      "visibleReadback": [
+        {
+          "role": "group",
+          "name": "暗室工作尚未保存。放弃本次未保存修改并退出？源照片不会删除。"
+        },
+        {
+          "role": "statictext",
+          "name": "暗室工作尚未保存。放弃本次未保存修改并退出？源照片不会删除。"
+        },
+        {
+          "role": "button",
+          "name": "取消"
+        },
+        {
+          "role": "statictext",
+          "name": "取消"
+        }
+      ],
+      "nativeActionAloneIsNotOutcomeProof": true
+    },
+    {
+      "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\native\\cancel-close-content-retained.json",
+      "sha256": "5e98dd02b13e95737632e08c524a9e851b2d54448f60751544ac5e141564bede",
+      "command": "snapshot",
+      "visibleReadback": [
+        {
+          "role": "statictext",
+          "name": "未保存项目"
+        },
+        {
+          "role": "button",
+          "name": "保存版本"
+        },
+        {
+          "role": "statictext",
+          "name": "保存版本"
+        },
+        {
+          "role": "button",
+          "name": "保存批次"
+        },
+        {
+          "role": "statictext",
+          "name": "保存批次"
+        },
+        {
+          "role": "statictext",
+          "name": "未保存项目"
+        },
+        {
+          "role": "statictext",
+          "name": "HOME_0001.jpg"
+        },
+        {
+          "role": "statictext",
+          "name": "HOME_0003.jpg"
+        },
+        {
+          "role": "button",
+          "name": "未保存项目"
+        },
+        {
+          "role": "statictext",
+          "name": "未保存项目"
+        }
+      ],
+      "nativeActionAloneIsNotOutcomeProof": true
+    },
+    {
+      "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\native\\save-close-picker.json",
+      "sha256": "123804859f68fd0fbaac76228d1a36f7aac12427451f262a063a75344851864c",
+      "command": "snapshot",
+      "visibleReadback": [
+        {
+          "role": "window",
+          "name": "保存 Color Studio 工作文件"
+        },
+        {
+          "role": "statictext",
+          "name": "保存类型:"
+        },
+        {
+          "role": "combobox",
+          "name": "保存类型:"
+        },
+        {
+          "role": "outline",
+          "name": "保存字段"
+        },
+        {
+          "role": "button",
+          "name": "保存(S)"
+        },
+        {
+          "role": "button",
+          "name": "取消"
+        }
+      ],
+      "nativeActionAloneIsNotOutcomeProof": true
+    },
+    {
+      "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\native\\save-close-dialog-accepted.json",
+      "sha256": "d3c3d2d253e0824e84e2fc850d1cc2ee0114e801a4f08f7b8d898f44a3ef82da",
+      "command": "click",
+      "visibleReadback": [],
+      "nativeActionAloneIsNotOutcomeProof": true
+    }
+  ],
+  "savedWorkfileSha256": "1ddeb1ae0b4888432a77df889bcf7169735251a41a59d1a0fba2be1b72c96b32",
+  "normalExit": {
+    "pid": 38368,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 424038400,
+    "osPeakWorkingSetBytes": 469934080,
+    "samples": 10086,
+    "phases": {
+      "startup": {
+        "samples": 10086,
+        "peakPrivateBytes": 424038400,
+        "peakWorkingSetBytes": 469934080
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  }
+}

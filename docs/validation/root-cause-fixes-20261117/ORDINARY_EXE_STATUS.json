@@ -1,45 +1,23 @@
 {
-  "atUtc": "2026-11-19T07:04:36.174917+00:00",
-  "source": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
-  "status": "PARTIAL_ORDINARY_OPEN_AND_EXPOSURE_CYCLE_VERIFIED",
-  "launch": {
-    "pid": 56424,
-    "createdFileTime": "134395409734408196",
-    "app": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-d07e4f43-Full-win-x64\\App\\KitaoPhotoSelector.exe",
-    "runtime": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\runtime",
+  "atUtc": "2026-11-22T05:50:47.063401+00:00",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "overall": "PARTIAL_ORDINARY_FINAL_JPEG_AND_IPHONE_PENDING",
+  "ordinaryHomeSynthetic40Mp": {
     "source": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
-    "mainDllSha256": "87eec5fbe4af5df0332359c2f95163218cde28ef445876a8d353effadd89cbad",
-    "startedUtc": 1795067373.4512973,
-    "newRawDecodesAuthorized": 0,
-    "guardBytes": 2147483648
-  },
-  "ordinaryTiffLoaded": true,
-  "ordinaryTiffEditingClosingExport": "NOT_RUN_CURRENT_SOURCE",
-  "controlledRepeat": "PASS_NOT_ORDINARY",
-  "priorOrdinaryJpegMainline": {
-    "source": "433a1d8e88d839839e4f21341e3e2776696d33a5",
     "status": "PASS",
-    "evidence": "final-acceptance-20261119/RESULTS.md"
+    "firstPidHistorical": 36572,
+    "reopenPidHistorical": 16560,
+    "liveProcessClaim": false,
+    "evidence": "../home-acceptance-20261122/ORDINARY_40MP_COMPLETE.json"
   },
-  "priorRepairedTiff": {
-    "source": "cb8c1adcde14c7092d0bd22ca692d6073d9efa09",
-    "status": "FAIL_2GIB_GUARD",
-    "bytes": 2227568640
-  },
-  "nextAction": "Native ordinary undo/redo/save/export after recovered file is now open",
-  "nextFile": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
-  "phone": "NEEDSLOGIN_LOCAL_SERVICE_DEVICE_BOOKING_READY",
-  "currentReceipt": "retained-preview-followup-20261119/ORDINARY_OPENED_CURRENT.json",
+  "ordinaryD07CloseAndRootBoundaries": "PASS_RECOVERED_ORIGINAL_EVIDENCE",
+  "ordinaryFinalJpeg": "NOT_RUN",
+  "priorOrdinary433Jpeg": "PASS_ORIGINAL_SOURCE_ONLY",
+  "finalHttpProtocol": "PASS_25_CHECKS",
+  "finalNamedRenderHandoff": "PASS_CONTROLLED_HOST_ONLY",
+  "phone": "HTTPS_AND_NEW_DEVICE_READY_ACTUAL_IPHONE_NOT_RUN",
+  "homeBookingRevision": 2,
+  "companyRevision4": "NOT_PRESENT_IN_HOME",
   "noNewRaw": true,
-  "forcedGc": false,
-  "historicalStatus": "history/ORDINARY_EXE_STATUS_before_retained_owner_update_20261119.json",
-  "ordinaryExposureReadbacks": [
-    0.1,
-    0.2,
-    0.3,
-    0.1
-  ],
-  "ordinaryUndoRedo": "NOT_VERIFIED_NATIVE_TIMEOUT",
-  "ordinaryPostEditSave": "NOT_CONFIRMED",
-  "ordinaryTiffExportCount": 0
+  "forcedGc": false
 }

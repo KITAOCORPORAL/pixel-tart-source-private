@@ -1,0 +1,26 @@
+{
+  "status": "PASS_ZERO_SIDE_EFFECTS",
+  "before": {
+    "projects": [
+      [
+        "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+        "HOME-D07-JPEG-20261122"
+      ]
+    ],
+    "pngFiles": [],
+    "workspaceExists": false
+  },
+  "after": {
+    "projects": [
+      [
+        "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+        "HOME-D07-JPEG-20261122"
+      ]
+    ],
+    "pngFiles": [],
+    "workspaceExists": false
+  },
+  "feedbackBoundary": "Known hidden-feedback defect; corrected by d3925142, unit/controlled verification only",
+  "noImageOrBusinessMutation": true,
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4"
+}

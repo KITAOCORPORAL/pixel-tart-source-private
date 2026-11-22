@@ -1,16 +1,9 @@
-# 光镜根因修复当前接续
+# 当前接续：家庭验收 2026-11-22
 
-当前分支 fix/root-cause-b0-b1-b2-20261117。产品源码 d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4；当前完整包 Guangjing-RootCause-d07e4f43-Full-win-x64。此前433/cb8c1adc包及失败原样保留。DELIVERY.json是唯一当前交付索引，包外CURRENT_DELIVERY.json另附文档/远端SHA。
+最终产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭分支 `home/d07-ordinary-acceptance-20261122`。当前完整事实见 [家庭报告](../home-acceptance-20261122/REPORT.md)、[剩余断点](../home-acceptance-20261122/REMAINING_BLOCKERS.json) 与本目录 DELIVERY.json。
 
-当前明确断点：普通EXE PID56424，创建FILETIME134395409734408196，独立根 E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-d07e4f43-20261119。这些是线索，继续前重查。当前已由用户打开恢复文件，普通曝光0.1→0.2→0.3→0.1均独立UI读回，未触发守卫。当前文件为：
-E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-d07e4f43-20261119/output/tiff-recovered-exposure01.ptstudio.json
+d07 家庭合成 40MP 普通 EXE 全循环已通过，仍绑定 d07；原生关闭/双根证据已补齐。后继源码修复空名拒绝可见反馈、历史预约受保护链接；真实包 HTTP25 和无浏览器脚本6通过。最终源码普通 EXE JPEG 主线与 iPhone 双向修改仍待人工操作。
 
-副本SHA474f6d83a3d7b5d5d0008499fff3d43e2c8216108c11e537049d0b9166ed19fb，保存原exposure0.1，指向已授权7752×5184 TIFF，不新增RAW解码。普通曝光循环已完成；继续验证撤销重做、保存、正常退出、独立进程重开、两次真实TIFF导出和全行像素/位深/方向/ICC。原生Invoke仍多次超时，不能把按钮调用当完成。最新证据ORDINARY_OPENED_CURRENT/RESOURCE。2GiB/50ms、无强制GC保持。
+公司 PID/E盘/旧授权均为历史。家中 Tailscale 当前在线，原家中预约为 revision 2、日期 11 月 15 日，公司 revision 4 未在家庭找到。新手机链接和授权仅在包外，27 张业务表摘要未变；不运行 seed/roundtrip 覆盖。禁止自动浏览器与 Computer Use 的当前规则继续生效。
 
-最新事实：cb普通连续编辑/撤销再次2227568640bytes STOP/exit1；d07修正分析缓存持有旧整帧和实际位深计费。41项相关回归通过；受控同输入连续编辑/撤销重做/保存/另一ViewModel重开通过，峰值1321.35MiB。受控结果不替代普通EXE验收。证据入口 retained-preview-followup-20261119/RCA_AND_SCOPE.md、CONTROLLED_REPEAT_RESULT/RESOURCE、ORDINARY_CURRENT.json。
-
-原433普通JPEG同项目主线PASS保持原source：索引两张、曝光0.5、浏览器锁定v1/r6、PC收回、真实JPEG2/ICC3144、保存exit0、独立进程重开/来源重扫。来源路径/数量保持，源子行GUID保存时重建边界不隐瞒。家中0a45ee0e和内存映射17a95b5a/14eda5c7均已包含，不重复应用。不能把原source通过改标为d07整主线通过。
-
-手机同源码服务PID50824/FILETIME134395426034383448、loopback17662已准备，原合成预约revision4全行不变，新设备授权到2026-11-21T06:17:20Z。浏览器账户已登录且公司设备记录存在，但控制台显示Machine not connected，本机仍NeedsLogin。持续等待入网的PID25624；当前有效URL仅见包外continuation-20261119/TAILSCALE_LIVE_LOGIN_PRIVATE.stderr.txt，设备凭据仅外部runtime。登录后核对正确tailnet/HTTPS再给真实手机链接。受PHONE_HANDOFF_ACTIVE保护，不运行seed/roundtrip/pc-adjust修改原预约。
-
-整体PARTIAL，普通TIFF/若干空名发送关闭边界/双root/iPhone未完成。不再读取旧聊天整段；历史交接在history/，按具体证据取件。
+原交接和失败保持在 history/；所有旧树、运行根和包保留。不可把 d07 的普通 TIFF 或旧433普通 JPEG 通过重新标给最终源码。

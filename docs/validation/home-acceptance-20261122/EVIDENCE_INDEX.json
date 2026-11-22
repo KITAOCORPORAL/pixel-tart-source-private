@@ -1,0 +1,102 @@
+{
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "files": [
+    {
+      "path": "CALENDAR_DEEPLINK_TEST.log",
+      "bytes": 575,
+      "sha256": "6604bd3b9ea01132c69c4d6070929913818dda235953b4310d7b7be7c7d5bfec"
+    },
+    {
+      "path": "CLOSE_BOUNDARIES.json",
+      "bytes": 5181,
+      "sha256": "6c418428461c4d691661ab517098bc9dc648c4b3fb66ad28c59bf49fb37bae04"
+    },
+    {
+      "path": "COMPONENT_BINDINGS.json",
+      "bytes": 1917,
+      "sha256": "6c824bdfbe154e21706f4e9322e5308de30ab0f127371c634509b2ebca8f491e"
+    },
+    {
+      "path": "CONTROLLED_SELECTION_RESOURCE.json",
+      "bytes": 386,
+      "sha256": "cd53bb001758d6962a157b55dd4d7cff946269e662e537cecc77cd6029ac6a4d"
+    },
+    {
+      "path": "CONTROLLED_SELECTION_RESULT.json",
+      "bytes": 607,
+      "sha256": "7d5197d73f1a20c62a0e71a774a206b69e4a006abfc51e7ff072470724f6289d"
+    },
+    {
+      "path": "DELIVERY.json",
+      "bytes": 1327,
+      "sha256": "673a6fbd87f95f40627c003702f47eb1115aa9cdea4578214535b75d8c8074af"
+    },
+    {
+      "path": "final-selection-core.trx",
+      "bytes": 60673,
+      "sha256": "5e83c427e1a306f586f1b1cf9e310b24c2a6bb37fa34f86078690851866794f5"
+    },
+    {
+      "path": "final-selection-wpf.trx",
+      "bytes": 15198,
+      "sha256": "52d8926cdb700d5b714ada4f675583b55aa0f2efcdc806a61babd4a241b06beb"
+    },
+    {
+      "path": "HTTP_RESULT.json",
+      "bytes": 1520,
+      "sha256": "a2fe86e26a6afe5ac66cd753cacb199ec25affe8b300d04082885b7a447f25c4"
+    },
+    {
+      "path": "LAUNCHER_CHECK.json",
+      "bytes": 311,
+      "sha256": "d44129c8833872437a34c9c16641f8bf025cb094350bc42e4c6bd81725a2d7cb"
+    },
+    {
+      "path": "MANUAL_STEPS.md",
+      "bytes": 1586,
+      "sha256": "924ee9525226eefb81977191cc8601e2349568cb62840963ac83ba8af847063e"
+    },
+    {
+      "path": "ORDINARY_40MP_COMPLETE.json",
+      "bytes": 6211,
+      "sha256": "3a71a1bb38aa41056942fde6766c3a6e788d7ede5e739bfb053cb5767d0fde21"
+    },
+    {
+      "path": "ORDINARY_BLANK_BEFORE_FIX.json",
+      "bytes": 658,
+      "sha256": "209ee989486b3f0f6e1c54db9b808b377d363818c1f1f37f056ae8a08c64afbe"
+    },
+    {
+      "path": "PACKAGE_VALIDATION.json",
+      "bytes": 627,
+      "sha256": "70f924df2d77bb5a0291d23702256fa4571586fe2dddc37797d8f49dc1db4e83"
+    },
+    {
+      "path": "PHONE_READINESS.json",
+      "bytes": 4558,
+      "sha256": "d019c96401bb94de5fca17a1eb7b900c7a10f14b6987c63d7b4d61fd3ac9ac3e"
+    },
+    {
+      "path": "REGRESSION.json",
+      "bytes": 743,
+      "sha256": "d0f1651e11b2e6b7f2ce82c3697bdac5465764d5036f24ea8536bd58a7b401bc"
+    },
+    {
+      "path": "REMAINING_BLOCKERS.json",
+      "bytes": 481,
+      "sha256": "63f7d7af751b29aa62d741a27ced5082daa3155784807f0dacc02089980fd909"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 4909,
+      "sha256": "f08903150f74bbf372b9d44f17301ae43e2ed3c25b5cf21a5da8669431145c0a"
+    },
+    {
+      "path": "ROOT_COEXISTENCE.json",
+      "bytes": 2396,
+      "sha256": "746e07ee4f762451af0689e06512b6a7351ae3a3c7b9dbf171c8af32927c46cc"
+    }
+  ],
+  "archiveBinding": "DELIVERY.json.archiveSha256; package member bytes are independently bound by PACKAGE_FILES.json",
+  "embeddedReportSnapshot": "pre-seal; later manual steps and post-seal receipts remain external"
+}

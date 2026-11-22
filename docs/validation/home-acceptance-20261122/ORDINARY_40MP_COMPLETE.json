@@ -1,0 +1,190 @@
+{
+  "status": "PASS_HOME_SYNTHETIC_ORDINARY_40MP",
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "authority": "ordinary full EXE/native controls/normal exits/independent OS process; every TIFF row hashed in separate read-only probes",
+  "inputKind": "PREEXISTING_AUTHORIZED_SYNTHETIC_RENDERED_RGB16_40MP_NOT_COMPANY_FUJI",
+  "input": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\inputs\\synthetic-rgb16-7752x5184.tif",
+  "recovery": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\TIFF-home-exposure01.ptstudio.json",
+  "exposureSequence": [
+    0.1,
+    0.2,
+    0.3,
+    0.1
+  ],
+  "undoReadback": 0.3,
+  "redoReadback": 0.1,
+  "firstPid": 36572,
+  "reopenPid": 16560,
+  "checks": {
+    "Width": true,
+    "Height": true,
+    "StoredPixelSha256": true,
+    "Rgb48PixelSha256": true,
+    "Format": true,
+    "ChannelBits": true,
+    "Orientation": true,
+    "Icc": true,
+    "expectedDimensions": true,
+    "sixteenBitChannels": true,
+    "iccPreserved": true,
+    "editedPixelsDifferFromInput": true,
+    "sourceBytesUnchanged": true
+  },
+  "inputProbe": {
+    "Path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\inputs\\synthetic-rgb16-7752x5184.tif",
+    "FileSha256": "5D3AEE67B02348F670E47EB94BBB44A16BAC3480311D38300F9C8D690DB49A0E",
+    "Width": 7752,
+    "Height": 5184,
+    "Format": "Rgb48",
+    "BitsPerPixel": 48,
+    "ChannelBits": 16,
+    "Orientation": 1,
+    "RowsRead": 5184,
+    "StoredPixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+    "Rgb48PixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+    "Icc": [
+      {
+        "Bytes": 3144,
+        "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      }
+    ]
+  },
+  "first": {
+    "Path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\exports\\first\\synthetic-rgb16-7752x5184_仿色.tif",
+    "FileSha256": "43ED862A7762E013318A83611DAE4FFDDB17745BA7299DA897DF50E23C3AFA83",
+    "Width": 7752,
+    "Height": 5184,
+    "Format": "Rgba64",
+    "BitsPerPixel": 64,
+    "ChannelBits": 16,
+    "Orientation": 1,
+    "RowsRead": 5184,
+    "StoredPixelSha256": "67CB1BEFDDC581979E22198ED3771FF82C443E8244AA47981E922974B6FB734D",
+    "Rgb48PixelSha256": "488C800374BA40D9250704F11FBE325238F74FC6B56CAF9A524FF0DEDD3F5762",
+    "Icc": [
+      {
+        "Bytes": 3144,
+        "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      }
+    ]
+  },
+  "reopened": {
+    "Path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\exports\\reopen\\synthetic-rgb16-7752x5184_仿色.tif",
+    "FileSha256": "43ED862A7762E013318A83611DAE4FFDDB17745BA7299DA897DF50E23C3AFA83",
+    "Width": 7752,
+    "Height": 5184,
+    "Format": "Rgba64",
+    "BitsPerPixel": 64,
+    "ChannelBits": 16,
+    "Orientation": 1,
+    "RowsRead": 5184,
+    "StoredPixelSha256": "67CB1BEFDDC581979E22198ED3771FF82C443E8244AA47981E922974B6FB734D",
+    "Rgb48PixelSha256": "488C800374BA40D9250704F11FBE325238F74FC6B56CAF9A524FF0DEDD3F5762",
+    "Icc": [
+      {
+        "Bytes": 3144,
+        "Sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      }
+    ]
+  },
+  "resource": [
+    {
+      "pid": 36572,
+      "exitCode": 0,
+      "monitorEndedWhileAppAlive": false,
+      "stop": null,
+      "peakPrivateBytes50ms": 2090287104,
+      "osPeakWorkingSetBytes": 2019192832,
+      "samples": 12867,
+      "phases": {
+        "startup": {
+          "samples": 1299,
+          "peakPrivateBytes": 303558656,
+          "peakWorkingSetBytes": 337465344
+        },
+        "open-recovery": {
+          "samples": 3774,
+          "peakPrivateBytes": 1363394560,
+          "peakWorkingSetBytes": 1254633472
+        },
+        "exposure02": {
+          "samples": 985,
+          "peakPrivateBytes": 1491832832,
+          "peakWorkingSetBytes": 1298497536
+        },
+        "exposure03": {
+          "samples": 926,
+          "peakPrivateBytes": 1471172608,
+          "peakWorkingSetBytes": 1312522240
+        },
+        "restore-exposure01": {
+          "samples": 864,
+          "peakPrivateBytes": 1579139072,
+          "peakWorkingSetBytes": 1415712768
+        },
+        "undo": {
+          "samples": 1002,
+          "peakPrivateBytes": 2090287104,
+          "peakWorkingSetBytes": 1859866624
+        },
+        "redo": {
+          "samples": 966,
+          "peakPrivateBytes": 2064326656,
+          "peakWorkingSetBytes": 1825615872
+        },
+        "export-before-save": {
+          "samples": 2729,
+          "peakPrivateBytes": 2027728896,
+          "peakWorkingSetBytes": 1701908480
+        },
+        "explicit-save": {
+          "samples": 159,
+          "peakPrivateBytes": 1328328704,
+          "peakWorkingSetBytes": 1261350912
+        },
+        "normal-close": {
+          "samples": 163,
+          "peakPrivateBytes": 1340391424,
+          "peakWorkingSetBytes": 1264619520
+        }
+      },
+      "forcedGcUsed": false,
+      "newRawDecodeLimit": 0
+    },
+    {
+      "pid": 16560,
+      "exitCode": 0,
+      "monitorEndedWhileAppAlive": false,
+      "stop": null,
+      "peakPrivateBytes50ms": 1919459328,
+      "osPeakWorkingSetBytes": 1825828864,
+      "samples": 9902,
+      "phases": {
+        "startup": {
+          "samples": 735,
+          "peakPrivateBytes": 294539264,
+          "peakWorkingSetBytes": 298164224
+        },
+        "open-saved-session": {
+          "samples": 6777,
+          "peakPrivateBytes": 1417195520,
+          "peakWorkingSetBytes": 1294626816
+        },
+        "export-reopen01": {
+          "samples": 2273,
+          "peakPrivateBytes": 1919459328,
+          "peakWorkingSetBytes": 1650724864
+        },
+        "normal-close": {
+          "samples": 117,
+          "peakPrivateBytes": 1282560000,
+          "peakWorkingSetBytes": 1180999680
+        }
+      },
+      "forcedGcUsed": false,
+      "newRawDecodeLimit": 0
+    }
+  ],
+  "newRawDecodes": 0,
+  "forcedGC": false
+}

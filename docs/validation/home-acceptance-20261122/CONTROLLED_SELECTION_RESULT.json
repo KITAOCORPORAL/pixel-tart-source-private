@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "blankCases": [
+    {
+      "name": "",
+      "rejected": true,
+      "projects": 0
+    },
+    {
+      "name": "   ",
+      "rejected": true,
+      "projects": 0
+    },
+    {
+      "name": "\t\r\n",
+      "rejected": true,
+      "projects": 0
+    }
+  ],
+  "namedCreated": true,
+  "namedId": "5ee9357c-254b-4d87-b0fa-bf95794da211",
+  "workflowId": "33c1b23f-8cd7-4425-a041-d74e39c9fe40",
+  "preRenderRejectedWithoutPngOrLease": true,
+  "otherFieldsPreserved": true,
+  "invalidWorkflowRejected": true,
+  "validRenderedHandoff": 1,
+  "nativeRawDecodes": 0
+}

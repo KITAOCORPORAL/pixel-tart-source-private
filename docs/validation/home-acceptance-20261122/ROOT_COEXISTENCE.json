@@ -1,0 +1,68 @@
+{
+  "status": "PASS_ORDINARY_D07_ROOT_OWNERSHIP",
+  "rootA": {
+    "pid": 24588,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\D07Home-20261122\\App\\Guangjing.D07RootA.exe",
+    "exeSha256": "ece1524f77ff2f2cdc47862bc390e96da65e67be0b6fc6b61692f02ecaba96a0",
+    "productAssemblySha256": "b9327956598a07b986eb0445b7098e3b0eb1691239ba613c6fb7b1d0ac5505fc",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\coexist-runtime-a",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795323365.814311,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "rootB": {
+    "pid": 38368,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\D07Home-20261122\\App\\Guangjing.D07Jpeg.exe",
+    "exeSha256": "ece1524f77ff2f2cdc47862bc390e96da65e67be0b6fc6b61692f02ecaba96a0",
+    "productAssemblySha256": "b9327956598a07b986eb0445b7098e3b0eb1691239ba613c6fb7b1d0ac5505fc",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\jpeg-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795323395.1446497,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "sameRootExitCode": 0,
+  "distinctRootOwners": true,
+  "sameRootDuplicateExited": true,
+  "productSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "rootAExit": {
+    "pid": 24588,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 279896064,
+    "osPeakWorkingSetBytes": 315183104,
+    "samples": 1413,
+    "phases": {
+      "startup": {
+        "samples": 1413,
+        "peakPrivateBytes": 279896064,
+        "peakWorkingSetBytes": 315179008
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "rootBExit": {
+    "pid": 38368,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 424038400,
+    "osPeakWorkingSetBytes": 469934080,
+    "samples": 10086,
+    "phases": {
+      "startup": {
+        "samples": 10086,
+        "peakPrivateBytes": 424038400,
+        "peakWorkingSetBytes": 469934080
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "sameRootSecondPidHistoricalOnly": 7260
+}

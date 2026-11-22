@@ -1,0 +1,133 @@
+{
+  "status": "HTTPS_DEVICE_AND_HISTORICAL_BOOKING_READY_PHONE_NOT_RUN",
+  "atUtc": "2026-11-22T05:45:08.652727+00:00",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "tailnetOnline": true,
+  "existingHttpsRouteReused": true,
+  "newDeviceExpiresAtUtc": "2026-11-24T05:45:08.5297668+00:00",
+  "homeBooking": {
+    "id": "41c744b1-d21a-462d-a865-4630519ed83a",
+    "revision": 2,
+    "startAtUtc": "2026-11-15T02:00:00.0000000+00:00",
+    "endAtUtc": "2026-11-15T03:00:00.0000000+00:00",
+    "timeZoneId": "China Standard Time"
+  },
+  "companyRevision4NotPresentInHome": true,
+  "businessTablesUnchanged": {
+    "SchemaInfo": {
+      "rows": 9,
+      "sha256": "9547ec3612f29501f962ba23dbdd6e25cdcb8b0090b081f4be0ce8d2609e846e"
+    },
+    "Projects": {
+      "rows": 1,
+      "sha256": "ade81565fbc23d81809483f37ad18acbe0bbed226e5e93f478fb4d5fd77f7c5f"
+    },
+    "ProjectSources": {
+      "rows": 1,
+      "sha256": "769a94582bb41224c5cf0e04e6fb9eb02b982e3f1cd7517846fade68153ef8a5"
+    },
+    "SelectionInputs": {
+      "rows": 3,
+      "sha256": "473a332aaa5e4792faad4e03ab0db9fa0a268fa37e82a368bcc89ed6696285ef"
+    },
+    "MediaFiles": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "MatchDecisions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "Tasks": {
+      "rows": 3,
+      "sha256": "fc617f34e528b3785672889859ecc5516f2b9be74d841d3d7c17c227fb8f2bfc"
+    },
+    "TaskSteps": {
+      "rows": 3,
+      "sha256": "b242c7a1d40480f64c4d317c57bcdd301081cd79851df93483b1f5d5f267a5ea"
+    },
+    "OperationItems": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "UndoJournals": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "QuickTools": {
+      "rows": 4,
+      "sha256": "9550b6d9b6506cbe1c79e5fc5646baf38bf2e200c56f6ad665611e25a3df0304"
+    },
+    "AuditLogs": {
+      "rows": 15,
+      "sha256": "b43ebd24ec11b53bdc4cd5c004a0c93c52267098177381cdcec58e6d86bfda01"
+    },
+    "Notifications": {
+      "rows": 3,
+      "sha256": "9f8bc58c71d1fadd8bb56bacaf4c70ecab0c092ccf292218bd734fc00448f689"
+    },
+    "ShootBookings": {
+      "rows": 1,
+      "sha256": "d7948367cf3c476da6d75e87a1a978aa5cf1a7a404afd97cb7810e7272ab6d69"
+    },
+    "ShootRequirementItems": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "BookingDocuments": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "BookingReminders": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TetherSessions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TetherAssets": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TetherAnnotations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "BookingContacts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "BookingStaffMembers": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "FinanceCategories": {
+      "rows": 22,
+      "sha256": "83e9bc8c5846b06f646590c47a59601065e4851b56982734edf3163fefef2843"
+    },
+    "FinanceTransactions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TetherAssetLibraryLinks": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "CrossModuleOperations": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "BookingMutationReceipts": {
+      "rows": 2,
+      "sha256": "db036ea7be7ba6898c072fd607f4cc6c22722c7eb0ff244e7ab0e0e75e5cebad"
+    }
+  },
+  "bookingMutations": 0,
+  "phoneBrowserNotOpened": true,
+  "physicalIPhoneAcceptance": "NOT_RUN",
+  "originalPhoneMarkerPreserved": true,
+  "servedJsMatchesFrozenSource": true,
+  "unauthenticatedReadStatus": 401,
+  "privateUrlNotBundled": true
+}

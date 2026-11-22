@@ -1,0 +1,17 @@
+{
+  "status": "PASS_ARCHIVE_BYTES_VERSIONS_AND_KNOWN_SECRET_EXCLUSION",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "archiveSha256": "232607ff8c711571050d1d42b0aba67abe264a1c1f906f792a228222c402ac37",
+  "checks": {
+    "allEightComponentVersionsMatch": true,
+    "everyArchivedMemberSha256Verified": true,
+    "manifestCoverageVerified": true,
+    "zipCrcVerified": true,
+    "extensionMatchesSource": true,
+    "knownCredentialsExcluded": true,
+    "runtimeExcluded": true,
+    "noAutomaticBrowserLauncher": true
+  },
+  "ordinaryFinalJpegPassed": false,
+  "physicalIPhonePassed": false
+}
