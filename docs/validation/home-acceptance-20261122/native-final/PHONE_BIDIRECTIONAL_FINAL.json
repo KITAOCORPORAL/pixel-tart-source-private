@@ -1,0 +1,61 @@
+{
+  "atUtc": "2026-11-22T15:03:54.489164+00:00",
+  "status": "PASS_REAL_IPHONE_AND_ORDINARY_PC_BIDIRECTIONAL_HOME_BOOKING",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "bookingId": "41c744b1-d21a-462d-a865-4630519ed83a",
+  "runtimeSource": "original home calendar; distinct from unavailable company record",
+  "revisionSequence": [
+    2,
+    3,
+    4
+  ],
+  "phoneToPc": {
+    "userReportedPhoneSave": true,
+    "phoneDeviceMatched": true,
+    "serverRevision": 3,
+    "ordinaryNativePcRefreshDisplayedThePhoneChange": true,
+    "timeChangeEachMinutes": 15
+  },
+  "pcToPhone": {
+    "ordinaryNativePcSaveCount": 1,
+    "serverRevision": 4,
+    "desktopDeviceMatched": true,
+    "phoneAuthenticatedGetRevision": 4,
+    "userExplicitlyReportedPhoneUi": "看到“当前版本 v4”",
+    "physicalPhoneRefreshConfirmed": true,
+    "timeChangeEachMinutes": 15
+  },
+  "unchangedNonTimeBookingFields": true,
+  "unchangedOtherBookings": true,
+  "noDuplicateBookings": true,
+  "agentHttpBookingMutationCount": 0,
+  "seedOrRoundtripUsed": false,
+  "serveConfigurationChanged": false,
+  "credentialRotatedForDnsIssue": false,
+  "networkIssueRecoveredDuringRealUserTest": true,
+  "pcNormalExit": {
+    "pid": 32520,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 289271808,
+    "osPeakWorkingSetBytes": 338137088,
+    "samples": 151910,
+    "phases": {
+      "startup": {
+        "samples": 151910,
+        "peakPrivateBytes": 289271808,
+        "peakWorkingSetBytes": 338128896
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "bookingV4UnchangedByPcClose": true,
+  "guardBytes": 2147483648,
+  "intervalMs": 50,
+  "forcedGc": false,
+  "newRawDecodes": 0,
+  "privateCredentialsBundled": false,
+  "companyHistoricalRevision4NotClaimedAsThisHomeRevision4": true
+}

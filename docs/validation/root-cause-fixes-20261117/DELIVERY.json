@@ -1,7 +1,7 @@
 {
   "atUtc": "2026-11-22T05:54:09.924543+00:00",
   "clientTimeZone": "Europe/Berlin",
-  "status": "PC_SELECTION_CLOSED_LOOP_PASS_PHONE_AND_COMPANY_ORIGINAL_PENDING",
+  "status": "HOME_SELECTION_AND_REAL_PHONE_PC_BIDIRECTIONAL_PASS_COMPANY_ORIGINAL_MATERIAL_PENDING",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "branch": "home/d07-ordinary-acceptance-20261122",
   "package": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122",
@@ -17,7 +17,7 @@
   "ordinaryHomeSynthetic40MpSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "ordinaryHomeSynthetic40Mp": "PASS_ORIGINAL_SOURCE",
   "ordinaryFinalJpegWorkflow": "PASS_USER_CHROME_AND_NATIVE_PC_SYNC_EXPORT_INDEPENDENT_REOPEN_REVOKE",
-  "actualIPhone": "PARTIAL_WAIT_PHYSICAL_PHONE_PAGE_REFRESH_V4",
+  "actualIPhone": "PASS_REAL_BIDIRECTIONAL_USER_CONFIRMED_V4",
   "phoneHttpsAndDevice": "READY",
   "credentialsAndRuntimeExcluded": true,
   "installer": false,
@@ -38,7 +38,10 @@
   "homeBookingRevision": 4,
   "phoneToNativePcPassed": true,
   "nativePcSavePhoneApiReadPassed": true,
-  "phoneActualRefreshPassed": false,
-  "postSealPhoneEvidenceAtUtc": "2026-11-22T13:35:46.060985+00:00",
-  "phoneEvidence": "native-final/PHONE_NATIVE_BIDIRECTIONAL_PROGRESS.json"
+  "phoneActualRefreshPassed": true,
+  "postSealPhoneEvidenceAtUtc": "2026-11-22T15:03:54.489164+00:00",
+  "phoneEvidence": "native-final/PHONE_BIDIRECTIONAL_FINAL.json",
+  "phoneBidirectionalFinalPassed": true,
+  "phonePcNormalExitCode": 0,
+  "companyOriginalMaterialVerification": "PENDING_ORIGINAL_TIFF_AND_RECOVERY"
 }

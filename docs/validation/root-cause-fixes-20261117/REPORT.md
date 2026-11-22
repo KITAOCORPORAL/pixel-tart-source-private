@@ -1,5 +1,5 @@
-# 当前根因修复交付状态
+# 当前根因修复交付最终状态
 
-在线选片普通EXE同项目闭环PASS，源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`。手机实际保存v3已由普通PC刷新看到；普通PC又原生保存v4，手机授权HTTPS可读v4。当前仅等待用户手机页面内刷新显示v4，才标双向真机通过。
+2026-11-22：**普通EXE在线选片同项目闭环与真实iPhone/PC双向档期均PASS**，所验源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`。所有桌面测试进程正常关闭，手机服务保留，最终家庭预约v4不变。
 
-详见 [手机实测进度](../home-acceptance-20261122/native-final/PHONE_NATIVE_PROGRESS.md)。公司原Fuji TIFF和恢复文件仍缺；d07家庭合成40MP/433JPEG保持原source。其他字段/预约保持，无seed/roundtrip，无HTTP代写，UI未重做。
+见 [家庭总报告](../home-acceptance-20261122/REPORT.md) 和 [手机最终回执](../home-acceptance-20261122/native-final/PHONE_NATIVE_PROGRESS.md)。尚缺公司原Fuji渲染TIFF/恢复文件作原图复验；d07合成40MP及433JPEG均保持原source。完整包字节未变，UI未重做。

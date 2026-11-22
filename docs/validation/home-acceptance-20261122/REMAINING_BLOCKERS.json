@@ -1,8 +1,8 @@
 {
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
-  "overall": "PC_SELECTION_CLOSED_LOOP_PASS_PHONE_AND_COMPANY_MATERIAL_PENDING",
+  "overall": "HOME_PC_SELECTION_AND_REAL_IPHONE_BIDIRECTIONAL_PASS_COMPANY_ORIGINAL_MATERIAL_PENDING",
   "ordinaryFinalJpegWorkflow": "PASS_USER_CHROME_AND_NATIVE_PC_SYNC_EXPORT_INDEPENDENT_REOPEN_REVOKE",
-  "actualIPhoneBidirectional": "PHONE_SAVE_AND_PC_NATIVE_READ_PASS_PC_SAVE_AND_PHONE_API_READ_PASS_WAIT_PHYSICAL_REFRESH_V4",
+  "actualIPhoneBidirectional": "PASS_REAL_USER_PHONE_SAVE_PC_NATIVE_REFRESH_SAVE_REAL_USER_PHONE_V4_DISPLAY",
   "companyOriginal40Mp": "MATERIAL_NOT_PRESENT",
   "ordinaryHomeSynthetic40Mp": {
     "status": "PASS",
@@ -14,5 +14,11 @@
   "ordinaryFinalBlankAndNamedSend": "PASS_NATIVE",
   "ordinaryFinalCloseCancelSave": "PASS_NATIVE",
   "ordinaryFinalRootOwnership": "PASS_NATIVE_OWNER_AND_ACKNOWLEDGED_SECONDARY",
-  "currentNativeReport": "native-final/REPORT.md"
+  "currentNativeReport": "native-final/REPORT.md",
+  "phoneActualRefreshPassed": true,
+  "desktopNativeProcesses": "ALL_NORMALLY_CLOSED",
+  "remainingMaterials": [
+    "authorized company rendered RGB16 40MP TIFF",
+    "matching company recovery workfile"
+  ]
 }
