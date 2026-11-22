@@ -1,0 +1,34 @@
+{
+  "boundary": "before-second-ushort-allocation",
+  "oldFloatArrayAddress": "0x021e80000048",
+  "oldFloatArrayBytes": 482236440,
+  "oldFloatGcRoots": 0,
+  "oldWorkspaceAddress": "0x021e6d160d78",
+  "oldWorkspaceGcRoots": 0,
+  "managedLiveObjectBytes": 8714771,
+  "managedDeadAndFreeBytes": 848211010,
+  "freeBlockBytes": 284716544,
+  "gcCommittedHeapBytes": 861913088,
+  "lohCommittedBytes": 822312960,
+  "wicPressureObjects": 31,
+  "wicReportedPressureBytes": 247712216,
+  "wicPressureCaveat": "Framework-reported estimates, not measured native committed bytes; do not attribute all residual native/private space to WIC.",
+  "gcCountsBeforeDump": [
+    12,
+    7,
+    4
+  ],
+  "gcCountsAfterDump": [
+    12,
+    7,
+    4
+  ],
+  "captureClassification": "DIAGNOSTIC_ONLY: pause and dump alter timing; never acceptance PASS",
+  "privateBytesBeforeDump": 1764061184,
+  "nonGcPrivateResidualUpperBoundBytes": 902148096,
+  "largestFreeBlockBytes": 131702904,
+  "managedUnreachableObjectBytesExcludingFree": 563494466,
+  "oldUshortAllocationBytes": 241118208,
+  "oldFloatAllocationBytes": 482236416,
+  "newOwnedRgb48Bytes": 241118208
+}

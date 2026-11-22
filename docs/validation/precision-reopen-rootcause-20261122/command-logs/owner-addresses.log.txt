@@ -1,0 +1,29 @@
+Loading core dump: N:\pixart\guangjing-precision-rootcause-20261122\artifacts\precision-rootcause-20261122\before-second-ushort.dmp ...
+         Address               MT           Size
+    021e6d160d78     7ffdc70447d8          2,976 
+    021ea587f8a8     7ffdc70447d8          2,976 
+    021ea58b69e0     7ffdc70447d8          2,976 
+
+Statistics:
+          MT Count TotalSize Class Name
+7ffdc70447d8     3     8,928 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel
+Total 3 objects, 8,928 bytes
+         Address               MT           Size
+    021e6d019810     7ffdc716d0b0             88 
+    021e6d022118     7ffdc716d0b0             88 
+    021e6d04aa00     7ffdc716d0b0             88 
+    021e6d1620e8     7ffdc71b3410             80 
+    021ea5850550     021e58216a78             24 
+    021ea5880c90     7ffdc71b3410             80 
+    021ea58b7cd0     7ffdc71b3410             80 
+    021ea58c2e10     7ffdc7247898            128 
+
+Statistics:
+          MT Count TotalSize Class Name
+021e58216a78     1        24 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+ValueCollection
+7ffdc7247898     1       128 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+AsyncStateMachineBox<RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterCoreAsync>d__4>
+7ffdc71b3410     3       240 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>
+7ffdc716d0b0     3       264 RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer
+Total 8 objects, 656 bytes
+Unrecognized command or argument '-stacks'.
+

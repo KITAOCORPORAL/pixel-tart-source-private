@@ -1,0 +1,42 @@
+{
+  "status": "PASS_SCOPED_REOPEN_GATE_READY_FOR_PRODUCT_INTEGRATION_REVIEW",
+  "source": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "productCommits": [
+    "cf5a63d3",
+    "11a424c9",
+    "ac1c57e9689428cea3f6938e06ad26209c7fc3d5"
+  ],
+  "readyForProductIntegrationReview": true,
+  "ordinaryExeAccepted": false,
+  "allLargeImagesStable": false,
+  "scope": "Existing legacy RGB48-derived neutral and admitted unmasked point nodes; same logical float/color/old recipe/direction/ICC. No general spatial/graph/full-float resource claim.",
+  "coreTests": {
+    "total": 85,
+    "passed": 85,
+    "failed": [],
+    "skipped": []
+  },
+  "wpfTests": {
+    "total": 20,
+    "passed": 20,
+    "failed": [],
+    "skipped": []
+  },
+  "newRawDecodes": 0,
+  "newRawBatches": 0,
+  "releaseDecoderDllReplaced": false,
+  "globalCacheCleared": false,
+  "forcedGcOrLohCompactionOrWorkingSetTrim": false,
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "oldStopPreserved": true,
+  "noNewGlobalSessionFramework": true,
+  "hostFixVsProductFix": "Host uses non-materializing descriptors/hash and owned-task completion; actual product allocation change is owned RGB48 per buffer with compatible lazy Rgb32 fallback. Old root dump ruled out old host/VM rooting at that exact boundary.",
+  "minimumFinalWorkingSetHeadroomMiB": 131.41,
+  "warnings": [
+    "3 rounds are finite evidence, not unlimited reopen proof.",
+    "Neutral cycle peaks rise within the three observed rounds; report full values, do not call all large-image paths stable.",
+    "Spatial/graph or explicit legacy Rgb32 access may materialize a full float frame and retain original capacity limitations.",
+    "Original company 0806D680 payload unavailable; substitute inputs explicitly identified, no RAW decode triggered."
+  ]
+}

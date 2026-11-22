@@ -1,0 +1,23 @@
+{
+  "base": "11a424c90199b32cbf73cc6a14eefd651612b213",
+  "source": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "changedProductFiles": [
+    "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs"
+  ],
+  "unchangedMathOrderWriterAndDecoder": [
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/StudioLayerComposite.cs",
+    "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+    "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs"
+  ],
+  "finalBinaryHashes": {
+    "KitaoPhotoSelector.dll": "B552CEFA7676166F9C6C34A23E834FCF626FAAC8A787C398DA5685673F55B376",
+    "RAWSelectionAssistant.Core.dll": "8356663DB09B050C28A63392E092D54A4D98141985B365A58A16DBE96A9084D4",
+    "LegacyExportMemoryHost.dll": "90F7E715DF32BCF0917FAAD69600718817C955171B94E8FA899360FB4BDFCAD8"
+  },
+  "oldStopSha256": "EA8C29226B929123E4EAA8A1847A6EE9DDAA1531809F07801131DCFF8D8BCED4"
+}

@@ -1,0 +1,219 @@
+diff --git a/src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs b/src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs
+index b35a43cc..e9bf184d 100644
+--- a/src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs
++++ b/src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs
+@@ -3,7 +3,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
+ 
+ namespace RAWSelectionAssistant.Core.Services.Color;
+ 
+-/// <summary>Display-referred, nonlinear sRGB float RGB (0..1); three channels, no alpha. RAW metadata owns orientation.</summary>
++/// <summary>Logical encoded sRGB float RGB; an owned exact RGB48 source may be read by strips until legacy Rgb32 access requests expansion. Three channels, no alpha.</summary>
+ public sealed class HighBitDepthImageBuffer : IDisposable
+ {
+     public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<float> rgb32, string sourceBitDepth = "32f", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
+@@ -23,10 +23,35 @@ public sealed class HighBitDepthImageBuffer : IDisposable
+     public int Width { get; }
+     public int Height { get; }
+     private ReadOnlyMemory<float> pixels;
++    private ReadOnlyMemory<ushort> ownedRgb48;
++    private readonly object backingGate=new();
++    internal static HighBitDepthImageBuffer TakeOwnedRgb48(int width,int height,ushort[] values,string sourceBitDepth,string space,ushort orientation,RawImageMetadata? metadata)
++        => new(width,height,values,sourceBitDepth,space,orientation,metadata,true);
++    private HighBitDepthImageBuffer(int width,int height,ushort[] values,string bits,string space,ushort orientation,RawImageMetadata? metadata,bool owned)
++    {
++        if(width<=0||height<=0||values.Length!=checked(width*height*3))throw new ArgumentException("Owned RGB48 dimensions mismatch.");
++        Width=width;Height=height;ownedRgb48=values;SourceBitDepth=bits;WorkingColorSpace=space;Orientation=orientation;Metadata=metadata;
++    }
++    public int SampleCount=>checked(Width*Height*3);
++    public long StorageBytes {get {lock(backingGate)return (long)pixels.Length*4+(long)ownedRgb48.Length*2;}}
++    public bool IsFloatMaterialized {get {lock(backingGate)return !pixels.IsEmpty;}}
++    internal SampleReader ReadSamples()
++    {lock(backingGate){if(disposed)throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer));return new(pixels,ownedRgb48);}}
++    internal readonly struct SampleReader(ReadOnlyMemory<float> floats,ReadOnlyMemory<ushort> words)
++    {public float this[int index]=>words.IsEmpty?floats.Span[index]:words.Span[index]/65535f;}
++    public void CopyRgb32(int offset,Span<float> destination)
++    {
++        if(offset<0||offset>SampleCount-destination.Length)throw new ArgumentOutOfRangeException(nameof(offset));
++        var input=ReadSamples();for(int i=0;i<destination.Length;i++)destination[i]=input[offset+i];
++    }
+     private IDisposable? ownedReservation;
+     private IDisposable? pixelReturn;
+     private bool disposed;
+-    public ReadOnlyMemory<float> Rgb32 { get=>!disposed?pixels:throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer)); private set=>pixels=value; }
++    public ReadOnlyMemory<float> Rgb32
++    {
++        get {lock(backingGate){if(disposed)throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer));if(pixels.IsEmpty&&!ownedRgb48.IsEmpty){pixels=ToFloat(ownedRgb48);ownedRgb48=default;}return pixels;}}
++        private set=>pixels=value;
++    }
+     public bool OwnsReservation=>ownedReservation is not null;
+     internal bool HasGraphBacking=>pixelReturn is not null;
+     public void TakeReservation(IDisposable reservation)
+@@ -34,7 +59,7 @@ public sealed class HighBitDepthImageBuffer : IDisposable
+         if(disposed||ownedReservation is not null)throw new InvalidOperationException("Buffer already owned/disposed");
+         ownedReservation=reservation;
+     }
+-    public void Dispose(){if(disposed)return;disposed=true;pixels=default;Interlocked.Exchange(ref pixelReturn,null)?.Dispose();Interlocked.Exchange(ref ownedReservation,null)?.Dispose();}
++    public void Dispose(){lock(backingGate){if(disposed)return;disposed=true;pixels=default;ownedRgb48=default;}Interlocked.Exchange(ref pixelReturn,null)?.Dispose();Interlocked.Exchange(ref ownedReservation,null)?.Dispose();}
+     public string SourceBitDepth { get; } = "32f";
+     public string WorkingColorSpace { get; } = "sRGB";
+     public ushort Orientation { get; } = 1;
+@@ -67,8 +92,8 @@ public sealed class HighBitDepthImageBuffer : IDisposable
+ 
+     public VisualPixelBuffer ToVisualRgb24(CancellationToken token)
+     {
+-        var output = new byte[Rgb32.Length];
+-        for (var i = 0; i < output.Length; i++){if((i & 8191)==0)token.ThrowIfCancellationRequested();output[i] = (byte)Math.Clamp(Math.Round(Rgb32.Span[i] * 255), 0, 255);}
++        var input=ReadSamples();var output = new byte[SampleCount];
++        for (var i = 0; i < output.Length; i++){if((i & 8191)==0)token.ThrowIfCancellationRequested();output[i] = (byte)Math.Clamp(Math.Round(input[i] * 255), 0, 255);}
+         return new(Width, Height, output);
+     }
+ 
+@@ -76,8 +101,8 @@ public sealed class HighBitDepthImageBuffer : IDisposable
+ 
+     public ushort[] ToRgb48()
+     {
+-        var output = new ushort[Rgb32.Length];
+-        for (var i = 0; i < output.Length; i++) output[i] = (ushort)Math.Clamp(Math.Round(Rgb32.Span[i] * 65535), 0, 65535);
++        var input=ReadSamples();var output = new ushort[SampleCount];
++        for (var i = 0; i < output.Length; i++) output[i] = (ushort)Math.Clamp(Math.Round(input[i] * 65535), 0, 65535);
+         return output;
+     }
+ 
+diff --git a/src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs b/src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs
+index 221b3914..9ec41234 100644
+--- a/src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs
++++ b/src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs
+@@ -18,7 +18,7 @@ public sealed class HighPrecisionExportRows : IDisposable
+         var input=source ?? throw new ObjectDisposedException(nameof(HighPrecisionExportRows));
+         token.ThrowIfCancellationRequested();
+         if((uint)y>=(uint)input.Height)throw new ArgumentOutOfRangeException(nameof(y));
+-        if(nodes.Length==0)return input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
++        if(nodes.Length==0&&input.IsFloatMaterialized)return input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
+         if(strip is null||y<stripStart||y>=stripStart+strip.Height)
+         {
+             strip?.Dispose();strip=null;stripStart=y;
+@@ -45,7 +45,7 @@ public sealed class HighPrecisionExportRows : IDisposable
+     private HighBitDepthImageBuffer RenderStrip(HighBitDepthImageBuffer input,int y,int rows)
+     {
+         using var buffers=GraphPixelAllocation.EnterIfNeeded();
+-        var copied=GraphPixelAllocation.Copy(input.Rgb32.Slice(y*input.Width*3,rows*input.Width*3));
++        var copied=GraphPixelAllocation.Allocate(rows*input.Width*3);input.CopyRgb32(y*input.Width*3,copied);
+         HighBitDepthImageBuffer? current=new(input.Width,rows,copied,input.SourceBitDepth,input.WorkingColorSpace,input.Orientation,input.Metadata);
+         try
+         {
+diff --git a/src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs b/src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs
+index bc526413..ab0ac20d 100644
+--- a/src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs
++++ b/src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs
+@@ -36,6 +36,25 @@ public static class RawImageOrientation
+             image.Metadata with{Orientation=1});
+     }
+ 
++    internal static HighBitDepthImageBuffer OwnUprightRgb48(RawDecodedImage image,CancellationToken token)
++    {
++        token.ThrowIfCancellationRequested();var input=image.Rgb48Pixels??throw new ArgumentException("RGB48 required.");
++        if(input.Length!=checked(image.Width*image.Height*3))throw new ArgumentException("RGB48 dimensions mismatch.");
++        var o=image.Metadata.Orientation;var rotate=o is >=2 and <=8;var w=rotate&&o>=5?image.Height:image.Width;var h=rotate&&o>=5?image.Width:image.Height;
++        var words=new ushort[input.Length];
++        for(int y=0;y<image.Height;y++)
++        {
++            token.ThrowIfCancellationRequested();
++            for(int x=0;x<image.Width;x++)
++            {
++                var (dx,dy)=o switch{2=>(image.Width-1-x,y),3=>(image.Width-1-x,image.Height-1-y),4=>(x,image.Height-1-y),5=>(y,x),6=>(image.Height-1-y,x),7=>(image.Height-1-y,image.Width-1-x),8=>(y,image.Width-1-x),_=>(x,y)};
++                input.AsSpan((y*image.Width+x)*3,3).CopyTo(words.AsSpan((dy*w+dx)*3,3));
++            }
++        }
++        return HighBitDepthImageBuffer.TakeOwnedRgb48(w,h,words,image.BitsPerChannel.ToString(),image.Metadata.ColorSpace,
++            rotate?(ushort)1:o,rotate?image.Metadata with{Orientation=1}:image.Metadata);
++    }
++
+     public static HighBitDepthImageBuffer NormalizePixels(HighBitDepthImageBuffer source, CancellationToken token = default)
+     {
+         var orientation = source.Orientation;
+diff --git a/src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs b/src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs
+index e851be1b..1214d764 100644
+--- a/src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs
++++ b/src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs
+@@ -23,7 +23,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
+             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The camera RAW did not provide genuine 16-bit RGB output.");
+         if (!string.Equals(decoded.Metadata.ColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
+             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The RAW output color space is not supported by Color Studio.");
+-        return upright ? RawImageOrientation.FromDecodedRgb48(decoded,token) : HighBitDepthImageBuffer.FromRaw(decoded);
++        return upright ? RawImageOrientation.OwnUprightRgb48(decoded,token) : HighBitDepthImageBuffer.FromRaw(decoded);
+     }
+ 
+     /// <summary>Same professional RGB48 decode and historical nearest proxy samples, but convert only
+@@ -147,7 +147,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
+         var width = Math.Max(1, (int)Math.Round(source.Width * maximumEdge / (double)edge));
+         var height = Math.Max(1, (int)Math.Round(source.Height * maximumEdge / (double)edge));
+         var values = new float[checked(width * height * 3)];
+-        var original = source.Rgb32.Span;
++        var original = source.ReadSamples();
+         for (var y = 0; y < height; y++)
+         {
+             token.ThrowIfCancellationRequested();
+@@ -155,7 +155,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
+             for (var x = 0; x < width; x++)
+             {
+                 var sourceX = Math.Min(source.Width - 1, (int)((x + .5) * source.Width / width));
+-                original.Slice((sourceY * source.Width + sourceX) * 3, 3).CopyTo(values.AsSpan((y * width + x) * 3, 3));
++                for(int c=0;c<3;c++)values[(y*width+x)*3+c]=original[(sourceY*source.Width+sourceX)*3+c];
+             }
+         }
+         return new(width, height, values, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
+diff --git a/tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs b/tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs
+new file mode 100644
+index 00000000..dc59f79b
+--- /dev/null
++++ b/tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs
+@@ -0,0 +1,49 @@
++using RAWSelectionAssistant.Core.Models;
++using RAWSelectionAssistant.Core.Services.Color;
++using RAWSelectionAssistant.Core.Services.Projects;
++using RAWSelectionAssistant.Core.Services.RawToJpeg;
++using System.Runtime.InteropServices;
++namespace RAWSelectionAssistant.Tests;
++[TestClass]
++public sealed class OwnedRgb48BackingTests
++{
++ public TestContext TestContext{get;set;}=null!;
++ [DataTestMethod][DataRow(1)][DataRow(2)][DataRow(3)][DataRow(4)][DataRow(5)][DataRow(6)][DataRow(7)][DataRow(8)]
++ public async Task OwnedRowsPreserveFloatSamplesMetadataAndDecoderArray(int orientation)
++ {
++  var values=Enumerable.Range(0,43*37*3).Select(i=>(ushort)((i*1777)%65536)).ToArray();var decoded=RawDecodedImage.FromRgb48(43,37,43*6,values,new("Frozen","OwnedRGB48",null,(ushort)orientation,"sRGB"));
++  var marker=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".raf");await File.WriteAllTextAsync(marker,"no RAW");
++  try
++  {
++   using var eager=HighBitDepthImageBuffer.FromRaw(decoded);using var expected=RawImageOrientation.NormalizePixels(eager);var frame=await new RawMatchTiff16ProductPipeline(new Supplied(decoded)).DecodeUprightFrozenMasterAsync(marker);using var source=frame.Image;
++   Assert.IsFalse(source.IsFloatMaterialized);Assert.AreEqual((long)values.Length*2,source.StorageBytes);Assert.AreEqual(expected.Width,source.Width);Assert.AreEqual(expected.Metadata,source.Metadata);
++   var row=new float[source.Width*3];for(int y=0;y<source.Height;y++){source.CopyRgb32(y*row.Length,row);CollectionAssert.AreEqual(expected.Rgb32.Slice(y*row.Length,row.Length).ToArray(),row);}
++   CollectionAssert.AreEqual(expected.ToVisualRgb24().Rgb24.ToArray(),source.ToVisualRgb24().Rgb24.ToArray());CollectionAssert.AreEqual(expected.ToRgb48(),source.ToRgb48());Assert.IsFalse(source.IsFloatMaterialized);
++   values[0]^=65535;CollectionAssert.AreEqual(expected.ToRgb48(),source.ToRgb48(),"Source must own a copy, not borrow decoder mutable memory");
++   var legacy=source.Rgb32;CollectionAssert.AreEqual(expected.Rgb32.ToArray(),legacy.ToArray());Assert.IsTrue(source.IsFloatMaterialized);Assert.AreEqual((long)values.Length*4,source.StorageBytes);
++  }
++  finally{File.Delete(marker);}
++ }
++ [TestMethod]public async Task AllUshortValuesAndConcurrentCompatibilityExpansionAreExact()
++ {
++  var words=Enumerable.Range(0,65536*3).Select(i=>(ushort)(i%65536)).ToArray();var image=RawDecodedImage.FromRgb48(256,256,256*6,words,new("Frozen","AllU16",null,1,"sRGB"));var marker=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".raf");await File.WriteAllTextAsync(marker,"no RAW");
++  try
++  {
++   var frozen=await new RawMatchTiff16ProductPipeline(new Supplied(image)).DecodeUprightFrozenMasterAsync(marker);using var source=frozen.Image;using var eager=HighBitDepthImageBuffer.FromRaw(image);CollectionAssert.AreEqual(eager.ToVisualRgb24().Rgb24.ToArray(),source.ToVisualRgb24().Rgb24.ToArray());Assert.IsFalse(source.IsFloatMaterialized);
++   var expanded=await Task.WhenAll(Enumerable.Range(0,8).Select(_=>Task.Run(()=>source.Rgb32)));foreach(var memory in expanded){CollectionAssert.AreEqual(eager.Rgb32.ToArray(),memory.ToArray());Assert.IsTrue(MemoryMarshal.TryGetArray(memory,out var a));Assert.IsTrue(MemoryMarshal.TryGetArray(expanded[0],out var b));Assert.AreSame(a.Array,b.Array);}
++  }
++  finally{File.Delete(marker);}
++ }
++ [TestMethod]public async Task OwnedSourceSurvivesRowCancellationFailureAndOtherBorrower()
++ {
++  var words=Enumerable.Range(0,129*65*3).Select(i=>(ushort)(i*17%65536)).ToArray();var decoded=RawDecodedImage.FromRgb48(129,65,129*6,words,new("Frozen","Owned",null,8,"sRGB"));var marker=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".raf");await File.WriteAllTextAsync(marker,"no RAW");
++  try
++  {
++   var frame=await new RawMatchTiff16ProductPipeline(new Supplied(decoded)).DecodeUprightFrozenMasterAsync(marker);using var source=frame.Image;var expected=source.ToRgb48();var stack=new ColorAdjustmentStack([new(Guid.NewGuid(),ColorStudioNodeType.BasicTone,"Tone",NumericParameters:new Dictionary<string,double>{{"exposure",.5}})]);var renderer=new ColorStudioRenderPipeline();using var cancel=new CancellationTokenSource();using var first=renderer.TryCreatePointExportRows(source,stack,cancel.Token);using var other=renderer.TryCreatePointExportRows(source,stack);Assert.IsNotNull(first);Assert.IsNotNull(other);var row=new byte[source.Width*6];first.FillRow(0,row);cancel.Cancel();bool cancelled=false;try{first.FillRow(20,row);}catch(OperationCanceledException){cancelled=true;}Assert.IsTrue(cancelled);first.Dispose();other.FillRow(20,row);CollectionAssert.AreEqual(expected,source.ToRgb48());Assert.IsFalse(source.IsFloatMaterialized);
++   bool failed=false;try{renderer.TryCreatePointExportRows(source,new([new(Guid.NewGuid(),ColorStudioNodeType.BasicTone,"bad",NumericParameters:new Dictionary<string,double>{{"exposure",double.NaN}})]));}catch(ArgumentException){failed=true;}Assert.IsTrue(failed);CollectionAssert.AreEqual(expected,source.ToRgb48());Assert.IsFalse(source.IsFloatMaterialized);
++  }
++  finally{File.Delete(marker);}
++ }
++ sealed class Supplied(RawDecodedImage decoded):IRawDecoder
++ {public RawDecoderCapability GetCapability()=>new(true,"Supplied","test",[".raf"],[".raf"]);public Task<RawDecodedImage> DecodeAsync(string p,RawToJpegOptions o,CancellationToken token=default)=>Task.FromResult(decoded);}
++}

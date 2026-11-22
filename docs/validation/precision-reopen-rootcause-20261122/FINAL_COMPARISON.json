@@ -1,0 +1,873 @@
+{
+  "processed40": {
+    "status": "PASS",
+    "checks": {
+      "width": true,
+      "height": true,
+      "bits": true,
+      "orientation": true,
+      "pixelBytes": true,
+      "pixelSha256": true,
+      "icc": true
+    },
+    "exhaustiveSamples": {
+      "first": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      },
+      "second": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      },
+      "third": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      }
+    },
+    "displayVsOriginalCore": {
+      "firstPreviewSha": true,
+      "secondPreviewSha": true,
+      "thirdPreviewSha": true
+    },
+    "resource": {
+      "pid": 46492,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1950240768,
+      "osPeakWorkingSetBytes": 2009690112,
+      "samples": 2964,
+      "guardBytes": 2147483648,
+      "samplingMs": 50,
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    "cyclePeaks": {
+      "1": {
+        "privatePeakBytes": 1525059584,
+        "workingPeakBytes": 1558822912
+      },
+      "2": {
+        "privatePeakBytes": 1950240768,
+        "workingPeakBytes": 2009690112
+      },
+      "3": {
+        "privatePeakBytes": 1317859328,
+        "workingPeakBytes": 1318526976
+      }
+    },
+    "fullCycle": true,
+    "result": {
+      "status": "PASS_ZERO_RAW_SAME_PROCESS_CYCLE",
+      "first": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "second": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+      "session": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\saved.ptstudio.json",
+      "pid": 46492,
+      "newRawDecodes": 0,
+      "replayReads": 3,
+      "forcedGc": false,
+      "display": "processed-three-cycle",
+      "scenario": "points",
+      "firstPreviewSha": "C39171F57A691D64C4CF035C6B38B1E256EF96D29EB184552039DE434B89E343",
+      "secondPreviewSha": "C39171F57A691D64C4CF035C6B38B1E256EF96D29EB184552039DE434B89E343",
+      "third": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-third\\synthetic-replay-marker_仿色.tif",
+      "thirdPreviewSha": "C39171F57A691D64C4CF035C6B38B1E256EF96D29EB184552039DE434B89E343",
+      "pointProcessedPreviewExcluded": false,
+      "source": "2.3.0+ac1c57e9689428cea3f6938e06ad26209c7fc3d5"
+    },
+    "viewports": [
+      {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 23208220,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 33271404,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      },
+      {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 12058555,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 22543493,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      },
+      {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 51274316,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 8316114,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      }
+    ],
+    "backings": [
+      {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      {
+        "type": "HighBitDepth",
+        "id": 38227903,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      {
+        "type": "HighBitDepth",
+        "id": 52719789,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      }
+    ],
+    "probes": {
+      "original": {
+        "file": "N:\\pixart\\guangjing-legacy-precision-lifetime-20261122\\artifacts\\precision-followup-20261122\\cf5-40-display-oracle\\oracle.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      },
+      "first": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      },
+      "second": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      },
+      "third": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-three-cycle\\export-third\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      }
+    },
+    "releaseTaskObservations": [
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ]
+    ]
+  },
+  "sony8": {
+    "status": "PASS",
+    "checks": {
+      "width": true,
+      "height": true,
+      "bits": true,
+      "orientation": true,
+      "pixelBytes": true,
+      "pixelSha256": true,
+      "icc": true
+    },
+    "exhaustiveSamples": {
+      "first": {
+        "comparedUint16Samples": 98841792,
+        "differentSamples": 0
+      },
+      "second": {
+        "comparedUint16Samples": 98841792,
+        "differentSamples": 0
+      }
+    },
+    "displayVsOriginalCore": {
+      "firstPreviewSha": true,
+      "secondPreviewSha": true
+    },
+    "resource": {
+      "pid": 39020,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1224159232,
+      "osPeakWorkingSetBytes": 1271730176,
+      "samples": 257,
+      "guardBytes": 2147483648,
+      "samplingMs": 50,
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    "cyclePeaks": {
+      "1": {
+        "privatePeakBytes": 1013407744,
+        "workingPeakBytes": 1010360320
+      },
+      "2": {
+        "privatePeakBytes": 1224159232,
+        "workingPeakBytes": 1271599104
+      }
+    },
+    "fullCycle": true,
+    "result": {
+      "status": "PASS_ZERO_RAW_SAME_PROCESS_CYCLE",
+      "first": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-sony-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "second": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-sony-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+      "session": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-sony-cycle\\saved.ptstudio.json",
+      "pid": 39020,
+      "newRawDecodes": 0,
+      "replayReads": 2,
+      "forcedGc": false,
+      "display": "processed-cycle",
+      "scenario": "neutral",
+      "firstPreviewSha": "C40B4261EDE7F60F4F153604571E1868FE13A9F3214E18F38B0842CB75C3A4FF",
+      "secondPreviewSha": "C40B4261EDE7F60F4F153604571E1868FE13A9F3214E18F38B0842CB75C3A4FF",
+      "third": null,
+      "thirdPreviewSha": null,
+      "pointProcessedPreviewExcluded": false,
+      "source": "2.3.0+ac1c57e9689428cea3f6938e06ad26209c7fc3d5"
+    },
+    "viewports": [
+      {
+        "zoom": 1,
+        "Mode": "原片",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 30059218,
+          "width": 4688,
+          "height": 7028,
+          "bits": 24,
+          "minBytes": 98841792
+        },
+        "matched": {
+          "type": "null"
+        },
+        "DisplayColorEnabled": false
+      },
+      {
+        "zoom": 1,
+        "Mode": "原片",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 49726096,
+          "width": 4688,
+          "height": 7028,
+          "bits": 24,
+          "minBytes": 98841792
+        },
+        "matched": {
+          "type": "null"
+        },
+        "DisplayColorEnabled": false
+      }
+    ],
+    "backings": [
+      {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 4688,
+        "height": 7028,
+        "bytes": 197683584,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 395367168
+      },
+      {
+        "type": "HighBitDepth",
+        "id": 6748970,
+        "width": 4688,
+        "height": 7028,
+        "bytes": 197683584,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 395367168
+      }
+    ],
+    "probes": {
+      "original": {
+        "file": "N:\\pixart\\guangjing-legacy-precision-lifetime-20261122\\artifacts\\precision-followup-20261122\\cf5-sony-display-oracle\\oracle.tif",
+        "width": 4688,
+        "height": 7028,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 197683584,
+        "pixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "1C551FB74DCA7AE8BAC71D64A35BB18A5440871D99EDD31A830AAB2869B1A372"
+      },
+      "first": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-sony-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+        "width": 4688,
+        "height": 7028,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 197683584,
+        "pixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "1C551FB74DCA7AE8BAC71D64A35BB18A5440871D99EDD31A830AAB2869B1A372"
+      },
+      "second": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-sony-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+        "width": 4688,
+        "height": 7028,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 197683584,
+        "pixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "1C551FB74DCA7AE8BAC71D64A35BB18A5440871D99EDD31A830AAB2869B1A372"
+      }
+    },
+    "releaseTaskObservations": [
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ]
+    ]
+  },
+  "neutral40": {
+    "status": "PASS",
+    "checks": {
+      "width": true,
+      "height": true,
+      "bits": true,
+      "orientation": true,
+      "pixelBytes": true,
+      "pixelSha256": true,
+      "icc": true
+    },
+    "exhaustiveSamples": {
+      "first": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      },
+      "second": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      },
+      "third": {
+        "comparedUint16Samples": 120559104,
+        "differentSamples": 0
+      }
+    },
+    "displayVsOriginalCore": {},
+    "resource": {
+      "pid": 33008,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 1691832320,
+      "osPeakWorkingSetBytes": 1671901184,
+      "samples": 380,
+      "guardBytes": 2147483648,
+      "samplingMs": 50,
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    "cyclePeaks": {
+      "1": {
+        "privatePeakBytes": 1084186624,
+        "workingPeakBytes": 1109590016
+      },
+      "2": {
+        "privatePeakBytes": 1590939648,
+        "workingPeakBytes": 1584406528
+      },
+      "3": {
+        "privatePeakBytes": 1691832320,
+        "workingPeakBytes": 1671901184
+      }
+    },
+    "fullCycle": true,
+    "result": {
+      "status": "PASS_ZERO_RAW_SAME_PROCESS_CYCLE",
+      "first": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "second": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+      "session": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\saved.ptstudio.json",
+      "pid": 33008,
+      "newRawDecodes": 0,
+      "replayReads": 3,
+      "forcedGc": false,
+      "display": "processed-three-cycle",
+      "scenario": "neutral",
+      "firstPreviewSha": "2CE7B1884783A078C1102F043ADB4A589E3E4A3C270803731C1DDBAAF7546205",
+      "secondPreviewSha": "2CE7B1884783A078C1102F043ADB4A589E3E4A3C270803731C1DDBAAF7546205",
+      "third": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-third\\synthetic-replay-marker_仿色.tif",
+      "thirdPreviewSha": "2CE7B1884783A078C1102F043ADB4A589E3E4A3C270803731C1DDBAAF7546205",
+      "pointProcessedPreviewExcluded": false,
+      "source": "2.3.0+ac1c57e9689428cea3f6938e06ad26209c7fc3d5"
+    },
+    "viewports": [
+      {
+        "zoom": 1,
+        "Mode": "原片",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 30059218,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "null"
+        },
+        "DisplayColorEnabled": false
+      },
+      {
+        "zoom": 1,
+        "Mode": "原片",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 49726096,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "null"
+        },
+        "DisplayColorEnabled": false
+      },
+      {
+        "zoom": 1,
+        "Mode": "原片",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 42226974,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "null"
+        },
+        "DisplayColorEnabled": false
+      }
+    ],
+    "backings": [
+      {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      {
+        "type": "HighBitDepth",
+        "id": 6748970,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      {
+        "type": "HighBitDepth",
+        "id": 31620279,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      }
+    ],
+    "probes": {
+      "original": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\d07-neutral-oracle\\oracle.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      },
+      "first": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      },
+      "second": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      },
+      "third": {
+        "file": "N:\\pixart\\guangjing-precision-rootcause-20261122\\artifacts\\precision-rootcause-20261122\\final-neutral-cycle\\export-third\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      }
+    },
+    "releaseTaskObservations": [
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ]
+    ]
+  }
+}

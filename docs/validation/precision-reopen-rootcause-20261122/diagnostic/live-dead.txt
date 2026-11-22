@@ -1,0 +1,106 @@
+Relevant excerpt; complete raw output preserved under local artifacts.
+Original full normalized copy SHA256: C199181E83D71879B1031094271192C214E6C14CB1849F140F94767BC8B3F287
+
+1: Loading core dump: N:\pixart\guangjing-precision-rootcause-20261122\artifacts\precision-rootcause-20261122\before-second-ushort.dmp ...
+2: Calculating live objects, this may take a while...
+3: Caching GC roots, this may take a while.
+4: Subsequent runs of this command will be faster.
+5: 
+6: Calculating live objects complete: 129,463 objects from 84 roots
+7: Statistics:
+8:           MT  Count TotalSize Class Name
+9: 7ffdc686fc10      1        24 System.Collections.Generic.KeyValuePair<System.Diagnostics.Tracing.EtwEventProvider+SessionInfo, System.Boolean>[]
+10: 7ffdc6906b28      1        24 System.Reflection.Metadata.TypeNameParseOptions
+11: 7ffdc68cbb00      1        24 System.Reflection.CustomAttributeRecord[]
+12: 7ffdc6965668      1        24 System.UInt64[]
+13: 7ffdc6bd37e8      1        24 <CppImplementationDetails>.BASESCRIPT_CONTROL$$BY0A@E
+14: 7ffdc6bd38a8      1        24 <CppImplementationDetails>.KERN_PAIR_CONTROL$$BY0A@E
+15: 7ffdc6bd3968      1        24 <CppImplementationDetails>.DIRECTORY_CONTROL$$BY0A@E
+16: 7ffdc6bd39c8      1        24 <CppImplementationDetails>.OFFSET_TABLE_CONTROL$$BY0A@E
+17: 7ffdc6bd3a28      1        24 <CppImplementationDetails>.GSUBHEADER_CONTROL$$BY0A@E
+18: 7ffdc6bd3a88      1        24 <CppImplementationDetails>.INDEXSUBTABLE4_CONTROL$$BY0A@E
+19: 7ffdc6bd3ae8      1        24 <CppImplementationDetails>.GSUBSUBCLASSRULE_CONTROL$$BY0A@E
+20: 7ffdc6bd3ba8      1        24 <CppImplementationDetails>.GSUBSUBRULE_CONTROL$$BY0A@E
+21: 7ffdc6bd3c08      1        24 <CppImplementationDetails>.GSUBLOOKUP_CONTROL$$BY0A@E
+22: 7ffdc6bd3c68      1        24 <CppImplementationDetails>.DTTF_HEADER_CONTROL$$BY0A@E
+23: 7ffdc6bd3cc8      1        24 <CppImplementationDetails>.HDMX_CONTROL$$BY0A@E
+24: 7ffdc6bd3d28      1        24 <CppImplementationDetails>.LONG_CONTROL$$BY0A@E
+25: 7ffdc6bd3d88      1        24 <CppImplementationDetails>.GSUBSUBSTLOOKUPRECORD_CONTROL$$BY0A@E
+26: 7ffdc6bd3de8      1        24 <CppImplementationDetails>.BASESCRIPTRECORD_CONTROL$$BY0A@E
+27: 7ffdc6bd3e48      1        24 <CppImplementationDetails>.EBDTCOMPONENT_CONTROL$$BY0A@E
+28: 7ffdc6bd3ea8      1        24 <CppImplementationDetails>.GSUBSUBCLASSSET_CONTROL$$BY0A@E
+29: 7ffdc6bd3f08      1        24 <CppImplementationDetails>.VDMX_CONTROL$$BY0A@E
+30: 7ffdc6bd3f68      1        24 <CppImplementationDetails>.GSUBLIGATURE_CONTROL$$BY0A@E
+31: 7ffdc6bd4088      1        24 <CppImplementationDetails>.EBDTHEADER_CONTROL$$BY0A@E
+32: 7ffdc6bd40e8      1        24 <CppImplementationDetails>.JSTFEXTENDERGLYPH_CONTROL$$BY0A@E
+33: 7ffdc6bd41a8      1        24 <CppImplementationDetails>.BASEMINMAX_CONTROL$$BY0A@E
+34: 7ffdc6bd4268      1        24 <CppImplementationDetails>.XSB_CONTROL$$BY0A@E
+35: 7ffdc6bd4328      1        24 <CppImplementationDetails>.TTC_HEADER_CONTROL$$BY0A@E
+36: 7ffdc6bd4388      1        24 <CppImplementationDetails>.WORD_CONTROL$$BY0A@E
+37: 7ffdc6bd43e8      1        24 <CppImplementationDetails>.COMPOSITE_GLYPH_CONTROL$$BY0A@E
+38: 7ffdc6bd4448      1        24 <CppImplementationDetails>.INDEXSUBTABLE1_CONTROL$$BY0A@E
+39: 7ffdc6bd44a8      1        24 <CppImplementationDetails>.GSUBCONTEXTSUBSTFORMAT1_CONTROL$$BY0A@E
+40: 7ffdc6bd4508      1        24 <CppImplementationDetails>.CMAP_FORMAT0_CONTROL$$BY0A@E
+41: 7ffdc6bd4568      1        24 <CppImplementationDetails>.BASECOORDFORMAT2_CONTROL$$BY0A@E
+42: 7ffdc6bd45c8      1        24 <CppImplementationDetails>.GSUBLIGATURESUBSTFORMAT1_CONTROL$$BY0A@E
+43: 7ffdc6bd4628      1        24 <CppImplementationDetails>.GSUBFEATURE_CONTROL$$BY0A@E
+44: 7ffdc6bd4688      1        24 <CppImplementationDetails>.SMALLGLYPHMETRICS_CONTROL$$BY0A@E
+45: 7ffdc6bd46e8      1        24 <CppImplementationDetails>.CMAP_HEADER_CONTROL$$BY0A@E
+1025: 7ffdc68db1e0      1        40 System.Reflection.CerHashtable<System.String, System.RuntimeType[]>+Table
+1026: 7ffdc727f978      1        40 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>
+1027: 7ffdc72df9e0      1        40 System.Runtime.CompilerServices.ConditionalWeakTable<System.Object, RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources+BufferBinding>
+1379: 021e65e31e20      1        56 System.Net.WebRequest+WebRequestPrefixElement[]
+1380: 7ffdc727fc18      1        56 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Container
+1381: 021e581b8a80      1        56 System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter<<>f__AnonymousType24<RAWSelectionAssistant.Core.Services.Projects.ReferenceLook, RAWSelectionAssistant.Core.Services.Projects.ColorAdjustmentStack, RAWSelectionAssistant.Core.Services.Projects.PixelTartFilmSettings>, RAWSelectionAssistant.Core.Services.Projects.ReferenceLook, RAWSelectionAssistant.Core.Services.Projects.ColorAdjustmentStack, RAWSelectionAssistant.Core.Services.Projects.PixelTartFilmSettings, System.Object>
+2149: 021e581bb760      1        80 System.Collections.Generic.Dictionary<System.String, System.TimeZoneInfo>
+2150: 7ffdc71b3410      1        80 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>
+2151: 7ffdc71b93e8      1        80 System.Collections.Generic.Dictionary<System.Guid, System.Collections.Generic.Stack<RAWSelectionAssistant.Core.Services.Projects.StudioEditVersion>>
+2532: 021e4c5cb7e8      1       152 System.Windows.UncommonField<System.Windows.Controls.HierarchicalVirtualizationItemDesiredSizes>
+2533: 7ffdc727fe00      1       152 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Entry[]
+2534: 7ffdc6c32158      5       160 System.Windows.Threading.PriorityRange
+3696: 7ffdc67add88 15,582   912,282 System.String
+3697: Total 129,462 objects, 8,714,771 bytes
+3698: Statistics:
+3722: 021e58216250      1          24 System.Collections.Generic.Dictionary<System.String, System.IDisposable>+ValueCollection
+3723: 021e58216a78      1          24 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+ValueCollection
+3724: 7ffdc72d6488      1          24 <>z__ReadOnlySingleElementList<RAWSelectionAssistant.ViewModels.ReferenceTargetItem>
+3844: 7ffdc708b038      2          48 System.Runtime.CompilerServices.CompilerGeneratedAttribute
+3845: 7ffdc727fc18      1          56 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Container
+3846: 7ffdc6f33208      1          56 MS.Internal.DpiUtil+HwndDpiInfo[]
+4258: 021e5855c0b0      2         128 System.Func<RAWSelectionAssistant.ViewModels.StudioFilterChoice, System.Boolean>
+4259: 7ffdc7247898      1         128 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+AsyncStateMachineBox<RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterCoreAsync>d__4>
+4260: 7ffdc739e4b0      1         136 System.Threading.Tasks.TaskCanceledException
+4279: 7ffdc70e45c8      6         144 System.Collections.ObjectModel.ReadOnlyCollection<System.Reflection.CustomAttributeData>
+4280: 7ffdc727fe00      1         152 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Entry[]
+4281: 7ffdc71919d0      1         152 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<Program+<Cycle>d__28>
+4282: 7ffdc73e6020      1         152 RAWSelectionAssistant.Core.Services.Projects.LightPrintFrame[]
+4287: 7ffdc6c3bdd0      5         160 System.Collections.Generic.Stack<System.Windows.Threading.PriorityChain<System.Windows.Threading.DispatcherOperation>>
+4288: 7ffdc71b3410      2         160 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>
+4289: 7ffdc71b93e8      2         160 System.Collections.Generic.Dictionary<System.Guid, System.Collections.Generic.Stack<RAWSelectionAssistant.Core.Services.Projects.StudioEditVersion>>
+4376: 021e4f2fa930      4         224 RAWSelectionAssistant.Views.PhotoGradePageView+<>c__DisplayClass147_1
+4377: 021e5858f210      1         224 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionAsync>d__1417>
+4378: 7ffdc7198728      2         240 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<>c__DisplayClass282_0
+4405: 7ffdc6e85968      4         256 System.Collections.Generic.HashSet<System.String>
+4406: 7ffdc716d0b0      3         264 RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer
+4407: 7ffdc6c402d8      3         264 MS.Win32.HwndSubclass
+4486: 7ffdc705b298      3         360 System.Diagnostics.ProcessInfo
+4487: 021e5855cba0      1         368 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionCoreAsync>d__1419>
+4488: 7ffdc7102368      2         368 System.Collections.Generic.Dictionary<System.String, System.ValueTuple<System.Text.Json.Serialization.Metadata.JsonPropertyInfo, System.Int32>>+Entry[]
+5219: 7ffdc73d1ca8  7,025     337,200 System.Windows.ModifiedValue
+5220: 021e4c65cbc0  5,224     389,328 System.Windows.ResourceReferenceExpression[]
+5221: 7ffdc6e118b8    534     418,064 System.Xaml.XamlNode[]
+5222: 7ffdc762e298  3,020     434,880 System.Windows.Data.BindingExpression
+5223: 7ffdc73d9c30      3     486,792 RAWSelectionAssistant.Core.Services.Projects.ColorSpacePoint[]
+5224: 7ffdc6782308 10,473     487,192 System.Object[]
+5225: 7ffdc67b2568 26,016     624,384 System.WeakReference
+5226: 7ffdc67add88 20,815   1,340,704 System.String
+5227: 7ffdc6ee6f88  4,108   1,484,704 System.Windows.EffectiveValueEntry[]
+5228: 7ffdd3742ea8  5,249   2,038,056 System.Windows.LocalValueEntry[]
+5229: 7ffdc68b35f8  6,972   5,246,896 System.Byte[]
+5230: 7ffdc71992a0      3  28,422,216 RAWSelectionAssistant.Core.Services.Projects.OklabColor[]
+5231: 021e68d321e0 15,020 284,716,544 Free
+5232: 7ffdc7271c40      3 507,916,488 System.Single[]
+5233: Total 334,894 objects, 848,211,010 bytes
+5234: <Note: this object has an invalid CLASS field>
+5235: Invalid object
+5236: 

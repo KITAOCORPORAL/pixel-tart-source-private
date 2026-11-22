@@ -1,0 +1,114 @@
+Loading core dump: N:\pixart\guangjing-precision-rootcause-20261122\artifacts\precision-rootcause-20261122\before-second-ushort.dmp ...
+
+DATAS = 
+========================================
+Number of GC Heaps: 1
+----------------------------------------
+Small object heap
+         segment            begin        allocated        committed allocated size         committed size        
+generation 0:
+    021e09f92750     021ea2000028     021ea23fff78     021ea2400000 0x3fff50 (4194128)     0x400000 (4194304)    
+    021e09f92e88     021ea4c00028     021ea4ffff80     021ea5000000 0x3fff58 (4194136)     0x400000 (4194304)    
+    021e09f93080     021ea5800028     021ea58e7048     021ea58f1000 0xe7020 (946208)       0xf1000 (987136)      
+generation 1:
+    021e09f8cd68     021e7fc00028     021e7ffffed0     021e80000000 0x3ffea8 (4193960)     0x400000 (4194304)    
+    021e09f92de0     021ea4800028     021ea4bfffa0     021ea4c00000 0x3fff78 (4194168)     0x400000 (4194304)    
+    021e09f92fd8     021ea5400028     021ea546b520     021ea5800000 0x6b4f8 (439544)       0x400000 (4194304)    
+generation 2:
+    021e09f89c30     021e6d000028     021e6d3fffe0     021e6d400000 0x3fffb8 (4194232)     0x400000 (4194304)    
+    021e09f89cd8     021e6d400028     021e6d800000     021e6d800000 0x3fffd8 (4194264)     0x400000 (4194304)    
+    021e09f89d80     021e6d800028     021e6dc00000     021e6dc00000 0x3fffd8 (4194264)     0x400000 (4194304)    
+    021e09f92d38     021ea4400028     021ea47f8008     021ea4800000 0x3f7fe0 (4161504)     0x400000 (4194304)    
+    021e09f92f30     021ea5000028     021ea5021450     021ea5042000 0x21428 (136232)       0x42000 (270336)      
+NonGC heap
+         segment            begin        allocated        committed allocated size         committed size        
+    021e692dc860     021e4a140008     021e4a1a3280     021e4a1b0000 0x63278 (406136)       0x70000 (458752)      
+Large object heap
+         segment            begin        allocated        committed allocated size         committed size        
+    021e09f89e28     021e6dc00028     021e6faa3118     021e6fac4000 0x1ea30f0 (32125168)   0x1ec4000 (32260096)  
+    021e09f8a368     021e6fc00028     021e7fb9f090     021e7fbfb000 0xff9f068 (268038248)  0xfffb000 (268414976) 
+    021e09f8ce10     021e80000028     021e9d4ee898     021e9d50f000 0x1d4ee870 (491710576) 0x1d50f000 (491843584)
+    021e09f927f8     021ea2400028     021ea4049640     021ea406a000 0x1c49618 (29660696)   0x1c6a000 (29794304)  
+Pinned object heap
+         segment            begin        allocated        committed allocated size         committed size        
+    021e09f896f0     021e6b000028     021e6b01e2c0     021e6b021000 0x1e298 (123544)       0x21000 (135168)      
+------------------------------
+GC Allocated Heap Size:    Size: 0x33166a40 (857107008) bytes.
+GC Committed Heap Size:    Size: 0x335fc000 (861913088) bytes.
+         Address               MT           Size
+    021e80000048     7ffdc7271c40    482,236,440 
+
+Statistics:
+          MT Count   TotalSize Class Name
+7ffdc7271c40     1 482,236,440 System.Single[]
+Total 1 objects, 482,236,440 bytes
+021e6d04a990
+021e6d059f68
+021e6d160d78
+021e6d161918
+021e6d161938
+021e6d161ab0
+021e6d161ad0
+021e6d161ae8
+021e6d163010
+021e6d163440
+021e6d163580
+021e6d1637c8
+021e6d163870
+021e6d1cd5a0
+021e6d1d3240
+021e6d1d3280
+021e6d1d3300
+021ea49f3ae8
+021ea4a292d0
+021ea4b3d9d0
+021ea4b5a040
+021ea4b709a8
+021ea4b728e0
+021ea4b75740
+021ea5850af8
+021ea5850c98
+021ea5850da0
+021ea5851408
+021ea5851720
+021ea58518c0
+021ea58519c8
+021ea587f8a8
+021ea5880448
+021ea5880680
+021ea58806a0
+021ea5881928
+021ea5881d58
+021ea5881e98
+021ea58820b0
+021ea5882158
+021ea5897e38
+021ea58b69e0
+021ea58b7580
+021ea58b76c0
+021ea58b76e0
+021ea58b8980
+021ea58b8db0
+021ea58b8ef0
+021ea58b9108
+021ea58b9198
+021ea58bf460
+021ea58bff10
+021ea58c0460
+021ea58c04f0
+021ea58c1500
+021ea58c1658
+021ea58c1cc0
+021ea58c2660
+021ea58c27b8
+021e6d019810
+021e6d022118
+021e6d04aa00
+021e6d1620e8
+021ea5850550
+021ea5880c90
+021ea58b7cd0
+021ea58c2e10
+Unrecognized command or argument '-waiting'.
+Unrecognized command or argument '-stacks'.
+

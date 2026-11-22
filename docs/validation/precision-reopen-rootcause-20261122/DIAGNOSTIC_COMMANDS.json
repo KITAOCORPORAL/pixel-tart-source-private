@@ -1,0 +1,38 @@
+{
+  "dump": "before-second-ushort.dmp",
+  "collector": "dotnet-dump 10.0.750501 --type Heap",
+  "commands": [
+    {
+      "output": "roots-and-stats02.log",
+      "commands": [
+        "gcroot 0x021e80000048",
+        "dumpheap -stat"
+      ]
+    },
+    {
+      "output": "workspace-roots.log",
+      "commands": [
+        "gcroot 0x021e6d160d78",
+        "dumpobj 0x021e6d160d78",
+        "gcroot 0x021e6d019810",
+        "dumpasync",
+        "finalizequeue"
+      ]
+    },
+    {
+      "output": "live-dead.log",
+      "commands": [
+        "dumpheap -live -stat",
+        "dumpheap -dead -stat"
+      ]
+    },
+    {
+      "output": "heap-overview.log",
+      "commands": [
+        "eeheap -gc",
+        "dumpheap -type System.Single[] -min 100000000"
+      ]
+    }
+  ],
+  "diagnosticOnly": true
+}

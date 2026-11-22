@@ -1,0 +1,108 @@
+Relevant excerpt; complete raw output preserved under local artifacts.
+Original full normalized copy SHA256: 28DBEB7F423509B4120F8BDF121133DC2377DA598B324549091514DD6502C607
+
+1: Loading core dump: N:\pixart\guangjing-precision-rootcause-20261122\artifacts\precision-rootcause-20261122\before-second-ushort.dmp ...
+2: Description:
+3:   Displays info about references (or roots) to an object at the specified address.
+4: 
+5: Usage:
+6:   > gcroot [<target>] [options]
+7: 
+8: Arguments:
+9:   <target>
+10: 
+11: Options:
+12:   -gcgen     Implementation helper for !findroots.
+13:   -nostacks  Do not use stack roots.
+14:   -limit     Limits the amount of roots to find
+15: 
+16: GCRoot looks for references (or roots) to an object. These can exist in four
+17: places:
+18: 
+19:    1. On the stack
+20:    2. Within a GC Handle
+21:    3. In an object ready for finalization
+22:    4. As a member of an object found in 1, 2 or 3 above.
+23: 
+24: First, all stacks will be searched for roots, then handle tables, and finally
+25: the reachable queue of the finalizer. Some caution about the stack roots: 
+26: GCRoot doesn't attempt to determine if a stack root it encountered is valid 
+27: or is old (discarded) data. You would have to use !ClrStack and !U to 
+28: disassemble the frame that the local or argument value belongs to in order to 
+29: determine if it is still in use.
+30: 
+31: Because people often want to restrict the search to gc handles and reachable
+32: objects, there is a -nostacks option.
+33: 
+34: The -all option forces all roots to be displayed instead of just the unique roots.
+35: Caching GC roots, this may take a while.
+36: Subsequent runs of this command will be faster.
+37: 
+38: Found 0 unique roots.
+39: Statistics:
+40:           MT  Count   TotalSize Class Name
+41: 7ffdc686fc10      1          24 System.Collections.Generic.KeyValuePair<System.Diagnostics.Tracing.EtwEventProvider+SessionInfo, System.Boolean>[]
+42: 7ffdc6906b28      1          24 System.Reflection.Metadata.TypeNameParseOptions
+43: 7ffdc6965668      1          24 System.UInt64[]
+44: 7ffdc6bd37e8      1          24 <CppImplementationDetails>.BASESCRIPT_CONTROL$$BY0A@E
+45: 7ffdc6bd38a8      1          24 <CppImplementationDetails>.KERN_PAIR_CONTROL$$BY0A@E
+852: 7ffdc7194ff0      1          24 System.ComponentModel.CancelEventArgs
+853: 021e58216a78      1          24 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+ValueCollection
+854: 021e58217590      1          24 System.Collections.ObjectModel.ReadOnlyCollection<System.Guid>
+1053: 7ffdc6bd5348      1          40 <CppImplementationDetails>.VHEA_CONTROL$$BY0A@E
+1054: 7ffdc727f978      1          40 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>
+1055: 7ffdc72df9e0      1          40 System.Runtime.CompilerServices.ConditionalWeakTable<System.Object, RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources+BufferBinding>
+2298: 7ffdc7199528      3         108 RAWSelectionAssistant.Core.Services.Projects.ColorSpaceSamplingTier[]
+2299: 7ffdc727fc18      2         112 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Container
+2300: 7ffdc6c67cf8      2         112 System.Configuration.StreamInfo
+2566: 021e5855c0b0      2         128 System.Func<RAWSelectionAssistant.ViewModels.StudioFilterChoice, System.Boolean>
+2567: 7ffdc7247898      1         128 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+AsyncStateMachineBox<RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterCoreAsync>d__4>
+2568: 7ffdc6cfdf38      1         136 System.Collections.Generic.Dictionary<System.Int32, System.Boolean>+Entry[]
+2603: 7ffdc6ea0958      1         152 System.Runtime.CompilerServices.ConditionalWeakTable<System.Object, System.Collections.Generic.List<System.Runtime.InteropServices.ComWrappers+ManagedObjectWrapperHolder>>+Entry[]
+2604: 7ffdc71919d0      1         152 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<Program+<Cycle>d__28>
+2605: 021e4c5cb7e8      1         152 System.Windows.UncommonField<System.Windows.Controls.HierarchicalVirtualizationItemDesiredSizes>
+2947: 021e4f2fa930      4         224 RAWSelectionAssistant.Views.PhotoGradePageView+<>c__DisplayClass147_1
+2948: 021e5858f210      1         224 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionAsync>d__1417>
+2949: 7ffdc6defcc8      1         232 System.Windows.Baml2006.WpfSharedBamlSchemaContext
+2958: 7ffdc67994e8     10         240 System.Int64
+2959: 7ffdc71b3410      3         240 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>
+2960: 7ffdc71b93e8      3         240 System.Collections.Generic.Dictionary<System.Guid, System.Collections.Generic.Stack<RAWSelectionAssistant.Core.Services.Projects.StudioEditVersion>>
+3042: 021e57dd74e8      8         256 System.Collections.Generic.List<RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualRgb24>
+3043: 7ffdc716d0b0      3         264 RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer
+3044: 7ffdc6e64f00     11         264 System.ComponentModel.DoubleConverter
+3074: 021e58052610      1         296 MS.Internal.TextFormatting.LineServicesCallbacks
+3075: 7ffdc727fe00      2         304 System.Runtime.CompilerServices.ConditionalWeakTable<System.Single[], RAWSelectionAssistant.Core.Services.Color.GraphPixelAllocation+Slot>+Entry[]
+3076: 7ffdc76d4088      1         304 System.Windows.Media.Animation.ClockGroup
+3198: 021e57fd1750      1         368 System.Text.Json.Serialization.Metadata.JsonTypeInfo<<>f__AnonymousType5<System.Double, System.String, System.Boolean, System.Boolean, System.Double, System.Double, System.Object, System.Object, System.Boolean>>
+3199: 021e5855cba0      1         368 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionCoreAsync>d__1419>
+3200: 021e5855d1c8      1         368 System.Text.Json.Serialization.Metadata.JsonTypeInfo<<>f__AnonymousType12<System.Int32, System.String, System.Int32[], System.Boolean>>
+4537: 7ffdc71992a0      4  28,422,240 RAWSelectionAssistant.Core.Services.Projects.OklabColor[]
+4538: 021e68d321e0 15,020 284,716,544 Free
+4539: 7ffdc7271c40      3 507,916,488 System.Single[]
+4540: Total 464,356 objects, 856,925,781 bytes
+4541:          Address               MT           Size
+4552:           MT Count TotalSize Class Name
+4553: 021e58216a78     1        24 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+ValueCollection
+4554: 7ffdc7247898     1       128 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>+AsyncStateMachineBox<RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline+<DecodeMasterCoreAsync>d__4>
+4555: 7ffdc71b3410     3       240 System.Collections.Generic.Dictionary<System.String, RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer>
+4556: 7ffdc716d0b0     3       264 RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer
+4557: Total 8 objects, 656 bytes
+4558: Statistics:
+4575: 7ffdc71be3a8     3       120 System.Collections.Concurrent.ConcurrentDictionary<System.Guid, RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+ThumbnailJob>
+4576: 7ffdc72da918     1       128 RAWSelectionAssistant.Core.Services.Projects.LatestPreviewQueue<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+ThumbnailSnapshot, RAWSelectionAssistant.ViewModels.StudioLayerThumbnailContext>
+4577: 7ffdc75d59d8     1       144 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.Core.Services.Projects.LatestPreviewQueue<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+ThumbnailSnapshot, RAWSelectionAssistant.ViewModels.StudioLayerThumbnailContext>+<Run>d__19>
+4578: 7ffdc739dfc0     1       160 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<>c__DisplayClass582_0+<<QueueFramePhotoPreviews>g__Build|0>d>
+4579: 7ffdc73946f8     2       160 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<>c__DisplayClass582_0
+4580: 7ffdc71caaf0     3       168 System.Collections.Concurrent.ConcurrentDictionary<System.Guid, RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+ThumbnailJob>+Tables
+4581: 7ffdc7198b00     3       192 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+PreviewAnalysisEntry
+4582: 7ffdc719cf70     6       192 System.Collections.Generic.Stack<System.Collections.Generic.Dictionary<System.Guid, RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+TargetAdjustment>>
+4583: 7ffdc71c3300     3       192 System.Func<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel>
+4584: 7ffdc7377900     1       192 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<ActivateTargetAsync>d__448>
+4585: 021e5858f210     1       224 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionAsync>d__1417>
+4586: 7ffdc7198728     3       360 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<>c__DisplayClass282_0
+4587: 021e5855cba0     1       368 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<LoadSessionCoreAsync>d__1419>
+4588: 7ffdc7394418     3       456 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Threading.Tasks.VoidTaskResult>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<RefreshPreviewAnalysisAsync>d__47>
+4589: 7ffdc73762e0     2       464 System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Boolean>+AsyncStateMachineBox<RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+<ValidateTargetIdentityAsync>d__591>
+4590: 7ffdc71ca918     3       960 System.Collections.Concurrent.ConcurrentDictionary<System.Guid, RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel+ThumbnailJob>+VolatileNode[]
+4591: 7ffdc70447d8     3     8,928 RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel
+4592: Total 59 objects, 14,128 bytes

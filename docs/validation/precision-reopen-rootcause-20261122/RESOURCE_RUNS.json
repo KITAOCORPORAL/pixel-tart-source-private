@@ -1,0 +1,53 @@
+{
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "runs": [
+    {
+      "name": "candidate-three-cycle",
+      "classification": "NORMAL_RESOURCE_RUN",
+      "exitCode": 0,
+      "privateMiB": 1870.06,
+      "workingMiB": 1928.94,
+      "stop": null
+    },
+    {
+      "name": "diagnostic-boundary",
+      "classification": "DIAGNOSTIC_ONLY",
+      "exitCode": 1,
+      "privateMiB": 2381.18,
+      "workingMiB": 2074.56,
+      "stop": {
+        "elapsedMs": 49547.00000002049,
+        "privateBytes": 2496851968,
+        "workingSetBytes": 2175332352,
+        "osPeakWorkingSetBytes": 2175332352,
+        "phase": "ushort-read-complete-2"
+      }
+    },
+    {
+      "name": "final-neutral-cycle",
+      "classification": "NORMAL_RESOURCE_RUN",
+      "exitCode": 0,
+      "privateMiB": 1613.46,
+      "workingMiB": 1594.45,
+      "stop": null
+    },
+    {
+      "name": "final-sony-cycle",
+      "classification": "NORMAL_RESOURCE_RUN",
+      "exitCode": 0,
+      "privateMiB": 1167.45,
+      "workingMiB": 1212.82,
+      "stop": null
+    },
+    {
+      "name": "final-three-cycle",
+      "classification": "NORMAL_RESOURCE_RUN",
+      "exitCode": 0,
+      "privateMiB": 1859.89,
+      "workingMiB": 1916.59,
+      "stop": null
+    }
+  ],
+  "diagnosticNeverAcceptance": true
+}
