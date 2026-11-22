@@ -126,7 +126,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if(forSelection)
         {
             var rejection=ValidateOnlineSelection is null ? "项目身份校验不可用，请重新打开归片项目。" : await ValidateOnlineSelection(WorkflowProjectId);
-            if(rejection is not null){StatusText=rejection;return;}
+            if(rejection is not null){StatusText=rejection;_dialogs.ShowInfo(rejection);return;}
         }
         await StopComparisonAsync();
         if ((forSelection ? OpenOnlineSelection is null || WorkflowProjectId is null : OpenPublishing is null) || IsExporting || IsInstantGenerating) return;
