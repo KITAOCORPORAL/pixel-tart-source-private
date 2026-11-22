@@ -1,0 +1,14 @@
+{
+  "test": "PointRowsUseOnlyScopedStripScratch",
+  "input": [
+    1024,
+    256
+  ],
+  "originalAllocatedBytes": 10235728,
+  "scopedRowAllocatedBytes": 540280,
+  "measurement": "GC.GetAllocatedBytesForCurrentThread around warmed existing Core render vs same point operations and scoped row renderer; no forced GC. This is a small synthetic controlled allocation measurement, not a full-frame process estimate.",
+  "newFullFrameFloatAllocationsInSupportedExport": 0,
+  "scratch": "Two exact-length 16-row float backing arrays reused within one export; final short strip may add smaller slots; scope released at end.",
+  "inputOwnership": "Borrowed read-only; never Dispose the input. Own only the strip or legacy fallback output.",
+  "snapshotIdentityAuthority": "target.RawMaster and Editor._frozenRawMaster share id; SourceImage and _fullRawDisplay share id; no double-counting. Weak IsAlive is not a heap-root proof."
+}

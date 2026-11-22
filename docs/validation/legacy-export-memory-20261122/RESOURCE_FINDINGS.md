@@ -1,0 +1,9 @@
+# 当前分配与持有边界
+
+本轮从d07重新构建并用同一宿主对照，不沿用旧峰值。原链中性仍Clone + ApplyHighPrecision.Copy两份完整float，最后创建导出不用的RGB24显示adapter。新导出限定点栈只借用不可变master，两个16行backing在一个GraphPixelAllocation.Scope内周转，直接按原量化写TIFF；fallback保持原高精度函数，仅不生成最后的显示adapter。
+
+Snapshot的target.RawMaster与Editor._frozenRawMaster为同id，不能按两份459.90MiB相加。完整SourceImage与_fullRawDisplay也同id。_rawPreviewMaster与_interactiveRawMaster为各自小代理。弱引用只说明未被回收，不能给出强根链。
+
+最终中性与点栈资源通过见RESOURCE_RESULTS；逐样本见EXHAUSTIVE_SAMPLE_COMPARISON。单次点条带计量见ALLOCATION_AND_OWNERSHIP。原有处理后点栈100%预览仍能越限，不在该导出补丁覆盖内。Sony方向8会走既有NormalizePixels，新宿主已按规范后宽高核对；首次输出严格一致，但同进程重开后OS工作集越限。原中性输入的RGB48→float、方向规范化副本和WPF native/display提交可重叠；本轮没有把其具体占比分配到未经测量的根，未声称确定泄漏。
+
+最小后续：在当前Sony STOP定位到的reopened→100%阶段采集完整的托管分配/根和WPF/native资源证据；评估本作用域临时master/方向buffer的终点。保留共享输入，不清全局cache、不强制GC、不提高守卫。

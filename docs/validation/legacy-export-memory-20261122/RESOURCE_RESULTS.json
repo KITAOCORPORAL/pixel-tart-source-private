@@ -1,0 +1,797 @@
+{
+  "runs": [
+    {
+      "name": "candidate-neutral-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1974.92,
+      "osPeakWorkingMiB": 1981.89,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "candidate-points-cycle",
+      "exitCode": 1,
+      "stopPhase": "visible-100",
+      "peakPrivateMiB": 2196.59,
+      "osPeakWorkingMiB": 1739.75,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "candidate02-points-cycle",
+      "exitCode": 1,
+      "stopPhase": "second-export-start",
+      "peakPrivateMiB": 2000.81,
+      "osPeakWorkingMiB": 2048.16,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "candidate03-points-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 2016.36,
+      "osPeakWorkingMiB": 2026.68,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-neutral-cycle",
+      "exitCode": 1,
+      "stopPhase": "export-start",
+      "peakPrivateMiB": 2200.31,
+      "osPeakWorkingMiB": 1963.38,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-neutral-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1534.73,
+      "osPeakWorkingMiB": 1564.9,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-neutral-proxy",
+      "exitCode": 1,
+      "stopPhase": "payload-read-2",
+      "peakPrivateMiB": 2048.66,
+      "osPeakWorkingMiB": 1857.2,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-neutral-same-host",
+      "exitCode": 1,
+      "stopPhase": "export-start",
+      "peakPrivateMiB": 2199.12,
+      "osPeakWorkingMiB": 1851.73,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-points-export-only",
+      "exitCode": 1,
+      "stopPhase": "export-start",
+      "peakPrivateMiB": 2197.34,
+      "osPeakWorkingMiB": 1751.31,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-points-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1998.43,
+      "osPeakWorkingMiB": 2023.82,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-sony-neutral-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1261.67,
+      "osPeakWorkingMiB": 1294.66,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "d07-sony-normalized-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1642.32,
+      "osPeakWorkingMiB": 1671.59,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "final-neutral-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 1976.12,
+      "osPeakWorkingMiB": 1982.48,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "final-points-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "peakPrivateMiB": 2013.93,
+      "osPeakWorkingMiB": 2023.19,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "final-sony-neutral-cycle",
+      "exitCode": 2,
+      "stopPhase": null,
+      "peakPrivateMiB": 1512.19,
+      "osPeakWorkingMiB": 1511.48,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    },
+    {
+      "name": "final-sony-normalized-cycle",
+      "exitCode": 1,
+      "stopPhase": "reopened",
+      "peakPrivateMiB": 2040.58,
+      "osPeakWorkingMiB": 2060.66,
+      "guardBytes": 2147483648,
+      "forcedGc": false,
+      "newRawDecodes": 0,
+      "nativeRawLoadedAtSnapshots": false
+    }
+  ],
+  "phasePeaks": {
+    "candidate-neutral-cycle": {
+      "startup": {
+        "samples": 12,
+        "peakPrivateBytes": 16764928,
+        "peakWorkingSetBytes": 64344064
+      },
+      "payload-read-1": {
+        "samples": 25,
+        "peakPrivateBytes": 950714368,
+        "peakWorkingSetBytes": 948412416
+      },
+      "master-loaded": {
+        "samples": 57,
+        "peakPrivateBytes": 1330282496,
+        "peakWorkingSetBytes": 1339645952
+      },
+      "visible-100": {
+        "samples": 6,
+        "peakPrivateBytes": 1331335168,
+        "peakWorkingSetBytes": 1343320064
+      },
+      "saved": {
+        "samples": 1,
+        "peakPrivateBytes": 1331417088,
+        "peakWorkingSetBytes": 1343873024
+      },
+      "export-start": {
+        "samples": 37,
+        "peakPrivateBytes": 1331478528,
+        "peakWorkingSetBytes": 1355825152
+      },
+      "export-finished": {
+        "samples": 27,
+        "peakPrivateBytes": 1318449152,
+        "peakWorkingSetBytes": 1355976704
+      },
+      "released-natural-idle": {
+        "samples": 2,
+        "peakPrivateBytes": 1312501760,
+        "peakWorkingSetBytes": 1352704000
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1313751040,
+        "peakWorkingSetBytes": 1354248192
+      },
+      "payload-read-2": {
+        "samples": 24,
+        "peakPrivateBytes": 2046451712,
+        "peakWorkingSetBytes": 2054885376
+      },
+      "reopened": {
+        "samples": 42,
+        "peakPrivateBytes": 2003951616,
+        "peakWorkingSetBytes": 2022715392
+      },
+      "second-export-start": {
+        "samples": 34,
+        "peakPrivateBytes": 2070851584,
+        "peakWorkingSetBytes": 2069123072
+      },
+      "second-export-finished": {
+        "samples": 27,
+        "peakPrivateBytes": 1820803072,
+        "peakWorkingSetBytes": 1872351232
+      }
+    },
+    "candidate-points-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16515072,
+        "peakWorkingSetBytes": 62451712
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950353920,
+        "peakWorkingSetBytes": 947331072
+      },
+      "master-loaded": {
+        "samples": 56,
+        "peakPrivateBytes": 1816170496,
+        "peakWorkingSetBytes": 1821478912
+      },
+      "visible-100": {
+        "samples": 1,
+        "peakPrivateBytes": 2303291392,
+        "peakWorkingSetBytes": 1824264192
+      }
+    },
+    "candidate02-points-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16318464,
+        "peakWorkingSetBytes": 62697472
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950272000,
+        "peakWorkingSetBytes": 947286016
+      },
+      "master-loaded": {
+        "samples": 57,
+        "peakPrivateBytes": 1335418880,
+        "peakWorkingSetBytes": 1342689280
+      },
+      "visible-100": {
+        "samples": 7,
+        "peakPrivateBytes": 1817378816,
+        "peakWorkingSetBytes": 1864196096
+      },
+      "saved": {
+        "samples": 1,
+        "peakPrivateBytes": 1336578048,
+        "peakWorkingSetBytes": 1347256320
+      },
+      "export-start": {
+        "samples": 368,
+        "peakPrivateBytes": 1566121984,
+        "peakWorkingSetBytes": 1629728768
+      },
+      "export-finished": {
+        "samples": 26,
+        "peakPrivateBytes": 1573105664,
+        "peakWorkingSetBytes": 1639358464
+      },
+      "released-natural-idle": {
+        "samples": 1,
+        "peakPrivateBytes": 1573171200,
+        "peakWorkingSetBytes": 1639522304
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1574412288,
+        "peakWorkingSetBytes": 1641193472
+      },
+      "payload-read-2": {
+        "samples": 37,
+        "peakPrivateBytes": 1963954176,
+        "peakWorkingSetBytes": 1974894592
+      },
+      "reopened": {
+        "samples": 39,
+        "peakPrivateBytes": 1984565248,
+        "peakWorkingSetBytes": 1981927424
+      },
+      "second-export-start": {
+        "samples": 223,
+        "peakPrivateBytes": 2098003968,
+        "peakWorkingSetBytes": 2147655680
+      }
+    },
+    "candidate03-points-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 15679488,
+        "peakWorkingSetBytes": 59830272
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950431744,
+        "peakWorkingSetBytes": 947314688
+      },
+      "master-loaded": {
+        "samples": 54,
+        "peakPrivateBytes": 1336074240,
+        "peakWorkingSetBytes": 1341644800
+      },
+      "visible-100": {
+        "samples": 7,
+        "peakPrivateBytes": 1337266176,
+        "peakWorkingSetBytes": 1346412544
+      },
+      "export-start": {
+        "samples": 365,
+        "peakPrivateBytes": 1357176832,
+        "peakWorkingSetBytes": 1380102144
+      },
+      "export-finished": {
+        "samples": 26,
+        "peakPrivateBytes": 1312141312,
+        "peakWorkingSetBytes": 1361084416
+      },
+      "released-natural-idle": {
+        "samples": 3,
+        "peakPrivateBytes": 2080972800,
+        "peakWorkingSetBytes": 2108076032
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1313439744,
+        "peakWorkingSetBytes": 1362984960
+      },
+      "payload-read-2": {
+        "samples": 36,
+        "peakPrivateBytes": 2046140416,
+        "peakWorkingSetBytes": 2086871040
+      },
+      "reopened": {
+        "samples": 40,
+        "peakPrivateBytes": 2076639232,
+        "peakWorkingSetBytes": 2093367296
+      },
+      "second-export-start": {
+        "samples": 344,
+        "peakPrivateBytes": 2114310144,
+        "peakWorkingSetBytes": 2125131776
+      },
+      "second-export-finished": {
+        "samples": 25,
+        "peakPrivateBytes": 2084188160,
+        "peakWorkingSetBytes": 2111938560
+      }
+    },
+    "d07-neutral-cycle": {
+      "startup": {
+        "samples": 13,
+        "peakPrivateBytes": 16990208,
+        "peakWorkingSetBytes": 64352256
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950558720,
+        "peakWorkingSetBytes": 948224000
+      },
+      "master-loaded": {
+        "samples": 56,
+        "peakPrivateBytes": 1333927936,
+        "peakWorkingSetBytes": 1339674624
+      },
+      "visible-100": {
+        "samples": 7,
+        "peakPrivateBytes": 1335050240,
+        "peakWorkingSetBytes": 1343709184
+      },
+      "export-start": {
+        "samples": 4,
+        "peakPrivateBytes": 2307194880,
+        "peakWorkingSetBytes": 2058756096
+      }
+    },
+    "d07-neutral-oracle": {
+      "startup": {
+        "samples": 14,
+        "peakPrivateBytes": 504582144,
+        "peakWorkingSetBytes": 439762944
+      },
+      "oracle-source": {
+        "samples": 9,
+        "peakPrivateBytes": 1608912896,
+        "peakWorkingSetBytes": 1629511680
+      },
+      "oracle-rendered": {
+        "samples": 10,
+        "peakPrivateBytes": 1608249344,
+        "peakWorkingSetBytes": 1638195200
+      },
+      "oracle-written": {
+        "samples": 5,
+        "peakPrivateBytes": 1609285632,
+        "peakWorkingSetBytes": 1639337984
+      }
+    },
+    "d07-neutral-proxy": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 15556608,
+        "peakWorkingSetBytes": 59727872
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950194176,
+        "peakWorkingSetBytes": 947212288
+      },
+      "master-loaded": {
+        "samples": 7,
+        "peakPrivateBytes": 957349888,
+        "peakWorkingSetBytes": 957030400
+      },
+      "export-start": {
+        "samples": 45,
+        "peakPrivateBytes": 1903575040,
+        "peakWorkingSetBytes": 1922842624
+      },
+      "export-finished": {
+        "samples": 24,
+        "peakPrivateBytes": 1903505408,
+        "peakWorkingSetBytes": 1922961408
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1904484352,
+        "peakWorkingSetBytes": 1923928064
+      },
+      "payload-read-2": {
+        "samples": 1,
+        "peakPrivateBytes": 2148179968,
+        "peakWorkingSetBytes": 1947410432
+      }
+    },
+    "d07-neutral-same-host": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16584704,
+        "peakWorkingSetBytes": 63393792
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950431744,
+        "peakWorkingSetBytes": 947470336
+      },
+      "master-loaded": {
+        "samples": 52,
+        "peakPrivateBytes": 1332699136,
+        "peakWorkingSetBytes": 1340092416
+      },
+      "visible-100": {
+        "samples": 7,
+        "peakPrivateBytes": 1333809152,
+        "peakWorkingSetBytes": 1344466944
+      },
+      "export-start": {
+        "samples": 3,
+        "peakPrivateBytes": 2305949696,
+        "peakWorkingSetBytes": 1941676032
+      }
+    },
+    "d07-points-export-only": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16203776,
+        "peakWorkingSetBytes": 63004672
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950218752,
+        "peakWorkingSetBytes": 947798016
+      },
+      "master-loaded": {
+        "samples": 52,
+        "peakPrivateBytes": 1330257920,
+        "peakWorkingSetBytes": 1340973056
+      },
+      "visible-100": {
+        "samples": 7,
+        "peakPrivateBytes": 1332129792,
+        "peakWorkingSetBytes": 1346084864
+      },
+      "export-start": {
+        "samples": 6,
+        "peakPrivateBytes": 2304073728,
+        "peakWorkingSetBytes": 1836380160
+      }
+    },
+    "d07-points-oracle": {
+      "startup": {
+        "samples": 14,
+        "peakPrivateBytes": 504115200,
+        "peakWorkingSetBytes": 447295488
+      },
+      "oracle-source": {
+        "samples": 341,
+        "peakPrivateBytes": 2095501312,
+        "peakWorkingSetBytes": 2101342208
+      },
+      "oracle-rendered": {
+        "samples": 10,
+        "peakPrivateBytes": 2094964736,
+        "peakWorkingSetBytes": 2120454144
+      },
+      "oracle-written": {
+        "samples": 6,
+        "peakPrivateBytes": 2095050752,
+        "peakWorkingSetBytes": 2120749056
+      }
+    },
+    "d07-sony-neutral-oracle": {
+      "startup": {
+        "samples": 12,
+        "peakPrivateBytes": 417787904,
+        "peakWorkingSetBytes": 364802048
+      },
+      "oracle-source": {
+        "samples": 7,
+        "peakPrivateBytes": 1322958848,
+        "peakWorkingSetBytes": 1346920448
+      },
+      "oracle-rendered": {
+        "samples": 8,
+        "peakPrivateBytes": 1322242048,
+        "peakWorkingSetBytes": 1355722752
+      },
+      "oracle-written": {
+        "samples": 4,
+        "peakPrivateBytes": 1322254336,
+        "peakWorkingSetBytes": 1355825152
+      }
+    },
+    "d07-sony-normalized-oracle": {
+      "startup": {
+        "samples": 17,
+        "peakPrivateBytes": 821477376,
+        "peakWorkingSetBytes": 797945856
+      },
+      "oracle-source": {
+        "samples": 7,
+        "peakPrivateBytes": 1722097664,
+        "peakWorkingSetBytes": 1736851456
+      },
+      "oracle-rendered": {
+        "samples": 9,
+        "peakPrivateBytes": 1722101760,
+        "peakWorkingSetBytes": 1751810048
+      },
+      "oracle-written": {
+        "samples": 4,
+        "peakPrivateBytes": 1721417728,
+        "peakWorkingSetBytes": 1751171072
+      }
+    },
+    "final-neutral-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16519168,
+        "peakWorkingSetBytes": 62316544
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950792192,
+        "peakWorkingSetBytes": 947597312
+      },
+      "master-loaded": {
+        "samples": 53,
+        "peakPrivateBytes": 1333694464,
+        "peakWorkingSetBytes": 1339957248
+      },
+      "visible-100": {
+        "samples": 6,
+        "peakPrivateBytes": 1334759424,
+        "peakWorkingSetBytes": 1343782912
+      },
+      "saved": {
+        "samples": 1,
+        "peakPrivateBytes": 1335812096,
+        "peakWorkingSetBytes": 1344593920
+      },
+      "export-start": {
+        "samples": 41,
+        "peakPrivateBytes": 1335218176,
+        "peakWorkingSetBytes": 1356644352
+      },
+      "export-finished": {
+        "samples": 26,
+        "peakPrivateBytes": 1312247808,
+        "peakWorkingSetBytes": 1356808192
+      },
+      "released-natural-idle": {
+        "samples": 3,
+        "peakPrivateBytes": 1334865920,
+        "peakWorkingSetBytes": 1389645824
+      },
+      "payload-read-2": {
+        "samples": 24,
+        "peakPrivateBytes": 2040004608,
+        "peakWorkingSetBytes": 2078773248
+      },
+      "reopened": {
+        "samples": 39,
+        "peakPrivateBytes": 2031386624,
+        "peakWorkingSetBytes": 2043998208
+      },
+      "second-export-start": {
+        "samples": 36,
+        "peakPrivateBytes": 2072109056,
+        "peakWorkingSetBytes": 2073886720
+      },
+      "second-export-finished": {
+        "samples": 26,
+        "peakPrivateBytes": 1830993920,
+        "peakWorkingSetBytes": 1882427392
+      }
+    },
+    "final-points-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 16699392,
+        "peakWorkingSetBytes": 63533056
+      },
+      "payload-read-1": {
+        "samples": 24,
+        "peakPrivateBytes": 950575104,
+        "peakWorkingSetBytes": 947695616
+      },
+      "master-loaded": {
+        "samples": 52,
+        "peakPrivateBytes": 1330597888,
+        "peakWorkingSetBytes": 1340542976
+      },
+      "visible-100": {
+        "samples": 8,
+        "peakPrivateBytes": 2057531392,
+        "peakWorkingSetBytes": 2079604736
+      },
+      "export-start": {
+        "samples": 366,
+        "peakPrivateBytes": 1351864320,
+        "peakWorkingSetBytes": 1379729408
+      },
+      "export-finished": {
+        "samples": 27,
+        "peakPrivateBytes": 1306185728,
+        "peakWorkingSetBytes": 1355390976
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1307365376,
+        "peakWorkingSetBytes": 1356886016
+      },
+      "payload-read-2": {
+        "samples": 36,
+        "peakPrivateBytes": 2040156160,
+        "peakWorkingSetBytes": 2080833536
+      },
+      "reopened": {
+        "samples": 40,
+        "peakPrivateBytes": 2026934272,
+        "peakWorkingSetBytes": 2058391552
+      },
+      "second-export-start": {
+        "samples": 339,
+        "peakPrivateBytes": 2111762432,
+        "peakWorkingSetBytes": 2121469952
+      },
+      "second-export-finished": {
+        "samples": 25,
+        "peakPrivateBytes": 2080194560,
+        "peakWorkingSetBytes": 2106945536
+      },
+      "released-natural-idle": {
+        "samples": 2,
+        "peakPrivateBytes": 2080194560,
+        "peakWorkingSetBytes": 2106982400
+      }
+    },
+    "final-sony-neutral-cycle": {
+      "startup": {
+        "samples": 9,
+        "peakPrivateBytes": 15233024,
+        "peakWorkingSetBytes": 57335808
+      },
+      "payload-read-1": {
+        "samples": 28,
+        "peakPrivateBytes": 1217413120,
+        "peakWorkingSetBytes": 1211621376
+      },
+      "master-loaded": {
+        "samples": 53,
+        "peakPrivateBytes": 1585647616,
+        "peakWorkingSetBytes": 1584545792
+      }
+    },
+    "final-sony-normalized-cycle": {
+      "startup": {
+        "samples": 11,
+        "peakPrivateBytes": 17256448,
+        "peakWorkingSetBytes": 64544768
+      },
+      "payload-read-1": {
+        "samples": 27,
+        "peakPrivateBytes": 1217740800,
+        "peakWorkingSetBytes": 1211731968
+      },
+      "master-loaded": {
+        "samples": 51,
+        "peakPrivateBytes": 1587486720,
+        "peakWorkingSetBytes": 1582370816
+      },
+      "visible-100": {
+        "samples": 6,
+        "peakPrivateBytes": 1588604928,
+        "peakWorkingSetBytes": 1586200576
+      },
+      "saved": {
+        "samples": 1,
+        "peakPrivateBytes": 1588678656,
+        "peakWorkingSetBytes": 1586769920
+      },
+      "export-start": {
+        "samples": 34,
+        "peakPrivateBytes": 1588781056,
+        "peakWorkingSetBytes": 1589460992
+      },
+      "export-finished": {
+        "samples": 26,
+        "peakPrivateBytes": 1537794048,
+        "peakWorkingSetBytes": 1571336192
+      },
+      "same-process-reopen-start": {
+        "samples": 1,
+        "peakPrivateBytes": 1140817920,
+        "peakWorkingSetBytes": 1180110848
+      },
+      "payload-read-2": {
+        "samples": 27,
+        "peakPrivateBytes": 2033086464,
+        "peakWorkingSetBytes": 2060701696
+      },
+      "reopened": {
+        "samples": 37,
+        "peakPrivateBytes": 2139701248,
+        "peakWorkingSetBytes": 2160762880
+      }
+    }
+  },
+  "samplingMs": 50,
+  "guardBytes": 2147483648,
+  "authority": "Whole-process observer guard; not hard OS job-object cap; Private and OS peak working set both guarded."
+}

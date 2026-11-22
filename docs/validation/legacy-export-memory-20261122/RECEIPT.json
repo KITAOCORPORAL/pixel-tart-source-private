@@ -1,0 +1,57 @@
+{
+  "status": "SCOPED_EXPORT_PARITY_PASS_RESOURCE_GATE_PARTIAL",
+  "productPatch": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+  "base": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "researchSource": "14ed39f1",
+  "patchApplyCheckAgainstD07": true,
+  "formalProductMergePerformed": false,
+  "releaseDllChanged": false,
+  "newRawDecodes": 0,
+  "newHeavyLedger": false,
+  "coldOrRebuildRawRuns": 0,
+  "oldStoppedBatchBalanceReused": false,
+  "forcedGc": false,
+  "globalCacheClear": false,
+  "guardBytes": 2147483648,
+  "supportedFastPath": [
+    "Neutral Preset",
+    "Preset point edits",
+    "WhiteBalance",
+    "BasicTone",
+    "ColorBalance",
+    "Levels",
+    "Curve",
+    "SkinTone"
+  ],
+  "fastPathRestrictions": [
+    "No graph, no nonidentity blend/opacity/local mask; exact existing point functions/order",
+    "Point tests show original-source 100% with processing preview disabled to isolate export. Existing full processed point preview can still exceed guard."
+  ],
+  "fallback": "Spatial/Develop/Details/Film/ReferenceMatch/ColorRange/graphs and layer composites retain original high-precision processing, but omit the unused final display adapter. No 40MP blanket resource guarantee.",
+  "resourcePasses": [
+    "final-neutral-cycle",
+    "final-points-cycle"
+  ],
+  "remainingStop": "final-sony-normalized-cycle: second same-process reopen exceeded OS peak working set before second export; first TIFF parity passed.",
+  "coreTests": {
+    "total": 59,
+    "passed": 58,
+    "failed": [],
+    "skipped": [
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+    ]
+  },
+  "wpfTests": {
+    "total": 20,
+    "passed": 20,
+    "failed": [],
+    "skipped": []
+  },
+  "fullProductIntegrationReady": false,
+  "integrationRecommendation": "Review isolated code only; do not mark complete product memory gate passed. Product line owns merge and must resolve/triage Sony orientation/reopen resource stop and processed-point-preview boundary.",
+  "missingOriginalPayload": "0806D680 RGB48 and company private panels unavailable at home; synthetic and authorized Sony substitutes explicitly labeled.",
+  "sharpenV1": "sealed",
+  "highlightCandidate": "research only, not connected; no Knee/Amount/V2 changes",
+  "timezone": "Europe/Berlin",
+  "existingPointAndSpatialMathBodyUnchanged": true
+}

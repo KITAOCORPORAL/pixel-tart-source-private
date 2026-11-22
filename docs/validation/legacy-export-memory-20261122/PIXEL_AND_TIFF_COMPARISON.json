@@ -1,0 +1,204 @@
+{
+  "synthetic-neutral": {
+    "status": "PASS",
+    "checks": {
+      "width": true,
+      "height": true,
+      "bits": true,
+      "orientation": true,
+      "pixelBytes": true,
+      "pixelSha256": true,
+      "icc": true,
+      "allSampledResourcesUnderGuard": true,
+      "newRawDecodesZero": true,
+      "twoReplayReads": true
+    },
+    "beforeAuthority": "Original d07 full Core processing without WPF, independent frozen-sample oracle; before WPF cycle stops retained separately.",
+    "run": {
+      "status": "PASS_ZERO_RAW_SAME_PROCESS_CYCLE",
+      "first": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-neutral-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "second": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-neutral-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+      "session": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-neutral-cycle\\saved.ptstudio.json",
+      "pid": 19996,
+      "newRawDecodes": 0,
+      "replayReads": 2,
+      "forcedGc": false,
+      "display": "cycle",
+      "scenario": "neutral",
+      "pointProcessedPreviewExcluded": false,
+      "source": "2.3.0+cf5a63d38365a0093524d87ed7670e3736b7bb24"
+    },
+    "resources": {
+      "pid": 19996,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 2072109056,
+      "osPeakWorkingSetBytes": 2078777344,
+      "samples": 290,
+      "guardBytes": 2147483648,
+      "samplingMs": 50,
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    "probes": {
+      "before": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\d07-neutral-oracle\\oracle.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      },
+      "after": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-neutral-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      },
+      "reopen": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-neutral-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "9D4111DCAA108AA05BE1CDB853DEE360748113F9533892670B0C69FF3BF7A7EB"
+      }
+    }
+  },
+  "synthetic-points": {
+    "status": "PASS",
+    "checks": {
+      "width": true,
+      "height": true,
+      "bits": true,
+      "orientation": true,
+      "pixelBytes": true,
+      "pixelSha256": true,
+      "icc": true,
+      "allSampledResourcesUnderGuard": true,
+      "newRawDecodesZero": true,
+      "twoReplayReads": true
+    },
+    "beforeAuthority": "Original d07 full Core processing without WPF, independent frozen-sample oracle; before WPF cycle stops retained separately.",
+    "run": {
+      "status": "PASS_ZERO_RAW_SAME_PROCESS_CYCLE",
+      "first": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-points-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "second": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-points-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+      "session": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-points-cycle\\saved.ptstudio.json",
+      "pid": 20796,
+      "newRawDecodes": 0,
+      "replayReads": 2,
+      "forcedGc": false,
+      "display": "cycle",
+      "scenario": "points",
+      "pointProcessedPreviewExcluded": true,
+      "source": "2.3.0+cf5a63d38365a0093524d87ed7670e3736b7bb24"
+    },
+    "resources": {
+      "pid": 20796,
+      "exitCode": 0,
+      "stop": null,
+      "peakPrivateBytes50ms": 2111762432,
+      "osPeakWorkingSetBytes": 2121469952,
+      "samples": 931,
+      "guardBytes": 2147483648,
+      "samplingMs": 50,
+      "newRawDecodes": 0,
+      "forcedGc": false
+    },
+    "probes": {
+      "before": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\d07-points-oracle\\oracle.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      },
+      "after": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-points-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      },
+      "reopen": {
+        "file": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\final-points-cycle\\export-reopen\\synthetic-replay-marker_仿色.tif",
+        "width": 7752,
+        "height": 5184,
+        "bits": [
+          16,
+          16,
+          16
+        ],
+        "orientation": 1,
+        "pixelBytes": 241118208,
+        "pixelSha256": "776FF3BE3F584490F62FF24949913DA16638595B0A22E2F4BD0EAA38C8212263",
+        "icc": {
+          "bytes": 3144,
+          "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+        },
+        "newRawDecodes": 0,
+        "fileSha256": "EA810AD7DDE8E061C88BA75839F59BC37238D49DDEEAF52CA416C52DAA90504A"
+      }
+    }
+  }
+}

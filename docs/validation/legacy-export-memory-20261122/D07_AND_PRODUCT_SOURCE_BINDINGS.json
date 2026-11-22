@@ -1,0 +1,97 @@
+{
+  "base": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "productPatch": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "e8180221": "e26b0a413f8e53e845087053414436de833d46cb",
+      "433a1d8e": "e26b0a413f8e53e845087053414436de833d46cb",
+      "d07e4f43": "e26b0a413f8e53e845087053414436de833d46cb",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "d4a973906eece55e854d3f4cedaa44c983513950"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "e8180221": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e",
+      "433a1d8e": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e",
+      "d07e4f43": "c402f9e70c847a6ac0738e0bcda199bd4fd34e4e",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "0d44a308f291bb513db208fee96bf99ffbb17c97"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/GraphPixelAllocation.cs",
+      "e8180221": "7e6ef318c5504432633e10b64a8cd8eb6711992b",
+      "433a1d8e": "7e6ef318c5504432633e10b64a8cd8eb6711992b",
+      "d07e4f43": "7e6ef318c5504432633e10b64a8cd8eb6711992b",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "7e6ef318c5504432633e10b64a8cd8eb6711992b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "e8180221": "ec0bba74c85e61204f7a27e8524d9d2a44438720",
+      "433a1d8e": "ec0bba74c85e61204f7a27e8524d9d2a44438720",
+      "d07e4f43": "ec0bba74c85e61204f7a27e8524d9d2a44438720",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "ec0bba74c85e61204f7a27e8524d9d2a44438720"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioLayerComposite.cs",
+      "e8180221": "2d476355836d6d8104b7bb5e2c69802de13b1c77",
+      "433a1d8e": "2d476355836d6d8104b7bb5e2c69802de13b1c77",
+      "d07e4f43": "2d476355836d6d8104b7bb5e2c69802de13b1c77",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "2d476355836d6d8104b7bb5e2c69802de13b1c77"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Analysis.cs",
+      "e8180221": "066643478cb90ab60d874019d408adaee213f493",
+      "433a1d8e": "066643478cb90ab60d874019d408adaee213f493",
+      "d07e4f43": "6995407687ceeb6adb35aab5fc22ebca6d2dab92",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "6995407687ceeb6adb35aab5fc22ebca6d2dab92"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "e8180221": "2f9a08092c48e6091c522087b3d1cce8321148ea",
+      "433a1d8e": "70ab6db5331119a1248d9568fa9eb01ee943d3bb",
+      "d07e4f43": "70ab6db5331119a1248d9568fa9eb01ee943d3bb",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "70ab6db5331119a1248d9568fa9eb01ee943d3bb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "e8180221": "9f34940bf44bb1650b0cfbf412241e75f36a9e5c",
+      "433a1d8e": "9f34940bf44bb1650b0cfbf412241e75f36a9e5c",
+      "d07e4f43": "7c1a052c7288f8519ade0d9fcb232b0856ea9659",
+      "cf5a63d38365a0093524d87ed7670e3736b7bb24": "7c1a052c7288f8519ade0d9fcb232b0856ea9659"
+    }
+  ],
+  "d07Later73988ProductDiffEmpty": true,
+  "sameHarnessReadback": [
+    {
+      "mode": "cycle",
+      "scenario": "neutral",
+      "hostSha256": "3fdda440cef85f00b0e1c48a4ac441fcc822c5514c63967dbeb1963073696dee",
+      "coreSha256": "664809f2aff7eedddc50ca91a617f1d6f646858caacb6921b79229426ba1f346",
+      "appSha256": "320564a41bbf2e4f090a47a0eda843c72cff7f24c55b29b58b39e91d0eae28d5",
+      "name": "d07-neutral-same-host"
+    },
+    {
+      "mode": "cycle",
+      "scenario": "neutral",
+      "hostSha256": "3fdda440cef85f00b0e1c48a4ac441fcc822c5514c63967dbeb1963073696dee",
+      "coreSha256": "fbdebeb283c39e4b0772080906ea3968f5d38fba774c3110610c1c29d4b0579d",
+      "appSha256": "0534c5866a1df8e613831deee0133457f56710ef569d8f7b3facb7adfd82ac9c",
+      "name": "final-neutral-cycle"
+    },
+    {
+      "mode": "cycle",
+      "scenario": "points",
+      "hostSha256": "3fdda440cef85f00b0e1c48a4ac441fcc822c5514c63967dbeb1963073696dee",
+      "coreSha256": "664809f2aff7eedddc50ca91a617f1d6f646858caacb6921b79229426ba1f346",
+      "appSha256": "320564a41bbf2e4f090a47a0eda843c72cff7f24c55b29b58b39e91d0eae28d5",
+      "name": "d07-points-export-only"
+    },
+    {
+      "mode": "cycle",
+      "scenario": "points",
+      "hostSha256": "3fdda440cef85f00b0e1c48a4ac441fcc822c5514c63967dbeb1963073696dee",
+      "coreSha256": "fbdebeb283c39e4b0772080906ea3968f5d38fba774c3110610c1c29d4b0579d",
+      "appSha256": "0534c5866a1df8e613831deee0133457f56710ef569d8f7b3facb7adfd82ac9c",
+      "name": "final-points-cycle"
+    }
+  ]
+}

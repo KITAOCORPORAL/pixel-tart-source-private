@@ -1,0 +1,259 @@
+{
+  "researchSource": "14ed39f18f18df46d9f2f32b02df746f842cb88f",
+  "selectedRows": [
+    {
+      "id": "skin-shoulder",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "method": "post-curve",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "candidate": {
+        "highMeanY": 0.6501257902534828,
+        "relativeHighRms": 0.03843870108273369,
+        "absoluteHighRms": 0.024989990917729646,
+        "highQ99": 0.8750000107134338,
+        "highMaxY": 0.8750000107134338,
+        "channelsAtOne": 0,
+        "inputClipChannels": 64971,
+        "fullMeanY": 0.4380091859833294,
+        "rgbF32Sha256": "98e95bd0dac5548b31fe1aecfe916799a2622295f543d26c8fbf3949b6442461"
+      },
+      "control": {
+        "highMeanY": 0.6501111658771325,
+        "relativeHighRms": 0.035191149355452145,
+        "absoluteHighRms": 0.02287815913602929,
+        "highQ99": 0.8288209527549363,
+        "highMaxY": 0.8288209527549363,
+        "channelsAtOne": 0,
+        "inputClipChannels": 64971,
+        "fullMeanY": 0.43797061642983537,
+        "rgbF32Sha256": "32dde229372f32df2089b3835a308128bd9baa6f5aa755dfab7c3589d72dcd1e"
+      },
+      "legacy": {
+        "highMeanY": 0.7299450067700731,
+        "relativeHighRms": 0.0429192463597715,
+        "absoluteHighRms": 0.03132868957464984,
+        "highQ99": 1,
+        "highMaxY": 1,
+        "channelsAtOne": 64971,
+        "inputClipChannels": 64971,
+        "fullMeanY": 0.47427578665185766,
+        "rgbF32Sha256": "8379377af79791f9e9c4f0c4eab750ae8291f4965c847c10c3676c05f5d0f41f"
+      },
+      "parameters": {
+        "exposure": -0.005590915679931641,
+        "strength": 0.9217815399169922
+      },
+      "anchorMidError": 2.1312818732077687e-07,
+      "sampleHighRelativeError": 4.369129174772216e-06,
+      "fullHighRelativeError": 2.249468728914198e-05,
+      "panel": "panels/skin-shoulder-E0-post-curve-mid_high.png",
+      "panelSha256": "2d91e791f1682f42921132b59a37312eb45e5759f484b585160b9c296b7fdf2b",
+      "array": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\fair-exact\\skin-shoulder-E0-post-curve-joint.f32",
+      "reviewNote": "肩部 EV0：原曲线已能接近柔化；候选仍有压平光泽代价",
+      "panelAvailableAtHome": false
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "method": "post-curve",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "candidate": {
+        "highMeanY": 0.6958462131051443,
+        "relativeHighRms": 0.20257812224267124,
+        "absoluteHighRms": 0.14096321922051377,
+        "highQ99": 0.9314391295286621,
+        "highMaxY": 0.9611201948062947,
+        "channelsAtOne": 0,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.6955291883221396,
+        "rgbF32Sha256": "491f9a9837baaf17acc2dfd5196f5d1ea08bd1a572f4d3a15b1adfb05d8e68f9"
+      },
+      "control": {
+        "highMeanY": 0.6955733765338599,
+        "relativeHighRms": 0.08005099047942132,
+        "absoluteHighRms": 0.05568133774265096,
+        "highQ99": 0.7388447188680396,
+        "highMaxY": 0.7388447188680396,
+        "channelsAtOne": 0,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.695065004401565,
+        "rgbF32Sha256": "3068d1b7671d737b00d072d59f6e0bf754c5963af1616354c92de9f56f17df86"
+      },
+      "legacy": {
+        "highMeanY": 0.8908597110377655,
+        "relativeHighRms": 0.15141977910522136,
+        "absoluteHighRms": 0.13489378065907978,
+        "highQ99": 1,
+        "highMaxY": 1,
+        "channelsAtOne": 225379,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.8897023185445094,
+        "rgbF32Sha256": "49c5291bf0bf5c222e54c5467308466ffc8f601f3d1940376f43bbd2c86a3736"
+      },
+      "parameters": {
+        "exposure": 1.0569405555725098,
+        "strength": 0.875
+      },
+      "anchorMidError": 2.1657943760633458e-07,
+      "sampleHighRelativeError": 0.0014706465977356157,
+      "fullHighRelativeError": 0.0003920932041390313,
+      "panel": "panels/warm-lit-texture-E1-post-curve-mid_high.png",
+      "panelSha256": "fd34dc6857824f5d62f71c7b28919c5f05ff26f5c38ac44ab929ee5361dbaa5b",
+      "array": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\fair-exact\\warm-lit-texture-E1-post-curve-joint.f32",
+      "reviewNote": "暖纹理 EV+1：候选保留裁切前增量；白点分布仍不同",
+      "panelAvailableAtHome": false
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 1,
+      "method": "basic-highlights",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "candidate": {
+        "highMeanY": 0.6958462131051443,
+        "relativeHighRms": 0.20257812224267124,
+        "absoluteHighRms": 0.14096321922051377,
+        "highQ99": 0.9314391295286621,
+        "highMaxY": 0.9611201948062947,
+        "channelsAtOne": 0,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.6955291883221396,
+        "rgbF32Sha256": "491f9a9837baaf17acc2dfd5196f5d1ea08bd1a572f4d3a15b1adfb05d8e68f9"
+      },
+      "control": {
+        "highMeanY": 0.6981119703860684,
+        "relativeHighRms": 0.18883665981870648,
+        "absoluteHighRms": 0.1318291326671609,
+        "highQ99": 0.968927058980755,
+        "highMaxY": 1,
+        "channelsAtOne": 90725,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.6974196044920009,
+        "rgbF32Sha256": "c4e13120e85fc9cda7166dbee9d4d627381630f46d811d2611e9e31c1bb81d69"
+      },
+      "legacy": {
+        "highMeanY": 0.8908597110377655,
+        "relativeHighRms": 0.15141977910522136,
+        "absoluteHighRms": 0.13489378065907978,
+        "highQ99": 1,
+        "highMaxY": 1,
+        "channelsAtOne": 225379,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.8897023185445094,
+        "rgbF32Sha256": "49c5291bf0bf5c222e54c5467308466ffc8f601f3d1940376f43bbd2c86a3736"
+      },
+      "parameters": {
+        "exposure": 1.3702845573425293,
+        "strength": -100
+      },
+      "anchorMidError": 4.749188819985761e-10,
+      "sampleHighRelativeError": 0.0034925343304872563,
+      "fullHighRelativeError": 0.003256117858015547,
+      "panel": "panels/warm-lit-texture-E1-basic-highlights-mid_high.png",
+      "panelSha256": "f463dad6f3cd5000402f3badca38a9d4d32681f208daa1a60dcf4e30500c5d1a",
+      "array": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\fair-exact\\warm-lit-texture-E1-basic-highlights-joint.f32",
+      "reviewNote": "暖纹理 EV+1：同输入 BasicTone 已接近",
+      "panelAvailableAtHome": false
+    },
+    {
+      "id": "warm-lit-texture",
+      "kind": "authorized-stored-photo",
+      "ev": 0,
+      "method": "post-highlights",
+      "condition": "mid+high",
+      "status": "JOINT_MATCHED",
+      "candidate": {
+        "highMeanY": 0.6284542229062472,
+        "relativeHighRms": 0.2114590205047262,
+        "absoluteHighRms": 0.1328923144078139,
+        "highQ99": 0.8522142311003907,
+        "highMaxY": 0.8750000107134338,
+        "channelsAtOne": 0,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.5526442956665135,
+        "rgbF32Sha256": "9e5f6c0078553eaac3d84f3108c69339f5c807839780fb589097870c0b3d0044"
+      },
+      "control": {
+        "highMeanY": 0.628410251266346,
+        "relativeHighRms": 0.2416666066091169,
+        "absoluteHighRms": 0.15186577298192033,
+        "highQ99": 0.957455904671367,
+        "highMaxY": 1,
+        "channelsAtOne": 63,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.5454556946721376,
+        "rgbF32Sha256": "625464c63ef2cc73085102985a6ab62883754ef9e9eb6e823a1c74fea770c9f9"
+      },
+      "legacy": {
+        "highMeanY": 0.6904779509664007,
+        "relativeHighRms": 0.23821229820761078,
+        "absoluteHighRms": 0.1644803395613883,
+        "highQ99": 0.9739483019320662,
+        "highMaxY": 1,
+        "channelsAtOne": 42935,
+        "inputClipChannels": 42935,
+        "fullMeanY": 0.5891255508096421,
+        "rgbF32Sha256": "bf061c7561cfe4259f85d5235a7716ceb2548ba191fe5d19f5bbcfb62554787d"
+      },
+      "parameters": {
+        "exposure": 0,
+        "strength": -100
+      },
+      "anchorMidError": 8.326672684688674e-17,
+      "sampleHighRelativeError": 0.0010736162867179687,
+      "fullHighRelativeError": 6.996792812987239e-05,
+      "panel": "panels/warm-lit-texture-E0-post-highlights-mid_high.png",
+      "panelSha256": "91be7056748b2361a6e0aa02683193a5839e5c399932d1690adb60b8e5c0d3e4",
+      "array": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\fair-exact\\warm-lit-texture-E0-post-highlights-joint.f32",
+      "reviewNote": "暖纹理 EV0：现有高光控制已足够",
+      "panelAvailableAtHome": false
+    }
+  ],
+  "newCandidateRuns": 0,
+  "new180Panels": 0,
+  "kneeChanged": false,
+  "amountAdded": false,
+  "v2Started": false,
+  "sharpenV1": "SEALED_UNCHANGED",
+  "companyPanelsAvailableAtHome": false,
+  "homeSourcePreviewSha256": "c72ad07d9eebb6997f2d5f1a94484c7078817ffcbe3ce33932b921b080a3d50e",
+  "viewer": {
+    "listen": {
+      "pid": 29540,
+      "startedUtc": 1795323060.2525601,
+      "root": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\highlight-review02",
+      "url": "http://127.0.0.1:3920/",
+      "readOnly": true,
+      "newCandidateRuns": 0,
+      "newRawDecodes": 0
+    },
+    "checks": [
+      {
+        "path": "",
+        "status": 200,
+        "bytes": 13255
+      },
+      {
+        "path": "data.json",
+        "status": 200,
+        "bytes": 10490
+      },
+      {
+        "path": "authorized-home-source.png",
+        "status": 200,
+        "bytes": 141178
+      },
+      {
+        "method": "POST",
+        "status": 501
+      }
+    ],
+    "browserOpened": false,
+    "candidateRuns": 0
+  }
+}

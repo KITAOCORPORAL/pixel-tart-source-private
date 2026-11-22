@@ -1,0 +1,34 @@
+{
+  "listen": {
+    "pid": 29540,
+    "startedUtc": 1795323060.2525601,
+    "root": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\highlight-review02",
+    "url": "http://127.0.0.1:3920/",
+    "readOnly": true,
+    "newCandidateRuns": 0,
+    "newRawDecodes": 0
+  },
+  "checks": [
+    {
+      "path": "",
+      "status": 200,
+      "bytes": 13255
+    },
+    {
+      "path": "data.json",
+      "status": 200,
+      "bytes": 10490
+    },
+    {
+      "path": "authorized-home-source.png",
+      "status": 200,
+      "bytes": 141178
+    },
+    {
+      "method": "POST",
+      "status": 501
+    }
+  ],
+  "browserOpened": false,
+  "candidateRuns": 0
+}

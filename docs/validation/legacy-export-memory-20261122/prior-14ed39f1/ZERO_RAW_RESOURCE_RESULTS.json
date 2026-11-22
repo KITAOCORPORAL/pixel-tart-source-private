@@ -1,0 +1,1272 @@
+{
+  "status": "RESOURCE_FAILURES_LOCALIZED_NOT_ORDINARY_ACCEPTANCE",
+  "newRawDecodes": 0,
+  "newHeavyLedgerCreated": false,
+  "forcedGc": false,
+  "decoderCalls": "Only storedRGB48 IRawDecoder substitute; originalRAW never opened, no nativeworker started",
+  "nativeLibraryGuard": "NoRAW nativeDLL copied to isolated stage; module census at finalcompletion unavailable becauseguard stopped each run; do not invent runtime module dumps",
+  "runs": [
+    {
+      "name": "full-detail-export",
+      "root": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-vm-e818-01",
+      "exit": {
+        "pid": 51364,
+        "exitCode": 1,
+        "stop": {
+          "elapsedMs": 7494.474700069986,
+          "privateBytes": 2548523008,
+          "workingSetBytes": 1898000384,
+          "osPeakWorkingSetBytes": 1898004480,
+          "phase": "session-saved"
+        },
+        "peakPrivateBytes50ms": 2548523008,
+        "osPeakWorkingSetBytes": 1898004480,
+        "samples": 148,
+        "guardBytes": 2147483648,
+        "deadlineSeconds": 600,
+        "newRawDecodes": 0,
+        "noHeavyLedger": true,
+        "sdk": "D:\\AI AGENT\\.dotnet\\dotnet.exe",
+        "hostSha256": "c327ff4d3ea7b29e7ebbece3d1b3de431ae57382b972e40206e886b31c73b0ea",
+        "forcedGc": false
+      },
+      "stages": [
+        {
+          "name": "baseline",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:18:59.6463655+00:00",
+          "privateBytes": 14979072,
+          "workingSetBytes": 54378496,
+          "osPeakWorking": 54382592,
+          "managedBytesEstimate": 2379432,
+          "totalManagedAllocated": 2372736,
+          "replayReadCalls": 0,
+          "holders": {}
+        },
+        {
+          "name": "workspace-created",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:18:59.7048542+00:00",
+          "privateBytes": 15921152,
+          "workingSetBytes": 60342272,
+          "osPeakWorking": 60346368,
+          "managedBytesEstimate": 3067496,
+          "totalManagedAllocated": 3058976,
+          "replayReadCalls": 0,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "cache-read-start-1",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:18:59.724616+00:00",
+          "privateBytes": 16355328,
+          "workingSetBytes": 61980672,
+          "osPeakWorking": 61984768,
+          "managedBytesEstimate": 3344792,
+          "totalManagedAllocated": 3335600,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "cache-rgb48-read-1",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:18:59.9712067+00:00",
+          "privateBytes": 263495680,
+          "workingSetBytes": 306163712,
+          "osPeakWorking": 306167808,
+          "managedBytesEstimate": 243907352,
+          "totalManagedAllocated": 245521816,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "cache-rgb48-streamed-write",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:01.6162059+00:00",
+          "privateBytes": 264527872,
+          "workingSetBytes": 308428800,
+          "osPeakWorking": 308432896,
+          "managedBytesEstimate": 244178576,
+          "totalManagedAllocated": 245792680,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "load-master",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:02.5001407+00:00",
+          "privateBytes": 930820096,
+          "workingSetBytes": 930291712,
+          "osPeakWorking": 930295808,
+          "managedBytesEstimate": 883860176,
+          "totalManagedAllocated": 891299512,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "visible-page-hidden-legacy-loaded",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:04.5461753+00:00",
+          "privateBytes": 1068384256,
+          "workingSetBytes": 1052286976,
+          "osPeakWorking": 1052291072,
+          "managedBytesEstimate": 575955024,
+          "totalManagedAllocated": 1008887248,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "preview-100",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:05.1263661+00:00",
+          "privateBytes": 1522839552,
+          "workingSetBytes": 1343762432,
+          "osPeakWorking": 1343766528,
+          "managedBytesEstimate": 701629488,
+          "totalManagedAllocated": 1134556912,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "preview-20",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:05.6825525+00:00",
+          "privateBytes": 1570914304,
+          "workingSetBytes": 1384284160,
+          "osPeakWorking": 1384288256,
+          "managedBytesEstimate": 856607496,
+          "totalManagedAllocated": 1299759024,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "preview-return100",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:06.231184+00:00",
+          "privateBytes": 1571045376,
+          "workingSetBytes": 1384710144,
+          "osPeakWorking": 1384718336,
+          "managedBytesEstimate": 857183744,
+          "totalManagedAllocated": 1300333736,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "session-saved",
+          "pid": 51364,
+          "atUtc": "2026-11-17T11:19:06.4205939+00:00",
+          "privateBytes": 1570648064,
+          "workingSetBytes": 1387843584,
+          "osPeakWorking": 1387847680,
+          "managedBytesEstimate": 854976440,
+          "totalManagedAllocated": 1306077824,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 64067863,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 27575860,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 22941862,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 29808750,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 25577178,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "CachedBitmap",
+              "id": 51255699,
+              "w": 7752,
+              "h": 5184,
+              "bits": 24,
+              "minBytes": 120559104
+            },
+            "sourceCacheCount": 0
+          }
+        }
+      ],
+      "stopIsResourceFailure": true,
+      "ordinaryProductAcceptance": false
+    },
+    {
+      "name": "independent-reopen-proxy-export-then-sameprocess-reopen",
+      "root": "E:\\Kitao-Deliveries\\color-fairness-resource-20261117\\resource-vm-e818-reopen-proxy-02",
+      "exit": {
+        "pid": 45052,
+        "exitCode": 1,
+        "stop": {
+          "elapsedMs": 7057.22750001587,
+          "privateBytes": 2174521344,
+          "workingSetBytes": 1983270912,
+          "osPeakWorkingSetBytes": 1983275008,
+          "phase": "cache-read-start-2"
+        },
+        "peakPrivateBytes50ms": 2174521344,
+        "osPeakWorkingSetBytes": 1983275008,
+        "samples": 139,
+        "guardBytes": 2147483648,
+        "deadlineSeconds": 600,
+        "newRawDecodes": 0,
+        "noHeavyLedger": true,
+        "sdk": "D:\\AI AGENT\\.dotnet\\dotnet.exe",
+        "hostSha256": "aedb22419b9eec6fd8dbcc87f1ea1a2e52299d973c91eec6b4b323316481342d",
+        "forcedGc": false
+      },
+      "stages": [
+        {
+          "name": "baseline",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:31.2473874+00:00",
+          "privateBytes": 14966784,
+          "workingSetBytes": 54386688,
+          "osPeakWorking": 54390784,
+          "managedBytesEstimate": 2379576,
+          "totalManagedAllocated": 2372880,
+          "replayReadCalls": 0,
+          "holders": {}
+        },
+        {
+          "name": "workspace-created",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:31.3023466+00:00",
+          "privateBytes": 15892480,
+          "workingSetBytes": 60358656,
+          "osPeakWorking": 60362752,
+          "managedBytesEstimate": 3067680,
+          "totalManagedAllocated": 3059160,
+          "replayReadCalls": 0,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "cache-read-start-1",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:31.4839071+00:00",
+          "privateBytes": 23212032,
+          "workingSetBytes": 73125888,
+          "osPeakWorking": 73129984,
+          "managedBytesEstimate": 9061808,
+          "totalManagedAllocated": 9036224,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "cache-rgb48-read-1",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:31.7242903+00:00",
+          "privateBytes": 270336000,
+          "workingSetBytes": 317472768,
+          "osPeakWorking": 317476864,
+          "managedBytesEstimate": 247402024,
+          "totalManagedAllocated": 251220848,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "independent-session-reopen",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:32.8279905+00:00",
+          "privateBytes": 971427840,
+          "workingSetBytes": 966213632,
+          "osPeakWorking": 966217728,
+          "managedBytesEstimate": 928543416,
+          "totalManagedAllocated": 932947536,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 54392269,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 36010865,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 65488073,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "session-saved",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:32.894417+00:00",
+          "privateBytes": 971821056,
+          "workingSetBytes": 966877184,
+          "osPeakWorking": 966881280,
+          "managedBytesEstimate": 928924784,
+          "totalManagedAllocated": 933327776,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 54392269,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 36010865,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 65488073,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "export-request-begin",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:32.8994487+00:00",
+          "privateBytes": 971886592,
+          "workingSetBytes": 966889472,
+          "osPeakWorking": 966893568,
+          "managedBytesEstimate": 928947232,
+          "totalManagedAllocated": 933350176,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 54392269,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 36010865,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 65488073,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "export-complete",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:37.1206196+00:00",
+          "privateBytes": 1930776576,
+          "workingSetBytes": 1939820544,
+          "osPeakWorking": 1939824640,
+          "managedBytesEstimate": 1611626992,
+          "totalManagedAllocated": 2022849848,
+          "replayReadCalls": 1,
+          "holders": {
+            "target.rawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._source": {
+              "type": "CachedBitmap",
+              "id": 14508461,
+              "w": 1600,
+              "h": 1070,
+              "bits": 24,
+              "minBytes": 5136000
+            },
+            "editor._interactiveSource": {
+              "type": "TransformedBitmap",
+              "id": 54392269,
+              "w": 800,
+              "h": 535,
+              "bits": 24,
+              "minBytes": 1284000
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "float",
+              "id": 36010865,
+              "bytes": 20544000,
+              "w": 1600,
+              "h": 1070
+            },
+            "editor._interactiveRawMaster": {
+              "type": "float",
+              "id": 65488073,
+              "bytes": 5136000,
+              "w": 800,
+              "h": 535
+            },
+            "editor._frozenRawMaster": {
+              "type": "float",
+              "id": 21764916,
+              "bytes": 482236416,
+              "w": 7752,
+              "h": 5184
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        },
+        {
+          "name": "disposed-natural-idle",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:37.7307531+00:00",
+          "privateBytes": 1931599872,
+          "workingSetBytes": 1940303872,
+          "osPeakWorking": 1940307968,
+          "managedBytesEstimate": 1612254056,
+          "totalManagedAllocated": 2023475376,
+          "replayReadCalls": 1,
+          "holders": {}
+        },
+        {
+          "name": "cache-read-start-2",
+          "pid": 45052,
+          "atUtc": "2026-11-17T11:27:37.7394136+00:00",
+          "privateBytes": 1930825728,
+          "workingSetBytes": 1940267008,
+          "osPeakWorking": 1940307968,
+          "managedBytesEstimate": 1612407640,
+          "totalManagedAllocated": 2023628600,
+          "replayReadCalls": 2,
+          "holders": {
+            "target.rawMaster": {
+              "type": "null"
+            },
+            "target.linearRawMaster": {
+              "type": "null"
+            },
+            "target.image": {
+              "type": "null"
+            },
+            "editor._source": {
+              "type": "null"
+            },
+            "editor._interactiveSource": {
+              "type": "null"
+            },
+            "editor._matchedImage": {
+              "type": "null"
+            },
+            "editor._rawPreviewMaster": {
+              "type": "null"
+            },
+            "editor._interactiveRawMaster": {
+              "type": "null"
+            },
+            "editor._frozenRawMaster": {
+              "type": "null"
+            },
+            "editor._fullRawDisplay": {
+              "type": "null"
+            },
+            "sourceCacheCount": 0
+          }
+        }
+      ],
+      "stopIsResourceFailure": true,
+      "ordinaryProductAcceptance": false
+    }
+  ],
+  "allocationMap": {
+    "width": 7752,
+    "height": 5184,
+    "pixels": 40186368,
+    "fullRgb48Bytes": 241118208,
+    "fullRgbFloatBytes": 482236416,
+    "fullRgb24Bytes": 120559104,
+    "nativeImage4Bytes": 321490944,
+    "preview1600FloatBytes": 20544000,
+    "interactive800FloatBytes": 5136000,
+    "sharedReferenceRules": [
+      "target.RawMaster and Editor._frozenRawMaster share the exact object; do not double count482236416",
+      "Editor._source and _fullRawDisplay at100 share the same CachedBitmap; do not double count120559104 minimum pixel storage",
+      "Disk cache and worker output files are not extra resident arrays merely because they exist",
+      "GC.GetTotalMemory(false) includes reachable and not-yet-collected objects; it is not a root dump or a full native allocation census"
+    ],
+    "sourceMechanisms": [
+      {
+        "call": "DiagnosticRawRgbCache.Read / replay reader",
+        "allocation": "oneRGB48 ushort[] +1MiB block; no full byte[] staging"
+      },
+      {
+        "call": "HighBitDepthImageBuffer.FromRaw->ushort constructor ToFloat",
+        "allocation": "one fullfloat482236416 while inputushort241118208 can overlap"
+      },
+      {
+        "call": "rawPipeline.PreviewMaster / interactive proxy",
+        "allocation": "20,544,000 and5,136,000 bytefloat buffers, distinct reduced sizes"
+      },
+      {
+        "call": "SetPreviewZoomAsync -> ToVisualRgb24 -> RawDisplayBitmapAdapter",
+        "allocation": "full120559104 managed RGB24 transient plus WIC copy; fullFrozenBitmap retained at100, not a newfloatmaster"
+      },
+      {
+        "call": "RawMatchTiff16ProductPipeline.ExportAsync -> Render",
+        "allocation": "ColorStudioRenderPipeline first source.Clone and ApplyHighPrecision Preset GraphPixelAllocation.Copy, each482236416 even neutral preset; returned RGB24 adapter adds120559104"
+      },
+      {
+        "call": "AtomicTiffWriter/TiffExport.WriteRgb48",
+        "allocation": "writes outputfloat to stream; no evidence of another fullRGB48 allocation in this writer; validation stream reads bounded",
+        "notNativeDecode": true
+      }
+    ],
+    "lateOriginalNative": "Native worker had exited0 before CacheStored and ProductPathEnd; oldSTOP~199s after import, so native scratch/output cannot be assumed simultaneously resident in parent atSTOP"
+  },
+  "scope": "Actual frozene818 VM/Page/Core code, injected storedpayload, controlled offscreenWPF; stage labels are lastcompleted markers, and firstSTOP occurred during subsequent export call"
+}

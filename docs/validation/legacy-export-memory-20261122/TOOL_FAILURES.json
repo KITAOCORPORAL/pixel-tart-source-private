@@ -1,0 +1,26 @@
+{
+  "allExperimentStopsPreserved": true,
+  "physicalCompanyStopFilesAvailableAtHome": false,
+  "nonProductToolCorrections": [
+    {
+      "tool": "baseline host build",
+      "error": "Missing System.Xml.Linq using; extension method compile errors",
+      "result": "Added using and rebuilt successfully; initial build log retained"
+    },
+    {
+      "tool": "initial Core test compile",
+      "error": "RawDecoderCapability and RawToJpegOptions were qualified to the services namespace",
+      "result": "Corrected to existing Models namespace; failed log retained"
+    },
+    {
+      "tool": "read-only viewer selector",
+      "error": "Expected mid_high but fixed record key is mid+high; first directory also already existed after assertion",
+      "result": "Read exact stored keys, created a fresh highlight-review02; no candidate execution"
+    },
+    {
+      "tool": "Sony View100 assertion",
+      "error": "Compared stored input dimensions to already normalized production master dimensions",
+      "result": "Fixed host assertion/oracle normalization using existing product function; initial FAILURE retained, no product orientation change"
+    }
+  ]
+}

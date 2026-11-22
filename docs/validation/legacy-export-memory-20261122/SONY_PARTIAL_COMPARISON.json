@@ -1,0 +1,70 @@
+{
+  "firstExportPixelAndMetadataParity": {
+    "width": true,
+    "height": true,
+    "bits": true,
+    "orientation": true,
+    "pixelBytes": true,
+    "pixelSha256": true,
+    "icc": true
+  },
+  "secondExportCompleted": false,
+  "reopenGuardStop": {
+    "pid": 23380,
+    "exitCode": 1,
+    "stop": {
+      "elapsedMs": 11140.999999945052,
+      "privateBytes": 2139701248,
+      "workingSetBytes": 2160762880,
+      "osPeakWorkingSetBytes": 2160762880,
+      "phase": "reopened"
+    },
+    "peakPrivateBytes50ms": 2139701248,
+    "osPeakWorkingSetBytes": 2160762880,
+    "samples": 221,
+    "guardBytes": 2147483648,
+    "samplingMs": 50,
+    "newRawDecodes": 0,
+    "forcedGc": false
+  },
+  "probes": {
+    "before": {
+      "file": "artifacts\\legacy-export-memory-20261122\\d07-sony-normalized-oracle\\oracle.tif",
+      "width": 4688,
+      "height": 7028,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "orientation": 1,
+      "pixelBytes": 197683584,
+      "pixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "icc": {
+        "bytes": 3144,
+        "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      },
+      "newRawDecodes": 0,
+      "fileSha256": "1C551FB74DCA7AE8BAC71D64A35BB18A5440871D99EDD31A830AAB2869B1A372"
+    },
+    "after": {
+      "file": "artifacts\\legacy-export-memory-20261122\\final-sony-normalized-cycle\\export-first\\synthetic-replay-marker_\u4eff\u8272.tif",
+      "width": 4688,
+      "height": 7028,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "orientation": 1,
+      "pixelBytes": 197683584,
+      "pixelSha256": "2F8272BE9709DCA1A7BE5DA650977E01F9786E263AE09643B4F6BEA5C1BDDA07",
+      "icc": {
+        "bytes": 3144,
+        "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      },
+      "newRawDecodes": 0,
+      "fileSha256": "1C551FB74DCA7AE8BAC71D64A35BB18A5440871D99EDD31A830AAB2869B1A372"
+    }
+  }
+}

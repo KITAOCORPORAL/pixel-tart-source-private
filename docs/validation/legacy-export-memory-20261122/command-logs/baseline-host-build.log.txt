@@ -1,0 +1,13 @@
+  正在确定要还原的项目…
+  已还原 N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Host.csproj (用时 132 毫秒)。
+N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Program.cs(93,269): error CS1061: “IEnumerable<XElement>”未包含“Attributes”的定义，并且找不到可接受第一个“IEnumerable<XElement>”类型参数的可访问扩展方法“Attributes”(是否缺少 using 指令或程序集引用?) [N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Host.csproj]
+N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Program.cs(93,424): error CS1503: 参数 2: 无法从“System.UriKind”转换为“bool” [N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Host.csproj]
+
+生成失败。
+
+N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Program.cs(93,269): error CS1061: “IEnumerable<XElement>”未包含“Attributes”的定义，并且找不到可接受第一个“IEnumerable<XElement>”类型参数的可访问扩展方法“Attributes”(是否缺少 using 指令或程序集引用?) [N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Host.csproj]
+N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Program.cs(93,424): error CS1503: 参数 2: 无法从“System.UriKind”转换为“bool” [N:\pixart\guangjing-legacy-export-memory-20261122\tools\LegacyExportMemory20261122\Host.csproj]
+    0 个警告
+    2 个错误
+
+已用时间 00:00:00.93
