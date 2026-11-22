@@ -27,9 +27,14 @@
       "sha256": "7d5197d73f1a20c62a0e71a774a206b69e4a006abfc51e7ff072470724f6289d"
     },
     {
+      "path": "CURRENT_PRODUCT.json",
+      "bytes": 1635,
+      "sha256": "7b9fd7ca740934eaadccd0e87023b53e795ae864e71be22bfb25e732f293c2a6"
+    },
+    {
       "path": "DELIVERY.json",
-      "bytes": 2412,
-      "sha256": "07afd39d25c61439a996d12aa903f076d51934c432ebfea771208b6f80f640d3"
+      "bytes": 2952,
+      "sha256": "2ad14cc4d79930ee87053855aa675eedd86ba514e0b7f6b77b811491b0e57465"
     },
     {
       "path": "final-selection-core.trx",
@@ -83,13 +88,13 @@
     },
     {
       "path": "REMAINING_BLOCKERS.json",
-      "bytes": 1087,
-      "sha256": "17382767de4aa041f3e4a4e4a243f87740469343b675484a5b960d71476d6eaf"
+      "bytes": 1557,
+      "sha256": "ee13fd0dfe49186b452a65a17ab43fb69934489f033330c59298d405d3d6ad04"
     },
     {
       "path": "REPORT.md",
-      "bytes": 1327,
-      "sha256": "f182152d279cf260511f5af4edf3305dcc5a6dd8540e3a8f7669325989f498dd"
+      "bytes": 1577,
+      "sha256": "159d7281da0b65f420ac07b7effbbc812458da484ec3779a483aec4d8a46ef18"
     },
     {
       "path": "ROOT_COEXISTENCE.json",
@@ -100,6 +105,11 @@
       "path": "native-final/EVIDENCE_INDEX.json",
       "bytes": 3987,
       "sha256": "ec12b345678152f171f4c19bb8c5424341100f2d7e8bfe0ba2f0d1911f64d067"
+    },
+    {
+      "path": "material-and-patch-review/EVIDENCE_INDEX.json",
+      "bytes": 1431,
+      "sha256": "225b6c99d73c4d82fa05e0e70fa59fed57be64df63f89e3ce23afc731d0abbf0"
     }
   ],
   "archiveBinding": "DELIVERY.json.archiveSha256; package member bytes are independently bound by PACKAGE_FILES.json",

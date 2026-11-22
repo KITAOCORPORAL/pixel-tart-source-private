@@ -1,7 +1,7 @@
 {
   "atUtc": "2026-11-22T05:54:09.924543+00:00",
   "clientTimeZone": "Europe/Berlin",
-  "status": "HOME_SELECTION_AND_REAL_PHONE_PC_BIDIRECTIONAL_PASS_COMPANY_ORIGINAL_MATERIAL_PENDING",
+  "status": "CURRENT_FULL_F84_ACCEPTED_RESEARCH_PATCH_HELD_COMPANY_MATERIAL_WAIT",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "branch": "home/d07-ordinary-acceptance-20261122",
   "package": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122",
@@ -43,5 +43,16 @@
   "phoneEvidence": "native-final/PHONE_BIDIRECTIONAL_FINAL.json",
   "phoneBidirectionalFinalPassed": true,
   "phonePcNormalExitCode": 0,
-  "companyOriginalMaterialVerification": "PENDING_ORIGINAL_TIFF_AND_RECOVERY"
+  "companyOriginalMaterialVerification": "PENDING_ORIGINAL_TIFF_AND_RECOVERY",
+  "currentFullProductEntryCount": 1,
+  "currentProductPointer": "../home-acceptance-20261122/CURRENT_PRODUCT.json",
+  "researchMemoryPatchAdmission": "HELD_NOT_MERGED_FINAL_PROCESSED40_SAME_PROCESS_GATE_FAILED",
+  "researchPatchChain": [
+    "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+    "11a424c90199b32cbf73cc6a14eefd651612b213"
+  ],
+  "researchEvidenceCommit": "eb5229eb1a06792162108fa1c3bed56c2ac249e1",
+  "materialReview": "../home-acceptance-20261122/material-and-patch-review/REPORT.md",
+  "materialReviewAtUtc": "2026-11-22T16:16:05.005616+00:00",
+  "buildOrAcceptanceRerunThisReview": false
 }

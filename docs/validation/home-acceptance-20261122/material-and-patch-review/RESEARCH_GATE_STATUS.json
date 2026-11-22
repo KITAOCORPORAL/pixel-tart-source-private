@@ -1,0 +1,42 @@
+{
+  "evidenceCommit": "eb5229eb1a06792162108fa1c3bed56c2ac249e1",
+  "receiptPath": "docs/validation/legacy-precision-followup-20261122/RECEIPT.json",
+  "receiptBlob": "ce364b149b571f9d184d0fb4b9b3404ad3e44267",
+  "receipt": {
+    "status": "SONY_REOPEN_AND_PROCESSED_FIRST_EXPORT_PASS_FULL_RESOURCE_GATE_PARTIAL",
+    "source": "11a424c90199b32cbf73cc6a14eefd651612b213",
+    "dependsOnProductPatch": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+    "formalProductMerged": false,
+    "nativeReleaseDllReplaced": false,
+    "newRawDecodes": 0,
+    "heavyLedgerCreated": false,
+    "oldStopBalancesChanged": false,
+    "forceGcOrGlobalCacheClear": false,
+    "guardBytes": 2147483648,
+    "corePassed": 75,
+    "wpfPassed": 20,
+    "fullProductIntegrationReady": false,
+    "passedScopes": [
+      "40MP neutral full same-process cycle",
+      "40MP actually processed 100% preview and first export",
+      "Sony direction8 full same-process cycle, upright direction1"
+    ],
+    "remainingStop": {
+      "run": "verified-40-processed100-cycle",
+      "stage": "payload-read-2",
+      "meaning": "Actual processed 40MP first export succeeded; same-process re-read capacity still exceeds guard. Not proof of a leak.",
+      "productBinaryBound": true,
+      "privatePeakBytes": 2493468672,
+      "osPeakWorkingSetBytes": 2181640192
+    },
+    "unchangedScope": [
+      "spatial/graph/complex composite original processing",
+      "highlight candidate not connected",
+      "sharpening V1 sealed",
+      "no cold/rebuild RAW admission"
+    ],
+    "proposedNextProbe": "Before second U16/float rebuild, distinguish actual strong roots, uncollected garbage, LOH commitment and WPF/native allocations under the same guard. No cache flush, forced GC or unproven shared-master disposal.",
+    "timezone": "Europe/Berlin"
+  },
+  "reexecutedHere": false
+}

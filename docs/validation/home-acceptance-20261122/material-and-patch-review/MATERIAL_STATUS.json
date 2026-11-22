@@ -1,0 +1,107 @@
+{
+  "status": "WAIT_AUTHORIZED_COMPANY_RENDERED_TIFF_AND_MATCHING_RECOVERY",
+  "companyTiff": {
+    "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+    "fileSha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+    "width": 7752,
+    "height": 5184,
+    "channelBits": 16,
+    "orientation": 1,
+    "iccBytes": 3144,
+    "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+    "rgb48AllRowsSha256": "5be9b355f579cfdc2aea9fcfec8e0208a2489b605e85db84e6bce688f63fb8aa",
+    "rowsReadInHistoricalProbe": 5184,
+    "fingerprintSources": [
+      "docs/validation/tiff-srgb-company-20261116/RECEIPT.json",
+      "docs/validation/root-cause-fixes-20261117/final-acceptance-20261117/AUTHORIZED_TIFF_CURRENT.json"
+    ]
+  },
+  "companyRecovery": {
+    "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
+    "historicalFingerprints": [
+      {
+        "source": "docs/validation/root-cause-fixes-20261117/retained-preview-followup-20261119/ORDINARY_CURRENT.json",
+        "observedAtUtc": "2026-11-19T07:04:36.174917+00:00",
+        "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
+        "sha256": "474f6d83a3d7b5d5d0008499fff3d43e2c8216108c11e537049d0b9166ed19fb",
+        "storedExposure": null,
+        "sourceDocumentSha256": "550af0630efa2b8928253eea34693c3b3fa219eb774121a98f42af782f35f7e0",
+        "uiExposureReadback": 0.1
+      },
+      {
+        "source": "docs/validation/root-cause-fixes-20261117/retained-preview-followup-20261119/ORDINARY_OPENED_CURRENT.json",
+        "observedAtUtc": "2026-11-19T07:04:36.174917+00:00",
+        "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
+        "sha256": "a321c8a74c86b9656b508deb640f247da70dadc18372d78088815a9acd0a21de",
+        "storedExposure": 0.1,
+        "sourceDocumentSha256": "9fdad362383c202201eca4892bddfef8cf7e836c066882fdc65966798ec10080",
+        "uiExposureReadback": 0.1
+      }
+    ],
+    "differentValidHistoricalHashes": true,
+    "currentFileHashUnknownWithoutFile": true,
+    "automaticChoiceBetweenSnapshots": false,
+    "expectedStoredExposure": 0.1
+  },
+  "minimumFilesToCollect": 2,
+  "doNotCollect": [
+    "camera RAW",
+    "payload",
+    "cache",
+    "full company delivery history",
+    "replacement native decoder"
+  ],
+  "exactPathProbes": {
+    "probes": [
+      {
+        "name": "companyFullExe",
+        "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\Guangjing-RootCause-d07e4f43-Full-win-x64\\App\\KitaoPhotoSelector.exe",
+        "exists": false,
+        "checkedAs": "exact authorized historical path"
+      },
+      {
+        "name": "companyTiff",
+        "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+        "exists": false,
+        "checkedAs": "exact authorized historical path"
+      },
+      {
+        "name": "companyRecovery",
+        "path": "E:\\Kitao-Deliveries\\root-cause-fixes-20261117\\tiff-d07e4f43-20261119\\output\\tiff-recovered-exposure01.ptstudio.json",
+        "exists": false,
+        "checkedAs": "exact authorized historical path"
+      }
+    ],
+    "recursiveScan": false
+  },
+  "transferConfigurationCheck": {
+    "checked": [
+      {
+        "path": "artifacts/home-20261122/CONTEXT.json",
+        "sha256": "ac402e496b83b108dab72630ca089d109a3a3aa56323310fe8121740a700086a",
+        "transferRelatedKeys": []
+      },
+      {
+        "path": "artifacts/home-resume-final-20261122/BUILD_CONTEXT.json",
+        "sha256": "1bf73381320174f8fb318fe58a561fce5ed8b68f7c1cc4dd6a90fcbf3abb30d1",
+        "transferRelatedKeys": []
+      },
+      {
+        "path": "artifacts/home-native-final-20261122/CONTEXT.json",
+        "sha256": "20e7d279f4aad0a7de56dc15d16f6f52e8d3299ca83ce0a4348db413721a2094",
+        "transferRelatedKeys": []
+      },
+      {
+        "path": "artifacts/home-native-final-20261122/CURRENT_HANDOFF.json",
+        "sha256": "dd739f7cd1f29020df4fcc636407d809648ec04651911fa267aa27e658d7f5aa",
+        "transferRelatedKeys": []
+      }
+    ],
+    "configuredAuthorizedMaterialTransferLocations": [],
+    "newTransferConnectionCreated": false
+  },
+  "ordinaryOriginalImageTestExecuted": false,
+  "newRawDecodes": 0,
+  "atUtc": "2026-11-22T16:13:39.784514+00:00",
+  "historicalHashDiscrepancyResolution": "Both are valid SHA256 observations from the same historical path; their records do not prove which is the current file. Preserve both and verify the actual authorized file on receipt, including its referenced TIFF and stored edit definition."
+}

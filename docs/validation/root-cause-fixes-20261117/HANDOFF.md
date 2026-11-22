@@ -1,11 +1,11 @@
-# 当前状态：家庭两条闭环已收口，仅余公司原图材料
+# 当前产品、研究补丁和材料待办
 
-所验源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭分支 home/d07-ordinary-acceptance-20261122。普通EXE选片同项目闭环PASS，真实iPhone/普通PC双向档期PASS。
+当前可用源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭已审文档d4965956。唯一当前完整产品入口：`C:\Users\Admin\AppData\Local\Guangjing\Deliveries\HomeResume-f84f8b2d-20261122\Start-FullProduct-LocalTest.cmd`。原四组件/扩展全模块包、ZIP及1432个文件摘要核对不变；不生成只有暗室的包。选片完整闭环、空名/补名、关闭取消保存、双DataRoot、真实iPhone/PC双向均保持PASS，不重列旧Tailscale/设备/窗口断点，不重签凭据、不改预约、不重跑已通过手机。
 
-选片v1/r5确认收回原项目、单选JPEG导出、正常退出独立重开、重复同步与复导一致、撤销失效均已完成；手机原家庭预约v2→手机v3→PC原生v4→用户确认手机显示v4。最终手机PC正常退出0，预约仍v4，2GiB/50ms守卫无停止、无强制GC、新RAW0。历史PID/窗口不再是当前活跃实例。手机HTTPS服务保留。
+本轮详见 [材料与准入报告](../home-acceptance-20261122/material-and-patch-review/REPORT.md)，唯一入口指针 [CURRENT_PRODUCT.json](../home-acceptance-20261122/CURRENT_PRODUCT.json)。既有按数据根恢复的Guarded工具保留作验收取证辅助，不是第二个产品版本/当前主入口；不自动合并数据根。
 
-最新 [总报告](../home-acceptance-20261122/REPORT.md)、[手机最终回执](../home-acceptance-20261122/native-final/PHONE_NATIVE_PROGRESS.md)，JSON为FINAL_WORKFLOW_RESULT与PHONE_BIDIRECTIONAL_FINAL。完整包/ZIP字节不变，封装后实测另列，不把旧包内报告当当前待办。包外CURRENT_HANDOFF.json保存正确本机恢复入口与原数据根。
+公司缺件只取两份：DSCF0347_仿色.tif与匹配tiff-recovered-exposure01.ptstudio.json，完整历史位置/文件及像素/ICC摘要见 [最小取件清单](../home-acceptance-20261122/material-and-patch-review/MATERIAL_REQUEST.md)。TIFF SHA0da1bf38…；恢复文件存在474f6d83…与a321c8a7…两条合法不同历史SHA，不能猜哪条是当前；取回先核公司端当前摘要和JSON定义。准确历史路径仍不可达，4个已知上下文没有材料传输位置配置，未遍历图库/新建连接。材料未到，原图保持待验，家庭合成不替代。
 
-下一步只在两份公司授权材料可用后继续原图复验：Fuji渲染TIFF及匹配恢复文件，准确历史路径见MATERIAL_CHECK.json。家庭固定合成40MP通过仍绑定d07，原433 JPEG与公司历史v4保持原source，不拿家庭结果冒充公司原图。没有可用取件配置，不扫描图库、不复制全历史、不重复应用已包含内存补丁。
+研究源码cf5a63d3→11a424c9，最新证据eb5229eb，后者仅文档。处理后40MP同进程重开仍payload-read-2 STOP（Private2377.96MiB/OS工作集2080.57MiB）。只读Git文本副本预演8源文件+2测试，冲突0、当前直接修改交集0，但不是行为/容量通过。仍不合入、不替换f84、不写研究树。不能以f84..研究分支整目录差异作补丁，否则回退可见拒绝、历史预约链接及WPF测试。未来研究门禁齐备后，由本产品线保留当前修复统一集成、构建全模块同源码包和受影响普通EXE验收，旧f84包保留。
 
-原PHONE_HANDOFF_ACTIVE、旧授权、旧树、原JPEG DB/工作文件、旧包和4个未提交工具均保留。未重做UI，无后台监控/自动续签；手机授权仍到2026-11-24 05:45 UTC（柏林06:45），私有链接/token不入Git或包。
+本轮构建/普通App启动/功能复测/预约写入/新RAW均0。原未提交4工具、研究HEAD/工作树状态、旧数据和历史失败保留。材料到位的2GiB/50ms原件副本完整流程见 [材料到位计划](../home-acceptance-20261122/material-and-patch-review/WHEN_MATERIAL_ARRIVES.md)；受控宿主/另一VM不能代替普通EXE独立进程。UI继续交Claude，本轮不重做。

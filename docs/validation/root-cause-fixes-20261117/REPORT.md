@@ -1,5 +1,7 @@
-# 当前根因修复交付最终状态
+# 家庭产品线当前状态
 
-2026-11-22：**普通EXE在线选片同项目闭环与真实iPhone/PC双向档期均PASS**，所验源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`。所有桌面测试进程正常关闭，手机服务保留，最终家庭预约v4不变。
+当前可用产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`、已审家庭文档d4965956；所有已完成的普通EXE与真实手机验收保留，当前完整包/入口/ZIP未变。
 
-见 [家庭总报告](../home-acceptance-20261122/REPORT.md) 和 [手机最终回执](../home-acceptance-20261122/native-final/PHONE_NATIVE_PROGRESS.md)。尚缺公司原Fuji渲染TIFF/恢复文件作原图复验；d07合成40MP及433JPEG均保持原source。完整包字节未变，UI未重做。
+本轮完成两个只读工作：精确整理公司两份缺件及历史摘要分歧；审查cf5a63d3→11a424c9与f84的产品增量。文本预演冲突0，但最终处理后40MP同进程重开仍STOP，研究补丁不接入。材料不可得，原图未运行。
+
+详见 [当前产品/待补丁/缺材料报告](../home-acceptance-20261122/material-and-patch-review/REPORT.md)。当前入口仅一个，CURRENT_PRODUCT.json固定其源与包摘要。没有构建、App启动、手机重跑、凭据签发、预约修改或RAW解码，研究树未改，UI未重做。

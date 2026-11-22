@@ -1,0 +1,157 @@
+{
+  "kind": "COPY_ONLY_THREE_WAY_TEXT_REVIEW_NOT_INTEGRATION",
+  "currentProduct": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "researchProduct": "11a424c90199b32cbf73cc6a14eefd651612b213",
+  "researchEvidence": "eb5229eb1a06792162108fa1c3bed56c2ac249e1",
+  "mergeBase": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "currentChangedPaths": [
+    "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "tests/RAWSelectionAssistant.WpfTests/SelectionRejectionVisibilityTests.cs"
+  ],
+  "memoryChangedPaths": [
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+    "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+    "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs",
+    "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs"
+  ],
+  "directModifiedFileIntersection": [],
+  "textConflictCount": 0,
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+      "currentExists": false,
+      "baseExists": false,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "d34cd04b918cf585d250a387794fd48ad11e183a533096e3940809175402b3ef",
+      "candidateBlob": "dcddf8c1de0ccbb6c6a851f9cda566f9b3efbf02"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "e0d272fec88c98cf8131e31122dce7f944fabb8ab65b14814da3b872eaa40c00",
+      "candidateBlob": "0d44a308f291bb513db208fee96bf99ffbb17c97"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "currentExists": false,
+      "baseExists": false,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "45fbc9e48d0b2c046dfef2b48371771135f18a50f482ee306cb24784e83a2993",
+      "candidateBlob": "221b3914cabba75911ef973acef29fc424ad7f70"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "250fd5d46ffd4be24181fed60f6c42a7a4e6f227aa47a0ea08deb12888f2cb2b",
+      "candidateBlob": "bc5264132ffad092b8b76b33fd219192e43f0594"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "7030d399e4b44be5131817ab559889e658f6a370c19e5d6f57d3db68b9f91c72",
+      "candidateBlob": "e851be1b1819fed056b08a5981cfbf77f427bad9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "61f2bb41cabe9c78ba23c2eb6b78f9de773fde416a615d27af4c85c5baf7293a",
+      "candidateBlob": "b0c9fd234f7f569547e7a74fe0f9eaf7ac73cd52"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "ccd5f0825ead02d60938e8bfeb52f43f60249b22666b87c62938c1b722c4a169",
+      "candidateBlob": "6952e73ba6f3192746803009e8db3358ef7c4087"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "currentExists": true,
+      "baseExists": true,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "d8b1e556b56efcaa14d8dfb680ead8ce983ee7f7c3c86aebc39f9b48f71ae80a",
+      "candidateBlob": "762162b1641c19e33f41cfddae918803481a35b2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs",
+      "currentExists": false,
+      "baseExists": false,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "7f34775503bffd1e681c1c50e54b3de0bb3e512271fc0c83cc6d86994fe2d35f",
+      "candidateBlob": "a3394f31573da45548af22570ab8219a7b141b4b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs",
+      "currentExists": false,
+      "baseExists": false,
+      "candidateExists": true,
+      "currentEqualsMergeBase": true,
+      "textConflictCount": 0,
+      "mergedSha256": "3fcdb09126927bb9c9dd664e9ad4fb0ae1aa33df0c33853ede035ed98c1dc0ca",
+      "candidateBlob": "c0758fd240aa0768922396a33850d29c23d06dd4"
+    }
+  ],
+  "currentFixesMustRemain": [
+    {
+      "path": "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js",
+      "blob": "404eae55fade61b50e45b4b2b048cbad86ebe319",
+      "sha256": "89dccfd85a7ea22fcad731f966848f6b35303706dd058626b8ce709e5dc3bb21",
+      "memoryPatchModifiesThisPath": false
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "blob": "c83656adecb781d3170d92f9f274f325286aef82",
+      "sha256": "e08258cf26b15d339b6bebcca0acbb7534e0830bfc1d987c126c5324b4d3da4b",
+      "memoryPatchModifiesThisPath": false
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/SelectionRejectionVisibilityTests.cs",
+      "blob": "b7d3be4a4667a2df256bf6dc3fb2e1c1bdeb2c4b",
+      "sha256": "3391da6eec87f0e1f7b5aa851ecc08e9fcaaa80231e9dd5ac0c277050a44a6f0",
+      "memoryPatchModifiesThisPath": false
+    }
+  ],
+  "integrationPerformed": false,
+  "researchWorktreeWritten": false,
+  "compilationPerformed": false,
+  "runtimeGatePassed": false,
+  "wholeBranchReplacementWouldRevertCurrentOnlyPaths": [
+    "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+    "tests/RAWSelectionAssistant.WpfTests/SelectionRejectionVisibilityTests.cs"
+  ]
+}
