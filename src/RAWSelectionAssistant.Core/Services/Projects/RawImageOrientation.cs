@@ -36,6 +36,25 @@ public static class RawImageOrientation
             image.Metadata with{Orientation=1});
     }
 
+    internal static HighBitDepthImageBuffer OwnUprightRgb48(RawDecodedImage image,CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();var input=image.Rgb48Pixels??throw new ArgumentException("RGB48 required.");
+        if(input.Length!=checked(image.Width*image.Height*3))throw new ArgumentException("RGB48 dimensions mismatch.");
+        var o=image.Metadata.Orientation;var rotate=o is >=2 and <=8;var w=rotate&&o>=5?image.Height:image.Width;var h=rotate&&o>=5?image.Width:image.Height;
+        var words=new ushort[input.Length];
+        for(int y=0;y<image.Height;y++)
+        {
+            token.ThrowIfCancellationRequested();
+            for(int x=0;x<image.Width;x++)
+            {
+                var (dx,dy)=o switch{2=>(image.Width-1-x,y),3=>(image.Width-1-x,image.Height-1-y),4=>(x,image.Height-1-y),5=>(y,x),6=>(image.Height-1-y,x),7=>(image.Height-1-y,image.Width-1-x),8=>(y,image.Width-1-x),_=>(x,y)};
+                input.AsSpan((y*image.Width+x)*3,3).CopyTo(words.AsSpan((dy*w+dx)*3,3));
+            }
+        }
+        return HighBitDepthImageBuffer.TakeOwnedRgb48(w,h,words,image.BitsPerChannel.ToString(),image.Metadata.ColorSpace,
+            rotate?(ushort)1:o,rotate?image.Metadata with{Orientation=1}:image.Metadata);
+    }
+
     public static HighBitDepthImageBuffer NormalizePixels(HighBitDepthImageBuffer source, CancellationToken token = default)
     {
         var orientation = source.Orientation;

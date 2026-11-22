@@ -18,7 +18,7 @@ public sealed class HighPrecisionExportRows : IDisposable
         var input=source ?? throw new ObjectDisposedException(nameof(HighPrecisionExportRows));
         token.ThrowIfCancellationRequested();
         if((uint)y>=(uint)input.Height)throw new ArgumentOutOfRangeException(nameof(y));
-        if(nodes.Length==0)return input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
+        if(nodes.Length==0&&input.IsFloatMaterialized)return input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
         if(strip is null||y<stripStart||y>=stripStart+strip.Height)
         {
             strip?.Dispose();strip=null;stripStart=y;
@@ -45,7 +45,7 @@ public sealed class HighPrecisionExportRows : IDisposable
     private HighBitDepthImageBuffer RenderStrip(HighBitDepthImageBuffer input,int y,int rows)
     {
         using var buffers=GraphPixelAllocation.EnterIfNeeded();
-        var copied=GraphPixelAllocation.Copy(input.Rgb32.Slice(y*input.Width*3,rows*input.Width*3));
+        var copied=GraphPixelAllocation.Allocate(rows*input.Width*3);input.CopyRgb32(y*input.Width*3,copied);
         HighBitDepthImageBuffer? current=new(input.Width,rows,copied,input.SourceBitDepth,input.WorkingColorSpace,input.Orientation,input.Metadata);
         try
         {
