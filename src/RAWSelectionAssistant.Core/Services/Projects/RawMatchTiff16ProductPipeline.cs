@@ -81,9 +81,24 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
     {
         ArgumentNullException.ThrowIfNull(master);
         await master.ValidateSourceAsync(token).ConfigureAwait(false);
-        using var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
-        return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
-            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
+        var image = master.Image;
+        if (image.SourceBitDepth != "16" || !string.Equals(image.WorkingColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("RAW processing requires 16-bit decoded sRGB input.");
+        var state = ColorStudioEffectiveState.Resolve(look, stack, film) ?? (look is not null
+            ? ColorStudioLegacyMigration.Migrate(look with { Film = film ?? look.Film }).Stack
+            : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]));
+        var renderer = new ColorStudioRenderPipeline();
+        using var rows = renderer.TryCreatePointExportRows(image,state,token);
+        if (rows is not null)
+        {
+            // Reuse only this export's bounded strip backing; no global cache or full-frame slot.
+            using var scratch = GraphPixelAllocation.Enter();
+            return await AtomicTiffWriter.WriteRowsAsync(destinationPath,image.Width,image.Height,rows.FillRow,
+                new(TiffBitDepth.Sixteen,IccProfile:outputIcc,Software:"光镜",Orientation:image.Orientation),token,overwrite:false).ConfigureAwait(false);
+        }
+        using var result = renderer.RenderForExport(image, look, state, token);
+        return await AtomicTiffWriter.WriteRgb48Async(destinationPath, result.Pixels,
+            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: result.Pixels.Orientation), token, overwrite: false).ConfigureAwait(false);
     }
 
     private static HighBitDepthImageBuffer CreateProxy(HighBitDepthImageBuffer source, int maximumEdge, CancellationToken token)

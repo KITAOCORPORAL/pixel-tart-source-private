@@ -8,18 +8,31 @@ public sealed record ColorStudioRenderResult(VisualPixelBuffer Pixels, IReadOnly
     PrecisionTrace? Precision = null);
 
 /// <summary>Headless linear Color Studio renderer. Export callers can use this same chain; no second WPF renderer is introduced.</summary>
-public sealed class ColorStudioRenderPipeline
+public sealed partial class ColorStudioRenderPipeline
 {
     private readonly ReferenceLookMatcher _matcher = new();
 
     public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null,IReadOnlyDictionary<Guid,Func<double,double,double>>? compiledMasks=null)
+    {
+        var result = RenderProcessing(source, analysis, reference, stack, token, captureNodeDiagnostics, alpha, tile, compiledMasks);
+        try { return new(result.Pixels.ToVisualRgb24(token), result.NodeOutputs, result.Pipeline, result.NodeInputs, result.Pixels, result.Precision); }
+        catch { result.Pixels.Dispose(); throw; }
+    }
+
+    private sealed record ProcessingResult(HighBitDepthImageBuffer Pixels, IReadOnlyList<VisualPixelBuffer> NodeOutputs,
+        ColorPipelineDescriptor Pipeline, IReadOnlyDictionary<Guid, VisualPixelBuffer> NodeInputs, PrecisionTrace Precision);
+
+    private ProcessingResult RenderProcessing(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis,
+        ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token, bool captureNodeDiagnostics,
+        ReadOnlyMemory<byte> alpha = default, FilmTileCoordinates? tile = null,
+        IReadOnlyDictionary<Guid,Func<double,double,double>>? compiledMasks = null)
     {
         ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = normalized.Graph?.Version==2?source:source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         if(normalized.Graph?.Version==2)
         {
             current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
-            return new(current.ToVisualRgb24(token),outputs,new ColorPipelineDescriptor(InputInterpretation:"HighPrecision sRGB",WorkingRepresentation:normalized.WorkingSpace,OutputEncoding:"sRGB display adapter"),inputs,current,new PrecisionTrace(precisionStages));
+            return new(current,outputs,new ColorPipelineDescriptor(InputInterpretation:"HighPrecision sRGB",WorkingRepresentation:normalized.WorkingSpace,OutputEncoding:"sRGB display adapter"),inputs,new PrecisionTrace(precisionStages));
         }
         foreach (var node in StudioGraphRouting.Nodes(normalized).Where(item => item.Enabled))
         {
@@ -31,7 +44,7 @@ public sealed class ColorStudioRenderPipeline
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
-        return new(current.ToVisualRgb24(token), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
+        return new(current, outputs, descriptor, inputs, new PrecisionTrace(precisionStages));
     }
 
     public static HighBitDepthImageBuffer ApplyPointEffect(HighBitDepthImageBuffer source,ColorAdjustmentStackNode node,CancellationToken token=default)
