@@ -1,7 +1,10 @@
 "use strict";
 (() => {
  const $=id=>document.getElementById(id), key="guangjing-schedule/v1";
- let credential=new URLSearchParams(location.hash.slice(1)).get("token");
+ const fragment=new URLSearchParams(location.hash.slice(1));
+ let credential=fragment.get("token");
+ const requestedBooking=fragment.get("booking");
+ const initialBookingId=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestedBooking||"")?requestedBooking:null;
  try{if(credential)sessionStorage.setItem(key,credential);else credential=sessionStorage.getItem(key);}catch{}
  history.replaceState(null,"",location.pathname);
  let booking=null,busy=false,days=1,zone="Asia/Shanghai",pending=null;
@@ -19,5 +22,5 @@
  $("edit").onsubmit=event=>{event.preventDefault();return save();};$("save-anyway").onclick=()=>save("SaveAnyway");$("allow-overlap").onclick=()=>save("MarkAllowOverlap");$("reload").onclick=()=>booking&&open(booking.id);
  $("today").onclick=async()=>{days=1;try{await list();}catch(e){message(e.message);}};$("upcoming").onclick=async()=>{days=14;try{await list();}catch(e){message(e.message);}};
  $("refresh").onclick=async()=>{try{await list();if(booking)await open(booking.id);}catch(e){message(e.message);}};
- (async()=>{try{if(!credential)throw new Error("缺少手机授权，请使用电脑签发的完整链接。");const session=await api("/session");zone=session.timeZone;$("device").textContent=session.device.name;await list();message("点预约查看详情，手机和电脑共用同一日历。");}catch(e){message(e.message);$("detail").hidden=true;}})();
+ (async()=>{try{if(!credential)throw new Error("缺少手机授权，请使用电脑签发的完整链接。");const session=await api("/session");zone=session.timeZone;$("device").textContent=session.device.name;await list();if(initialBookingId)await open(initialBookingId);else message("点预约查看详情，手机和电脑共用同一日历。");}catch(e){message(e.message);$("detail").hidden=true;}})();
 })();
