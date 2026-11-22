@@ -1,0 +1,105 @@
+{
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "savedResult": {
+    "SelectionProjectId": "33370906-7374-4688-9cb0-2672d8996a45",
+    "ConfirmedAtUtc": "2026-11-22T12:19:33.4275988+00:00",
+    "Items": [
+      {
+        "SelectionProjectId": "33370906-7374-4688-9cb0-2672d8996a45",
+        "ImageId": "76020d15-bc29-47d9-8715-a45f52e40920",
+        "OriginalFileName": "HOME_0001.png",
+        "Selected": false,
+        "Favorite": false,
+        "CustomerNote": null,
+        "ExtraSelected": false
+      },
+      {
+        "SelectionProjectId": "33370906-7374-4688-9cb0-2672d8996a45",
+        "ImageId": "994555a9-bd9b-40da-8f8e-fb908353f468",
+        "OriginalFileName": "HOME_0003.png",
+        "Selected": true,
+        "Favorite": false,
+        "CustomerNote": null,
+        "ExtraSelected": false
+      }
+    ],
+    "SelectionVersion": 1,
+    "Revision": 5,
+    "IsLocked": true
+  },
+  "selectedSavedTargets": [
+    "HOME_0003.jpg"
+  ],
+  "firstConfirmedExit": {
+    "pid": 31276,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 547590144,
+    "osPeakWorkingSetBytes": 548433920,
+    "samples": 46506,
+    "phases": {
+      "startup": {
+        "samples": 46506,
+        "peakPrivateBytes": 547590144,
+        "peakWorkingSetBytes": 544862208
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "independentReopenLaunch": {
+    "pid": 34016,
+    "app": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\App\\KitaoPhotoSelector.exe",
+    "exeSha256": "8ce4a1b9222c739fd4f1c9b9f604173229817f10c6c56e8015fae68fe4a420bb",
+    "productAssemblySha256": "9d6b59b44f05c906d2e5a5aa044fab6eff2bc7509593ceeea13f6f858036b51a",
+    "runtime": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\jpeg-runtime",
+    "guardBytes": 2147483648,
+    "intervalMs": 50,
+    "newRawDecodeLimit": 0,
+    "startedUtc": 1795351032.1454322,
+    "authority": "ordinary App prepared for native UI input"
+  },
+  "ownerFinalGetRequestsBeforeManualRefresh": [],
+  "independentReopenUiReceipt": "v1/r5; selected1; exposure0.5",
+  "finalExit": {
+    "pid": 34016,
+    "exitCode": 0,
+    "monitorEndedWhileAppAlive": false,
+    "stop": null,
+    "peakPrivateBytes50ms": 530923520,
+    "osPeakWorkingSetBytes": 545427456,
+    "samples": 11474,
+    "phases": {
+      "startup": {
+        "samples": 11474,
+        "peakPrivateBytes": 530923520,
+        "peakWorkingSetBytes": 545415168
+      }
+    },
+    "forcedGcUsed": false,
+    "newRawDecodeLimit": 0
+  },
+  "nativeEvidence": [
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\pc-confirmed-result-readback.json",
+      "sha256": "dcadb8a59861a38dea293863a13c01fcb08e6776d3c51a978b67dcdd2ff7c93e"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\same-workflow-sync-readback.json",
+      "sha256": "77c9cf91a6bdff66e6300a581d5bac4958e15ba2370c4cfc02aba311cace1c72"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\final-reopen-editor-state.json",
+      "sha256": "c23ec80b5a5757abbc40e0d28887727adccf35bc43cf4d4358163581f6301d6e"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\final-reopen-persisted-receipt.json",
+      "sha256": "5305a738461f91e02e741e7e730ccdac0971e5ec9c0ba721d936048b7f2e91cd"
+    },
+    {
+      "path": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\native\\revoked-album-readback.json",
+      "sha256": "9a8295c2548029b800a450b025a50b257132972753600f4bb1bbfc4910ede5cd"
+    }
+  ]
+}

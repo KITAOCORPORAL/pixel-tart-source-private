@@ -18,6 +18,31 @@
       "sha256": "feb4f6dfc84880a2c2921830eb90f166d20f477eef6c3ce1926bce07f0c8afbd"
     },
     {
+      "path": "CONFIRMED_RESULT_PERSISTENCE.json",
+      "bytes": 3900,
+      "sha256": "2214eaac9b6ab6bfddbce6c378166792ba0e306beff03ed8c87cf5b2a493fb2a"
+    },
+    {
+      "path": "CUSTOMER_CONFIRMATION.json",
+      "bytes": 1121,
+      "sha256": "fcbfce80d9c2e5317f52fc8fe12c5562acdf6d2f3c78a1ec561b3c53f317dfaa"
+    },
+    {
+      "path": "CUSTOMER_JPEG_COMPARISON.json",
+      "bytes": 1492,
+      "sha256": "caf643de703fa941d1170188f45f549bb71dde51011100f4f87563150d610dde"
+    },
+    {
+      "path": "FINAL_WORKFLOW_RESULT.json",
+      "bytes": 1954,
+      "sha256": "5f27378014a8f3924007f88a40f3708ed330767ad45c7524b42b8ce8ff87c579"
+    },
+    {
+      "path": "history/REPORT_before_customer_confirmation_20261122.md",
+      "bytes": 5064,
+      "sha256": "0d2bd64cfc7095136223a85086b9f874c245a4da7f998f10a4ddea617045c5b7"
+    },
+    {
       "path": "JPG_SAVE_REOPEN.json",
       "bytes": 2661,
       "sha256": "0239ed575495d5439c0659cdc76580515a0637b920df2e141d98405462524c19"
@@ -26,6 +51,11 @@
       "path": "MATERIAL_CHECK.json",
       "bytes": 801,
       "sha256": "24d7d33f0f0c9b0e788b77596e7ed51a9105ef2684d084c27a4dfb8ee054f4d7"
+    },
+    {
+      "path": "PHONE_NATIVE_READY.json",
+      "bytes": 459,
+      "sha256": "adebc62965a8f30e6858fdabe48063937d6b2510fe13d0b3cb9e802ae3f6079a"
     },
     {
       "path": "PHONE_STATUS.json",
@@ -38,9 +68,19 @@
       "sha256": "9ea124b955c558298404ffdb74dd0a03d1ff7612678865bb42e648a25b491dcc"
     },
     {
+      "path": "REOPEN_REPEAT_SYNC.json",
+      "bytes": 587,
+      "sha256": "5e6e7b35affb4aeb28686745933ac94399f65cc49c8d89087fc9044e63d3513e"
+    },
+    {
       "path": "REPORT.md",
-      "bytes": 5064,
-      "sha256": "0d2bd64cfc7095136223a85086b9f874c245a4da7f998f10a4ddea617045c5b7"
+      "bytes": 4411,
+      "sha256": "535d40fd52c0aae3f577aec639ea7037569897d95ea7fab2e28a96fa419ec976"
+    },
+    {
+      "path": "REVOCATION_RESULT.json",
+      "bytes": 312,
+      "sha256": "a7c89b3ca53380f1fbe4786f4f535ad6c538332afa468f44e081eee1aeb2818a"
     },
     {
       "path": "ROOT_OWNERSHIP.json",

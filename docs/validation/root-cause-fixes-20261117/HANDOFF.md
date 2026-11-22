@@ -1,11 +1,9 @@
-# 当前断点：最终源码原生前半程通过，等系统 Chrome 客户确认
+# 当前断点：在线选片闭环已通过，等iPhone原预约保存
 
-产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，家庭分支 `home/d07-ordinary-acceptance-20261122`。完整包未修改，DELIVERY.json 仍绑定原 ZIP 字节；新增普通实测见 [本轮原生报告](../home-acceptance-20261122/native-final/REPORT.md)。
+产品源码 `f84f8b2d9f68d668c6387089832e6f52cdd24dab`，分支 home/d07-ordinary-acceptance-20261122，完整产品和ZIP字节未变。最新 [普通闭环报告](../home-acceptance-20261122/native-final/REPORT.md) 与 FINAL_WORKFLOW_RESULT.json 是当前事实。
 
-最终源码普通 EXE 已通过：空名/纯空白可见拒绝与零副作用、补名发送成功、两个 DataRoot 共存/同根次进程退出0、重复关闭单保存窗口/取消保留两图/保存退出0。原 JPEG 项目扫描2JPG/0RAW、曝光0.5、实际上传发布两图，保存退出0后独立进程重开同相册/曝光均保留。公司73988e4f远端无后续；不重复应用已包含的家中/内存补丁。
+用户已完成系统Chrome确认，服务和普通PC均收回v1/r5锁定的HOME_0003单张选择；原生同步回原项目，同目录/1项目/1选择，独立重开再同步无重复；只导出客户所选JPEG，两次文件字节/全RGB像素/尺寸/方向/ICC一致。普通进程22872/31276/34016均正常退出0；撤销后旧页404/接口预览401，本地结果保留。最终源码空白拒绝/补名、关闭取消保存、双根边界通过保持。
 
-当前下一步只需用户在系统Chrome打开包外 CUSTOMER_URL_PRIVATE.txt 内完整链接，选 HOME_0003.png，点击“确认选择并锁定”。用户规则要求网页手动操作，不能用HTTP选择/确认代替。待用户回报后代理只读核对回执，再继续普通PC收回/同项目同步/客户所选JPEG导出/保存退出独立重开/撤销。当前App PID31276、窗口w-530224、root为 artifacts/home-native-final-20261122/jpeg-runtime；下轮必须按路径/创建时间重验，守卫仍运行。详细私有接续文件 artifacts/home-native-final-20261122/CURRENT_HANDOFF.json。
+当前普通PC已只读打开家庭原预约：PID32520、窗口w-2691266、root为原functional-home-20261115/workflow-runtime，守卫2GiB/50ms仍运行。预约ID41c744b1-d21a-462d-a865-4630519ed83a，2026-11-15，revision2，打开PC前后整行不变。下一步只需用户iPhone在同一私网Safari打开包外PHONE_URL_PRIVATE.txt，核对v2后把开始/结束各顺延15分钟保存并回报版本；代理随后核验并PC原生修改，再手机刷新，完成双向。不要自动seed/roundtrip/pc-adjust，保留原PHONE_HANDOFF_ACTIVE。公司历史revision4未在家庭找到，不能冒称保留的是同一条记录。手机授权到2026-11-24 05:45 UTC（柏林06:45）。
 
-d07家庭合成40MP普通全循环已完成，继续绑定d07；433JPEG也保留原source。公司原TIFF/恢复文件不在准确历史路径。手机HTTPS只读200，家中原预约仍v2，公司历史v4未找到；原预约与PHONE_HANDOFF_ACTIVE均保留，绝不seed/roundtrip覆盖。iPhone双向修改留在Chrome主线之后。
-
-原家中JPEG DB/工作文件原字节保持；所有旧树/包/运行根和原未提交的4个HomeD07Acceptance脚本保留。UI未重做。
+全部具体路径与活跃进程身份见包外 CURRENT_HANDOFF.json，下一轮重查路径/创建时间/守卫。客户Chrome旧链接已撤销。私有链接/token/数据库不入Git/产品包。d07家庭合成40MP通过继续绑定d07，433JPEG保持原source；公司原Fuji TIFF/恢复文件仍缺。旧树、旧包、原JPEG DB/工作文件及4个原未提交工具保持，UI未重做。

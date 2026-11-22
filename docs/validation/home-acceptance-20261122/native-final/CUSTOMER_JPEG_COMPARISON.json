@@ -1,0 +1,43 @@
+{
+  "status": "PASS_NATIVE_CUSTOMER_SELECTED_JPEG_BEFORE_AFTER_INDEPENDENT_REOPEN",
+  "checks": {
+    "fileSha256": true,
+    "dimensions": true,
+    "mode": true,
+    "rgbPixelSha256": true,
+    "iccBytes": true,
+    "iccSha256": true,
+    "orientation": true,
+    "outputCount": true
+  },
+  "first": {
+    "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\customer-export-first\\HOME_0003_仿色.jpg",
+    "fileSha256": "afe57bd0ca808a0075ed07abf5ebd152c4f828af21cf57626606b5eef864addc",
+    "dimensions": [
+      1280,
+      853
+    ],
+    "mode": "RGB",
+    "rgbPixelSha256": "ead4c74bed583b2dd919a347e0b1e5a179b596ab659747d57c331a2846bff708",
+    "iccBytes": 3144,
+    "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+    "orientation": 1,
+    "outputCount": 1
+  },
+  "reopened": {
+    "file": "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-native-final-20261122\\customer-export-reopen\\HOME_0003_仿色.jpg",
+    "fileSha256": "afe57bd0ca808a0075ed07abf5ebd152c4f828af21cf57626606b5eef864addc",
+    "dimensions": [
+      1280,
+      853
+    ],
+    "mode": "RGB",
+    "rgbPixelSha256": "ead4c74bed583b2dd919a347e0b1e5a179b596ab659747d57c331a2846bff708",
+    "iccBytes": 3144,
+    "iccSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+    "orientation": 1,
+    "outputCount": 1
+  },
+  "confirmedVersion": 1,
+  "confirmedRevision": 5
+}

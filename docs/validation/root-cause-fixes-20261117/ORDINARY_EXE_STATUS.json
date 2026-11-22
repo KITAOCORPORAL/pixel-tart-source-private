@@ -1,7 +1,7 @@
 {
-  "atUtc": "2026-11-22T12:08:36.002332+00:00",
+  "atUtc": "2026-11-22T12:53:49.782121+00:00",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
-  "overall": "PARTIAL_NATIVE_BOUNDARIES_PASS_BROWSER_RESULT_FLOW_AND_IPHONE_PENDING",
+  "overall": "PC_SELECTION_CLOSED_LOOP_PASS_PHONE_AND_COMPANY_ORIGINAL_PENDING",
   "ordinaryHomeSynthetic40Mp": {
     "source": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
     "status": "PASS",
@@ -11,11 +11,11 @@
     "evidence": "../home-acceptance-20261122/ORDINARY_40MP_COMPLETE.json"
   },
   "ordinaryD07CloseAndRootBoundaries": "PASS_RECOVERED_ORIGINAL_EVIDENCE",
-  "ordinaryFinalJpeg": "PUBLISH_NORMAL_EXIT_AND_INDEPENDENT_REOPEN_PASS_WAIT_REAL_BROWSER_CONFIRMATION",
+  "ordinaryFinalJpeg": "PASS_USER_CHROME_CONFIRM_NATIVE_PC_SAME_PROJECT_SYNC_EXPORT_INDEPENDENT_REOPEN_REVOKE",
   "priorOrdinary433Jpeg": "PASS_ORIGINAL_SOURCE_ONLY",
   "finalHttpProtocol": "PASS_25_CHECKS",
   "finalNamedRenderHandoff": "PASS_CONTROLLED_HOST_ONLY",
-  "phone": "HTTPS_AND_NEW_DEVICE_READY_ACTUAL_IPHONE_NOT_RUN",
+  "phone": "ORDINARY_PC_ORIGINAL_BOOKING_V2_READY_WAIT_PHYSICAL_IPHONE_SAVE",
   "homeBookingRevision": 2,
   "companyRevision4": "NOT_PRESENT_IN_HOME",
   "noNewRaw": true,
@@ -24,7 +24,16 @@
   "ordinaryFinalCloseCancelSave": "PASS",
   "ordinaryFinalRootOwnership": "PASS_OWNER_AND_ACKNOWLEDGED_SECONDARY",
   "firstFinalJpegExitCode": 0,
-  "activeFinalJpegReopenPid": 31276,
   "activePidMustBeRevalidated": true,
-  "currentReport": "../home-acceptance-20261122/native-final/REPORT.md"
+  "currentReport": "../home-acceptance-20261122/native-final/REPORT.md",
+  "confirmedVersion": 1,
+  "confirmedRevision": 5,
+  "selectedCount": 1,
+  "jpegProcessPidsHistorical": [
+    22872,
+    31276,
+    34016
+  ],
+  "allJpegProcessesNormalExit": true,
+  "activePhoneDesktopPid": 32520
 }

@@ -1,0 +1,73 @@
+{
+  "atUtc": "2026-11-22T12:53:49.782121+00:00",
+  "status": "PASS_FINAL_SOURCE_ORDINARY_JPEG_SAME_PROJECT_BROWSER_PC_CLOSED_LOOP",
+  "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "workflowProjectId": "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+  "selectionProjectId": "33370906-7374-4688-9cb0-2672d8996a45",
+  "confirmedVersion": 1,
+  "confirmedRevision": 5,
+  "selectedCount": 1,
+  "selectedCustomerAsset": "HOME_0003.png",
+  "selectedSourceTarget": "HOME_0003.jpg",
+  "projects": [
+    [
+      "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+      "HOME-D07-JPEG-20261122",
+      "33370906-7374-4688-9cb0-2672d8996a45"
+    ]
+  ],
+  "sources": [
+    [
+      "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+      "N:\\pixart\\guangjing-d07-home-20261122\\artifacts\\home-20261122\\jpeg-inputs"
+    ]
+  ],
+  "selectionInputs": [
+    [
+      "3b3a32ee-24d1-4181-9f29-07b80996aa6f",
+      "HOME_0003.png",
+      "HOME_0003"
+    ]
+  ],
+  "normalProcessChain": [
+    {
+      "pid": 22872,
+      "exit": 0,
+      "peakPrivateBytes50ms": 814698496
+    },
+    {
+      "pid": 31276,
+      "exit": 0,
+      "peakPrivateBytes50ms": 547590144
+    },
+    {
+      "pid": 34016,
+      "exit": 0,
+      "peakPrivateBytes50ms": 530923520
+    }
+  ],
+  "independentReopenRetainsConfirmedResultWithoutFinalHttpFetch": true,
+  "repeatedSyncKeepsOneProjectAndSource": true,
+  "jpegBeforeAfterReopenChecks": {
+    "fileSha256": true,
+    "dimensions": true,
+    "mode": true,
+    "rgbPixelSha256": true,
+    "iccBytes": true,
+    "iccSha256": true,
+    "orientation": true,
+    "outputCount": true
+  },
+  "revoke": {
+    "page": 404,
+    "client": 401,
+    "preview": 401
+  },
+  "originalProjectAndRecoveryBytesUnchanged": true,
+  "guardBytes": 2147483648,
+  "intervalMs": 50,
+  "forcedGc": false,
+  "newRawDecodes": 0,
+  "iPhoneBidirectional": "NOT_RUN",
+  "companyOriginalTiff": "MATERIAL_NOT_PRESENT"
+}

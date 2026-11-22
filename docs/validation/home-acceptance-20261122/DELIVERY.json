@@ -1,7 +1,7 @@
 {
   "atUtc": "2026-11-22T05:54:09.924543+00:00",
   "clientTimeZone": "Europe/Berlin",
-  "status": "SEALED_FULL_DIAGNOSTIC_NATIVE_PREFIX_PASS_BROWSER_AND_PHONE_PENDING",
+  "status": "PC_SELECTION_CLOSED_LOOP_PASS_PHONE_AND_COMPANY_ORIGINAL_PENDING",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "branch": "home/d07-ordinary-acceptance-20261122",
   "package": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122",
@@ -16,8 +16,8 @@
   "actualHttpChecksPassed": 25,
   "ordinaryHomeSynthetic40MpSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "ordinaryHomeSynthetic40Mp": "PASS_ORIGINAL_SOURCE",
-  "ordinaryFinalJpegWorkflow": "PARTIAL_NATIVE_PUBLISH_AND_REOPEN_PASS_BROWSER_CONFIRM_SYNC_EXPORT_PENDING",
-  "actualIPhone": "NOT_RUN",
+  "ordinaryFinalJpegWorkflow": "PASS_USER_CHROME_AND_NATIVE_PC_SYNC_EXPORT_INDEPENDENT_REOPEN_REVOKE",
+  "actualIPhone": "NOT_RUN_WAIT_USER_SAVE",
   "phoneHttpsAndDevice": "READY",
   "credentialsAndRuntimeExcluded": true,
   "installer": false,
@@ -28,5 +28,11 @@
   "nativeBoundarySource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "nativeBoundaryResult": "PASS_EMPTY_WHITESPACE_NAMED_SEND_CLOSE_CANCEL_SAVE_ROOTS",
   "currentNativeReport": "native-final/REPORT.md",
-  "postSealNativeEvidenceAtUtc": "2026-11-22T12:08:36.002332+00:00"
+  "postSealNativeEvidenceAtUtc": "2026-11-22T12:53:49.782121+00:00",
+  "finalNativeReceipt": "native-final/FINAL_WORKFLOW_RESULT.json",
+  "confirmedSelectionVersion": 1,
+  "confirmedRevision": 5,
+  "selectedJpegCount": 1,
+  "selectedJpegBeforeAfterReopenMatches": true,
+  "actualTestAlbumRevoked": true
 }
