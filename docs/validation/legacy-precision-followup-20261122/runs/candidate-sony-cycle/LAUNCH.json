@@ -1,0 +1,28 @@
+{
+  "pid": 44932,
+  "startedUtc": 1795346869.1588256,
+  "mode": "processed-cycle",
+  "scenario": "neutral",
+  "task": {
+    "name": "sony33",
+    "inputKind": "existing authorized Sony rendered RGB16",
+    "renderedSource": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+    "renderedSourceSha256": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "payload": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\sony33.rgb48",
+    "pixelSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+    "width": 7028,
+    "height": 4688,
+    "orientation": 8,
+    "icc": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\sony33.icc",
+    "iccSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+    "newRawDecodes": 0,
+    "guardBytes": 2147483648,
+    "inputDifference": "Original company 0806D680 payload unavailable; frozen from existing rendered TIFF. No sensor-linear claim."
+  },
+  "stage": "N:\\pixart\\guangjing-legacy-precision-lifetime-20261122\\artifacts\\precision-followup-20261122\\candidate-stage",
+  "hostSha256": "4ef334d21c3194c3da03e4065b058de358e2cd64de98309880e11deacffbb0da",
+  "coreSha256": "adc8d0cf3498c80fd81f189a533e0d9e78dc4a2e1e3efe4bf026bb0d561123a5",
+  "appSha256": "d15c40f795557bd223c8813b032b1cbab0df62a1ae06e7f361f4a9c1bcd2a2b1",
+  "guardBytes": 2147483648,
+  "newRawDecodes": 0
+}

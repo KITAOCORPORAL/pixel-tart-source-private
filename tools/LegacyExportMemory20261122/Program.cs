@@ -33,7 +33,9 @@ static class Program
  static void Snap(string stage)
  {
   Phase=stage;File.WriteAllText(Path.Combine(Root,"phase.txt"),stage);using var p=Process.GetCurrentProcess();p.Refresh();var holders=new Dictionary<string,object>();
-  if(Vm is not null){holders["target.RawMaster"]=Describe(Vm.ActiveTarget?.RawMaster);holders["target.Image"]=Describe(Vm.TargetImage);foreach(var name in new[]{"_source","_interactiveSource","_matchedImage","_rawPreviewMaster","_interactiveRawMaster","_frozenRawMaster","_fullRawDisplay"})holders["Editor."+name]=Describe(Field(Vm.Editor,name));}
+  if(Vm is not null){holders["editor.mode"]=new{enabled=Vm.Editor.Enabled,mode=Vm.Editor.EffectiveViewMode,detail=Vm.Editor.IsDetailPreviewRequested};holders["target.RawMaster"]=Describe(Vm.ActiveTarget?.RawMaster);holders["target.Image"]=Describe(Vm.TargetImage);foreach(var name in new[]{"_source","_interactiveSource","_matchedImage","_rawPreviewMaster","_interactiveRawMaster","_frozenRawMaster","_fullRawDisplay"})holders["Editor."+name]=Describe(Field(Vm.Editor,name));}
+  if(Page is not null&&Page.Dispatcher.CheckAccess()&&Page.FindName("PhotoViewport") is ColorStudioImageViewport viewport)
+      holders["viewport"]=new{zoom=viewport.State.Zoom,viewport.Mode,viewport.IsVisible,viewport.IsLoaded,width=viewport.ActualWidth,height=viewport.ActualHeight,original=Describe(viewport.Original),matched=Describe(viewport.Matched),viewport.DisplayColorEnabled};
   var modules=p.Modules.Cast<ProcessModule>().Select(x=>x.ModuleName).ToArray();if(modules.Any(x=>x.Equals("raw_r.dll",StringComparison.OrdinalIgnoreCase)||x.Equals("libraw.dll",StringComparison.OrdinalIgnoreCase)))throw new InvalidOperationException("RAW native module loaded");
   File.AppendAllText(Path.Combine(Root,"events.jsonl"),JsonSerializer.Serialize(new{stage,pid=p.Id,atUtc=DateTimeOffset.UtcNow,privateBytes=p.PrivateMemorySize64,workingSetBytes=p.WorkingSet64,managedEstimate=GC.GetTotalMemory(false),allocatedBytes=GC.GetTotalAllocatedBytes(true),gcCollections=new[]{GC.CollectionCount(0),GC.CollectionCount(1),GC.CollectionCount(2)},holders,weakOwners=Owners.Select(x=>new{x.Role,alive=x.Owner.IsAlive}),replayReads=Decoder?.Calls??0,nativeRawLoaded=false})+"\n");
  }
@@ -47,12 +49,19 @@ static class Program
  }
  static async Task Oracle()
  {
-  using var decoded=ReadFloat();using var master=RawImageOrientation.NormalizePixels(decoded);Snap("oracle-source");var pipeline=new RawMatchTiff16ProductPipeline(new Replay());
+  var decoded=ReadFloat();using var master=RawImageOrientation.NormalizePixels(decoded);if(!ReferenceEquals(decoded,master))decoded.Dispose();Snap("oracle-source");var pipeline=new RawMatchTiff16ProductPipeline(new Replay());
   var rendered=pipeline.Render(master,null,Stack());using var pixels=rendered.ProcessingPixels!;Snap("oracle-rendered");
   var file=Path.Combine(Root,"oracle.tif");await AtomicTiffWriter.WriteRgb48Async(file,pixels,new(TiffBitDepth.Sixteen,IccProfile:File.ReadAllBytes(Icc),Orientation:master.Orientation));Snap("oracle-written");
-  File.WriteAllText(Path.Combine(Root,"RESULT.json"),JsonSerializer.Serialize(new{status="PASS_ORIGINAL_CORE_ORACLE",file,newRawDecodes=0,outputFloatSha256=FloatHash(pixels)},Json));
+  File.WriteAllText(Path.Combine(Root,"RESULT.json"),JsonSerializer.Serialize(new{status="PASS_ORIGINAL_CORE_ORACLE",file,newRawDecodes=0,outputFloatSha256=FloatHash(pixels),outputRgb24Sha256=Convert.ToHexString(SHA256.HashData(rendered.Pixels.Rgb24.Span))},Json));
  }
  static string FloatHash(HighBitDepthImageBuffer image){using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);hash.AppendData(MemoryMarshal.AsBytes(image.Rgb32.Span));return Convert.ToHexString(hash.GetHashAndReset());}
+ static string BitmapHash(BitmapSource image)
+ {
+  if(image.Format!=System.Windows.Media.PixelFormats.Rgb24)throw new InvalidOperationException("Expected legacy RGB24 display adapter");
+  using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);var row=new byte[image.PixelWidth*3];
+  for(int y=0;y<image.PixelHeight;y++){image.CopyPixels(new Int32Rect(0,y,image.PixelWidth,1),row,row.Length,0);hash.AppendData(row);}
+  return Convert.ToHexString(hash.GetHashAndReset());
+ }
  static void Show()
  {
   var hidden=new ReferenceColorWorkspaceView{Visibility=Visibility.Collapsed,DataContext=Vm};Page=new PhotoGradePageView{DataContext=Vm};var grid=new System.Windows.Controls.Grid();grid.Children.Add(hidden);grid.Children.Add(Page);
@@ -60,9 +69,21 @@ static class Program
  }
  static async Task View100()
  {
-  if(Scenario!="neutral")Vm!.Editor.Enabled=false;
+  if(Scenario!="neutral"&&!Mode.StartsWith("processed",StringComparison.Ordinal))Vm!.Editor.Enabled=false;
+  if(Mode.StartsWith("processed",StringComparison.Ordinal)){Vm!.Editor.Enabled=true;Vm.Editor.ViewMode="仿色结果";}
   Show();await Settle();var viewport=(ColorStudioImageViewport)Page!.FindName("PhotoViewport");viewport.State.SetZoom(1);Vm!.Editor.RequestPreviewZoom(1);await Settle();
+  var wait=Stopwatch.StartNew();
+  while(Field(Vm.Editor,"_detailRequest") is not null || Vm.Editor.IsBusy ||
+      (Mode.StartsWith("processed",StringComparison.Ordinal)&&Scenario!="neutral"&&Vm.Editor.MatchedImage is null))
+  {
+      if(Vm.Editor.HasError)throw new InvalidOperationException("Preview failed: "+Vm.Editor.StatusText);
+      if(wait.Elapsed.TotalSeconds>200)throw new TimeoutException("Pending preview did not settle");
+      await Task.Delay(50);await Dispatcher.Yield(DispatcherPriority.ApplicationIdle);
+  }
+  await Vm.AnalysisWork;
+  if(Math.Abs(viewport.State.Zoom-1)>1e-9)throw new InvalidOperationException("Actual viewport zoom is not 100%");
   if(!viewport.IsVisible||!viewport.IsLoaded||viewport.ActualWidth<=0||Vm.Editor.SourceImage is not{} image||image.PixelWidth!=Vm.ActiveTarget!.RawMaster!.Width||image.PixelHeight!=Vm.ActiveTarget.RawMaster.Height)throw new InvalidOperationException("Visible 100% detail was not established");
+  if(Mode.StartsWith("processed",StringComparison.Ordinal)&&Scenario!="neutral"&&(Vm.Editor.MatchedImage is not{} matched||matched.PixelWidth!=image.PixelWidth||matched.PixelHeight!=image.PixelHeight))throw new InvalidOperationException("Processed full-size preview missing");
   Snap("visible-100");
  }
  static async Task Release()
@@ -79,12 +100,18 @@ static class Program
   var beforeHash=FloatHash(Vm.ActiveTarget.RawMaster.Image);var session=Path.Combine(Root,"saved.ptstudio.json");await Vm.SaveSessionAsync(session);Snap("saved");
   Vm.QuickExportFormat=StudioExportFormat.Tiff;Snap("export-start");await Vm.ExportSelectedCommand.ExecuteAsync(null);await Settle();
   if(Vm.ActiveTarget.ExportStatus!=ReferenceExportStatus.Succeeded)throw new InvalidOperationException("First export failed: "+Vm.ActiveTarget.Error+" "+Vm.StatusText);
-  var first=Vm.ActiveTarget.OutputPath;Snap("export-finished");if(beforeHash!=FloatHash(Vm.ActiveTarget.RawMaster!.Image))throw new InvalidOperationException("Shared master was disposed or mutated");
+  var first=Vm.ActiveTarget.OutputPath;var firstPreviewSha=BitmapHash(Vm.Editor.MatchedImage??Vm.Editor.SourceImage!);Snap("export-finished");if(beforeHash!=FloatHash(Vm.ActiveTarget.RawMaster!.Image))throw new InvalidOperationException("Shared master was disposed or mutated");
+  if(Mode=="processed-once")
+  {
+      await Release();
+      File.WriteAllText(Path.Combine(Root,"RESULT.json"),JsonSerializer.Serialize(new{status="PASS_PROCESSED100_FIRST_EXPORT",first,firstPreviewSha,second=(string?)null,sameProcessReopenVerified=false,newRawDecodes=0,replayReads=Decoder.Calls,pointProcessedPreviewExcluded=false,source=typeof(ReferenceColorWorkspaceViewModel).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion},Json));
+      return;
+  }
   await Release();dialogs=new Dialogs(Path.Combine(Root,"export-reopen"));Vm=new(dialogs,rawDecoder:Decoder);Snap("same-process-reopen-start");await Vm.LoadSessionAsync(session);await Settle();
   if(Vm.ActiveTarget?.RawMaster is null)throw new InvalidOperationException("Reopened frozen master missing");Snap("reopened");if(Mode!="proxy-cycle")await View100();Vm.QuickExportFormat=StudioExportFormat.Tiff;
   Snap("second-export-start");await Vm.ExportSelectedCommand.ExecuteAsync(null);await Settle();if(Vm.ActiveTarget.ExportStatus!=ReferenceExportStatus.Succeeded)throw new InvalidOperationException("Second export failed");
-  var second=Vm.ActiveTarget.OutputPath;Snap("second-export-finished");if(beforeHash!=FloatHash(Vm.ActiveTarget.RawMaster!.Image))throw new InvalidOperationException("Reopened master altered");await Release();
-  File.WriteAllText(Path.Combine(Root,"RESULT.json"),JsonSerializer.Serialize(new{status="PASS_ZERO_RAW_SAME_PROCESS_CYCLE",first,second,session,pid=Environment.ProcessId,newRawDecodes=0,replayReads=Decoder.Calls,forcedGc=false,display=Mode,scenario=Scenario,pointProcessedPreviewExcluded=Scenario!="neutral",source=typeof(ReferenceColorWorkspaceViewModel).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion},Json));
+  var second=Vm.ActiveTarget.OutputPath;var secondPreviewSha=BitmapHash(Vm.Editor.MatchedImage??Vm.Editor.SourceImage!);Snap("second-export-finished");if(beforeHash!=FloatHash(Vm.ActiveTarget.RawMaster!.Image))throw new InvalidOperationException("Reopened master altered");await Release();
+  File.WriteAllText(Path.Combine(Root,"RESULT.json"),JsonSerializer.Serialize(new{status="PASS_ZERO_RAW_SAME_PROCESS_CYCLE",first,second,session,pid=Environment.ProcessId,newRawDecodes=0,replayReads=Decoder.Calls,forcedGc=false,display=Mode,scenario=Scenario,firstPreviewSha,secondPreviewSha,pointProcessedPreviewExcluded=Scenario!="neutral"&&!Mode.StartsWith("processed",StringComparison.Ordinal),source=typeof(ReferenceColorWorkspaceViewModel).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion},Json));
  }
  [STAThread]static int Main(string[] args)
  {

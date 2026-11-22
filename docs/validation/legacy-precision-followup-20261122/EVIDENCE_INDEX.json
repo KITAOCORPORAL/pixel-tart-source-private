@@ -1,0 +1,529 @@
+{
+  "files": [
+    {
+      "file": ".gitattributes",
+      "bytes": 34,
+      "sha256": "A287F65EE4F41B94337F0FCE59B956DC154CFEBFC3F5F1423146AD79675F7C3B"
+    },
+    {
+      "file": "COMBINED_D07_MEMORY.patch",
+      "bytes": 45149,
+      "sha256": "6993ED534F89459A1789DC8F871B7777B864702E7FB456CDC98775C960505C9B"
+    },
+    {
+      "file": "command-logs/candidate-build.log.txt",
+      "bytes": 9744,
+      "sha256": "D2F61EE7413DD9144A8B4F2136CFAAC0F615BEF30986E262DF1E58A1C8015CB8"
+    },
+    {
+      "file": "command-logs/candidate02-build.log.txt",
+      "bytes": 8425,
+      "sha256": "EC8BB1B525E4875ADDB068CC165559C8206C2D4073933E305A69D9176C5CC3D7"
+    },
+    {
+      "file": "command-logs/core.log.txt",
+      "bytes": 36834,
+      "sha256": "5C95E0AA4C5B22813F84BAD7B533073AA35C393C4E59A4B6D38B769A3FC06740"
+    },
+    {
+      "file": "command-logs/core02.log.txt",
+      "bytes": 35685,
+      "sha256": "246374236A7D7E90910355897CC1E1FCA2E4BA0071DFD322DB7316E5CD38D264"
+    },
+    {
+      "file": "command-logs/core03.log.txt",
+      "bytes": 37313,
+      "sha256": "E784D13C725E6E809616BAA37047570C8ED63E5D66E09D340F197A1A29CB4528"
+    },
+    {
+      "file": "command-logs/final-build.log.txt",
+      "bytes": 8371,
+      "sha256": "6F3F7427332DF04ACD13FE2F79FAE93F3CE1525C5842BB3FD827134B2F9F06DF"
+    },
+    {
+      "file": "command-logs/final-host-build.log.txt",
+      "bytes": 219,
+      "sha256": "EB0C7CFDC3C10B77A729C8CBC49DFC0D22D57C38DED81A33F156A9FD1F12823D"
+    },
+    {
+      "file": "command-logs/host-build.log.txt",
+      "bytes": 384,
+      "sha256": "2902D1C8B277DAA34B02C016497B5DF66CDEDAFB016A10398B0C465D8E8B56E6"
+    },
+    {
+      "file": "command-logs/host02-build.log.txt",
+      "bytes": 1024,
+      "sha256": "C12803B8689475131C858F5843140CB0EC28CAAAB1D053BAB756AA725FC0419E"
+    },
+    {
+      "file": "command-logs/host02-build02.log.txt",
+      "bytes": 215,
+      "sha256": "AB4EF4D7E9A815F6D5F6955956AB1177C8376915A9C71AFBC8992545988A38A1"
+    },
+    {
+      "file": "command-logs/pdb-tool-build.log.txt",
+      "bytes": 386,
+      "sha256": "CB9F8A1569AC906181827FA93D67E2709DB835542F3CFB17566FFFA4EF811310"
+    },
+    {
+      "file": "command-logs/verified-host-build.log.txt",
+      "bytes": 222,
+      "sha256": "3694EA4BE274E6675803D137D1FF5C9D78022B2CD2D49E4053C736B95CD0DEF6"
+    },
+    {
+      "file": "command-logs/wpf.log.txt",
+      "bytes": 184010,
+      "sha256": "14890DDE53BF1C34C318268503AC1F8888EC496C82C20AA82D36755718BAF8F3"
+    },
+    {
+      "file": "FOLLOWUP_ONLY.patch",
+      "bytes": 24017,
+      "sha256": "98B0BA215C13F3A47E3B4CCEECF059FC8E0C3A2228FD912D16E73A81B15ED230"
+    },
+    {
+      "file": "HANDOFF.md",
+      "bytes": 1169,
+      "sha256": "25F209AF1AD3ED25FA979F2C45DB55616805BBC200CDC2114C53B5F1CB4B1AB0"
+    },
+    {
+      "file": "HIGHLIGHT_REUSE.json",
+      "bytes": 356,
+      "sha256": "BF3DBE7493A687B3B0334345232BD93508EC85178E6158CA45C97D88D7746B4E"
+    },
+    {
+      "file": "LOCAL_ARTIFACTS.json",
+      "bytes": 4886,
+      "sha256": "45970254F2ABC2AF7A7F648B6B934EABA775EF9462C99CD899A608A587042396"
+    },
+    {
+      "file": "PIXEL_DISPLAY_COMPARISON.json",
+      "bytes": 13661,
+      "sha256": "E3A60F563249971700217143160DCEF918D27B3F3538650704DD976B374F8198"
+    },
+    {
+      "file": "PRESERVATION.json",
+      "bytes": 238,
+      "sha256": "1BFDE62DD01CA3DB755CF91D78E943A176C74D5F1DB844073B71BE495B5D78D9"
+    },
+    {
+      "file": "RECEIPT.json",
+      "bytes": 1521,
+      "sha256": "9C1D23DB264C5E974CC55AB1C8E920546FF32B41684F5143C34019DCBFF53C16"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 4999,
+      "sha256": "1C83990510FC546BF1E806D008372B37CA6A1AE347B921D8E69B310408E7D3FD"
+    },
+    {
+      "file": "RESOURCE_RESULTS.json",
+      "bytes": 20733,
+      "sha256": "7C3A88028F843665EB7A99E15056E2A9FD68918119CB8A6BE5D3F7B4C75A81AB"
+    },
+    {
+      "file": "REUSED_INPUTS.json",
+      "bytes": 2074,
+      "sha256": "27CAE706CE60DDA229BE6D8E528E1E06733E632AAD637C26F162D0822FAD9D01"
+    },
+    {
+      "file": "runs/candidate-40-processed-cycle/events.jsonl",
+      "bytes": 2369,
+      "sha256": "3403F4D2DA1726BF6B10DD6466D453209A6B4E68AC19A2DCAEEA3C8CA629BCC1"
+    },
+    {
+      "file": "runs/candidate-40-processed-cycle/EXIT.json",
+      "bytes": 238,
+      "sha256": "E96B5F18914EB1E92603F6877014A7F0DB2966A71F0673ED3DD6C991CE1F2E96"
+    },
+    {
+      "file": "runs/candidate-40-processed-cycle/FAILURE.json",
+      "bytes": 260,
+      "sha256": "2235F2C6BE50F4CED04B442FC2B830DF6D6B9DE324DC5416CDF275B47943A189"
+    },
+    {
+      "file": "runs/candidate-40-processed-cycle/LAUNCH.json",
+      "bytes": 1589,
+      "sha256": "BA2B2BE02EAD6A7346EE7A8D5C9CE4E256FACD0F92DE9C5E7D91E4932BC9CE7D"
+    },
+    {
+      "file": "runs/candidate-40-processed-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 17112,
+      "sha256": "43DE110F913BA7690627D232084E973EEA5D90F713DE2B96E6F62BDE0A835410"
+    },
+    {
+      "file": "runs/candidate-processed100-cycle02/events.jsonl",
+      "bytes": 11565,
+      "sha256": "4C7E71122B9D222CEAFCF41C0486DE08701781A2BADADED5F8D70735B1237891"
+    },
+    {
+      "file": "runs/candidate-processed100-cycle02/EXIT.json",
+      "bytes": 403,
+      "sha256": "B0374C44307B7191D02F123B253CBCDF4671B118AC3A4F6F6B5678D4C9C04FE9"
+    },
+    {
+      "file": "runs/candidate-processed100-cycle02/LAUNCH.json",
+      "bytes": 1592,
+      "sha256": "45CC5E61BBAFBFBCC52C4A4054F6977BF3E993950598BFC874F3754BB3726DEE"
+    },
+    {
+      "file": "runs/candidate-processed100-cycle02/RESOURCE_SAMPLES.jsonl",
+      "bytes": 122152,
+      "sha256": "D9A59AD7980CC5F3711FA7EFD9B8B688EF9AD0F63AB2E6CF1D8711F0B7DBBE44"
+    },
+    {
+      "file": "runs/candidate-processed100-cycle02/STOP.json",
+      "bytes": 220,
+      "sha256": "4F15456F1508A63747C2997DA4918F96E560A36E6E3CB1D94C29B8D76B87F898"
+    },
+    {
+      "file": "runs/candidate-sony-cycle/events.jsonl",
+      "bytes": 18771,
+      "sha256": "960801EE6143269CCAD54443648C60CDAA511D37B92B601DF61A5ED727EF9F46"
+    },
+    {
+      "file": "runs/candidate-sony-cycle/EXIT.json",
+      "bytes": 238,
+      "sha256": "3773FDCFCE8742440326ECFAB001492EA9532869414DDEC565AA2408E9C0B813"
+    },
+    {
+      "file": "runs/candidate-sony-cycle/LAUNCH.json",
+      "bytes": 1572,
+      "sha256": "1B6116DA9D2589870EEF8D76BD5A13E35343DD916568948887F4604A17C28A7C"
+    },
+    {
+      "file": "runs/candidate-sony-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 50705,
+      "sha256": "5AF50F69F6EB180515E7E190B7C9D92A561F1723FA171B73EEFDC8D58262CABD"
+    },
+    {
+      "file": "runs/candidate-sony-cycle/RESULT.json",
+      "bytes": 964,
+      "sha256": "20AAE66B48887C2C8A05F1E15BE5896FDCA9281704883A894F9574853F4A172F"
+    },
+    {
+      "file": "runs/cf5-40-display-oracle/events.jsonl",
+      "bytes": 1131,
+      "sha256": "E2FD09933CFDDA3985444DA8840CB0DD29384863182A42DECF0291A160DD5D97"
+    },
+    {
+      "file": "runs/cf5-40-display-oracle/EXIT.json",
+      "bytes": 238,
+      "sha256": "767E2898C96167A3B2792A8B312036A404513B94332851982E65462F018F386D"
+    },
+    {
+      "file": "runs/cf5-40-display-oracle/LAUNCH.json",
+      "bytes": 1583,
+      "sha256": "5D8C4D843388013AD094C580368D8497B4AF134825AB3806B20C0BAE65B16108"
+    },
+    {
+      "file": "runs/cf5-40-display-oracle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 62153,
+      "sha256": "059FB3A7CCB439F8806FB95F37CB868C028058D6B9DD34DAE1D8FF9EA0077AE3"
+    },
+    {
+      "file": "runs/cf5-40-display-oracle/RESULT.json",
+      "bytes": 392,
+      "sha256": "84755FF74FA2A99289182D6091C196ADF9A4CDBD247FD244E62DFE85EAF9FFCB"
+    },
+    {
+      "file": "runs/cf5-processed-100-stop/events.jsonl",
+      "bytes": 2370,
+      "sha256": "9781970A376769989D406CECBF78F22BE89CB7DAEACD6C4183EE7AF21CC72AC0"
+    },
+    {
+      "file": "runs/cf5-processed-100-stop/EXIT.json",
+      "bytes": 238,
+      "sha256": "A84212134B10DFD582E2731BCED9D940F4F829A404B7222413FFEB0E0CB1BE10"
+    },
+    {
+      "file": "runs/cf5-processed-100-stop/FAILURE.json",
+      "bytes": 260,
+      "sha256": "2235F2C6BE50F4CED04B442FC2B830DF6D6B9DE324DC5416CDF275B47943A189"
+    },
+    {
+      "file": "runs/cf5-processed-100-stop/LAUNCH.json",
+      "bytes": 1592,
+      "sha256": "C9638B32066E7545FECA9C3D32757A59FDE86E81ED51ED680793BB30E0C56E3A"
+    },
+    {
+      "file": "runs/cf5-processed-100-stop/RESOURCE_SAMPLES.jsonl",
+      "bytes": 17229,
+      "sha256": "321E8111FC12C7650B6551F8551F870A8DF097DA5CDEDF47BC086F3CED8370DE"
+    },
+    {
+      "file": "runs/cf5-processed100-control02/events.jsonl",
+      "bytes": 2367,
+      "sha256": "FC3AF5D8859BD318C455A44529E50D96D22F6C18BAE8D7EEC5E311977CD69B28"
+    },
+    {
+      "file": "runs/cf5-processed100-control02/EXIT.json",
+      "bytes": 410,
+      "sha256": "32221D5A3026E13716C56474CBB276ED4AEA5158F75EC56F82EA9EF6C7EAEA87"
+    },
+    {
+      "file": "runs/cf5-processed100-control02/LAUNCH.json",
+      "bytes": 1590,
+      "sha256": "B70D455F33A36ABBD474E64429C7F79C1AD24335DD6DB8A5E84BEC5CAEDFC8AE"
+    },
+    {
+      "file": "runs/cf5-processed100-control02/RESOURCE_SAMPLES.jsonl",
+      "bytes": 14206,
+      "sha256": "B93C1D885B0ACEEB39B08A538B53D1BB1A5962D8F497A53583879E3CE6285EDA"
+    },
+    {
+      "file": "runs/cf5-processed100-control02/STOP.json",
+      "bytes": 229,
+      "sha256": "42C6DB73F3F158A869D0AF52CC7788F401F8DE26AC5D701998757E5D985F0491"
+    },
+    {
+      "file": "runs/cf5-sony-display-oracle/events.jsonl",
+      "bytes": 1131,
+      "sha256": "51747798CD5227FA915C8AA1FB391C3BABCBF05C6848BFBBE6E2E07DC86C9764"
+    },
+    {
+      "file": "runs/cf5-sony-display-oracle/EXIT.json",
+      "bytes": 237,
+      "sha256": "3E7AE089AA58C19757DBFA3992788379E1B3A340AB1BD738505EE828DCAEDC52"
+    },
+    {
+      "file": "runs/cf5-sony-display-oracle/LAUNCH.json",
+      "bytes": 1566,
+      "sha256": "42A0A921D88FC6C67F348A9D2AE6DFF19B8B749A9EE150961713308AA911376A"
+    },
+    {
+      "file": "runs/cf5-sony-display-oracle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 5809,
+      "sha256": "2AB3161478F3C32AA93C320D78AC5C0D1622D31BAB148E4F0B1A82594354ADDB"
+    },
+    {
+      "file": "runs/cf5-sony-display-oracle/RESULT.json",
+      "bytes": 394,
+      "sha256": "4D9BF8758353D9D3153E09F807AD6B481BE559779E1F1162F19E307B7B296E73"
+    },
+    {
+      "file": "runs/final-processed100-first/events.jsonl",
+      "bytes": 9545,
+      "sha256": "46530C8BA8DB09C126EF1472F11494F674B64AA2401F98AF58AC6F8327AE8E1C"
+    },
+    {
+      "file": "runs/final-processed100-first/EXIT.json",
+      "bytes": 238,
+      "sha256": "2CE3080838455D88EF1D032312C3E8BD6A4331B1A779BFC256ADA75D380D1039"
+    },
+    {
+      "file": "runs/final-processed100-first/LAUNCH.json",
+      "bytes": 1585,
+      "sha256": "B1E03D68AA486D22808DBB22E49139A80A86CD5BE42016A74117EE09A94E0331"
+    },
+    {
+      "file": "runs/final-processed100-first/RESOURCE_SAMPLES.jsonl",
+      "bytes": 123702,
+      "sha256": "4BC615FEE80D00260CC20636ED350EBF0C2C8949420A13230AF1CB57A23B5619"
+    },
+    {
+      "file": "runs/final-processed100-first/RESULT.json",
+      "bytes": 537,
+      "sha256": "6BA31FC7A31B0776FFD0E98F081200A4064FE3C95D42C432DB00AEE3D1FDD4FB"
+    },
+    {
+      "file": "runs/final-sony-cycle/events.jsonl",
+      "bytes": 18769,
+      "sha256": "8FFB43D8A5D5D8610FCBCCB4AA3CBC5334AE2650BD40D914F74E3943796C485D"
+    },
+    {
+      "file": "runs/final-sony-cycle/EXIT.json",
+      "bytes": 238,
+      "sha256": "8C449B16D34630910B692A213EAF3858FF63FD068BBA7BDC33BDBBB0EAE02C32"
+    },
+    {
+      "file": "runs/final-sony-cycle/LAUNCH.json",
+      "bytes": 1568,
+      "sha256": "12C7A2CC8E7BDE9E86ADD831F1647CC013C1B8FD4D80AD796616263F2EA62BAC"
+    },
+    {
+      "file": "runs/final-sony-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 44630,
+      "sha256": "80A8D5E3644DFBFAAF8EC580BF8BACBA30B672AC11C1416B999ED5898409C84B"
+    },
+    {
+      "file": "runs/final-sony-cycle/RESULT.json",
+      "bytes": 998,
+      "sha256": "B07FC0C5FC85AF55DDE38FC5874278AD0C788B0CF44FB56D9929A0BE93438F7C"
+    },
+    {
+      "file": "runs/verified-40-neutral-cycle/events.jsonl",
+      "bytes": 20819,
+      "sha256": "FB20467AC7B8C29B0288EB2A6F381E65B1D6FC4D084B6D1A509A1328672447B1"
+    },
+    {
+      "file": "runs/verified-40-neutral-cycle/EXIT.json",
+      "bytes": 238,
+      "sha256": "9F1E1B4165CBBAB535E88826FD2150B16C626ECBF747C798B097E264CAE37FDB"
+    },
+    {
+      "file": "runs/verified-40-neutral-cycle/LAUNCH.json",
+      "bytes": 1596,
+      "sha256": "FCF651B073A9DD294D198640FAF493176DD70D42E9BD2031F6A5DC54351A5AB4"
+    },
+    {
+      "file": "runs/verified-40-neutral-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 45633,
+      "sha256": "FEF91BDD532BA9CA960D788FF88C587417CA1FAB7A82888C8E43F2A6EC74BFBD"
+    },
+    {
+      "file": "runs/verified-40-neutral-cycle/RESULT.json",
+      "bytes": 1025,
+      "sha256": "ABE8CF3C1C704F7C19C2BF51A46FD96FDEF2F996F567A1A737A005852B5C76B6"
+    },
+    {
+      "file": "runs/verified-40-processed100-cycle/events.jsonl",
+      "bytes": 13096,
+      "sha256": "A1F7C69DB55562BA4B4A884422F5C3F6CB63E4FA6AFBAB347A434270B3F783F0"
+    },
+    {
+      "file": "runs/verified-40-processed100-cycle/EXIT.json",
+      "bytes": 413,
+      "sha256": "B011DE002FD6AB27869FCA656563D6822510479D14612EC3BA729873F23447CC"
+    },
+    {
+      "file": "runs/verified-40-processed100-cycle/LAUNCH.json",
+      "bytes": 1595,
+      "sha256": "4FD4F1D6C0419716079DB0E2EC59AE6C6DA50D344EAE5E64166D4EF480AB67D8"
+    },
+    {
+      "file": "runs/verified-40-processed100-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 121895,
+      "sha256": "2696A40FA4AB2164E085E367074348BD55302B1680C093F4D6BD53B21F631278"
+    },
+    {
+      "file": "runs/verified-40-processed100-cycle/STOP.json",
+      "bytes": 230,
+      "sha256": "EA8C29226B929123E4EAA8A1847A6EE9DDAA1531809F07801131DCFF8D8BCED4"
+    },
+    {
+      "file": "runs/verified-40-processed100-first/events.jsonl",
+      "bytes": 11073,
+      "sha256": "38EA757405E2F110226B8E3CF4A2B2B2D22AF98DB3857DC063419CE92ADC5421"
+    },
+    {
+      "file": "runs/verified-40-processed100-first/EXIT.json",
+      "bytes": 238,
+      "sha256": "77474B0EBAFA6FCD07E67C2C0DB1FD001322240EAE37F4C29CE275AFC890D366"
+    },
+    {
+      "file": "runs/verified-40-processed100-first/LAUNCH.json",
+      "bytes": 1594,
+      "sha256": "38AF4B13F258AC3049334BE0544F1DBAF3251553508FCBB9C5D309A89A5DE093"
+    },
+    {
+      "file": "runs/verified-40-processed100-first/RESOURCE_SAMPLES.jsonl",
+      "bytes": 128765,
+      "sha256": "481F81C52BF3B3424C789D8409D965EF7183588DEB76892786B928DBC5C639B5"
+    },
+    {
+      "file": "runs/verified-40-processed100-first/RESULT.json",
+      "bytes": 543,
+      "sha256": "2470A1CB93E95CD7C4D257AA4917768F7DC071F8817EE9D8B6DDE9CA55093940"
+    },
+    {
+      "file": "runs/verified-cf5-processed100-control/events.jsonl",
+      "bytes": 2370,
+      "sha256": "9116241C08880A86D4B63238F43B1DD27C21856D6F6428AF13B681CDA7FBD076"
+    },
+    {
+      "file": "runs/verified-cf5-processed100-control/EXIT.json",
+      "bytes": 411,
+      "sha256": "704E53B1DD7F923DCC9EC5FED4933C185C7805DFC1BF45F6224D6F3CC76EE7E3"
+    },
+    {
+      "file": "runs/verified-cf5-processed100-control/LAUNCH.json",
+      "bytes": 1593,
+      "sha256": "7527276703AAA948F7B8C49BB44D360C1039794D16EB04411BA92DDAA8239F15"
+    },
+    {
+      "file": "runs/verified-cf5-processed100-control/RESOURCE_SAMPLES.jsonl",
+      "bytes": 13751,
+      "sha256": "F5681F2EF0924C5371409F51C5A9F1456B3734EEAE3FB6EF877C63053FF460ED"
+    },
+    {
+      "file": "runs/verified-cf5-processed100-control/STOP.json",
+      "bytes": 229,
+      "sha256": "A9B1F347250AA897032A99458AB0E2710708A1ED0891D98C5E04DD226606980C"
+    },
+    {
+      "file": "runs/verified-cf5-sony-control/events.jsonl",
+      "bytes": 13753,
+      "sha256": "34E626EB79DE73573B2D4CFEAF9AEE005FF2C4E8A891C4B6E89FD58E3A1721EA"
+    },
+    {
+      "file": "runs/verified-cf5-sony-control/EXIT.json",
+      "bytes": 408,
+      "sha256": "A915F8258D364EB2F72360AC15E994295348F34B256C36824B1D7393415D532D"
+    },
+    {
+      "file": "runs/verified-cf5-sony-control/LAUNCH.json",
+      "bytes": 1575,
+      "sha256": "5A6A40692FA12393EF671678303519B9FAF0642D1D454FFB24F83BC20A3E0C79"
+    },
+    {
+      "file": "runs/verified-cf5-sony-control/RESOURCE_SAMPLES.jsonl",
+      "bytes": 34464,
+      "sha256": "E74DF3439BC3D9789C03679F01086B449C42E4A18A71A3A2A9F7C97E101D046F"
+    },
+    {
+      "file": "runs/verified-cf5-sony-control/STOP.json",
+      "bytes": 225,
+      "sha256": "56DA723CEEEC7E50F3B01E87D0E220F137186DA3843D8BE1E14AE890E162526C"
+    },
+    {
+      "file": "runs/verified-sony-cycle/events.jsonl",
+      "bytes": 20809,
+      "sha256": "91CB63A7A6265983046FF79C02D09EE685FD66108B7FAA147F3AECF39681A94F"
+    },
+    {
+      "file": "runs/verified-sony-cycle/EXIT.json",
+      "bytes": 238,
+      "sha256": "5A6E86057B6801E3F70A77C869C79080DB3D9C2154893C74F482E067DDE943A5"
+    },
+    {
+      "file": "runs/verified-sony-cycle/LAUNCH.json",
+      "bytes": 1577,
+      "sha256": "716550FD0523DED9D09468EADC5308F64DAA735C9D6F2B02FADC449E627E250D"
+    },
+    {
+      "file": "runs/verified-sony-cycle/RESOURCE_SAMPLES.jsonl",
+      "bytes": 43792,
+      "sha256": "4948A7DEA234B088D18FD3E30AD8AA201F7F918A9446AC181A4DB1CE5BD82286"
+    },
+    {
+      "file": "runs/verified-sony-cycle/RESULT.json",
+      "bytes": 1007,
+      "sha256": "43EBE80FB076971E22C9BA4D463A327B1110692E856277EBA6F8A6908C3BF94F"
+    },
+    {
+      "file": "SOURCE_BINDING.json",
+      "bytes": 2610,
+      "sha256": "3F35E97691135F24134A6C878DCD82F52C41A208FAE33FA6FC883A2313DA1195"
+    },
+    {
+      "file": "TEST_RESULTS.json",
+      "bytes": 421,
+      "sha256": "1E1BABAEDCF3ADF5DC34C98DB78947B5720D92E13790986A58A3AFEE83C9DA26"
+    },
+    {
+      "file": "tests/core.trx",
+      "bytes": 105131,
+      "sha256": "CCCD00D394A55878581BB24AF83F60647EC8E2BF6C5EC862AB64287E100DB25F"
+    },
+    {
+      "file": "tests/wpf.trx",
+      "bytes": 29992,
+      "sha256": "C4F707519F76D7C85449D019755222D88DDACF7A219A34CA7AD305F32E27D999"
+    },
+    {
+      "file": "TOOL_FAILURES.json",
+      "bytes": 921,
+      "sha256": "25E105AB54751E90C89B8372ECF1409EA5680FDAF55EA4C31447D1AA071AAF35"
+    }
+  ]
+}

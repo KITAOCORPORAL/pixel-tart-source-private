@@ -1,0 +1,18 @@
+{
+  "pid": 35100,
+  "exitCode": 1,
+  "stop": {
+    "elapsedMs": 40375.0,
+    "privateBytes": 2503098368,
+    "workingSetBytes": 2175856640,
+    "osPeakWorkingSetBytes": 2175856640,
+    "phase": "payload-read-2"
+  },
+  "peakPrivateBytes50ms": 2503098368,
+  "osPeakWorkingSetBytes": 2175856640,
+  "samples": 797,
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "newRawDecodes": 0,
+  "forcedGc": false
+}

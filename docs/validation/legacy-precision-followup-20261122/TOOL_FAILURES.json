@@ -1,0 +1,24 @@
+{
+  "failuresPreserved": [
+    {
+      "scope": "Host compile",
+      "error": "LastRenderFailure is internal to product assembly",
+      "correction": "Use public StatusText; original build log retained"
+    },
+    {
+      "scope": "Preview completion assertion",
+      "error": "DetailPreviewWork can be replaced by no-op duplicate request; first assertion inspected too early",
+      "correction": "Wait actual detail request and IsBusy, then assert full MatchedImage/viewport zoom; both failures preserved"
+    },
+    {
+      "scope": "Portable PDB readback",
+      "error": "FileNotFound because Release DebugType=None",
+      "correction": "Did not use this failed check as evidence; reran final binary cycle to bind remaining STOP"
+    }
+  ],
+  "notAProductResourcePass": [
+    "cf5-processed-100-stop",
+    "candidate-40-processed-cycle"
+  ],
+  "remainingStopFromFinalProduct": "verified-40-processed100-cycle"
+}

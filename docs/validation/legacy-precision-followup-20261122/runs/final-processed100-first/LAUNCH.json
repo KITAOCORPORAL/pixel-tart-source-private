@@ -1,0 +1,28 @@
+{
+  "pid": 33756,
+  "startedUtc": 1795347827.0408733,
+  "mode": "processed-once",
+  "scenario": "points",
+  "task": {
+    "name": "synthetic40",
+    "inputKind": "existing synthetic rendered RGB16, same 7752x5184 dimensions",
+    "renderedSource": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+    "renderedSourceSha256": "5D3AEE67B02348F670E47EB94BBB44A16BAC3480311D38300F9C8D690DB49A0E",
+    "payload": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\synthetic40.rgb48",
+    "pixelSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+    "width": 7752,
+    "height": 5184,
+    "orientation": 1,
+    "icc": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\synthetic40.icc",
+    "iccSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+    "newRawDecodes": 0,
+    "guardBytes": 2147483648,
+    "inputDifference": "Original company 0806D680 payload unavailable; frozen from existing rendered TIFF. No sensor-linear claim."
+  },
+  "stage": "N:\\pixart\\guangjing-legacy-precision-lifetime-20261122\\artifacts\\precision-followup-20261122\\final-stage",
+  "hostSha256": "e861c1363e3522516a6669cb1845c750053ae3e7931362099a9a69fc6e119a73",
+  "coreSha256": "0b9eca09286e30c21fb384336a4e9f80c19ce2882e656c9ac198a55144de1326",
+  "appSha256": "ef401fc4507c7637beefa8d06d4b8d92d7947cf62e18985ff7dd4a58be42388e",
+  "guardBytes": 2147483648,
+  "newRawDecodes": 0
+}

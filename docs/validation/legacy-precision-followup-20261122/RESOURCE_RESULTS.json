@@ -1,0 +1,750 @@
+{
+  "runs": [
+    {
+      "name": "candidate-40-processed-cycle",
+      "exitCode": 2,
+      "stopPhase": null,
+      "privateMiB": 1388.24,
+      "workingMiB": 1282.15,
+      "hostSha256": "4ef334d21c3194c3da03e4065b058de358e2cd64de98309880e11deacffbb0da",
+      "productSource": null
+    },
+    {
+      "name": "candidate-processed100-cycle02",
+      "exitCode": 1,
+      "stopPhase": "payload-read-2",
+      "privateMiB": 2387.14,
+      "workingMiB": 2075.06,
+      "hostSha256": "92fe2f7dec28beb8c20dc1c69d8cb4e700721ad84319fd3f1f57f7ad2d33e138",
+      "productSource": null
+    },
+    {
+      "name": "candidate-sony-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1569.66,
+      "workingMiB": 1611.2,
+      "hostSha256": "4ef334d21c3194c3da03e4065b058de358e2cd64de98309880e11deacffbb0da",
+      "productSource": "2.3.0"
+    },
+    {
+      "name": "cf5-40-display-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1998.3,
+      "workingMiB": 2024.2,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": null
+    },
+    {
+      "name": "cf5-processed-100-stop",
+      "exitCode": 2,
+      "stopPhase": null,
+      "privateMiB": 1735.48,
+      "workingMiB": 1739.7,
+      "hostSha256": "4ef334d21c3194c3da03e4065b058de358e2cd64de98309880e11deacffbb0da",
+      "productSource": null
+    },
+    {
+      "name": "cf5-processed100-control02",
+      "exitCode": 1,
+      "stopPhase": "master-loaded",
+      "privateMiB": 2195.64,
+      "workingMiB": 1739.61,
+      "hostSha256": "92fe2f7dec28beb8c20dc1c69d8cb4e700721ad84319fd3f1f57f7ad2d33e138",
+      "productSource": null
+    },
+    {
+      "name": "cf5-sony-display-oracle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1641.65,
+      "workingMiB": 1671.59,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": null
+    },
+    {
+      "name": "final-processed100-first",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1698.73,
+      "workingMiB": 1738.03,
+      "hostSha256": "e861c1363e3522516a6669cb1845c750053ae3e7931362099a9a69fc6e119a73",
+      "productSource": "2.3.0+11a424c90199b32cbf73cc6a14eefd651612b213"
+    },
+    {
+      "name": "final-sony-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1548.8,
+      "workingMiB": 1588.61,
+      "hostSha256": "e861c1363e3522516a6669cb1845c750053ae3e7931362099a9a69fc6e119a73",
+      "productSource": "2.3.0+11a424c90199b32cbf73cc6a14eefd651612b213"
+    },
+    {
+      "name": "verified-40-neutral-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1981.5,
+      "workingMiB": 1987.44,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": "2.3.0+11a424c90199b32cbf73cc6a14eefd651612b213"
+    },
+    {
+      "name": "verified-40-processed100-first",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1692.05,
+      "workingMiB": 1747.04,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": "2.3.0+11a424c90199b32cbf73cc6a14eefd651612b213"
+    },
+    {
+      "name": "verified-cf5-processed100-control",
+      "exitCode": 1,
+      "stopPhase": "master-loaded",
+      "privateMiB": 2201.15,
+      "workingMiB": 1738.83,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": null
+    },
+    {
+      "name": "verified-cf5-sony-control",
+      "exitCode": 1,
+      "stopPhase": "reopened",
+      "privateMiB": 2041.25,
+      "workingMiB": 2060.57,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": null
+    },
+    {
+      "name": "verified-sony-cycle",
+      "exitCode": 0,
+      "stopPhase": null,
+      "privateMiB": 1549.02,
+      "workingMiB": 1588.93,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": "2.3.0+11a424c90199b32cbf73cc6a14eefd651612b213"
+    },
+    {
+      "name": "verified-40-processed100-cycle",
+      "exitCode": 1,
+      "stopPhase": "payload-read-2",
+      "privateMiB": 2377.96,
+      "workingMiB": 2080.57,
+      "hostSha256": "4469aed5556651c69fa9f820a159030296e559114815113ef705472fc32ee8a3",
+      "productSource": "11a424c90199b32cbf73cc6a14eefd651612b213"
+    }
+  ],
+  "phasePeaks": {
+    "candidate-40-processed-cycle": {
+      "startup": {
+        "privatePeakBytes": 15650816,
+        "workingPeakBytes": 59121664,
+        "samples": 12
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950321152,
+        "workingPeakBytes": 947650560,
+        "samples": 26
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1455673344,
+        "workingPeakBytes": 1342083072,
+        "samples": 75
+      }
+    },
+    "candidate-processed100-cycle02": {
+      "startup": {
+        "privatePeakBytes": 15343616,
+        "workingPeakBytes": 58105856,
+        "samples": 10
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950374400,
+        "workingPeakBytes": 947929088,
+        "samples": 24
+      },
+      "": {
+        "privatePeakBytes": 950509568,
+        "workingPeakBytes": 948498432,
+        "samples": 1
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1724768256,
+        "workingPeakBytes": 1755848704,
+        "samples": 382
+      },
+      "visible-100": {
+        "privatePeakBytes": 1736310784,
+        "workingPeakBytes": 1770119168,
+        "samples": 5
+      },
+      "saved": {
+        "privatePeakBytes": 1739833344,
+        "workingPeakBytes": 1772060672,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1790439424,
+        "workingPeakBytes": 1822855168,
+        "samples": 343
+      },
+      "export-finished": {
+        "privatePeakBytes": 1770033152,
+        "workingPeakBytes": 1823682560,
+        "samples": 26
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1769218048,
+        "workingPeakBytes": 1822953472,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 2503098368,
+        "workingPeakBytes": 2175856640,
+        "samples": 4
+      }
+    },
+    "candidate-sony-cycle": {
+      "startup": {
+        "privatePeakBytes": 16637952,
+        "workingPeakBytes": 63365120,
+        "samples": 12
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 818982912,
+        "workingPeakBytes": 818368512,
+        "samples": 28
+      },
+      "": {
+        "privatePeakBytes": 818982912,
+        "workingPeakBytes": 818376704,
+        "samples": 1
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1207894016,
+        "workingPeakBytes": 1190961152,
+        "samples": 64
+      },
+      "visible-100": {
+        "privatePeakBytes": 1642704896,
+        "workingPeakBytes": 1682198528,
+        "samples": 7
+      },
+      "saved": {
+        "privatePeakBytes": 1221152768,
+        "workingPeakBytes": 1203957760,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1221218304,
+        "workingPeakBytes": 1206607872,
+        "samples": 41
+      },
+      "export-finished": {
+        "privatePeakBytes": 1148411904,
+        "workingPeakBytes": 1181700096,
+        "samples": 27
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1636401152,
+        "workingPeakBytes": 1689440256,
+        "samples": 5
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1132453888,
+        "workingPeakBytes": 1168199680,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 1553395712,
+        "workingPeakBytes": 1568161792,
+        "samples": 37
+      },
+      "reopened": {
+        "privatePeakBytes": 1640820736,
+        "workingPeakBytes": 1679949824,
+        "samples": 46
+      },
+      "second-export-start": {
+        "privatePeakBytes": 1645907968,
+        "workingPeakBytes": 1686937600,
+        "samples": 35
+      },
+      "second-export-finished": {
+        "privatePeakBytes": 1636401152,
+        "workingPeakBytes": 1689436160,
+        "samples": 25
+      }
+    },
+    "cf5-40-display-oracle": {
+      "startup": {
+        "privatePeakBytes": 504520704,
+        "workingPeakBytes": 440750080,
+        "samples": 16
+      },
+      "oracle-source": {
+        "privatePeakBytes": 2095112192,
+        "workingPeakBytes": 2118696960,
+        "samples": 367
+      },
+      "oracle-rendered": {
+        "privatePeakBytes": 2095280128,
+        "workingPeakBytes": 2120822784,
+        "samples": 14
+      },
+      "oracle-written": {
+        "privatePeakBytes": 2095370240,
+        "workingPeakBytes": 2122498048,
+        "samples": 8
+      }
+    },
+    "cf5-processed-100-stop": {
+      "startup": {
+        "privatePeakBytes": 16920576,
+        "workingPeakBytes": 63741952,
+        "samples": 13
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950616064,
+        "workingPeakBytes": 948301824,
+        "samples": 25
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1819787264,
+        "workingPeakBytes": 1822232576,
+        "samples": 76
+      }
+    },
+    "cf5-processed100-control02": {
+      "startup": {
+        "privatePeakBytes": 15892480,
+        "workingPeakBytes": 59936768,
+        "samples": 11
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950435840,
+        "workingPeakBytes": 947445760,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 2302300160,
+        "workingPeakBytes": 1824116736,
+        "samples": 59
+      }
+    },
+    "cf5-sony-display-oracle": {
+      "startup": {
+        "privatePeakBytes": 821403648,
+        "workingPeakBytes": 858255360,
+        "samples": 18
+      },
+      "oracle-source": {
+        "privatePeakBytes": 1721155584,
+        "workingPeakBytes": 1748201472,
+        "samples": 7
+      },
+      "oracle-rendered": {
+        "privatePeakBytes": 1721331712,
+        "workingPeakBytes": 1751080960,
+        "samples": 8
+      },
+      "oracle-written": {
+        "privatePeakBytes": 1721397248,
+        "workingPeakBytes": 1751166976,
+        "samples": 6
+      }
+    },
+    "final-processed100-first": {
+      "startup": {
+        "privatePeakBytes": 16154624,
+        "workingPeakBytes": 60162048,
+        "samples": 12
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950996992,
+        "workingPeakBytes": 948166656,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1714470912,
+        "workingPeakBytes": 1748496384,
+        "samples": 389
+      },
+      "visible-100": {
+        "privatePeakBytes": 1736384512,
+        "workingPeakBytes": 1770967040,
+        "samples": 6
+      },
+      "export-start": {
+        "privatePeakBytes": 1781248000,
+        "workingPeakBytes": 1817735168,
+        "samples": 346
+      },
+      "export-finished": {
+        "privatePeakBytes": 1772515328,
+        "workingPeakBytes": 1821356032,
+        "samples": 27
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1721094144,
+        "workingPeakBytes": 1742368768,
+        "samples": 2
+      }
+    },
+    "final-sony-cycle": {
+      "startup": {
+        "privatePeakBytes": 16412672,
+        "workingPeakBytes": 63221760,
+        "samples": 11
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 818593792,
+        "workingPeakBytes": 817852416,
+        "samples": 25
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1211117568,
+        "workingPeakBytes": 1192308736,
+        "samples": 52
+      },
+      "visible-100": {
+        "privatePeakBytes": 1220796416,
+        "workingPeakBytes": 1201782784,
+        "samples": 6
+      },
+      "saved": {
+        "privatePeakBytes": 1220939776,
+        "workingPeakBytes": 1203396608,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1219899392,
+        "workingPeakBytes": 1205776384,
+        "samples": 40
+      },
+      "export-finished": {
+        "privatePeakBytes": 1148968960,
+        "workingPeakBytes": 1184677888,
+        "samples": 28
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1149231104,
+        "workingPeakBytes": 1185062912,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 1550303232,
+        "workingPeakBytes": 1545773056,
+        "samples": 25
+      },
+      "reopened": {
+        "privatePeakBytes": 1624010752,
+        "workingPeakBytes": 1664491520,
+        "samples": 38
+      },
+      "second-export-start": {
+        "privatePeakBytes": 1624031232,
+        "workingPeakBytes": 1665560576,
+        "samples": 35
+      },
+      "second-export-finished": {
+        "privatePeakBytes": 1591025664,
+        "workingPeakBytes": 1662693376,
+        "samples": 25
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1592090624,
+        "workingPeakBytes": 1663479808,
+        "samples": 3
+      }
+    },
+    "verified-40-neutral-cycle": {
+      "startup": {
+        "privatePeakBytes": 16433152,
+        "workingPeakBytes": 63025152,
+        "samples": 12
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950456320,
+        "workingPeakBytes": 948277248,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1335570432,
+        "workingPeakBytes": 1339715584,
+        "samples": 53
+      },
+      "visible-100": {
+        "privatePeakBytes": 2039533568,
+        "workingPeakBytes": 2042445824,
+        "samples": 8
+      },
+      "export-start": {
+        "privatePeakBytes": 1335767040,
+        "workingPeakBytes": 1355300864,
+        "samples": 41
+      },
+      "export-finished": {
+        "privatePeakBytes": 1314144256,
+        "workingPeakBytes": 1359491072,
+        "samples": 28
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1314283520,
+        "workingPeakBytes": 1359749120,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 2047148032,
+        "workingPeakBytes": 2036228096,
+        "samples": 25
+      },
+      "reopened": {
+        "privatePeakBytes": 2012848128,
+        "workingPeakBytes": 2024214528,
+        "samples": 39
+      },
+      "second-export-start": {
+        "privatePeakBytes": 2077753344,
+        "workingPeakBytes": 2070835200,
+        "samples": 37
+      },
+      "second-export-finished": {
+        "privatePeakBytes": 1819635712,
+        "workingPeakBytes": 1868292096,
+        "samples": 26
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1332350976,
+        "workingPeakBytes": 1385488384,
+        "samples": 2
+      }
+    },
+    "verified-40-processed100-first": {
+      "startup": {
+        "privatePeakBytes": 17059840,
+        "workingPeakBytes": 63709184,
+        "samples": 14
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950931456,
+        "workingPeakBytes": 948711424,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1723867136,
+        "workingPeakBytes": 1764995072,
+        "samples": 417
+      },
+      "visible-100": {
+        "privatePeakBytes": 1737510912,
+        "workingPeakBytes": 1777696768,
+        "samples": 5
+      },
+      "saved": {
+        "privatePeakBytes": 1741594624,
+        "workingPeakBytes": 1779863552,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1774243840,
+        "workingPeakBytes": 1815203840,
+        "samples": 350
+      },
+      "export-finished": {
+        "privatePeakBytes": 1759866880,
+        "workingPeakBytes": 1817669632,
+        "samples": 26
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1759866880,
+        "workingPeakBytes": 1817919488,
+        "samples": 3
+      }
+    },
+    "verified-cf5-processed100-control": {
+      "startup": {
+        "privatePeakBytes": 15650816,
+        "workingPeakBytes": 59019264,
+        "samples": 11
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950599680,
+        "workingPeakBytes": 948219904,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 2308075520,
+        "workingPeakBytes": 1823297536,
+        "samples": 56
+      }
+    },
+    "verified-cf5-sony-control": {
+      "startup": {
+        "privatePeakBytes": 15618048,
+        "workingPeakBytes": 58322944,
+        "samples": 10
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 1217953792,
+        "workingPeakBytes": 1212047360,
+        "samples": 29
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1586532352,
+        "workingPeakBytes": 1582702592,
+        "samples": 53
+      },
+      "visible-100": {
+        "privatePeakBytes": 1586606080,
+        "workingPeakBytes": 1585340416,
+        "samples": 5
+      },
+      "saved": {
+        "privatePeakBytes": 1586679808,
+        "workingPeakBytes": 1585987584,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1587126272,
+        "workingPeakBytes": 1589141504,
+        "samples": 35
+      },
+      "export-finished": {
+        "privatePeakBytes": 1535016960,
+        "workingPeakBytes": 1570406400,
+        "samples": 27
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1137577984,
+        "workingPeakBytes": 1179283456,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 2031665152,
+        "workingPeakBytes": 2060251136,
+        "samples": 27
+      },
+      "reopened": {
+        "privatePeakBytes": 2140401664,
+        "workingPeakBytes": 2160267264,
+        "samples": 38
+      }
+    },
+    "verified-sony-cycle": {
+      "startup": {
+        "privatePeakBytes": 16609280,
+        "workingPeakBytes": 63553536,
+        "samples": 11
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 818974720,
+        "workingPeakBytes": 818229248,
+        "samples": 25
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1218560000,
+        "workingPeakBytes": 1198280704,
+        "samples": 53
+      },
+      "visible-100": {
+        "privatePeakBytes": 1624244224,
+        "workingPeakBytes": 1664876544,
+        "samples": 7
+      },
+      "saved": {
+        "privatePeakBytes": 1218899968,
+        "workingPeakBytes": 1201770496,
+        "samples": 1
+      },
+      "export-start": {
+        "privatePeakBytes": 1218953216,
+        "workingPeakBytes": 1204580352,
+        "samples": 36
+      },
+      "export-finished": {
+        "privatePeakBytes": 1154490368,
+        "workingPeakBytes": 1183817728,
+        "samples": 26
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1154555904,
+        "workingPeakBytes": 1184030720,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 1555607552,
+        "workingPeakBytes": 1580191744,
+        "samples": 26
+      },
+      "reopened": {
+        "privatePeakBytes": 1624244224,
+        "workingPeakBytes": 1664724992,
+        "samples": 38
+      },
+      "second-export-start": {
+        "privatePeakBytes": 1624260608,
+        "workingPeakBytes": 1665949696,
+        "samples": 34
+      },
+      "second-export-finished": {
+        "privatePeakBytes": 1589211136,
+        "workingPeakBytes": 1657425920,
+        "samples": 25
+      },
+      "released-natural-idle": {
+        "privatePeakBytes": 1548775424,
+        "workingPeakBytes": 1636855808,
+        "samples": 2
+      }
+    },
+    "verified-40-processed100-cycle": {
+      "startup": {
+        "privatePeakBytes": 15716352,
+        "workingPeakBytes": 58920960,
+        "samples": 11
+      },
+      "payload-read-1": {
+        "privatePeakBytes": 950468608,
+        "workingPeakBytes": 947503104,
+        "samples": 24
+      },
+      "master-loaded": {
+        "privatePeakBytes": 1723981824,
+        "workingPeakBytes": 1758576640,
+        "samples": 382
+      },
+      "visible-100": {
+        "privatePeakBytes": 1735581696,
+        "workingPeakBytes": 1770520576,
+        "samples": 5
+      },
+      "export-start": {
+        "privatePeakBytes": 1781342208,
+        "workingPeakBytes": 1814589440,
+        "samples": 341
+      },
+      "export-finished": {
+        "privatePeakBytes": 1760899072,
+        "workingPeakBytes": 1816915968,
+        "samples": 27
+      },
+      "same-process-reopen-start": {
+        "privatePeakBytes": 1760899072,
+        "workingPeakBytes": 1817092096,
+        "samples": 1
+      },
+      "payload-read-2": {
+        "privatePeakBytes": 2493468672,
+        "workingPeakBytes": 2181640192,
+        "samples": 3
+      }
+    }
+  },
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "newRawDecodes": 0,
+  "forcedGc": false
+}

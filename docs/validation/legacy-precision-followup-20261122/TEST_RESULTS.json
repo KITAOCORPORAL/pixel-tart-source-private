@@ -1,0 +1,17 @@
+{
+  "core": {
+    "passed": 75,
+    "failed": [],
+    "skipped": [],
+    "allocationNotes": [
+      "TestContext 消息:\r\nDisplay allocation original=10235392; rows=1319680; same RGB24 bytes",
+      "TestContext 消息:\r\nOrientation allocation original=6291752; fused=3145912; mandatory float bytes=3145728"
+    ]
+  },
+  "wpf": {
+    "passed": 20,
+    "failed": [],
+    "skipped": [],
+    "allocationNotes": []
+  }
+}

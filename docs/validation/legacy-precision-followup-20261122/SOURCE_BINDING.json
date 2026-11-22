@@ -1,0 +1,56 @@
+{
+  "productPatch": "11a424c90199b32cbf73cc6a14eefd651612b213",
+  "priorProductPatch": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+  "d07": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+  "currentProductTreeHead": "468b386aa24d506b0019043e256bd7f67094fd36",
+  "currentProductRelevantDiffFromD07Empty": true,
+  "productTreeNotModifiedByThisTask": true,
+  "mathFilesUnchangedFromCf5": [
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/StudioLayerComposite.cs",
+    "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs"
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "blob": "221b3914cabba75911ef973acef29fc424ad7f70"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "blob": "bc5264132ffad092b8b76b33fd219192e43f0594"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "blob": "e851be1b1819fed056b08a5981cfbf77f427bad9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+      "blob": "b0c9fd234f7f569547e7a74fe0f9eaf7ac73cd52"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "blob": "6952e73ba6f3192746803009e8db3358ef7c4087"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "blob": "762162b1641c19e33f41cfddae918803481a35b2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs",
+      "blob": "c0758fd240aa0768922396a33850d29c23d06dd4"
+    }
+  ],
+  "finalBinaryHashes": {
+    "KitaoPhotoSelector.dll": "EF401FC4507C7637BEEFA8D06D4B8D92D7947CF62E18985FF7DD4A58BE42388E",
+    "RAWSelectionAssistant.Core.dll": "0B9ECA09286E30C21FB384336A4E9F80C19CE2882E656C9AC198A55144DE1326"
+  },
+  "remainingStopFinalBinaryReadback": {
+    "run": "verified-40-processed100-cycle",
+    "stage": "N:\\pixart\\guangjing-legacy-precision-lifetime-20261122\\artifacts\\precision-followup-20261122\\verified-final-stage",
+    "coreSha256": "0b9eca09286e30c21fb384336a4e9f80c19ce2882e656c9ac198a55144de1326",
+    "appSha256": "ef401fc4507c7637beefa8d06d4b8d92d7947cf62e18985ff7dd4a58be42388e",
+    "sameAsFinalStage": true
+  }
+}
