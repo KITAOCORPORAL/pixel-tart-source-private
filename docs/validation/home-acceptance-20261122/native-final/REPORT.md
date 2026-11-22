@@ -22,11 +22,9 @@ d07 家庭固定合成40MP普通EXE全循环仍绑定d07；433 JPEG仍绑定原4
 
 ## 当前仅剩的验收
 
-**iPhone双向档期尚未执行。** 已用同一f84普通PC打开原家庭预约，当前PID32520/窗口w-2691266，2GiB/50ms守卫运行；原预约行摘要和revision2不变。手机HTTPS只读可用，原PHONE_HANDOFF_ACTIVE保留，没有seed/roundtrip/pc-adjust。公司历史revision4未在家庭找到，没有用家庭v2替代它。
+手机→PC已完成实际验收：用户手机原预约v2→v3，普通PC原生刷新看到了修改。PC已原生再修改一次形成v4，手机授权HTTPS也读到v4。**只待用户在手机页面内“刷新”，回报实际显示当前版本v4**，才完成手机反向显示验收。详见 [手机与原生PC进度](PHONE_NATIVE_PROGRESS.md)。没有HTTP代写预约、没有seed/roundtrip，没有修改Serve或重签凭据。
 
-用户下一步：在iPhone加入相同私网，用包外 PHONE_URL_PRIVATE.txt 的完整链接打开Safari，核对原2026-11-15预约v2，将页面所示开始与结束各顺延15分钟并保存，回传保存版本。随后代理负责只读核对、PC原生刷新与一次PC修改，再请手机刷新核对，补齐双向证据。新手机授权到2026-11-24 05:45 UTC（柏林06:45）。链接/token不进Git或包。
-
-精确私有接续见 artifacts/home-native-final-20261122/CURRENT_HANDOFF.json。所有PID/窗口下次要按创建时间、路径和守卫重查；JPEG测试客户链接已撤销，不能再按旧Chrome步骤进入。
+家庭此记录的v4是手机/PC操作形成的新版本，与公司历史v4区分。原公司记录/原Fuji TIFF与恢复文件仍不在家庭现场。具体私有路径与当前PC进程见 CURRENT_HANDOFF.json；受保护链接/token仍不入Git或包。当前普通PC仍是原预约窗口，2GiB/50ms守卫持续采样，下轮必须验证PID/创建时间。
 
 ## 交付
 

@@ -1,5 +1,5 @@
 {
-  "atUtc": "2026-11-22T12:53:49.782121+00:00",
+  "atUtc": "2026-11-22T13:35:46.060985+00:00",
   "productSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
   "overall": "PC_SELECTION_CLOSED_LOOP_PASS_PHONE_AND_COMPANY_ORIGINAL_PENDING",
   "ordinaryHomeSynthetic40Mp": {
@@ -15,8 +15,8 @@
   "priorOrdinary433Jpeg": "PASS_ORIGINAL_SOURCE_ONLY",
   "finalHttpProtocol": "PASS_25_CHECKS",
   "finalNamedRenderHandoff": "PASS_CONTROLLED_HOST_ONLY",
-  "phone": "ORDINARY_PC_ORIGINAL_BOOKING_V2_READY_WAIT_PHYSICAL_IPHONE_SAVE",
-  "homeBookingRevision": 2,
+  "phone": "PHONE_TO_PC_PASS_PC_NATIVE_SAVE_V4_PHONE_API_PASS_WAIT_REAL_PHONE_REFRESH",
+  "homeBookingRevision": 4,
   "companyRevision4": "NOT_PRESENT_IN_HOME",
   "noNewRaw": true,
   "forcedGc": false,
@@ -35,5 +35,6 @@
     34016
   ],
   "allJpegProcessesNormalExit": true,
-  "activePhoneDesktopPid": 32520
+  "activePhoneDesktopPid": 32520,
+  "phoneActualBidirectionalFinalPassed": false
 }

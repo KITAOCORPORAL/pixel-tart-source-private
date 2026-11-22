@@ -17,7 +17,7 @@
   "ordinaryHomeSynthetic40MpSource": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
   "ordinaryHomeSynthetic40Mp": "PASS_ORIGINAL_SOURCE",
   "ordinaryFinalJpegWorkflow": "PASS_USER_CHROME_AND_NATIVE_PC_SYNC_EXPORT_INDEPENDENT_REOPEN_REVOKE",
-  "actualIPhone": "NOT_RUN_WAIT_USER_SAVE",
+  "actualIPhone": "PARTIAL_WAIT_PHYSICAL_PHONE_PAGE_REFRESH_V4",
   "phoneHttpsAndDevice": "READY",
   "credentialsAndRuntimeExcluded": true,
   "installer": false,
@@ -34,5 +34,11 @@
   "confirmedRevision": 5,
   "selectedJpegCount": 1,
   "selectedJpegBeforeAfterReopenMatches": true,
-  "actualTestAlbumRevoked": true
+  "actualTestAlbumRevoked": true,
+  "homeBookingRevision": 4,
+  "phoneToNativePcPassed": true,
+  "nativePcSavePhoneApiReadPassed": true,
+  "phoneActualRefreshPassed": false,
+  "postSealPhoneEvidenceAtUtc": "2026-11-22T13:35:46.060985+00:00",
+  "phoneEvidence": "native-final/PHONE_NATIVE_BIDIRECTIONAL_PROGRESS.json"
 }
