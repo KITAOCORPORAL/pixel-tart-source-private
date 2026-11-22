@@ -1094,7 +1094,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
                 // The proxy remains float RGB. Both preview and export consume this same frozen look/stack contract.
                 var input = RawRenderInput(interactive) ?? raw;
                 var rendered = await Task.Run(() => new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder())
-                    .Render(input, look, stack, token: renderToken, film: film).Pixels, renderToken);
+                    .RenderDisplay(input, look, stack, token: renderToken, film: film), renderToken);
                 image = RawDisplayBitmapAdapter.ToBitmap(rendered);
             }
             else if (stack.Nodes.Count > 0)

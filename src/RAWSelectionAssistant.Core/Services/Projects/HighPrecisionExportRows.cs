@@ -13,25 +13,34 @@ public sealed class HighPrecisionExportRows : IDisposable
     { this.source=source;this.nodes=nodes;this.token=token; }
     public bool BorrowsSource => true;
     public string Path => nodes.Length==0 ? "BorrowedIdentityRows" : "OwnedPointStripRows";
-    public void FillRow(int y,Memory<byte> destination)
+    private ReadOnlySpan<float> ReadRow(int y)
     {
         var input=source ?? throw new ObjectDisposedException(nameof(HighPrecisionExportRows));
         token.ThrowIfCancellationRequested();
-        if((uint)y>=(uint)input.Height||destination.Length!=input.Width*6)throw new ArgumentOutOfRangeException(nameof(y));
-        ReadOnlySpan<float> row;
-        if(nodes.Length==0)row=input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
-        else
+        if((uint)y>=(uint)input.Height)throw new ArgumentOutOfRangeException(nameof(y));
+        if(nodes.Length==0)return input.Rgb32.Span.Slice(y*input.Width*3,input.Width*3);
+        if(strip is null||y<stripStart||y>=stripStart+strip.Height)
         {
-            if(strip is null||y<stripStart||y>=stripStart+strip.Height)
-            {
-                strip?.Dispose();strip=null;stripStart=y;
-                strip=RenderStrip(input,y,Math.Min(16,input.Height-y));
-            }
-            row=strip.Rgb32.Span.Slice((y-stripStart)*input.Width*3,input.Width*3);
+            strip?.Dispose();strip=null;stripStart=y;
+            strip=RenderStrip(input,y,Math.Min(16,input.Height-y));
         }
+        return strip.Rgb32.Span.Slice((y-stripStart)*input.Width*3,input.Width*3);
+    }
+    public void FillRow(int y,Memory<byte> destination)
+    {
+        var row=ReadRow(y);
+        if(destination.Length!=row.Length*2)throw new ArgumentOutOfRangeException(nameof(destination));
         // Identical rounding and byte order to TiffExport.WriteRgb48.
         for(int i=0;i<row.Length;i++)BinaryPrimitives.WriteUInt16LittleEndian(destination.Span.Slice(i*2,2),
             (ushort)Math.Clamp(Math.Round(row[i]*65535),0,65535));
+    }
+    public void FillDisplayRow(int y,Memory<byte> destination)
+    {
+        var row=ReadRow(y);
+        if(destination.Length!=row.Length)throw new ArgumentOutOfRangeException(nameof(destination));
+        // Direct float-to-display rounding, exactly HighBitDepthImageBuffer.ToVisualRgb24;
+        // never derive display samples from quantized RGB48 export rows.
+        for(int i=0;i<row.Length;i++)destination.Span[i]=(byte)Math.Clamp(Math.Round(row[i]*255),0,255);
     }
     private HighBitDepthImageBuffer RenderStrip(HighBitDepthImageBuffer input,int y,int rows)
     {

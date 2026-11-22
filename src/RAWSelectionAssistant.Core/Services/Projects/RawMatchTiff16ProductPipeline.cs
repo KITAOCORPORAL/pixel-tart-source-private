@@ -12,7 +12,10 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
 {
     public static bool IsRaw(string path) => RawToJpegDefaults.CandidateRawExtensions.Contains(Path.GetExtension(path));
 
-    public async Task<HighBitDepthImageBuffer> DecodeMasterAsync(string path, CancellationToken token = default)
+    public Task<HighBitDepthImageBuffer> DecodeMasterAsync(string path, CancellationToken token = default) =>
+        DecodeMasterCoreAsync(path,false,token);
+
+    private async Task<HighBitDepthImageBuffer> DecodeMasterCoreAsync(string path,bool upright,CancellationToken token)
     {
         if (!IsRaw(path)) throw new RawDecodeException(ErrorCodeCatalog.UnsupportedFormat, "Not a candidate RAW file.");
         var decoded = await decoder.DecodeAsync(path, new RawToJpegOptions(AutoRotate: false, DecodeMode: RawDecodeMode.ProfessionalDecode), token).ConfigureAwait(false);
@@ -20,7 +23,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The camera RAW did not provide genuine 16-bit RGB output.");
         if (!string.Equals(decoded.Metadata.ColorSpace, "sRGB", StringComparison.OrdinalIgnoreCase))
             throw new RawDecodeException(ErrorCodeCatalog.DecodeFailed, "The RAW output color space is not supported by Color Studio.");
-        return HighBitDepthImageBuffer.FromRaw(decoded);
+        return upright ? RawImageOrientation.FromDecodedRgb48(decoded,token) : HighBitDepthImageBuffer.FromRaw(decoded);
     }
 
     /// <summary>Same professional RGB48 decode and historical nearest proxy samples, but convert only
@@ -42,12 +45,22 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
     }
 
-    public async Task<FrozenRawMaster> DecodeFrozenMasterAsync(string path, CancellationToken token = default)
+    public Task<FrozenRawMaster> DecodeFrozenMasterAsync(string path, CancellationToken token = default) =>
+        DecodeFrozenMasterCoreAsync(path,false,token);
+
+    public Task<FrozenRawMaster> DecodeUprightFrozenMasterAsync(string path,CancellationToken token = default) =>
+        DecodeFrozenMasterCoreAsync(path,true,token);
+
+    private async Task<FrozenRawMaster> DecodeFrozenMasterCoreAsync(string path,bool upright,CancellationToken token)
     {
-        var image = await DecodeMasterAsync(path, token).ConfigureAwait(false);
-        await using var stream = new FileStream(Path.GetFullPath(path), FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 1024, FileOptions.SequentialScan);
-        var sourceSha256 = Convert.ToHexString(await SHA256.HashDataAsync(stream, token).ConfigureAwait(false));
-        return new FrozenRawMaster(path, sourceSha256, Guid.NewGuid(), image);
+        var image = await DecodeMasterCoreAsync(path,upright,token).ConfigureAwait(false);
+        try
+        {
+            await using var stream = new FileStream(Path.GetFullPath(path), FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 1024, FileOptions.SequentialScan);
+            var sourceSha256 = Convert.ToHexString(await SHA256.HashDataAsync(stream, token).ConfigureAwait(false));
+            return new FrozenRawMaster(path, sourceSha256, Guid.NewGuid(), image);
+        }
+        catch { image.Dispose(); throw; } // Fresh, unpublished image is owned by this decode scope only.
     }
 
     public ColorStudioRenderResult Render(HighBitDepthImageBuffer master, ReferenceLook? look, ColorAdjustmentStack? stack, int maximumEdge = 0, CancellationToken token = default, PixelTartFilmSettings? film = null)
@@ -63,6 +76,32 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         var display = ColorStudioProcessingAnalysis.RequiresSourceAnalysis(state,look) ? working.ToVisualRgb24(token) : new VisualPixelBuffer(1,1,new byte[3]);
         var analysis = ColorStudioProcessingAnalysis.Create(display, state, look, token);
         return new ColorStudioRenderPipeline().Render(working, analysis, look, state, token, captureNodeDiagnostics: false);
+    }
+
+    /// <summary>Display-only consumer with identical samples; never materialize an unused full float result.</summary>
+    public VisualPixelBuffer RenderDisplay(HighBitDepthImageBuffer master,ReferenceLook? look,ColorAdjustmentStack? stack,
+        int maximumEdge=0,CancellationToken token=default,PixelTartFilmSettings? film=null)
+    {
+        ArgumentNullException.ThrowIfNull(master);
+        if(master.SourceBitDepth!="16"||!string.Equals(master.WorkingColorSpace,"sRGB",StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("RAW processing requires 16-bit decoded sRGB input.");
+        token.ThrowIfCancellationRequested();
+        var working=maximumEdge>0?CreateProxy(master,maximumEdge,token):master;
+        using var proxyOwner=ReferenceEquals(working,master)?null:working;
+        var state=ColorStudioEffectiveState.Resolve(look,stack,film)??(look is not null
+            ?ColorStudioLegacyMigration.Migrate(look with{Film=film??look.Film}).Stack
+            :new ColorAdjustmentStack([new(Guid.NewGuid(),ColorStudioNodeType.Preset,"原图",true)]));
+        var renderer=new ColorStudioRenderPipeline();
+        using var rows=renderer.TryCreatePointExportRows(working,state,token);
+        if(rows is not null)
+        {
+            using var scratch=GraphPixelAllocation.Enter();
+            var rgb=new byte[checked(working.Width*working.Height*3)];
+            for(int y=0;y<working.Height;y++)rows.FillDisplayRow(y,rgb.AsMemory(y*working.Width*3,working.Width*3));
+            return new(working.Width,working.Height,rgb);
+        }
+        using var processing=renderer.RenderForExport(working,look,state,token);
+        return processing.Pixels.ToVisualRgb24(token);
     }
 
     public VisualPixelBuffer DisplaySource(HighBitDepthImageBuffer master, int maximumEdge, CancellationToken token = default) =>
