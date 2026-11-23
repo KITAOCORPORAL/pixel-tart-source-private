@@ -1,0 +1,41 @@
+{
+  "hostSourceFiles": [
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/Program.cs",
+      "sha256": "0d5322fbc3237a2014e40764871d86eab2747f43a33357878ee3780bdbf5d5a5"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/HolderTags.cs",
+      "sha256": "c0ebd81b2010c963c3c4c28307183e202171ce1a6fe9cffcd6265476ce1ee44f"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/Host.csproj",
+      "sha256": "ef326da40c07dabf75afff2aa204c6d3913395a3f0a54ea8542cae62fee144da"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/guard.py",
+      "sha256": "41072e043f8ca267531b075b4044dd47d57100a7a03923009234db63468eee13"
+    }
+  ],
+  "wrapperFiles": [
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/prepare_stage.py",
+      "sha256": "29c3b809a6db8531024d058809e7a8b0ce87b255a274dcef278f07e8d4b183db"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/capture.py",
+      "sha256": "2984f16c1a3340dd26886a9d9abb4498e1cbedfeb9e23bbbee517b1bb63cd904"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/analyze.py",
+      "sha256": "9aeb8a3939913cff99b8295b8483c8c55ce3afdf252460970b977af36c645795"
+    },
+    {
+      "path": "tools/Rgb48HolderBoundary20261123/observe_company.py",
+      "sha256": "94b7f09a5ec49a0dfb2b71ffa051cc8bb08d1c09199f886a58299a5c6a35f9c7"
+    }
+  ],
+  "compiledHostSha256": "175091a740f569f3bc8072780d7d0b12c246c325267c48c8463889f83e51bddd",
+  "originalHostAt63Blob": "4e196e65fedff1d3373956682a344debdfae6e17",
+  "productAppAndCoreNotBuiltByCompanyWrapper": true
+}

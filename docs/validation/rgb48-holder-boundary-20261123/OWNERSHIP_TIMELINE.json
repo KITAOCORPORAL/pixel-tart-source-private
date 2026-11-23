@@ -1,0 +1,78 @@
+{
+  "source": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "companyEvidence": "63a8633d437ca58966bf8b6bb82acfa287c54caa",
+  "rows": [
+    {
+      "stage": "01 旧缓存/冻结载荷读取开始",
+      "objectOrBuffer": "第一轮reader ushort[]，241118208B；此处还不是master",
+      "holder": "63a受控Replay.DecodeAsync的Task.Run闭包与局部values，返回RawDecodedImage.Rgb48Pixels",
+      "expectedRelease": "DecodeMasterCore收到并创建独占master后，RawDecodedImage/读取局部退出；实际由GC回收，不由文件Dispose释放数组",
+      "evidence": "公司events before-ushort-1→ushort-read-complete-1；宿主Program.cs:150–159；这是合法旧缓存payload重放，非普通legacy UI/发行decoder磁盘cache命中。"
+    },
+    {
+      "stage": "02 规范方向与源图交接",
+      "objectOrBuffer": "第二份独占RGB48 master数组241118208B；非整帧float",
+      "holder": "RawImageOrientation.OwnUprightRgb48复制/方向置换→HighBitDepthImageBuffer.ownedRgb48；FrozenRawMaster.Image；target.RawMaster",
+      "expectedRelease": "保留期间按借用使用；target/Editor/缩略图等全部释放后才可达性归零。Dispose清数组字段不等于强制回收",
+      "evidence": "RawMatchTiff16ProductPipeline.cs:18–26,54–64；RawImageOrientation.cs:33+；公司master id8630212，StorageBytes241118208、floatMaterialized=false。"
+    },
+    {
+      "stage": "03 1600/800代理及目标图",
+      "objectOrBuffer": "1600×1070 float约19.59MiB、800×535 float约4.90MiB，小CachedBitmap/TransformedBitmap",
+      "holder": "target.Image/TargetImage；Editor._rawPreviewMaster/_interactiveRawMaster、_source/_interactiveSource；缩略图target或任务局部",
+      "expectedRelease": "SetSource替换、ResetDetailPreview/Editor.Dispose、workspace TargetImage/Thumbnail置空和任务退出；不能仅按字段赋null断言GC",
+      "evidence": "Workspace ActivateTargetAsync:710–726；Tether SetSourceAsync:764–775；公司代理ids35878178/63763137，target小图45083904。"
+    },
+    {
+      "stage": "04 100%原始预览建立",
+      "objectOrBuffer": "整幅RGB24暂存byte[]120559104B→WIC CachedBitmap（最少像素负载同值）",
+      "holder": "ToVisualRgb24局部数组→BitmapSource.Create拷贝；同一个bitmap id55012273在Editor._source/_fullRawDisplay和viewport.Original同时出现",
+      "expectedRelease": "暂存byte[]在adapter返回后无须长期保留；bitmap到SetSource/Reset/Dispose/视口解绑且无其他持有者后可回收。WIC原生资源可能延后",
+      "evidence": "Tether.DetailPreview.cs:19–40；RawDisplayBitmapAdapter.cs:11–20；公司四处相同id是别名，不算四张整幅图。"
+    },
+    {
+      "stage": "05 处理后100%预览发布",
+      "objectOrBuffer": "处理RGB24暂存byte[]120559104B→新CachedBitmap id44070913",
+      "holder": "RenderDisplay临时RGB24；Editor._matchedImage、viewport.Matched；cacheKey准入时_previewCache.Result，分析/任务其他路径待证",
+      "expectedRelease": "render结果局部结束；缓存逐出/Editor.Dispose.Clear；viewport及分析引用清除后不可达；任务完成不自动清Task对象的所有字段",
+      "evidence": "Tether.RenderAsync:1094–1125；HighPrecisionExportRows.ReadRow/FillDisplayRow；公司id记录确认直接字段，未dump确认缓存/分析/闭包实际强链。"
+    },
+    {
+      "stage": "06 首轮保存/导出",
+      "objectOrBuffer": "master仍RGB48，不新增整幅float；16行float scratch与逐行RGB48",
+      "holder": "导出scope rows借用master，GraphPixelAllocation与行writer拥有临时条带/行",
+      "expectedRelease": "using rows/scratch/导出finally结束；借用者不可替别的持有者Dispose共享master",
+      "evidence": "公司saved/export-finished仍id8630212；公司首轮TIFF全行正确；本轮不重做已有像素实验。"
+    },
+    {
+      "stage": "07 页面解绑、workspace关闭、任务等待",
+      "objectOrBuffer": "旧Page/Window/VM、Editor图及master",
+      "holder": "宿主Window.Content/DataContext=null后closing局部仍临时持旧VM；Dispose清目标RawMaster、分析、sourceCache、Editor缓存/源/处理图；已识别Task快照待完成",
+      "expectedRelease": "Release async真正返回后closing/tasks局部可结束；await known Tasks与Dispatcher idle不保证全部未枚举任务",
+      "evidence": "宿主Release:102–106；Workspace.Dispose:768–790；Editor.Dispose:1236。注意KnownTasks查Completion字段但产品是属性，漏缩略图任务。"
+    },
+    {
+      "stage": "08 新VM/批次准备阶段",
+      "objectOrBuffer": "新外层VM、暂存staged VM；读取工作JSON后准备恢复目标",
+      "holder": "LoadSessionAsync用using staged+_skipSessionPreparation=true先准备；外层新VM字段仍null，实际新解码在staged/新async链里",
+      "expectedRelease": "prepared成功后AdoptPreparedSource转交并清staged Targets/sourceCache；失败恢复旧状态。新VM日志null不证明所有旧或staged对象均无根",
+      "evidence": "Session.cs:75–113,121–207；公司第二次读取前holders看到的是新外层VM，不能把这些null单独当旧VM字段已清证据；本次转储才直接dump旧Editor字段。"
+    },
+    {
+      "stage": "09 第二个约230MiB数组分配前",
+      "objectOrBuffer": "公司旧弱对象7个alive；家庭reader弱槽0，旧master/两bitmap/VM/editor在堆中",
+      "holder": "公司实际强根未知；家庭六个标记对象gcroot=0，旧master内部仍指向owned数组但自身无根，故内部边不是外部活根",
+      "expectedRelease": "没有强根时等待自然GC/原生生命周期；不能销毁共享master/forceGC/延时等内存下降来制造通过",
+      "evidence": "公司before-ushort-2 Private1932525568B=1843MiB，+229.948MiB=2072.948MiB容量算术；家庭捕获六个0根，旧Editor四主字段null，非公司结论。"
+    },
+    {
+      "stage": "10 第二次数组实际申请",
+      "objectOrBuffer": "新reader ushort[]241118208B（对象带头241118232B）",
+      "holder": "受控Replay Task局部values；公司实际新分配在ReadExactly之前",
+      "expectedRelease": "读取/解码后与阶段01–02相同；本诊断故意在此之前结束，不作容量测试",
+      "evidence": "公司STOP2176217088B（2075.402MiB），无ushort-read-complete-2；本次观察没有分配该数组，不称修复或PASS。"
+    }
+  ],
+  "ordinaryTiffSeparate": true,
+  "newOutsideVmIsNotOldVmProof": true
+}

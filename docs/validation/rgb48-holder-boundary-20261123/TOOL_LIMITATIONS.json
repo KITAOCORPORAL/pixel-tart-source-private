@@ -1,0 +1,17 @@
+[
+  {
+    "surface": "managed worktree app tool",
+    "result": "invalid escape in mapped path; created normal linked Git worktree and always selected it explicitly",
+    "productEffect": false
+  },
+  {
+    "surface": "host build",
+    "result": "PowerShell-computed mapped full path did not resolve binary references; explicit native argv from Python succeeded",
+    "productEffect": false
+  },
+  {
+    "surface": "SOS",
+    "result": "gcroot -all address rejected by current parser; retained log and used supported gcroot address including stacks, with complete unique-root result",
+    "productEffect": false
+  }
+]

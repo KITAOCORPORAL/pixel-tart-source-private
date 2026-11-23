@@ -1,0 +1,51 @@
+{
+  "oldEditorFields": [
+    "00007ffd4fe9cde8 04000cce       40 ...ging.BitmapSource   No instance 0000000000000000 _source",
+    "00007ffd4ffbfd00 04000ccf       48 ...tDepthImageBuffer   No instance 0000000000000000 _rawPreviewMaster",
+    "00007ffd4ffbfd00 04000cd0       50 ...tDepthImageBuffer   No instance 0000000000000000 _interactiveRawMaster",
+    "00007ffd4fe9cde8 04000cd1       58 ...ging.BitmapSource   No instance 0000000000000000 _interactiveSource",
+    "00007ffd4fe9cde8 04000cda       78 ...ging.BitmapSource   No instance 0000000000000000 _matchedImage",
+    "00007ffd4fea5990 04000d07      138 ...s.FrozenRawMaster   No instance 0000000000000000 _frozenRawMaster",
+    "00007ffd4fe9cde8 04000d66      370 ...ging.BitmapSource   No instance 0000000000000000 _fullRawDisplay"
+  ],
+  "masterBackingPointerFirstLine": "000001f09201d730: 000001f0a5000048 072f960000000000 0000000000000000 00007ffd4f504738",
+  "readerClearedSlotFirstLine": "000001f08e3b1178: 0000000000000000 000001f092045690 000001f092044c70 000001f092044ed0",
+  "rootCommands": [
+    {
+      "role": "first_workspace",
+      "command": "gcroot 0x000001F0921602C0",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "9ef57b30a6e343b3f9b137077e4366c0aa13b140d95957ca278bd3db87ff0867"
+    },
+    {
+      "role": "first_editor",
+      "command": "gcroot 0x000001F0921AC508",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "e67a2059a5e8e231c0e9a4e95041f03157dc639b243200921e6471840aa5e0ac"
+    },
+    {
+      "role": "first_master_wrapper",
+      "command": "gcroot 0x000001F09201D6D8",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "39956c91408648fc9277ebfbf4dc0272b1c64b03e50100676e4cda6df3429bd4"
+    },
+    {
+      "role": "first_master_owned_ushort_array",
+      "command": "gcroot 0x000001F0A5000048",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "8c19eafd6a37b28212b75a41a311cd233c026e92de9ed930cea08789241046f9"
+    },
+    {
+      "role": "first_original_bitmap",
+      "command": "gcroot 0x000001F0BBA32D88",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "8c19eafd6a37b28212b75a41a311cd233c026e92de9ed930cea08789241046f9"
+    },
+    {
+      "role": "first_processed_bitmap",
+      "command": "gcroot 0x000001F0BBB6D9D8",
+      "actualResult": "Found 0 unique roots.",
+      "fullRawLogSha256": "91065f9b8d999d4a07da7dd77d0acf9964f599271c3410ca246c315f6f377b39"
+    }
+  ]
+}

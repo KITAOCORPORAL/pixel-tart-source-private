@@ -1,0 +1,136 @@
+{
+  "classification": "HOUSEHOLD_DIAGNOSTIC_CAPTURE_ONLY_NOT_COMPANY_ADMISSION",
+  "atUtc": "2026-11-23T13:01:08.213420+00:00",
+  "fixtureKind": "already-authorized synthetic rendered RGB16 7752x5184; not company0806",
+  "payloadSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+  "rendererScenario": "inherited WB temperature9/tint-4 and BasicTone exposure0.5/highlights-20/saturation7; actual processed100 first round",
+  "subjects": [
+    {
+      "role": "first_reader_ushort_array",
+      "weakHandle": "0x1f08e3b1178",
+      "type": "System.UInt16[]",
+      "weakSlotValue": "0x0",
+      "weakTargetCleared": true,
+      "strongRootCount": null,
+      "slotLog": "processed-root-and-reader-slot.log",
+      "slotLogSha256": "a1e126e08241a6c9050ec6f3e87c6d5abb88c01fda13fcbd2a6d2e73e38c9997"
+    },
+    {
+      "role": "first_workspace",
+      "weakHandle": "0x210c127ffc0",
+      "objectAddress": "0x000001F0921602C0",
+      "type": "RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel",
+      "payloadBytes": 0,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_workspace-roots.log",
+      "rootLogSha256": "9ef57b30a6e343b3f9b137077e4366c0aa13b140d95957ca278bd3db87ff0867"
+    },
+    {
+      "role": "first_editor",
+      "weakHandle": "0x210c127ffb8",
+      "objectAddress": "0x000001F0921AC508",
+      "type": "RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel",
+      "payloadBytes": 0,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_editor-roots.log",
+      "rootLogSha256": "e67a2059a5e8e231c0e9a4e95041f03157dc639b243200921e6471840aa5e0ac",
+      "oldEditorFieldsNull": {
+        "_source": true,
+        "_matchedImage": true,
+        "_frozenRawMaster": true,
+        "_fullRawDisplay": true
+      }
+    },
+    {
+      "role": "first_master_wrapper",
+      "weakHandle": "0x210c127ffa0",
+      "objectAddress": "0x000001F09201D6D8",
+      "type": "RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer",
+      "payloadBytes": 241118208,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_master_wrapper-roots.log",
+      "rootLogSha256": "39956c91408648fc9277ebfbf4dc0272b1c64b03e50100676e4cda6df3429bd4"
+    },
+    {
+      "role": "first_master_owned_ushort_array",
+      "weakHandle": "0x210c127ff98",
+      "objectAddress": "0x000001F0A5000048",
+      "type": "System.UInt16[]",
+      "payloadBytes": 241118208,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_master_owned_ushort_array-roots.log",
+      "rootLogSha256": "8c19eafd6a37b28212b75a41a311cd233c026e92de9ed930cea08789241046f9"
+    },
+    {
+      "role": "first_original_bitmap",
+      "weakHandle": "0x210c127ff90",
+      "objectAddress": "0x000001F0BBA32D88",
+      "type": "System.Windows.Media.Imaging.CachedBitmap",
+      "payloadBytes": 120559104,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_original_bitmap-roots.log",
+      "rootLogSha256": "8c19eafd6a37b28212b75a41a311cd233c026e92de9ed930cea08789241046f9"
+    },
+    {
+      "role": "first_processed_bitmap",
+      "weakHandle": "0x210c127ff88",
+      "objectAddress": "0x000001F0BBB6D9D8",
+      "type": "System.Windows.Media.Imaging.CachedBitmap",
+      "payloadBytes": 120559104,
+      "strongRootCount": 0,
+      "weakTargetCleared": false,
+      "rootLog": "first_processed_bitmap-roots.log",
+      "rootLogSha256": "91065f9b8d999d4a07da7dd77d0acf9964f599271c3410ca246c315f6f377b39"
+    }
+  ],
+  "masterArrayEdge": {
+    "role": "first_master_wrapper.ownedRgb48._object",
+    "arrayAddress": "0x000001F0A5000048",
+    "edgeVerifiedBySameDumpPointer": true,
+    "wrapperAndArrayBothStrongRootCount": 0,
+    "notAnExternalRoot": true
+  },
+  "arrayInventory": {
+    "thresholdBytes": 100000000,
+    "byteArrayCount": 0,
+    "singleArrayCount": 0,
+    "ushortArrayCount": 1,
+    "ushortArrayObjectBytes": 241118232,
+    "logicalPayloadBytes": 241118208,
+    "rawLogSha256": "dab24568432995c002d6db013ff2b9650fd9ad2a5fb792f74d1a5f1d2938c769"
+  },
+  "gcCountsBefore": [
+    12,
+    7,
+    4
+  ],
+  "gcCountsAfter": [
+    12,
+    7,
+    4
+  ],
+  "gcCountsEqual": true,
+  "boundaryPauseSeconds": 16.144049,
+  "pausedOtherThreadsCouldProgress": true,
+  "oldReleaseAndSettlingUnchanged": true,
+  "targetExit": {
+    "pid": 50524,
+    "exitCode": 0,
+    "stop": null,
+    "peakPrivateBytes50ms": 1524142080,
+    "osPeakWorkingSetBytes": 1589915648,
+    "samples": 1340,
+    "guardBytes": 2147483648,
+    "samplingMs": 50,
+    "newRawDecodes": 0,
+    "forcedGc": false
+  },
+  "secondAllocationNotAttempted": true,
+  "notResourcePass": true,
+  "scopeLimits": "Only tagged principal first-round objects at the captured household/company scope. A pause can allow other threads to progress; zero managed roots does not measure native WIC commitment, all retired images, or another machine/input."
+}
