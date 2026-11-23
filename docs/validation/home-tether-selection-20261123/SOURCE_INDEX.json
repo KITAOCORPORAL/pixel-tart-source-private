@@ -1,0 +1,173 @@
+[
+  {
+    "feature": "工作日历与手机档期",
+    "entry": "侧栏「工作日历」；既有受保护手机档期页",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/CalendarViewModels.cs",
+      "src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs",
+      "src/Guangjing.Schedule.Server/Program.cs",
+      "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js"
+    ],
+    "types": "WPF View/VM；C#服务/SQLite仓储；ASP.NET Core/JS客户端",
+    "data": "显式AppDataPaths.Root/Data/pixel-tart.db（ShootBookings等）；手机服务显式Schedule:Root/Database、schedule-requests.jsonl。授权/token仅私有根。",
+    "evidence": "home-acceptance-20261122/native-final/PHONE_BIDIRECTIONAL_FINAL.json：f84真实iPhone/PC v2→v3→v4通过；本轮复用、不重跑手机。",
+    "missingPaths": []
+  },
+  {
+    "feature": "策划中心",
+    "entry": "侧栏「策划中心」；项目/预约关联策划",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectStore.Copies.cs"
+    ],
+    "types": "WPF View/VM；C# PlanningProjectStore/文档与快照存储",
+    "data": "Data/ProjectPlanning/<projectId>.planning.json；文档/引用副本由PlanningProjectCopyStorage管理，不代表源照片所有权。",
+    "evidence": "functional-closure-home-20261115/CURRENT_REPORT.md、root-cause-fixes-20261117/HANDOFF.md含历史关联/安全边界；f84同版本完整文档原生复验待核。",
+    "missingPaths": []
+  },
+  {
+    "feature": "自由画布",
+    "entry": "素材库「自由画布」；策划参考/画布关联",
+    "paths": [
+      "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+      "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasDocument.cs"
+    ],
+    "types": "WPF自绘视图/Editor；CanvasDocument/CanvasDocumentStore",
+    "data": "素材库database目录下canvases/<canvasId>.json；文档StorageRoot和自有资源副本按对象记录，不等同原图移动。",
+    "evidence": "company-r55-workflow-20261102/FINAL_REPORT.md及既有Canvas测试；今晚未新增画布体验验收，f84完整同版本视觉验收待核。",
+    "missingPaths": []
+  },
+  {
+    "feature": "联机拍摄",
+    "entry": "侧栏「联机拍摄」→关联项目→选择看守文件夹→开始联机会话",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs",
+      "src/RAWSelectionAssistant.Core/Services/Tethering/TetherLibraryHandoffService.cs"
+    ],
+    "types": "WPF View/VM；None/WatchFolder提供器；FSEvent稳定检测/安全复制/持久交接",
+    "data": "主DB TetherSessions/TetherAssets/TetherAnnotations/TetherAssetLibraryLinks/CrossModuleOperations；Cache/TetherProxies；原始落盘路径及可选ProjectCopyPath。",
+    "evidence": "本轮REPORT/FILE_DELIVERY/REOPEN：0ade普通EXE新增JPEG→Stable/Ready→同项目/库/选片/独立重开通过；无A7M4实拍或遥控快门通过。",
+    "missingPaths": []
+  },
+  {
+    "feature": "资产归片与索引",
+    "entry": "侧栏「归片工作区」来源→扫描→筛选编辑；素材库导入引用",
+    "paths": [
+      "src/RAWSelectionAssistant/MainWindow.xaml",
+      "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/MediaIndexService.cs",
+      "src/RAWSelectionAssistant.Core/Services/Database/SqliteDomainRepositories.cs",
+      "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs"
+    ],
+    "types": "WPF工作流；PhotoProjectRecord；MediaIndex/项目SQLite仓储；模块VM",
+    "data": "主DB Projects/ProjectSources与媒体索引仓储；旧JSON fallback Indexes/media-index.json。素材库.ptlibrary/database/asset-library-v16.db，AssetItems/ProjectAssetLinks；导入Reference不复制源。",
+    "evidence": "本轮已实测1JPEG/0RAW索引，同一ProjectId，Reference归片，源SHA不变；未开启项目/备份安全复制，不能称复制交付通过。",
+    "missingPaths": []
+  },
+  {
+    "feature": "本地选片/看图/标记",
+    "entry": "素材库选中照片→评分/收藏→查看大图；归片「筛选编辑」；暗室灯箱观片",
+    "paths": [
+      "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+      "src/PixelTart.Modules.AssetLibrary/AssetViewerWindow.cs",
+      "src/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs"
+    ],
+    "types": "WPF目录/检查器/原图窗口；本地标注与观片台",
+    "data": "素材库AssetItems/摄影师标注；暗室工作文件保存会话标记/版本；不是客户确认状态。",
+    "evidence": "本轮普通素材检查器4星、收藏1项、独立进程仍显示评分4；暗室工作文件重开1/1同图。大图窗口打开记录有，载入完成/物理前台焦点不作已验证声明。",
+    "missingPaths": []
+  },
+  {
+    "feature": "在线选片与客户回选",
+    "entry": "暗室「发送客户选片」→上传/发布→客户确认→PC刷新/回写→导出客户所选",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+      "src/RAWSelectionAssistant/ViewModels/OnlineSelectionHttpWorkflow.cs",
+      "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionWorkspaceStores.cs",
+      "src/PixelTart.SelectionApi.Server/Program.cs"
+    ],
+    "types": "WPF VM/HTTP工作流；ASP.NET Core服务；受保护Web客户页",
+    "data": "Root/OnlineSelection/workspace.json、Proxies；显式PIXELTART_SELECTION_LOCALDEV_ROOT服务状态/requests.jsonl；源WorkflowProjectId与客户锁定结果分开持久化。",
+    "evidence": "home-acceptance-20261122/native-final/REPORT.md：f84系统Chrome+普通PC同项目确认/回写/导出/独立重开PASS；本轮只复用，无浏览器自动化或新客户发布。",
+    "missingPaths": []
+  },
+  {
+    "feature": "暗室/调色",
+    "entry": "侧栏「暗室」；归片筛选编辑；联机「打开完整参考仿色」",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs"
+    ],
+    "types": "WPF照片页/VM；Core节点渲染与旧配方/ICC合同",
+    "data": ".ptstudio.json（含workflowProjectId/目标源SHA/recipe/版本）；Data/StudioVersions；素材库身份/标注关系。",
+    "evidence": "本轮0ade正常保存/打开工作文件，同项目1/1JPEG通过。公司63a8633d候选f319 TIFF/legacy重开资源FAIL；家庭研究PASS不能升级公司/稳定f84全部大图通过。",
+    "missingPaths": []
+  },
+  {
+    "feature": "宝丽来/即时胶片",
+    "entry": "暗室即时胶片/相纸/显影/独立变体",
+    "paths": [
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/InstantV3ProductPipeline.cs"
+    ],
+    "types": "WPF工作流；Core生产桥接；历史命名Kitao.InstantFilm.Research组件",
+    "data": "工作文件/版本中RawDefinition.InstantFilm、LightPrint与冻结种子/输入定义；图像/本地任务数据不等同科研准入。",
+    "evidence": "r54-node-system-20261028与darkroom-lightprint-r3历史/自动回执；今晚未显影，f84同版本完整实操最近证据待核。",
+    "missingPaths": []
+  },
+  {
+    "feature": "摄影收支",
+    "entry": "侧栏「摄影收支」；关联项目/预约",
+    "paths": [
+      "src/RAWSelectionAssistant/Views/FinanceView.xaml",
+      "src/RAWSelectionAssistant/ViewModels/FinanceViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs",
+      "src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs",
+      "src/RAWSelectionAssistant.Core/Services/Database/BusinessSchemaMigration.cs"
+    ],
+    "types": "WPF View/VM；FinanceService/SqliteFinanceRepository",
+    "data": "主DB FinanceCategories/FinanceTransactions，金额minor units/币种/项目与预约关联；不读取本任务外财务数据。",
+    "evidence": "Version230Rc3BusinessCoreTests等自动层；今晚未做真实收支录入，最近同版本原生业务验收待核。",
+    "missingPaths": []
+  },
+  {
+    "feature": "项目历史/恢复",
+    "entry": "侧栏「项目历史」→继续处理；工作台最近项目；暗室打开项目",
+    "paths": [
+      "src/RAWSelectionAssistant/MainWindow.xaml",
+      "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+      "src/RAWSelectionAssistant.Core/Services/ProjectHistoryService.cs"
+    ],
+    "types": "WPF主壳/项目历史服务；PhotoProjectRecord",
+    "data": "主DB Projects/ProjectSources优先；旧fallback Root/Projects/projects.json；设置只保存最近名称不代替项目ID；暗室.ptstudio.json为另一层工作文件。",
+    "evidence": "本轮同项目DB、工作文件workflowProjectId及独立进程打开同图通过；f84家庭历史关闭/恢复边界沿用native-final/REPORT。",
+    "missingPaths": []
+  },
+  {
+    "feature": "Eagle（独立本地插件/主程序集成待核）",
+    "entry": "Eagle内Kitao Visual Indexer插件；f84主壳未发现Eagle入口",
+    "paths": [
+      "G:/plugins/kitao-visual-indexer/manifest.json",
+      "G:/plugins/kitao-visual-indexer/index.html",
+      "G:/plugins/kitao-visual-indexer/core.cjs",
+      "G:/plugins/kitao-visual-indexer/V39_QA_HANDOFF.md"
+    ],
+    "types": "外部Eagle插件HTML/Node CJS，manifest版本1.0.0；独立于本C#产品仓库",
+    "data": "运行时显式root写RUN_STATUS/审计/结果JSON；Eagle图库由自身API管理，实际图库绑定目录未读取，待核；不推断与主DB互通。",
+    "evidence": "外部V39_QA_HANDOFF只声明测试7/7、未生成实际QA/未写Eagle；本轮仅源码索引，无模型请求/图库读写/插件安装改动。",
+    "missingPaths": []
+  }
+]

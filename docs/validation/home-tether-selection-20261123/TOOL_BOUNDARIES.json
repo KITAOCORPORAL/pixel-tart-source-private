@@ -1,0 +1,32 @@
+{
+  "nativeGuiOnly": true,
+  "internalProductInjection": false,
+  "browserOpened": false,
+  "toolFailuresNotProductPass": [
+    {
+      "scope": "Agent global status",
+      "error": "private file DACL grants an untrusted principal",
+      "resolution": "Fresh task AGENT_DESKTOP_HOME; no ACL relaxation"
+    },
+    {
+      "scope": "native references/menus",
+      "error": "ambiguous target, timeout, popup not found",
+      "resolution": "Read state; unique visible native UIA patterns, single menu open+invoke; no duplicate uncertain action"
+    },
+    {
+      "scope": "read-only library location",
+      "error": "SetValue unavailable",
+      "resolution": "Normal choose-folder dialog and exact folder field"
+    },
+    {
+      "scope": "workfile save refs",
+      "error": "timeouts and ambiguous window",
+      "resolution": "Direct unique save dialog window-id, verified full filename then submit, saved file SHA verified"
+    },
+    {
+      "scope": "helper scripts",
+      "error": "PowerShell path-array syntax / menu foreach pipeline parser / native-host expected assembly name",
+      "resolution": "Corrected helper syntax and used actual Guangjing.Capture.NativeHost.dll; raw failed tool outcomes kept local"
+    }
+  ]
+}

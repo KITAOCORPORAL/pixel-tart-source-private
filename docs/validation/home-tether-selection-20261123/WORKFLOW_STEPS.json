@@ -1,0 +1,51 @@
+[
+  {
+    "step": "named project",
+    "entry": "归片工作区→4 输出交付→项目名称→保存项目",
+    "code": "MainViewModel.SaveCurrentProjectAsync",
+    "status": "PASS_ORDINARY",
+    "proof": "Projects id4b639da6..., name HOME-TETHER-SELECTION-20261123; blank save rejected"
+  },
+  {
+    "step": "camera recognition/connect",
+    "entry": "OS Camera/Image/WPD enum and 联机拍摄 startup",
+    "code": "CameraContracts.DefaultCameraDiscoveryService",
+    "status": "NO_A7M4_DETECTED_NO_VENDOR_PROVIDER",
+    "proof": "Only storage volumes; fixed None/WatchFolder discovery is not hardware handshake"
+  },
+  {
+    "step": "shutter",
+    "entry": "Current product has no supported remote shutter entry",
+    "code": "CameraCapabilities.CanRemoteCapture=false",
+    "status": "NOT_IMPLEMENTED_NOT_ATTEMPTED",
+    "proof": "No vendor SDK; manual camera/vendor software capture must output to watched directory"
+  },
+  {
+    "step": "file already delivered",
+    "entry": "联机拍摄→关联项目→选择目录→开始联机→existing test JPEG copied after start",
+    "code": "WatchFolderCameraAdapter + FileStabilityProbe",
+    "status": "PASS_POST_LANDING_SUBSTITUTE",
+    "proof": "AssetStable/Ready, exact source/dest SHA, no RAW"
+  },
+  {
+    "step": "correct project/library reference",
+    "entry": "素材库→全部素材（refresh）→选中",
+    "code": "TetherLibraryHandoffService.HandoffAsync",
+    "status": "PASS_REFERENCE_HANDOFF",
+    "proof": "TetherAssetLibraryLinks Ready; AssetItems/ProjectAssetLinks share test project; project/backup physical copy OFF"
+  },
+  {
+    "step": "selection",
+    "entry": "素材库选择照片→照片评分4；归片来源→扫描→筛选编辑",
+    "code": "AssetLibraryViewModel annotation + MainViewModel.EditIndexedProjectAsync",
+    "status": "PASS_ORDINARY",
+    "proof": "收藏1项；JPG1/RAW0；workfile same workflowProjectId"
+  },
+  {
+    "step": "save and independent reopen",
+    "entry": "照片页 文件→保存项目；关闭按钮；同入口新进程；文件→打开项目；素材库",
+    "code": "ReferenceColorWorkspaceViewModel.Session + ordinary closing",
+    "status": "PASS_ORDINARY",
+    "proof": "PID13452→31788; same file visible1/1, rating4 visible, same GUID/SHA"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "base": "baa1de690afb6215c6e25ca3d16880afab4caa1a",
+  "stableSource": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "companyReport": "63a8633d437ca58966bf8b6bb82acfa287c54caa",
+  "productSource": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022",
+  "firstStableLauncher": "C:\\Users\\Admin\\AppData\\Local\\Guangjing\\Deliveries\\HomeResume-f84f8b2d-20261122\\Start-FullProduct-LocalTest.cmd",
+  "stableEntrySha256": "f00c98550625137a96ff109f650ad327abf10ab0baf24411f59008404087f46d",
+  "candidatePackage": "N:\\pixart\\guangjing-home-tether-selection-20261123\\artifacts\\home-tether-20261123\\full-product",
+  "compiledComponents": [
+    {
+      "file": "App/KitaoPhotoSelector.dll",
+      "sha256": "CF8B0028BC5C4C4CF6C63467A7A6996283FD31257BB41AF736B9E0E9DFF23D54",
+      "source": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022"
+    },
+    {
+      "file": "SelectionService/PixelTart.SelectionApi.Server.dll",
+      "sha256": "0C4852677AC448E4782C7C94BB05856E23CA0C135A64DF4EC7FAAC4AB916AF46",
+      "source": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022"
+    },
+    {
+      "file": "ScheduleService/Guangjing.Schedule.Server.dll",
+      "sha256": "785CBD0B85AE8CB52684FFC5798CA4D4D0B62C025E1DA31E006D1479AAC2F190",
+      "source": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022"
+    },
+    {
+      "file": "native-host/Guangjing.Capture.NativeHost.dll",
+      "sha256": "C9AC371960CEBE34121D90951C0E751400C957EB7329B39E138DE12522414757",
+      "source": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022"
+    }
+  ],
+  "staticExtensionUnchangedFromStable": true,
+  "memoryResearchCandidateIntegrated": false,
+  "runtimeRoot": "N:\\pixart\\guangjing-home-tether-selection-20261123\\artifacts\\home-tether-20261123\\isolated-localappdata\\KitaoDiagnostic\\OnlineHttpV1-f84f8b2d\\desktop",
+  "runtimeNeverBundled": true,
+  "pointObservationOnlyNoWholeRunResourceGuardClaim": true
+}

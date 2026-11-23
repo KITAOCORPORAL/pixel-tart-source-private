@@ -23,6 +23,13 @@ public sealed class TetherProjectRefreshTests
    vm.OnActivated();await vm.ProjectRefreshWork;vm.OnDeactivated();repo.Pending=new(TaskCreationOptions.RunContinuationsAsynchronously);vm.OnActivated();var work=vm.ProjectRefreshWork;vm.OnDeactivated();repo.Pending.SetResult([Project("late")]);await work;Assert.AreEqual(1,vm.ProjectOptions.Count);
   }finally{await vm.DisposeAsync();}
  });
+ [TestMethod]public Task RunningSessionSelectionSurvivesArchivedEntryRefresh()=>RunSta(async()=>
+ {
+  var repo=new Projects();var item=Project("active");repo.Items.Add(item);var vm=Vm(repo);try
+  {
+   vm.OnActivated();await vm.ProjectRefreshWork;vm.SelectedProject=vm.ProjectOptions.Single(x=>x.Id==item.Id);vm.ApplyReviewState("connected",[]);Assert.IsTrue(vm.IsRunning);vm.OnDeactivated();repo.Items.Clear();vm.OnActivated();await vm.ProjectRefreshWork;Assert.AreEqual(item.Id,vm.SelectedProject!.Id);Assert.IsTrue(vm.ProjectOptions.Any(x=>x.Id==item.Id));
+  }finally{await vm.DisposeAsync();}
+ });
  sealed class Projects:IProjectRepository
  {
   public List<PhotoProjectRecord> Items=[];public TaskCompletionSource<IReadOnlyList<PhotoProjectRecord>>? Pending;
