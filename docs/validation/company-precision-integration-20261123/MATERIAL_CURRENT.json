@@ -1,0 +1,52 @@
+{
+  "TIFF": {
+    "path": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export/DSCF0347_仿色.tif",
+    "bytes": 241121559,
+    "modifiedUtc": "2026-11-03T10:39:00.008Z",
+    "sha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+  },
+  "recovery": {
+    "path": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-d07e4f43-20261119/output/tiff-recovered-exposure01.ptstudio.json",
+    "sha256": "a321c8a74c86b9656b508deb640f247da70dadc18372d78088815a9acd0a21de",
+    "bytes": 6851,
+    "modifiedUtc": "2026-11-19T06:59:52.924Z",
+    "version": 1,
+    "targetCount": 1,
+    "targets": [
+      {
+        "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+        "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+        "activeEditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+        "rawDefinition": null,
+        "stack": {
+          "nodes": [
+            {
+              "id": "a23429cc-1ad3-4752-b5d0-637f9c6f5620",
+              "type": 7,
+              "name": "基础与 HDR 影调",
+              "enabled": true,
+              "filmSettings": null,
+              "opacity": 1,
+              "blend": 0,
+              "localMask": null,
+              "userLocked": false,
+              "systemLocked": false,
+              "numericParameters": {
+                "exposure": 0.1
+              },
+              "samples": [],
+              "negativeSamples": []
+            }
+          ],
+          "version": 2,
+          "workingSpace": "OKLabD65",
+          "processingVersion": 2
+        }
+      }
+    ],
+    "sameAsHistoricalDigests": "Not guessed; this actualhash authoritative for currentdisk"
+  },
+  "originalsUntouched": true,
+  "noPrivateLibraryScan": true,
+  "copiesOnly": true
+}

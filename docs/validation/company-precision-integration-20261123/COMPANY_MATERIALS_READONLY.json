@@ -1,0 +1,243 @@
+[
+  {
+    "path": "E:/Guangjing-RawColorChain-20261103/pass4/company-02/default-export/DSCF0347_仿色.tif",
+    "bytes": 241121559,
+    "modifiedUtc": "2026-11-03T10:39:00.008Z",
+    "sha256": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f"
+  },
+  {
+    "path": "E:/Kitao-Deliveries/root-cause-fixes-20261117/tiff-d07e4f43-20261119/output/tiff-recovered-exposure01.ptstudio.json",
+    "bytes": 6851,
+    "modifiedUtc": "2026-11-19T06:59:52.924Z",
+    "sha256": "a321c8a74c86b9656b508deb640f247da70dadc18372d78088815a9acd0a21de",
+    "document": {
+      "targets": [
+        {
+          "id": "af62a649-22ea-48cd-a1ee-490abddaf0ff",
+          "path": "E:\\Guangjing-RawColorChain-20261103\\pass4\\company-02\\default-export\\DSCF0347_仿色.tif",
+          "assetId": null,
+          "selected": true,
+          "look": null,
+          "stack": {
+            "nodes": [
+              {
+                "id": "a23429cc-1ad3-4752-b5d0-637f9c6f5620",
+                "type": 7,
+                "name": "基础与 HDR 影调",
+                "enabled": true,
+                "filmSettings": null,
+                "opacity": 1,
+                "blend": 0,
+                "localMask": null,
+                "userLocked": false,
+                "systemLocked": false,
+                "numericParameters": {
+                  "exposure": 0.1
+                },
+                "samples": [],
+                "negativeSamples": []
+              }
+            ],
+            "version": 2,
+            "workingSpace": "OKLabD65",
+            "processingVersion": 2
+          },
+          "film": {
+            "enabled": false,
+            "profileId": "PT-N01",
+            "profileAmount": 100,
+            "grainAmount": 0,
+            "grainSize": 35,
+            "halationAmount": 0,
+            "bloomAmount": 0,
+            "vignetteAmount": 0,
+            "surfaceAmount": 0,
+            "textureId": "None",
+            "textureAmount": 0,
+            "seed": 17,
+            "spatialVersion": 1
+          },
+          "engine": 0,
+          "executionMode": 0,
+          "sessionRating": 0,
+          "sessionColorLabel": null,
+          "libraryId": null,
+          "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+          "editVersions": [
+            {
+              "id": "d15929be-1d81-9840-9f8a-5aa023d1b5a3",
+              "name": "原始",
+              "createdAt": "2026-11-16T06:53:33.2176485+00:00",
+              "libraryId": null,
+              "assetId": null,
+              "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+              "look": null,
+              "stack": null,
+              "film": null,
+              "engine": 0,
+              "mode": 0,
+              "rawDefinition": null,
+              "rawInput": null,
+              "originVersionId": null,
+              "originIdentity": null,
+              "archived": false,
+              "isOriginal": true,
+              "isMain": false,
+              "mainExplicit": false,
+              "rating": 0,
+              "colorLabel": null,
+              "processingVersion": 1
+            },
+            {
+              "id": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+              "name": "默认版本",
+              "createdAt": "2026-11-16T06:53:33.1500532+00:00",
+              "libraryId": null,
+              "assetId": null,
+              "sourceHash": "0da1bf38e42b0b76aee28f2b9a0af013ceff4cb9c46102128732d0626d667c6f",
+              "look": null,
+              "stack": {
+                "nodes": [
+                  {
+                    "id": "a23429cc-1ad3-4752-b5d0-637f9c6f5620",
+                    "type": 7,
+                    "name": "基础与 HDR 影调",
+                    "enabled": true,
+                    "filmSettings": null,
+                    "opacity": 1,
+                    "blend": 0,
+                    "localMask": null,
+                    "userLocked": false,
+                    "systemLocked": false,
+                    "numericParameters": {
+                      "exposure": 0.1
+                    },
+                    "samples": [],
+                    "negativeSamples": []
+                  }
+                ],
+                "version": 2,
+                "workingSpace": "OKLabD65",
+                "processingVersion": 2
+              },
+              "film": {
+                "enabled": false,
+                "profileId": "PT-N01",
+                "profileAmount": 100,
+                "grainAmount": 0,
+                "grainSize": 35,
+                "halationAmount": 0,
+                "bloomAmount": 0,
+                "vignetteAmount": 0,
+                "surfaceAmount": 0,
+                "textureId": "None",
+                "textureAmount": 0,
+                "seed": 17,
+                "spatialVersion": 1
+              },
+              "engine": 0,
+              "mode": 0,
+              "rawDefinition": null,
+              "rawInput": null,
+              "originVersionId": null,
+              "originIdentity": null,
+              "archived": false,
+              "isOriginal": false,
+              "isMain": true,
+              "mainExplicit": false,
+              "rating": 0,
+              "colorLabel": null,
+              "processingVersion": 2
+            }
+          ],
+          "activeEditVersionId": "82858053-bb81-94a8-cd29-61e03f1a1adc",
+          "catalogRevision": 0,
+          "rawDefinition": null,
+          "rawInput": null,
+          "variantsExpanded": false
+        }
+      ],
+      "activeTargetId": "af62a649-22ea-48cd-a1ee-490abddaf0ff",
+      "filterScope": "All",
+      "minimumRating": 0,
+      "colorLabelFilter": "All",
+      "version": 1,
+      "layout": {
+        "auxiliaryWidth": 290,
+        "editingWidth": 340,
+        "auxiliaryOpen": true,
+        "editingOpen": true,
+        "auxiliaryMode": 0,
+        "toolMode": 0,
+        "filmstripDock": "Bottom",
+        "filmstripView": "Grid",
+        "filmstripOpen": true,
+        "darkroom": {
+          "width": 304,
+          "open": true,
+          "tab": 0,
+          "solo": false,
+          "sectionOrder": [
+            "AdjustmentScroll.R53Layers",
+            "AdjustmentScroll.1",
+            "AdjustmentScroll.2",
+            "AdjustmentScroll.3",
+            "AdjustmentScroll.4",
+            "AdjustmentScroll.5",
+            "AdjustmentScroll.6",
+            "AdjustmentScroll.7",
+            "AdjustmentScroll.ColorRange",
+            "AdjustmentScroll.8",
+            "AdjustmentScroll.9",
+            "AdjustmentScroll.10",
+            "AdjustmentScroll.11",
+            "AdjustmentScroll.12",
+            "PaperScroll.1",
+            "PaperScroll.2",
+            "PaperScroll.3",
+            "PaperScroll.4",
+            "PaperScroll.Defects",
+            "PaperScroll.5",
+            "PaperScroll.6",
+            "LayersScroll.SceneExposure",
+            "StylesScroll.1",
+            "StylesScroll.2",
+            "StylesScroll.3",
+            "StylesScroll.4",
+            "VariantsScroll.1",
+            "VariantsScroll.2",
+            "VariantsScroll.3"
+          ],
+          "collapsedSections": [
+            "AdjustmentScroll.R53Layers",
+            "AdjustmentScroll.3",
+            "AdjustmentScroll.4",
+            "AdjustmentScroll.7",
+            "AdjustmentScroll.8",
+            "AdjustmentScroll.9",
+            "AdjustmentScroll.10",
+            "AdjustmentScroll.11",
+            "AdjustmentScroll.12",
+            "PaperScroll.Defects",
+            "PaperScroll.5",
+            "LayersScroll.SceneExposure",
+            "StylesScroll.3"
+          ]
+        },
+        "r54Stills": [],
+        "r54GraphHeight": 216,
+        "r54GraphCollapsed": null,
+        "r54GraphZoom": 1,
+        "r54GraphPanX": 8,
+        "r54GraphPanY": 12,
+        "filmDraftFrameId": null,
+        "filmDraftInputMode": null,
+        "r53Professional": false,
+        "r53Favorites": [],
+        "r53Recents": []
+      },
+      "embeddedVersionsAuthoritative": true,
+      "workflowProjectId": null
+    }
+  }
+]

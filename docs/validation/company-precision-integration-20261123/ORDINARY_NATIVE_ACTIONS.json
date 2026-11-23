@@ -1,0 +1,116 @@
+{
+  "source": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "pid": 26780,
+  "scope": "RunningproductionUIA/standardfiledialogs; noViewModelinjection; processedfullsizeinternalreadbackNOT_MEASURED",
+  "actions": [
+    {
+      "file": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\native-continuation-uia\\c1-100processed.json",
+      "atUtc": "2026-11-23T06:12:21.4138323+00:00",
+      "action": "Invoke",
+      "target": "7:26780:24647929",
+      "readbacks": [
+        {
+          "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "曝光",
+          "id": "CompactStudioSlider-BasicTone-exposure",
+          "value": 0.1,
+          "visualState": null
+        }
+      ]
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\native-continuation-uia\\c1-exp02.json",
+      "atUtc": "2026-11-23T06:09:33.1440642+00:00",
+      "action": "SetValue",
+      "target": "7:26780:34509825",
+      "readbacks": [
+        {
+          "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "曝光",
+          "id": "CompactStudioSlider-BasicTone-exposure",
+          "value": 0.2,
+          "visualState": null
+        }
+      ]
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\native-continuation-uia\\c1-exp03.json",
+      "atUtc": "2026-11-23T06:10:01.7682390+00:00",
+      "action": "SetValue",
+      "target": "7:26780:34509825",
+      "readbacks": [
+        {
+          "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "曝光",
+          "id": "CompactStudioSlider-BasicTone-exposure",
+          "value": 0.3,
+          "visualState": null
+        }
+      ]
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\native-continuation-uia\\c1-reopen-menu.json",
+      "atUtc": "2026-11-23T06:20:44.9119599+00:00",
+      "action": "InvokeMenuChild",
+      "target": "7:26780:45916501",
+      "readbacks": [
+        {
+          "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "打开 Color Studio 工作文件",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "曝光",
+          "id": "CompactStudioSlider-BasicTone-exposure",
+          "value": 0.1,
+          "visualState": null
+        }
+      ]
+    },
+    {
+      "file": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\native-continuation-uia\\c1-restore01.json",
+      "atUtc": "2026-11-23T06:11:53.9309165+00:00",
+      "action": "SetValue",
+      "target": "7:26780:34509825",
+      "readbacks": [
+        {
+          "name": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+          "id": "",
+          "value": null,
+          "visualState": "Normal"
+        },
+        {
+          "name": "曝光",
+          "id": "CompactStudioSlider-BasicTone-exposure",
+          "value": 0.1,
+          "visualState": null
+        }
+      ]
+    }
+  ],
+  "allRawUiEvidenceRoot": "E:/Kitao-Deliveries/company-precision-integration-20261123",
+  "firstExportOracle": "TIFF_CYCLE1_FULL_ROW_ORACLE.json",
+  "guardStop": "ordinary-STOP.json"
+}

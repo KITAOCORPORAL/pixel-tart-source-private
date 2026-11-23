@@ -1,0 +1,57 @@
+{
+  "status": "NEW_COMPANY_CACHE_GATE_FAILED_NO_FINAL_ADMISSION",
+  "baseProduct": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "candidateProduct": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "input": "0806D680 actualcompanycache; distinct from home synthetic40MP",
+  "stop": {
+    "reason": "2GiB or 600s guard",
+    "sample": {
+      "elapsedMs": 75226.37060000125,
+      "privateBytes": 2176217088,
+      "workingSetBytes": 1642938368,
+      "osPeakWorkingSetBytes": 1642942464,
+      "phase": "before-ushort-allocation-2"
+    }
+  },
+  "firstRoundCompletedStages": [
+    "startup",
+    "before-ushort-allocation-1",
+    "ushort-read-complete-1",
+    "master-loaded",
+    "visible-100",
+    "saved",
+    "export-start",
+    "export-finished",
+    "release-tasks-observed",
+    "released-natural-idle",
+    "same-process-reopen-start",
+    "before-ushort-allocation-2"
+  ],
+  "sourceBackingAllObservedRgb48": true,
+  "allKnownScopeTasksEndedAtRelease": [
+    {
+      "name": "analysis",
+      "status": "RanToCompletion",
+      "IsCompleted": true
+    },
+    {
+      "name": "detail",
+      "status": "RanToCompletion",
+      "IsCompleted": true
+    },
+    {
+      "name": "lightPrint",
+      "status": "RanToCompletion",
+      "IsCompleted": true
+    },
+    {
+      "name": "framePhotos",
+      "status": "RanToCompletion",
+      "IsCompleted": true
+    }
+  ],
+  "changeToOld11aDecision": "Superseded old11a rejection with fullac1 source review; newf319actualcachegateindependentlyfailed",
+  "notAColorMathFailure": true,
+  "notAProvenLeak": true,
+  "stablePrimaryMustStayF84": true
+}

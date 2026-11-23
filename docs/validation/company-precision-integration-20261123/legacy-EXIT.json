@@ -1,0 +1,18 @@
+{
+  "pid": 1776,
+  "exitCode": 1,
+  "stop": {
+    "elapsedMs": 75226.37060000125,
+    "privateBytes": 2176217088,
+    "workingSetBytes": 1642938368,
+    "osPeakWorkingSetBytes": 1642942464,
+    "phase": "before-ushort-allocation-2"
+  },
+  "peakPrivateBytes50ms": 2176217088,
+  "osPeakWorkingSetBytes": 1642942464,
+  "samples": 1477,
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "newRawDecodes": 0,
+  "forcedGc": false
+}

@@ -1,0 +1,65 @@
+{
+  "oldtree": "E:/Kitao-Worktrees/product-functional-closure-20261112",
+  "head": "4aa17e64efb16dffde208c306ede2a62ba0ec9d8",
+  "dirty": [
+    {
+      "status": " M",
+      "file": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "bytes": 19341,
+      "sha256": "a95e0ea5fed498f2a352b000ada8103ea0f14d8c5636dac6b3a67adeeb3d5127"
+    },
+    {
+      "status": " M",
+      "file": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+      "bytes": 5645,
+      "sha256": "5993ef423fb24a95701b71aa8f6d679ee80720921b418dfe72d0edff03217bf3"
+    },
+    {
+      "status": " M",
+      "file": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "bytes": 18224,
+      "sha256": "8531b70737b09cb9eba35e86b5e045b2446d61dfd2ea7338cc5c7ed8ddc6c6b1"
+    },
+    {
+      "status": " M",
+      "file": "tests/RAWSelectionAssistant.WpfTests/LightPrintR3Tests.cs",
+      "bytes": 15650,
+      "sha256": "f274fbb2f488fb3884e7e48b4efd4e72f3f9e4d11ff9ee07a5cc49fd96aaab61"
+    },
+    {
+      "status": " M",
+      "file": "tools/ProductMemoryIntegrationReplay/Program.cs",
+      "bytes": 25963,
+      "sha256": "d970df42c10a0ee4733fa0e869074a0402536f15531656892680a0ed5bcbc90d"
+    },
+    {
+      "status": " M",
+      "file": "tools/ProductMemoryIntegrationReplay/run_guarded.py",
+      "bytes": 4767,
+      "sha256": "3bb594301bc55864c16fe4e30b14ad315948ec8cd6307720d7241a78a9144259"
+    },
+    {
+      "status": "??",
+      "file": "tools/FunctionalClosureAcceptance/Compare-RenderedTiffOutputs.py",
+      "bytes": 3648,
+      "sha256": "5ccafc1b6010fcfcb421477bc9c07448a2fc832a551ea860f054088376299265"
+    },
+    {
+      "status": "??",
+      "file": "tools/FunctionalClosureAcceptance/Native-ProductStep.ps1",
+      "bytes": 3775,
+      "sha256": "1ae241bca90397435c4204bdbd3a4f67f253571456a635465650c97812800e00"
+    },
+    {
+      "status": "??",
+      "file": "ws-3f9bdab8/",
+      "directoryNotTraversed": true
+    }
+  ],
+  "currentPrimaryTree": {
+    "root": "E:/Kitao-Worktrees/company-functional-20261116",
+    "head": "f6655aff201b157a09ee37c46eb82596ff59028f",
+    "status": ""
+  },
+  "policy": "Read-only; no reset/stash/clean/rebase/sourceoverwrite performed; no privategallerytraversal"
+}

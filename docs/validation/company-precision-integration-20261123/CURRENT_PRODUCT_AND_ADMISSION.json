@@ -1,0 +1,50 @@
+{
+  "atUtc": "2026-11-23T06:46:43.852Z",
+  "status": "PARTIAL_INTEGRATED_CANDIDATE_HELD_COMPANY_DOUBLE_RESOURCE_FAILURE",
+  "currentUsableProduct": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "currentPrimaryEntry": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\Guangjing-Company-f84f8b2d-StableFull-win-x64\\Start-FullProduct-LocalTest.cmd",
+  "primaryEntryCount": 1,
+  "candidateSource": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "candidatePackage": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\Guangjing-Company-f3190f44-Full-win-x64",
+  "candidatePromoted": false,
+  "homeBase": "baa1de690afb6215c6e25ca3d16880afab4caa1a",
+  "memoryReviewedHead": "ce9c38e7404d74d146ec918f862c46a38adfb85b",
+  "integratedCommits": [
+    "bb14b81a",
+    "8a2d6951",
+    "f3190f44"
+  ],
+  "old11aReview": "HISTORICAL_FAILURE_NOT_CURRENT_DECISION",
+  "ac1Review": "FULL_OWNERSHIP_AND_TEST_REVIEW_COMPLETED; ac1limitedhomegatesretained",
+  "newCompanyGates": {
+    "ordinaryTiff": {
+      "source": "f3190f4470996232aa63477838b8979d66dd8e45",
+      "status": "FIRST_EXPOSURE_UNDO_REDO_SAVE_EXPORT_DONE_REOPEN_2GIB_STOP",
+      "completedFullCycles": 0,
+      "firstExportFullRowOracle": "PASS",
+      "sameProcessThreeCycles": "NOT_COMPLETED_RESOURCE_STOP",
+      "independentReopenExport": "NOT_RUN_AFTER_STOP",
+      "peakPrivateBytes": 2203717632,
+      "peakWorkingBytes": 1950105600,
+      "privateHeadroomMiB": -53.62890625
+    },
+    "legacyCache": {
+      "source": "f3190f4470996232aa63477838b8979d66dd8e45",
+      "status": "FIRST_PROCESSED100_SAVE_EXPORT_COMPLETE_SECOND_CACHE_ARRAY_READ_2GIB_STOP",
+      "masterBacking": "RGB48_NO_FLOAT_EXPANSION_ATOBSERVEDPHASES",
+      "fullThreeCycleGate": false,
+      "peakPrivateBytes": 2176217088,
+      "peakWorkingBytes": 1642942464,
+      "privateHeadroomMiB": -27.40234375,
+      "scope": "ControlledVM actualoldlegalRGB48cache, not ordinarylegacyUI"
+    }
+  },
+  "jpegAffectedTests": "47initialPASS/1obsoletefixtureFAIL; correctedfixture1PASS; originalfailurepreserved",
+  "phone": "Homef84physicalPASSretained; no newdevice/token/bookingwrites",
+  "newRawDecodes": 0,
+  "forcedGc": false,
+  "workingSetTrim": false,
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "gateFailureAction": "Retainf84primary/oldpackages/source; holdcandidate and record unresolvedretiredworking-set/contiguousallocationcapacity. No resourcecondition weakening."
+}

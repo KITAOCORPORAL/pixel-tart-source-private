@@ -1,0 +1,99 @@
+{
+  "candidateFunctionalSource": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "runs": [
+    {
+      "name": "core",
+      "counters": {
+        "total": 85,
+        "executed": 85,
+        "passed": 85,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": []
+    },
+    {
+      "name": "wpf",
+      "counters": {
+        "total": 26,
+        "executed": 26,
+        "passed": 26,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": []
+    },
+    {
+      "name": "affected",
+      "counters": {
+        "total": 48,
+        "executed": 48,
+        "passed": 47,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [
+        "CreateAndImportCommand_ValidatesBeforePickerAndCancelCreatesDraft"
+      ]
+    },
+    {
+      "name": "fixed-number-fixture",
+      "counters": {
+        "total": 1,
+        "executed": 1,
+        "passed": 1,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": []
+    }
+  ],
+  "doNotSumOverlappingFilters": true,
+  "originalAffectedFailure": "Outdatedfixture expects countbeforeblankname; product uses approvednamefirst sinceB2. Productfile/testwereunchangedfromf84.",
+  "testCorrection": "Only countvalidationfixture supplies legalname/client to isolate invalidquantity; single correctedtestpassed",
+  "phoneHardwareAcceptance": "Retainedhomef84realdevicepass; no newcredentials/bookings"
+}

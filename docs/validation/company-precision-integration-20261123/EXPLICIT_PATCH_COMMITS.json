@@ -1,0 +1,49 @@
+[
+  {
+    "sha": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+    "parents": "d3925142c1e13d1a456ae9ec53b7834b97f58f47",
+    "subject": "fix(schedule): open preserved bookings from protected phone links",
+    "files": [
+      "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js",
+      "tools/MobileScheduleAcceptance/CalendarDeepLink.test.cjs"
+    ]
+  },
+  {
+    "sha": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+    "parents": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+    "subject": "fix(memory): stream legacy high-precision point exports with explicit input ownership",
+    "files": [
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs"
+    ]
+  },
+  {
+    "sha": "11a424c90199b32cbf73cc6a14eefd651612b213",
+    "parents": "fb00ef264d8538b40a9eec1776eab5e6ac8ed3ee",
+    "subject": "fix(memory): fuse owned RGB48 orientation and stream legacy display results",
+    "files": [
+      "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+      "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs"
+    ]
+  },
+  {
+    "sha": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+    "parents": "eb5229eb1a06792162108fa1c3bed56c2ac249e1",
+    "subject": "fix(memory): retain owned RGB48 sources and expand only consumed strips",
+    "files": [
+      "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs"
+    ]
+  }
+]

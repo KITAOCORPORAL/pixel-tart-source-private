@@ -1,0 +1,14 @@
+✔ Historical booking opens by validated fragment id and keeps revision without a write (41.0777ms)
+✔ A normal link keeps the list-only behavior (1.9327ms)
+✔ Malformed booking ids never enter a request path (4.2121ms)
+✔ A saved session can open a booking link without embedding a second token (1.9133ms)
+✔ Missing credentials stop before all HTTP reads (0.9964ms)
+✔ A missing historical booking displays the server rejection without mutation (1.6231ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 140.1026

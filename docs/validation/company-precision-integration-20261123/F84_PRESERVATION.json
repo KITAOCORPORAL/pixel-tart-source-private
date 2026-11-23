@@ -1,0 +1,52 @@
+{
+  "base": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "candidate": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "explicitChangesOnly": [
+    "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+    "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+    "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+    "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+    "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs",
+    "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs",
+    "tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs"
+  ],
+  "protected": [
+    {
+      "file": "src/Guangjing.Schedule.Server/wwwroot/calendar-client.js",
+      "baseBlob": "404eae55fade61b50e45b4b2b048cbad86ebe319",
+      "candidateBlob": "404eae55fade61b50e45b4b2b048cbad86ebe319",
+      "unchanged": true
+    },
+    {
+      "file": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "baseBlob": "c83656adecb781d3170d92f9f274f325286aef82",
+      "candidateBlob": "c83656adecb781d3170d92f9f274f325286aef82",
+      "unchanged": true
+    },
+    {
+      "file": "src/RAWSelectionAssistant/ViewModels/MainViewModel.OnlineSelection.cs",
+      "baseBlob": "11d52eae3b5ac030a97e0c13c5a6c2275372cee6",
+      "candidateBlob": "11d52eae3b5ac030a97e0c13c5a6c2275372cee6",
+      "unchanged": true
+    },
+    {
+      "file": "tests/RAWSelectionAssistant.WpfTests/SelectionRejectionVisibilityTests.cs",
+      "baseBlob": "b7d3be4a4667a2df256bf6dc3fb2e1c1bdeb2c4b",
+      "candidateBlob": "b7d3be4a4667a2df256bf6dc3fb2e1c1bdeb2c4b",
+      "unchanged": true
+    },
+    {
+      "file": "tools/MobileScheduleAcceptance/CalendarDeepLink.test.cjs",
+      "baseBlob": "1a2b2fcc7cf0810e7cdcbad831a371c7ccffab97",
+      "candidateBlob": "1a2b2fcc7cf0810e7cdcbad831a371c7ccffab97",
+      "unchanged": true
+    }
+  ],
+  "closureProtocol": "No delta to approvedf84 MainWindow/App closeprotocol fromthreeexplicitcommits",
+  "decoderAndColorMath": "No delta fromthreeexplicitcommits to发行decoder/ColorStudioToolProcessor/PVdefinitions/Tiffwriter"
+}

@@ -1,0 +1,1441 @@
+[
+  {
+    "stage": "startup",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:54:47.2136807+00:00",
+    "privateBytes": 14311424,
+    "workingSetBytes": 53649408,
+    "managedEstimate": 2428640,
+    "gcHeapBytes": 0,
+    "gcCommittedBytes": 0,
+    "gcFragmentedBytes": 0,
+    "allocatedBytes": 2406912,
+    "gcCollections": [
+      0,
+      0,
+      0
+    ],
+    "holders": {},
+    "weakOwners": [],
+    "replayReads": 0,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "before-ushort-allocation-1",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:54:47.2867584+00:00",
+    "privateBytes": 16257024,
+    "workingSetBytes": 61427712,
+    "managedEstimate": 3206632,
+    "gcHeapBytes": 0,
+    "gcCommittedBytes": 0,
+    "gcFragmentedBytes": 0,
+    "allocatedBytes": 3152504,
+    "gcCollections": [
+      0,
+      0,
+      0
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "原片",
+        "detail": false
+      },
+      "target.RawMaster": {
+        "type": "null"
+      },
+      "target.Image": {
+        "type": "null"
+      },
+      "Editor._source": {
+        "type": "null"
+      },
+      "Editor._interactiveSource": {
+        "type": "null"
+      },
+      "Editor._matchedImage": {
+        "type": "null"
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "null"
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "null"
+      },
+      "Editor._frozenRawMaster": {
+        "type": "null"
+      },
+      "Editor._fullRawDisplay": {
+        "type": "null"
+      }
+    },
+    "weakOwners": [],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "ushort-read-complete-1",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:54:47.4015607+00:00",
+    "privateBytes": 262701056,
+    "workingSetBytes": 304201728,
+    "managedEstimate": 243998896,
+    "gcHeapBytes": 245504920,
+    "gcCommittedBytes": 245600256,
+    "gcFragmentedBytes": 1588584,
+    "allocatedBytes": 245519088,
+    "gcCollections": [
+      1,
+      1,
+      1
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "原片",
+        "detail": false
+      },
+      "target.RawMaster": {
+        "type": "null"
+      },
+      "target.Image": {
+        "type": "null"
+      },
+      "Editor._source": {
+        "type": "null"
+      },
+      "Editor._interactiveSource": {
+        "type": "null"
+      },
+      "Editor._matchedImage": {
+        "type": "null"
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "null"
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "null"
+      },
+      "Editor._frozenRawMaster": {
+        "type": "null"
+      },
+      "Editor._fullRawDisplay": {
+        "type": "null"
+      }
+    },
+    "weakOwners": [],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "master-loaded",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:54:48.5604089+00:00",
+    "privateBytes": 708476928,
+    "workingSetBytes": 703909888,
+    "managedEstimate": 663560856,
+    "gcHeapBytes": 643561088,
+    "gcCommittedBytes": 653017088,
+    "gcFragmentedBytes": 26176,
+    "allocatedBytes": 670904856,
+    "gcCollections": [
+      2,
+      1,
+      1
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "原片",
+        "detail": false
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "null"
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "null"
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "visible-100",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:55:25.9183651+00:00",
+    "privateBytes": 1934012416,
+    "workingSetBytes": 1592614912,
+    "managedEstimate": 736120384,
+    "gcHeapBytes": 696609384,
+    "gcCommittedBytes": 775270400,
+    "gcFragmentedBytes": 13473048,
+    "allocatedBytes": 1207702152,
+    "gcCollections": [
+      14,
+      6,
+      2
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "WaitingForActivation",
+          "IsCompleted": false
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "仿色结果",
+        "detail": true
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "viewport": {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 55012273,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 44070913,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "saved",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:55:26.5250348+00:00",
+    "privateBytes": 1930473472,
+    "workingSetBytes": 1596694528,
+    "managedEstimate": 325456848,
+    "gcHeapBytes": 610341344,
+    "gcCommittedBytes": 808361984,
+    "gcFragmentedBytes": 289205800,
+    "allocatedBytes": 1218089080,
+    "gcCollections": [
+      16,
+      7,
+      3
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "WaitingForActivation",
+          "IsCompleted": false
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "仿色结果",
+        "detail": true
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "viewport": {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 55012273,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 44070913,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "export-start",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:55:26.535841+00:00",
+    "privateBytes": 1930473472,
+    "workingSetBytes": 1596710912,
+    "managedEstimate": 325643512,
+    "gcHeapBytes": 610341344,
+    "gcCommittedBytes": 808361984,
+    "gcFragmentedBytes": 289205800,
+    "allocatedBytes": 1218276792,
+    "gcCollections": [
+      16,
+      7,
+      3
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "WaitingForActivation",
+          "IsCompleted": false
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "仿色结果",
+        "detail": true
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "viewport": {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 55012273,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 44070913,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "export-finished",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:56:01.2108954+00:00",
+    "privateBytes": 1932046336,
+    "workingSetBytes": 1601089536,
+    "managedEstimate": 322902800,
+    "gcHeapBytes": 604667152,
+    "gcCommittedBytes": 687869952,
+    "gcFragmentedBytes": 285024736,
+    "allocatedBytes": 1359707560,
+    "gcCollections": [
+      18,
+      9,
+      4
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "仿色结果",
+        "detail": true
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "viewport": {
+        "zoom": 1,
+        "Mode": "仿色结果",
+        "IsVisible": true,
+        "IsLoaded": true,
+        "width": 897.3333333333333,
+        "height": 614.6666666666666,
+        "original": {
+          "type": "CachedBitmap",
+          "id": 55012273,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "matched": {
+          "type": "CachedBitmap",
+          "id": 44070913,
+          "width": 7752,
+          "height": 5184,
+          "bits": 24,
+          "minBytes": 120559104
+        },
+        "DisplayColorEnabled": false
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "release-tasks-observed",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:56:01.8243721+00:00",
+    "privateBytes": 1932070912,
+    "workingSetBytes": 1601536000,
+    "managedEstimate": 329425648,
+    "gcHeapBytes": 605701752,
+    "gcCommittedBytes": 687869952,
+    "gcFragmentedBytes": 283549048,
+    "allocatedBytes": 1371829008,
+    "gcCollections": [
+      19,
+      9,
+      4
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "仿色结果",
+        "detail": true
+      },
+      "target.RawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "target.Image": {
+        "type": "CachedBitmap",
+        "id": 45083904,
+        "width": 1600,
+        "height": 1070,
+        "bits": 24,
+        "minBytes": 5136000
+      },
+      "Editor._source": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._interactiveSource": {
+        "type": "TransformedBitmap",
+        "id": 49219842,
+        "width": 800,
+        "height": 535,
+        "bits": 24,
+        "minBytes": 1284000
+      },
+      "Editor._matchedImage": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "HighBitDepth",
+        "id": 35878178,
+        "width": 1600,
+        "height": 1070,
+        "bytes": 20544000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 20544000
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "HighBitDepth",
+        "id": 63763137,
+        "width": 800,
+        "height": 535,
+        "bytes": 5136000,
+        "floatMaterialized": true,
+        "logicalFloatBytes": 5136000
+      },
+      "Editor._frozenRawMaster": {
+        "type": "HighBitDepth",
+        "id": 8630212,
+        "width": 7752,
+        "height": 5184,
+        "bytes": 241118208,
+        "floatMaterialized": false,
+        "logicalFloatBytes": 482236416
+      },
+      "Editor._fullRawDisplay": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "released-natural-idle",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:56:01.8415181+00:00",
+    "privateBytes": 1932509184,
+    "workingSetBytes": 1601572864,
+    "managedEstimate": 329629328,
+    "gcHeapBytes": 605701752,
+    "gcCommittedBytes": 687869952,
+    "gcFragmentedBytes": 283549048,
+    "allocatedBytes": 1372035160,
+    "gcCollections": [
+      19,
+      9,
+      4
+    ],
+    "holders": {},
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "same-process-reopen-start",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:56:01.8515598+00:00",
+    "privateBytes": 1932509184,
+    "workingSetBytes": 1601581056,
+    "managedEstimate": 329738208,
+    "gcHeapBytes": 605701752,
+    "gcCommittedBytes": 687869952,
+    "gcFragmentedBytes": 283549048,
+    "allocatedBytes": 1372140896,
+    "gcCollections": [
+      19,
+      9,
+      4
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "原片",
+        "detail": false
+      },
+      "target.RawMaster": {
+        "type": "null"
+      },
+      "target.Image": {
+        "type": "null"
+      },
+      "Editor._source": {
+        "type": "null"
+      },
+      "Editor._interactiveSource": {
+        "type": "null"
+      },
+      "Editor._matchedImage": {
+        "type": "null"
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "null"
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "null"
+      },
+      "Editor._frozenRawMaster": {
+        "type": "null"
+      },
+      "Editor._fullRawDisplay": {
+        "type": "null"
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 1,
+    "nativeRawLoaded": false
+  },
+  {
+    "stage": "before-ushort-allocation-2",
+    "pid": 1776,
+    "atUtc": "2026-11-23T05:56:01.8892904+00:00",
+    "privateBytes": 1932525568,
+    "workingSetBytes": 1602027520,
+    "managedEstimate": 330016832,
+    "gcHeapBytes": 605701752,
+    "gcCommittedBytes": 687869952,
+    "gcFragmentedBytes": 283549048,
+    "allocatedBytes": 1372401888,
+    "gcCollections": [
+      19,
+      9,
+      4
+    ],
+    "holders": {
+      "tasks": [
+        {
+          "name": "analysis",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "detail",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "lightPrint",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        },
+        {
+          "name": "framePhotos",
+          "status": "RanToCompletion",
+          "IsCompleted": true
+        }
+      ],
+      "editor.mode": {
+        "enabled": true,
+        "mode": "原片",
+        "detail": false
+      },
+      "target.RawMaster": {
+        "type": "null"
+      },
+      "target.Image": {
+        "type": "null"
+      },
+      "Editor._source": {
+        "type": "null"
+      },
+      "Editor._interactiveSource": {
+        "type": "null"
+      },
+      "Editor._matchedImage": {
+        "type": "null"
+      },
+      "Editor._rawPreviewMaster": {
+        "type": "null"
+      },
+      "Editor._interactiveRawMaster": {
+        "type": "null"
+      },
+      "Editor._frozenRawMaster": {
+        "type": "null"
+      },
+      "Editor._fullRawDisplay": {
+        "type": "null"
+      }
+    },
+    "weakOwners": [
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "TransformedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "HighBitDepthImageBuffer",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      },
+      {
+        "Role": "CachedBitmap",
+        "alive": true
+      }
+    ],
+    "replayReads": 2,
+    "nativeRawLoaded": false
+  }
+]

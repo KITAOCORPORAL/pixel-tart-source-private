@@ -1,0 +1,63 @@
+{
+  "atUtc": "2026-11-23T06:58:14.324Z",
+  "sourceProductCandidate": "f3190f4470996232aa63477838b8979d66dd8e45",
+  "stableProduct": "f84f8b2d9f68d668c6387089832e6f52cdd24dab",
+  "phase": "PARTIAL_GATES_FAILED_STABLE_PRIMARY_PRESERVED",
+  "ordinaryCandidateGuard": {
+    "path": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\ordinary-initial",
+    "stopped": true
+  },
+  "legacyCandidateGuard": {
+    "path": "E:\\Kitao-Deliveries\\company-precision-integration-20261123\\legacy-processed-three-cycle",
+    "stopped": true
+  },
+  "gateReason": "Dual2GiBprivate/OSpeak thresholds preserved, not reachedthreecycles",
+  "tests": {
+    "core": {
+      "pass": 85,
+      "fail": 0
+    },
+    "wpf": {
+      "pass": 26,
+      "fail": 0
+    },
+    "affectedInitial": {
+      "pass": 47,
+      "fail": 1
+    },
+    "correctedFixture": {
+      "pass": 1,
+      "fail": 0
+    },
+    "staticCalendar": {
+      "pass": 6,
+      "fail": 0
+    },
+    "filtersOverlapNotTotalled": true
+  },
+  "ordinaryTiffFirstPixelOracle": {
+    "rows": 5184,
+    "rgbChannels": 120559104,
+    "differences": 0,
+    "bitsPerChannel": 16,
+    "orientation": 1,
+    "iccBytes": 3144
+  },
+  "expectedRemaining": {
+    "ordinaryFullCycles": "3_REQUIRED_NOT_COMPLETED",
+    "normalCloseAndIndependentExport": "NOT_RUN_AFTER_RESOURCESTOP",
+    "ordinaryLegacyUi": "NOT_RUN_DO_NOT_FORCE_CACHEMISS_RAW"
+  },
+  "phoneHomePhysicalResult": "RETAINED_F84_NO_REPEAT",
+  "newRawDecodes": 0,
+  "forcedGc": false,
+  "workingSetTrim": false,
+  "newInstaller": false,
+  "packageCurrentEntryCount": 1,
+  "packageReadiness": "Stablef84startup/reusepassed; candidateheld",
+  "originalMaterialsUnchanged": true,
+  "oldPackagesAndProjectsPreserved": true,
+  "old11aAdmissionUpdated": true,
+  "ac1PreviousLimitedPassNotDowngraded": true,
+  "format": "Focusedreport plus hash/index; originalsamples/runtime/images remain external"
+}

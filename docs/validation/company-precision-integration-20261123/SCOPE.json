@@ -1,0 +1,33 @@
+{
+  "branch": "integration/company-precision-20261123",
+  "worktree": "E:/Kitao-Worktrees/company-precision-integration-20261123",
+  "baseHome": "baa1de690afb6215c6e25ca3d16880afab4caa1a",
+  "explicitPatchMapping": [
+    [
+      "cf5a63d3",
+      "bb14b81a"
+    ],
+    [
+      "11a424c9",
+      "8a2d6951"
+    ],
+    [
+      "ac1c57e9",
+      "f3190f44"
+    ]
+  ],
+  "researchHeadNotCopied": true,
+  "additionalProductFixes": 0,
+  "additionalChanges": "Testfixturevalidnameforquantityisolation + diagnostictools + reports only",
+  "notApprovedForCurrentProduct": true,
+  "privateRuntimeExternal": true,
+  "importantEvidenceReadFirst": [
+    "REPORT.md",
+    "CURRENT_PRODUCT_AND_ADMISSION.json",
+    "TEST_RESULTS.json",
+    "MATERIAL_CURRENT.json",
+    "TIFF_CYCLE1_FULL_ROW_ORACLE.json",
+    "LEGACY_EVENTS.json"
+  ],
+  "rawEvidenceRoot": "E:/Kitao-Deliveries/company-precision-integration-20261123"
+}

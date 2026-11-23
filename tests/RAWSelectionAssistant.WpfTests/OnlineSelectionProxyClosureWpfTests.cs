@@ -221,8 +221,8 @@ public sealed class OnlineSelectionProxyClosureWpfTests
         var invalidDialogs = new RecordingDialogService([], null);
         var invalid = new OnlineSelectionViewModel(dialogService: invalidDialogs)
         {
-            ProjectName = string.Empty,
-            ClientName = string.Empty,
+            ProjectName = "数量校验隔离用例",
+            ClientName = "客户",
             TargetCountText = "0"
         };
         var invalidStatus = WaitForStatusAsync(invalid, "目标数量必须是大于零的数字。");
