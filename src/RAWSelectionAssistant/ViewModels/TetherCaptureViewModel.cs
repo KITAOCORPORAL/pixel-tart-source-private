@@ -509,9 +509,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         await ColorSettings.InitializeAsync(cancellationToken);
         var next=await _nextCaptureStore.LoadAsync(cancellationToken);_nextCaptureProjectName=next.ProjectName;_nextCaptureIncludeProject=next.IncludeProject;_nextCaptureIncludeDate=next.IncludeDate;_nextCapturePrefix=next.CustomPrefix;_nextCaptureCounter=next.Counter;_nextCaptureFolder=next.TargetFolder??string.Empty;_nextCaptureAdjustment=next.Adjustment;
         foreach(var name in new[]{nameof(NextCaptureProjectName),nameof(NextCaptureIncludeProject),nameof(NextCaptureIncludeDate),nameof(NextCapturePrefix),nameof(NextCaptureCounter),nameof(NextCaptureFolder),nameof(NextCaptureAdjustment),nameof(NextCaptureExample),nameof(NextCaptureFreeSpace)})OnPropertyChanged(name);
-        ProjectOptions.Clear(); ProjectOptions.Add(new(null, "无项目"));
-        if (_projectRepository is not null) foreach (var project in await _projectRepository.ListAsync(cancellationToken)) ProjectOptions.Add(new(project.Id, project.Name));
-        SelectedProject = ProjectOptions[0];
+        await RefreshProjectOptionsAsync(false,cancellationToken);
         await ReferenceMode.LoadAsync(cancellationToken);
         var recovered = await _adapter.RecoverLatestAsync(cancellationToken);
         if (recovered is not null)
@@ -564,10 +562,33 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public void BeginNoteEditing() => _selectionCoordinator.IsEditingNote = true;
     public void EndNoteEditing() => _selectionCoordinator.IsEditingNote = false;
 
+    private long _projectRefreshRevision;
+    internal Task ProjectRefreshWork {get;private set;}=Task.CompletedTask;
+    private async Task RefreshProjectOptionsAsync(bool requireActive,CancellationToken token)
+    {
+        var revision=Interlocked.Increment(ref _projectRefreshRevision);
+        if(ProjectOptions.Count==0){ProjectOptions.Add(new(null,"无项目"));SelectedProject=ProjectOptions[0];}
+        try
+        {
+            var projects=_projectRepository is null?Array.Empty<PhotoProjectRecord>():await _projectRepository.ListAsync(token);
+            if(token.IsCancellationRequested||_lifetime.IsCancellationRequested||revision!=Volatile.Read(ref _projectRefreshRevision)||(requireActive&&!IsPageActive))return;
+            var selected=SelectedProject;var id=selected?.Id;
+            ProjectOptions.Clear();ProjectOptions.Add(new(null,"无项目"));
+            foreach(var project in projects)ProjectOptions.Add(new(project.Id,project.Name));
+            // An archived/deleted list entry must not silently detach an active capture session.
+            if(IsRunning&&id.HasValue&&ProjectOptions.All(x=>x.Id!=id))ProjectOptions.Add(selected!);
+            SelectedProject=ProjectOptions.FirstOrDefault(x=>x.Id==id)??ProjectOptions[0];
+        }
+        catch(OperationCanceledException)when(token.IsCancellationRequested||_lifetime.IsCancellationRequested){}
+        catch(Exception error)when(error is IOException or InvalidOperationException or Microsoft.Data.Sqlite.SqliteException)
+        {if(revision==Volatile.Read(ref _projectRefreshRevision)&&!_lifetime.IsCancellationRequested)StatusText="项目列表未刷新，当前会话保持："+error.Message;}
+    }
+
     public void OnActivated()
     {
         if (IsPageActive) return;
         IsPageActive = true;
+        Track(ProjectRefreshWork=RefreshProjectOptionsAsync(true,_lifetime.Token));
         if (SelectedAsset is not null) Track(LoadSelectedAsync(SelectedAsset, _lifetime.Token));
     }
 
@@ -575,6 +596,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         if (!IsPageActive) return;
         IsPageActive = false;
+        Interlocked.Increment(ref _projectRefreshRevision);
         _requestCoordinator.CancelCurrent();
         _fullResolutionLoader.ReleaseExcept(null);
         _selectionCoordinator.HasActiveInteraction = false;
