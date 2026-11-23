@@ -1,0 +1,91 @@
+{
+  "requestedDocumentationSource": "ce9c38e7404d74d146ec918f862c46a38adfb85b",
+  "productSource": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "companyProductBaseline": "73988e4f6e1092002aa4ad978e59d245410102a8",
+  "allChangedProductAndTestFiles": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "gitBlob": "e9bf184d736025c0a259fe8fb26da9edb7260a79",
+      "sha256": "56940660c7bb1d88be526407f77d481450a42e53e3a91f249ae234e3081b5891",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+      "gitBlob": "dcddf8c1de0ccbb6c6a851f9cda566f9b3efbf02",
+      "sha256": "d34cd04b918cf585d250a387794fd48ad11e183a533096e3940809175402b3ef",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "gitBlob": "0d44a308f291bb513db208fee96bf99ffbb17c97",
+      "sha256": "e0d272fec88c98cf8131e31122dce7f944fabb8ab65b14814da3b872eaa40c00",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+      "gitBlob": "9ec41234437619177a8dcb67cfd5978e0f5c9664",
+      "sha256": "cb98eb420be84ea7873825c7c55bf7134067bb599732adcd796be1fcee24eb7d",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "gitBlob": "ab0ac20dafb17d9aba2ab3693955e07fbf675bf0",
+      "sha256": "364755ee01aa5488eb6af7469317cc30e1de400f9ec6297c78d5139a9786ba06",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "gitBlob": "1214d764a5de68acbeab6a1867ce82ec3b8017a0",
+      "sha256": "2644e0a94e2d704d1675aed92b18304fcf6f369e48f6e3bb91bac31f301098ea",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+      "gitBlob": "b0c9fd234f7f569547e7a74fe0f9eaf7ac73cd52",
+      "sha256": "61f2bb41cabe9c78ba23c2eb6b78f9de773fde416a615d27af4c85c5baf7293a",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "gitBlob": "6952e73ba6f3192746803009e8db3358ef7c4087",
+      "sha256": "ccd5f0825ead02d60938e8bfeb52f43f60249b22666b87c62938c1b722c4a169",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "gitBlob": "762162b1641c19e33f41cfddae918803481a35b2",
+      "sha256": "d8b1e556b56efcaa14d8dfb680ead8ce983ee7f7c3c86aebc39f9b48f71ae80a",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs",
+      "gitBlob": "a3394f31573da45548af22570ab8219a7b141b4b",
+      "sha256": "7f34775503bffd1e681c1c50e54b3de0bb3e512271fc0c83cc6d86994fe2d35f",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs",
+      "gitBlob": "c0758fd240aa0768922396a33850d29c23d06dd4",
+      "sha256": "3fcdb09126927bb9c9dd664e9ad4fb0ae1aa33df0c33853ede035ed98c1dc0ca",
+      "worktreeSameLogicalText": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs",
+      "gitBlob": "dc59f79b34f39824fdb4aac0467e7ae33ab86ccd",
+      "sha256": "5ae965986c28030636797865353126ee2ca66464b08a55d9f28e2151fa66e290",
+      "worktreeSameLogicalText": true
+    }
+  ],
+  "workingProductEqualsSource": true,
+  "companyBinaryHashes": {
+    "KitaoPhotoSelector.dll": "3e0a1e353391122f1df50ac3ec3d610b95df2eb7ed085217ae7ebd8e9d953f73",
+    "RAWSelectionAssistant.Core.dll": "1a2c61e32fed74c5ca5ce7569041c60f80e04fe508508edc610b08b775de164a",
+    "LegacyExportMemoryHost.dll": "4ca69a746b280635e6e08e8f3bdf653e9ecf5d5c3a8e38471fe6f2d0bac66be8"
+  },
+  "upstreamBinaryIdentity": "Recompiled company SDK10.0.302/runtime10.0.10; household byte identity is not assumed",
+  "managedBindingSha256": "98c9542e373928248f974845c67c2827d5ac7be6c65fb76f4a3c5db12600dcf8",
+  "rawNativeAssets": [],
+  "hostSourceSha256": "4caa7a148e0e776e6a92dbdc875511a311ef1cac15fb944345f519e6d2217325",
+  "guardSourceSha256": "d59544c1d46851f596903a4f055d99908f35e725b99e4d5313c608f733c3b27a",
+  "stageSourceSha256": "be2d8677e0221b9a1d5dc9fa6172ae9a7fae20a8907514b4751757b02dd6bb35"
+}

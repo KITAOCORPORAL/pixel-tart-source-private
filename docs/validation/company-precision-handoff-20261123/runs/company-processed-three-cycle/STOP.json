@@ -1,0 +1,10 @@
+{
+  "reason": "2GiB or 600s guard",
+  "sample": {
+    "elapsedMs": 74740.91489999773,
+    "privateBytes": 2159071232,
+    "workingSetBytes": 1694101504,
+    "osPeakWorkingSetBytes": 1694105600,
+    "phase": "before-ushort-allocation-2"
+  }
+}

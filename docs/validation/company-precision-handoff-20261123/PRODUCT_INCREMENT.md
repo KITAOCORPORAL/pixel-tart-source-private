@@ -1,0 +1,19 @@
+# 产品增量与集成依据
+
+交接起点是文档提交`ce9c38e7404d74d146ec918f862c46a38adfb85b`，产品源码是`ac1c57e9689428cea3f6938e06ad26209c7fc3d5`。研究门禁不重复运行。公司原产品树仍为`73988e4f6e1092002aa4ad978e59d245410102a8`，其src/tests与d07e4f43完全相同。本次独立交接树以ce9c38e7为基线，仅新增交接文档及产物比较脚本，没有写入原产品树。
+
+|顺序|完整产品提交|准确增量|依赖与验证|
+|---|---|---|---|
+|1|cf5a63d38365a0093524d87ed7670e3736b7bb24|增加ColorStudioRenderPipeline.Export.cs、HighPrecisionExportRows；拆出不自动建立显示RGB24的RenderProcessing；RawMatch导出优先借用中性源或16行点节点；明确借用/自有结果释放；新增LegacyHighPrecisionExportTests|基于d07；Core原数学函数复用，空间/图回落保留。其余两笔增量使用这里的类型和入口。|
+|2|11a424c90199b32cbf73cc6a14eefd651612b213|融合解码RGB48方向映射，增加RenderDisplay和FillDisplayRow；VM的upright入口、缩略图和Tether预览转至同一显示路由；新增LegacyPrecisionLifetimeTests|依赖cf5；显示直接float→RGB24，避免先TIFF量化再显示的不同舍入；方向8测试仍遵守规范坐标。该阶段自身仍会建立整帧float。|
+|3|ac1c57e9689428cea3f6938e06ad26209c7fc3d5|HighBitDepthImageBuffer内部独占RGB48表示、ReadSamples/CopyRgb32/StorageBytes/IsFloatMaterialized；OwnUprightRgb48复制外部U16并规范方向；行处理/代理按消费范围转float；新增OwnedRgb48BackingTests|依赖前两笔；兼容Rgb32首次请求才整帧展开并清除本buffer内部U16引用。不是全局Session框架或强制回收。|
+
+交付的三个逐提交patch与COMBINED_PRODUCT_AND_TESTS.patch均包含对应src和tests。每个完整SHA、父提交、文件列表和patch摘要见INTEGRATION_CHAIN.json。组合patch与上游COMBINED_D07.patch字节相同（以JSON核验值为准）。原FOLLOWUP_ONLY.patch只用于已含cf5+11a的树，不能单独套在d07。
+
+本轮在临时Git索引中对d07和公司73988e4f执行apply --cached --check和实际apply，再比较src/tests树，均与ac1完全一致；临时索引不写产品工作区。上游FOLLOWUP_ONLY也在11a基线检查。产品线可按cf5→11a→ac1显式cherry-pick，或一次应用组合patch；两种方式二选一，不能重复应用。公司实际原载荷的重复重开仍失败，因此这只是可复核的集成候选，不允许据此打发行稳定标签。
+
+ColorStudioToolProcessor.cs、ColorStudioDevelop.cs、StudioLayerComposite.cs、TiffExport.cs、LibRawDecoder.cs从d07到ac1逐字节未变；SHA见INTEGRATION_CHAIN。ColorStudioRenderPipeline.cs在cf5只抽出processing/显示适配所有权，不声称整个文件未修改。配方、节点顺序、方向约定、量化和ICC合同保持。Core85/WPF20的源绑定回执来自ce9c38e7的封存测试，本轮仅核对并引用，没有重跑旧门禁；详见INHERITED_TEST_BINDING.json。新增公司原载荷有限结果必须单独看COMPANY_COMPARISON.json。
+
+公司构建使用独立目录、SDK10.0.302/runtime10.0.10，版本2.3.0+ac1...；逐程序集摘要与源文件blob见COMPANY_SOURCE_BINDING.json。家庭机器的最终DLL摘要保留在上游SOURCE_BINDING；本轮不假设不同机器/SDK重编译字节相同。stage经现有prepare_stage.py只复制241个托管资产，未放入raw_r.dll/libraw.dll。该stage是回放材料，不是安装器或替换发行DLL。
+
+宿主观察器修改（不展开源的描述/逻辑float摘要、等待已识别Task结束再Dispatcher idle、10秒失败上限）来自ce9的既有工具，原样复用；它们与产品三笔增量分开。700mssettling、双2GiB/50ms和600s watchdog均未调整。本轮的verify_company.py只比较既有输出，不参与产品渲染。

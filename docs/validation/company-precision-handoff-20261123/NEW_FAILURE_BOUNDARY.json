@@ -1,0 +1,117 @@
+{
+  "classification": "NEW_COMPANY_ORIGINAL_PAYLOAD_RESOURCE_FAILURE_NOT_OLD_ROOT_INVESTIGATION",
+  "source": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "stages": {
+    "visible-100": {
+      "privateBytes": 1919266816,
+      "workingSetBytes": 1578921984,
+      "managedEstimate": 737325176,
+      "gcCommittedBytes": 775204864,
+      "gcFragmentedBytes": 19844648,
+      "gcCollections": [
+        14,
+        6,
+        2
+      ]
+    },
+    "saved": {
+      "privateBytes": 1914511360,
+      "workingSetBytes": 1581682688,
+      "managedEstimate": 325612512,
+      "gcCommittedBytes": 808419328,
+      "gcFragmentedBytes": 289055232,
+      "gcCollections": [
+        16,
+        7,
+        3
+      ]
+    },
+    "export-finished": {
+      "privateBytes": 1914585088,
+      "workingSetBytes": 1586180096,
+      "managedEstimate": 322930568,
+      "gcCommittedBytes": 687992832,
+      "gcFragmentedBytes": 285199408,
+      "gcCollections": [
+        18,
+        9,
+        4
+      ]
+    },
+    "release-tasks-observed": {
+      "privateBytes": 1915346944,
+      "workingSetBytes": 1586569216,
+      "managedEstimate": 329435240,
+      "gcCommittedBytes": 687992832,
+      "gcFragmentedBytes": 283662144,
+      "gcCollections": [
+        19,
+        9,
+        4
+      ]
+    },
+    "released-natural-idle": {
+      "privateBytes": 1915367424,
+      "workingSetBytes": 1586675712,
+      "managedEstimate": 329655368,
+      "gcCommittedBytes": 687992832,
+      "gcFragmentedBytes": 283662144,
+      "gcCollections": [
+        19,
+        9,
+        4
+      ]
+    },
+    "same-process-reopen-start": {
+      "privateBytes": 1915367424,
+      "workingSetBytes": 1586679808,
+      "managedEstimate": 329771304,
+      "gcCommittedBytes": 687992832,
+      "gcFragmentedBytes": 283662144,
+      "gcCollections": [
+        19,
+        9,
+        4
+      ]
+    },
+    "before-ushort-allocation-2": {
+      "privateBytes": 1915379712,
+      "workingSetBytes": 1587118080,
+      "managedEstimate": 330062992,
+      "gcCommittedBytes": 687992832,
+      "gcFragmentedBytes": 283662144,
+      "gcCollections": [
+        19,
+        9,
+        4
+      ]
+    }
+  },
+  "sampledCyclePeaks": {
+    "1": {
+      "privateBytes": 1923649536,
+      "currentWorkingSetBytes": 1587023872,
+      "samples": 1465
+    },
+    "2": {
+      "privateBytes": 2159071232,
+      "currentWorkingSetBytes": 1694101504,
+      "samples": 2
+    }
+  },
+  "observed": "First full processed100/save/export completed. Prior identified tasks completed at release. Master stayed241118208bytes RGB48 with floatMaterialized=false. Guard terminated during phase before-ushort-allocation-2, no ushort-read-complete-2 event.",
+  "capacityArithmeticMiB": {
+    "releasedPrivate": 1826.63671875,
+    "nextFullUshortArrayPayload": 229.9482421875,
+    "sumWithoutOtherAllocations": 2056.5849609375,
+    "threshold": 2048
+  },
+  "notEstablished": [
+    "Which precise native allocation owns residual private commitment",
+    "Whether any old image remains rooted",
+    "New leak diagnosis",
+    "All paths unsafe or all prior household tests invalid"
+  ],
+  "noFurtherResourceRetry": true,
+  "noAutomaticRemediation": "No product code change, budget increase, forcedGC, buffer resize or working-set trim."
+}

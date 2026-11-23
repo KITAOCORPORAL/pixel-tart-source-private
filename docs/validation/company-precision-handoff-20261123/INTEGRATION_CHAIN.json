@@ -1,0 +1,130 @@
+{
+  "requestedDocumentationSource": "ce9c38e7404d74d146ec918f862c46a38adfb85b",
+  "productSource": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "companyProductTreeBase": "73988e4f6e1092002aa4ad978e59d245410102a8",
+  "companyProductEqualsD07": true,
+  "chain": [
+    {
+      "sha": "cf5a63d38365a0093524d87ed7670e3736b7bb24",
+      "parent": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+      "productFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.Export.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs"
+      ],
+      "testFiles": [
+        "tests/RAWSelectionAssistant.Tests/LegacyHighPrecisionExportTests.cs"
+      ],
+      "patchSha256": "7f0ae5f8ef026a4bc03d3e73d8aae1eda4cd73f54eafe4afd1014e98ddf8cc97"
+    },
+    {
+      "sha": "11a424c90199b32cbf73cc6a14eefd651612b213",
+      "parent": "fb00ef264d8538b40a9eec1776eab5e6ac8ed3ee",
+      "productFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+        "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+        "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs"
+      ],
+      "testFiles": [
+        "tests/RAWSelectionAssistant.Tests/LegacyPrecisionLifetimeTests.cs"
+      ],
+      "patchSha256": "98b0ba215c13f3a47e3b4cceecf059fc8e0c3a2228fd912d16e73a81b15ed230"
+    },
+    {
+      "sha": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+      "parent": "eb5229eb1a06792162108fa1c3bed56c2ac249e1",
+      "productFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/HighPrecisionExportRows.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+        "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs"
+      ],
+      "testFiles": [
+        "tests/RAWSelectionAssistant.Tests/OwnedRgb48BackingTests.cs"
+      ],
+      "patchSha256": "b43757cdd8302ec2de45ef884732d7ec71599dd06f2d9b51a194384f06521969"
+    }
+  ],
+  "patchChecks": [
+    {
+      "name": "combined-d07",
+      "base": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+      "checkExit": 0,
+      "appliedOnlyToTemporaryIndex": true,
+      "resultProductEqualsAc1": true,
+      "patch": "E:\\Kitao-Worktrees\\precision-product-handoff-20261123\\docs\\validation\\precision-reopen-rootcause-20261122\\COMBINED_D07.patch",
+      "patchSha256": "3b4dbb3b3c6a4719b5e8d385041b2d3c2b1dcb90bd9b08024d8fef2d2ac914de"
+    },
+    {
+      "name": "combined-company-product",
+      "base": "73988e4f6e1092002aa4ad978e59d245410102a8",
+      "checkExit": 0,
+      "appliedOnlyToTemporaryIndex": true,
+      "resultProductEqualsAc1": true,
+      "patch": "E:\\Kitao-Worktrees\\precision-product-handoff-20261123\\docs\\validation\\precision-reopen-rootcause-20261122\\COMBINED_D07.patch",
+      "patchSha256": "3b4dbb3b3c6a4719b5e8d385041b2d3c2b1dcb90bd9b08024d8fef2d2ac914de"
+    },
+    {
+      "name": "followup-only",
+      "base": "11a424c90199b32cbf73cc6a14eefd651612b213",
+      "checkExit": 0,
+      "appliedOnlyToTemporaryIndex": true,
+      "resultProductEqualsAc1": true,
+      "patch": "E:\\Kitao-Worktrees\\precision-product-handoff-20261123\\docs\\validation\\precision-reopen-rootcause-20261122\\FOLLOWUP_ONLY.patch",
+      "patchSha256": "b43757cdd8302ec2de45ef884732d7ec71599dd06f2d9b51a194384f06521969"
+    }
+  ],
+  "productionWorktreeMutated": false,
+  "researchWorktreeMutated": false,
+  "combinedProductAndTestPatch": {
+    "path": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\COMBINED_PRODUCT_AND_TESTS.patch",
+    "bytes": 59045,
+    "sha256": "3b4dbb3b3c6a4719b5e8d385041b2d3c2b1dcb90bd9b08024d8fef2d2ac914de",
+    "checks": [
+      {
+        "base": "d07e4f4370c8e7d8505a46e3085cc6a069fb4bd4",
+        "patchApplies": true,
+        "sourceAndTestsExactlyMatchAc1": true,
+        "temporaryIndexOnly": true
+      },
+      {
+        "base": "73988e4f6e1092002aa4ad978e59d245410102a8",
+        "patchApplies": true,
+        "sourceAndTestsExactlyMatchAc1": true,
+        "temporaryIndexOnly": true
+      }
+    ],
+    "byteIdenticalToUpstreamCOMBINED_D07": true
+  },
+  "unchangedNumericalWriterAndDecoderFiles": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "sha256": "a0e073ca19ac866c149f9225833bce546d9ad1e850cbd01f5954322852e6ebc4",
+      "exactlyUnchangedFromD07": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+      "sha256": "352664b0d3b4f2c9f43427e260f75171917a0965e0e2fa0b6734556bc21958ad",
+      "exactlyUnchangedFromD07": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioLayerComposite.cs",
+      "sha256": "02051f59aabb41426c664626f0cb3e157bda39a82928ac9a09703f0cc7dc232c",
+      "exactlyUnchangedFromD07": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+      "sha256": "196c6965eaa63c9cc6c631008842ae8172f1b7b9ac235c83fa3ad73bbc21d939",
+      "exactlyUnchangedFromD07": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+      "sha256": "79dbf871f746cd3cca4152013576371fbdbe6684100e85674cf6b31d8fb454df",
+      "exactlyUnchangedFromD07": true
+    }
+  ]
+}

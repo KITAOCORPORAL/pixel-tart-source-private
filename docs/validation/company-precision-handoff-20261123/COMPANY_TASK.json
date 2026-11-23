@@ -1,0 +1,23 @@
+{
+  "name": "company-original0806",
+  "inputKind": "Existing authorized company RGB48 cache payload, original0806D680 identity verified",
+  "payload": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\cache-A\\b94b118361e245b19f169897ae5a7353.rgb48",
+  "pixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+  "width": 7752,
+  "height": 5184,
+  "orientation": 1,
+  "icc": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\company-srgb.icc",
+  "iccSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+  "newRawDecodes": 0,
+  "guardBytes": 2147483648,
+  "inputDifference": "Original company RGB48 cache reused byte-for-byte; no RAW opened. SourceSha and decoder identity preserved as historical cache provenance only; task marker is not original RAW. ICC is existing OS sRGB profile byte-identical to prior3144-byte receipt.",
+  "sourceCacheIndex": "E:\\Guangjing-RawReopen001-ProductRegression-20261110\\cache-A\\e1fbf5aa5d1ef1f8da6b9f52544bbce61c089fa0234b06e8cca4cd9cc7cd43e7.json",
+  "sourceCacheIndexSha256": "c0a3bce4111df4830057fbf3b1d9d2725577ab7fbd50df84951c1f17926ec510",
+  "sourceHashFromCache": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "layout": {
+    "byteOrder": "little-endian",
+    "channels": "interleaved RGB unsigned16",
+    "rowStrideBytes": 46512,
+    "payloadHeader": false
+  }
+}

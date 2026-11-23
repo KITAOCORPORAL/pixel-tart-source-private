@@ -1,0 +1,26 @@
+# 内存API合同与回落边界
+
+本表绑定ac1源码。只有通过DecodeUprightFrozenMasterAsync→OwnUprightRgb48得到的已拥有规范方向RGB48源，才获得延迟float表示；类型相同不意味着所有构造入口自动获益。40MP公司图每份RGB48为241118208bytes（229.95MiB），逻辑floatRGB为482236416bytes（459.90MiB），RGB24为120559104bytes（114.97MiB）。下列条带合同不消除显示RGB24/WIC整帧、当前帧、代理及运行时驻留。
+
+|调用/路径|对master的行为|保留限制|
+|---|---|---|
+|DecodeUprightFrozenMasterAsync→OwnUprightRgb48|复制解码结果为独占ushort，按原方向映射规范坐标；不借用外部可变数组，不建立整帧float|输入U16与独占副本仍可能并存；本轮decoder是只读原RGB48替身，没有执行真实相机解码。|
+|SampleCount、StorageBytes、IsFloatMaterialized|不展开，仅检查现有表示|StorageBytes是buffer自身有效表示长度，不是GC提交/进程峰值。|
+|CopyRgb32(offset,destination)、内部ReadSamples|按消费样本使用原ushort/65535f；不会请求整帧float|destination大小由调用方决定，整帧destination仍是整帧分配。|
+|TryCreatePointExportRows→FillRow|中性及准入点节点使用至多16行float；已经是float的中性源可借用行|源本身由调用方持有，Dispose只释放自己的条带；不销毁共享master。|
+|RenderDisplay→FillDisplayRow|准入路径16行计算，直接按Math.Round(float*255)建立RGB24显示|RGB24结果仍是整帧；不把RGB48导出量化后的样本当显示参考。|
+|CreateProxy/PreviewMaster/DisplaySource，320/800/1600预览|ReadSamples读取被采样位置，输出小float/RGB24代理；源保持U16|这些是显示代理，不替代完整导出。若maximumEdge已覆盖源，返回原buffer，后续调用仍决定是否展开。|
+|ToVisualRgb24/ToRgb48|读SampleReader，不把源变成float|分别申请完整byte/ushort输出；不能称为无整帧分配。|
+|Rgb32 getter，包括仅为读Length/Span/ToArray而访问|首次一次性申请完整float，缓存结果并清除本buffer内部U16引用|转换时U16和float可并存；旧U16何时GC回收未知。并发getter共用同一个展开结果。|
+|HighBitDepthImageBuffer.Clone|调用Rgb32再复制，源先展开，另有整帧float副本|不可用于只需字节数/身份的观察器。|
+|公开ushort构造、FromRaw、DecodeMasterAsync、DecodeFrozenMasterAsync、ExportAsync(sourcePath,...)的旧入口|旧API按原合同立即转换整帧float；不能假设upright优化已覆盖|零RAW工具仅将新生成说明marker传给冻结源合同；绝不将相机RAW路径传入这些入口。|
+|RawImageOrientation.FromDecodedRgb48|11a的历史float融合函数；仍申请完整float|本轮有效低内存入口是OwnUprightRgb48。|
+|NormalizePixels(source)|方向1直接返回原源；方向2–8旧循环访问Rgb32并产生规范方向float|已用upright入口的源无需二次方向变换；不能盲目修改旧兼容方向路径。|
+|RenderForExport中性借用结果→外部直接WriteRgb48/Rgb32|借用结果本身不展开；旧TiffExport.WriteRgb48访问Rgb32时会展开|产品新ExportAsync优先TryCreatePointExportRows→WriteRowsAsync，不能绕回旧整帧writer后宣称仍条带。|
+|旧ColorStudioRenderPipeline.Render/RenderProcessing与图/空间/复杂合成fallback|旧processing可能Clone或读取Rgb32，触发完整float和其他整帧结果|维持原数值合同与原资源边界，不由点节点门禁外推40MP可用。|
+
+点节点准入必须按ColorStudioRenderPipeline.Export.cs实际PointExportNodes判断：无Graph，启用节点满足StudioLayerComposite.Identity，类型仅Preset/WhiteBalance/BasicTone/ColorBalance/Levels/Curve/SkinTone。Preset另按既有恒等强度规则过滤。生效蒙版、非恒等透明度/混合、ReferenceMatch、Film、Details/其他空间或全局统计路径不因此获得条带容量承诺；不把禁用/无效历史字段误当新增像素行为。Validation/Normalize仍按原规则。
+
+重点调用定位：HighBitDepthImageBuffer.cs的Rgb32/Clone，RawImageOrientation.cs的兼容方向循环，TiffExport.cs的WriteRgb48，ColorStudioRenderPipeline.cs的RenderProcessing/ApplyPointEffect；这些读取的接收者是否为整帧源必须结合调用链判断。ApplyPointEffect在HighPrecisionExportRows中只接收16行strip，因此其Rgb32读取不等于原master展开。完整静态文本检索仅留本地RGB32_CALLS_IN_SOURCE.json，不机械把所有同名Rgb32（含其他类型）判为源展开。
+
+本轮实际记录证明首轮处理时master仍为RGB48且floatMaterialized=false；这排除了“本轮首轮master已退回整float”这一解释，但未测量精确原生分配所有权，也未证明无引用问题。新失败是公司内容和公司运行环境的容量边界，不能覆盖成通用点节点PASS。

@@ -1,0 +1,40 @@
+{
+  "atUtc": "2026-11-23T06:01:10.407801+00:00",
+  "scope": "Finite original company payload verification. Repeated cycle already failed; no repetition or neutral cycle added. One first-cycle-only observation below completes missing pre-failure display evidence.",
+  "productSource": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "guardBytes": 2147483648,
+  "samplingMs": 50,
+  "watchdogSeconds": 600,
+  "runs": [
+    {
+      "name": "company-points-oracle",
+      "mode": "oracle",
+      "scenario": "points",
+      "cap": 1,
+      "state": "COMPLETED"
+    },
+    {
+      "name": "company-processed-three-cycle",
+      "mode": "processed-three-cycle",
+      "scenario": "points",
+      "cap": 1,
+      "plannedMaxCycles": 3,
+      "state": "STOP_ON_SECOND_REOPEN_NO_RETRY"
+    },
+    {
+      "name": "company-first-display-observation",
+      "mode": "processed-once",
+      "scenario": "points",
+      "cap": 1,
+      "maxCycles": 1,
+      "state": "AUTHORIZED_WITHIN_FINITE_VALIDATION_NOT_A_REOPEN_RETRY",
+      "reason": "Original host writes first display hash only at final RESULT. Guard stopped repeated run before that file. Existing first-only mode obtains missing direct display digest without repeating the failed reopen."
+    }
+  ],
+  "serialOnly": true,
+  "failurePolicy": "Preserve every failure. No larger thresholds, added cycles, forced GC, task delay changes or RAW budgets. No further resource cases in this delivery.",
+  "originalCameraRawRead": false,
+  "newRawDecodes": 0,
+  "oldBatchOrBalanceReused": false,
+  "highlightOrSharpeningExecuted": false
+}

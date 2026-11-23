@@ -1,0 +1,253 @@
+{
+  "status": "PARTIAL_COMPANY_FIRST_CYCLE_EXACT_REOPEN_RESOURCE_GATE_FAILED",
+  "productSource": "ac1c57e9689428cea3f6938e06ad26209c7fc3d5",
+  "companyOriginalPixelSha256": "0806D680ACC74FACD093DD2280E1C1A82CD18E40D0C27823D8C6C87CC7E3FC7E",
+  "checks": {
+    "width": true,
+    "height": true,
+    "bits": true,
+    "orientation": true,
+    "pixelBytes": true,
+    "pixelSha256": true,
+    "icc": true
+  },
+  "sampleComparisons": {
+    "failed_cycle_first": {
+      "uint16ChannelSamplesCompared": 120559104,
+      "differentSamples": 0,
+      "exact": true
+    },
+    "first_only": {
+      "uint16ChannelSamplesCompared": 120559104,
+      "differentSamples": 0,
+      "exact": true
+    }
+  },
+  "probes": {
+    "oracle": {
+      "file": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\company-points-oracle\\oracle.tif",
+      "width": 7752,
+      "height": 5184,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "orientation": 1,
+      "pixelBytes": 241118208,
+      "pixelSha256": "DC2271C5039EEC9B2C19DF2C1CF4EE1C0ACCF5A80689DEA8700309E5F4D018D2",
+      "icc": {
+        "bytes": 3144,
+        "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      },
+      "newRawDecodes": 0,
+      "fileSha256": "12B98366044307542BEFEF302625BF654ACE400937E979BB03F0D8E2E2FF3034"
+    },
+    "failed_cycle_first": {
+      "file": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\company-processed-three-cycle\\export-first\\synthetic-replay-marker_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "orientation": 1,
+      "pixelBytes": 241118208,
+      "pixelSha256": "DC2271C5039EEC9B2C19DF2C1CF4EE1C0ACCF5A80689DEA8700309E5F4D018D2",
+      "icc": {
+        "bytes": 3144,
+        "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      },
+      "newRawDecodes": 0,
+      "fileSha256": "12B98366044307542BEFEF302625BF654ACE400937E979BB03F0D8E2E2FF3034"
+    },
+    "first_only": {
+      "file": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\company-first-display-observation\\export-first\\synthetic-replay-marker_仿色.tif",
+      "width": 7752,
+      "height": 5184,
+      "bits": [
+        16,
+        16,
+        16
+      ],
+      "orientation": 1,
+      "pixelBytes": 241118208,
+      "pixelSha256": "DC2271C5039EEC9B2C19DF2C1CF4EE1C0ACCF5A80689DEA8700309E5F4D018D2",
+      "icc": {
+        "bytes": 3144,
+        "sha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E"
+      },
+      "newRawDecodes": 0,
+      "fileSha256": "12B98366044307542BEFEF302625BF654ACE400937E979BB03F0D8E2E2FF3034"
+    }
+  },
+  "display": {
+    "status": "PASS_SEPARATE_FIRST_ONLY_OBSERVATION",
+    "referenceRgb24Sha256": "BECC4E5B42A288364C0CD411765F82995CB6F8BC66E6C3422F48888241B2EE98",
+    "actualViewportRgb24Sha256": "BECC4E5B42A288364C0CD411765F82995CB6F8BC66E6C3422F48888241B2EE98",
+    "bytesComparedBySha256": 120559104,
+    "exact": true,
+    "viewport": {
+      "zoom": 1,
+      "Mode": "仿色结果",
+      "IsVisible": true,
+      "IsLoaded": true,
+      "width": 897.3333333333333,
+      "height": 614.6666666666666,
+      "original": {
+        "type": "CachedBitmap",
+        "id": 55012273,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "matched": {
+        "type": "CachedBitmap",
+        "id": 44070913,
+        "width": 7752,
+        "height": 5184,
+        "bits": 24,
+        "minBytes": 120559104
+      },
+      "DisplayColorEnabled": false
+    },
+    "notFailedRunLateResult": true
+  },
+  "save": {
+    "file": "E:\\Kitao-Deliveries\\precision-product-handoff-20261123\\company-processed-three-cycle\\saved.ptstudio.json",
+    "sha256": "15BC8408A193E9F3845B326C1B26708C1F5D0A2B05117632FA3CA85547DB81F3",
+    "savedExactPointRecipe": {
+      "nodes": [
+        {
+          "id": "10101010-0000-0000-0000-000000000001",
+          "type": 6,
+          "name": "WB",
+          "enabled": true,
+          "filmSettings": null,
+          "opacity": 1,
+          "blend": 0,
+          "localMask": null,
+          "userLocked": false,
+          "systemLocked": false,
+          "numericParameters": {
+            "temperature": 9,
+            "tint": -4
+          },
+          "samples": [],
+          "negativeSamples": []
+        },
+        {
+          "id": "10101010-0000-0000-0000-000000000002",
+          "type": 7,
+          "name": "Tone",
+          "enabled": true,
+          "filmSettings": null,
+          "opacity": 1,
+          "blend": 0,
+          "localMask": null,
+          "userLocked": false,
+          "systemLocked": false,
+          "numericParameters": {
+            "exposure": 0.5,
+            "highlights": -20,
+            "saturation": 7
+          },
+          "samples": [],
+          "negativeSamples": []
+        }
+      ],
+      "version": 2,
+      "workingSpace": "OKLabD65",
+      "processingVersion": 2
+    },
+    "originalHistoricalRecipe": "Neutral/no stack; retained unchanged in HISTORICAL_RECIPE_CHECK.json",
+    "configuredPointRecipeIsPriorApprovedProbeRecipe": true
+  },
+  "resources": {
+    "company-points-oracle": {
+      "exit": {
+        "pid": 25812,
+        "exitCode": 0,
+        "stop": null,
+        "peakPrivateBytes50ms": 2093899776,
+        "osPeakWorkingSetBytes": 2118078464,
+        "samples": 787,
+        "guardBytes": 2147483648,
+        "samplingMs": 50,
+        "newRawDecodes": 0,
+        "forcedGc": false
+      },
+      "privateHeadroomBytes": 53583872,
+      "workingHeadroomBytes": 29405184,
+      "privateHeadroomMiB": 51.1015625,
+      "workingHeadroomMiB": 28.04296875,
+      "expectedMode": "oracle",
+      "samplesVerified": 787,
+      "stopFilePresent": false
+    },
+    "company-processed-three-cycle": {
+      "exit": {
+        "pid": 28972,
+        "exitCode": 1,
+        "stop": {
+          "elapsedMs": 74740.91489999773,
+          "privateBytes": 2159071232,
+          "workingSetBytes": 1694101504,
+          "osPeakWorkingSetBytes": 1694105600,
+          "phase": "before-ushort-allocation-2"
+        },
+        "peakPrivateBytes50ms": 2159071232,
+        "osPeakWorkingSetBytes": 1694105600,
+        "samples": 1467,
+        "guardBytes": 2147483648,
+        "samplingMs": 50,
+        "newRawDecodes": 0,
+        "forcedGc": false
+      },
+      "privateHeadroomBytes": -11587584,
+      "workingHeadroomBytes": 453378048,
+      "privateHeadroomMiB": -11.05078125,
+      "workingHeadroomMiB": 432.375,
+      "expectedMode": "processed-three-cycle",
+      "samplesVerified": 1467,
+      "stopFilePresent": true
+    },
+    "company-first-display-observation": {
+      "exit": {
+        "pid": 29392,
+        "exitCode": 0,
+        "stop": null,
+        "peakPrivateBytes50ms": 1924628480,
+        "osPeakWorkingSetBytes": 1591459840,
+        "samples": 1461,
+        "guardBytes": 2147483648,
+        "samplingMs": 50,
+        "newRawDecodes": 0,
+        "forcedGc": false
+      },
+      "privateHeadroomBytes": 222855168,
+      "workingHeadroomBytes": 556023808,
+      "privateHeadroomMiB": 212.53125,
+      "workingHeadroomMiB": 530.265625,
+      "expectedMode": "processed-once",
+      "samplesVerified": 1461,
+      "stopFilePresent": false
+    }
+  },
+  "firstCycleExportAndProcessed100": true,
+  "repeatedReopenPassed": false,
+  "ordinaryFullExeAcceptance": false,
+  "runLimits": "No failed reopen retry; one additional existing first-only mode captured display digest missing after STOP. Three processes total; no further resource cases.",
+  "newFailureLocalization": {
+    "lastCompleteStage": "before-ushort-allocation-2",
+    "newSecondUshortReadCompleted": false,
+    "priorReleaseKnownTasksAllComplete": true,
+    "priorMasterNotFullFloat": true,
+    "notProofOfLeakOrNativeOwnership": true
+  },
+  "newRawDecodes": 0,
+  "oldBatchOrBalanceReused": false,
+  "noNewProductPatch": true
+}

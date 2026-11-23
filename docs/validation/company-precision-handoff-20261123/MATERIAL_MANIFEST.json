@@ -1,0 +1,62 @@
+{
+  "companyOriginal": "COMPANY_ORIGINAL_MATERIAL_CHECK.json",
+  "companyTask": "COMPANY_TASK.json",
+  "historicalRecipe": "HISTORICAL_RECIPE_CHECK.json",
+  "householdReportedMaterialChecks": [
+    {
+      "reportedSample": "synthetic40",
+      "type": "renderedSource",
+      "reportedPath": "N:\\pixart\\guangjing-tiff-viewport-memory-20261115\\artifacts\\tiff-memory-20261115\\synthetic-rgb16-7752x5184.tif",
+      "expectedSha256": "5D3AEE67B02348F670E47EB94BBB44A16BAC3480311D38300F9C8D690DB49A0E",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    },
+    {
+      "reportedSample": "synthetic40",
+      "type": "payload",
+      "reportedPath": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\synthetic40.rgb48",
+      "expectedSha256": "1AB0A922300A718FC54F4DCCA3D2B23E2D9BAD6393C5D190C18848CCE47ED901",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    },
+    {
+      "reportedSample": "synthetic40",
+      "type": "icc",
+      "reportedPath": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\synthetic40.icc",
+      "expectedSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    },
+    {
+      "reportedSample": "sony33",
+      "type": "renderedSource",
+      "reportedPath": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\visual-review-final\\sony-dsc08015-isolated-frozen.tif",
+      "expectedSha256": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    },
+    {
+      "reportedSample": "sony33",
+      "type": "payload",
+      "reportedPath": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\sony33.rgb48",
+      "expectedSha256": "CCE5B7FCC0D6051F89074933B81BFEE284D17261C464A1C7357B8993D1D7CD36",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    },
+    {
+      "reportedSample": "sony33",
+      "type": "icc",
+      "reportedPath": "N:\\pixart\\guangjing-legacy-export-memory-20261122\\artifacts\\legacy-export-memory-20261122\\inputs\\sony33.icc",
+      "expectedSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+      "existsOnCompany": false,
+      "usedInThisValidation": false
+    }
+  ],
+  "rawCameraFilesRead": 0,
+  "cameraRawSourcesNotRehashed": "Original SourceSha is cache-record provenance; current hash verification covers authorized RGB48 payload and index. Original cameraRAW was not opened.",
+  "layout": "Packed headerless little-endian RGB unsigned16,7752x5184,row46512bytes,orientation1,sRGB; byte count and original payload SHA exact.",
+  "icc": "Existing OS profile C:/Windows/System32/spool/drivers/color/sRGB Color Space Profile.icm,3144bytes,2B3AA164...; exact prior profile hash. Company task gets a local copy, original untouched.",
+  "originalNeutralRecipe": "Historical saved stack/look/rawDefinition are null, film enabled=false. This original workfile is read-only.",
+  "currentProbePointRecipe": "Existing final tool recipe: WB temperature9/tint-4 then BasicTone EV0.5/highlights-20/saturation7,ProcessingVersion2. This is the already sealed gate recipe, not an asserted original neutral edit.",
+  "noSubstituteInputPromotion": true
+}
