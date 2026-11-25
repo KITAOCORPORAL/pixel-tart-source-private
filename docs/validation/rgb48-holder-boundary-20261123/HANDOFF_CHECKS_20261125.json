@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-25T13:42:10.078589+01:00",
+  "timeZone": "Asia/Shanghai",
+  "classification": "DOCUMENTATION_AND_READ_ONLY_REUSE_CHECKS_NO_NEW_TARGET_RUN",
+  "baseResearch": "f5c7f1c4221647b6a773ec0d8bdafc674fdc1ba4",
+  "branch": "research/rgb48-second-open-holders-20261123",
+  "remoteCompany": "63a8633d437ca58966bf8b6bb82acfa287c54caa",
+  "remoteResearchBeforeDelivery": "f5c7f1c4221647b6a773ec0d8bdafc674fdc1ba4",
+  "remoteCheckScope": "git fetch origin --prune succeeded; all fetched refs reviewed; no newer company result in this repository. Company-only unpushed files unavailable from home.",
+  "priorEvidenceFilesUnchanged": 15,
+  "hostAndWrapperFilesUnchanged": 8,
+  "pythonAstFilesChecked": 5,
+  "cliHelpExitCodes": {
+    "observe_company.py": 0,
+    "capture.py": 0,
+    "analyze.py": 0
+  },
+  "companyPowerShellCommandSyntax": "PASS via PowerShell AST parser; command not executed",
+  "recipeMatchesOriginal63aStackExactly": true,
+  "recipeSource": "Program.Stack(), not LAUNCH.task",
+  "inputSource": "Original company LAUNCH.task; company paths resolved there. No company binary/input availability claim from home.",
+  "thumbnailCompletionIsPropertyAndInheritedFieldProbeStillPresent": true,
+  "existingDumpSha256Verified": "ebe3ab54ef68dfb9707662095fb32163cf1b835182703d13d9d945a7a125f8e8",
+  "existingWeakMapAndSevenRoleLogsSha256Verified": true,
+  "existingSixMappedSubjectsHaveZeroRoots": true,
+  "existingFirstReaderWeakSlotZero": true,
+  "existingGcCountsBeforeAndAfter": [
+    12,
+    7,
+    4
+  ],
+  "existingBoundaryPauseSeconds": 16.144049,
+  "productSourceTreeUnchangedFromF319": true,
+  "commandIccCheck": "PowerShell preflight checks original task.iccSha256; capture.py itself only checks ICC file exists.",
+  "newTargetRuns": 0,
+  "newHeapCaptures": 0,
+  "newRawDecodes": 0,
+  "companyObservationExecuted": false,
+  "resourceAdmission": "NOT_ATTEMPTED_NO_RESOURCE_PASS",
+  "oldEvidenceAndStopRecordsPreserved": true
+}

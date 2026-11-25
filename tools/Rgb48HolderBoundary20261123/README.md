@@ -12,6 +12,8 @@
 
 ## 下次公司机只执行一次
 
+公司使用的一页交接与按本机回执解析路径的命令见 [COMPANY_HANDOFF_20261125.md](../../docs/validation/rgb48-holder-boundary-20261123/COMPANY_HANDOFF_20261125.md)。2026-11-25 fetch后，公司最新已提交证据仍为63a8633d；本次未再捕获家庭或公司进程。
+
 在本研究分支上，沿用公司已授权0806D680 RGB48缓存、原f319完整候选和已有dotnet-dump 10.0.750501，不再运行旧中性/Sony/像素/三轮资源实验，不读相机RAW。
 
 ```powershell
@@ -21,7 +23,11 @@ python tools/Rgb48HolderBoundary20261123/observe_company.py `
   --output "E:/Kitao-Deliveries/rgb48-holder-boundary-company-once"
 ```
 
-输出目录必须全新；已有证据拒绝覆盖。工具路径须是已有固定版本的实际路径；若公司机未准备该工具，只补这项前置，不换采集器或跑资源测试。脚本仅编译新的小宿主，**不重建产品**；默认从原LAUNCH.stage取实际运行二进制，App和Core必须逐字节匹配该原run，且PE产品版本必须为f3190f44；不把完整候选包的80f8ab6c…摘要自动当作原legacy stage摘要。也可用--product-app显式指定另一个逐字节匹配的目录。复制managed-only stage前核验其MANAGED_BINDING，未重建产品。输入/配方来自原LAUNCH.task并核全payload摘要，guard保留2GiB/50ms（以及原600s上限），发行raw_r/libraw不得加载。
+运行目录是本研究分支的独立工作树根（含AGENTS.md和tools目录）。以上E盘路径来自原公司回执，须在公司机按原run/迁移回执解析；家庭不推断公司盘现状。需Windows x64、Python ≥3.11、.NET 10 SDK/WPF和已有固定采集器，输出盘空闲须>3GiB。
+
+输出目录必须全新；已有证据拒绝覆盖。工具路径须是已有固定版本的实际路径；若公司机未准备该工具，只补这项前置，不换采集器或跑资源测试。脚本仅编译新的小宿主，**不重建产品**；默认从原LAUNCH.stage取实际运行二进制，App和Core必须逐字节匹配该原run，且App PE产品版本必须为f3190f44；不把完整候选包的80f8ab6c…摘要自动当作原legacy stage摘要。也可用--product-app显式指定另一个逐字节匹配的目录。复制managed-only stage前核验其MANAGED_BINDING，未重建产品。
+
+输入来自原LAUNCH.task；capture.py核payload长度与全摘要，ICC在该脚本内仅检查存在，因此公司命令另按task.iccSha256核摘要。**配方并非从task读取**：Program.Stack()固定沿用63a原LegacyExportMemory宿主的points配方（PV2；WB temperature9/tint−4 → BasicTone exposure0.5/highlights−20/saturation7），与普通TIFF恢复文件的exposure0.1不同。guard保留Private与OS峰值工作集双2GiB/50ms（以及原600s上限），发行raw_r/libraw不得加载。
 
 一个命令执行：构建宿主→受控第一轮实际处理100%/保存导出→第二次数组分配前7弱句柄定位→一次Heap dump→立即结束诊断→离线查询。原候选/原run/稳定f84不改写。转储、图片、payload、全SOS输出只在包外，不能入Git；可回传ANALYSIS_SUMMARY.json的审阅后摘要、对象映射、必要根链、GC计数与绑定。
 
