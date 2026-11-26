@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-26",
+  "status": "PASS_COMPANY_POST_LANDING_CUSTOMER_SELECTED_JPEG_AND_INDEPENDENT_REEXPORT",
+  "build": {
+    "productVersion": "2.3.0+05a9291f99f330f7159423616653f09189ccd47a",
+    "functionalCommit": "0adea8a7d77b8b5e1fa6823f798f9b40564d4022",
+    "identicalSrcTree": "829426d93baed5bd8797298b585d4ab3e72bdc88",
+    "componentSha256": {
+      "App/KitaoPhotoSelector.exe": "2fd5b5fb234da77b4725da74b04f866ac2575d7833f762061b4782702e4f611a",
+      "App/KitaoPhotoSelector.dll": "b5decc4e0c68b7df65178638af21625990edca3e7f22d3e9cc9faa2e91592133",
+      "SelectionService/PixelTart.SelectionApi.Server.dll": "5f980bbff741c24b8e0d1e464530436159cda3aafc36779988cd0eba29569e6a",
+      "ScheduleService/Guangjing.Schedule.Server.dll": "be96fd5351b8ae3241d915e97d591e1d6e47c18faf025d0c47b9aa5349661f9d",
+      "native-host/Guangjing.Capture.NativeHost.dll": "fe486b8e0f827b5c46e6c8b4be9e20532ec2d5ab0fe5af21520f1e301e1d38a9"
+    }
+  },
+  "source": {
+    "filename": "SET_PORTRAIT_01.jpg",
+    "author": "Petr Kratochvil",
+    "license": "CC0 1.0",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Fashion_model_portrait.jpg",
+    "sha256": "1c07f7b45e9e0593a6cdb9f0f95b60f9e2f983262daf7e570b67249205a7cb46",
+    "bytes": 188199,
+    "inputIccBytes": 0,
+    "actualCameraShutter": false,
+    "copyToProject": false,
+    "copyToBackup": false,
+    "importExisting": false
+  },
+  "identity": {
+    "projectName": "COMPANY-PORTRAIT-20261126",
+    "workflowProjectId": "e3f2aeb7-cf8d-4ae3-a71f-218be790e9d8",
+    "tetherSessionId": "83a4fd38-14e6-4f20-8aff-1c4cd207feb1",
+    "tetherAssetId": "77fbdc90-f53c-42fa-bc57-55f23f1f5270",
+    "libraryId": "013911c1-742f-41ab-82aa-88924a0cb220",
+    "libraryAssetId": "0b38f0ac-c503-4452-8783-c9593ff3975f",
+    "projectAssetRole": "TetherCapture",
+    "darkroomTargetId": "91014136-30d0-4629-8d76-b281be736231",
+    "activeEditVersionId": "ac27722c-bfd0-7f98-a7d9-e537c9882815",
+    "albumId": "0cf6ea31-cd42-432e-9865-eb7a5cfb1590",
+    "selectionImageId": "f5cbf558-b407-49e1-a65e-0ec119158336",
+    "preparedFilename": "SET_PORTRAIT_01.png",
+    "normalizedSelection": "SET_PORTRAIT_01"
+  },
+  "customerAndPhotographer": {
+    "browser": "Desktop Google Chrome 157.0.8103.79; fresh headless browser context, real page controls",
+    "realPhone": false,
+    "browserSelectionBefore": 0,
+    "browserSelectionAfter": 1,
+    "selectionVersion": 1,
+    "lockedRevision": 4,
+    "confirmedUtc": "2026-11-26T08:37:19.4455359+00:00",
+    "isLocked": true,
+    "customerSelected": true,
+    "customerFavorite": false,
+    "photographerRatingTether": 4,
+    "photographerRatingLibrary": 4,
+    "projectsAfterSync": 1,
+    "originalSourceFoldersAfterSync": 1,
+    "selectedRowsAfterSync": 1,
+    "newProcessRequiredAnotherCustomerConfirmation": false
+  },
+  "exports": {
+    "file": "SET_PORTRAIT_01_仿色.jpg",
+    "outputsPerDirectory": [1, 1],
+    "exportIds": ["f5d85aa2-da71-4eb0-a0f6-64c277b82f78", "8e6f8d10-ee42-4781-b547-d6d2cfbbdc60"],
+    "completedUtc": ["2026-11-26T08:48:58.673981+00:00", "2026-11-26T08:54:09.4495373+00:00"],
+    "distinctFilesAndJobs": true,
+    "recipeSnapshotsEqual": true,
+    "sidecarLibraryAssetId": null,
+    "quality": 95,
+    "bitDepth": 8,
+    "dimensions": [960, 1440],
+    "exifOrientation": 1,
+    "fileBytes": 281095,
+    "fileSha256Both": "970d1ec37fc5f47af7a054a51fdfd30c48c4034541cdaf66662f10fe14243fb1",
+    "decodedRgbSamplesCompared": 4147200,
+    "decodedRgbSampleDifferences": 0,
+    "decodedRgbSha256Both": "98eabbb487d05d6b947077e029372edb6d8a10aa49bc884fde483a76b0e3c62d",
+    "iccBytes": 3144,
+    "iccSha256Both": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e"
+  },
+  "ordinaryProcesses": [
+    {"pid": 28428, "exitCode": 0, "guardStop": false, "peakPrivateBytes": 1264082944, "osPeakWorkingSetBytes": 1211080704},
+    {"pid": 37704, "exitCode": 0, "guardStop": false, "peakPrivateBytes": 491290624, "osPeakWorkingSetBytes": 461033472}
+  ],
+  "companyOnlyEvidenceSha256": {
+    "landing": "92e7a663b937406ab6bd20a1d65da13f29d219ee869d55dc8196cecdae5375eb",
+    "browserConfirmation": "7a20e6e3777a9ccd12b2e12288164f56bc3a1f627ab6026e2beb7efbe2fe3a51",
+    "archivedCustomerResult": "2eea3e04ae98e665a6bdf4f59c3c8b025ffbf7214e6ba9c7d6b6efb0a2f6f871",
+    "savedWorkfile": "59a77c8cd101a164e1d7f523114d52b6877cb525b4fcf97c28f0d66042afd49f",
+    "secondProcessVisibleSelection": "c35c790cf295e16757b4637f80e4f1505facdcf2a34ccc7a322fde1da09201c3",
+    "firstNormalExit": "c85c902200aff6d80435a4cefd400ae71d10103ef95f0978a76463da018c969c",
+    "secondNormalExit": "8f44b1ed658997f5458bce354e1aecfc892f4ab17a52327d78ac41e515dba3ad"
+  },
+  "preservation": {"f84LauncherUnchanged": true, "testServiceStopped": true, "otherCompanyServicePreserved": true, "productSourceChanged": false}
+}
