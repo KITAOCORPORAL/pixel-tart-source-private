@@ -1,0 +1,30 @@
+[
+  {
+    "check": "满额、专业版限制、拒绝成员越权、一次性邀请、同一成员换端不新增席位",
+    "total": 4,
+    "memberSeats": 3,
+    "sameId": "327a0950-02a6-4cf0-8568-b3cd4c8a524f"
+  },
+  {
+    "check": "异块并发均保存；旧版本同块输入完整保留，可合并",
+    "conflict": "b9055a35-0d20-44fa-bffc-a3fbef3b6ce6",
+    "current": "A：侧光拍出衣领的结构。",
+    "submitted": "B：改用侧逆光、保留纹理。"
+  },
+  {
+    "check": "提交重试去重、同编号异内容拒绝；前插文字精确平移，删选区不误绑，删除后仍可回复",
+    "thread": "46df9f67-c3b3-41d5-b8b2-041e0ae0c9ff",
+    "retainedNotes": 2
+  },
+  {
+    "check": "移除保留署名、回收席位；旧设备和迁移码的读、写、重复请求、原图、在线心跳全部撤权",
+    "denied": 5,
+    "newMember": "c8460858-76ea-4181-8bf2-6b446f623459"
+  },
+  {
+    "check": "导出独立原生项目并用 PlanningProjectStore 打开、照片重新核验，批注扩展保留",
+    "project": "98fea4ab-2508-4209-9933-267dadee9ba7",
+    "nativeRevision": 3,
+    "export": "review-746d3c5b15e5457b9bde98cff0d6a172"
+  }
+]

@@ -61,6 +61,18 @@ public partial class App : Application
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+#if PLANNING_REVIEW_PILOT
+        if (e.Args is ["--planning-review", string configuration])
+        {
+            base.OnStartup(e);
+            var view = new PlanningCenterView();
+            MainWindow = new Window { Title = "光镜 · 策划中心 / 协作审稿试点", Width = 1320, Height = 890, MinWidth = 780, MinHeight = 540, Content = view };
+            MainWindow.Show();
+            try { await view.OpenReviewCopyAsync(configuration); }
+            catch (Exception error) { MainWindow.Content = new System.Windows.Controls.TextBlock { Margin = new Thickness(32), Text = "审稿试点未打开：" + error.Message }; }
+            return;
+        }
+#endif
 #if PHOTOGRAPHER_TRIAL
         if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1")
         {
