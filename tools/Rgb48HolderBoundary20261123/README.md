@@ -12,24 +12,17 @@
 
 ## 下次公司机只执行一次
 
-公司使用的一页交接与按本机回执解析路径的命令见 [COMPANY_HANDOFF_20261125.md](../../docs/validation/rgb48-holder-boundary-20261123/COMPANY_HANDOFF_20261125.md)。2026-11-25 fetch后，公司最新已提交证据仍为63a8633d；本次未再捕获家庭或公司进程。
-
-在本研究分支上，沿用公司已授权0806D680 RGB48缓存、原f319完整候选和已有dotnet-dump 10.0.750501，不再运行旧中性/Sony/像素/三轮资源实验，不读相机RAW。
+原 `63a` 的 task 没有 `iccSha256`。公司从本研究分支工作树根执行：
 
 ```powershell
-python tools/Rgb48HolderBoundary20261123/observe_company.py `
-  --baseline-launch "E:/Kitao-Deliveries/company-precision-integration-20261123/legacy-processed-three-cycle/LAUNCH.json" `
-  --dump-tool "<公司已部署的10.0.750501/dotnet-dump.exe>" `
-  --output "E:/Kitao-Deliveries/rgb48-holder-boundary-company-once"
+python tools/Rgb48HolderBoundary20261123/observe_company.py --company-63a
 ```
 
-运行目录是本研究分支的独立工作树根（含AGENTS.md和tools目录）。以上E盘路径来自原公司回执，须在公司机按原run/迁移回执解析；家庭不推断公司盘现状。需Windows x64、Python ≥3.11、.NET 10 SDK/WPF和已有固定采集器，输出盘空闲须>3GiB。
+见[公司交接与回传要求](../../docs/validation/rgb48-holder-boundary-20261123/COMPANY_ICC_HANDOFF_20261126.md)及[原预检停止记录](../../docs/validation/rgb48-holder-boundary-20261123/COMPANY_PREFLIGHT_20261126.md)。有原字段必须核对指定 ICC 全摘要；缺字段的例外只认原 LAUNCH 固定字节、原 App/Core、授权缓存、同次首导 TIFF 的固定全摘要、原完成侧车和内嵌 ICC。新任务使用经核对的 ICC 副本；这一绑定不能证明旧宿主实际读取过该文件。脚本没有跳过 ICC 检查或替换固定摘要的选项。
 
-输出目录必须全新；已有证据拒绝覆盖。工具路径须是已有固定版本的实际路径；若公司机未准备该工具，只补这项前置，不换采集器或跑资源测试。脚本仅编译新的小宿主，**不重建产品**；默认从原LAUNCH.stage取实际运行二进制，App和Core必须逐字节匹配该原run，且App PE产品版本必须为f3190f44；不把完整候选包的80f8ab6c…摘要自动当作原legacy stage摘要。也可用--product-app显式指定另一个逐字节匹配的目录。复制managed-only stage前核验其MANAGED_BINDING，未重建产品。
+`--company-63a` 解析原 `VALIDATION.json` 和已部署采集器，选择固定的全新输出目录。若原证据按公司回执迁移，显式入口为 `--baseline-launch`、`--output`，非标准工具路径加 `--dump-tool`；任何缺字段的 LAUNCH 仍须逐字节匹配同一固定摘要。`--product-app` 只接受同一二进制。原首导侧车的 `OutputPath` 必须仍指向所核对文件，不能改侧车来迁移。一次执行只构建隔离诊断宿主，不重建产品。双 2 GiB / 50 ms 守卫及 600 s 上限、`points` 配方和原等待均不变。
 
-输入来自原LAUNCH.task；capture.py核payload长度与全摘要，ICC在该脚本内仅检查存在，因此公司命令另按task.iccSha256核摘要。**配方并非从task读取**：Program.Stack()固定沿用63a原LegacyExportMemory宿主的points配方（PV2；WB temperature9/tint−4 → BasicTone exposure0.5/highlights−20/saturation7），与普通TIFF恢复文件的exposure0.1不同。guard保留Private与OS峰值工作集双2GiB/50ms（以及原600s上限），发行raw_r/libraw不得加载。
-
-一个命令执行：构建宿主→受控第一轮实际处理100%/保存导出→第二次数组分配前7弱句柄定位→一次Heap dump→立即结束诊断→离线查询。原候选/原run/稳定f84不改写。转储、图片、payload、全SOS输出只在包外，不能入Git；可回传ANALYSIS_SUMMARY.json的审阅后摘要、对象映射、必要根链、GC计数与绑定。
+家庭仅运行小夹具：`python -m unittest discover -s tools/Rgb48HolderBoundary20261123 -p test_company_preflight.py -v`。保留 11 月 25 日交接和全部历史 STOP，不再执行旧的缺字段即停命令。
 
 ## 判别规则
 

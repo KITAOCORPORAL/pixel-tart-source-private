@@ -1,0 +1,43 @@
+{
+  "classification": "HOUSEHOLD_FIXTURE_PREFLIGHT_ONLY",
+  "checkedAtUtc": "2026-11-26T12:11:28.302760+00:00",
+  "base": "914ee867432e5f041c0acd7a842bac52deed3911",
+  "fixture": "Temporary 2x1 RGB48 payload, small classic TIFF with a raw ICC byte tag; no company private files. The six digest pins are substituted in the test process only. External calls in the dispatch test are mocked.",
+  "python": "3.12.10",
+  "command": "python -m unittest discover -s tools/Rgb48HolderBoundary20261123 -p test_company_preflight.py -v",
+  "testsRun": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passedTests": [
+    "test_company_preflight.TestCompanyPreflight.test_change_after_preflight_stops_before_guard",
+    "test_company_preflight.TestCompanyPreflight.test_declared_conflict_or_invalid_value_stops_before_any_subprocess",
+    "test_company_preflight.TestCompanyPreflight.test_declared_icc_full_hash_succeeds_without_export_evidence",
+    "test_company_preflight.TestCompanyPreflight.test_first_ifd_tag_type_length_and_value_are_all_required",
+    "test_company_preflight.TestCompanyPreflight.test_one_command_checks_original_and_writes_receipt_before_dispatch",
+    "test_company_preflight.TestCompanyPreflight.test_one_command_uses_receipted_run_and_refuses_existing_output",
+    "test_company_preflight.TestCompanyPreflight.test_other_launch_app_core_or_payload_cannot_enter_fallback",
+    "test_company_preflight.TestCompanyPreflight.test_pinned_missing_field_fixes_only_the_new_observation",
+    "test_company_preflight.TestCompanyPreflight.test_tiff_and_sidecar_changed_together_still_fail_fixed_whole_file_digest",
+    "test_company_preflight.TestCompanyPreflight.test_wrong_sidecar_hash_state_path_or_current_icc_stops"
+  ],
+  "requestedCases": {
+    "declaredMatches": "accept by declared full file digest",
+    "declaredMismatchIncludingNullEmptyInvalid": "STOP before subprocess; no fallback",
+    "missingWithAllEvidence": "accept current inputs only; historical LAUNCH unchanged",
+    "badSidecarOrIcc": "STOP (hash, state, output path, ICC length, content, first IFD tag/type)"
+  },
+  "productionPinsComparedToCompanyReport": true,
+  "historicalCompanyLaunchReadOrWrittenAtHome": false,
+  "guardAndHostByteIdenticalToBase": true,
+  "productChanges": 0,
+  "newHostBuilds": 0,
+  "targetRuns": 0,
+  "guardRuns": 0,
+  "heapCaptures": 0,
+  "newRawDecodes": 0,
+  "companyObservationExecuted": false,
+  "historyBackfilled": false,
+  "historicalIccReadDetermined": false,
+  "largeImageReopen": "NOT_TESTED"
+}

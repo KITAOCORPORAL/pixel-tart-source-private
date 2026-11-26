@@ -2,16 +2,20 @@
 from pathlib import Path
 from datetime import datetime,timezone
 import argparse,json,subprocess,sys,time,hashlib,shutil
+from company_preflight import observation_task
 p=argparse.ArgumentParser();p.add_argument('--stage',required=True,type=Path);p.add_argument('--out',required=True,type=Path);p.add_argument('--dump-tool',required=True,type=Path);source=p.add_mutually_exclusive_group(required=True);source.add_argument('--task',type=Path);source.add_argument('--baseline-launch',type=Path);a=p.parse_args();stage=a.stage.resolve();out=a.out.resolve();tool=a.dump_tool.resolve();assert not out.exists() and tool.is_file()
 def load(path):return json.loads(path.read_text('utf-8-sig'))
 def sha(path):
  with path.open('rb') as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
+binding = None
 if a.baseline_launch:
- baseline=load(a.baseline_launch);task=baseline['task'];scope='company actual candidate matched to prior launch'
- assert sha(stage/'KitaoPhotoSelector.dll').lower()==baseline['appSha256'].lower(),'Candidate App differs from the actual prior run'
- assert sha(stage/'RAWSelectionAssistant.Core.dll').lower()==baseline['coreSha256'].lower(),'Candidate Core differs from the actual prior run'
-else:baseline=None;task=load(a.task);scope='authorized household fixture; not company original or company binary'
-payload=Path(task['payload']);assert payload.is_file() and payload.stat().st_size==task['width']*task['height']*6;assert sha(payload).lower()==task['pixelSha256'].lower();assert Path(task['icc']).is_file()
+ # Recheck evidence and staged DLLs after publish, before launching the observer guard.
+ # A changed input cannot be substituted while the small host was building.
+ task, binding = observation_task(a.baseline_launch.resolve(), stage, out.parent)
+ scope = 'company diagnostic; current inputs bound for this observation only'
+else:
+ task=load(a.task);scope='authorized household fixture; not company original or company binary'
+ payload=Path(task['payload']);assert payload.is_file() and payload.stat().st_size==task['width']*task['height']*6;assert sha(payload).lower()==task['pixelSha256'].lower();assert Path(task['icc']).is_file()
 assert shutil.disk_usage(out.parent).free>3*1024**3,'Keep old evidence; insufficient room for one private dump'
 taskfile=out.parent/(out.name+'-task.json');assert not taskfile.exists();taskfile.write_text(json.dumps(task,indent=2),encoding='utf-8')
 log=out.parent/(out.name+'-controller.log');assert not log.exists();handle=log.open('x',encoding='utf-8');guard=Path(__file__).with_name('guard.py');process=subprocess.Popen([sys.executable,str(guard),str(stage),str(taskfile),str(out),'processed-diagnostic','points'],stdout=handle,stderr=subprocess.STDOUT)
@@ -32,5 +36,6 @@ try:process.wait(timeout=45)
 except subprocess.TimeoutExpired:raise RuntimeError('Diagnostic host did not finish after capture; keep guard/run evidence')
 handle.close();exit=load(out/'EXIT.json');after=load(out/'HOLDER_CAPTURE_COMPLETE.json') if (out/'HOLDER_CAPTURE_COMPLETE.json').exists() else None
 summary={'classification':'DIAGNOSTIC_ONLY_NO_RESOURCE_ADMISSION','scope':scope,'startedAtUtc':start,'collectorExitCode':code,'collectorTimedOut':timedOut,'dumpExists':dump.exists(),'dumpBytes':dump.stat().st_size if dump.exists() else 0,'dumpSha256':sha(dump) if dump.exists() and code==0 else None,'weakMapSha256':sha(out/'WEAK_HANDLE_MAP.json'),'gcCountsBefore':mapping['gcCounts'],'gcCountsAfter':after['gcCountsAfter'] if after else None,'gcCountsEqual':bool(after and mapping['gcCounts']==after['gcCountsAfter']),'targetExit':exit,'diagnosticExpectedEarlyEnd':(out/'OBSERVATION_RESULT.json').exists(),'secondAllocationSkippedForObservationOnly':bool(after and after['secondUshortAllocated']==False),'baselineLaunch':str(a.baseline_launch) if a.baseline_launch else None,'stableProductUnchanged':True,'forcedGc':False,'oldReleaseAndSettlingUnchanged':True}
+if binding is not None: summary['inputPreflight'] = binding
 (out/'CAPTURE_SUMMARY.json').write_text(json.dumps(summary,indent=2),encoding='utf-8');print(json.dumps({k:summary[k] for k in ['classification','scope','collectorExitCode','dumpBytes','gcCountsEqual','diagnosticExpectedEarlyEnd']}))
 if code!=0 or not dump.exists():raise SystemExit(2)
