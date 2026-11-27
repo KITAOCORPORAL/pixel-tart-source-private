@@ -8,6 +8,7 @@ namespace PlanningReview;
 public sealed class Problem(int status, string message) : Exception(message) { public int Status => status; }
 public sealed class Notebook
 {
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public Workbench? Workbench { get; set; }
     public int Schema { get; set; } = 1;
     public Guid Project { get; set; }
     public Guid Document { get; set; }
@@ -48,6 +49,8 @@ public sealed record Note(Guid Author, string Name, DateTimeOffset At, string Te
 public sealed class Anchor
 {
     public Guid Target { get; set; }
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public Guid? PageId { get; set; }
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public Guid? ObjectId { get; set; }
     public int Start { get; set; }
     public string Quote { get; set; } = "";
     public double[]? Rect { get; set; }
@@ -76,6 +79,9 @@ public sealed class Edit
     public Guid After { get; set; }
     public bool Flag { get; set; }
     public string? Image { get; set; }
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public string? Kind { get; set; }
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public string? Section { get; set; }
+    [JsonIgnore(Condition=JsonIgnoreCondition.WhenWritingNull)] public JsonElement? Data { get; set; }
 }
 public static class Rules
 {
@@ -90,15 +96,16 @@ public static class Rules
     public static int Used(Notebook book) => book.People.Count(p => p.Active && !p.Owner) + book.Invitations.Count(Pending);
     public static void Track(Notebook book, Block block, string next)
     {
-        var old = block.Text; int prefix = 0, suffix = 0;
+        foreach(var a in book.Threads.Select(t=>t.Anchor).Where(a=>a.Target==block.Id&&!a.Detached&&a.PageId==null&&a.Quote.Length>0))TrackAnchor(a,block.Text,next);
+        block.Text=next;block.Version++;
+    }
+    public static void TrackAnchor(Anchor anchor,string old,string next)
+    {
+        int prefix = 0, suffix = 0;
         while (prefix < Math.Min(old.Length, next.Length) && old[prefix] == next[prefix]) prefix++;
         while (suffix < Math.Min(old.Length, next.Length) - prefix && old[^(suffix + 1)] == next[^(suffix + 1)]) suffix++;
-        foreach (var anchor in book.Threads.Select(t => t.Anchor).Where(a => a.Target == block.Id && !a.Detached && a.Quote.Length > 0))
-        {
-            if (anchor.Start + anchor.Quote.Length <= prefix) continue;
-            if (anchor.Start >= old.Length - suffix) anchor.Start += next.Length - old.Length;
-            else anchor.Detached = true;
-        }
-        block.Text = next; block.Version++;
+        if (anchor.Start + anchor.Quote.Length <= prefix) return;
+        if (anchor.Start >= old.Length - suffix) anchor.Start += next.Length - old.Length;
+        else anchor.Detached = true;
     }
 }

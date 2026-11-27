@@ -25,9 +25,10 @@ public sealed class NativePlan(string root)
     }
     private readonly PlanningProjectStore planning = new(Path.Combine(root, "ProjectPlanning"));
     private readonly ProjectShotStore shots = new(Path.Combine(root, "ProjectShots"));
-    public async Task<Notebook> Open(Guid project)
+    public async Task<Notebook> Open(Guid project,bool workbench=false)
     {
-        if (!planning.Exists(project))
+        var existingNative=planning.Exists(project);
+        if (!existingNative)
         {
             var body = "以秋冬外套为主角，拍出面料的厚度与衣领的层次。\n保留深色织纹，动作自然，背景不抢主体。";
             await planning.SaveAsync(new PlanningProjectState(project, Summary: new("秋冬系列平面型录")) { Document = new() { Title = "秋冬服装型录", Body = body, Location = "北窗摄影棚" } });
@@ -39,7 +40,8 @@ public sealed class NativePlan(string root)
         var book = new Notebook { Project = project, Document = doc.Package!.DocumentId, Title = doc.Title };
         book.People.Add(new() { Name = "负责人 A", Owner = true });
         book.Blocks.AddRange(doc.Body.Replace("\r\n", "\n").Split('\n').Select(line => new Block { Text = line, Field = "body", ReadOnly = doc.Package.RichTextPackageBase64 is not null }));
-        foreach (var shot in (await shots.LoadAsync(project)).Shots.Where(s => !s.IsArchived).OrderBy(s => s.Order))
+        var catalog=await shots.LoadAsync(project);
+        foreach (var shot in catalog.Shots.Where(s => !s.IsArchived).OrderBy(s => s.Order))
         { book.Blocks.Add(new() { Id = shot.ShotId, Kind = "shot", Text = shot.Name }); book.Order.Add(shot.ShotId); }
         foreach (var copy in PlanningReferenceLinks.Copies(doc).Where(c=>c.Kind=="reference").DistinctBy(c=>c.ReferenceId))
         {
@@ -57,8 +59,28 @@ public sealed class NativePlan(string root)
             book.Blocks=restored.Blocks;book.Threads=restored.Threads;book.Conflicts=restored.Conflicts;book.Revision=restored.Revision;
             book.People=restored.People;foreach(var person in book.People)person.Active=person.Owner;
         }
+        if(workbench)
+        {
+            if(doc.Extensions?.TryGetValue("PixelTartWorkbenchV1",out var snapshot)==true)
+            {
+                var restored=snapshot.Deserialize<WorkbenchArchive>(Json)??throw new InvalidDataException("工作台扩展无效");
+                var wb=restored.State; Need(wb.Pages.Count<=200 && wb.Pages.All(p=>p.Id!=Guid.Empty&&p.Version>0) && wb.Pages.Select(p=>p.Id).Distinct().Count()==wb.Pages.Count,"工作台页面身份重复或无效");
+                Need(wb.ShotDetails.Select(d=>d.Id).Distinct().Count()==wb.ShotDetails.Count&&wb.ShotDetails.All(d=>book.Blocks.Any(b=>b.Id==d.Id&&b.Kind=="shot")),"工作台分镜身份不匹配");
+                // Validate live page structures against retained assets, including historic removed assets.
+                foreach(var page in wb.Pages)WorkSchema.Page(book,page.Kind,page.Data,allowRemovedAssets:true);
+                Need(restored.Threads.All(t=>t.Anchor.PageId is {} pageId && wb.Pages.Any(p=>p.Id==pageId)) && !restored.Threads.Select(t=>t.Id).Concat(book.Threads.Select(t=>t.Id)).GroupBy(id=>id).Any(g=>g.Count()>1),"工作台批注身份无效");
+                book.Workbench=wb;book.Threads.AddRange(restored.Threads);
+            }
+            else
+            {
+                var basic=Workbench.Seed(book,catalog.Shots.Where(s=>!s.IsArchived).Select(NativeShot).ToList());
+                book.Workbench=existingNative?NativeWorkbenchProjection.Create(book,state,catalog,basic):basic;
+            }
+        }
         return book;
     }
+    private sealed record WorkbenchArchive(Workbench State,List<Discussion> Threads);
+    static ShotDetail NativeShot(ProjectShot shot)=>new(){Id=shot.ShotId,Requirements=shot.Action,Fields=new(){["scene"]=shot.Scene??"",["shotSize"]=shot.ShotSize,["cameraAndLens"]=shot.CameraAndLens,["props"]=shot.Props,["lighting"]=shot.Lighting,["remarks"]=shot.Remarks,["estimatedMinutes"]=shot.EstimatedMinutes.ToString()}};
     private sealed record Archive(List<Block> Blocks,List<Discussion> Threads,List<Clash> Conflicts,long Revision,List<Person> People);
     public async Task<Block> Import(Notebook book, Edit edit)
     {
@@ -108,12 +130,26 @@ public sealed class NativePlan(string root)
         }
         var output = new PlanningProjectStore(planningRoot); var state = await output.LoadAsync(book.Project); var doc = state.Document!;
         var text = string.Join("\n", book.Blocks.Where(b => b.Kind == "text" && !b.Removed).Select(b => b.Text));
+        if(doc.Package!.RichTextPackageBase64 is null && book.Workbench?.Pages.FirstOrDefault(p=>p.Kind=="doc" && p.Section=="brief" && !p.Archived) is {} brief)
+            text=string.Join("\n",brief.Data.GetProperty("paragraphs").EnumerateArray().Select(p=>p.GetProperty("text").GetString()));
         var liveRefs = book.Blocks.Where(b => b.Kind == "image" && b.Removed).Select(b => b.Id).ToHashSet();
         var extensions = doc.Extensions is null ? new() : new Dictionary<string, JsonElement>(doc.Extensions);
-        extensions["PixelTartReviewV1"] = JsonSerializer.SerializeToElement(new Archive(book.Blocks,book.Threads,book.Conflicts,book.Revision,book.People), Json);
+        extensions["PixelTartReviewV1"] = JsonSerializer.SerializeToElement(new Archive(book.Blocks,book.Threads.Where(t=>t.Anchor.PageId==null).ToList(),book.Conflicts,book.Revision,book.People), Json);
+        if(book.Workbench is {} wb)extensions["PixelTartWorkbenchV1"]=JsonSerializer.SerializeToElement(new WorkbenchArchive(wb,book.Threads.Where(t=>t.Anchor.PageId!=null).ToList()),Json);
         await output.SaveAsync(state with { Document = doc with { Body = text, Package = doc.Package! with { Body = text }, Extensions = extensions, References = doc.References.Where(r => !liveRefs.Contains(r.Source.ReferenceId)).ToArray() } });
         var original = await shots.LoadAsync(book.Project); var active = book.Order.Select((id, index) => (id, index)).ToDictionary(x => x.id, x => x.index);
-        await new ProjectShotStore(Path.Combine(destination, "ProjectShots")).SaveCatalogAsync(original with { Shots = original.Shots.Select(s => active.TryGetValue(s.ShotId, out var index) ? s with { Name = book.Blocks.Single(b => b.Id == s.ShotId).Text, Order = index } : s with { IsArchived = true }).ToArray() });
+        var merged=original.Shots.ToList();var now=DateTimeOffset.UtcNow;
+        if(book.Workbench!=null)foreach(var b in book.Blocks.Where(b=>b.Kind=="shot" && merged.All(s=>s.ShotId!=b.Id)))
+            merged.Add(new ProjectShot(b.Id,book.Project,merged.Count,b.Text,ProjectShotStatus.NotStarted,null,null,[],now,now));
+        ProjectShot ConvertShot(ProjectShot s)
+        {
+            if(!active.TryGetValue(s.ShotId,out var index))return s with { IsArchived=true };
+            var next=s with {Name=book.Blocks.Single(b=>b.Id==s.ShotId).Text,Order=index};
+            if(book.Workbench?.ShotDetails.Find(d=>d.Id==s.ShotId) is {} detail)
+            {var f=detail.Fields;return next with {PlanningFieldsVersion=1,Action=detail.Requirements,Scene=f.TryGetValue("scene",out var scene)?scene:s.Scene,ShotSize=f.GetValueOrDefault("shotSize",s.ShotSize),CameraAndLens=f.GetValueOrDefault("cameraAndLens",s.CameraAndLens),Props=f.GetValueOrDefault("props",s.Props),Lighting=f.GetValueOrDefault("lighting",s.Lighting),Remarks=f.GetValueOrDefault("remarks",s.Remarks),EstimatedMinutes=f.TryGetValue("estimatedMinutes",out var ms)&&int.TryParse(ms,out var m)&&m is >=0 and <=1440?m:s.EstimatedMinutes};}
+            return next;
+        }
+        await new ProjectShotStore(Path.Combine(destination,"ProjectShots")).SaveCatalogAsync(original with {Shots=merged.Select(ConvertShot).ToArray()});
         var reopened = (await output.LoadAsync(book.Project)).Document!;
         foreach (var item in reopened.References.Where(r => r.ProjectCopy is not null)) using (PlanningProjectCopyStorage.OpenVerifiedRead(item.ProjectCopy!)) { }
     }

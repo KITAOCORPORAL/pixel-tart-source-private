@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>光镜 · 策划工作台</title><link rel="stylesheet" href="workbench.css"><link rel="stylesheet" href="workbench-editors.css"><script type="module" src="workbench.js"></script></head>
+<body>
+<header class="wb-header"><a href="#list" id="home" class="wb-brand"><span class="wb-mark">光</span><span><strong>光镜</strong><small>策划工作台</small></span></a><span class="wb-divider"></span><span id="crumb" class="wb-crumb">摄影工作室 / 策划案</span><div class="wb-spacer"></div><span id="sync" role="status" class="wb-sync" hidden></span><button id="people" hidden type="button">项目成员</button><button id="deliver" hidden type="button">交付预览</button><button id="save" hidden type="button" class="wb-primary">保存修改</button></header>
+<main class="wb-login" id="login"><div class="wb-login-art"><span>GUANGJING STUDIO</span><div>把一个画面，<br>变成一场拍摄。</div><small>项目策划 · 多人协作</small></div><form id="join" autocomplete="off"><span class="wb-kicker">PLANNING WORKBENCH / 光镜</span><h1>打开策划工作台</h1><p>首次加入使用负责人发给你的邀请码。已加入的成员在新电脑上使用自己的迁移码。</p><label>邀请码或个人迁移码<input id="joinCode" required></label><button class="wb-primary" type="submit">进入策划</button><p id="joinError" role="alert"></p></form></main>
+<main id="library" class="wb-library" hidden></main>
+<div id="work" class="wb-work" hidden>
+  <aside class="wb-nav"><div id="projectHead" class="wb-project"></div><nav id="sections" aria-label="桌面基础版分区"></nav><div id="pages" class="wb-page-list" aria-label="页面缩略图"></div><div id="account" class="wb-account"></div></aside>
+  <main class="wb-main"><div id="pageHead" class="wb-page-head"></div><div id="canvasHost"></div></main>
+  <aside id="aside" class="wb-aside"><div id="asideTabs" class="wb-tabs"></div><div id="asideBody" class="wb-aside-body"></div></aside>
+</div>
+<dialog id="panel" class="wb-modal"><form method="dialog" class="wb-modal-close"><button aria-label="关闭对话框">✕</button></form><div id="panelBody"></div></dialog>
+<div id="toast" class="wb-toast" role="status" hidden></div>
+</body></html>

@@ -14,14 +14,15 @@ public sealed class Room
     readonly NativePlan native;
     Notebook book;
     Room(string root, byte[] key, NativePlan native, Notebook book) { this.root = root; this.key = key; this.native = native; this.book = book; }
-    public static async Task<Room> Load(string root, Guid project)
+    public static async Task<Room> Load(string root, Guid project, bool workbench=false)
     {
         var keyPath = Path.Combine(root, "identity.key"); var path = Path.Combine(root, "notebook.json");
         if (!File.Exists(keyPath) && File.Exists(path)) throw new InvalidDataException("缺少原身份密钥，保留项目并停止");
         if (!File.Exists(keyPath)) NativePlan.Atomic(keyPath, RandomNumberGenerator.GetBytes(32));
         var native = new NativePlan(Path.Combine(root, "isolated"));
-        var book = File.Exists(path) ? JsonSerializer.Deserialize<Notebook>(File.ReadAllBytes(path), Json)! : await native.Open(project);
+        var book = File.Exists(path) ? JsonSerializer.Deserialize<Notebook>(File.ReadAllBytes(path), Json)! : await native.Open(project,workbench);
         Need(book.Project == project && book.Schema == 1, "项目不匹配");
+        Need((book.Workbench is not null)==workbench,"工作台必须使用独立数据目录；旧项目请通过副本导入。");
         var room = new Room(root, File.ReadAllBytes(keyPath), native, book);
         if (!File.Exists(path)) room.Commit(book);
         return room;
@@ -62,19 +63,27 @@ public sealed class Room
     {
         var me = Member(token);
         var online = presence.Where(p => (DateTimeOffset.UtcNow - p.Value.At).TotalSeconds < 18 && book.People.Any(m => m.Id == p.Key.Person && m.Active)).GroupBy(p=>p.Key.Person).Select(g => { var item=g.MaxBy(p=>p.Value.At); return new { person=g.Key, target=item.Value.Target }; }).ToArray();
-        return Task.FromResult<object>(new { book.Project, book.Document, book.Title, book.Team, book.Revision, book.OrderVersion, book.Order, book.Blocks, book.Threads, book.Conflicts, people = book.People, me, online, memberSeats = MemberSeats, used = Used(book), invitations = me.Owner ? book.Invitations.Where(Pending).Select(i => new { i.Id, i.Label, i.Expires, code = Code("invite", i.Id) }).ToArray() : null });
+        var state = new { book.Project, book.Document, book.Title, book.Team, book.Revision, book.OrderVersion, book.Order, book.Blocks, book.Threads, book.Conflicts, people = book.People, me, online, memberSeats = MemberSeats, used = Used(book), invitations = me.Owner ? book.Invitations.Where(Pending).Select(i => new { i.Id, i.Label, i.Expires, code = Code("invite", i.Id) }).ToArray() : null };
+        if (book.Workbench is not {} wb) return Task.FromResult<object>(state);
+        var view=JsonSerializer.SerializeToElement(state,Json).EnumerateObject().ToDictionary(p=>p.Name,p=>(object)p.Value);
+        view["workbench"]=wb.View(book.Team);return Task.FromResult<object>(view);
     });
     public Task<object> Pulse(string? token, Guid device, Guid? target) => Locked<object>(() =>
     {
         var actor = Member(token); Need(device != Guid.Empty, "缺少设备身份");
         foreach (var entry in presence.Where(p => (DateTimeOffset.UtcNow - p.Value.At).TotalSeconds > 30).Select(p=>p.Key).ToArray()) presence.Remove(entry);
-        presence[(actor.Id, device)] = (DateTimeOffset.UtcNow, book.Blocks.Any(b => b.Id == target && !b.Removed) ? target : null);
+        presence[(actor.Id, device)] = (DateTimeOffset.UtcNow, book.Blocks.Any(b => b.Id == target && !b.Removed) || book.Workbench?.Pages.Any(p=>p.Id==target)==true ? target : null);
         return Task.FromResult<object>(new { book.Revision });
     });
     public Task<(Stream stream,string mime)> Image(string? token, Guid id) => Locked(async () =>
     {
         Member(token); var block = book.Blocks.FirstOrDefault(b => b.Id == id && !b.Removed && b.Kind == "image") ?? throw new Problem(404, "参考图已移除");
         return (await native.Read(book, block),block.Mime!);
+    });
+    public Task<byte[]> Office(string? token) => Locked(() =>
+    {
+        Need(Member(token).Owner,"仅负责人可导出审阅稿",403);
+        return Task.FromResult(WorkbenchOffice.Create(book));
     });
     public Task<string> Export(string? token) => Locked(async () =>
     {
@@ -92,10 +101,16 @@ public sealed class Room
         void Owner() => Need(actor.Owner,"只有负责人可以管理席位和版本。",403);
         void Conflict(string current, string submitted)
         { next.Conflicts.Add(new(edit.Id,actor.Id,actor.Name,now,edit.Target,edit.Action,edit.Base,submitted,current)); outcome="conflict"; }
+        if (next.Workbench?.PrivateTier=="basic" && !next.Team && edit.Action is ("comment" or "reply" or "status")) throw new Problem(403,"批注需要专业版或团队版。");
         var note = () => new Note(actor.Id,actor.Name,now,Short(edit.Text));
         switch (edit.Action)
         {
             case "upgrade": Owner(); next.Team=true; break;
+            case "wbTier":
+                Owner(); Need(next.Workbench!=null,"此实例未开启工作台",404); Need(edit.Text is "basic" or "pro","版本无效");
+                Need(!next.Team,"团队项目不能降级；请导出新的私人副本。",409); next.Workbench!.PrivateTier=edit.Text; break;
+            case "wbPageAdd": case "wbPageSet": case "wbPageDelete": case "wbPageRestore": case "wbPageMove": case "wbShotSet": case "wbShotAdd": case "wbShotArchive": case "wbShotMove":
+                (next.Workbench??throw new Problem(404,"此实例未开启工作台")).Apply(next,edit,Conflict); break;
             case "invite":
                 Owner(); Need(next.Team,"请先升级为团队项目"); Need(Used(next)<MemberSeats,"席位已满；请先移除成员或撤销待用邀请。",409);
                 var label=Short(edit.Text,32); Need(!next.People.Any(p=>p.Active&&p.Name==label)&&!next.Invitations.Any(i=>Pending(i)&&i.Label==label),"署名已占用",409);
@@ -112,13 +127,16 @@ public sealed class Room
                 Need(!target!.ReadOnly,"富文本原稿保留格式，仅开放批注");
                 if (target.Version!=edit.Base || target.Removed) Conflict(target.Removed?"原位置已移除":target.Text,submitted);
                 else if (edit.Action=="delete") { target.Removed=true; target.Version++; if (next.Order.Remove(target.Id)) next.OrderVersion++; foreach(var item in next.Threads.Where(t=>t.Anchor.Target==target.Id)) item.Anchor.Detached=true; }
-                else Track(next,target,submitted); break;
+                else {Track(next,target,submitted);if(target.Kind=="shot" && next.Workbench?.ShotDetails.Find(s=>s.Id==target.Id) is {} detail) detail.Version++;} break;
             case "move":
                 Need(edit.After!=edit.Target,"不能移到自身之后");
                 if(next.OrderVersion!=edit.Base || !next.Order.Contains(edit.Target) || !next.Order.Contains(edit.After)) Conflict(string.Join(",",next.Order),$"{edit.Target} → {edit.After}");
                 else {next.Order.Remove(edit.Target);next.Order.Insert(next.Order.IndexOf(edit.After)+1,edit.Target);next.OrderVersion++;} break;
             case "comment":
-                var anchor=edit.Anchor??throw new Problem(422,"请选择批注位置"); var block=next.Blocks.Find(b=>b.Id==anchor.Target)??throw new Problem(404,"位置不存在");
+                var anchor=edit.Anchor??throw new Problem(422,"请选择批注位置"); if (next.Workbench is {} workspace && anchor.PageId is not null)
+                { workspace.PrepareAnchor(next,anchor,edit.Base);next.Threads.Add(new(){Id=edit.Id, Anchor=anchor, Notes=[note()]});break; }
+                Need(anchor.PageId==null && anchor.ObjectId==null,"批注位置缺少工作台页面");
+                var block=next.Blocks.Find(b=>b.Id==anchor.Target)??throw new Problem(404,"位置不存在");
                 anchor.Detached=block.Removed;
                 if(block.Kind=="text") { Need(anchor.Quote is { Length: > 0 and <= 4000 } && anchor.Start>=0,"请选中需要批注的文字"); anchor.Detached |= block.Version!=edit.Base || anchor.Start>block.Text.Length-anchor.Quote.Length || !block.Text.AsSpan(anchor.Start,anchor.Quote.Length).SequenceEqual(anchor.Quote); anchor.Rect=null; }
                 else if(block.Kind=="image") { var rect=anchor.Rect; Need(rect is { Length:4 } && rect.All(double.IsFinite) && rect[0]>=0 && rect[1]>=0 && rect[2]>0 && rect[3]>0 && rect[0]+rect[2]<=1.000001 && rect[1]+rect[3]<=1.000001 && block.Hash==anchor.Hash,"图片或框选区域无效"); anchor.Quote=""; }
@@ -129,7 +147,7 @@ public sealed class Room
             case "ack":
                 var index=next.Conflicts.FindIndex(c=>c.Id==edit.Target&&!c.Closed); Need(index>=0,"冲突已处理",409); var clash=next.Conflicts[index];
                 Need(actor.Owner||clash.Author==actor.Id,"仅本人或负责人可处理冲突",403);
-                if(edit.Flag) {var current=next.Blocks.Find(b=>b.Id==clash.Target&&!b.Removed);Need(clash.Action=="text"&&current!=null&&current.Version==edit.Base,"内容再次变化，请重新核对",409); Track(next,current!,Short(edit.Text,12000));}
+                if(edit.Flag) {var current=next.Blocks.Find(b=>b.Id==clash.Target&&!b.Removed);Need(clash.Action=="text"&&current!=null&&current.Version==edit.Base,"内容再次变化，请重新核对",409); Track(next,current!,Short(edit.Text,12000));if(current!.Kind=="shot"&&next.Workbench?.ShotDetails.Find(s=>s.Id==current.Id) is {} sd)sd.Version++;}
                 next.Conflicts[index]=clash with { Closed=true }; break;
             default: throw new Problem(422,"未知的策划操作");
         }
