@@ -1,0 +1,322 @@
+{
+  "status": "PASS",
+  "startedUtc": "2026-11-27T04:05:32.463809+00:00",
+  "project": "5db8a1f2-72fa-4977-a98e-9688f4a5d67d",
+  "physicalMachines": 1,
+  "clients": {
+    "A": "https://127.0.0.1:45753/",
+    "B": "https://192.168.1.10:45753/"
+  },
+  "actions": [
+    {
+      "check": "open Basic",
+      "timeUtc": "2026-11-27T04:05:34.809518+00:00",
+      "project": "5db8a1f2-72fa-4977-a98e-9688f4a5d67d",
+      "tier": "basic",
+      "assets": 3,
+      "shots": 6,
+      "screenshot": {
+        "file": "01-basic-list.png",
+        "sha256": "942c597588fbd4dd1739113397b102b719f05c3866e99d084d76ddb765064494"
+      }
+    },
+    {
+      "check": "mood template",
+      "timeUtc": "2026-11-27T04:05:35.054626+00:00",
+      "page": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+      "title": "情绪板 · 副本"
+    },
+    {
+      "check": "drop three project assets",
+      "timeUtc": "2026-11-27T04:05:35.600295+00:00",
+      "assetIds": [
+        "edb866a4-260a-4016-a628-bd269eb6aabc",
+        "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "2292ff09-3eb5-4fcb-a371-3b5ab0580308"
+      ],
+      "objectIds": [
+        "b83ea17f-83bd-44ee-83d0-f864a84b74c9",
+        "c3c8fb50-2743-45f8-9b85-9fb55be9791a",
+        "f1a962e5-c22e-462d-b275-affbb1e11e1d"
+      ],
+      "screenshot": {
+        "file": "02-dragged-three.png",
+        "sha256": "56a7c2dccb3c3abb88c3c905f3ac4ddadcb563c3ffd24699ce5ee5e83108cd53"
+      }
+    },
+    {
+      "check": "crop original and replace preserving bounds",
+      "timeUtc": "2026-11-27T04:05:36.398332+00:00",
+      "objectId": "b83ea17f-83bd-44ee-83d0-f864a84b74c9",
+      "beforeAsset": "edb866a4-260a-4016-a628-bd269eb6aabc",
+      "afterAsset": "2292ff09-3eb5-4fcb-a371-3b5ab0580308",
+      "cropBeforeReplacement": {
+        "x": 0.21987271948335732,
+        "y": 0.21998566960009586,
+        "w": 0.5399436512212645,
+        "h": 0.5299999875279373
+      },
+      "bounds": [
+        100,
+        207.5969827586207,
+        168.75,
+        248.4634212099162,
+        0
+      ]
+    },
+    {
+      "check": "canvas title Chinese composition and partial formatting",
+      "timeUtc": "2026-11-27T04:05:36.681745+00:00",
+      "text": "秋冬衣领 · 侧逆光",
+      "styledRange": [
+        2,
+        4
+      ],
+      "marks": [
+        {
+          "start": 0,
+          "end": 2,
+          "bold": true,
+          "color": "#355342",
+          "size": 58
+        },
+        {
+          "start": 2,
+          "end": 4,
+          "bold": true,
+          "underline": true,
+          "color": "#355342",
+          "size": 58
+        },
+        {
+          "start": 4,
+          "end": 10,
+          "bold": true,
+          "color": "#355342",
+          "size": 58
+        }
+      ],
+      "compositionEvents": [
+        [
+          "compositionstart",
+          "秋冬色彩研究"
+        ],
+        [
+          "compositionupdate",
+          "秋冬衣领"
+        ],
+        [
+          "compositionupdate",
+          "秋冬衣领"
+        ],
+        [
+          "compositionend",
+          "秋冬衣领"
+        ]
+      ],
+      "method": "Chromium CDP IME composition; not OS input method",
+      "screenshot": {
+        "file": "03-canvas-title.png",
+        "sha256": "0f1b1e0b27cd498ad106d60bd0da71185c776b01e339108f5397ae3c57554149"
+      }
+    },
+    {
+      "check": "bind clothing photo to third shot",
+      "timeUtc": "2026-11-27T04:05:37.155021+00:00",
+      "shot": "aa2ef330-3701-4e5c-a94b-0a910c58f4b4",
+      "originalRank": 3,
+      "asset": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+      "screenshot": {
+        "file": "04-third-shot.png",
+        "sha256": "dc429628488ac2bca9d6fb94a31541344fdaa7a2c236aeea022c93572e19d4e2"
+      }
+    },
+    {
+      "check": "professional selected text comment and prefix reanchor",
+      "timeUtc": "2026-11-27T04:05:37.881552+00:00",
+      "setup": "owner used actual professional-tier control",
+      "beforeStart": 2,
+      "after": {
+        "target": "a174677d-6e6b-4c2f-901e-e53867cc8fd2",
+        "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+        "objectId": "a174677d-6e6b-4c2f-901e-e53867cc8fd2",
+        "start": 5,
+        "quote": "衣领",
+        "hash": null,
+        "rect": null,
+        "detached": false
+      },
+      "screenshot": {
+        "file": "05-prefix-retained.png",
+        "sha256": "f59f5a043c394110e0d1e44aeddba7349569526d197185c46342e95730ddc5c1"
+      }
+    },
+    {
+      "check": "B signs in with individual team invitation",
+      "timeUtc": "2026-11-27T04:05:40.223839+00:00",
+      "setup": "owner used actual upgrade and invitation buttons; B used one-time code in link fragment",
+      "visiblePhotos": 3,
+      "verifiedOriginals": {
+        "edb866a4-260a-4016-a628-bd269eb6aabc": {
+          "bytes": 188199,
+          "sha256": "1c07f7b45e9e0593a6cdb9f0f95b60f9e2f983262daf7e570b67249205a7cb46"
+        },
+        "50f44b75-6fbd-40db-bd15-4054544c3d16": {
+          "bytes": 261861,
+          "sha256": "0884ecc7c547fa1f8c6505fac4dc5ec18ef08e437b224e6937a17d124ebea169"
+        },
+        "2292ff09-3eb5-4fcb-a371-3b5ab0580308": {
+          "bytes": 99500,
+          "sha256": "1212a14c1dc4dd873c81fd3fe76b370fac4be95f8a11d84eaec68fc9f5400107"
+        }
+      }
+    },
+    {
+      "check": "B marks collar on canvas, A locates replies resolves",
+      "timeUtc": "2026-11-27T04:05:42.347211+00:00",
+      "thread": "0545cf54-44ea-452c-a635-b1c47d506372",
+      "anchor": {
+        "target": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+        "objectId": "c3c8fb50-2743-45f8-9b85-9fb55be9791a",
+        "start": 0,
+        "quote": "",
+        "hash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+        "rect": [
+          0.42975391373323757,
+          0.6899856820721584,
+          0.27997083408165746,
+          0.11499990022349926
+        ],
+        "detached": false
+      },
+      "authors": [
+        "造型师 B",
+        "负责人 A"
+      ],
+      "screenshot": {
+        "file": "06-owner-collar-location.png",
+        "sha256": "bc44243ddaf2e633b96d6268f80ed74aedece4eee51bbbb134fc0cf715e6e6d2"
+      }
+    },
+    {
+      "check": "B reorders third shot after sixth, keeps reference and shot comment",
+      "timeUtc": "2026-11-27T04:05:46.247361+00:00",
+      "before": [
+        "a71fab10-6f3b-422e-863a-c3596e61a83e",
+        "16e24466-6a25-4c83-ad76-440ae0f91aa4",
+        "aa2ef330-3701-4e5c-a94b-0a910c58f4b4",
+        "cea8328c-3127-4555-b763-b732cc0de399",
+        "f6d9082d-4d45-4a5a-a15a-60e423aa1bf3",
+        "3fcf25ee-045c-485b-be5e-f7eaa0aa92f2"
+      ],
+      "after": [
+        "a71fab10-6f3b-422e-863a-c3596e61a83e",
+        "16e24466-6a25-4c83-ad76-440ae0f91aa4",
+        "cea8328c-3127-4555-b763-b732cc0de399",
+        "f6d9082d-4d45-4a5a-a15a-60e423aa1bf3",
+        "3fcf25ee-045c-485b-be5e-f7eaa0aa92f2",
+        "aa2ef330-3701-4e5c-a94b-0a910c58f4b4"
+      ],
+      "referenceId": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+      "threadId": "e250e67f-8e26-4806-9f68-928905e2c12c",
+      "screenshot": {
+        "file": "07-reordered-sixth.png",
+        "sha256": "5150a42209376b5928a311d695e6f5249ce42ad9f8fc383bec7341815aa7d582"
+      }
+    },
+    {
+      "check": "old placement comment detaches after replacement",
+      "timeUtc": "2026-11-27T04:05:47.254054+00:00",
+      "old": {
+        "target": "2292ff09-3eb5-4fcb-a371-3b5ab0580308",
+        "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+        "objectId": "f1a962e5-c22e-462d-b275-affbb1e11e1d",
+        "start": 0,
+        "quote": "",
+        "hash": "1212A14C1DC4DD873C81FD3FE76B370FAC4BE95F8A11D84EAEC68FC9F5400107",
+        "rect": [
+          0.21991405917411677,
+          0.21997101492656435,
+          0.5399995676351635,
+          0.5300002993295019
+        ],
+        "detached": true
+      },
+      "replacement": "edb866a4-260a-4016-a628-bd269eb6aabc",
+      "unaffectedCollar": {
+        "target": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+        "objectId": "c3c8fb50-2743-45f8-9b85-9fb55be9791a",
+        "start": 0,
+        "quote": "",
+        "hash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+        "rect": [
+          0.42975391373323757,
+          0.6899856820721584,
+          0.27997083408165746,
+          0.11499990022349926
+        ],
+        "detached": false
+      }
+    },
+    {
+      "check": "reopen independent profiles",
+      "timeUtc": "2026-11-27T04:05:48.732154+00:00",
+      "revision": 45,
+      "order": [
+        "a71fab10-6f3b-422e-863a-c3596e61a83e",
+        "16e24466-6a25-4c83-ad76-440ae0f91aa4",
+        "cea8328c-3127-4555-b763-b732cc0de399",
+        "f6d9082d-4d45-4a5a-a15a-60e423aa1bf3",
+        "3fcf25ee-045c-485b-be5e-f7eaa0aa92f2",
+        "aa2ef330-3701-4e5c-a94b-0a910c58f4b4"
+      ],
+      "page": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+      "collar": {
+        "target": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+        "objectId": "c3c8fb50-2743-45f8-9b85-9fb55be9791a",
+        "start": 0,
+        "quote": "",
+        "hash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+        "rect": [
+          0.42975391373323757,
+          0.6899856820721584,
+          0.27997083408165746,
+          0.11499990022349926
+        ],
+        "detached": false
+      },
+      "screenshot": {
+        "file": "08-member-reopened.png",
+        "sha256": "2f0146f69f5cf717ce7817a43d7ee41e62d878a432e99782bb671c1f9872734c"
+      }
+    },
+    {
+      "check": "clean vs review delivery previews",
+      "timeUtc": "2026-11-27T04:05:49.096212+00:00",
+      "clean": {
+        "containsThisDiscussion": false,
+        "visibleImages": 20,
+        "screenshot": {
+          "file": "09-clean-preview.png",
+          "sha256": "c4562605ef5713fd805729a27da9957e62a92c3c5b3bdb3563524c85a637996f"
+        }
+      },
+      "review": {
+        "containsThisDiscussion": true,
+        "visibleImages": 22,
+        "screenshot": {
+          "file": "09-review-preview.png",
+          "sha256": "d7241a10f9cc52b64037693b781578f1aba9271873a3e4493d4498a5236b815b"
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "browserUA": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36",
+  "memberA": "480518f2-65ac-4843-b7f7-e242c00ad908",
+  "memberB": "ae5d6c0b-d54c-4957-aef0-4599538f506e",
+  "completedUtc": "2026-11-27T04:05:49.096795+00:00"
+}

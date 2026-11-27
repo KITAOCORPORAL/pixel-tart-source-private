@@ -1,0 +1,24 @@
+[
+  {
+    "check": "Plain v1 default state and native export",
+    "files": 8
+  },
+  {
+    "check": "Basic private writes; Pro text anchors track prefix; stale input and op replay; section, table, page order and restore",
+    "section": "budget"
+  },
+  {
+    "check": "Image note retains original hash and normalized rect on translated placement, detached on object removal"
+  },
+  {
+    "check": "Team identity and revocation include image bytes; source-copy SHA unchanged; native export created",
+    "sourceFiles": 8,
+    "exportFiles": 3
+  },
+  {
+    "check": "Restart same notebook retains rich content, members and placement history"
+  },
+  {
+    "check": "Export reimport portable into another private project root: image bytes, shot metadata, notes, archived warning, section/order and accounts isolated"
+  }
+]

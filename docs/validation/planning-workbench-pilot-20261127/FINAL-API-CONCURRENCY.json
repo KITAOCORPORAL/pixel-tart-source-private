@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "mode": "two independent member tokens / one physical Windows host; pinned TLS via loopback + LAN adapter",
+  "binarySha256": {
+    "PlanningReview.exe": "6ab1dc9bb0eb7abdc909e8dd627f7c0f8f3f5eb580dcbe030da17b1f0c5866e2",
+    "PlanningReview.dll": "569b53e46be826fc2f70620532c6f5aa85194ae3363cf70cf930420749b14fc6",
+    "RAWSelectionAssistant.Core.dll": "e41a41113907388edda05cb95161968e1a770ee7c8a8045cc79fc90bf55e9008"
+  },
+  "checks": [
+    {
+      "check": "Simultaneous edits to two different shots persisted for both members",
+      "saved": 2
+    },
+    {
+      "check": "Simultaneous changes on distinct pages persisted for both members",
+      "saved": 2
+    },
+    {
+      "check": "Concurrent edits to the same paragraph preserved winning content and exact other input in shared conflict",
+      "accepted": 1,
+      "conflicts": 1
+    },
+    {
+      "check": "Client closed TLS connection immediately after sending update; write independently observed before identical retry, revision and shot version unchanged",
+      "replay": true
+    },
+    {
+      "check": "Lost reply acknowledgement reproduced before replay; one reply and unchanged room revision",
+      "replies": 1,
+      "replay": true
+    },
+    {
+      "check": "Removed member denied state, image, applied op replay, fresh write, pulse, migration join; original attribution/history retained",
+      "denials": 6
+    }
+  ],
+  "physicalSecondDevice": "NOT_TESTED",
+  "utc": "2026-11-27T12:08:05.622601+08:00",
+  "isolatedQaListenerStoppedAfterVerification": true
+}

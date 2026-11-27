@@ -1,0 +1,240 @@
+{
+  "status": "PASS",
+  "project": "5db8a1f2-72fa-4977-a98e-9688f4a5d67d",
+  "method": "Browser interactions on the existing resolved B→A collar thread; predicted CSS pixels use rendered full image bounds times stored original normalized anchor, independently clipped to the visible crop.",
+  "thread": "0545cf54-44ea-452c-a635-b1c47d506372",
+  "anchor": {
+    "target": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+    "pageId": "9bab6e8d-f810-4baa-acd8-e20dbfbbf148",
+    "objectId": "c3c8fb50-2743-45f8-9b85-9fb55be9791a",
+    "start": 0,
+    "quote": "",
+    "hash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+    "rect": [
+      0.42975391373323757,
+      0.6899856820721584,
+      0.27997083408165746,
+      0.11499990022349926
+    ],
+    "detached": false
+  },
+  "phases": [
+    {
+      "name": "01-before",
+      "placement": {
+        "x": 389.6551724137931,
+        "y": 207.5969827586207,
+        "w": 168.75,
+        "h": 225,
+        "rotate": 0,
+        "assetId": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        }
+      },
+      "revision": 51,
+      "storedOriginalHash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+      "storedOriginalRect": [
+        0.42975391373323757,
+        0.6899856820721584,
+        0.27997083408165746,
+        0.11499990022349926
+      ],
+      "fullImageCssPx": {
+        "x": 636.1300048828125,
+        "y": 460.9971923828125,
+        "width": 130.48638916015625,
+        "height": 195.75
+      },
+      "visibleImageCssPx": {
+        "x": 636.1300048828125,
+        "y": 460.9971923828125,
+        "width": 130.48638916015625,
+        "height": 195.75
+      },
+      "expectedOverlayCssPx": {
+        "x": 692.207041313308,
+        "y": 596.0618896484375,
+        "width": 36.53238320947264,
+        "height": 22.51123046875
+      },
+      "actualOverlayCssPx": {
+        "x": 692.2177734375,
+        "y": 596.0510864257812,
+        "width": 36.5264892578125,
+        "height": 22.4976806640625
+      },
+      "maxErrorCssPx": 0.0135,
+      "screenshot": {
+        "file": "01-before.png",
+        "sha256": "5483e6ac0a683ff15d09888493135e56400c14668ae9c36d9c118dfa4f735696"
+      }
+    },
+    {
+      "name": "02-after-crop",
+      "placement": {
+        "x": 389.6551724137931,
+        "y": 207.5969827586207,
+        "w": 168.75,
+        "h": 239.28009738193927,
+        "rotate": 0,
+        "assetId": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "crop": {
+          "x": 0.16978109659363055,
+          "y": 0.24998565712803306,
+          "w": 0.7299238767660443,
+          "h": 0.6900000249441254
+        }
+      },
+      "revision": 52,
+      "storedOriginalHash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+      "storedOriginalRect": [
+        0.42975391373323757,
+        0.6899856820721584,
+        0.27997083408165746,
+        0.11499990022349926
+      ],
+      "fullImageCssPx": {
+        "x": 593.83984375,
+        "y": 385.5926513671875,
+        "width": 201.13311767578125,
+        "height": 301.6724853515625
+      },
+      "visibleImageCssPx": {
+        "x": 627.9873046875,
+        "y": 460.9971923828125,
+        "width": 146.8125,
+        "height": 208.1611328125
+      },
+      "expectedOverlayCssPx": {
+        "x": 680.2775882525348,
+        "y": 593.7423469348886,
+        "width": 56.31140671713274,
+        "height": 34.692305715604675
+      },
+      "actualOverlayCssPx": {
+        "x": 680.2689208984375,
+        "y": 593.7265625,
+        "width": 56.3052978515625,
+        "height": 34.6912841796875
+      },
+      "maxErrorCssPx": 0.0158,
+      "screenshot": {
+        "file": "02-after-crop.png",
+        "sha256": "711cb190ab1224e17652cd00312897dbddba86942fbf7ea126898cc7b5aac104"
+      }
+    },
+    {
+      "name": "03-after-resize",
+      "placement": {
+        "x": 389.6551724137931,
+        "y": 207.5969827586207,
+        "w": 243.46264367816093,
+        "h": 345.21934867066506,
+        "rotate": 0,
+        "assetId": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "crop": {
+          "x": 0.16978109659363055,
+          "y": 0.24998565712803306,
+          "w": 0.7299238767660443,
+          "h": 0.6900000249441254
+        }
+      },
+      "revision": 53,
+      "storedOriginalHash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+      "storedOriginalRect": [
+        0.42975391373323757,
+        0.6899856820721584,
+        0.27997083408165746,
+        0.11499990022349926
+      ],
+      "fullImageCssPx": {
+        "x": 578.7236328125,
+        "y": 352.19281005859375,
+        "width": 290.17218017578125,
+        "height": 435.27191162109375
+      },
+      "visibleImageCssPx": {
+        "x": 627.9873046875,
+        "y": 460.9971923828125,
+        "width": 211.80426025390625,
+        "height": 300.34033203125
+      },
+      "expectedOverlayCssPx": {
+        "x": 703.4262628995482,
+        "y": 652.5241968853263,
+        "width": 81.23974731110638,
+        "height": 50.05622640651768
+      },
+      "actualOverlayCssPx": {
+        "x": 703.4190673828125,
+        "y": 652.5059814453125,
+        "width": 81.2362060546875,
+        "height": 50.0521240234375
+      },
+      "maxErrorCssPx": 0.0182,
+      "screenshot": {
+        "file": "03-after-resize.png",
+        "sha256": "e844dbf4aafd6c0a516a4630db2f83873c47bb5738f346cfcf7b6a5a86ecb3a8"
+      }
+    },
+    {
+      "name": "04-after-reopen",
+      "placement": {
+        "x": 389.6551724137931,
+        "y": 207.5969827586207,
+        "w": 243.46264367816093,
+        "h": 345.21934867066506,
+        "rotate": 0,
+        "assetId": "50f44b75-6fbd-40db-bd15-4054544c3d16",
+        "crop": {
+          "x": 0.16978109659363055,
+          "y": 0.24998565712803306,
+          "w": 0.7299238767660443,
+          "h": 0.6900000249441254
+        }
+      },
+      "revision": 53,
+      "storedOriginalHash": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+      "storedOriginalRect": [
+        0.42975391373323757,
+        0.6899856820721584,
+        0.27997083408165746,
+        0.11499990022349926
+      ],
+      "fullImageCssPx": {
+        "x": 578.7236328125,
+        "y": 352.19281005859375,
+        "width": 290.17218017578125,
+        "height": 435.27191162109375
+      },
+      "visibleImageCssPx": {
+        "x": 627.9873046875,
+        "y": 460.9971923828125,
+        "width": 211.80426025390625,
+        "height": 300.34033203125
+      },
+      "expectedOverlayCssPx": {
+        "x": 703.4262628995482,
+        "y": 652.5241968853263,
+        "width": 81.23974731110638,
+        "height": 50.05622640651768
+      },
+      "actualOverlayCssPx": {
+        "x": 703.4190673828125,
+        "y": 652.5059814453125,
+        "width": 81.2362060546875,
+        "height": 50.0521240234375
+      },
+      "maxErrorCssPx": 0.0182,
+      "screenshot": {
+        "file": "04-after-reopen.png",
+        "sha256": "e844dbf4aafd6c0a516a4630db2f83873c47bb5738f346cfcf7b6a5a86ecb3a8"
+      }
+    }
+  ],
+  "scriptSha256": "f2ce8a3b6fb3001049a15010bdc74aa0c010100e329ac175ed8571371b61fc5c"
+}

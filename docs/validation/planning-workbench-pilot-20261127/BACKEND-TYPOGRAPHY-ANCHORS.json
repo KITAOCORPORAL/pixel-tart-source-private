@@ -1,0 +1,11 @@
+[
+  {
+    "check": "Stored and exported bounded font, letter spacing, line height, caption; arbitrary font and out-of-range spacing rejected; canvas text supports line height",
+    "invalidInputsRejected": 3
+  },
+  {
+    "check": "Shot image area note verified with project hash and stable shot objectId; changing its reference detaches old discussion and late note; forged digest and missing asset rejected",
+    "detached": 2,
+    "invalidRequestsRejected": 2
+  }
+]

@@ -1,0 +1,391 @@
+{
+  "date": "2026-11-27",
+  "sourceBase": "a398d6c264b4a90b6e6ab01a0cf453f8e5945312",
+  "deployedExeSHA256": "8ecabf7174d2030b39579c248d87d3aff7bb109c6077968b3fb51191d3f48366",
+  "deployedAssemblySHA256": "ac5b7dbc9ecfb1fde3f953ff696d05861a6f023dae90298a7bbefad817f3c982",
+  "launchArgs": [],
+  "pid": 19784,
+  "windowTitle": "Kitao Studio 光镜",
+  "accessibilityTool": "open-computer-use; snapshots restricted to PID 19784",
+  "isolated": true,
+  "unchangedFixture": [
+    [
+      "a276b08636dd441eb73086ab876ac112.planning.json",
+      "534ccd9c6b00262a23b06515940b6349ef9606125193902a40f919ebb477ea2e"
+    ],
+    [
+      "0884ecc7c547fa1f8c6505fac4dc5ec18ef08e437b224e6937a17d124ebea169.jpg",
+      "0884ecc7c547fa1f8c6505fac4dc5ec18ef08e437b224e6937a17d124ebea169"
+    ],
+    [
+      "a276b08636dd441eb73086ab876ac112.shots.json",
+      "b2ec87a4081f7df3e74500c7948f90d60e9855aaa513183d3e0add7c8f8ffa37"
+    ]
+  ],
+  "project": "a276b086-36dd-441e-b730-86ab876ac112",
+  "mode": "Simple",
+  "routes": [
+    {
+      "name": "项目概览",
+      "snapshot": "simple-01.txt",
+      "sha256": "ba226589662677fc34321c8f8fe86931c27ee55fa9819d3b595212794e873ab8",
+      "screenshotSHA256": "90f47dbdc885d5335dbad890e4a54012edb76f7dbce9603ecd944fd62bdfa57a",
+      "presentOnContentOrInspector": [
+        "拍摄目标",
+        "视觉关键词",
+        "客户要求",
+        "必拍内容",
+        "注意事项",
+        "交付用途",
+        "查看镜头清单"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "文字",
+      "snapshot": "simple-02.txt",
+      "sha256": "2cd6971ea3c413d71bb17795639388d934aca7d3ce5007293b30b81549fd3b7d",
+      "screenshotSHA256": "95907a3741e5142d59cc3aa3982ad29753be738fff0769a25358b54adf59f71c",
+      "presentOnContentOrInspector": [
+        "编辑",
+        "编辑色彩方案",
+        "查看完整镜头清单"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "镜头清单与分镜",
+      "snapshot": "simple-03.txt",
+      "sha256": "284d901c682d74e8e4312d4930ce98b06c717e7896dd50eb21afb6de2dc55daf",
+      "screenshotSHA256": "45e3744f3d12cbb54dddeae6cb2c756f73660e956e99f50b5f768b353fd169fa",
+      "presentOnContentOrInspector": [
+        "可编辑镜头清单",
+        "自定义列名称",
+        "归档镜头"
+      ],
+      "tableHeaders": [
+        "镜号",
+        "状态",
+        "参考",
+        "名称",
+        "场景",
+        "景别",
+        "机位 / 镜头",
+        "人物动作",
+        "道具",
+        "灯光",
+        "预计分钟",
+        "备注"
+      ]
+    },
+    {
+      "name": "参考图",
+      "snapshot": "simple-04.txt",
+      "sha256": "5d6f1b7aa32265f62a83dd179bfcbd736944e85871823da2f5da52caf021b6a9",
+      "screenshotSHA256": "17607ea5cfcec876ce99e566a9555ab39535123407af250f7f0d158468b88b2d",
+      "presentOnContentOrInspector": [
+        "添加本地图片（副本/外链）",
+        "参考图：autumn-collar",
+        "项目自有副本",
+        "从素材库 / 灵感板 / 自由画布选择"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "情绪板",
+      "snapshot": "simple-05.txt",
+      "sha256": "edd366cb34dc7a4a4ae7356151026107d45ae92abf4841d81d2b17fd0c927c9e",
+      "screenshotSHA256": "836959ea452cce57d28b0ac2961bb95a832b260c21315c27c6ae78b4f99f88b3",
+      "presentOnContentOrInspector": [
+        "在自由画布中排布",
+        "关联的灵感板与自由画布"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "灯位图",
+      "snapshot": "simple-06.txt",
+      "sha256": "0dc9f3105c662a6245948f5c2b6991b8af9b36608c2a1e2e2b63112e601e3f3f",
+      "screenshotSHA256": "e72fb5b5ea60ee3a12d4689c6d30121d79d6a59a8bf55e5b48968ab108118cc9",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "10×10 m"
+      ],
+      "tableHeaders": [
+        "名称",
+        "横向位置 0–1",
+        "纵向位置 0–1",
+        "方向角度",
+        "功率百分比",
+        "修饰器",
+        "归档"
+      ]
+    },
+    {
+      "name": "服化道与道具",
+      "snapshot": "simple-07.txt",
+      "sha256": "01c047accce49ae4ee01e556e4b0a925b6ce5db3564a883b1aa5c2c5dc3b26e8",
+      "screenshotSHA256": "9b1a808bf1fcc18f87ab09958d6d9a1c8a65b33a5d9e854600846e145cabde9f",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "新增",
+        "撤销上次策划操作"
+      ],
+      "tableHeaders": [
+        "名称",
+        "分类",
+        "数量",
+        "准备状态",
+        "来源",
+        "归档"
+      ]
+    },
+    {
+      "name": "设备",
+      "snapshot": "simple-08.txt",
+      "sha256": "3a10715e279165553f166b71b697e9e5e442d6d5d9b97e1f3cf06ed150fa0633",
+      "screenshotSHA256": "e92b5461c5fabbf37f824738ad9f39257346b79fdca51d0c9fe956118fd6f270",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "手工登记设备"
+      ],
+      "tableHeaders": [
+        "名称",
+        "型号",
+        "数量",
+        "来源目录",
+        "归档"
+      ]
+    },
+    {
+      "name": "人员",
+      "snapshot": "simple-09.txt",
+      "sha256": "a7315e910f067b734570eab0f6e0650a9a2009ec989e72031d41579aa7db2b86",
+      "screenshotSHA256": "a6528b285fcbb4ccc07f17f9b9c9c2fd6938d69935294d5d5141952292c9e30b",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "联系方式"
+      ],
+      "tableHeaders": [
+        "名称",
+        "角色",
+        "联系方式",
+        "到场时间",
+        "归档"
+      ]
+    },
+    {
+      "name": "场地",
+      "snapshot": "simple-10.txt",
+      "sha256": "55ab9d804399713043f7471c6ac41343d55e7fc82b0d154177bec93a22b1fe3f",
+      "screenshotSHA256": "d730d625a68c224158d283c937c72dbd735a3b1e0eeda96d27f7cdf9d9d42f5d",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "日落 / 潮汐"
+      ],
+      "tableHeaders": [
+        "名称",
+        "地址",
+        "联系方式",
+        "可用时段",
+        "报备许可",
+        "归档"
+      ]
+    },
+    {
+      "name": "档期",
+      "snapshot": "simple-11.txt",
+      "sha256": "e33611874182c9784642ea544f856d845ab6a57f0525401eb0b55633e84ebdb7",
+      "screenshotSHA256": "ed5483092b4f3c9524ef039f87f133ddcf85294fd0d79960042812d2d3a1f18c",
+      "presentOnContentOrInspector": [
+        "关联档期",
+        "北窗摄影棚"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "当天时间表",
+      "snapshot": "simple-12.txt",
+      "sha256": "2e73a3d678a0adc0bfecca7623306c65357fdc0965fd7473a299d5dc5ece0730",
+      "screenshotSHA256": "7d7d1c610373a537c97886981c3ce6e815320396346d724121e20fbd2a69fe20",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "开始时间",
+        "结束时间"
+      ],
+      "tableHeaders": [
+        "名称",
+        "日期",
+        "开始时间",
+        "结束时间",
+        "时区ID",
+        "地点",
+        "负责人",
+        "归档"
+      ]
+    },
+    {
+      "name": "预算",
+      "snapshot": "simple-13.txt",
+      "sha256": "a3c8ae6c33a3c12829ba9924b7ea0af638d46d776a26e14dfe16116004efaae8",
+      "screenshotSHA256": "29b29127874f1281668ba576931ee2830f1830876e2442c98e934f9f75bafefc",
+      "presentOnContentOrInspector": [
+        "摄影资源清单",
+        "读取项目实际支出（只读）"
+      ],
+      "tableHeaders": [
+        "名称",
+        "预算金额",
+        "币种",
+        "归档"
+      ]
+    },
+    {
+      "name": "文件",
+      "snapshot": "simple-14.txt",
+      "sha256": "6c090ebf66684ab7d77484958551544817a94186ae6b05c115997c7d490710d9",
+      "screenshotSHA256": "3962bdddcfce2f1c9697e5accc917bb124c330fbc5b958b9051c4964e0789a24",
+      "presentOnContentOrInspector": [
+        "添加文件（副本/外链）",
+        "项目文件"
+      ],
+      "tableHeaders": []
+    },
+    {
+      "name": "文档内容",
+      "snapshot": "simple-15.txt",
+      "sha256": "0cb9ebf3c4c08724777426be923c5b3fa50dc0812113ccfd186a08ffcd0fc87a",
+      "screenshotSHA256": "c70c5179f1f6cf8e47c235ce76f7fa1e40839886211886d1db23a260f5c189ba",
+      "presentOnContentOrInspector": [
+        "文档内容",
+        "保存"
+      ],
+      "tableHeaders": []
+    }
+  ],
+  "panels": {
+    "picker": {
+      "labels": [
+        "策划案列表",
+        "全部",
+        "进行中",
+        "草稿",
+        "已完成",
+        "搜索项目、模特或日期",
+        "导入项目包"
+      ],
+      "snapshotSHA256": "4da1ad5c46d134b7b5561ffc23d9ac5486f910426cefd6d0c5bf799b5388fb03"
+    },
+    "basic-rich": {
+      "labels": [
+        "加粗",
+        "标题1",
+        "查找",
+        "撤销",
+        "页眉页脚 / 页码",
+        "导出 DOCX",
+        "导入 DOCX",
+        "完成编辑"
+      ],
+      "snapshotSHA256": "79590cfd6f9fcf72b1d3c18dd2f4b624bc83a8e78c9374a179ef09e899066470"
+    },
+    "venue-detail": {
+      "labels": [
+        "编辑：",
+        "名称",
+        "地址",
+        "联系方式",
+        "可用时段",
+        "报备许可",
+        "日落（手动）",
+        "潮汐（手动）",
+        "时区ID",
+        "关联镜头（多选）",
+        "保存",
+        "取消"
+      ],
+      "snapshotSHA256": "7f9af500c2e26bee621170a7a125d642ea513b27bd8b2e71f54c3189e68cc59f"
+    },
+    "context-verified-focus": {
+      "labels": [
+        "查看大图",
+        "打开来源",
+        "设为策划封面",
+        "加入情绪板",
+        "用于当前镜头",
+        "用于灯光",
+        "用于造型",
+        "参考分类",
+        "分组",
+        "明确关联到成片",
+        "发送到自由画布",
+        "用于参考仿色",
+        "从策划中移除"
+      ],
+      "snapshotSHA256": "d24876fb0e4e8374a77f8536be9ac07e3dfe2a80dafcfbc0087d31424228fecc"
+    },
+    "more": {
+      "labels": [
+        "查看关联档期",
+        "外链检查、失配修复与手动重连",
+        "导出15区汇总 DOCX",
+        "导出策划项目包（含已验证自有副本）",
+        "导入到独立目录…"
+      ],
+      "snapshotSHA256": "e2a0684f94d7eafcf7b0385afcf9108304ed7021c316fd7deff8f0d518483f95"
+    },
+    "export": {
+      "labels": [
+        "导出策划案 PDF",
+        "PDF 导出质量",
+        "导出 PDF",
+        "取消"
+      ],
+      "snapshotSHA256": "09cc738b255dbf226c35862247e42cb3c8b2d98022bb622c87ebcdf6b1a261ba"
+    },
+    "advanced": {
+      "labels": [
+        "摄影提案 · 文档工作区",
+        "保存",
+        "撤销策划操作",
+        "刷新结构引用",
+        "导出摄影DOCX",
+        "导回摄影DOCX",
+        "分镜表 · 结构化引用",
+        "编辑页眉页脚 / 页码",
+        "开始",
+        "插入",
+        "布局",
+        "文档"
+      ],
+      "snapshotSHA256": "61530a5abf3737c4de1698957934e69618a5f143c60ee3b6a5d25c277d641ebf"
+    },
+    "office-layout": {
+      "labels": [
+        "合并单元格",
+        "拆分单元格",
+        "表格对齐",
+        "列宽",
+        "页边距",
+        "A4/Letter"
+      ],
+      "snapshotSHA256": "f965bc2548a614ee9123cb802b776779eebe9ade2ed1204556b7bf7e7464583d"
+    },
+    "office-doc": {
+      "labels": [
+        "导出 PDF",
+        "导入 DOCX",
+        "导出 DOCX",
+        "打印 / PDF",
+        "分页预览"
+      ],
+      "snapshotSHA256": "7966f6ccc039734b3d15269b6198e161f2ff40e779b568409b0d2bb4699af34f"
+    }
+  },
+  "excluded": [
+    "No real project modified",
+    "No external linked source fetched",
+    "No physical remote device",
+    "No generated PDF/DOCX/package nor Office round-trip claimed"
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "method": "Click navigation and inspect rendered controls. No content or settings saved.",
+  "testedUtc": "2026-11-27T03:51:34.654513+00:00",
+  "physicalMachines": 1,
+  "sectionRoutes": [
+    {
+      "title": "项目概览",
+      "tableHeaders": [],
+      "actionExamples": [
+        "打开策划页面",
+        "打开镜头与分镜",
+        "打开项目参考图",
+        "打开灯位与照明"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "项目概览"
+    },
+    {
+      "title": "文字 · 项目简报",
+      "tableHeaders": [],
+      "actionExamples": [
+        "B",
+        "I",
+        "U",
+        "选区批注",
+        "＋ 段落",
+        "↶",
+        "↷",
+        "插入参考图",
+        "移除引用",
+        "秋冬服装型录",
+        "客户需求",
+        "创意方向",
+        "交付规格"
+      ],
+      "canvasCount": 0,
+      "richEditors": 11,
+      "nav": "文字"
+    },
+    {
+      "title": "镜头清单与分镜",
+      "tableHeaders": [],
+      "actionExamples": [
+        "卡片",
+        "列表",
+        "＋ 新建镜头",
+        "镜头列",
+        "编辑分镜",
+        "打开现场参考",
+        "分镜批注",
+        "换序 / 更多"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "镜头清单与分镜",
+      "shotListHeaders": [
+        "镜号",
+        "状态",
+        "参考",
+        "名称",
+        "场景",
+        "景别",
+        "机位 / 镜头",
+        "人物动作",
+        "道具",
+        "灯光",
+        "预计分钟",
+        "备注",
+        "操作"
+      ]
+    },
+    {
+      "title": "参考图",
+      "tableHeaders": [],
+      "actionExamples": [
+        "打开参考图画布",
+        "打开素材中转站",
+        "查看大图",
+        "插入情绪板",
+        "素材来源"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "参考图"
+    },
+    {
+      "title": "情绪板",
+      "tableHeaders": [],
+      "actionExamples": [
+        "＋ 图片",
+        "T  标题",
+        "▭  矩形",
+        "◯  椭圆",
+        "╱  线条",
+        "→  箭头",
+        "↶",
+        "↷"
+      ],
+      "canvasCount": 1,
+      "richEditors": 0,
+      "nav": "情绪板"
+    },
+    {
+      "title": "灯位图",
+      "tableHeaders": [],
+      "actionExamples": [
+        "打开灯具清单",
+        "＋ 图片",
+        "T  标题",
+        "▭  矩形",
+        "◯  椭圆",
+        "╱  线条",
+        "→  箭头",
+        "↶",
+        "↷"
+      ],
+      "canvasCount": 1,
+      "richEditors": 0,
+      "nav": "灯位图"
+    },
+    {
+      "title": "服化道与道具",
+      "tableHeaders": [
+        "缩略图",
+        "Look 编号",
+        "名称",
+        "分类",
+        "数量",
+        "负责人",
+        "准备状态",
+        "来源",
+        "归档",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "服化道与道具"
+    },
+    {
+      "title": "设备",
+      "tableHeaders": [
+        "名称",
+        "型号",
+        "数量",
+        "来源目录",
+        "归档",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "设备"
+    },
+    {
+      "title": "人员",
+      "tableHeaders": [
+        "名称",
+        "角色",
+        "联系方式",
+        "到场时间",
+        "归档",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "人员"
+    },
+    {
+      "title": "场地",
+      "tableHeaders": [
+        "名称",
+        "地址",
+        "联系方式",
+        "可用时段",
+        "报备许可",
+        "归档",
+        "时区",
+        "手录日落",
+        "备注",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "场地"
+    },
+    {
+      "title": "档期",
+      "tableHeaders": [
+        "档期标题",
+        "日期",
+        "地点",
+        "状态",
+        "资料来源",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "移除记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "档期"
+    },
+    {
+      "title": "当天时间表",
+      "tableHeaders": [
+        "名称",
+        "日期",
+        "开始时间",
+        "结束时间",
+        "时区 ID",
+        "地点",
+        "负责人",
+        "归档",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "当天时间表"
+    },
+    {
+      "title": "预算",
+      "tableHeaders": [
+        "名称",
+        "预算金额",
+        "币种",
+        "归档",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "归档记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "预算"
+    },
+    {
+      "title": "文件",
+      "tableHeaders": [
+        "名称",
+        "状态",
+        "来源类型",
+        "文件详情",
+        "记录操作"
+      ],
+      "actionExamples": [
+        "新增记录",
+        "撤销表格操作",
+        "重做",
+        "编辑详情",
+        "复制记录",
+        "移除记录"
+      ],
+      "canvasCount": 0,
+      "richEditors": 0,
+      "nav": "文件"
+    },
+    {
+      "title": "文档内容",
+      "tableHeaders": [],
+      "actionExamples": [
+        "B",
+        "I",
+        "U",
+        "选区批注",
+        "＋ 段落",
+        "↶",
+        "↷",
+        "插入参考图",
+        "现场备注 / 交付留档",
+        "到场检查",
+        "客户备注"
+      ],
+      "canvasCount": 0,
+      "richEditors": 6,
+      "nav": "文档内容"
+    }
+  ],
+  "revisionBefore": 45,
+  "reviewThreadCount": 4,
+  "previewViewport": {
+    "windowWidth": 1700,
+    "dialogWidth": 630,
+    "wrapperClientWidth": 528,
+    "tableWidth": 1076,
+    "wrapperOverflowX": "auto"
+  },
+  "revisionAfter": 45,
+  "hashes": {
+    "PlanningReview.dll": "5e6b1a681a73e7bbf829571e61541fe6e40abd4deb4cdb73b134acdca18700d7",
+    "RAWSelectionAssistant.Core.dll": "e41a41113907388edda05cb95161968e1a770ee7c8a8045cc79fc90bf55e9008",
+    "wwwroot/workbench.html": "7416dbad56aa86c4565861f19ac1a863f11ce8e410023a2458e4573a1e11abd6",
+    "wwwroot/workbench.js": "ad28289343deb88f65b0e16cd8dc5aeb3126e41afad61a9bd2b9ef3da1edabcc",
+    "wwwroot/workbench.css": "07be7e318b24320d355d658ad330631f3d03d301cee3447f676b844a5e2e4ef9",
+    "wwwroot/workbench-editors.js": "9b870b939abc614f8c462c2c049ede33d44ecd832f8c7c019c13ac1a9c4d73c2",
+    "wwwroot/workbench-editors.css": "f8916a0f2ae197451b15507d328ca3ecadf584e6cd71192bda707a6238f88f39"
+  },
+  "acceptanceScriptSha256": "d20e4a60814f6d4cd303b2798b0f946a9e8460d15c787ebc66a8d511dd0de1c0"
+}

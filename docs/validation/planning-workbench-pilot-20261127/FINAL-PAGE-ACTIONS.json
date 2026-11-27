@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "project": "5db8a1f2-72fa-4977-a98e-9688f4a5d67d",
+  "utc": "2026-11-27T04:23:42.169898+00:00",
+  "qaOnly": true,
+  "browserEntry": "https://127.0.0.1:45753/workbench.html",
+  "checks": [
+    {
+      "action": "copy dirty page",
+      "passed": true,
+      "sourceId": "64280416-1e09-4c84-826f-02390f5a8a81",
+      "copyId": "e92770fb-314b-4895-96a2-0002fae2bea9",
+      "dirtyBeforeCopy": true,
+      "sourceAndCopyShareSavedValue": "复制前未保存的器材 44befc",
+      "distinctPageIdentity": true
+    },
+    {
+      "action": "rename confirmed",
+      "passed": true,
+      "visibleHeading": "器材修订 44befc",
+      "serverTitle": "器材修订 44befc",
+      "revision": 61
+    },
+    {
+      "action": "rename 取消",
+      "passed": true,
+      "noRevisionChange": true,
+      "headingUnchanged": true
+    },
+    {
+      "action": "rename Escape",
+      "passed": true,
+      "noRevisionChange": true,
+      "headingUnchanged": true
+    },
+    {
+      "action": "move and undo",
+      "passed": true,
+      "initialPosition": 23,
+      "movedTo": 1,
+      "restoredPosition": 23,
+      "restoredFullOrderSha256": "665d8bad81c029399d6ca81ab0e7932621393fbbeac2b4a50c5d240dceda242f"
+    },
+    {
+      "action": "save table and reopen",
+      "passed": true,
+      "rowId": "04751eee-3ece-4fc8-9e4d-89dc9dab92b6",
+      "tableColumn": "名称",
+      "savedCopyValue": "副本独立器材 44befc",
+      "sourceValueStillIndependent": true,
+      "headingAfterReload": "器材修订 44befc",
+      "orderSurvivesReload": true
+    }
+  ],
+  "servedWorkbenchJsSha256": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36",
+  "revisions": [
+    58,
+    64
+  ]
+}

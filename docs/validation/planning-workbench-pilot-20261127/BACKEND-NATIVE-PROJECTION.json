@@ -1,0 +1,16 @@
+[
+  {
+    "check": "Native project isolated copy -> 15 sections plus real light inventory; source hashes unchanged, original IDs, archive status, source/shot relationships, metadata-only attachment, image bytes and opaque native rich package verified",
+    "pages": 16,
+    "sourceFiles": 7,
+    "primarySections": 15,
+    "additionalPages": 1
+  },
+  {
+    "check": "Export reimport keeps workbench extension identities; original input remains byte-identical"
+  },
+  {
+    "check": "Blank workbench remains three seed pages",
+    "pages": 3
+  }
+]

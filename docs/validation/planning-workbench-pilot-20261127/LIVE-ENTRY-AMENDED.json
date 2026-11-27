@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "utc": "2026-11-27T04:25:21.632541+00:00",
+  "method": "Isolated headless Chromium contexts; TLS exception scoped to each context. Owner login only; every other POST blocked. Invitation file inspected locally, never followed. No credentials saved.",
+  "entries": [
+    {
+      "entry": "private-basic/list",
+      "resolvedAddress": "https://127.0.0.1:45752/workbench.html#list",
+      "project": "2fa4fb3a-70e6-4191-a3b2-ab158f65ec60",
+      "tier": "basic",
+      "revision": 26,
+      "ownerJoinCalls": 1,
+      "verified": {
+        "listRowCount": 1,
+        "sampleTitle": "秋冬服装型录",
+        "servedJsSha256": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea"
+      }
+    },
+    {
+      "entry": "private-review/mood",
+      "resolvedAddress": "https://127.0.0.1:45751/workbench.html#mood",
+      "project": "95ff154e-5a63-448d-a3bc-8f49dfb78b80",
+      "tier": "team",
+      "revision": 32,
+      "ownerJoinCalls": 1,
+      "verified": {
+        "seedThreadCount": 2,
+        "seedCommentFound": true,
+        "locatedVisibleRegion": true,
+        "servedJsSha256": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea"
+      }
+    },
+    {
+      "entry": "private-review/brief",
+      "resolvedAddress": "https://127.0.0.1:45751/workbench.html#brief",
+      "project": "95ff154e-5a63-448d-a3bc-8f49dfb78b80",
+      "tier": "team",
+      "revision": 32,
+      "ownerJoinCalls": 1,
+      "verified": {
+        "paragraphCount": 11,
+        "servedJsSha256": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea"
+      }
+    },
+    {
+      "entry": "private-review/shots",
+      "resolvedAddress": "https://127.0.0.1:45751/workbench.html#shots",
+      "project": "95ff154e-5a63-448d-a3bc-8f49dfb78b80",
+      "tier": "team",
+      "revision": 32,
+      "ownerJoinCalls": 1,
+      "verified": {
+        "shotCount": 6,
+        "servedJsSha256": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea",
+        "startedOnShots": true,
+        "cardNoteLocatesThirdShot": true,
+        "imageRegionNoteOpenedOriginalImageModal": true,
+        "stayedOnShotsRoute": true,
+        "imagePixels": [
+          960,
+          1440
+        ],
+        "sourceNormalizedRect": [
+          0.43,
+          0.69,
+          0.28,
+          0.115
+        ],
+        "visibleOverlayNormalizedRect": [
+          0.43,
+          0.69,
+          0.28,
+          0.115
+        ],
+        "imageSha256": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169"
+      }
+    }
+  ],
+  "pendingInvitation": {
+    "count": 1,
+    "manualDetailsOpened": true,
+    "name": "公司审稿员 C",
+    "expires": "2026-12-04T04:05:36.8127053+00:00",
+    "manualCodeAndFragmentMatchedPendingEntry": true,
+    "target": "https://192.168.1.10:45751/workbench.html",
+    "networkRequests": 0,
+    "claimAttempted": false
+  },
+  "notebooksUnchanged": true,
+  "protectedRequestsBlocked": 0,
+  "publishedHashes": {
+    "PlanningReview.dll": "569b53e46be826fc2f70620532c6f5aa85194ae3363cf70cf930420749b14fc6",
+    "RAWSelectionAssistant.Core.dll": "e41a41113907388edda05cb95161968e1a770ee7c8a8045cc79fc90bf55e9008",
+    "wwwroot/workbench.html": "7416dbad56aa86c4565861f19ac1a863f11ce8e410023a2458e4573a1e11abd6",
+    "wwwroot/workbench.js": "a2b4c63b399470cfc6171b27530af592aa2e0d21536fe901c1a49f207c838fea",
+    "wwwroot/workbench.css": "432000916d564df33aaf3f0e5e3b948caafa52f3b3f0414abc86d7489bb1be1a",
+    "wwwroot/workbench-editors.js": "20e86e2e881576b4b21c23e12c30048c9493e48bff33ff2f2bbae77e5fb35f36",
+    "wwwroot/workbench-editors.css": "f8916a0f2ae197451b15507d328ca3ecadf584e6cd71192bda707a6238f88f39"
+  },
+  "matchesFinalBrowserBitsExceptApprovedJsAmendment": true
+}

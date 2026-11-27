@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "startedUtc": "2026-11-27T04:07:46.583388+00:00",
+  "project": "5db8a1f2-72fa-4977-a98e-9688f4a5d67d",
+  "physicalMachines": 1,
+  "checks": [
+    {
+      "name": "restore unsaved Chinese paste after reload",
+      "passed": true,
+      "restoredSha256": "039ba4652ad32836b0c60f15f75af65092876fc7e45e4ef02a48c5cecc369522",
+      "editorDirty": "true",
+      "method": "Renderer clipboard paste event; no OS clipboard or OS IME",
+      "utf16Units": 2528,
+      "sha256": "039ba4652ad32836b0c60f15f75af65092876fc7e45e4ef02a48c5cecc369522",
+      "revisionBefore": 49,
+      "revisionAfterReload": 49,
+      "restoredLength": 2528,
+      "syncAfterReload": "本机有改动"
+    },
+    {
+      "name": "explicit save commits restored document",
+      "passed": true,
+      "revisionBefore": 49,
+      "revisionAfter": 50
+    },
+    {
+      "name": "reopen selected font and spacing plus paragraph leading",
+      "passed": true,
+      "mark": [
+        {
+          "start": 0,
+          "end": 2,
+          "font": "mono",
+          "spacing": 3
+        }
+      ],
+      "lineHeight": 1.8,
+      "rendered": {
+        "length": 2528,
+        "spanText": "衣领",
+        "font": "Consolas, \"Courier New\", monospace",
+        "spacing": "3px",
+        "leading": "1.8",
+        "otherStyled": false
+      }
+    },
+    {
+      "name": "wide preview displays initial overview table at 1700px",
+      "passed": true,
+      "geometry": {
+        "viewport": 1700,
+        "dialog": 1360,
+        "visible": 1238,
+        "table": 1238,
+        "horizontalScroll": "auto"
+      },
+      "screenshot": {
+        "file": "wide-preview-first-screen.png",
+        "sha256": "cc22b6c58024353b850d9b38b1f1806b6b94cc7a1c31f8d6d82b2a73b609451c"
+      }
+    },
+    {
+      "name": "clean preview renders typography on exact selected text",
+      "passed": true,
+      "rendered": {
+        "length": 2528,
+        "spanText": "衣领",
+        "font": "Consolas, \"Courier New\", monospace",
+        "spacing": "3px",
+        "leading": "1.8",
+        "otherStyled": false
+      }
+    },
+    {
+      "name": "owner downloads Word through browser",
+      "passed": true,
+      "bytes": 10250,
+      "sha256": "15887159a8e847103589a6faca38bf64bae346f1f03fd68a78fa3327392dca65",
+      "matchingParagraphs": 1,
+      "subsetFont": "Consolas",
+      "subsetSpacingTwips": "45",
+      "paragraphLeading": "432"
+    }
+  ],
+  "scriptSha256": "401ddf1af9f2c65266aed2f64f81408e2e48f5841265351a8219a318c8d12efb",
+  "browserUA": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36",
+  "pageId": "8a52bb4f-6d14-4ab0-9c27-2fb6f94601dd",
+  "finishedUtc": "2026-11-27T04:07:48.769043+00:00"
+}
