@@ -1,0 +1,16 @@
+# Candidate HTTPS protocol acceptance — 2026-11-27
+
+**PASS: 8 checks** on one Windows host, an isolated candidate listener and a clean Chromium profile, using synthetic saved planning files and the repository’s CC0 photograph. All web requests used HTTPS. The probe validated the listener certificate pin before sending test credentials. Host processes started and stopped by the test used a separate data root. This receipt contains no credentials, live identifiers, addresses, or private paths.
+
+| Check | Observed result |
+| --- | --- |
+| `PARTIAL_AND_HASH_GATE` | Concurrent submissions for one plan returned the same publication ID. An incorrect photo digest left one file pending; the room was unavailable. Requests without the control credential, from the LAN, or from a browser origin were denied. A destination mismatch and an out-of-scope manifest path were rejected. |
+| `PARTIAL_RESTART_AND_RESTAGE` | Restart preserved the outstanding file list. A new saved snapshot reused the publication ID, changed the manifest digest, and rejected a seal with the older or missing manifest digest. |
+| `ALL_BYTES_WITH_INVALID_NATIVE_PLAN` | Receiving all declared bytes did not open a room when the saved native document identity differed from the publication identity; no entry URL was issued. |
+| `LOST_ACK_AND_REOPEN` | After discarding the seal response body and restarting, status returned the original ready publication and its saved source fingerprint. A new one-time owner ticket restored access from loopback; reusing that ticket or using it from the LAN failed. The original photo bytes matched. Room-scoped control paths remained unavailable even with a casing variation. |
+| `MEMBER_INVITE_ARTIFACT_AND_PERMISSIONS` | The owner could issue a room-scoped member link with an invite code only. The invite redeemed once; a member could read the matching photo and save a comment. Member management and exports were denied to the member, and unauthenticated room data was denied. |
+| `BROWSER_MEMBER_TIMELINE` | Fresh Chromium entered through a LAN invitation, rendered the synthetic row on `#timeline`, cleared the invite from the address bar, and stored its member session under the room namespace. |
+| `READY_IMMUTABLE_AND_ISOLATED` | A changed source snapshot and subsequent uploads could not overwrite the published content or comment. Same-title plans in different projects, and two documents in one project, used separate rooms and rejected credentials issued to the other room. |
+| `LEGACY_WORKBENCH_REGRESSION` | A separate legacy instance still served its original root workbench and Basic mode. It did not expose the candidate publishing API. The 7,400,000-byte request cap and original oversized-request response were retained. |
+
+Reproduce with [`accept_share_candidate.py`](../../../tools/PlanningReview/accept_share_candidate.py) against a fresh Release build and a QA certificate, using a free port and a new proof directory. Pass the optional `--browser` and `--browser-spki` arguments to include the Chromium check. This run covers Windows host behavior and a distinct browser profile; it does not establish separate-machine LAN reachability, native desktop interactions, or mobile behavior.

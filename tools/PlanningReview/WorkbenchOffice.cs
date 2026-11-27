@@ -24,10 +24,41 @@ internal static class WorkbenchOffice
     static XElement P(string s,string? style=null)=>E("p",style==null?null:E("pPr",V("pStyle",style)),Run(s));
     static XElement Rich(JsonElement p,string? prefix=null)
     {
-        var type=Str(p,"type");if(type=="")type=Str(p,"style");string? heading=type switch{"h1"=>"Heading2","h2" or "h3"=>"Heading3","quote"=>"Quote","caption"=>"Caption",_=>null};var pp=E("pPr");if(heading!=null)pp.Add(V("pStyle",heading));if(p.TryGetProperty("lineHeight",out var height))pp.Add(E("spacing",A("line",(int)Math.Round(height.GetDouble()*240)),A("lineRule","auto")));if(Str(p,"align") is "right" or "center" )pp.Add(V("jc",Str(p,"align")));
+        var type=Str(p,"type");if(type=="")type=Str(p,"style");string? heading=type switch{"h1"=>"Heading2","h2" or "h3"=>"Heading3","quote"=>"Quote","caption"=>"Caption",_=>null};var pp=E("pPr");if(heading!=null)pp.Add(V("pStyle",heading));if(Flag(p,"pageBreakBefore"))pp.Add(E("pageBreakBefore"));if(p.TryGetProperty("lineHeight",out var height))pp.Add(E("spacing",A("line",(int)Math.Round(height.GetDouble()*240)),A("lineRule","auto")));if(Str(p,"align") is "right" or "center" )pp.Add(V("jc",Str(p,"align")));
         var para=E("p",pp);prefix??=type switch{"ul" or "li"=>"•  ","check"=>Flag(p,"checked")?"☑  ":"☐  ",_=>null};if(prefix!=null)para.Add(Run(prefix));var text=Str(p,"text");int pos=0;
         if(p.TryGetProperty("marks",out var marks))foreach(var m in marks.EnumerateArray()){int a=m.GetProperty("start").GetInt32(),b=m.GetProperty("end").GetInt32();if(a>pos)para.Add(Run(text[pos..a]));para.Add(Run(text[a..b],m));pos=b;}
         if(pos<text.Length)para.Add(Run(text[pos..]));return para;
+    }
+    static XElement NativeDocBlock(JsonElement block,string? prefix=null)
+    {
+        if(block.TryGetProperty("nativeImage",out var inlineImage))return P("参考图  "+Str(inlineImage,"caption"),"Caption");
+        if(!block.TryGetProperty("nativeTable",out var table))return Rich(block,prefix);
+        var rows=table.GetProperty("rows").EnumerateArray().ToArray();
+        var elem=E("tbl",E("tblPr",E("tblW",A("w",0),A("type","auto")),E("tblBorders",new[]{"top","bottom","left","right","insideH","insideV"}.Select(s=>E(s,A("val","single"),A("sz",4),A("color","D4DBD6"))))));
+        var active=new Dictionary<int,(int span,int rows)>();
+        for(int r=0;r<rows.Length;r++)
+        {
+            var row=E("tr",r==0&&Flag(table,"repeatHeader")?E("trPr",E("tblHeader")):null);
+            var column=0;var existing=new Dictionary<int,(int span,int rows)>(active);
+            void ContinueSpan()
+            {
+                while(existing.Remove(column,out var prior))
+                {
+                    row.Add(E("tc",E("tcPr",prior.span>1?V("gridSpan",prior.span):null,E("vMerge")),P("")));
+                    if(prior.rows<=1)active.Remove(column);else active[column]=(prior.span,prior.rows-1);
+                    column+=prior.span;
+                }
+            }
+            foreach(var cell in rows[r].GetProperty("cells").EnumerateArray())
+            {
+                ContinueSpan();var span=cell.GetProperty("colSpan").GetInt32();var merge=cell.GetProperty("rowSpan").GetInt32();
+                if(merge>1)active[column]=(span,merge-1);
+                var contents=cell.GetProperty("paragraphs").EnumerateArray().Select(p=>NativeDocBlock(p)).DefaultIfEmpty(P(""));
+                row.Add(E("tc",E("tcPr",span>1?V("gridSpan",span):null,merge>1?V("vMerge","restart"):null),contents));column+=span;
+            }
+            ContinueSpan();elem.Add(row);
+        }
+        return elem;
     }
     static XElement Tbl(IReadOnlyList<string> heads,IEnumerable<string[]> values)
     {
@@ -47,7 +78,7 @@ internal static class WorkbenchOffice
             var rows=book.Order.Where(blocks.ContainsKey).Select((id,index)=>{var d=shots.GetValueOrDefault(id);return new[]{(index+1)+"  "+blocks[id].Text,d?.Requirements??"",Caption(d?.AssetId)};});body.Add(Tbl(["镜号与名称","拍摄要求","参考图"],rows));}
         int cells=0;
         foreach(var page in pages){if(page.Kind=="shots"&&shotList)continue;body.Add(P(page.Title,"Heading1"));var data=page.Data;
-            switch(page.Kind){case "doc":int serial=0;foreach(var para in data.GetProperty("paragraphs").EnumerateArray()){if(Str(para,"type")=="ol")body.Add(Rich(para,(++serial)+".  "));else{serial=0;body.Add(Rich(para));}}
+            switch(page.Kind){case "doc":int serial=0;foreach(var para in data.GetProperty("paragraphs").EnumerateArray()){if(Str(para,"type")=="ol")body.Add(NativeDocBlock(para,(++serial)+".  "));else{serial=0;body.Add(NativeDocBlock(para));}}
                 if(data.TryGetProperty("assetIds",out var ids))foreach(var a in ids.EnumerateArray()){var title=Caption(a.GetGuid());if(title!="")body.Add(P("参考图  "+title,"Caption"));}break;
             case "table":var cols=data.GetProperty("columns").EnumerateArray().ToArray();var rows=data.GetProperty("rows").EnumerateArray().ToArray();
                 cells+=cols.Length*Math.Max(1,rows.Length);Need(cells<=16000,"表格单元格超出单份 Word 审阅稿的导出上限",413);

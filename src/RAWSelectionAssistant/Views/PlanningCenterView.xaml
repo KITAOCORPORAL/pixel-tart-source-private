@@ -63,9 +63,10 @@
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
     <Grid Grid.ColumnSpan="3" x:Name="EditorHeader" Margin="32,22,32,16">
      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-     <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="{DynamicResource Type.Proposal.Header.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/></StackPanel>
+     <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="{DynamicResource Type.Proposal.Header.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/><TextBlock x:Name="PlanningTeamShareStatus" Visibility="Collapsed" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,0" AutomationProperties.AutomationId="PlanningTeamShareStatus" AutomationProperties.LiveSetting="Polite"/></StackPanel>
      <WrapPanel Grid.Column="1" VerticalAlignment="Center" IsEnabled="{Binding HasProject}">
       <Button x:Name="PlanningSaveRetry" Visibility="Collapsed" Content="重试保存" Click="PlanningRetry_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="重试保存并保留草稿"/>
+      <Button x:Name="PlanningTeamShareAction" Visibility="Collapsed" Content="共享到团队" Style="{StaticResource SecondaryButton}" AutomationProperties.AutomationId="PlanningTeamShareAction" AutomationProperties.Name="共享到团队"/>
       <Button x:Name="PlanningSectionToggle" Content="分区" Click="SectionDrawer_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="打开分区导航"/>
       <Button x:Name="PlanningInspectorToggle" Content="检查器" Click="InspectorDrawer_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="打开或收起检查器"/>
       <Button x:Name="PlanningSimpleModeButton" Content="简单版" Click="SimpleMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换简单版"/>

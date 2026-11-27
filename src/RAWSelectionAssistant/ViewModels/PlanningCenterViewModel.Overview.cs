@@ -86,12 +86,13 @@ public sealed partial class PlanningCenterViewModel
 
     public async Task OpenProjectSafelyAsync(Guid projectId, Guid? bookingId = null, Guid? shotId = null)
     {
-        if (!await FlushAsync()) return;
+        if (IsPlanningLoading || !await FlushAsync() || IsPlanningLoading) return;
         try
         {
             await LoadAsync(projectId, bookingId);
             if (shotId is Guid id) { SelectedShot = Shots.FirstOrDefault(shot => shot.ShotId == id) ?? SelectedShot; ContentPage = "镜头清单"; }
         }
+        catch (PlanningSwitchSaveException) { return; }
         catch (Exception error) when (IsRecoverableProjectError(error) || error is InvalidOperationException)
         {
             new FileLogService().Error("上次策划无法恢复，返回策划总览。", error);

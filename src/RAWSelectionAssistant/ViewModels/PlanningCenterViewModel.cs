@@ -121,8 +121,8 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     }
     private async Task LoadPlanningCoreAsync(Guid projectId,Guid? bookingId,CancellationToken token)
     {
+        if (!await FlushAsync()) throw new PlanningSwitchSaveException();
         InvalidateReferenceRefresh();
-        if (!await FlushAsync()) throw new IOException("请先保存当前策划。");
         EditorGeneration++;ResetPlanningExpenses();
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");
         _state=await _planning.LoadAsync(projectId,token);_booking=null;if((bookingId??_state.BookingId) is Guid id){_booking=await _bookings.GetAsync(id,false,token);if(_state.BookingId!=id){_state=_state with{BookingId=id};await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(projectId,token);}}
@@ -137,6 +137,8 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
         await LoadDocumentAsync();
         await RefreshPlanningListAsync(token);
     }
+
+    private sealed class PlanningSwitchSaveException() : IOException("请先保存当前策划。");
 
     private async Task NewShotAsync()
     {

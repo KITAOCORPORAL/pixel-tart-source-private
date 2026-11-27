@@ -13,16 +13,24 @@ public sealed class Room
     readonly byte[] key;
     readonly NativePlan native;
     Notebook book;
+    readonly Dictionary<Guid, DateTimeOffset> ownerTickets = [];
     Room(string root, byte[] key, NativePlan native, Notebook book) { this.root = root; this.key = key; this.native = native; this.book = book; }
-    public static async Task<Room> Load(string root, Guid project, bool workbench=false)
+    public static async Task<Room> Load(string root, Guid project, bool workbench=false, Guid? publishedDocument=null, bool existingOnly=false)
     {
         var keyPath = Path.Combine(root, "identity.key"); var path = Path.Combine(root, "notebook.json");
+        if (existingOnly && (!File.Exists(path) || !File.Exists(keyPath))) throw new InvalidDataException("在线房间的已发布状态缺失，保留目录并停止。");
         if (!File.Exists(keyPath) && File.Exists(path)) throw new InvalidDataException("缺少原身份密钥，保留项目并停止");
         if (!File.Exists(keyPath)) NativePlan.Atomic(keyPath, RandomNumberGenerator.GetBytes(32));
         var native = new NativePlan(Path.Combine(root, "isolated"));
-        var book = File.Exists(path) ? JsonSerializer.Deserialize<Notebook>(File.ReadAllBytes(path), Json)! : await native.Open(project,workbench);
+        var book = File.Exists(path) ? JsonSerializer.Deserialize<Notebook>(File.ReadAllBytes(path), Json)! : await native.Open(project,workbench,publishedDocument is not null);
         Need(book.Project == project && book.Schema == 1, "项目不匹配");
         Need((book.Workbench is not null)==workbench,"工作台必须使用独立数据目录；旧项目请通过副本导入。");
+        if (publishedDocument is {} document)
+        {
+            Need(book.Document == document && book.People.Count(p => p.Owner && p.Active) == 1, "已发布策划文档或负责人身份不匹配");
+            if (existingOnly) Need(book.Team, "在线房间不是团队状态");
+            book.Team = true;
+        }
         var room = new Room(root, File.ReadAllBytes(keyPath), native, book);
         if (!File.Exists(path)) room.Commit(book);
         return room;
@@ -45,11 +53,34 @@ public sealed class Room
         var id = Decode(code,"member"); return book.People.FirstOrDefault(p => p.Id == id && p.Active && (p.Owner || book.Team)) ?? throw new Problem(403, "项目访问权限已撤销。");
     }
     public string OwnerKey => Code("member",book.People.Single(p => p.Owner).Id);
+    internal bool IsOwnerCredential(string? token) => token is {} value &&
+        CryptographicOperations.FixedTimeEquals(Encoding.UTF8.GetBytes(value), Encoding.UTF8.GetBytes(OwnerKey));
+    internal Task<string> IssueOwnerTicket() => Locked(() =>
+    {
+        var now = DateTimeOffset.UtcNow;
+        foreach (var expired in ownerTickets.Where(t => t.Value <= now).Select(t => t.Key).ToArray()) ownerTickets.Remove(expired);
+        // Polling also creates receipts; retain a bounded set of recently issued links for lost acknowledgements.
+        if (ownerTickets.Count >= 128) ownerTickets.Remove(ownerTickets.MinBy(t => t.Value).Key);
+        var id = Guid.NewGuid(); ownerTickets[id] = now.AddSeconds(90);
+        return Task.FromResult(Code("owner-once", id));
+    });
     async Task<T> Locked<T>(Func<Task<T>> run) { await gate.WaitAsync(); try { return await run(); } finally { gate.Release(); } }
-    public Task<object> Join(string code) => Locked<object>(() =>
+    public Task<object> Join(string? code, bool published = false, bool loopback = false) => Locked<object>(() =>
     {
         Person person;
-        if (code.StartsWith("member.", StringComparison.Ordinal)) person = Member(code);
+        if (code is null) throw new Problem(401, "身份凭据无效，请重新加入。");
+        if (published && code.StartsWith("owner-once.", StringComparison.Ordinal))
+        {
+            Need(loopback, "负责人入口仅可在发布电脑上打开。", 403);
+            var ticket = Decode(code, "owner-once");
+            Need(ownerTickets.Remove(ticket, out var expires) && expires > DateTimeOffset.UtcNow, "负责人入口已使用或过期，请从桌面重新打开。", 401);
+            person = book.People.Single(p => p.Owner && p.Active);
+        }
+        else if (code.StartsWith("member.", StringComparison.Ordinal))
+        {
+            person = Member(code);
+            Need(!published || !person.Owner, "请从发布电脑的桌面打开负责人入口。", 403);
+        }
         else
         {
             var id = Decode(code,"invite"); var next = Copy(); var index = next.Invitations.FindIndex(i => i.Id == id);
@@ -59,14 +90,16 @@ public sealed class Room
         }
         return Task.FromResult<object>(new { token = Code("member",person.Id), person.Id, person.Name, book.Project });
     });
-    public Task<object> View(string? token) => Locked<object>(() =>
+    public Task<object> View(string? token, string? memberUrl = null) => Locked<object>(() =>
     {
         var me = Member(token);
         var online = presence.Where(p => (DateTimeOffset.UtcNow - p.Value.At).TotalSeconds < 18 && book.People.Any(m => m.Id == p.Key.Person && m.Active)).GroupBy(p=>p.Key.Person).Select(g => { var item=g.MaxBy(p=>p.Value.At); return new { person=g.Key, target=item.Value.Target }; }).ToArray();
         var state = new { book.Project, book.Document, book.Title, book.Team, book.Revision, book.OrderVersion, book.Order, book.Blocks, book.Threads, book.Conflicts, people = book.People, me, online, memberSeats = MemberSeats, used = Used(book), invitations = me.Owner ? book.Invitations.Where(Pending).Select(i => new { i.Id, i.Label, i.Expires, code = Code("invite", i.Id) }).ToArray() : null };
         if (book.Workbench is not {} wb) return Task.FromResult<object>(state);
         var view=JsonSerializer.SerializeToElement(state,Json).EnumerateObject().ToDictionary(p=>p.Name,p=>(object)p.Value);
-        view["workbench"]=wb.View(book.Team);return Task.FromResult<object>(view);
+        view["workbench"]=wb.View(book.Team);
+        if (memberUrl != null) view["memberUrl"] = memberUrl;
+        return Task.FromResult<object>(view);
     });
     public Task<object> Pulse(string? token, Guid device, Guid? target) => Locked<object>(() =>
     {

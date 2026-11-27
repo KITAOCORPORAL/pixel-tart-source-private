@@ -34,6 +34,7 @@ public partial class PlanningCenterView : UserControl
     public PlanningCenterView()
     {
         InitializeComponent();
+        InitializeTeamShare();
         PlanningDockOverlay.MouseDown+=(_,e)=>{if(e.OriginalSource==PlanningDockOverlay)ClosePlanningDock();};
         DataContextChanged += (_, e) =>
         {
@@ -109,6 +110,7 @@ public partial class PlanningCenterView : UserControl
     private void ViewModelChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_vm is null) return;
+        TeamShareContextChanged(e.PropertyName);
         if(e.PropertyName==nameof(_vm.ReferenceImageEpoch))
         {
             _ownedPreviewGeneration++;_ownedPreviewCancellation?.Cancel();PreviewImage.Source=null;
@@ -205,8 +207,11 @@ public partial class PlanningCenterView : UserControl
                 default: RenderImages(_vm.ContentPage, true); break;
             }
         }
-        finally { RenderR5Inspector(); _rendering = false; UpdateResponsiveLayout(); }
+        finally { RenderR5Inspector(); _rendering = false; UpdateResponsiveLayout(); UpdateTeamShareHeader(); }
     }
+    partial void InitializeTeamShare();
+    partial void TeamShareContextChanged(string? property);
+    partial void UpdateTeamShareHeader();
     private void RenderNavigation()
     {
         if (_vm is null) return;
@@ -575,10 +580,23 @@ public partial class PlanningCenterView : UserControl
     }
     private async void DocumentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_rendering || _switchingDocument || _vm is null || DocumentList.SelectedItem is not PlanningProjectCard card || card.ProjectId == _vm.ProjectId && !_vm.IsOverview) return;
+        if (_rendering || _switchingDocument || _vm is not { } owner || DocumentList.SelectedItem is not PlanningProjectCard card || card.ProjectId == owner.ProjectId && !owner.IsOverview) return;
         _switchingDocument = true; DocumentList.IsEnabled = false;
-        try { if (!await FlushDocumentAsync()) { DocumentList.SelectedItem = _vm.PlanningProjects.FirstOrDefault(p => p.ProjectId == _vm.ProjectId); return; } await _vm.OpenProjectSafelyAsync(card.ProjectId); Render(); DocumentScroll.ScrollToTop(); }
+        try
+        {
+            if (!await owner.FlushAsync()) { RestoreSelection(); return; }
+            if (!ReferenceEquals(_vm, owner)) return;
+            await owner.OpenProjectSafelyAsync(card.ProjectId);
+            if (!ReferenceEquals(_vm, owner)) return;
+            if (owner.ProjectId != card.ProjectId || owner.IsOverview) { RestoreSelection(); return; }
+            Render(); DocumentScroll.ScrollToTop();
+        }
         finally { _switchingDocument = false; DocumentList.IsEnabled = true; }
+
+        void RestoreSelection()
+        {
+            if (ReferenceEquals(_vm, owner)) DocumentList.SelectedItem = owner.PlanningProjects.FirstOrDefault(p => p.ProjectId == owner.ProjectId);
+        }
     }
     private void More_Click(object sender, RoutedEventArgs e)
     {

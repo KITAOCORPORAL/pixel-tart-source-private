@@ -20,13 +20,37 @@ internal static class WorkSchema
     static void Marks(JsonElement o,string text)
     {if(!o.TryGetProperty("marks",out _))return;int previous=0;foreach(var m in Arr(o,"marks",4096)){Keys(m,"start end bold italic underline color size highlight font spacing");var s=Require(m,"start");var e=Require(m,"end");int x=0,y=0;Need(s.ValueKind==JsonValueKind.Number&&s.TryGetInt32(out x)&&e.ValueKind==JsonValueKind.Number&&e.TryGetInt32(out y)&&x>=previous&&y>x&&y<=text.Length,"文字格式区间无效");previous=y;foreach(var k in new[]{"bold","italic","underline"})Flag(m,k);Color(m,"color");Color(m,"highlight");Range(m,"size",8,126);Choice(m,"font","sans","serif","mono");Range(m,"spacing",-1,12);}}
     static void Asset(Notebook book,Guid id,bool allowRemoved=false)=>Need(book.Blocks.Any(b=>b.Id==id&&b.Kind=="image"&&(allowRemoved||!b.Removed)),"参考图不是本项目的可用副本",409);
+    private static void Paragraph(Notebook book,JsonElement p,HashSet<Guid> ids,bool allowRemovedAssets,bool allowTable)
+    {
+        Keys(p,"id type style text checked align marks lineHeight pageBreakBefore nativeImage nativeTable");
+        Need(ids.Add(Id(p)),"段落身份重复");var text=Str(Require(p,"text"),24000);
+        Choice(p,"type","p","h1","h2","h3","li","check","ul","ol","quote","caption");
+        Range(p,"lineHeight",1,3);Choice(p,"style","body","h1","h2","quote");Choice(p,"align","left","center","right");Flag(p,"checked");Flag(p,"pageBreakBefore");Marks(p,text);
+        if(p.TryGetProperty("nativeImage",out var image))
+        {
+            Keys(image,"assetId caption width height");Asset(book,Id(image,"assetId"),allowRemovedAssets);
+            Str(Require(image,"caption"),12000);Num(Require(image,"width"),1,12000);Num(Require(image,"height"),1,12000);
+        }
+        if(p.TryGetProperty("nativeTable",out var table))
+        {
+            Need(allowTable && !p.TryGetProperty("nativeImage",out _),"不支持嵌套表格或表格图片节点叠放");
+            Keys(table,"rows repeatHeader");Flag(table,"repeatHeader");
+            foreach(var row in Arr(table,"rows",300))
+            {
+                Keys(row,"cells");foreach(var cell in Arr(row,"cells",40))
+                {
+                    Keys(cell,"colSpan rowSpan paragraphs");Num(Require(cell,"colSpan"),1,40);Num(Require(cell,"rowSpan"),1,300);
+                    foreach(var part in Arr(cell,"paragraphs",100))Paragraph(book,part,ids,allowRemovedAssets,false);
+                }
+            }
+        }
+    }
     public static void Page(Notebook book,string kind,JsonElement d,bool allowRemovedAssets=false)
     {
         Need(d.GetRawText().Length<=400000,"单页内容超限");var ids=new HashSet<Guid>();
         switch(kind)
         {
-            case "doc": Keys(d,"paragraphs assetIds");if(d.TryGetProperty("assetIds",out _)){var refs=new HashSet<Guid>(); foreach(var a in Arr(d,"assetIds",100)){Guid id=Guid.Empty;Need(a.ValueKind==JsonValueKind.String && a.TryGetGuid(out id)&&refs.Add(id),"正文参考图身份无效");Asset(book,id,allowRemovedAssets);}}foreach(var p in Arr(d,"paragraphs",1000)){
-                Keys(p,"id type style text checked align marks lineHeight");Need(ids.Add(Id(p)),"段落身份重复");var text=Str(Require(p,"text"),24000);Choice(p,"type","p","h1","h2","h3","li","check","ul","ol","quote","caption");Range(p,"lineHeight",1,3);Choice(p,"style","body","h1","h2","quote");Choice(p,"align","left","center","right");Flag(p,"checked");Marks(p,text);}break;
+            case "doc": Keys(d,"paragraphs assetIds");if(d.TryGetProperty("assetIds",out _)){var refs=new HashSet<Guid>(); foreach(var a in Arr(d,"assetIds",100)){Guid id=Guid.Empty;Need(a.ValueKind==JsonValueKind.String && a.TryGetGuid(out id)&&refs.Add(id),"正文参考图身份无效");Asset(book,id,allowRemovedAssets);}}foreach(var p in Arr(d,"paragraphs",1000))Paragraph(book,p,ids,allowRemovedAssets,true);break;
             case "table": Keys(d,"columns rows");var cols=new HashSet<string>(StringComparer.Ordinal);foreach(var c in Arr(d,"columns",40)){Keys(c,"key label");var key=Str(Require(c,"key"),64);Need(Regex.IsMatch(key,"^[A-Za-z0-9_-]+$")&&key is not ("__proto__" or "prototype" or "constructor")&&cols.Add(key),"列标识无效或重复");Short(Str(Require(c,"label"),100),100);} Need(cols.Count>0,"至少需要一列");
                 foreach(var row in Arr(d,"rows",1000)){Keys(row,"id cells");Need(ids.Add(Id(row)),"行身份重复");var cells=Require(row,"cells");Need(cells.ValueKind==JsonValueKind.Object,"缺少表格单元");var seen=new HashSet<string>();foreach(var cell in cells.EnumerateObject()){Need(cols.Contains(cell.Name)&&seen.Add(cell.Name),"未知或重复的列");Str(cell.Value,12000);}}break;
             case "canvas": Keys(d,"width height objects");Range(d,"width",100,8000);Range(d,"height",100,8000);foreach(var o in Arr(d,"objects",600)){

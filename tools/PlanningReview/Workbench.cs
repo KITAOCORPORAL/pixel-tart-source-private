@@ -12,6 +12,7 @@ public sealed class WorkPage
     public int Version {get;set;}=1;
     public JsonElement Data {get;set;}
     public bool Archived {get;set;}
+    public List<RAWSelectionAssistant.Core.Services.Projects.PlanningShareSectionNotice> Notices {get;set;}=[];
 }
 public sealed class ShotDetail
 {
@@ -41,11 +42,23 @@ public sealed class Workbench
         foreach(var (kind,title) in new[]{("doc","策划正文"),("canvas","参考图板"),("shots","拍摄分镜")}) wb.Pages.Add(new(){Id=Guid.NewGuid(),Title=title,Section=kind=="doc"?"brief":kind=="canvas"?"reference":"shots",Kind=kind,Data=kind=="doc" && rows.Length>0?Enc(new {paragraphs=rows}):Empty(kind)});
         return wb;
     }
-    static JsonElement Items(WorkPage p)=>p.Data.GetProperty(p.Kind=="doc"?"paragraphs":"objects");
+    static IEnumerable<JsonElement> Items(WorkPage p)
+    {
+        if(p.Kind=="canvas")return p.Data.GetProperty("objects").EnumerateArray();
+        if(p.Kind!="doc")return [];
+        return p.Data.GetProperty("paragraphs").EnumerateArray().SelectMany(WithChildren);
+        static IEnumerable<JsonElement> WithChildren(JsonElement para)
+        {
+            yield return para;
+            if(!para.TryGetProperty("nativeTable",out var table))yield break;
+            foreach(var row in table.GetProperty("rows").EnumerateArray())foreach(var cell in row.GetProperty("cells").EnumerateArray())
+                foreach(var child in cell.GetProperty("paragraphs").EnumerateArray())yield return child;
+        }
+    }
     static JsonElement? Item(WorkPage p,Guid id)
-    {if(p.Kind is "doc" or "canvas") foreach(var a in Items(p).EnumerateArray()) if(a.GetProperty("id").GetGuid()==id)return a;return null;}
+    {foreach(var a in Items(p))if(a.GetProperty("id").GetGuid()==id)return a;return null;}
     static string TextOf(JsonElement obj)=>obj.TryGetProperty("text",out var value)?value.GetString()??"":"";
-    static bool PageHasAsset(WorkPage p,Guid id)=>p.Data.TryGetProperty("assetIds",out var assets)&&assets.EnumerateArray().Any(a=>a.GetGuid()==id);
+    static bool PageHasAsset(WorkPage p,Guid id)=>(p.Data.TryGetProperty("assetIds",out var assets)&&assets.EnumerateArray().Any(a=>a.GetGuid()==id)) || Items(p).Any(i=>i.TryGetProperty("nativeImage",out var image)&&image.GetProperty("assetId").GetGuid()==id);
     static bool IsImage(JsonElement obj)=>obj.TryGetProperty("kind",out var k)&&k.GetString()=="image";
     static string Summary(WorkPage page)=>Enc(new {page.Title,page.Data}).GetRawText();
     static Guid? Asset(JsonElement obj)=>obj.TryGetProperty("assetId",out var value)&&value.ValueKind==JsonValueKind.String?value.GetGuid():null;
@@ -68,7 +81,8 @@ public sealed class Workbench
             var r=anchor.Rect; Need(r is {Length:4} && r.All(double.IsFinite) && r[0]>=0 && r[1]>=0 && r[2]>0 && r[3]>0 && r[0]+r[2]<=1.000001 && r[1]+r[3]<=1.000001 && block.Hash==anchor.Hash,"原图摘要或框选区域无效");
             if(page.Kind=="doc")anchor.Detached|=!PageHasAsset(page,block.Id);
             if(anchor.ObjectId is {} placement){if(page.Kind=="shots")anchor.Detached|=ShotDetails.Find(s=>s.Id==placement)?.AssetId!=block.Id || !book.Order.Contains(placement);
-                else {var obj=Item(page,placement);anchor.Detached|=obj is null||!IsImage(obj.Value)||Asset(obj.Value)!=block.Id;}}
+                else if(page.Kind=="canvas"){var obj=Item(page,placement);anchor.Detached|=obj is null||!IsImage(obj.Value)||Asset(obj.Value)!=block.Id;}
+                else if(page.Kind=="doc"){var obj=Item(page,placement);anchor.Detached|=obj is null||!obj.Value.TryGetProperty("nativeImage",out var inline)||inline.GetProperty("assetId").GetGuid()!=block.Id;}}
         }
         else {Need(block.Kind=="shot" && page.Kind=="shots","无效分镜锚点");anchor.Rect=null;anchor.Hash=null;}
         anchor.Quote="";anchor.Detached|=block.Removed;
@@ -96,7 +110,7 @@ public sealed class Workbench
             case "wbPageSet":case "wbPageDelete":case "wbPageRestore":
                 Need(page!=null,"页面不存在",404);
                 if(page!.Version!=edit.Base || page.Archived!=(edit.Action=="wbPageRestore")){conflict(Summary(page),Enc(new {edit.Text,edit.Data}).GetRawText());break;}
-                var modified=new WorkPage{Id=page.Id,Kind=page.Kind,Section=edit.Section==null?page.Section:Short(edit.Section,40),Title=edit.Text.Length==0?page.Title:Short(edit.Text,120),Version=page.Version+1,Data=edit.Data??page.Data,Archived=edit.Action=="wbPageDelete"};
+                var modified=new WorkPage{Id=page.Id,Kind=page.Kind,Section=edit.Section==null?page.Section:Short(edit.Section,40),Title=edit.Text.Length==0?page.Title:Short(edit.Text,120),Notices=page.Notices,Version=page.Version+1,Data=edit.Data??page.Data,Archived=edit.Action=="wbPageDelete"};
                 if(edit.Action=="wbPageSet")WorkSchema.Page(book,page.Kind,modified.Data);
                 TrackPage(book,page,modified);Pages[Pages.IndexOf(page)]=modified;if(edit.Action!="wbPageSet")PageOrderVersion++;break;
             case "wbPageMove":

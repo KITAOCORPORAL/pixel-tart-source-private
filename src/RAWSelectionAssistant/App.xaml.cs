@@ -85,7 +85,11 @@ public partial class App : Application
         if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1" ||
            !Path.IsPathFullyQualified(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT")??""))
         {
+#if PLANNING_REVIEW_PILOT
+            ThemedMessageDialog.Show(null,"光镜 · 团队协作候选","请双击交付目录中的 Start-PlanningShare.cmd 启动；候选版需要独立的测试数据目录。",ThemedMessageKind.Warning);
+#else
             ThemedMessageDialog.Show(null,"光镜 · 不能发行","完整范围诊断预览必须通过 Start-Guangjing-Diagnostic.cmd 启动；缺少隔离数据目录，程序未访问日常数据。",ThemedMessageKind.Warning);
+#endif
             Shutdown(2);return;
         }
 #endif

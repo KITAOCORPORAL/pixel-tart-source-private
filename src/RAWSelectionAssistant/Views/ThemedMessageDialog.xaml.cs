@@ -47,6 +47,19 @@ public partial class ThemedMessageDialog : Window
         return dialog.ShowDialog() == true;
     }
 
+#if PLANNING_REVIEW_PILOT
+    internal static bool ConfirmTeamShare(Window? owner, string message, bool isRetry)
+    {
+        var dialog = new ThemedMessageDialog("共享到团队", message, ThemedMessageKind.Question, true);
+        if (owner is { IsLoaded: true }) dialog.Owner = owner;
+        dialog.YesButton.Content = isRetry ? "重试发布" : "发布到团队";
+        System.Windows.Automation.AutomationProperties.SetName(dialog.YesButton, (string)dialog.YesButton.Content);
+        System.Windows.Automation.AutomationProperties.SetAutomationId(dialog.YesButton, "PlanningTeamSharePublish");
+        System.Windows.Automation.AutomationProperties.SetAutomationId(dialog, "PlanningTeamSharePreflight");
+        return dialog.ShowDialog() == true;
+    }
+#endif
+
     internal static ThemedMessageDialog CreateSaveDiscardCancel(string title, string message)
     {
         var dialog = new ThemedMessageDialog(title, message, ThemedMessageKind.Question, true);
