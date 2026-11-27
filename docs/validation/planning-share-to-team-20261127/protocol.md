@@ -1,6 +1,6 @@
 # Candidate HTTPS protocol acceptance — 2026-11-27
 
-**PASS: 8 checks** on one Windows host, an isolated candidate listener and a clean Chromium profile, using synthetic saved planning files and the repository’s CC0 photograph. All web requests used HTTPS. The probe validated the listener certificate pin before sending test credentials. Host processes started and stopped by the test used a separate data root. This receipt contains no credentials, live identifiers, addresses, or private paths.
+**PASS: 8 checks** on one Windows host, an isolated candidate listener and a clean Chromium profile, using synthetic saved planning files and the repository’s CC0 photograph. The suite passed again using the delivered `PlanningReview.dll` from functional commit `4900732c8ea643401bfaea41f5477142cd7bd874` (SHA-256 `B1FAA82CFD8A257D1B35B08BD7DC6EFBA7C8809A8A33568D647B92262227814C`). All web requests used HTTPS. The probe validated the listener certificate pin before sending test credentials. Host processes started and stopped by the test used a separate data root. This receipt contains no credentials, live identifiers, addresses, or private paths.
 
 | Check | Observed result |
 | --- | --- |
