@@ -1,0 +1,105 @@
+{
+  "project": "6ad19687-2f03-4f72-89ce-c378f354f1f5",
+  "lan": "https://192.168.1.10:45748/",
+  "qaInstance": "gap-20261127-eb8128ba",
+  "kind": "Two independently launched persistent Chromium clients, one physical Windows host. Only UI interactions perform writes.",
+  "crossPhysical": "NOT_RUN",
+  "checks": {
+    "professionalShotAndRegionBeforeUpgrade": {
+      "team": false,
+      "revision": 3,
+      "shotThread": "17fad2b8-8842-4db9-9550-bf5d05d5fdde",
+      "shotId": "46b6de9e-2f20-45f4-b250-ed970598bfbb",
+      "imageThread": "a6fe8e86-6d43-417e-a2b8-2703a54dcc13",
+      "imageId": "15d7c5b0-6ab2-4efb-b144-7b8c43ec8eb2",
+      "imageSha256": "0884ECC7C547FA1F8C6505FAC4DC5EC18EF08E437B224E6937A17D124EBEA169",
+      "rectangle": [
+        0.42999994805518615,
+        0.690000017314938,
+        0.2800000779172208,
+        0.11500001731493792
+      ],
+      "author": "负责人 A"
+    },
+    "concurrentDifferentShotCards": {
+      "baselineGlobalRevision": 6,
+      "overlap": "both real UI-generated save POSTs intercepted pending; neither forwarded until both arrived; released together to real pilot",
+      "requests": {
+        "A": {
+          "target": "46b6de9e-2f20-45f4-b250-ed970598bfbb",
+          "base": 1,
+          "operationId": "d642923a-6e6d-4fa1-a38e-15287e345fa4",
+          "queuedUtc": "2026-11-27T02:14:33.280495+00:00",
+          "forwardedUtc": "2026-11-27T02:14:33.297053+00:00"
+        },
+        "B": {
+          "target": "a210c2b9-9a5a-46e2-8234-f7dea3cc16c6",
+          "base": 1,
+          "operationId": "38aafb8f-334b-41c7-abc7-db2e5120f24f",
+          "queuedUtc": "2026-11-27T02:14:33.296775+00:00",
+          "forwardedUtc": "2026-11-27T02:14:33.296814+00:00"
+        }
+      },
+      "responses": {
+        "B": {
+          "status": 200,
+          "outcome": "saved",
+          "revision": 7
+        },
+        "A": {
+          "status": 200,
+          "outcome": "saved",
+          "revision": 8
+        }
+      },
+      "reopened": [
+        {
+          "actor": "负责人 A",
+          "actorId": "1d801c8b-f3c0-47bd-86e6-ab0b00a7d362",
+          "globalRevision": 8,
+          "conflicts": 0,
+          "shots": [
+            {
+              "id": "46b6de9e-2f20-45f4-b250-ed970598bfbb",
+              "text": "负责人 A：第一镜正面拍摄，检查衣领间距",
+              "version": 2
+            },
+            {
+              "id": "a210c2b9-9a5a-46e2-8234-f7dea3cc16c6",
+              "text": "造型师 B：第二镜采用侧逆光，保留衣领织纹",
+              "version": 2
+            }
+          ]
+        },
+        {
+          "actor": "造型师 B",
+          "actorId": "24f6f1e1-dd29-4a21-9607-57e016a8133b",
+          "globalRevision": 8,
+          "conflicts": 0,
+          "shots": [
+            {
+              "id": "46b6de9e-2f20-45f4-b250-ed970598bfbb",
+              "text": "负责人 A：第一镜正面拍摄，检查衣领间距",
+              "version": 2
+            },
+            {
+              "id": "a210c2b9-9a5a-46e2-8234-f7dea3cc16c6",
+              "text": "造型师 B：第二镜采用侧逆光，保留衣领织纹",
+              "version": 2
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "startedUtc": "2026-11-27T02:14:27.697630+00:00",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.8154.6 Safari/537.36",
+  "ownerId": "1d801c8b-f3c0-47bd-86e6-ab0b00a7d362",
+  "memberId": "24f6f1e1-dd29-4a21-9607-57e016a8133b",
+  "seats": {
+    "owner": 1,
+    "availableMemberSeats": 3
+  },
+  "status": "PASS",
+  "finishedUtc": "2026-11-27T02:14:34.704591+00:00"
+}
