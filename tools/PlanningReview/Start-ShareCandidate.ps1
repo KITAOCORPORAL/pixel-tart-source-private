@@ -112,7 +112,9 @@ public static class GuangjingShareProbe {
         $envForDesktop=@{PIXEL_TART_ISOLATED_RUNTIME='1';PIXEL_TART_ISOLATED_RUNTIME_ROOT=$runtime;GUANGJING_TEAM_SHARE_CONFIG=$configPath;PIXEL_TART_HUMAN_ACCEPTANCE=$null;PIXEL_TART_ACCEPTANCE=$null;PIXEL_TART_ACCEPTANCE_ROOT=$null}
         $p=Start-Process -FilePath $desktop -WorkingDirectory (Split-Path -Parent $desktop) -Environment $envForDesktop -PassThru
         $result.desktopPid=$p.Id
-        Atomic (Join-Path $private 'desktop-receipt.json') @{pid=$p.Id;exe=$p.Path;startUtcTicks=$p.StartTime.ToUniversalTime().Ticks}
+        # Process.Path can be unavailable while the ordinary EXE is starting. Record the
+        # validated launch target; consumers still confirm the live path, PID and start time.
+        Atomic (Join-Path $private 'desktop-receipt.json') @{pid=$p.Id;exe=$desktop;startUtcTicks=$p.StartTime.ToUniversalTime().Ticks}
     }
     [pscustomobject]$result
 } finally {$lease.Dispose()}
